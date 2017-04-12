@@ -16,6 +16,8 @@
         http://www.springframework.org/schema/task  
 		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
+	<bean id="SpringContextUtil" class="com.sqe.shop.util.SpringContextUtil" lazy-init="false"/>
+	
 	<import resource="classpath:config/mybatis-config.xml"/>
 
 </beans>  

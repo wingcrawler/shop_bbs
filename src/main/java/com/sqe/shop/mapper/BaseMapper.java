@@ -11,7 +11,7 @@ public interface BaseMapper {
 	
 	<T> int update(T t);
 	
-	<T> T getById(@Param("id") Integer productId);
+	<T> T getById(@Param("id") Integer id);
 	
 	int delete(@Param("id") Integer id);
 
