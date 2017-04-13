@@ -5,14 +5,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-
-<%
-    //jquery
-    String jqueryVersion = "1.10.2";
-
-    session.setAttribute("jqueryVersion", jqueryVersion);
-    pageContext.setAttribute("timeInMillis", System.currentTimeMillis());
-%>
 <script type="text/javascript">
     var ctx = '<%=request.getContextPath() %>';
 </script>

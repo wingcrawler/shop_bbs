@@ -21,7 +21,7 @@ public class HomeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
-		model = new ModelAndView("index");
+		model = new ModelAndView("front/index");
 		model.addObject("productList", productService.getProductList());
 		return model;
 	}

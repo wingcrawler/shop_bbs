@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.UserMapper">
+
+<resultMap type="com.sqe.shop.model.User" id="UserBaseMapper">
+	<id property="userAddress" column="user_address" />
+	<id property="password" column="password" />
+	<id property="userStatus" column="user_status" />
+	<id property="userImage" column="user_image" />
+	<id property="userPhone" column="user_phone" />
+	<id property="id" column="id" />
+	<id property="userRole" column="user_role" />
+	<id property="userIntroduce" column="user_introduce" />
+	<id property="username" column="username" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into user
+	(user_address,password,user_status,user_image,user_phone,user_role,user_introduce,username)
+	values
+	(#{userAddress},#{password},#{userStatus},#{userImage},#{userPhone},#{userRole},#{userIntroduce},#{username})
+</insert>
+
+<update id="update">
+	UPDATE user 
+	<set>
+		<if test="userAddress != null">  
+        	user_address=userAddress
+    	</if>
+		<if test="password != null">  
+        	password=password
+    	</if>
+		<if test="userStatus != null">  
+        	user_status=userStatus
+    	</if>
+		<if test="userImage != null">  
+        	user_image=userImage
+    	</if>
+		<if test="userPhone != null">  
+        	user_phone=userPhone
+    	</if>
+		<if test="userRole != null">  
+        	user_role=userRole
+    	</if>
+		<if test="userIntroduce != null">  
+        	user_introduce=userIntroduce
+    	</if>
+		<if test="username != null">  
+        	username=username
+    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from user where id=#{id}
+</delete>
+
+<select id="getById" resultMap="UserBaseMapper">
+	SELECT * FROM user WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from user  where 1=1 
+		<if test="parm.userAddress != null">
+	     	and user_address = #{parm.userAddress}
+	   	</if>
+		<if test="parm.password != null">
+	     	and password = #{parm.password}
+	   	</if>
+		<if test="parm.userStatus != null">
+	     	and user_status = #{parm.userStatus}
+	   	</if>
+		<if test="parm.userImage != null">
+	     	and user_image = #{parm.userImage}
+	   	</if>
+		<if test="parm.userPhone != null">
+	     	and user_phone = #{parm.userPhone}
+	   	</if>
+		<if test="parm.userRole != null">
+	     	and user_role = #{parm.userRole}
+	   	</if>
+		<if test="parm.userIntroduce != null">
+	     	and user_introduce = #{parm.userIntroduce}
+	   	</if>
+		<if test="parm.username != null">
+	     	and username = #{parm.username}
+	   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="UserBaseMapper">
+	select * from user where 1=1 
+		<if test="parm.userAddress != null">
+	     	and user_address = #{parm.userAddress}
+	   	</if>
+		<if test="parm.password != null">
+	     	and password = #{parm.password}
+	   	</if>
+		<if test="parm.userStatus != null">
+	     	and user_status = #{parm.userStatus}
+	   	</if>
+		<if test="parm.userImage != null">
+	     	and user_image = #{parm.userImage}
+	   	</if>
+		<if test="parm.userPhone != null">
+	     	and user_phone = #{parm.userPhone}
+	   	</if>
+		<if test="parm.userRole != null">
+	     	and user_role = #{parm.userRole}
+	   	</if>
+		<if test="parm.userIntroduce != null">
+	     	and user_introduce = #{parm.userIntroduce}
+	   	</if>
+		<if test="parm.username != null">
+	     	and username = #{parm.username}
+	   	</if>
+		<if test="parm.start != null">
+		limit ${parm.start},${parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from user where 1=1 
+</select>
+
+
+</mapper>

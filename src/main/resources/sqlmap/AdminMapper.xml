@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.AdminMapper">
+
+<resultMap type="com.sqe.shop.model.Admin" id="AdminBaseMapper">
+	<id property="password" column="password" />
+	<id property="id" column="id" />
+	<id property="user" column="user" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into admin
+	(password, user)
+	values
+	(#{password}, #{user})
+</insert>
+
+<update id="update">
+	UPDATE admin 
+	<set>
+		<if test="password != null">  
+        	password=#{password}
+    	</if>
+		<if test="user != null">  
+        	user=#{user}
+    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from admin where id=#{id}
+</delete>
+
+<select id="getById" resultMap="AdminBaseMapper">
+	SELECT * FROM admin WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from admin  where 1=1 
+		<if test="parm.password != null">
+	     	and password = #{parm.password}
+	   	</if>
+		<if test="parm.user != null">
+	     	and user = #{parm.user}
+	   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="AdminBaseMapper">
+	select * from admin where 1=1 
+		<if test="parm.password != null">
+	     	and password = #{parm.password}
+	   	</if>
+		<if test="parm.user != null">
+	     	and user = #{parm.user}
+	   	</if>
+		<if test="parm.start != null">
+		limit ${parm.start},${parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from admin where 1=1 
+</select>
+
+
+</mapper>

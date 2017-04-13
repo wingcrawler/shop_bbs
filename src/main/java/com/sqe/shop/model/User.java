@@ -1,174 +1,76 @@
-/**
- * 
- */
 package com.sqe.shop.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Transient;
-
-/**
- * @author Vito16 zhouwentao16@gmail.com
- * @date 2013-7-8
- * 
- */
-@Entity
-@Table(name = "t_user")
 public class User implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
+
+	private String userAddress;
+	private String password;
+	private String userStatus;
+	private String userImage;
+	private String userPhone;
 	private Integer id;
-	private String account; // 账号
-	private String username;// 用户名
-	private Integer point;// 积分
-	private String phone;// 手机
-	private String telPhone;// 座机
-	private String address;// 地址
-	private String zipCode;// 邮编
-	private String remark;// 备注
-	private String password;// 密码
-    private String slat;//密码加密使用
-
-	// ***** VO *********
-	private String spc; // 验证码
-
-	public User() {
-	};
-
-	/**
-	 * @param id
-	 * @param username
-	 * @param password
-	 */
-	public User(Integer id, String username, String password) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
+	private String userRole;
+	private String userIntroduce;
+	private String username;
+	
+	public String getUserAddress() {
+		return userAddress;
 	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password="
-				+ password + "]";
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
 	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	@Length(min = 2, max = 15)
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	@NotEmpty
-	@Length(min = 6, max = 14)
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getAccount() {
-		return account;
+	public String getUserStatus() {
+		return userStatus;
 	}
-
-	public void setAccount(String account) {
-		this.account = account;
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
 	}
-
-	@Max(999999)
-	@Min(0)
-	public Integer getPoint() {
-		return point;
+	public String getUserImage() {
+		return userImage;
 	}
-
-	public void setPoint(Integer point) {
-		this.point = point;
+	public void setUserImage(String userImage) {
+		this.userImage = userImage;
 	}
-
-	@Length(min = 11, max = 11)
-	public String getPhone() {
-		return phone;
+	public String getUserPhone() {
+		return userPhone;
 	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
-
-	@Length(min = 11, max = 11)
-	public String getTelPhone() {
-		return telPhone;
+	public Integer getId() {
+		return id;
 	}
-
-	public void setTelPhone(String telPhone) {
-		this.telPhone = telPhone;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-
-	@Length(min = 4, max = 50)
-	public String getAddress() {
-		return address;
+	public String getUserRole() {
+		return userRole;
 	}
-
-	public void setAddress(String address) {
-		this.address = address;
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
-
-	@Length(min = 6, max = 6)
-	public String getZipCode() {
-		return zipCode;
+	public String getUserIntroduce() {
+		return userIntroduce;
 	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setUserIntroduce(String userIntroduce) {
+		this.userIntroduce = userIntroduce;
 	}
-
-	@Length(max = 50)
-	public String getRemark() {
-		return remark;
+	public String getUsername() {
+		return username;
 	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-
-
-	@Transient
-	public String getSpc() {
-		return spc;
-	}
-
-	public void setSpc(String spc) {
-		this.spc = spc;
-	}
-
-    public String getSlat() {
-        return slat;
-    }
-
-    public void setSlat(String slat) {
-        this.slat = slat;
-    }
+	
+	
+	
 }

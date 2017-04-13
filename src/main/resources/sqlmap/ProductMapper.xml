@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.ProductMapper">
+
+<resultMap type="com.sqe.shop.model.Product" id="ProductBaseMapper">
+	<id property="productDescripton" column="product_descripton" />
+	<id property="productStatus" column="product_status" />
+	<id property="id" column="id" />
+	<id property="productCount" column="product_count" />
+	<id property="productView" column="product_view" />
+	<id property="productRank" column="product_rank" />
+	<id property="productName" column="product_name" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into product
+	(product_descripton,product_status,product_count,product_view,product_rank,product_name)
+	values
+	(#{productDescripton},#{productStatus},#{productCount},#{productView},#{productRank},#{productName})
+</insert>
+
+<update id="update">
+	UPDATE product 
+	<set>
+		<if test="productDescripton != null">  
+        	product_descripton=#{productDescripton}
+    	</if>
+		<if test="productStatus != null">  
+        	product_status=#{productStatus}
+    	</if>
+		<if test="productCount != null">  
+        	product_count=#{productCount}
+    	</if>
+		<if test="productView != null">  
+        	product_view=#{productView}
+    	</if>
+		<if test="productRank != null">  
+        	product_rank=#{productRank}
+    	</if>
+		<if test="productName != null">  
+        	product_name=#{productName}
+    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from product where id=#{id}
+</delete>
+
+<select id="getById" resultMap="ProductBaseMapper">
+	SELECT * FROM product WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from product  where 1=1 
+		<if test="parm.productDescripton != null">
+	     	and product_descripton = #{parm.productDescripton}
+	   	</if>
+		<if test="parm.productStatus != null">
+	     	and product_status = #{parm.productStatus}
+	   	</if>
+		<if test="parm.productCount != null">
+	     	and product_count = #{parm.productCount}
+	   	</if>
+		<if test="parm.productView != null">
+	     	and product_view = #{parm.productView}
+	   	</if>
+		<if test="parm.productRank != null">
+	     	and product_rank = #{parm.productRank}
+	   	</if>
+		<if test="parm.productName != null">
+	     	and product_name = #{parm.productName}
+	   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="ProductBaseMapper">
+	select * from product where 1=1 
+		<if test="parm.productDescripton != null">
+	     	and product_descripton = #{parm.productDescripton}
+	   	</if>
+		<if test="parm.productStatus != null">
+	     	and product_status = #{parm.productStatus}
+	   	</if>
+		<if test="parm.productCount != null">
+	     	and product_count = #{parm.productCount}
+	   	</if>
+		<if test="parm.productView != null">
+	     	and product_view = #{parm.productView}
+	   	</if>
+		<if test="parm.productRank != null">
+	     	and product_rank = #{parm.productRank}
+	   	</if>
+		<if test="parm.productName != null">
+	     	and product_name = #{parm.productName}
+	   	</if>
+		<if test="parm.start != null">
+		limit ${parm.start},${parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from product where 1=1 
+</select>
+
+
+</mapper>

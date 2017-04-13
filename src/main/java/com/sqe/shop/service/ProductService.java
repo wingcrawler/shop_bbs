@@ -7,34 +7,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sqe.shop.mapper.TProductMapper;
-import com.sqe.shop.model.TProduct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.sqe.shop.mapper.ProductMapper;
+import com.sqe.shop.model.Product;
 
 @Component
 public class ProductService extends AdapterService implements BaseService {
 
 	@Autowired
-    TProductMapper productMapper;
+    ProductMapper productMapper;
 	
-	public TProduct getById(Integer productId) {
-		return super.getById("TProductMapper", productId);
+	public Product getById(Integer productId) {
+		return super.getById("ProductMapper", productId);
 	}
 	
-	public List<TProduct> getProductList() {
+	public List<Product> getProductList() {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
-		List<TProduct> list = super.getBeanListByParm("TProductMapper", parmMap);  
+		List<Product> list = super.getBeanListByParm("ProductMapper", parmMap);  
 		return list;
 	}
 
-	public int insert(TProduct t) {
+	public int insert(Product t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int update(TProduct t) {
+	public int update(Product t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
