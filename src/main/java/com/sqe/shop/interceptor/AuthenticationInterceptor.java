@@ -1,7 +1,7 @@
-package com.sqe.shop.common;
+package com.sqe.shop.interceptor;
 
-import com.sqe.shop.util.AdminUtil;
 import com.sqe.shop.util.UserUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -17,15 +17,15 @@ import javax.servlet.http.HttpServletResponse;
  * @version 2017/2/8
  */
 @Component
-public class AdminAuthenticationInterceptor extends HandlerInterceptorAdapter {
+public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
-    private Logger logger = LoggerFactory.getLogger(AdminAuthenticationInterceptor.class);
+    private Logger logger = LoggerFactory.getLogger(AuthenticationInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        if(AdminUtil.getAdminFromSession(request.getSession())==null){
-            logger.info("管理员未登录,跳转到登录页面.");
-            response.sendRedirect("/admin/login");
+        if(UserUtil.getUserFromSession(request.getSession())==null){
+            logger.info("用户未登录,跳转到登录页面.");
+            response.sendRedirect("/user/login");
             return false;
         }
         return true;

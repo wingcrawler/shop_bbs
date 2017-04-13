@@ -1,4 +1,4 @@
-package com.sqe.shop.common;
+package com.sqe.shop.util;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +11,7 @@ import java.util.List;
  * @author Vito
  * @version 2014/6/14
  */
-public class Page<T> {
+public class PageUtil<T> {
     public static final int DEFAULT_PAGE_SIZE = 10;
     // -- 公共变量 --//
     public static final String ASC = "asc";
@@ -29,12 +29,12 @@ public class Page<T> {
     protected long totalCount = -1;
 
     // -- 构造函数 --//
-    public Page(int pageNo,int pageSize) {
+    public PageUtil(int pageNo,int pageSize) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
     }
 
-    public Page(HttpServletRequest request) {
+    public PageUtil(HttpServletRequest request) {
         int pageNumber = Integer.parseInt(StringUtils.defaultIfBlank(request.getParameter("p"), "1"));
         setPageNo(pageNumber);
         int pageSize = Integer.parseInt(StringUtils.defaultIfBlank(request.getParameter("ps"), String.valueOf(DEFAULT_PAGE_SIZE)));
@@ -63,7 +63,7 @@ public class Page<T> {
     /**
      * 返回Page对象自身的setPageNo函数,可用于连续设置。
      */
-    public Page<T> pageNo(final int thePageNo) {
+    public PageUtil<T> pageNo(final int thePageNo) {
         setPageNo(thePageNo);
         return this;
     }
@@ -85,7 +85,7 @@ public class Page<T> {
     /**
      * 返回Page对象自身的setPageSize函数,可用于连续设置。
      */
-    public Page<T> pageSize(final int thePageSize) {
+    public PageUtil<T> pageSize(final int thePageSize) {
         setPageSize(thePageSize);
         return this;
     }
@@ -114,7 +114,7 @@ public class Page<T> {
     /**
      * 返回Page对象自身的setOrderBy函数,可用于连续设置。
      */
-    public Page<T> orderBy(final String theOrderBy) {
+    public PageUtil<T> orderBy(final String theOrderBy) {
         setOrderBy(theOrderBy);
         return this;
     }
@@ -148,7 +148,7 @@ public class Page<T> {
     /**
      * 返回Page对象自身的setOrder函数,可用于连续设置。
      */
-    public Page<T> order(final String theOrder) {
+    public PageUtil<T> order(final String theOrder) {
         setOrder(theOrder);
         return this;
     }
@@ -177,7 +177,7 @@ public class Page<T> {
     /**
      * 返回Page对象自身的setAutoCount函数,可用于连续设置。
      */
-    public Page<T> autoCount(final boolean theAutoCount) {
+    public PageUtil<T> autoCount(final boolean theAutoCount) {
         setAutoCount(theAutoCount);
         return this;
     }
