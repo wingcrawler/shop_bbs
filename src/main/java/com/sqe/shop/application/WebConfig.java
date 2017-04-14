@@ -13,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableSpringDataWebSupport
-@ComponentScan(basePackageClasses=Application.class, useDefaultFilters=true)  
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -23,8 +22,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         	.excludePathPatterns("/user/login","/user/reg","/user/logout");
 
         registry.addInterceptor(new AdminAuthenticationInterceptor())
-        	.addPathPatterns("/admin/**","/*/admin/**")
-        	.excludePathPatterns("/admin/login","/admin/logout");
+        	.addPathPatterns("/backend1/**","/*/backend1/**")
+        	.excludePathPatterns("/backend/login","/backend/logout");
     }
 /*
     @Override

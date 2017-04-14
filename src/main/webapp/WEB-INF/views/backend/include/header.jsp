@@ -3,7 +3,6 @@
 <!-- User Info, Notifications and Menu Bar -->
 			<nav class="navbar user-info-navbar" role="navigation">
 				
-				<!-- Left links for user info navbar -->
 				<ul class="user-info-menu left-links list-inline list-unstyled">
 					
 					<li class="hidden-sm hidden-xs">
@@ -157,24 +156,20 @@
 				</ul>
 				
 				
-				<!-- Right links for user info navbar -->
 				<ul class="user-info-menu right-links list-inline list-unstyled">
-					
-					<li class="search-form"><!-- You can add "always-visible" to show make the search input visible -->
-						
+					<!-- 搜索框 -->
+					<li class="search-form">
 						<form method="get" action="extra-search.html">
 							<input type="text" name="s" class="form-control search-field" placeholder="Type to search..." />
-							
 							<button type="submit" class="btn btn-link">
 								<i class="linecons-search"></i>
 							</button>
 						</form>
-						
 					</li>
-					
+					<!-- 个人中心 -->
 					<li class="dropdown user-profile">
 						<a href="#" data-toggle="dropdown">
-							<img src="/backend/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
+							<img src="/backendstyle/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
 							<span>${user.username}<i class="fa-angle-down"></i></span>
 						</a>
 						<ul class="dropdown-menu user-profile-menu list-unstyled">
@@ -183,13 +178,6 @@
 							<li class="last"><a href="/account/logout"><i class="fa-lock"></i>退出</a></li>
 						</ul>
 					</li>
-					
-					<li>
-						<a href="#" data-toggle="chat">
-							<i class="fa-comments-o"></i>
-						</a>
-					</li>
-					
 				</ul>
 				
 			</nav>

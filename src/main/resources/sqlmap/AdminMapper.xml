@@ -57,6 +57,11 @@
 		<if test="parm.user != null">
 	     	and user = #{parm.user}
 	   	</if>
+	   	
+	   	<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+	   	
 		<if test="parm.start != null">
 		limit ${parm.start},${parm.limit}
 		</if>
@@ -65,6 +70,12 @@
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from admin where 1=1 
+	<if test="parm.orderby != null">
+   		order by #{parm.orderby}
+   	</if>
+   	<if test="parm.start != null">
+		limit ${parm.start},${parm.limit}
+	</if>
 </select>
 
 

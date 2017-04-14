@@ -11,11 +11,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * 登录校验
- * @author 木鱼 muyu@yiji.com
- * @version 2017/2/8
- */
 @Component
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 

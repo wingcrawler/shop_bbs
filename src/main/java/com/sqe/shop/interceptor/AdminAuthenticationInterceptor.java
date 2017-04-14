@@ -11,11 +11,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * 登录校验
- * @author 木鱼 muyu@yiji.com
- * @version 2017/2/8
- */
 @Component
 public class AdminAuthenticationInterceptor extends HandlerInterceptorAdapter {
 
@@ -25,7 +20,7 @@ public class AdminAuthenticationInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         if(AdminUtil.getAdminFromSession(request.getSession())==null){
             logger.info("管理员未登录,跳转到登录页面.");
-            response.sendRedirect("/admin/login");
+            response.sendRedirect("/backend/login");
             return false;
         }
         return true;
