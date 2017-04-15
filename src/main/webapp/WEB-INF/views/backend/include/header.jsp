@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- User Info, Notifications and Menu Bar -->
 			<nav class="navbar user-info-navbar" role="navigation">
 				
@@ -181,3 +180,7 @@
 				</ul>
 				
 			</nav>
+			
+<!-- <div class="page-loading-overlay">
+	<div class="loader-2"></div>
+</div> -->

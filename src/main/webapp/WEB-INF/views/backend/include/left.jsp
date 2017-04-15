@@ -20,8 +20,6 @@
 		</header>
 
 		<ul id="main-menu" class="main-menu">
-			<!-- add class "multiple-expanded" to allow multiple submenus to open -->
-			<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
 			<li class="li active opened">
 				<a href="/backend/index">
 					<i class="linecons-globe"></i>
@@ -58,7 +56,7 @@
 					<span class="title">${t.m_news }</span>
 				</a>
 				<ul>
-					<li><a href=""><span class="title">${t.m_news_info }</span></a></li>
+					<li><a href="/backend/news/list"><span class="title">${t.m_news_info }</span></a></li>
 					<li><a href=""><span class="title">${t.m_news_read }</span></a></li>
 					<li><a href=""><span class="title">${t.m_news_click }</span></a></li>
 					<li><a href=""><span class="title">${t.m_news_comment }</span></a></li>

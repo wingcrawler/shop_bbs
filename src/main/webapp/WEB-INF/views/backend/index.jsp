@@ -5,7 +5,7 @@
 <head>
 
 	<jsp:include page="include/meta.jsp"></jsp:include>
-	<title>Admin</title>
+	<title>${t.title_backend_index }</title>
 	
 <style>
 .linecons-cloud:before{position:relative;top:10px;}
@@ -104,10 +104,5 @@
 			
 		</div>
 	</div>
-	
-	<div class="page-loading-overlay">
-		<div class="loader-2"></div>
-	</div>
-
 </body>
 </html>
