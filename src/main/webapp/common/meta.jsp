@@ -4,8 +4,5 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
 
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<script type="text/javascript">
-    var ctx = '<%=request.getContextPath() %>';
-</script>
+<jsp:include page="global.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="${ctx}/backendstyle/css/bootstrap.css"/>

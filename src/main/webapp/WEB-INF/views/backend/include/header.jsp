@@ -160,7 +160,7 @@
 					<!-- 搜索框 -->
 					<li class="search-form">
 						<form method="get" action="extra-search.html">
-							<input type="text" name="s" class="form-control search-field" placeholder="Type to search..." />
+							<input type="text" name="s" class="form-control search-field" placeholder="${t.head_search_placeholder }" />
 							<button type="submit" class="btn btn-link">
 								<i class="linecons-search"></i>
 							</button>
@@ -173,9 +173,9 @@
 							<span>${user.username}<i class="fa-angle-down"></i></span>
 						</a>
 						<ul class="dropdown-menu user-profile-menu list-unstyled">
-							<li><a href="/auth/admin/profile"><i class="fa-user"></i>个人中心</a></li>
-							<li><a href="#settings"><i class="fa-wrench"></i>设置</a></li>
-							<li class="last"><a href="/account/logout"><i class="fa-lock"></i>退出</a></li>
+							<li><a href="/auth/admin/profile"><i class="fa-user"></i>${t.head_usercenter }</a></li>
+							<li><a href="#settings"><i class="fa-wrench"></i>${t.head_setting }</a></li>
+							<li class="last"><a href="/account/logout"><i class="fa-lock"></i>${t.sign_out }</a></li>
 						</ul>
 					</li>
 				</ul>

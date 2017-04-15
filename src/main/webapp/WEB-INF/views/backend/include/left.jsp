@@ -7,7 +7,7 @@
 			<div class="logo">
 				<a href="javascript:void(0);" class="logo-expanded"> <!-- <img src="/admin/images/logo@2x.png" width="80" alt="" /> -->
 					<h2 style="color: #fff; padding: 0; margin: 0;">
-						<i class="fa fa-cog"></i> Admin
+						<i class="fa fa-cog"></i> ${t.backend_name }
 					</h2>
 				</a>
 			</div>
@@ -25,60 +25,59 @@
 			<li class="li active opened">
 				<a href="/backend/index">
 					<i class="linecons-globe"></i>
-					<span class="title">主页</span>
+					<span class="title">${t.home}</span>
 				</a>
 			</li>
 			<li class="li">
-				<a href=""><i class="linecons-user"></i><span class="title">用户管理</span></a>
+				<a href=""><i class="linecons-user"></i><span class="title">${t.m_user }</span></a>
 			</li>
 			<li class="li">
 				<a href="ui-panels.html"> 
-					<i class="linecons-attach"></i> 
-					<span class="title">广告管理</span>
+					<i class="linecons-tag"></i> 
+					<span class="title">${t.m_ad }</span>
 				</a>
 				<ul>
-					<li><a href=""><span class="title">活动轮播图</span></a></li>
-					<li><a href=""><span class="title">广告位管理</span></a></li>
+					<li><a href=""><span class="title">${t.m_ad_active }</span></a></li>
+					<li><a href=""><span class="title">${t.m_ad_position }</span></a></li>
 				</ul>
 			</li>
 			<li class="li">
 				<a href="ui-panels.html"> 
 					<i class="linecons-attach"></i> 
-					<span class="title">产品管理</span>
+					<span class="title">${t.m_product }</span>
 				</a>
 				<ul>
-					<li><a href=""><span class="title">类别管理</span></a></li>
-					<li><a href=""><span class="title">点击量查看</span></a></li>
-					<li><a href=""><span class="title">权重管理</span></a></li>
+					<li><a href=""><span class="title">${t.m_product_cate }</span></a></li>
+					<li><a href=""><span class="title">${t.m_product_click }</span></a></li>
+					<li><a href=""><span class="title">${t.m_product_weight }</span></a></li>
 				</ul>
 			</li>
 			<li class="li">
 				<a href="ui-panels.html"> 
-					<i class="linecons-attach"></i> 
-					<span class="title">新闻资讯管理</span>
+					<i class="linecons-note"></i> 
+					<span class="title">${t.m_news }</span>
 				</a>
 				<ul>
-					<li><a href=""><span class="title">资讯管理</span></a></li>
-					<li><a href=""><span class="title">阅读量</span></a></li>
-					<li><a href=""><span class="title">点击计数管理</span></a></li>
-					<li><a href=""><span class="title">评论管理</span></a></li>
+					<li><a href=""><span class="title">${t.m_news_info }</span></a></li>
+					<li><a href=""><span class="title">${t.m_news_read }</span></a></li>
+					<li><a href=""><span class="title">${t.m_news_click }</span></a></li>
+					<li><a href=""><span class="title">${t.m_news_comment }</span></a></li>
 				</ul>
 			</li>
 			<li class="li">
 				<a href="ui-panels.html"> 
-					<i class="linecons-attach"></i> 
-					<span class="title">店家管理</span>
+					<i class="linecons-shop"></i> 
+					<span class="title">${t.m_store }</span>
 				</a>
 				<ul>
-					<li><a href=""><span class="title">编辑店家</span></a></li>
-					<li><a href=""><span class="title">店家资质审核</span></a></li>
-					<li><a href=""><span class="title">店家产品审核</span></a></li>
-					<li><a href=""><span class="title">店家留言查看</span></a></li>
-					<li><a href=""><span class="title">店家产品权重管理</span></a></li>
+					<li><a href=""><span class="title">${t.m_store_list }</span></a></li>
+					<li><a href=""><span class="title">${t.m_store_product }</span></a></li>
+					<li><a href=""><span class="title">${t.m_store_msg }</span></a></li>
+					<li><a href=""><span class="title">${t.m_store_weight }</span></a></li>
 				</ul>
 			</li>
 			<li class="li">
-				<a href=""><i class="linecons-clock"></i><span class="title">论坛管理</span></a>
+				<a href=""><i class="linecons-comment"></i><span class="title">${t.m_bbs }</span></a>
 			</li>
 		</ul>
 

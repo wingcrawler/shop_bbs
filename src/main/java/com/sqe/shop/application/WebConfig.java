@@ -3,10 +3,13 @@ package com.sqe.shop.application;
 import com.sqe.shop.interceptor.AdminAuthenticationInterceptor;
 import com.sqe.shop.interceptor.AuthenticationInterceptor;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.web.filter.OrderedCharacterEncodingFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -52,4 +55,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
 
+    @Bean
+	@ConditionalOnMissingBean(CharacterEncodingFilter.class)
+	public CharacterEncodingFilter characterEncodingFilter() {
+		CharacterEncodingFilter filter = new OrderedCharacterEncodingFilter();
+		filter.setEncoding("utf-8");
+		filter.setForceRequestEncoding(true);
+		filter.setForceResponseEncoding(true);
+		return filter;
+	}
+    
 }
