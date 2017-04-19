@@ -3,20 +3,19 @@
 	<div class="sidebar-menu-inner">
 
 		<header class="logo-env">
-			<!-- logo -->
 			<div class="logo">
-				<a href="javascript:void(0);" class="logo-expanded"> <!-- <img src="/admin/images/logo@2x.png" width="80" alt="" /> -->
+				<a href="javascript:void(0);" class="logo-expanded"> 
 					<h2 style="color: #fff; padding: 0; margin: 0;">
 						<i class="fa fa-cog"></i> ${t.backend_name }
 					</h2>
 				</a>
 			</div>
-			<div class="mobile-menu-toggle visible-xs">
+			<!-- <div class="mobile-menu-toggle visible-xs">
 				<a href="#" data-toggle="user-info-menu"> <i class="fa-bell-o"></i>
 					<span class="badge badge-success">7</span>
 				</a> <a href="#" data-toggle="mobile-menu"> <i class="fa-bars"></i>
 				</a>
-			</div>
+			</div> -->
 		</header>
 
 		<ul id="main-menu" class="main-menu">
@@ -26,30 +25,22 @@
 					<span class="title">${t.home}</span>
 				</a>
 			</li>
+			<!-- 广告信息管理 -->
 			<li class="li">
-				<a href=""><i class="linecons-user"></i><span class="title">${t.m_user }</span></a>
+				<a href="/backend/ad/list"><i class="linecons-tag"></i><span class="title">${t.m_ad }</span></a>
 			</li>
-			<li class="li">
-				<a href="ui-panels.html"> 
-					<i class="linecons-tag"></i> 
-					<span class="title">${t.m_ad }</span>
-				</a>
-				<ul>
-					<li><a href=""><span class="title">${t.m_ad_active }</span></a></li>
-					<li><a href=""><span class="title">${t.m_ad_position }</span></a></li>
-				</ul>
-			</li>
+			<!-- 产品管理 -->
 			<li class="li">
 				<a href="ui-panels.html"> 
 					<i class="linecons-attach"></i> 
 					<span class="title">${t.m_product }</span>
 				</a>
 				<ul>
-					<li><a href=""><span class="title">${t.m_product_cate }</span></a></li>
-					<li><a href=""><span class="title">${t.m_product_click }</span></a></li>
-					<li><a href=""><span class="title">${t.m_product_weight }</span></a></li>
+					<li><a href="/backend/product/list"><span class="title">${t.m_product_list }</span></a></li>
+					<li><a href="/backend/product/category"><span class="title">${t.m_product_cate }</span></a></li>
 				</ul>
 			</li>
+			<!-- 新闻资讯管理 -->
 			<li class="li">
 				<a href="ui-panels.html"> 
 					<i class="linecons-note"></i> 
@@ -62,6 +53,7 @@
 					<li><a href=""><span class="title">${t.m_news_comment }</span></a></li>
 				</ul>
 			</li>
+			<!-- 店家管理 -->
 			<li class="li">
 				<a href="ui-panels.html"> 
 					<i class="linecons-shop"></i> 
@@ -74,8 +66,17 @@
 					<li><a href=""><span class="title">${t.m_store_weight }</span></a></li>
 				</ul>
 			</li>
+			<!-- 用户管理 -->
+			<li class="li">
+				<a href=""><i class="linecons-user"></i><span class="title">${t.m_user }</span></a>
+			</li>
+			<!-- 论坛管理 -->
 			<li class="li">
 				<a href=""><i class="linecons-comment"></i><span class="title">${t.m_bbs }</span></a>
+			</li>
+			<!-- 举报信息 -->
+			<li class="li">
+				<a href=""><i class="linecons-star"></i><span class="title">${t.m_report }</span></a>
 			</li>
 		</ul>
 

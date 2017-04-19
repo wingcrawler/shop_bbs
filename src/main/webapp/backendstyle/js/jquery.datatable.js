@@ -113,6 +113,9 @@
 				dataType : args.dataType,
 				success : function(data) {
 					var html = '';
+					if(data.list==undefined){
+						return;
+					}
 					var len = data.list.length;
 					for (var i = 0; i < len; i++) {
 						var item = data.list[i];

@@ -57,13 +57,17 @@
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
-					        		<b style="display:none;">${code.content}</b>
+					        		<%-- <b style="display:none;">${code.content}</b> --%>
 									<textarea id="myEditor">${code.content}</textarea>
 									<script type="text/javascript">
 										var ue = UE.getEditor('myEditor',{
 											toolbars: [
-									           ['fullscreen', 'source', 'undo', 'redo', 'bold','pasteplain','removeformat','link','unlink',
-									           'simpleupload','insertimage','imagecenter','justifyleft','justifyright','justifycenter','justifyjustify']
+									           ['fullscreen', 'source', 'undo', 'redo', 'bold','pasteplain','removeformat','link','unlink','cleardoc',
+									           'simpleupload','insertimage','imagecenter','justifyleft','justifyright','justifycenter','justifyjustify',
+									           'insertrow', 'insertcol', 'mergeright','mergedown', 'deleterow', 'deletecol', 'splittorows', 'splittocols', 
+									           'splittocells', 'deletecaption','inserttitle', 'mergecells', 'deletetable',  
+									           'insertparagraphbeforetable','edittable','edittd','inserttable','autotypeset','customstyle',
+									           'spechars','fontfamily','fontsize']
 									       ],
 									       initialFrameHeight:500,
 									       initialFrameWidth:'100%'
