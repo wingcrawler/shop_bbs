@@ -5,7 +5,7 @@
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.title_news_list }</title>
+	<title>${t.m_bbs_topic }</title>
 	
 </head>
 <body class="page-body">
@@ -99,8 +99,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(3).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(3).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(6).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(6).find('ul li').eq(2).addClass('active');
 });
 </script>
 </body>

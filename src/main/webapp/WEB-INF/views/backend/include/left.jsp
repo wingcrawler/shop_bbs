@@ -37,7 +37,7 @@
 				</a>
 				<ul>
 					<li><a href="/backend/product/list"><span class="title">${t.m_product_list }</span></a></li>
-					<li><a href="/backend/product/category"><span class="title">${t.m_product_cate }</span></a></li>
+					<li><a href="/backend/cate/list"><span class="title">${t.m_product_cate }</span></a></li>
 				</ul>
 			</li>
 			<!-- 新闻资讯管理 -->
@@ -47,10 +47,8 @@
 					<span class="title">${t.m_news }</span>
 				</a>
 				<ul>
-					<li><a href="/backend/news/list"><span class="title">${t.m_news_info }</span></a></li>
-					<li><a href=""><span class="title">${t.m_news_read }</span></a></li>
-					<li><a href=""><span class="title">${t.m_news_click }</span></a></li>
-					<li><a href=""><span class="title">${t.m_news_comment }</span></a></li>
+					<li><a href="/backend/news/list"><span class="title">${t.m_news_list }</span></a></li>
+					<li><a href="/backend/news/comment"><span class="title">${t.m_news_comment }</span></a></li>
 				</ul>
 			</li>
 			<!-- 店家管理 -->
@@ -60,23 +58,31 @@
 					<span class="title">${t.m_store }</span>
 				</a>
 				<ul>
-					<li><a href=""><span class="title">${t.m_store_list }</span></a></li>
-					<li><a href=""><span class="title">${t.m_store_product }</span></a></li>
-					<li><a href=""><span class="title">${t.m_store_msg }</span></a></li>
-					<li><a href=""><span class="title">${t.m_store_weight }</span></a></li>
+					<li><a href="/backend/store/list"><span class="title">${t.m_store_list }</span></a></li>
+					<li><a href="/backend/store/detail"><span class="title">${t.m_store_detail }</span></a></li>
+					<li><a href="/backend/store/productVerify"><span class="title">${t.m_store_product }</span></a></li>
+					<li><a href="/backend/store/msg"><span class="title">${t.m_store_msg }</span></a></li>
 				</ul>
 			</li>
 			<!-- 用户管理 -->
 			<li class="li">
-				<a href=""><i class="linecons-user"></i><span class="title">${t.m_user }</span></a>
+				<a href="/backend/user/list"><i class="linecons-user"></i><span class="title">${t.m_user }</span></a>
 			</li>
 			<!-- 论坛管理 -->
 			<li class="li">
-				<a href=""><i class="linecons-comment"></i><span class="title">${t.m_bbs }</span></a>
+				<a href="ui-panels.html"> 
+					<i class="linecons-comment"></i> 
+					<span class="title">${t.m_bbs }</span>
+				</a>
+				<ul>
+					<li><a href="/backend/bbs/list"><span class="title">${t.m_bbs_list }</span></a></li>
+					<li><a href="/backend/bbs/plate"><span class="title">${t.m_bbs_plate }</span></a></li>
+					<li><a href="/backend/bbs/topic"><span class="title">${t.m_bbs_topic }</span></a></li>
+				</ul>
 			</li>
 			<!-- 举报信息 -->
 			<li class="li">
-				<a href=""><i class="linecons-star"></i><span class="title">${t.m_report }</span></a>
+				<a href="/backend/report/list"><i class="linecons-star"></i><span class="title">${t.m_report }</span></a>
 			</li>
 		</ul>
 

@@ -5,7 +5,7 @@
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.title_news_list }</title>
+	<title>${t.m_store_msg }</title>
 	
 </head>
 <body class="page-body">
@@ -57,6 +57,7 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">列表</h3>
 						<div class="panel-options">
+							<a href="/backend/report/edit" target="_blank"><i class="fa-plus"></i></a>
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
 					</div>
@@ -99,8 +100,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(3).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(3).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(4).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(4).find('ul li').eq(0).addClass('active');
 });
 </script>
 </body>

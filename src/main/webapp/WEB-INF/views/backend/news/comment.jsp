@@ -5,7 +5,7 @@
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.title_news_list }</title>
+	<title>${t.title_news_comment }</title>
 	
 </head>
 <body class="page-body">
@@ -100,7 +100,7 @@
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
 	$('#main-menu li.li').eq(3).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(3).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(3).find('ul li').eq(1).addClass('active');
 });
 </script>
 </body>

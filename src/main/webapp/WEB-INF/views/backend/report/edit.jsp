@@ -5,7 +5,7 @@
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.title_news_edit }</title>
+	<title>${t.m_report_edit }</title>
 	<script src="/ue/ueditor.config.js"></script>
 	<script src="/ue/ueditor.all.js"></script>
 	<!-- <script type="text/javascript" charset="utf-8" src="/ue/lang/en/en.js"></script> -->
@@ -94,8 +94,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(3).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(3).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(4).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(4).find('ul li').eq(0).addClass('active');
 });
 </script>
 </body>
