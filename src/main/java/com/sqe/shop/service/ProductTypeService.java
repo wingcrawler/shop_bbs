@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class ProductTypeService extends AdapterService implements BaseService {
 	
 	@Autowired
-    ProductTypeMapper ProductTypeMapper;
+    ProductTypeMapper productTypeMapper;
     
     public int insert(ProductType ProductType) {
-		return ProductTypeMapper.insert(ProductType);
+		return productTypeMapper.insert(ProductType);
 	}
     
     public int update(ProductType ProductType) {
-		return ProductTypeMapper.update(ProductType);
+		return productTypeMapper.update(ProductType);
 	}
 	
 	public int delete(Long id) {
-		return ProductTypeMapper.delete(id);
+		return productTypeMapper.delete(id);
 	}
 
 	public ProductType getById(Long id) {
-		return ProductTypeMapper.getById(id);
+		return productTypeMapper.getById(id);
 	}
 	
 	public int countByParm(ProductType ProductType) {
@@ -39,11 +39,11 @@ public class ProductTypeService extends AdapterService implements BaseService {
 		/*if(ProductType!=null){
 		
 		}*/
-		return ProductTypeMapper.countByParm(parm);
+		return productTypeMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return ProductTypeMapper.countByParm(parm);
+		return productTypeMapper.countByParm(parm);
 	}
 	
 	public PageUtil<ProductType> getBeanListByParm(ProductType ProductType, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class ProductTypeService extends AdapterService implements BaseService {
 		/*if(ProductType!=null){
 			
 		}*/
-		int count = ProductTypeMapper.countByParm(parm);
+		int count = productTypeMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<ProductType> list = ProductTypeMapper.getBeanListByParm(parm);
+			List<ProductType> list = productTypeMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class ProductTypeService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = ProductTypeMapper.countByParm(parm);
+		int count = productTypeMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = ProductTypeMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = productTypeMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

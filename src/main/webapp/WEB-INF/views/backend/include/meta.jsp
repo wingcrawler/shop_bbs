@@ -35,6 +35,7 @@
 	<script src="/backendstyle/js/toastr/toastr.min.js"></script>
 	<script src="/backendstyle/js/xenon-custom.js"></script>
 	
+	<script src="/backendstyle/js/jquery.form.js"></script>
 	<script src="/backendstyle/js/common-util.js"></script>	
 	<script src="/backendstyle/js/jquery.page.js"></script>
 	<script src="/backendstyle/js/jquery.dateutil.js"></script>

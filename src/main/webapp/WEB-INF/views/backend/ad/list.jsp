@@ -62,12 +62,11 @@
 							<thead>
 								<tr>
 									<th field="index" width="60">${t.t_no }</th>
-									<th field="imagePath">${t.t_img }</th>
 									<th field="imageUrl">${t.t_img_link }</th>
 									<th field="type">${t.t_type }</th>
 									<th field="sort">${t.t_weight }</th>
 									<th field="description">${t.t_desc }</th>
-									<th field="op" field-role="0,2,4,5" width="180"></th>
+									<th field="op" field-role="2,0" width="110"></th>
 								</tr>
 							</thead>
 							<tbody class="middle-align"></tbody>
@@ -81,6 +80,8 @@
 		</div>
 	</div>
 	
+<jsp:include page="../dialog/dialog_delete.jsp"></jsp:include>
+
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
@@ -94,6 +95,19 @@ $(function(){
 		}
 	}); 
 });
+
+function edit(obj){
+	var url="/backend/ad/edit?id=" + $(obj).attr("opid");
+	window.open(url);
+}
+
+function showDeleteDialog(obj) {
+	var _id = $(obj).attr("opid");
+	var _url = '/backend/ad/doDelete';
+	$("input[name='hidden-url']").val(_url);
+	$("input[name='hidden-id']").val(_id);
+	jQuery("#modal-delete").modal("show", {backdrop: "fade"});
+}
 
 function search(){
 	var type=$('select[name="type"]').val();

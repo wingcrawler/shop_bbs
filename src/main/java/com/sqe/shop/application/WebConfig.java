@@ -1,10 +1,15 @@
 package com.sqe.shop.application;
 
+import javax.servlet.MultipartConfigElement;
+
 import com.sqe.shop.interceptor.AdminAuthenticationInterceptor;
 import com.sqe.shop.interceptor.AuthenticationInterceptor;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration;
 import org.springframework.boot.web.filter.OrderedCharacterEncodingFilter;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -46,15 +51,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addFormatter(formatter);
     }*/
 
-    @Bean(name = "multipartResolver")
+   /* @Bean(name = "multipartResolver")
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver=new CommonsMultipartResolver();
         resolver.setDefaultEncoding("utf-8");
         resolver.setMaxUploadSize(10240000);
         return resolver;
-    }
-
-
+    }*/
+    
     @Bean
 	@ConditionalOnMissingBean(CharacterEncodingFilter.class)
 	public CharacterEncodingFilter characterEncodingFilter() {

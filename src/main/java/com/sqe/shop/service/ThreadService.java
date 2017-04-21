@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class ThreadService extends AdapterService implements BaseService {
 	
 	@Autowired
-    ThreadMapper ThreadMapper;
+    ThreadMapper threadMapper;
     
     public int insert(Thread Thread) {
-		return ThreadMapper.insert(Thread);
+		return threadMapper.insert(Thread);
 	}
     
     public int update(Thread Thread) {
-		return ThreadMapper.update(Thread);
+		return threadMapper.update(Thread);
 	}
 	
 	public int delete(Long id) {
-		return ThreadMapper.delete(id);
+		return threadMapper.delete(id);
 	}
 
 	public Thread getById(Long id) {
-		return ThreadMapper.getById(id);
+		return threadMapper.getById(id);
 	}
 	
 	public int countByParm(Thread Thread) {
@@ -39,11 +39,11 @@ public class ThreadService extends AdapterService implements BaseService {
 		/*if(Thread!=null){
 		
 		}*/
-		return ThreadMapper.countByParm(parm);
+		return threadMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return ThreadMapper.countByParm(parm);
+		return threadMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Thread> getBeanListByParm(Thread Thread, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class ThreadService extends AdapterService implements BaseService {
 		/*if(Thread!=null){
 			
 		}*/
-		int count = ThreadMapper.countByParm(parm);
+		int count = threadMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Thread> list = ThreadMapper.getBeanListByParm(parm);
+			List<Thread> list = threadMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class ThreadService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = ThreadMapper.countByParm(parm);
+		int count = threadMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = ThreadMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = threadMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class SectionService extends AdapterService implements BaseService {
 	
 	@Autowired
-    SectionMapper SectionMapper;
+    SectionMapper sectionMapper;
     
     public int insert(Section Section) {
-		return SectionMapper.insert(Section);
+		return sectionMapper.insert(Section);
 	}
     
     public int update(Section Section) {
-		return SectionMapper.update(Section);
+		return sectionMapper.update(Section);
 	}
 	
 	public int delete(Long id) {
-		return SectionMapper.delete(id);
+		return sectionMapper.delete(id);
 	}
 
 	public Section getById(Long id) {
-		return SectionMapper.getById(id);
+		return sectionMapper.getById(id);
 	}
 	
 	public int countByParm(Section Section) {
@@ -39,11 +39,11 @@ public class SectionService extends AdapterService implements BaseService {
 		/*if(Section!=null){
 		
 		}*/
-		return SectionMapper.countByParm(parm);
+		return sectionMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return SectionMapper.countByParm(parm);
+		return sectionMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Section> getBeanListByParm(Section Section, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class SectionService extends AdapterService implements BaseService {
 		/*if(Section!=null){
 			
 		}*/
-		int count = SectionMapper.countByParm(parm);
+		int count = sectionMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Section> list = SectionMapper.getBeanListByParm(parm);
+			List<Section> list = sectionMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class SectionService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = SectionMapper.countByParm(parm);
+		int count = sectionMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = SectionMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = sectionMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

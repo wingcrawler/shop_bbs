@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class QuestionAnswerService extends AdapterService implements BaseService {
 	
 	@Autowired
-    QuestionAnswerMapper QuestionAnswerMapper;
+    QuestionAnswerMapper questionAnswerMapper;
     
     public int insert(QuestionAnswer QuestionAnswer) {
-		return QuestionAnswerMapper.insert(QuestionAnswer);
+		return questionAnswerMapper.insert(QuestionAnswer);
 	}
     
     public int update(QuestionAnswer QuestionAnswer) {
-		return QuestionAnswerMapper.update(QuestionAnswer);
+		return questionAnswerMapper.update(QuestionAnswer);
 	}
 	
 	public int delete(Long id) {
-		return QuestionAnswerMapper.delete(id);
+		return questionAnswerMapper.delete(id);
 	}
 
 	public QuestionAnswer getById(Long id) {
-		return QuestionAnswerMapper.getById(id);
+		return questionAnswerMapper.getById(id);
 	}
 	
 	public int countByParm(QuestionAnswer QuestionAnswer) {
@@ -39,11 +39,11 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 		/*if(QuestionAnswer!=null){
 		
 		}*/
-		return QuestionAnswerMapper.countByParm(parm);
+		return questionAnswerMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return QuestionAnswerMapper.countByParm(parm);
+		return questionAnswerMapper.countByParm(parm);
 	}
 	
 	public PageUtil<QuestionAnswer> getBeanListByParm(QuestionAnswer QuestionAnswer, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 		/*if(QuestionAnswer!=null){
 			
 		}*/
-		int count = QuestionAnswerMapper.countByParm(parm);
+		int count = questionAnswerMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<QuestionAnswer> list = QuestionAnswerMapper.getBeanListByParm(parm);
+			List<QuestionAnswer> list = questionAnswerMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = QuestionAnswerMapper.countByParm(parm);
+		int count = questionAnswerMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = QuestionAnswerMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = questionAnswerMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

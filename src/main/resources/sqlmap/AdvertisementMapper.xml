@@ -25,19 +25,19 @@
 	UPDATE advertisement 
 	<set>
 			<if test="imagePath != null">  
-	        	image_path=#{imagePath}
+	        	image_path=#{imagePath},
 	    	</if>
 			<if test="imageUrl != null">  
-	        	image_url=#{imageUrl}
+	        	image_url=#{imageUrl},
 	    	</if>
 			<if test="description != null">  
-	        	description=#{description}
+	        	description=#{description},
 	    	</if>
 			<if test="sort != null">  
-	        	sort=#{sort}
+	        	sort=#{sort},
 	    	</if>
 			<if test="type != null">  
-	        	type=#{type}
+	        	type=#{type},
 	    	</if>
 	</set>   
     WHERE id=#{id}

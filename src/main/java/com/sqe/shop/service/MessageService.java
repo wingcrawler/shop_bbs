@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class MessageService extends AdapterService implements BaseService {
 	
 	@Autowired
-    MessageMapper MessageMapper;
+    MessageMapper messageMapper;
     
     public int insert(Message Message) {
-		return MessageMapper.insert(Message);
+		return messageMapper.insert(Message);
 	}
     
     public int update(Message Message) {
-		return MessageMapper.update(Message);
+		return messageMapper.update(Message);
 	}
 	
 	public int delete(Long id) {
-		return MessageMapper.delete(id);
+		return messageMapper.delete(id);
 	}
 
 	public Message getById(Long id) {
-		return MessageMapper.getById(id);
+		return messageMapper.getById(id);
 	}
 	
 	public int countByParm(Message Message) {
@@ -39,11 +39,11 @@ public class MessageService extends AdapterService implements BaseService {
 		/*if(Message!=null){
 		
 		}*/
-		return MessageMapper.countByParm(parm);
+		return messageMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return MessageMapper.countByParm(parm);
+		return messageMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Message> getBeanListByParm(Message Message, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class MessageService extends AdapterService implements BaseService {
 		/*if(Message!=null){
 			
 		}*/
-		int count = MessageMapper.countByParm(parm);
+		int count = messageMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Message> list = MessageMapper.getBeanListByParm(parm);
+			List<Message> list = messageMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class MessageService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = MessageMapper.countByParm(parm);
+		int count = messageMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = MessageMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = messageMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

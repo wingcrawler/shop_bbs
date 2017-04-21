@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class ShopService extends AdapterService implements BaseService {
 	
 	@Autowired
-    ShopMapper ShopMapper;
+    ShopMapper shopMapper;
     
     public int insert(Shop Shop) {
-		return ShopMapper.insert(Shop);
+		return shopMapper.insert(Shop);
 	}
     
     public int update(Shop Shop) {
-		return ShopMapper.update(Shop);
+		return shopMapper.update(Shop);
 	}
 	
 	public int delete(Long id) {
-		return ShopMapper.delete(id);
+		return shopMapper.delete(id);
 	}
 
 	public Shop getById(Long id) {
-		return ShopMapper.getById(id);
+		return shopMapper.getById(id);
 	}
 	
 	public int countByParm(Shop Shop) {
@@ -39,11 +39,11 @@ public class ShopService extends AdapterService implements BaseService {
 		/*if(Shop!=null){
 		
 		}*/
-		return ShopMapper.countByParm(parm);
+		return shopMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return ShopMapper.countByParm(parm);
+		return shopMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Shop> getBeanListByParm(Shop Shop, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class ShopService extends AdapterService implements BaseService {
 		/*if(Shop!=null){
 			
 		}*/
-		int count = ShopMapper.countByParm(parm);
+		int count = shopMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Shop> list = ShopMapper.getBeanListByParm(parm);
+			List<Shop> list = shopMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class ShopService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = ShopMapper.countByParm(parm);
+		int count = shopMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = ShopMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = shopMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

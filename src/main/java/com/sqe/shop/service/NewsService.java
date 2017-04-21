@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class NewsService extends AdapterService implements BaseService {
 	
 	@Autowired
-    NewsMapper NewsMapper;
+    NewsMapper newsMapper;
     
     public int insert(News News) {
-		return NewsMapper.insert(News);
+		return newsMapper.insert(News);
 	}
     
     public int update(News News) {
-		return NewsMapper.update(News);
+		return newsMapper.update(News);
 	}
 	
 	public int delete(Long id) {
-		return NewsMapper.delete(id);
+		return newsMapper.delete(id);
 	}
 
 	public News getById(Long id) {
-		return NewsMapper.getById(id);
+		return newsMapper.getById(id);
 	}
 	
 	public int countByParm(News News) {
@@ -39,11 +39,11 @@ public class NewsService extends AdapterService implements BaseService {
 		/*if(News!=null){
 		
 		}*/
-		return NewsMapper.countByParm(parm);
+		return newsMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return NewsMapper.countByParm(parm);
+		return newsMapper.countByParm(parm);
 	}
 	
 	public PageUtil<News> getBeanListByParm(News News, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class NewsService extends AdapterService implements BaseService {
 		/*if(News!=null){
 			
 		}*/
-		int count = NewsMapper.countByParm(parm);
+		int count = newsMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<News> list = NewsMapper.getBeanListByParm(parm);
+			List<News> list = newsMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class NewsService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = NewsMapper.countByParm(parm);
+		int count = newsMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = NewsMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = newsMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

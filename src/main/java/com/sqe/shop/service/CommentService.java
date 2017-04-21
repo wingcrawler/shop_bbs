@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class CommentService extends AdapterService implements BaseService {
 	
 	@Autowired
-    CommentMapper CommentMapper;
+    CommentMapper commentMapper;
     
     public int insert(Comment Comment) {
-		return CommentMapper.insert(Comment);
+		return commentMapper.insert(Comment);
 	}
     
     public int update(Comment Comment) {
-		return CommentMapper.update(Comment);
+		return commentMapper.update(Comment);
 	}
 	
 	public int delete(Long id) {
-		return CommentMapper.delete(id);
+		return commentMapper.delete(id);
 	}
 
 	public Comment getById(Long id) {
-		return CommentMapper.getById(id);
+		return commentMapper.getById(id);
 	}
 	
 	public int countByParm(Comment Comment) {
@@ -39,11 +39,11 @@ public class CommentService extends AdapterService implements BaseService {
 		/*if(Comment!=null){
 		
 		}*/
-		return CommentMapper.countByParm(parm);
+		return commentMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return CommentMapper.countByParm(parm);
+		return commentMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Comment> getBeanListByParm(Comment Comment, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class CommentService extends AdapterService implements BaseService {
 		/*if(Comment!=null){
 			
 		}*/
-		int count = CommentMapper.countByParm(parm);
+		int count = commentMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Comment> list = CommentMapper.getBeanListByParm(parm);
+			List<Comment> list = commentMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class CommentService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = CommentMapper.countByParm(parm);
+		int count = commentMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = CommentMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = commentMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

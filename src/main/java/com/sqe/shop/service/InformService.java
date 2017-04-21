@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class InformService extends AdapterService implements BaseService {
 	
 	@Autowired
-    InformMapper InformMapper;
+    InformMapper informMapper;
     
     public int insert(Inform Inform) {
-		return InformMapper.insert(Inform);
+		return informMapper.insert(Inform);
 	}
     
     public int update(Inform Inform) {
-		return InformMapper.update(Inform);
+		return informMapper.update(Inform);
 	}
 	
 	public int delete(Long id) {
-		return InformMapper.delete(id);
+		return informMapper.delete(id);
 	}
 
 	public Inform getById(Long id) {
-		return InformMapper.getById(id);
+		return informMapper.getById(id);
 	}
 	
 	public int countByParm(Inform Inform) {
@@ -39,11 +39,11 @@ public class InformService extends AdapterService implements BaseService {
 		/*if(Inform!=null){
 		
 		}*/
-		return InformMapper.countByParm(parm);
+		return informMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return InformMapper.countByParm(parm);
+		return informMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Inform> getBeanListByParm(Inform Inform, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class InformService extends AdapterService implements BaseService {
 		/*if(Inform!=null){
 			
 		}*/
-		int count = InformMapper.countByParm(parm);
+		int count = informMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Inform> list = InformMapper.getBeanListByParm(parm);
+			List<Inform> list = informMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class InformService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = InformMapper.countByParm(parm);
+		int count = informMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = InformMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = informMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

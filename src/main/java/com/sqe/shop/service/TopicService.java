@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class TopicService extends AdapterService implements BaseService {
 	
 	@Autowired
-    TopicMapper TopicMapper;
+    TopicMapper topicMapper;
     
     public int insert(Topic Topic) {
-		return TopicMapper.insert(Topic);
+		return topicMapper.insert(Topic);
 	}
     
     public int update(Topic Topic) {
-		return TopicMapper.update(Topic);
+		return topicMapper.update(Topic);
 	}
 	
 	public int delete(Long id) {
-		return TopicMapper.delete(id);
+		return topicMapper.delete(id);
 	}
 
 	public Topic getById(Long id) {
-		return TopicMapper.getById(id);
+		return topicMapper.getById(id);
 	}
 	
 	public int countByParm(Topic Topic) {
@@ -39,11 +39,11 @@ public class TopicService extends AdapterService implements BaseService {
 		/*if(Topic!=null){
 		
 		}*/
-		return TopicMapper.countByParm(parm);
+		return topicMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return TopicMapper.countByParm(parm);
+		return topicMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Topic> getBeanListByParm(Topic Topic, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class TopicService extends AdapterService implements BaseService {
 		/*if(Topic!=null){
 			
 		}*/
-		int count = TopicMapper.countByParm(parm);
+		int count = topicMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Topic> list = TopicMapper.getBeanListByParm(parm);
+			List<Topic> list = topicMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class TopicService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = TopicMapper.countByParm(parm);
+		int count = topicMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = TopicMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = topicMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

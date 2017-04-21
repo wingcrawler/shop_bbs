@@ -20,7 +20,7 @@
 		});
 	},
 	
-	$.fn.onSelect = function(options) {
+	$.fn.optionSelect = function(options) {
 		var args = $.extend({
 			compare : '-1',
 			backFn : function() {

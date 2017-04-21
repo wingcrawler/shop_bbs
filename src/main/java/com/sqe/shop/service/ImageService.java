@@ -15,22 +15,22 @@ import com.sqe.shop.util.PageUtil;
 public class ImageService extends AdapterService implements BaseService {
 	
 	@Autowired
-    ImageMapper ImageMapper;
+    ImageMapper imageMapper;
     
     public int insert(Image Image) {
-		return ImageMapper.insert(Image);
+		return imageMapper.insert(Image);
 	}
     
     public int update(Image Image) {
-		return ImageMapper.update(Image);
+		return imageMapper.update(Image);
 	}
 	
 	public int delete(Long id) {
-		return ImageMapper.delete(id);
+		return imageMapper.delete(id);
 	}
 
 	public Image getById(Long id) {
-		return ImageMapper.getById(id);
+		return imageMapper.getById(id);
 	}
 	
 	public int countByParm(Image Image) {
@@ -39,11 +39,11 @@ public class ImageService extends AdapterService implements BaseService {
 		/*if(Image!=null){
 		
 		}*/
-		return ImageMapper.countByParm(parm);
+		return imageMapper.countByParm(parm);
 	}
 	
 	public int countByParm(Map<String, Object> parm) {
-		return ImageMapper.countByParm(parm);
+		return imageMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Image> getBeanListByParm(Image Image, int pageNo, Integer pageSize) {
@@ -53,10 +53,10 @@ public class ImageService extends AdapterService implements BaseService {
 		/*if(Image!=null){
 			
 		}*/
-		int count = ImageMapper.countByParm(parm);
+		int count = imageMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Image> list = ImageMapper.getBeanListByParm(parm);
+			List<Image> list = imageMapper.getBeanListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;
@@ -64,10 +64,10 @@ public class ImageService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		int count = ImageMapper.countByParm(parm);
+		int count = imageMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		if(count!=0){
-			List<Map<String, Object>> list = ImageMapper.getMapListByParm(parm);
+			List<Map<String, Object>> list = imageMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
 		return pageUtil;

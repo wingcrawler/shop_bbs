@@ -1,5 +1,6 @@
 package com.sqe.shop.common;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -31,5 +32,18 @@ public class BaseController {
         }
         request.setAttribute("t", bundle);
     }
+	
+	public HashMap<String, Object> responseOK(String result){
+		HashMap<String, Object> resMap = new HashMap<String, Object>();
+		resMap.put(Constants.ERROR_NO, Constants.ERRORCODE_SUCCESS);
+		resMap.put(Constants.ERROR_INFO, result);
+		return resMap;
+	}
+	public HashMap<String, Object> responseError(Integer errorNo, String errorInfo){
+		HashMap<String, Object> resMap = new HashMap<String, Object>();
+		resMap.put(Constants.ERROR_NO, errorNo);
+		resMap.put(Constants.ERROR_INFO, errorInfo);
+		return resMap;
+	}
 	
 }
