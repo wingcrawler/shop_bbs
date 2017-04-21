@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.QuestionAnswerMapper">
+
+<resultMap type="com.sqe.shop.model.QuestionAnswer" id="QuestionAnswerBaseMapper">
+	<id property="questionId" column="question_id" />
+	<id property="id" column="id" />
+	<id property="answer" column="answer" />
+	<id property="userId" column="user_id" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into question_answer
+	(question_id,answer,user_id)
+	values
+	(#{questionId},#{answer},#{userId})
+</insert>
+
+<update id="update">
+	UPDATE question_answer 
+	<set>
+			<if test="questionId != null">  
+	        	question_id=#{questionId}
+	    	</if>
+			<if test="answer != null">  
+	        	answer=#{answer}
+	    	</if>
+			<if test="userId != null">  
+	        	user_id=#{userId}
+	    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from question_answer where id=#{id}
+</delete>
+
+<select id="getById" resultMap="QuestionAnswerBaseMapper">
+	SELECT * FROM question_answer WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from question_answer  where 1=1 
+			<if test="parm.questionId != null">
+		     	and question_id = #{parm.questionId}
+		   	</if>
+			<if test="parm.answer != null">
+		     	and answer = #{parm.answer}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="QuestionAnswerBaseMapper">
+	select * from question_answer where 1=1 
+			<if test="parm.questionId != null">
+		     	and question_id = #{parm.questionId}
+		   	</if>
+			<if test="parm.answer != null">
+		     	and answer = #{parm.answer}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from question_answer where 1=1
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+</mapper>

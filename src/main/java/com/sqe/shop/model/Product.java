@@ -7,11 +7,14 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String productDescripton;
-	private String productStatus;
-	private Integer id;
+	private Integer productUrlClick;
+	private Integer productStatus;
+	private Long id;
+	private String productUrl;
 	private Integer productCount;
 	private Integer productView;
 	private Integer productRank;
+	private Long productTypeId;
 	private String productName;
 	
 	public String getProductDescripton() {
@@ -20,17 +23,29 @@ public class Product implements Serializable {
 	public void setProductDescripton(String productDescripton) {
 		this.productDescripton = productDescripton;
 	}
-	public String getProductStatus() {
+	public Integer getProductUrlClick() {
+		return productUrlClick;
+	}
+	public void setProductUrlClick(Integer productUrlClick) {
+		this.productUrlClick = productUrlClick;
+	}
+	public Integer getProductStatus() {
 		return productStatus;
 	}
-	public void setProductStatus(String productStatus) {
+	public void setProductStatus(Integer productStatus) {
 		this.productStatus = productStatus;
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getProductUrl() {
+		return productUrl;
+	}
+	public void setProductUrl(String productUrl) {
+		this.productUrl = productUrl;
 	}
 	public Integer getProductCount() {
 		return productCount;
@@ -49,6 +64,12 @@ public class Product implements Serializable {
 	}
 	public void setProductRank(Integer productRank) {
 		this.productRank = productRank;
+	}
+	public Long getProductTypeId() {
+		return productTypeId;
+	}
+	public void setProductTypeId(Long productTypeId) {
+		this.productTypeId = productTypeId;
 	}
 	public String getProductName() {
 		return productName;

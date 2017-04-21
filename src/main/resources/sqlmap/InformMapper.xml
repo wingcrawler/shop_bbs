@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.InformMapper">
+
+<resultMap type="com.sqe.shop.model.Inform" id="InformBaseMapper">
+	<id property="infromDate" column="infrom_date" />
+	<id property="informRemark" column="inform_remark" />
+	<id property="informTitle" column="inform_title" />
+	<id property="informContext" column="inform_context" />
+	<id property="userPostId" column="user_post_id" />
+	<id property="userReportedId" column="user_reported_id" />
+	<id property="infromStatus" column="infrom_status" />
+	<id property="id" column="id" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into inform
+	(infrom_date,inform_remark,inform_title,inform_context,user_post_id,user_reported_id,infrom_status)
+	values
+	(#{infromDate},#{informRemark},#{informTitle},#{informContext},#{userPostId},#{userReportedId},#{infromStatus})
+</insert>
+
+<update id="update">
+	UPDATE inform 
+	<set>
+			<if test="infromDate != null">  
+	        	infrom_date=#{infromDate}
+	    	</if>
+			<if test="informRemark != null">  
+	        	inform_remark=#{informRemark}
+	    	</if>
+			<if test="informTitle != null">  
+	        	inform_title=#{informTitle}
+	    	</if>
+			<if test="informContext != null">  
+	        	inform_context=#{informContext}
+	    	</if>
+			<if test="userPostId != null">  
+	        	user_post_id=#{userPostId}
+	    	</if>
+			<if test="userReportedId != null">  
+	        	user_reported_id=#{userReportedId}
+	    	</if>
+			<if test="infromStatus != null">  
+	        	infrom_status=#{infromStatus}
+	    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from inform where id=#{id}
+</delete>
+
+<select id="getById" resultMap="InformBaseMapper">
+	SELECT * FROM inform WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from inform  where 1=1 
+			<if test="parm.infromDate != null">
+		     	and infrom_date = #{parm.infromDate}
+		   	</if>
+			<if test="parm.informRemark != null">
+		     	and inform_remark = #{parm.informRemark}
+		   	</if>
+			<if test="parm.informTitle != null">
+		     	and inform_title = #{parm.informTitle}
+		   	</if>
+			<if test="parm.informContext != null">
+		     	and inform_context = #{parm.informContext}
+		   	</if>
+			<if test="parm.userPostId != null">
+		     	and user_post_id = #{parm.userPostId}
+		   	</if>
+			<if test="parm.userReportedId != null">
+		     	and user_reported_id = #{parm.userReportedId}
+		   	</if>
+			<if test="parm.infromStatus != null">
+		     	and infrom_status = #{parm.infromStatus}
+		   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="InformBaseMapper">
+	select * from inform where 1=1 
+			<if test="parm.infromDate != null">
+		     	and infrom_date = #{parm.infromDate}
+		   	</if>
+			<if test="parm.informRemark != null">
+		     	and inform_remark = #{parm.informRemark}
+		   	</if>
+			<if test="parm.informTitle != null">
+		     	and inform_title = #{parm.informTitle}
+		   	</if>
+			<if test="parm.informContext != null">
+		     	and inform_context = #{parm.informContext}
+		   	</if>
+			<if test="parm.userPostId != null">
+		     	and user_post_id = #{parm.userPostId}
+		   	</if>
+			<if test="parm.userReportedId != null">
+		     	and user_reported_id = #{parm.userReportedId}
+		   	</if>
+			<if test="parm.infromStatus != null">
+		     	and infrom_status = #{parm.infromStatus}
+		   	</if>
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from inform where 1=1
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+</mapper>

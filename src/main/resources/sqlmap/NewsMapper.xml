@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.NewsMapper">
+
+<resultMap type="com.sqe.shop.model.News" id="NewsBaseMapper">
+	<id property="newsUp" column="news_up" />
+	<id property="newsTitle" column="news_title" />
+	<id property="newsContext" column="news_context" />
+	<id property="newsReaded" column="news_readed" />
+	<id property="id" column="id" />
+	<id property="newsDate" column="news_date" />
+	<id property="newsType" column="news_type" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into news
+	(news_up,news_title,news_context,news_readed,news_date,news_type)
+	values
+	(#{newsUp},#{newsTitle},#{newsContext},#{newsReaded},#{newsDate},#{newsType})
+</insert>
+
+<update id="update">
+	UPDATE news 
+	<set>
+			<if test="newsUp != null">  
+	        	news_up=#{newsUp}
+	    	</if>
+			<if test="newsTitle != null">  
+	        	news_title=#{newsTitle}
+	    	</if>
+			<if test="newsContext != null">  
+	        	news_context=#{newsContext}
+	    	</if>
+			<if test="newsReaded != null">  
+	        	news_readed=#{newsReaded}
+	    	</if>
+			<if test="newsDate != null">  
+	        	news_date=#{newsDate}
+	    	</if>
+			<if test="newsType != null">  
+	        	news_type=#{newsType}
+	    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from news where id=#{id}
+</delete>
+
+<select id="getById" resultMap="NewsBaseMapper">
+	SELECT * FROM news WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from news  where 1=1 
+			<if test="parm.newsUp != null">
+		     	and news_up = #{parm.newsUp}
+		   	</if>
+			<if test="parm.newsTitle != null">
+		     	and news_title = #{parm.newsTitle}
+		   	</if>
+			<if test="parm.newsContext != null">
+		     	and news_context = #{parm.newsContext}
+		   	</if>
+			<if test="parm.newsReaded != null">
+		     	and news_readed = #{parm.newsReaded}
+		   	</if>
+			<if test="parm.newsDate != null">
+		     	and news_date = #{parm.newsDate}
+		   	</if>
+			<if test="parm.newsType != null">
+		     	and news_type = #{parm.newsType}
+		   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="NewsBaseMapper">
+	select * from news where 1=1 
+			<if test="parm.newsUp != null">
+		     	and news_up = #{parm.newsUp}
+		   	</if>
+			<if test="parm.newsTitle != null">
+		     	and news_title = #{parm.newsTitle}
+		   	</if>
+			<if test="parm.newsContext != null">
+		     	and news_context = #{parm.newsContext}
+		   	</if>
+			<if test="parm.newsReaded != null">
+		     	and news_readed = #{parm.newsReaded}
+		   	</if>
+			<if test="parm.newsDate != null">
+		     	and news_date = #{parm.newsDate}
+		   	</if>
+			<if test="parm.newsType != null">
+		     	and news_type = #{parm.newsType}
+		   	</if>
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from news where 1=1
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+</mapper>

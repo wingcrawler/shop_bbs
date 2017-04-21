@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.SectionMapper">
+
+<resultMap type="com.sqe.shop.model.Section" id="SectionBaseMapper">
+	<id property="sectionStatus" column="section_status" />
+	<id property="id" column="id" />
+	<id property="sectionParentId" column="section_parent_id" />
+	<id property="sectionType" column="section_type" />
+	<id property="sectionTitle" column="section_title" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into section
+	(section_status,section_parent_id,section_type,section_title)
+	values
+	(#{sectionStatus},#{sectionParentId},#{sectionType},#{sectionTitle})
+</insert>
+
+<update id="update">
+	UPDATE section 
+	<set>
+			<if test="sectionStatus != null">  
+	        	section_status=#{sectionStatus}
+	    	</if>
+			<if test="sectionParentId != null">  
+	        	section_parent_id=#{sectionParentId}
+	    	</if>
+			<if test="sectionType != null">  
+	        	section_type=#{sectionType}
+	    	</if>
+			<if test="sectionTitle != null">  
+	        	section_title=#{sectionTitle}
+	    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from section where id=#{id}
+</delete>
+
+<select id="getById" resultMap="SectionBaseMapper">
+	SELECT * FROM section WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from section  where 1=1 
+			<if test="parm.sectionStatus != null">
+		     	and section_status = #{parm.sectionStatus}
+		   	</if>
+			<if test="parm.sectionParentId != null">
+		     	and section_parent_id = #{parm.sectionParentId}
+		   	</if>
+			<if test="parm.sectionType != null">
+		     	and section_type = #{parm.sectionType}
+		   	</if>
+			<if test="parm.sectionTitle != null">
+		     	and section_title = #{parm.sectionTitle}
+		   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="SectionBaseMapper">
+	select * from section where 1=1 
+			<if test="parm.sectionStatus != null">
+		     	and section_status = #{parm.sectionStatus}
+		   	</if>
+			<if test="parm.sectionParentId != null">
+		     	and section_parent_id = #{parm.sectionParentId}
+		   	</if>
+			<if test="parm.sectionType != null">
+		     	and section_type = #{parm.sectionType}
+		   	</if>
+			<if test="parm.sectionTitle != null">
+		     	and section_title = #{parm.sectionTitle}
+		   	</if>
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from section where 1=1
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+</mapper>

@@ -24,6 +24,10 @@ public class Constants {
         public static final Integer ENDED = 4;//已完成
     }
     
+    //用户权限
+    public static final int ROLE_BUY = 1; //买家
+    public static final int ROLE_SELL = 2; //卖家
+    
     //广告类型
     public static final int AD_TYPE_HDT = 0; //活动图
     public static final int AD_TYPE_GGW = 1; //广告位

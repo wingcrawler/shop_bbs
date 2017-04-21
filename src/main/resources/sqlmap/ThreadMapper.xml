@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.ThreadMapper">
+
+<resultMap type="com.sqe.shop.model.Thread" id="ThreadBaseMapper">
+	<id property="topicId" column="topic_id" />
+	<id property="threadStatus" column="thread_status" />
+	<id property="threadTitle" column="thread_title" />
+	<id property="threadTime" column="thread_time" />
+	<id property="threadType" column="thread_type" />
+	<id property="id" column="id" />
+	<id property="threadContext" column="thread_context" />
+	<id property="userId" column="user_id" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into thread
+	(topic_id,thread_status,thread_title,thread_time,thread_type,thread_context,user_id)
+	values
+	(#{topicId},#{threadStatus},#{threadTitle},#{threadTime},#{threadType},#{threadContext},#{userId})
+</insert>
+
+<update id="update">
+	UPDATE thread 
+	<set>
+			<if test="topicId != null">  
+	        	topic_id=#{topicId}
+	    	</if>
+			<if test="threadStatus != null">  
+	        	thread_status=#{threadStatus}
+	    	</if>
+			<if test="threadTitle != null">  
+	        	thread_title=#{threadTitle}
+	    	</if>
+			<if test="threadTime != null">  
+	        	thread_time=#{threadTime}
+	    	</if>
+			<if test="threadType != null">  
+	        	thread_type=#{threadType}
+	    	</if>
+			<if test="threadContext != null">  
+	        	thread_context=#{threadContext}
+	    	</if>
+			<if test="userId != null">  
+	        	user_id=#{userId}
+	    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from thread where id=#{id}
+</delete>
+
+<select id="getById" resultMap="ThreadBaseMapper">
+	SELECT * FROM thread WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from thread  where 1=1 
+			<if test="parm.topicId != null">
+		     	and topic_id = #{parm.topicId}
+		   	</if>
+			<if test="parm.threadStatus != null">
+		     	and thread_status = #{parm.threadStatus}
+		   	</if>
+			<if test="parm.threadTitle != null">
+		     	and thread_title = #{parm.threadTitle}
+		   	</if>
+			<if test="parm.threadTime != null">
+		     	and thread_time = #{parm.threadTime}
+		   	</if>
+			<if test="parm.threadType != null">
+		     	and thread_type = #{parm.threadType}
+		   	</if>
+			<if test="parm.threadContext != null">
+		     	and thread_context = #{parm.threadContext}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="ThreadBaseMapper">
+	select * from thread where 1=1 
+			<if test="parm.topicId != null">
+		     	and topic_id = #{parm.topicId}
+		   	</if>
+			<if test="parm.threadStatus != null">
+		     	and thread_status = #{parm.threadStatus}
+		   	</if>
+			<if test="parm.threadTitle != null">
+		     	and thread_title = #{parm.threadTitle}
+		   	</if>
+			<if test="parm.threadTime != null">
+		     	and thread_time = #{parm.threadTime}
+		   	</if>
+			<if test="parm.threadType != null">
+		     	and thread_type = #{parm.threadType}
+		   	</if>
+			<if test="parm.threadContext != null">
+		     	and thread_context = #{parm.threadContext}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from thread where 1=1
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+</mapper>

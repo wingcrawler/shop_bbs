@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.MessageMapper">
+
+<resultMap type="com.sqe.shop.model.Message" id="MessageBaseMapper">
+	<id property="messageStatus" column="message_status" />
+	<id property="postId" column="post_id" />
+	<id property="id" column="id" />
+	<id property="messageContext" column="message_context" />
+	<id property="receiveId" column="receive_id" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into message
+	(message_status,post_id,message_context,receive_id)
+	values
+	(#{messageStatus},#{postId},#{messageContext},#{receiveId})
+</insert>
+
+<update id="update">
+	UPDATE message 
+	<set>
+			<if test="messageStatus != null">  
+	        	message_status=#{messageStatus}
+	    	</if>
+			<if test="postId != null">  
+	        	post_id=#{postId}
+	    	</if>
+			<if test="messageContext != null">  
+	        	message_context=#{messageContext}
+	    	</if>
+			<if test="receiveId != null">  
+	        	receive_id=#{receiveId}
+	    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from message where id=#{id}
+</delete>
+
+<select id="getById" resultMap="MessageBaseMapper">
+	SELECT * FROM message WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from message  where 1=1 
+			<if test="parm.messageStatus != null">
+		     	and message_status = #{parm.messageStatus}
+		   	</if>
+			<if test="parm.postId != null">
+		     	and post_id = #{parm.postId}
+		   	</if>
+			<if test="parm.messageContext != null">
+		     	and message_context = #{parm.messageContext}
+		   	</if>
+			<if test="parm.receiveId != null">
+		     	and receive_id = #{parm.receiveId}
+		   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="MessageBaseMapper">
+	select * from message where 1=1 
+			<if test="parm.messageStatus != null">
+		     	and message_status = #{parm.messageStatus}
+		   	</if>
+			<if test="parm.postId != null">
+		     	and post_id = #{parm.postId}
+		   	</if>
+			<if test="parm.messageContext != null">
+		     	and message_context = #{parm.messageContext}
+		   	</if>
+			<if test="parm.receiveId != null">
+		     	and receive_id = #{parm.receiveId}
+		   	</if>
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from message where 1=1
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+</mapper>
