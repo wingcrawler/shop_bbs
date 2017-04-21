@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +54,9 @@ public class AdapterService {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> List<T> getBeanListByParm(String mapperName, Map<String, Object> paramMap) {
+		if(paramMap==null){
+			paramMap = new HashMap<String, Object>();
+		}
 		return  (List<T>) invokeMapper(mapperName, "getBeanListByParm", paramMap);
 	}
 
@@ -77,7 +81,7 @@ public class AdapterService {
 							args = (Object[]) new Object();
 						}
 						Map<String, Object> map = (Map<String, Object>) SpringContextUtil.getBean(mapperClass);
-						Object mapperInstance = map.get(mapperName); //获取bean实例
+						Object mapperInstance = map.get(mapperName.substring(0, 1).toLowerCase()+mapperName.subSequence(1, mapperName.length())); //获取bean实例
 						return mapperMethod.invoke(mapperInstance, args);
 					}
 				}		

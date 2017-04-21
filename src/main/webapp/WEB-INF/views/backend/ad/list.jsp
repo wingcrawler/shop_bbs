@@ -26,15 +26,11 @@
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
 								<div class="col-sm-3">
-									${t.t_title }:
-									<input type="text" class="form-control input" name="title" value="">
-								</div>
-								<div class="col-sm-3">
 									${t.t_menu }:
-									<select class="form-control select" name="menuId">
+									<select class="form-control select" name="type">
 										<option value="-1">-- ${t.t_select } --</option>
-										<option value="1">${t.m_ad_active }</option>
-										<option value="2">${t.m_ad_position }</option>
+										<option value="0">${t.m_ad_active }</option>
+										<option value="1">${t.m_ad_position }</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -65,13 +61,13 @@
 						<table class="table table-bordered table-striped" id="datatable">
 							<thead>
 								<tr>
-									<th width="60" field="index">${t.t_no }</th>
-									<th field="title" url="http://my.blog/blog/detail?id=" parm="id">${t.t_title }</th>
-									<th field="img">${t.t_img }</th>
-									<th field="imgLink">${t.t_img_link }</th>
-									<th field="createTime">${t.t_createtime }</th>
-									<th field="updateTime">${t.t_updatetime }</th>
-									<th field="op" field-role="0"></th>
+									<th field="index" width="60">${t.t_no }</th>
+									<th field="imagePath">${t.t_img }</th>
+									<th field="imageUrl">${t.t_img_link }</th>
+									<th field="type">${t.t_type }</th>
+									<th field="sort">${t.t_weight }</th>
+									<th field="description">${t.t_desc }</th>
+									<th field="op" field-role="0,2,4,5" width="180"></th>
 								</tr>
 							</thead>
 							<tbody class="middle-align"></tbody>
@@ -98,6 +94,14 @@ $(function(){
 		}
 	}); 
 });
+
+function search(){
+	var type=$('select[name="type"]').val();
+	var parm = {
+		type:type
+	}
+	$.fn.doSearch(parm);
+}
 </script>
 </body>
 </html>

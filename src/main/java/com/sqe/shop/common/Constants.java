@@ -23,4 +23,8 @@ public class Constants {
         public static final Integer DELETED = 3;//已删除
         public static final Integer ENDED = 4;//已完成
     }
+    
+    //广告类型
+    public static final int AD_TYPE_HDT = 0; //活动图
+    public static final int AD_TYPE_GGW = 1; //广告位
 }

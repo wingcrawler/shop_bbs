@@ -129,22 +129,22 @@
 								var opHtml = '';
 								var field_role =  fields.eq(index).attr("field-role");//获取当前列op字段的field-role值
 								if (field_role.indexOf('1') >= 0) {										
-									opHtml += '<a href="javascript:;" index="'+i+'" id="'+item.id+'" onclick="add(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-plus"></i></a>';
+									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="add(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-plus"></i></a>';
 								}
 								if (field_role.indexOf('2') >= 0) {
-									opHtml += '<a href="javascript:;" index="'+i+'" id="'+item.id+'" onclick="edit(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-edit"></i></a>';
+									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="edit(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-edit"></i></a>';
 								}
 								if (field_role.indexOf('3') >= 0) {
-									opHtml += '<a href="javascript:;" index="'+i+'" id="'+item.id+'" onclick="viewDetail(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-eye"></i></a>';
+									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="viewDetail(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-eye"></i></a>';
 								}
 								if (field_role.indexOf('4') >= 0) {
-									opHtml += '<a href="javascript:;" index="'+i+'" id="'+item.id+'" onclick="moveUp(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-up"></i></a>';
+									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="moveUp(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-up"></i></a>';
 								}
 								if (field_role.indexOf('5') >= 0) {
-									opHtml += '<a href="javascript:;" index="'+i+'" id="'+item.id+'" onclick="moveDown(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-down"></i></a>';
+									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="moveDown(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-down"></i></a>';
 								}
 								if (field_role.indexOf('0') >= 0) {
-									opHtml += '<a href="javascript:;" index="'+i+'" id="'+item.id+'" onclick="showDeleteDialog(this);" class="btn btn-danger btn-single btn-sm"><i class="fa-minus"></i></a>';
+									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="showDeleteDialog(this);" class="btn btn-danger btn-single btn-sm"><i class="fa-minus"></i></a>';
 								}
 								text = opHtml;
 								html += '<td>' + text + '</td>';

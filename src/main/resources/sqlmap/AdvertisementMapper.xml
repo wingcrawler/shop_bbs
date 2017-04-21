@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.AdvertisementMapper">
+
+<resultMap type="com.sqe.shop.model.Advertisement" id="AdvertisementBaseMapper">
+	<id property="imagePath" column="image_path" />
+	<id property="imageUrl" column="image_url" />
+	<id property="description" column="description" />
+	<id property="id" column="id" />
+	<id property="sort" column="sort" />
+	<id property="type" column="type" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into advertisement
+	(image_path,image_url,description,sort,type)
+	values
+	(#{imagePath},#{imageUrl},#{description},#{sort},#{type})
+</insert>
+
+<update id="update">
+	UPDATE advertisement 
+	<set>
+			<if test="imagePath != null">  
+	        	image_path=#{imagePath}
+	    	</if>
+			<if test="imageUrl != null">  
+	        	image_url=#{imageUrl}
+	    	</if>
+			<if test="description != null">  
+	        	description=#{description}
+	    	</if>
+			<if test="sort != null">  
+	        	sort=#{sort}
+	    	</if>
+			<if test="type != null">  
+	        	type=#{type}
+	    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from advertisement where id=#{id}
+</delete>
+
+<select id="getById" resultMap="AdvertisementBaseMapper">
+	SELECT * FROM advertisement WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from advertisement  where 1=1 
+			<if test="parm.imagePath != null">
+		     	and image_path = #{parm.imagePath}
+		   	</if>
+			<if test="parm.imageUrl != null">
+		     	and image_url = #{parm.imageUrl}
+		   	</if>
+			<if test="parm.description != null">
+		     	and description = #{parm.description}
+		   	</if>
+			<if test="parm.sort != null">
+		     	and sort = #{parm.sort}
+		   	</if>
+			<if test="parm.type != null">
+		     	and type = #{parm.type}
+		   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="AdvertisementBaseMapper">
+	select * from advertisement where 1=1 
+			<if test="parm.imagePath != null">
+		     	and image_path = #{parm.imagePath}
+		   	</if>
+			<if test="parm.imageUrl != null">
+		     	and image_url = #{parm.imageUrl}
+		   	</if>
+			<if test="parm.description != null">
+		     	and description = #{parm.description}
+		   	</if>
+			<if test="parm.sort != null">
+		     	and sort = #{parm.sort}
+		   	</if>
+			<if test="parm.type != null">
+		     	and type = #{parm.type}
+		   	</if>
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from advertisement where 1=1
+		<if test="parm.orderby != null">
+	   		order by #{parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+</mapper>

@@ -11,9 +11,9 @@ public interface BaseMapper {
 	
 	<T> int update(T t);
 	
-	<T> T getById(@Param("id") Integer id);
+	<T> T getById(@Param("id") Long id);
 	
-	int delete(@Param("id") Integer id);
+	int delete(@Param("id") Long id);
 
 	int countByParm(@Param("parm") Map<String, Object> paramMap);
 
