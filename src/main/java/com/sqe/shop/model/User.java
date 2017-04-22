@@ -8,11 +8,12 @@ public class User implements Serializable {
 
 	private String userAddress;
 	private String password;
-	private String userStatus;
+	private Integer userStatus;
 	private String userImage;
 	private String userPhone;
+	private String userMail;
 	private Long id;
-	private String userRole;
+	private Integer userRole;
 	private String userIntroduce;
 	private String username;
 	
@@ -28,10 +29,10 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getUserStatus() {
+	public Integer getUserStatus() {
 		return userStatus;
 	}
-	public void setUserStatus(String userStatus) {
+	public void setUserStatus(Integer userStatus) {
 		this.userStatus = userStatus;
 	}
 	public String getUserImage() {
@@ -46,16 +47,22 @@ public class User implements Serializable {
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
+	public String getUserMail() {
+		return userMail;
+	}
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
+	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getUserRole() {
+	public Integer getUserRole() {
 		return userRole;
 	}
-	public void setUserRole(String userRole) {
+	public void setUserRole(Integer userRole) {
 		this.userRole = userRole;
 	}
 	public String getUserIntroduce() {

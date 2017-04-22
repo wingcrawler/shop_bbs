@@ -6,6 +6,11 @@
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
 	<title>${t.title_news_comment }</title>
+	<script src="/ue/ueditor.config.js"></script>
+	<script src="/ue/ueditor.all.js"></script>
+	<!-- <script type="text/javascript" charset="utf-8" src="/ue/lang/en/en.js"></script> -->
+	<script type="text/javascript" charset="utf-8" src="/ue/lang/zh-cn/zh-cn.js"></script>
+	<link href="/ue/themes/default/css/ueditor.css" rel="stylesheet">
 	
 </head>
 <body class="page-body">
@@ -16,82 +21,73 @@
 			<!-- 头部栏 -->
 			<jsp:include page="../include/header.jsp"></jsp:include>	
 			
-			<!-- 搜索区 -->
-			<div class="row">
-				<div class="col-sm-12 panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">搜索框</h3>
-					</div>
-					<div class="panel-body">
-						<form class="form-horizontal form" id="form" action="javascript:void(0);">
-							<div class="form-group">
-								<div class="col-sm-3">
-									标题:
-									<input type="text" class="form-control input" name="title" value="" placeholder="输入标题">
-								</div>
-								<div class="col-sm-3">
-									菜单：
-									<select class="form-control select" name="menuId">
-										<option value="-1">-- 选择菜单 --</option>
-										<option value="1">item1</option>
-										<option value="2">item2</option>
-									</select>
-								</div>
-								<div class="col-sm-2">
-									<br>
-									<button class="btn btn-info btn-icon" onclick="search()">
-										<i class="fa-search"></i>
-										<span>搜索</span>
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!-- 搜索区结束 -->
-			
-			<!-- 列表区 -->
+			<!-- 内容区 -->
 			<div class="row">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">列表</h3>
-						<div class="panel-options">
-							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
-						</div>
+						<h3 class="panel-title">
+							<a><i class="fa-location-arrow"> ${t.title_news_edit }</i></a> 
+						</h3>
 					</div>
 					<div class="panel-body">
-						<table class="table table-bordered table-striped" id="datatable">
-							<thead>
-								<tr>
-									<th width="55" field="index">编号</th>
-									<th field="title" url="http://my.blog/blog/detail?id=" parm="id">标题</th>
-									<th field="username">用户名</th>
-									<th field="menuName">菜单</th>
-									<th field="click">点击</th>
-									<th field="createTime">创建时间</th>
-									<th field="updateTime">更新时间</th>
-									<th field="op" field-role="0"></th>
-								</tr>
-							</thead>
-							<tbody class="middle-align">
-								<tr>
-									<td>1</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td><a class="btn btn-info" href="/backend/news/edit">编辑</a></td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="pagebar"></div>
+						<form class="form-horizontal form" action="javascript:void(0);">
+					        <div class="form-group">
+					          	<div class="col-sm-6">
+					          		<input type="hidden" value="${entity.id}" name="id" />
+					          		<input type="hidden" value="${entity.newsId}" name="newsId" />
+					          		<p>${t.t_title }</p>
+					            	<input class="form-control" type="text" readonly="readonly" value="${entity.title}">
+					          	</div>
+					        	<div class="col-sm-3">
+					          		<p>${t.t_status }</p>
+					          		<select class="form-control select" name="status" id="commentStatus">
+										<%-- <option value="-1">-- ${t.t_select } --</option> --%>
+										<option value="0">${t.t_off }</option>
+										<option value="1">${t.t_on }</option>
+									</select>
+					          	</div>
+					          	<div class="col-sm-3">
+					        		<p>${t.t_username }</p>
+					            	<input class="form-control" type="text" readonly="readonly" value="${entity.username}">
+					    		</div>
+					        </div>
+					        <div class="form-group">
+					        	<div class="col-sm-3">
+					        		<p>${t.t_comment }</p>
+					        		<p>${entity.context}</p>
+					    		</div>
+					        </div>
+					        <div class="form-group">
+					        	<div class="col-sm-12">
+					        		<%-- <b style="display:none;">${code.content}</b> --%>
+									<textarea id="myEditor" name="context"></textarea>
+									<script type="text/javascript">
+										var ue = UE.getEditor('myEditor',{
+											toolbars: [
+									           ['fullscreen', 'source', 'undo', 'redo', 'bold','pasteplain',
+									            'removeformat','link','unlink','cleardoc',
+									           'justifyleft','justifyright','justifycenter','justifyjustify',
+									           'autotypeset', 'spechars','fontfamily','fontsize']
+									       ],
+									       initialFrameHeight:500,
+									       initialFrameWidth:'100%'
+									       /* autoHeightEnabled: true,
+									       autoFloatEnabled: true */
+										});
+									</script>
+									<span style="color:#f00">限制1000字</span>
+					        	</div> 	
+					        </div>
+					        <div class="form-group">
+					        	<div class="col-sm-12">
+					        		<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
+					    		</div>
+					        </div>
+					     </form>
 					</div>
 				</div>
 			</div>
-			<!-- 列表区结束 -->
+			<!-- 内容区结束 -->
 			
 		</div>
 	</div>
@@ -101,6 +97,18 @@ $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
 	$('#main-menu li.li').eq(3).addClass('active').addClass('opened');
 	$('#main-menu li.li').eq(3).find('ul li').eq(1).addClass('active');
+	
+	$('#commentStatus').optionSelect({
+		compare:'${entity.status}',
+		backFn : function(p) {
+		}
+	});
+	
+	$('#submit').click(function(){
+	    var parm = $.fn.getFormJson('.form');
+	    var id = ${entity.id};
+		$.fn.doSave(parm,'/backend/comment/doSave','/backend/comment/list?id='+id);
+	});	
 });
 </script>
 </body>

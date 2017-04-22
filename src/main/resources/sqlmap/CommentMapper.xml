@@ -9,6 +9,7 @@
 	<id property="context" column="context" />
 	<id property="shopId" column="shop_id" />
 	<id property="id" column="id" />
+	<id property="commentId" column="comment_id" />
 	<id property="userId" column="user_id" />
 	<id property="status" column="status" />
 </resultMap>  
@@ -18,9 +19,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into comment
-	(date,news_id,product_id,context,shop_id,user_id,status)
+	(date,news_id,product_id,context,comment_id,shop_id,user_id,status)
 	values
-	(#{date},#{newsId},#{productId},#{context},#{shopId},#{userId},#{status})
+	(#{date},#{newsId},#{productId},#{context},#{commentId},#{shopId},#{userId},#{status})
 </insert>
 
 <update id="update">
@@ -37,6 +38,9 @@
 	    	</if>
 			<if test="context != null">  
 	        	context=#{context},
+	    	</if>
+	    	<if test="commentId != null">  
+	        	comment_id=#{commentId},
 	    	</if>
 			<if test="shopId != null">  
 	        	shop_id=#{shopId},
@@ -73,6 +77,9 @@
 			<if test="parm.context != null">
 		     	and context = #{parm.context}
 		   	</if>
+		   	<if test="parm.commentId != null">
+		     	and comment_id = #{parm.commentId}
+		   	</if>
 			<if test="parm.shopId != null">
 		     	and shop_id = #{parm.shopId}
 		   	</if>
@@ -98,6 +105,9 @@
 			<if test="parm.context != null">
 		     	and context = #{parm.context}
 		   	</if>
+		   	<if test="parm.commentId != null">
+		     	and comment_id = #{parm.commentId}
+		   	</if>
 			<if test="parm.shopId != null">
 		     	and shop_id = #{parm.shopId}
 		   	</if>
@@ -117,13 +127,18 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select * from comment where 1=1
-		<if test="parm.orderby != null">
-	   		order by ${parm.orderby}
-	   	</if>
-		<if test="parm.start != null">
-			limit #{parm.start},#{parm.limit}
-		</if>
+	select c.context,c.id,n.news_title as newsTitle,c.date,c.user_id as userId, c.`status`,u.username from comment c 
+	LEFT JOIN news n on c.news_id=n.id
+	LEFT JOIN `user` u on c.user_id=u.id
+	<if test="parm.newsId != null">
+     	and n.id = #{parm.newsId}
+   	</if>
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
 </select>
 
 

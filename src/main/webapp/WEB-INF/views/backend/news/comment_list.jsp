@@ -5,7 +5,7 @@
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.title_news_list }</title>
+	<title>${t.title_comment_management }</title>
 	
 </head>
 <body class="page-body">
@@ -27,7 +27,7 @@
 							<div class="form-group">
 								<div class="col-sm-3">
 									${t.t_title }:
-									<input type="text" class="form-control input" name="newsTitle" value="" placeholder="${t.t_input_title }">
+									<input type="text" class="form-control input" name="newsTitle" value="${news.newsTitle}">
 								</div>
 								<div class="col-sm-2">
 									<br>
@@ -49,7 +49,6 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">${t.t_list }</h3>
 						<div class="panel-options">
-							<a href="/backend/news/edit" target="_blank"><i class="fa-plus"></i></a>
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
 					</div>
@@ -58,11 +57,11 @@
 							<thead>
 								<tr>
 									<th width="60" field="index">${t.t_no }</th>
-									<th field="newsTitle" url="/backend/comment/list?id=" parm="id">${t.t_title }</th>
-									<th field="typeName">${t.t_type }</th>
-									<th field="newsReaded">${t.t_read }</th>
-									<th field="newsUp">${t.t_thumup }</th>
-									<th field="createTimeStr">${t.t_createtime }</th>
+									<th field="newsTitle">${t.t_title }</th>
+									<th field="statusStr">${t.t_status }</th>
+									<th field="username">${t.t_username }</th>
+									<th field="context">${t.t_comment }</th>
+									<th field="dateStr">${t.t_createtime }</th>
 									<th field="op" field-role="2,0"></th>
 								</tr>
 							</thead>
@@ -81,16 +80,23 @@
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
 	$('#main-menu li.li').eq(3).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(3).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(3).find('ul li').eq(1).addClass('active');
 	
 	$('#datatable').datatable({
-		url_load : '/backend/news/getList',
-		url_edit : '/backend/news/edit',
-		url_remove : '/backend/news/doDelete',
+		url_load : '/backend/comment/getList',
+		url_edit : '/backend/comment/edit',
+		url_remove : '/backend/comment/doDelete',
 		backFn : function(p) {
 			// console.log(p);
 		}
 	}); 
+	
+	var newsId = '${news.id}';
+	debugger;
+	if(newsId!=''){
+		var parm = {id:newsId};
+		$.fn.doSearch(parm);	
+	}
 });
 </script>
 </body>

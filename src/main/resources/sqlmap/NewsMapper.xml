@@ -12,6 +12,10 @@
 	<id property="newsType" column="news_type" />
 </resultMap>  
 
+<sql id="columns">
+   id, news_up, news_title,news_readed,news_date,news_type
+</sql>
+
 <insert id="insert">
 	<selectKey resultType="long" keyProperty="id">  
    		select LAST_INSERT_ID()
@@ -61,7 +65,7 @@
 		     	and news_up = #{parm.newsUp}
 		   	</if>
 			<if test="parm.newsTitle != null">
-		     	and news_title = #{parm.newsTitle}
+		     	and news_title like "%"#{parm.newsTitle}"%"
 		   	</if>
 			<if test="parm.newsContext != null">
 		     	and news_context = #{parm.newsContext}
@@ -78,12 +82,12 @@
 </select>
 
 <select id="getBeanListByParm" resultMap="NewsBaseMapper">
-	select * from news where 1=1 
+	select <include refid="columns"/> from news where 1=1 
 			<if test="parm.newsUp != null">
 		     	and news_up = #{parm.newsUp}
 		   	</if>
 			<if test="parm.newsTitle != null">
-		     	and news_title = #{parm.newsTitle}
+		     	and news_title like "%"#{parm.newsTitle}"%"
 		   	</if>
 			<if test="parm.newsContext != null">
 		     	and news_context = #{parm.newsContext}

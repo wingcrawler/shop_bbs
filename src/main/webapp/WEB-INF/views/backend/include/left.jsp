@@ -48,7 +48,7 @@
 				</a>
 				<ul>
 					<li><a href="/backend/news/list"><span class="title">${t.m_news_list }</span></a></li>
-					<li><a href="/backend/news/comment"><span class="title">${t.m_news_comment }</span></a></li>
+					<li><a href="/backend/comment/list"><span class="title">${t.m_news_comment }</span></a></li>
 				</ul>
 			</li>
 			<!-- 店家管理 -->

@@ -6,6 +6,8 @@ public class BaseModel {
 	private String statusName;
 	private String shopName;
 	private String createTimeStr;
+	private String username;
+	private String title;
 
 	public String getTypeName() {
 		return typeName;
@@ -37,6 +39,23 @@ public class BaseModel {
 
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
+	}
+
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

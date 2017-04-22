@@ -42,13 +42,48 @@ public class Constants {
     public static final int PRODUCT_ON = 1; //上架
     public static final int PRODUCT_OFF = 2; //下架
     public static final int PRODUCT_WAIT = 0; //待审核
-    public static String getProductStatus(int status) {
-		if(status==1){
+    public static String getProductStatus(Integer value) {
+    	if(value==null){
+    		return "未知";
+    	}
+		if(value==1){
 			return "已上架";
-		} else if(status==2){
+		} else if(value==2){
 			return "已下架";
 		} else {
 			return "待审核";
+		}
+	}
+    
+    //news 语言
+    public static final int NEWS_ZH = 1; //中文
+    public static final int NEWS_EN = 2; //英文
+    public static String getNewsLang(Integer value) {
+    	if(value==null){
+    		return "未知";
+    	}
+		if(value==0){
+			return "中文";
+		} else if(value==1){
+			return "英文";
+		} else {
+			return "未知";
+		}
+	}
+    
+    //评论状态
+    public static final int COMMENT_OFF = 0; //屏蔽
+    public static final int COMMENT_ON = 1; //显示
+    public static String getCommentStatus(Integer value) {
+    	if(value==null){
+    		return "未知";
+    	}
+		if(value==0){
+			return "已屏蔽";
+		} else if(value==1){
+			return "正常";
+		} else {
+			return "未知";
 		}
 	}
 }

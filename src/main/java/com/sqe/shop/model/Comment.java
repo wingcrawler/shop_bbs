@@ -3,7 +3,9 @@ package com.sqe.shop.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Comment implements Serializable {
+import com.sqe.shop.common.BaseModel;
+
+public class Comment extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -11,6 +13,7 @@ public class Comment implements Serializable {
 	private Long newsId;
 	private Long productId;
 	private String context;
+	private Long commentId;
 	private Long shopId;
 	private Long id;
 	private Long userId;
@@ -39,6 +42,12 @@ public class Comment implements Serializable {
 	}
 	public void setContext(String context) {
 		this.context = context;
+	}
+	public Long getCommentId() {
+		return commentId;
+	}
+	public void setCommentId(Long commentId) {
+		this.commentId = commentId;
 	}
 	public Long getShopId() {
 		return shopId;
