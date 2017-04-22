@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ImportResource;
 
 @Configuration
 @ImportResource("classpath:spring-context.xml")
-@ComponentScan(basePackages = "com.sqe.shop")  
+@ComponentScan(basePackages = "com.sqe")  
 @EnableAutoConfiguration
 /*@SpringBootApplication*/
 public class Application {
