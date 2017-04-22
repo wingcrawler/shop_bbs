@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class NewsService extends AdapterService implements BaseService {
 	@Autowired
     NewsMapper newsMapper;
     
-    public int insert(News News) {
-		return newsMapper.insert(News);
+    public int insert(News news) {
+		return newsMapper.insert(news);
 	}
     
-    public int update(News News) {
-		return newsMapper.update(News);
+    public int update(News news) {
+		return newsMapper.update(news);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class NewsService extends AdapterService implements BaseService {
 		return newsMapper.getById(id);
 	}
 	
-	public int countByParm(News News) {
+	public int countByParm(News news) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(News!=null){
+		if(news!=null){
 		
-		}*/
+		}
 		return newsMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class NewsService extends AdapterService implements BaseService {
 		return newsMapper.countByParm(parm);
 	}
 	
-	public PageUtil<News> getBeanListByParm(News News, int pageNo, Integer pageSize) {
+	public PageUtil<News> getBeanListByParm(News news, int pageNo, Integer pageSize) {
 		PageUtil<News> pageUtil = new PageUtil<News>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(News!=null){
-			
-		}*/
+		if(news!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = newsMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<News> list = new ArrayList<News>();
 		if(count!=0){
-			List<News> list = newsMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = newsMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class NewsService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(News news) {
+		if(news.getId()!=null){
+			newsMapper.update(news);
+		} else {
+			newsMapper.insert(news);
+		}
 	}
 
 }

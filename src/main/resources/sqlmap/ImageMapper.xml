@@ -27,25 +27,25 @@
 	UPDATE image 
 	<set>
 			<if test="newsId != null">  
-	        	news_id=#{newsId}
+	        	news_id=#{newsId},
 	    	</if>
 			<if test="imageLocalurl != null">  
-	        	image_localURL=#{imageLocalurl}
+	        	image_localURL=#{imageLocalurl},
 	    	</if>
 			<if test="productId != null">  
-	        	product_id=#{productId}
+	        	product_id=#{productId},
 	    	</if>
 			<if test="psotId != null">  
-	        	psot_id=#{psotId}
+	        	psot_id=#{psotId},
 	    	</if>
 			<if test="imagePath != null">  
-	        	image_path=#{imagePath}
+	        	image_path=#{imagePath},
 	    	</if>
 			<if test="shopId != null">  
-	        	shop_id=#{shopId}
+	        	shop_id=#{shopId},
 	    	</if>
 			<if test="imageTitle != null">  
-	        	image_title=#{imageTitle}
+	        	image_title=#{imageTitle},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -108,7 +108,7 @@
 		     	and image_title = #{parm.imageTitle}
 		   	</if>
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
@@ -119,7 +119,7 @@
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from image where 1=1
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}

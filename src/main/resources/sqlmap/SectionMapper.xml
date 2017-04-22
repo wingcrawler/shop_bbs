@@ -24,16 +24,16 @@
 	UPDATE section 
 	<set>
 			<if test="sectionStatus != null">  
-	        	section_status=#{sectionStatus}
+	        	section_status=#{sectionStatus},
 	    	</if>
 			<if test="sectionParentId != null">  
-	        	section_parent_id=#{sectionParentId}
+	        	section_parent_id=#{sectionParentId},
 	    	</if>
 			<if test="sectionType != null">  
-	        	section_type=#{sectionType}
+	        	section_type=#{sectionType},
 	    	</if>
 			<if test="sectionTitle != null">  
-	        	section_title=#{sectionTitle}
+	        	section_title=#{sectionTitle},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -78,7 +78,7 @@
 		     	and section_title = #{parm.sectionTitle}
 		   	</if>
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
@@ -89,7 +89,7 @@
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from section where 1=1
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}

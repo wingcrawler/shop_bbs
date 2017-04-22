@@ -22,10 +22,10 @@
 	UPDATE topic 
 	<set>
 			<if test="topicDescription != null">  
-	        	topic_description=#{topicDescription}
+	        	topic_description=#{topicDescription},
 	    	</if>
 			<if test="topicTitle != null">  
-	        	topic_title=#{topicTitle}
+	        	topic_title=#{topicTitle},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -58,7 +58,7 @@
 		     	and topic_title = #{parm.topicTitle}
 		   	</if>
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
@@ -69,7 +69,7 @@
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from topic where 1=1
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}

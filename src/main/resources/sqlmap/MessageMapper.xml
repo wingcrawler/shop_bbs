@@ -24,16 +24,16 @@
 	UPDATE message 
 	<set>
 			<if test="messageStatus != null">  
-	        	message_status=#{messageStatus}
+	        	message_status=#{messageStatus},
 	    	</if>
 			<if test="postId != null">  
-	        	post_id=#{postId}
+	        	post_id=#{postId},
 	    	</if>
 			<if test="messageContext != null">  
-	        	message_context=#{messageContext}
+	        	message_context=#{messageContext},
 	    	</if>
 			<if test="receiveId != null">  
-	        	receive_id=#{receiveId}
+	        	receive_id=#{receiveId},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -78,7 +78,7 @@
 		     	and receive_id = #{parm.receiveId}
 		   	</if>
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
@@ -89,7 +89,7 @@
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from message where 1=1
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}

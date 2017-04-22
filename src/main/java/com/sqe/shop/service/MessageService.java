@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class MessageService extends AdapterService implements BaseService {
 	@Autowired
     MessageMapper messageMapper;
     
-    public int insert(Message Message) {
-		return messageMapper.insert(Message);
+    public int insert(Message message) {
+		return messageMapper.insert(message);
 	}
     
-    public int update(Message Message) {
-		return messageMapper.update(Message);
+    public int update(Message message) {
+		return messageMapper.update(message);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class MessageService extends AdapterService implements BaseService {
 		return messageMapper.getById(id);
 	}
 	
-	public int countByParm(Message Message) {
+	public int countByParm(Message message) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Message!=null){
+		if(message!=null){
 		
-		}*/
+		}
 		return messageMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class MessageService extends AdapterService implements BaseService {
 		return messageMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Message> getBeanListByParm(Message Message, int pageNo, Integer pageSize) {
+	public PageUtil<Message> getBeanListByParm(Message message, int pageNo, Integer pageSize) {
 		PageUtil<Message> pageUtil = new PageUtil<Message>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Message!=null){
-			
-		}*/
+		if(message!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = messageMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Message> list = new ArrayList<Message>();
 		if(count!=0){
-			List<Message> list = messageMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = messageMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class MessageService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Message message) {
+		if(message.getId()!=null){
+			messageMapper.update(message);
+		} else {
+			messageMapper.insert(message);
+		}
 	}
 
 }

@@ -63,7 +63,7 @@
 								<tr>
 									<th field="index" width="60">${t.t_no }</th>
 									<th field="imageUrl">${t.t_img_link }</th>
-									<th field="type">${t.t_type }</th>
+									<th field="typeName">${t.t_type }</th>
 									<th field="sort">${t.t_weight }</th>
 									<th field="description">${t.t_desc }</th>
 									<th field="op" field-role="2,0" width="110"></th>

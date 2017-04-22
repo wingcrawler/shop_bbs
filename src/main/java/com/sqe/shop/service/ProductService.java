@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class ProductService extends AdapterService implements BaseService {
 	@Autowired
     ProductMapper productMapper;
     
-    public int insert(Product Product) {
-		return productMapper.insert(Product);
+    public int insert(Product product) {
+		return productMapper.insert(product);
 	}
     
-    public int update(Product Product) {
-		return productMapper.update(Product);
+    public int update(Product product) {
+		return productMapper.update(product);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class ProductService extends AdapterService implements BaseService {
 		return productMapper.getById(id);
 	}
 	
-	public int countByParm(Product Product) {
+	public int countByParm(Product product) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Product!=null){
+		if(product!=null){
 		
-		}*/
+		}
 		return productMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class ProductService extends AdapterService implements BaseService {
 		return productMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Product> getBeanListByParm(Product Product, int pageNo, Integer pageSize) {
+	public PageUtil<Product> getBeanListByParm(Product product, int pageNo, Integer pageSize) {
 		PageUtil<Product> pageUtil = new PageUtil<Product>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Product!=null){
-			
-		}*/
+		if(product!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = productMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Product> list = new ArrayList<Product>();
 		if(count!=0){
-			List<Product> list = productMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = productMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class ProductService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Product product) {
+		if(product.getId()!=null){
+			productMapper.update(product);
+		} else {
+			productMapper.insert(product);
+		}
 	}
 
 }

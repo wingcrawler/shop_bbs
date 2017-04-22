@@ -29,31 +29,31 @@
 	UPDATE product 
 	<set>
 			<if test="productDescripton != null">  
-	        	product_descripton=#{productDescripton}
+	        	product_descripton=#{productDescripton},
 	    	</if>
 			<if test="productUrlClick != null">  
-	        	product_url_click=#{productUrlClick}
+	        	product_url_click=#{productUrlClick},
 	    	</if>
 			<if test="productStatus != null">  
-	        	product_status=#{productStatus}
+	        	product_status=#{productStatus},
 	    	</if>
 			<if test="productUrl != null">  
-	        	product_url=#{productUrl}
+	        	product_url=#{productUrl},
 	    	</if>
 			<if test="productCount != null">  
-	        	product_count=#{productCount}
+	        	product_count=#{productCount},
 	    	</if>
 			<if test="productView != null">  
-	        	product_view=#{productView}
+	        	product_view=#{productView},
 	    	</if>
 			<if test="productRank != null">  
-	        	product_rank=#{productRank}
+	        	product_rank=#{productRank},
 	    	</if>
 			<if test="productTypeId != null">  
-	        	product_type_id=#{productTypeId}
+	        	product_type_id=#{productTypeId},
 	    	</if>
 			<if test="productName != null">  
-	        	product_name=#{productName}
+	        	product_name=#{productName},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -128,7 +128,7 @@
 		     	and product_name = #{parm.productName}
 		   	</if>
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
@@ -139,7 +139,7 @@
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from product where 1=1
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}

@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class ImageService extends AdapterService implements BaseService {
 	@Autowired
     ImageMapper imageMapper;
     
-    public int insert(Image Image) {
-		return imageMapper.insert(Image);
+    public int insert(Image image) {
+		return imageMapper.insert(image);
 	}
     
-    public int update(Image Image) {
-		return imageMapper.update(Image);
+    public int update(Image image) {
+		return imageMapper.update(image);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class ImageService extends AdapterService implements BaseService {
 		return imageMapper.getById(id);
 	}
 	
-	public int countByParm(Image Image) {
+	public int countByParm(Image image) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Image!=null){
+		if(image!=null){
 		
-		}*/
+		}
 		return imageMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class ImageService extends AdapterService implements BaseService {
 		return imageMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Image> getBeanListByParm(Image Image, int pageNo, Integer pageSize) {
+	public PageUtil<Image> getBeanListByParm(Image image, int pageNo, Integer pageSize) {
 		PageUtil<Image> pageUtil = new PageUtil<Image>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Image!=null){
-			
-		}*/
+		if(image!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = imageMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Image> list = new ArrayList<Image>();
 		if(count!=0){
-			List<Image> list = imageMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = imageMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class ImageService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Image image) {
+		if(image.getId()!=null){
+			imageMapper.update(image);
+		} else {
+			imageMapper.insert(image);
+		}
 	}
 
 }

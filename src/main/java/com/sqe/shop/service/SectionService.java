@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class SectionService extends AdapterService implements BaseService {
 	@Autowired
     SectionMapper sectionMapper;
     
-    public int insert(Section Section) {
-		return sectionMapper.insert(Section);
+    public int insert(Section section) {
+		return sectionMapper.insert(section);
 	}
     
-    public int update(Section Section) {
-		return sectionMapper.update(Section);
+    public int update(Section section) {
+		return sectionMapper.update(section);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class SectionService extends AdapterService implements BaseService {
 		return sectionMapper.getById(id);
 	}
 	
-	public int countByParm(Section Section) {
+	public int countByParm(Section section) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Section!=null){
+		if(section!=null){
 		
-		}*/
+		}
 		return sectionMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class SectionService extends AdapterService implements BaseService {
 		return sectionMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Section> getBeanListByParm(Section Section, int pageNo, Integer pageSize) {
+	public PageUtil<Section> getBeanListByParm(Section section, int pageNo, Integer pageSize) {
 		PageUtil<Section> pageUtil = new PageUtil<Section>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Section!=null){
-			
-		}*/
+		if(section!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = sectionMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Section> list = new ArrayList<Section>();
 		if(count!=0){
-			List<Section> list = sectionMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = sectionMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class SectionService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Section section) {
+		if(section.getId()!=null){
+			sectionMapper.update(section);
+		} else {
+			sectionMapper.insert(section);
+		}
 	}
 
 }

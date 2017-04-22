@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class CommentService extends AdapterService implements BaseService {
 	@Autowired
     CommentMapper commentMapper;
     
-    public int insert(Comment Comment) {
-		return commentMapper.insert(Comment);
+    public int insert(Comment comment) {
+		return commentMapper.insert(comment);
 	}
     
-    public int update(Comment Comment) {
-		return commentMapper.update(Comment);
+    public int update(Comment comment) {
+		return commentMapper.update(comment);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class CommentService extends AdapterService implements BaseService {
 		return commentMapper.getById(id);
 	}
 	
-	public int countByParm(Comment Comment) {
+	public int countByParm(Comment comment) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Comment!=null){
+		if(comment!=null){
 		
-		}*/
+		}
 		return commentMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class CommentService extends AdapterService implements BaseService {
 		return commentMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Comment> getBeanListByParm(Comment Comment, int pageNo, Integer pageSize) {
+	public PageUtil<Comment> getBeanListByParm(Comment comment, int pageNo, Integer pageSize) {
 		PageUtil<Comment> pageUtil = new PageUtil<Comment>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Comment!=null){
-			
-		}*/
+		if(comment!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = commentMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Comment> list = new ArrayList<Comment>();
 		if(count!=0){
-			List<Comment> list = commentMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = commentMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class CommentService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Comment comment) {
+		if(comment.getId()!=null){
+			commentMapper.update(comment);
+		} else {
+			commentMapper.insert(comment);
+		}
 	}
 
 }

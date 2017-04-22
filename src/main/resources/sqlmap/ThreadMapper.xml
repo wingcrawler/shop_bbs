@@ -27,25 +27,25 @@
 	UPDATE thread 
 	<set>
 			<if test="topicId != null">  
-	        	topic_id=#{topicId}
+	        	topic_id=#{topicId},
 	    	</if>
 			<if test="threadStatus != null">  
-	        	thread_status=#{threadStatus}
+	        	thread_status=#{threadStatus},
 	    	</if>
 			<if test="threadTitle != null">  
-	        	thread_title=#{threadTitle}
+	        	thread_title=#{threadTitle},
 	    	</if>
 			<if test="threadTime != null">  
-	        	thread_time=#{threadTime}
+	        	thread_time=#{threadTime},
 	    	</if>
 			<if test="threadType != null">  
-	        	thread_type=#{threadType}
+	        	thread_type=#{threadType},
 	    	</if>
 			<if test="threadContext != null">  
-	        	thread_context=#{threadContext}
+	        	thread_context=#{threadContext},
 	    	</if>
 			<if test="userId != null">  
-	        	user_id=#{userId}
+	        	user_id=#{userId},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -108,7 +108,7 @@
 		     	and user_id = #{parm.userId}
 		   	</if>
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
@@ -119,7 +119,7 @@
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from thread where 1=1
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}

@@ -1,5 +1,6 @@
 package com.sqe.shop.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,12 +18,12 @@ public class ProductTypeService extends AdapterService implements BaseService {
 	@Autowired
     ProductTypeMapper productTypeMapper;
     
-    public int insert(ProductType ProductType) {
-		return productTypeMapper.insert(ProductType);
+    public int insert(ProductType productType) {
+		return productTypeMapper.insert(productType);
 	}
     
-    public int update(ProductType ProductType) {
-		return productTypeMapper.update(ProductType);
+    public int update(ProductType productType) {
+		return productTypeMapper.update(productType);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class ProductTypeService extends AdapterService implements BaseService {
 		return productTypeMapper.getById(id);
 	}
 	
-	public int countByParm(ProductType ProductType) {
+	public int countByParm(ProductType productType) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(ProductType!=null){
-		
-		}*/
+		if(productType!=null){
+			parm.put("typeName", productType.getTypeName());
+		}
 		return productTypeMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,22 @@ public class ProductTypeService extends AdapterService implements BaseService {
 		return productTypeMapper.countByParm(parm);
 	}
 	
-	public PageUtil<ProductType> getBeanListByParm(ProductType ProductType, int pageNo, Integer pageSize) {
+	public PageUtil<ProductType> getBeanListByParm(ProductType productType, int pageNo, Integer pageSize) {
 		PageUtil<ProductType> pageUtil = new PageUtil<ProductType>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(ProductType!=null){
-			
-		}*/
+		if(productType!=null){
+			parm.put("typeName", productType.getTypeName());
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+			parm.put("orderby", "type_rank asc");
+		}
 		int count = productTypeMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<ProductType> list = new ArrayList<ProductType>();
 		if(count!=0){
-			List<ProductType> list = productTypeMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = productTypeMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +74,14 @@ public class ProductTypeService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(ProductType productType) {
+		if(productType.getId()!=null){
+			productTypeMapper.update(productType);
+		} else {
+			productTypeMapper.insert(productType);
+		}
 	}
 
 }

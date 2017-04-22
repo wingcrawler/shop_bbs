@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class QuestionsService extends AdapterService implements BaseService {
 	@Autowired
     QuestionsMapper questionsMapper;
     
-    public int insert(Questions Questions) {
-		return questionsMapper.insert(Questions);
+    public int insert(Questions questions) {
+		return questionsMapper.insert(questions);
 	}
     
-    public int update(Questions Questions) {
-		return questionsMapper.update(Questions);
+    public int update(Questions questions) {
+		return questionsMapper.update(questions);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class QuestionsService extends AdapterService implements BaseService {
 		return questionsMapper.getById(id);
 	}
 	
-	public int countByParm(Questions Questions) {
+	public int countByParm(Questions questions) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Questions!=null){
+		if(questions!=null){
 		
-		}*/
+		}
 		return questionsMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class QuestionsService extends AdapterService implements BaseService {
 		return questionsMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Questions> getBeanListByParm(Questions Questions, int pageNo, Integer pageSize) {
+	public PageUtil<Questions> getBeanListByParm(Questions questions, int pageNo, Integer pageSize) {
 		PageUtil<Questions> pageUtil = new PageUtil<Questions>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Questions!=null){
-			
-		}*/
+		if(questions!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = questionsMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Questions> list = new ArrayList<Questions>();
 		if(count!=0){
-			List<Questions> list = questionsMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = questionsMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class QuestionsService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Questions questions) {
+		if(questions.getId()!=null){
+			questionsMapper.update(questions);
+		} else {
+			questionsMapper.insert(questions);
+		}
 	}
 
 }

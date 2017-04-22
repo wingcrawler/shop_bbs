@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class PostService extends AdapterService implements BaseService {
 	@Autowired
     PostMapper postMapper;
     
-    public int insert(Post Post) {
-		return postMapper.insert(Post);
+    public int insert(Post post) {
+		return postMapper.insert(post);
 	}
     
-    public int update(Post Post) {
-		return postMapper.update(Post);
+    public int update(Post post) {
+		return postMapper.update(post);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class PostService extends AdapterService implements BaseService {
 		return postMapper.getById(id);
 	}
 	
-	public int countByParm(Post Post) {
+	public int countByParm(Post post) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Post!=null){
+		if(post!=null){
 		
-		}*/
+		}
 		return postMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class PostService extends AdapterService implements BaseService {
 		return postMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Post> getBeanListByParm(Post Post, int pageNo, Integer pageSize) {
+	public PageUtil<Post> getBeanListByParm(Post post, int pageNo, Integer pageSize) {
 		PageUtil<Post> pageUtil = new PageUtil<Post>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Post!=null){
-			
-		}*/
+		if(post!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = postMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Post> list = new ArrayList<Post>();
 		if(count!=0){
-			List<Post> list = postMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = postMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class PostService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Post post) {
+		if(post.getId()!=null){
+			postMapper.update(post);
+		} else {
+			postMapper.insert(post);
+		}
 	}
 
 }

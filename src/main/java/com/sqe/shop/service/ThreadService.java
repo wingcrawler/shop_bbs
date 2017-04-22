@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class ThreadService extends AdapterService implements BaseService {
 	@Autowired
     ThreadMapper threadMapper;
     
-    public int insert(Thread Thread) {
-		return threadMapper.insert(Thread);
+    public int insert(Thread thread) {
+		return threadMapper.insert(thread);
 	}
     
-    public int update(Thread Thread) {
-		return threadMapper.update(Thread);
+    public int update(Thread thread) {
+		return threadMapper.update(thread);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class ThreadService extends AdapterService implements BaseService {
 		return threadMapper.getById(id);
 	}
 	
-	public int countByParm(Thread Thread) {
+	public int countByParm(Thread thread) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Thread!=null){
+		if(thread!=null){
 		
-		}*/
+		}
 		return threadMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class ThreadService extends AdapterService implements BaseService {
 		return threadMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Thread> getBeanListByParm(Thread Thread, int pageNo, Integer pageSize) {
+	public PageUtil<Thread> getBeanListByParm(Thread thread, int pageNo, Integer pageSize) {
 		PageUtil<Thread> pageUtil = new PageUtil<Thread>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Thread!=null){
-			
-		}*/
+		if(thread!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = threadMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Thread> list = new ArrayList<Thread>();
 		if(count!=0){
-			List<Thread> list = threadMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = threadMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class ThreadService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Thread thread) {
+		if(thread.getId()!=null){
+			threadMapper.update(thread);
+		} else {
+			threadMapper.insert(thread);
+		}
 	}
 
 }

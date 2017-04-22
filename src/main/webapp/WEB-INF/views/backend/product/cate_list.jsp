@@ -26,16 +26,8 @@
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
 								<div class="col-sm-3">
-									${t.t_title }:
-									<input type="text" class="form-control input" name="title" value="">
-								</div>
-								<div class="col-sm-3">
-									${t.t_menu }:
-									<select class="form-control select" name="menuId">
-										<option value="-1">-- ${t.t_select } --</option>
-										<option value="1">${t.m_ad_active }</option>
-										<option value="2">${t.m_ad_position }</option>
-									</select>
+									${t.t_type_name }:
+									<input type="text" class="form-control input" name="typeName" value="">
 								</div>
 								<div class="col-sm-2">
 									<br>
@@ -57,7 +49,7 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">${t.t_list }</h3>
 						<div class="panel-options">
-							<a href="/backend/product/edit" target="_blank"><i class="fa-plus"></i></a>
+							<a href="/backend/cate/edit" target="_blank"><i class="fa-plus"></i></a>
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
 					</div>
@@ -66,12 +58,12 @@
 							<thead>
 								<tr>
 									<th width="60" field="index">${t.t_no }</th>
-									<th field="title" url="http://my.blog/blog/detail?id=" parm="id">${t.t_title }</th>
-									<th field="img">${t.t_img }</th>
-									<th field="imgLink">${t.t_img_link }</th>
-									<th field="createTime">${t.t_createtime }</th>
-									<th field="updateTime">${t.t_updatetime }</th>
-									<th field="op" field-role="0"></th>
+									<th field="typeNameCh">${t.t_type_name }(${t.t_zh })</th>
+									<th field="typeName">${t.t_type_name }(${t.t_en })</th>
+									<th field="typeRank">${t.t_weight }</th>
+									<th field="typeDescriptionCh">${t.t_desc }(${t.t_zh })</th>
+									<th field="typeDescription">${t.t_desc }(${t.t_en })</th>
+									<th field="op" field-role="2,0" width="110"></th>
 								</tr>
 							</thead>
 							<tbody class="middle-align"></tbody>
@@ -85,6 +77,7 @@
 		</div>
 	</div>
 	
+<jsp:include page="../dialog/dialog_delete.jsp"></jsp:include>
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
@@ -92,12 +85,22 @@ $(function(){
 	$('#main-menu li.li').eq(2).find('ul li').eq(1).addClass('active');
 	
 	$('#datatable').datatable({
-		url_load : '/backend/product/getList',
+		url_load : '/backend/cate/getList',
+		url_remove:'/backend/cate/doDelete',
+		url_edit:'/backend/cate/edit',
 		backFn : function(p) {
 			// console.log(p);
 		}
 	}); 
 });
+
+function search(){
+	var typeName=$('input[name="typeName"]').val();
+	var parm = {
+			typeName:typeName
+	}
+	$.fn.doSearch(parm);
+}
 </script>
 </body>
 </html>

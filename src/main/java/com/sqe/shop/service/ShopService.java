@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class ShopService extends AdapterService implements BaseService {
 	@Autowired
     ShopMapper shopMapper;
     
-    public int insert(Shop Shop) {
-		return shopMapper.insert(Shop);
+    public int insert(Shop shop) {
+		return shopMapper.insert(shop);
 	}
     
-    public int update(Shop Shop) {
-		return shopMapper.update(Shop);
+    public int update(Shop shop) {
+		return shopMapper.update(shop);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class ShopService extends AdapterService implements BaseService {
 		return shopMapper.getById(id);
 	}
 	
-	public int countByParm(Shop Shop) {
+	public int countByParm(Shop shop) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Shop!=null){
+		if(shop!=null){
 		
-		}*/
+		}
 		return shopMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class ShopService extends AdapterService implements BaseService {
 		return shopMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Shop> getBeanListByParm(Shop Shop, int pageNo, Integer pageSize) {
+	public PageUtil<Shop> getBeanListByParm(Shop shop, int pageNo, Integer pageSize) {
 		PageUtil<Shop> pageUtil = new PageUtil<Shop>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Shop!=null){
-			
-		}*/
+		if(shop!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = shopMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Shop> list = new ArrayList<Shop>();
 		if(count!=0){
-			List<Shop> list = shopMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = shopMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class ShopService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Shop shop) {
+		if(shop.getId()!=null){
+			shopMapper.update(shop);
+		} else {
+			shopMapper.insert(shop);
+		}
 	}
 
 }

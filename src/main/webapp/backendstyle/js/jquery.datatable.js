@@ -57,9 +57,25 @@
 		action.load(_obj, _args);
 	}
 	
+	/* 进入编辑页  */
+	$.fn.edit = function(obj){
+		var url= _args.url_edit + "?id=" + $(obj).attr("opid");
+		window.open(url);
+	}
+
+	/* 弹出删除确认框  */
+	$.fn.showDeleteDialog = function(obj) {
+		var _id = $(obj).attr("opid");
+		var _url = _args.url_remove;
+		$("input[name='hidden-url']").val(_url);
+		$("input[name='hidden-id']").val(_id);
+		jQuery("#modal-delete").modal("show", {backdrop: "fade"});
+	}
+	
 	/* 删除 */
 	$.fn.doDelete = function() {
-		var _url = $('input[name="hidden-url"]').val();
+		/*var _url = $('input[name="hidden-url"]').val();*/
+		var _url = _args.url_remove;
 		var _id = $('input[name="hidden-id"]').val();
 		$.ajax({
 			type: "GET",
@@ -80,10 +96,10 @@
 	}
 	
 	/* 保存 */
-	$.fn.doSave = function(_parm, _url) {
+	$.fn.doSave = function(_parm, _submitUrl, _jumpUrl) {
 		$.ajax({
 			type: "POST",
-			url: _url,
+			url: _submitUrl,
 			dataType : "json",
 			data: _parm,
 			success: function(data) {
@@ -91,11 +107,48 @@
 					$.commonUtil.showTip(data.errorInfo);
 				} else {
 					$.commonUtil.showTip(data.errorInfo);
-					action.load(_obj, _args);
+					self.location= _jumpUrl;
 				}
 			}
 		});
 	}
+	
+	/* 含图片的表单提交 */
+	$.fn.ajaxSubmit = function(_submitUrl, _jumpUrl) {
+		$(".form").ajaxSubmit({  
+            type:'post',  
+            cache: false,  
+            url: _submitUrl, 
+            dataType : 'json', //返回值类型 一般设置为json  
+            success : function(data, status) {  
+            	debugger;
+	        	if(data.errorNo==0){
+	        		self.location= _jumpUrl;
+				} else {
+					$.commonUtil.showTip(data.errorInfo);
+				}
+	        },  
+	        error : function(data, status, e) {  
+	        	$.commonUtil.showTip(data.errorInfo); 
+	        }   
+        });
+	}
+	
+	 $.fn.getFormJson = function(elem) {
+        var o = {};
+        var a = $(elem).serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    }
 	
 	var action = {
 		init: function(obj,args){
@@ -132,7 +185,7 @@
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="add(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-plus"></i></a>';
 								}
 								if (field_role.indexOf('2') >= 0) {
-									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="edit(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-edit"></i></a>';
+									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="$.fn.edit(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-edit"></i></a>';
 								}
 								if (field_role.indexOf('3') >= 0) {
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="viewDetail(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-eye"></i></a>';
@@ -144,7 +197,7 @@
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="moveDown(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-down"></i></a>';
 								}
 								if (field_role.indexOf('0') >= 0) {
-									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="showDeleteDialog(this);" class="btn btn-danger btn-single btn-sm"><i class="fa-minus"></i></a>';
+									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="$.fn.showDeleteDialog(this);" class="btn btn-danger btn-single btn-sm"><i class="fa-minus"></i></a>';
 								}
 								text = opHtml;
 								html += '<td>' + text + '</td>';

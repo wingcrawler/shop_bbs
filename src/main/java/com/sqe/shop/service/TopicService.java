@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class TopicService extends AdapterService implements BaseService {
 	@Autowired
     TopicMapper topicMapper;
     
-    public int insert(Topic Topic) {
-		return topicMapper.insert(Topic);
+    public int insert(Topic topic) {
+		return topicMapper.insert(topic);
 	}
     
-    public int update(Topic Topic) {
-		return topicMapper.update(Topic);
+    public int update(Topic topic) {
+		return topicMapper.update(topic);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class TopicService extends AdapterService implements BaseService {
 		return topicMapper.getById(id);
 	}
 	
-	public int countByParm(Topic Topic) {
+	public int countByParm(Topic topic) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Topic!=null){
+		if(topic!=null){
 		
-		}*/
+		}
 		return topicMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class TopicService extends AdapterService implements BaseService {
 		return topicMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Topic> getBeanListByParm(Topic Topic, int pageNo, Integer pageSize) {
+	public PageUtil<Topic> getBeanListByParm(Topic topic, int pageNo, Integer pageSize) {
 		PageUtil<Topic> pageUtil = new PageUtil<Topic>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Topic!=null){
-			
-		}*/
+		if(topic!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = topicMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Topic> list = new ArrayList<Topic>();
 		if(count!=0){
-			List<Topic> list = topicMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = topicMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class TopicService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Topic topic) {
+		if(topic.getId()!=null){
+			topicMapper.update(topic);
+		} else {
+			topicMapper.insert(topic);
+		}
 	}
 
 }

@@ -27,25 +27,25 @@
 	UPDATE inform 
 	<set>
 			<if test="infromDate != null">  
-	        	infrom_date=#{infromDate}
+	        	infrom_date=#{infromDate},
 	    	</if>
 			<if test="informRemark != null">  
-	        	inform_remark=#{informRemark}
+	        	inform_remark=#{informRemark},
 	    	</if>
 			<if test="informTitle != null">  
-	        	inform_title=#{informTitle}
+	        	inform_title=#{informTitle},
 	    	</if>
 			<if test="informContext != null">  
-	        	inform_context=#{informContext}
+	        	inform_context=#{informContext},
 	    	</if>
 			<if test="userPostId != null">  
-	        	user_post_id=#{userPostId}
+	        	user_post_id=#{userPostId},
 	    	</if>
 			<if test="userReportedId != null">  
-	        	user_reported_id=#{userReportedId}
+	        	user_reported_id=#{userReportedId},
 	    	</if>
 			<if test="infromStatus != null">  
-	        	infrom_status=#{infromStatus}
+	        	infrom_status=#{infromStatus},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -108,7 +108,7 @@
 		     	and infrom_status = #{parm.infromStatus}
 		   	</if>
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
@@ -119,7 +119,7 @@
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from inform where 1=1
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}

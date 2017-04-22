@@ -25,19 +25,19 @@
 	UPDATE product_type 
 	<set>
 			<if test="typeNameCh != null">  
-	        	type_name_ch=#{typeNameCh}
+	        	type_name_ch=#{typeNameCh},
 	    	</if>
 			<if test="typeName != null">  
-	        	type_name=#{typeName}
+	        	type_name=#{typeName},
 	    	</if>
 			<if test="typeRank != null">  
-	        	type_rank=#{typeRank}
+	        	type_rank=#{typeRank},
 	    	</if>
 			<if test="typeDescriptionCh != null">  
-	        	type_description_ch=#{typeDescriptionCh}
+	        	type_description_ch=#{typeDescriptionCh},
 	    	</if>
 			<if test="typeDescription != null">  
-	        	type_description=#{typeDescription}
+	        	type_description=#{typeDescription},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -53,11 +53,8 @@
 
 <select id="countByParm" resultType="integer">
 	select count(*) from product_type  where 1=1 
-			<if test="parm.typeNameCh != null">
-		     	and type_name_ch = #{parm.typeNameCh}
-		   	</if>
 			<if test="parm.typeName != null">
-		     	and type_name = #{parm.typeName}
+		     	and  (type_name = #{parm.typeName} or type_name_ch = #{parm.typeName})
 		   	</if>
 			<if test="parm.typeRank != null">
 		     	and type_rank = #{parm.typeRank}
@@ -72,11 +69,8 @@
 
 <select id="getBeanListByParm" resultMap="ProductTypeBaseMapper">
 	select * from product_type where 1=1 
-			<if test="parm.typeNameCh != null">
-		     	and type_name_ch = #{parm.typeNameCh}
-		   	</if>
 			<if test="parm.typeName != null">
-		     	and type_name = #{parm.typeName}
+		     	and  (type_name = #{parm.typeName} or type_name_ch = #{parm.typeName})
 		   	</if>
 			<if test="parm.typeRank != null">
 		     	and type_rank = #{parm.typeRank}
@@ -88,7 +82,7 @@
 		     	and type_description = #{parm.typeDescription}
 		   	</if>
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
@@ -99,7 +93,7 @@
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from product_type where 1=1
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}

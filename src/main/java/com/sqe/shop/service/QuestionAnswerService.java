@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 	@Autowired
     QuestionAnswerMapper questionAnswerMapper;
     
-    public int insert(QuestionAnswer QuestionAnswer) {
-		return questionAnswerMapper.insert(QuestionAnswer);
+    public int insert(QuestionAnswer questionAnswer) {
+		return questionAnswerMapper.insert(questionAnswer);
 	}
     
-    public int update(QuestionAnswer QuestionAnswer) {
-		return questionAnswerMapper.update(QuestionAnswer);
+    public int update(QuestionAnswer questionAnswer) {
+		return questionAnswerMapper.update(questionAnswer);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 		return questionAnswerMapper.getById(id);
 	}
 	
-	public int countByParm(QuestionAnswer QuestionAnswer) {
+	public int countByParm(QuestionAnswer questionAnswer) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(QuestionAnswer!=null){
+		if(questionAnswer!=null){
 		
-		}*/
+		}
 		return questionAnswerMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 		return questionAnswerMapper.countByParm(parm);
 	}
 	
-	public PageUtil<QuestionAnswer> getBeanListByParm(QuestionAnswer QuestionAnswer, int pageNo, Integer pageSize) {
+	public PageUtil<QuestionAnswer> getBeanListByParm(QuestionAnswer questionAnswer, int pageNo, Integer pageSize) {
 		PageUtil<QuestionAnswer> pageUtil = new PageUtil<QuestionAnswer>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(QuestionAnswer!=null){
-			
-		}*/
+		if(questionAnswer!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = questionAnswerMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<QuestionAnswer> list = new ArrayList<QuestionAnswer>();
 		if(count!=0){
-			List<QuestionAnswer> list = questionAnswerMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = questionAnswerMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(QuestionAnswer questionAnswer) {
+		if(questionAnswer.getId()!=null){
+			questionAnswerMapper.update(questionAnswer);
+		} else {
+			questionAnswerMapper.insert(questionAnswer);
+		}
 	}
 
 }

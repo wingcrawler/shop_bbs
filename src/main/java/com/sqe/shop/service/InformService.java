@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,12 @@ public class InformService extends AdapterService implements BaseService {
 	@Autowired
     InformMapper informMapper;
     
-    public int insert(Inform Inform) {
-		return informMapper.insert(Inform);
+    public int insert(Inform inform) {
+		return informMapper.insert(inform);
 	}
     
-    public int update(Inform Inform) {
-		return informMapper.update(Inform);
+    public int update(Inform inform) {
+		return informMapper.update(inform);
 	}
 	
 	public int delete(Long id) {
@@ -33,12 +34,11 @@ public class InformService extends AdapterService implements BaseService {
 		return informMapper.getById(id);
 	}
 	
-	public int countByParm(Inform Inform) {
+	public int countByParm(Inform inform) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Inform!=null){
+		if(inform!=null){
 		
-		}*/
+		}
 		return informMapper.countByParm(parm);
 	}
 	
@@ -46,19 +46,20 @@ public class InformService extends AdapterService implements BaseService {
 		return informMapper.countByParm(parm);
 	}
 	
-	public PageUtil<Inform> getBeanListByParm(Inform Inform, int pageNo, Integer pageSize) {
+	public PageUtil<Inform> getBeanListByParm(Inform inform, int pageNo, Integer pageSize) {
 		PageUtil<Inform> pageUtil = new PageUtil<Inform>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		// TODO
-		/*if(Inform!=null){
-			
-		}*/
+		if(inform!=null){
+			parm.put("start", pageUtil.getStartRow());
+			parm.put("limit", pageUtil.getPageSize());
+		}
 		int count = informMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Inform> list = new ArrayList<Inform>();
 		if(count!=0){
-			List<Inform> list = informMapper.getBeanListByParm(parm);
-			pageUtil.setList(list);
+			list = informMapper.getBeanListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -71,6 +72,14 @@ public class InformService extends AdapterService implements BaseService {
 			pageUtil.setList(list);
 		}
 		return pageUtil;
+	}
+	
+	public void save(Inform inform) {
+		if(inform.getId()!=null){
+			informMapper.update(inform);
+		} else {
+			informMapper.insert(inform);
+		}
 	}
 
 }

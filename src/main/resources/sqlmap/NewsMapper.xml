@@ -26,22 +26,22 @@
 	UPDATE news 
 	<set>
 			<if test="newsUp != null">  
-	        	news_up=#{newsUp}
+	        	news_up=#{newsUp},
 	    	</if>
 			<if test="newsTitle != null">  
-	        	news_title=#{newsTitle}
+	        	news_title=#{newsTitle},
 	    	</if>
 			<if test="newsContext != null">  
-	        	news_context=#{newsContext}
+	        	news_context=#{newsContext},
 	    	</if>
 			<if test="newsReaded != null">  
-	        	news_readed=#{newsReaded}
+	        	news_readed=#{newsReaded},
 	    	</if>
 			<if test="newsDate != null">  
-	        	news_date=#{newsDate}
+	        	news_date=#{newsDate},
 	    	</if>
 			<if test="newsType != null">  
-	        	news_type=#{newsType}
+	        	news_type=#{newsType},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -98,7 +98,7 @@
 		     	and news_type = #{parm.newsType}
 		   	</if>
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
@@ -109,7 +109,7 @@
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from news where 1=1
 		<if test="parm.orderby != null">
-	   		order by #{parm.orderby}
+	   		order by ${parm.orderby}
 	   	</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
