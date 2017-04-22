@@ -4,15 +4,17 @@
 
 <resultMap type="com.sqe.shop.model.Product" id="ProductBaseMapper">
 	<id property="productDescripton" column="product_descripton" />
-	<id property="productUrlClick" column="product_url_click" />
 	<id property="productStatus" column="product_status" />
-	<id property="id" column="id" />
-	<id property="productUrl" column="product_url" />
 	<id property="productCount" column="product_count" />
 	<id property="productView" column="product_view" />
 	<id property="productRank" column="product_rank" />
 	<id property="productTypeId" column="product_type_id" />
 	<id property="productName" column="product_name" />
+	<id property="productUrlClick" column="product_url_click" />
+	<id property="shopId" column="shop_id" />
+	<id property="id" column="id" />
+	<id property="productUrl" column="product_url" />
+	<id property="productPrice" column="product_price" />
 </resultMap>  
 
 <insert id="insert">
@@ -20,9 +22,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into product
-	(product_descripton,product_url_click,product_status,product_url,product_count,product_view,product_rank,product_type_id,product_name)
+	(product_descripton,product_status,product_count,product_view,product_rank,product_type_id,product_name,product_url_click,shop_id,product_url,product_price)
 	values
-	(#{productDescripton},#{productUrlClick},#{productStatus},#{productUrl},#{productCount},#{productView},#{productRank},#{productTypeId},#{productName})
+	(#{productDescripton},#{productStatus},#{productCount},#{productView},#{productRank},#{productTypeId},#{productName},#{productUrlClick},#{shopId},#{productUrl},#{productPrice})
 </insert>
 
 <update id="update">
@@ -31,14 +33,8 @@
 			<if test="productDescripton != null">  
 	        	product_descripton=#{productDescripton},
 	    	</if>
-			<if test="productUrlClick != null">  
-	        	product_url_click=#{productUrlClick},
-	    	</if>
 			<if test="productStatus != null">  
 	        	product_status=#{productStatus},
-	    	</if>
-			<if test="productUrl != null">  
-	        	product_url=#{productUrl},
 	    	</if>
 			<if test="productCount != null">  
 	        	product_count=#{productCount},
@@ -54,6 +50,18 @@
 	    	</if>
 			<if test="productName != null">  
 	        	product_name=#{productName},
+	    	</if>
+			<if test="productUrlClick != null">  
+	        	product_url_click=#{productUrlClick},
+	    	</if>
+			<if test="shopId != null">  
+	        	shop_id=#{shopId},
+	    	</if>
+			<if test="productUrl != null">  
+	        	product_url=#{productUrl},
+	    	</if>
+			<if test="productPrice != null">  
+	        	product_price=#{productPrice},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -72,14 +80,8 @@
 			<if test="parm.productDescripton != null">
 		     	and product_descripton = #{parm.productDescripton}
 		   	</if>
-			<if test="parm.productUrlClick != null">
-		     	and product_url_click = #{parm.productUrlClick}
-		   	</if>
 			<if test="parm.productStatus != null">
 		     	and product_status = #{parm.productStatus}
-		   	</if>
-			<if test="parm.productUrl != null">
-		     	and product_url = #{parm.productUrl}
 		   	</if>
 			<if test="parm.productCount != null">
 		     	and product_count = #{parm.productCount}
@@ -94,7 +96,19 @@
 		     	and product_type_id = #{parm.productTypeId}
 		   	</if>
 			<if test="parm.productName != null">
-		     	and product_name = #{parm.productName}
+		     	and product_name like  "%"#{parm.productName}"%"
+		   	</if>
+			<if test="parm.productUrlClick != null">
+		     	and product_url_click = #{parm.productUrlClick}
+		   	</if>
+			<if test="parm.shopId != null">
+		     	and shop_id = #{parm.shopId}
+		   	</if>
+			<if test="parm.productUrl != null">
+		     	and product_url = #{parm.productUrl}
+		   	</if>
+			<if test="parm.productPrice != null">
+		     	and product_price = #{parm.productPrice}
 		   	</if>
 </select>
 
@@ -103,14 +117,8 @@
 			<if test="parm.productDescripton != null">
 		     	and product_descripton = #{parm.productDescripton}
 		   	</if>
-			<if test="parm.productUrlClick != null">
-		     	and product_url_click = #{parm.productUrlClick}
-		   	</if>
 			<if test="parm.productStatus != null">
 		     	and product_status = #{parm.productStatus}
-		   	</if>
-			<if test="parm.productUrl != null">
-		     	and product_url = #{parm.productUrl}
 		   	</if>
 			<if test="parm.productCount != null">
 		     	and product_count = #{parm.productCount}
@@ -125,7 +133,19 @@
 		     	and product_type_id = #{parm.productTypeId}
 		   	</if>
 			<if test="parm.productName != null">
-		     	and product_name = #{parm.productName}
+		     	and product_name like  "%"#{parm.productName}"%"
+		   	</if>
+			<if test="parm.productUrlClick != null">
+		     	and product_url_click = #{parm.productUrlClick}
+		   	</if>
+			<if test="parm.shopId != null">
+		     	and shop_id = #{parm.shopId}
+		   	</if>
+			<if test="parm.productUrl != null">
+		     	and product_url = #{parm.productUrl}
+		   	</if>
+			<if test="parm.productPrice != null">
+		     	and product_price = #{parm.productPrice}
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
@@ -137,13 +157,27 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select * from product where 1=1
-		<if test="parm.orderby != null">
-	   		order by ${parm.orderby}
-	   	</if>
-		<if test="parm.start != null">
-			limit #{parm.start},#{parm.limit}
-		</if>
+	select p.id id,p.product_name as productName, p.product_price as productPrice,
+	p.product_rank as productRank, p.product_view as productView,p.product_count as productCount,
+	p.product_status as productStatus,s.shop_title as shopName,concat(pt.type_name_ch,'/',pt.type_name) as productTypeName
+	from product p 
+	LEFT JOIN product_type pt on p.product_type_id=pt.id
+	LEFT JOIN shop s on p.shop_id=s.id
+	<if test="parm.productStatus != null">
+     	and p.product_status = #{parm.productStatus}
+   	</if>
+   	<if test="parm.productName != null">
+     	and product_name like  "%"#{parm.productName}"%"
+   	</if>
+   	<if test="parm.shopId != null">
+    	and p.shop_id = #{parm.shopId}
+  	</if>
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
 </select>
 
 

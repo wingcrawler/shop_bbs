@@ -37,4 +37,18 @@ public class Constants {
     //广告类型
     public static final int AD_TYPE_HDT = 0; //活动图
     public static final int AD_TYPE_GGW = 1; //广告位
+    
+    //产品状态
+    public static final int PRODUCT_ON = 1; //上架
+    public static final int PRODUCT_OFF = 2; //下架
+    public static final int PRODUCT_WAIT = 0; //待审核
+    public static String getProductStatus(int status) {
+		if(status==1){
+			return "已上架";
+		} else if(status==2){
+			return "已下架";
+		} else {
+			return "待审核";
+		}
+	}
 }

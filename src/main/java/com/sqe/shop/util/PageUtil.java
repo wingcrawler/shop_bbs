@@ -9,6 +9,8 @@ import java.util.List;
  */  
 public class PageUtil<E> {  
 
+	//最大查询数
+	private static int MAX_PAGE_SIZE = Integer.MAX_VALUE;
 	//默认每页10条
 	private static int DEFAULT_PAGE_SIZE = 10;
 	//默认第一页
@@ -29,7 +31,7 @@ public class PageUtil<E> {
 
     public PageUtil(int pageNo, Integer pageSize) {
     	if(pageSize==null || pageSize < 0){
-    		pageSize = DEFAULT_PAGE_SIZE;
+    		pageSize = MAX_PAGE_SIZE;
     	} else {
     		this.pageSize = pageSize;
     	}

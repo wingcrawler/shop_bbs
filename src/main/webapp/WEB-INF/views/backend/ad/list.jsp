@@ -79,9 +79,7 @@
 			
 		</div>
 	</div>
-	
-<jsp:include page="../dialog/dialog_delete.jsp"></jsp:include>
-
+<jsp:include page="../dialog/dialog_delete.jsp"></jsp:include>	
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');

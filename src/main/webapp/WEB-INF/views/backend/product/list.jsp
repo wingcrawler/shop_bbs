@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -26,24 +28,36 @@
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
 								<div class="col-sm-3">
-									${t.t_title }:
-									<input type="text" class="form-control input" name="title" value="">
+									${t.t_product_name }:
+									<input type="text" class="form-control input" name="productName" value="">
 								</div>
 								<div class="col-sm-3">
-									${t.t_menu }:
-									<select class="form-control select" name="menuId">
+									${t.t_product_status }:
+									<select class="form-control select" name="productStatus" id="StatusSelect">
+										<option value="">-- ${t.t_select } --</option>
+										<option value="0">${t.t_product_wait }</option>
+										<option value="1">${t.t_product_on }</option>
+										<option value="2">${t.t_product_off }</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									${t.t_select_store }:
+									<select class="form-control select" name="shopId">
 										<option value="-1">-- ${t.t_select } --</option>
-										<option value="1">${t.m_ad_active }</option>
-										<option value="2">${t.m_ad_position }</option>
+										<c:forEach items="${shopList}" var="item">
+										<option value="${item.id}">${item.name}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<div class="col-sm-2">
 									<br>
-									<button class="btn btn-info btn-icon" onclick="search()">
+									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
 										<i class="fa-search"></i>
 										<span>${t.t_search }</span>
 									</button>
 								</div>
+							</div>
+							<div class="form-group">
 							</div>
 						</form>
 					</div>
@@ -57,7 +71,6 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">${t.t_list }</h3>
 						<div class="panel-options">
-							<a href="/backend/product/edit" target="_blank"><i class="fa-plus"></i></a>
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
 					</div>
@@ -66,12 +79,15 @@
 							<thead>
 								<tr>
 									<th width="60" field="index">${t.t_no }</th>
-									<th field="title" url="http://my.blog/blog/detail?id=" parm="id">${t.t_title }</th>
-									<th field="img">${t.t_img }</th>
-									<th field="imgLink">${t.t_img_link }</th>
-									<th field="createTime">${t.t_createtime }</th>
-									<th field="updateTime">${t.t_updatetime }</th>
-									<th field="op" field-role="0"></th>
+									<th field="productName">${t.t_product_name }</th>
+									<th field="shopName">${t.t_shop_name }</th>
+									<th field="productTypeName">${t.t_product_type }</th>
+									<th field="productPrice">${t.t_price }</th>
+									<th field="productCount">${t.t_product_count }</th>
+									<th field="productStatusStr">${t.t_product_status }</th>
+									<th field="productView">${t.t_product_view }</th>
+									<th field="productRank">${t.t_weight }</th>
+									<th field="op" field-role="2,0" width="110"></th>
 								</tr>
 							</thead>
 							<tbody class="middle-align"></tbody>
@@ -84,7 +100,7 @@
 			
 		</div>
 	</div>
-	
+<jsp:include page="../dialog/dialog_delete.jsp"></jsp:include>	
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
@@ -93,10 +109,13 @@ $(function(){
 	
 	$('#datatable').datatable({
 		url_load : '/backend/product/getList',
+		url_edit : '/backend/product/edit',
+		url_remove : '/backend/product/doDelete',
 		backFn : function(p) {
 			// console.log(p);
 		}
 	}); 
+	
 });
 </script>
 </body>

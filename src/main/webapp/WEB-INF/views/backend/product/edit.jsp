@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -26,29 +28,75 @@
 					<div class="panel-body">
 						<form class="form-horizontal form" action="javascript:void(0);">
 					        <div class="form-group">
-					          	<div class="col-sm-6">
+					          	<div class="col-sm-3">
 					          		<input type="hidden" value="${entity.id}" name="id" />
-					          		<p>${t.t_input_title }</p>
-					            	<input class="form-control" type="text" name="title" value="${entity.title}">
+					          		<p>${t.t_product_name }</p>
+					            	<input class="form-control" type="text" readonly="readonly" value="${entity.productName}">
 					          	</div>
-					          	<div class="col-sm-6">
-					          		<p>${t.t_select_menu }</p>
-									<select class="form-control select" name="category">
-										<option value="-1">-- ${t.t_select } --</option>
-										<option value="1">${t.m_ad_active }</option>
-										<option value="2">${t.m_ad_position }</option>
-									</select>
+					          	<div class="col-sm-3">
+					          		<p>${t.t_price }</p>
+					            	<input class="form-control" type="text" readonly="readonly" value="${entity.productPrice}">
+					          	</div>
+					          	<div class="col-sm-3">
+					          		<p>${t.t_weight }</p>
+					            	<input class="form-control" type="text" name="productRank" value="${entity.productRank}">
+					          	</div>
+					          	<div class="col-sm-3">
+					          		<p>${t.t_product_view }</p>
+					            	<input class="form-control" type="text" readonly="readonly" value="${entity.productView}">
 					          	</div>
 					        </div>
 					        <div class="form-group">
-					        	<div class="col-sm-6">
-					          		<p>${t.t_img_link }</p>
-					            	<input class="form-control" type="text" name="imgLink" value="${entity.imgLink}">
+					        	<div class="col-sm-3">
+					          		<p>${t.t_product_status }</p>
+					          		<select class="form-control select" name="productStatus" id="StatusSelect">
+										<option value="">-- ${t.t_select } --</option>
+										<option value="0">${t.t_product_wait }</option>
+										<option value="1">${t.t_product_on }</option>
+										<option value="2">${t.t_product_off }</option>
+									</select>
+					          	</div>
+					          	<div class="col-sm-3">
+					          		<p>${t.t_product_count }</p>
+					            	<input class="form-control" type="text" readonly="readonly" value="${entity.productCount}">
+					          	</div>
+					          	<div class="col-sm-3">
+					          		<p>${t.t_product_type }</p>
+					            	<input class="form-control" type="text" readonly="readonly" value="${entity.typeName}">
+					          	</div>
+					          	<div class="col-sm-3">
+					          		<p>${t.t_shop_name }</p>
+					            	<input class="form-control" type="text" readonly="readonly" value="${entity.shopName}">
 					          	</div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
-					        		<a id="codeSubmit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
+					        		<div class="mail-single-attachments">
+										<h3>
+											<i class="linecons-attach"></i>${t.t_img_list }
+										</h3>
+										<ul class="list-unstyled list-inline">
+										<c:if test="${empty imgList }">
+										No Images
+										</c:if>
+										<c:forEach items="${imgList}" var="item">
+											<li>
+												<a href="#" class="thumb">
+													<img src="${item.imagePath }" class="img-thumbnail">
+												</a>
+												<!-- <a href="#" class="name">
+													IMG_007.jpg
+													<span>14KB</span>
+												</a> -->
+											</li>
+										</c:forEach>
+										</ul>
+									</div>
+					        	</div>
+					        </div>
+					        <div class="form-group">
+					        	<div class="col-sm-12">
+					        		<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
 					    		</div>
 					        </div>
 					     </form>
@@ -65,6 +113,17 @@ $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
 	$('#main-menu li.li').eq(1).addClass('active').addClass('opened');
 	$('#main-menu li.li').eq(1).find('ul li').eq(0).addClass('active');
+	
+	$('#StatusSelect').optionSelect({
+		compare:'${entity.productStatus}',
+		backFn : function(p) {
+		}
+	});
+	
+	$('#submit').click(function(){
+        var parm = $.fn.getFormJson('.form');
+		$.fn.doSave(parm,'/backend/product/doSave','/backend/product/list');
+	});
 });
 </script>
 </body>

@@ -57,6 +57,13 @@
 		action.load(_obj, _args);
 	}
 	
+	/* 搜索 */
+	$.fn.doAutoSearch = function() {
+		var _parm = $.fn.getFormJson('.form');
+		_args.parm = _parm;
+		action.load(_obj, _args);
+	}
+	
 	/* 进入编辑页  */
 	$.fn.edit = function(obj){
 		var url= _args.url_edit + "?id=" + $(obj).attr("opid");
