@@ -69,10 +69,10 @@
 				id : _id
 			},
 			success: function(data) {
-				if (data.errorNo != 200) {
+				if (data.errorNo != 0) {
 					$.commonUtil.showTip(data.errorInfo);
 				} else {
-					$.commonUtil.showTip("删除成功");
+					$.commonUtil.showTip(data.errorInfo);
 					action.load(_obj, _args);
 				}
 			}
@@ -87,10 +87,10 @@
 			dataType : "json",
 			data: _parm,
 			success: function(data) {
-				if (data.errorNo != 200) {
+				if (data.errorNo != 0) {
 					$.commonUtil.showTip(data.errorInfo);
 				} else {
-					$.commonUtil.showTip("提交成功");
+					$.commonUtil.showTip(data.errorInfo);
 					action.load(_obj, _args);
 				}
 			}

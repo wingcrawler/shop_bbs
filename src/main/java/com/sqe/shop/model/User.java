@@ -11,7 +11,7 @@ public class User implements Serializable {
 	private String userStatus;
 	private String userImage;
 	private String userPhone;
-	private Integer id;
+	private Long id;
 	private String userRole;
 	private String userIntroduce;
 	private String username;
@@ -46,10 +46,10 @@ public class User implements Serializable {
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getUserRole() {

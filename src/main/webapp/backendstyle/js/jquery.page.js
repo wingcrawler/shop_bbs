@@ -13,10 +13,10 @@
 			return (function(){
 				obj.empty();
 				if(args.current > 1){
-					obj.append('<a href="javascript:;" class="prevPage" onClick="'+args.fnName+'('+(args.current-1)+')">上一页</a>');
+					obj.append('<a href="javascript:;" class="prevPage" onClick="'+args.fnName+'('+(args.current-1)+')">'+args.prevPage+'</a>');
 				}else{
 					obj.remove('.prevPage');
-					obj.append('<span class="disabled">上一页</span>');
+					obj.append('<span class="disabled">'+args.prevPage+'</span>');
 				}
 				if(args.current != 1 && args.current >= 4 && args.pageCount != 4){
 					obj.append('<a href="javascript:;" class="tcdNumber" onClick="'+args.fnName+'(1)">'+1+'</a>');
@@ -47,10 +47,10 @@
 					obj.append('<a href="javascript:;" class="tcdNumber" onClick="'+args.fnName+'('+args.ageCount+')">'+args.pageCount+'</a>');
 				}
 				if(args.current < args.pageCount){
-					obj.append('<a href="javascript:;" class="nextPage" onClick="'+args.fnName+'('+(args.current+1)+')">下一页</a>');
+					obj.append('<a href="javascript:;" class="nextPage" onClick="'+args.fnName+'('+(args.current+1)+')">'+args.nextPage+'</a>');
 				}else{
 					obj.remove('.nextPage');
-					obj.append('<span class="disabled">下一页</span>');
+					obj.append('<span class="disabled">'+args.nextPage+'</span>');
 				}
 			})();
 		},
@@ -86,6 +86,8 @@
 			pageCount : 10,
 			current : 1,
 			fnName : '',
+			prevPage:'Prev Page',
+			nextPage:'Next Page',
 			backFn : function(){}
 		},options);
 		ms.init(this,args);
