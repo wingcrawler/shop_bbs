@@ -65,7 +65,14 @@
 			</li>
 			<!-- 用户管理 -->
 			<li class="li">
-				<a href="/backend/user/list"><i class="linecons-user"></i><span class="title">${t.m_user }</span></a>
+				<a href="ui-panels.html"> 
+					<i class="linecons-user"></i> 
+					<span class="title">${t.m_user }</span>
+				</a>
+				<ul>
+					<li><a href="/backend/user/list"><span class="title">${t.t_user_list }</span></a></li>
+					<li><a href="/backend/user/import"><span class="title">${t.t_import }</span></a></li>
+				</ul>
 			</li>
 			<!-- 论坛管理 -->
 			<li class="li">

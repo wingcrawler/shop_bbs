@@ -7,6 +7,7 @@
 	<id property="password" column="password" />
 	<id property="userStatus" column="user_status" />
 	<id property="userImage" column="user_image" />
+	<id property="createTime" column="create_time" />
 	<id property="userPhone" column="user_phone" />
 	<id property="userMail" column="user_mail" />
 	<id property="id" column="id" />
@@ -20,9 +21,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into user
-	(user_address,password,user_status,user_image,user_phone,user_mail,user_role,user_introduce,username)
+	(user_address,password,user_status,user_image,create_time,user_phone,user_mail,user_role,user_introduce,username)
 	values
-	(#{userAddress},#{password},#{userStatus},#{userImage},#{userPhone},#{userMail},#{userRole},#{userIntroduce},#{username})
+	(#{userAddress},#{password},#{userStatus},#{userImage},#{createTime},#{userPhone},#{userMail},#{userRole},#{userIntroduce},#{username})
 </insert>
 
 <update id="update">
@@ -39,6 +40,9 @@
 	    	</if>
 			<if test="userImage != null">  
 	        	user_image=#{userImage},
+	    	</if>
+			<if test="createTime != null">  
+	        	create_time=#{createTime},
 	    	</if>
 			<if test="userPhone != null">  
 	        	user_phone=#{userPhone},
@@ -81,6 +85,9 @@
 			<if test="parm.userImage != null">
 		     	and user_image = #{parm.userImage}
 		   	</if>
+			<if test="parm.createTime != null">
+		     	and create_time = #{parm.createTime}
+		   	</if>
 			<if test="parm.userPhone != null">
 		     	and user_phone = #{parm.userPhone}
 		   	</if>
@@ -94,7 +101,7 @@
 		     	and user_introduce = #{parm.userIntroduce}
 		   	</if>
 			<if test="parm.username != null">
-		     	and username = #{parm.username}
+		     	and username like "%"#{parm.username}"%"
 		   	</if>
 </select>
 
@@ -112,6 +119,9 @@
 			<if test="parm.userImage != null">
 		     	and user_image = #{parm.userImage}
 		   	</if>
+			<if test="parm.createTime != null">
+		     	and create_time = #{parm.createTime}
+		   	</if>
 			<if test="parm.userPhone != null">
 		     	and user_phone = #{parm.userPhone}
 		   	</if>
@@ -125,7 +135,7 @@
 		     	and user_introduce = #{parm.userIntroduce}
 		   	</if>
 			<if test="parm.username != null">
-		     	and username = #{parm.username}
+		     	and username like "%"#{parm.username}"%"
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}

@@ -17,6 +17,7 @@ public class Shop extends BaseModel implements Serializable {
 	private String shopTitle;
 	private Long id;
 	private String shopLicenes;
+	private Long userId;
 	
 	public Integer getShopStatus() {
 		return shopStatus;
@@ -65,6 +66,12 @@ public class Shop extends BaseModel implements Serializable {
 	}
 	public void setShopLicenes(String shopLicenes) {
 		this.shopLicenes = shopLicenes;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 	
 	

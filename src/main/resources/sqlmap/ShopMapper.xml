@@ -11,6 +11,7 @@
 	<id property="shopTitle" column="shop_title" />
 	<id property="id" column="id" />
 	<id property="shopLicenes" column="shop_licenes" />
+	<id property="userId" column="user_id" />
 </resultMap>  
 
 <insert id="insert">
@@ -18,9 +19,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into shop
-	(shop_status,create_time,shop_qualifies,shop_description,shop_rank,shop_title,shop_licenes)
+	(shop_status,create_time,shop_qualifies,shop_description,shop_rank,shop_title,shop_licenes,user_id)
 	values
-	(#{shopStatus},#{createTime},#{shopQualifies},#{shopDescription},#{shopRank},#{shopTitle},#{shopLicenes})
+	(#{shopStatus},#{createTime},#{shopQualifies},#{shopDescription},#{shopRank},#{shopTitle},#{shopLicenes},#{userId})
 </insert>
 
 <update id="update">
@@ -46,6 +47,9 @@
 	    	</if>
 			<if test="shopLicenes != null">  
 	        	shop_licenes=#{shopLicenes},
+	    	</if>
+	    	<if test="userId != null">  
+	        	user_id=#{userId},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -82,6 +86,9 @@
 			<if test="parm.shopLicenes != null">
 		     	and shop_licenes = #{parm.shopLicenes}
 		   	</if>
+		   	<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
 </select>
 
 <select id="getBeanListByParm" resultMap="ShopBaseMapper">
@@ -106,6 +113,9 @@
 		   	</if>
 			<if test="parm.shopLicenes != null">
 		     	and shop_licenes = #{parm.shopLicenes}
+		   	</if>
+		   	<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}

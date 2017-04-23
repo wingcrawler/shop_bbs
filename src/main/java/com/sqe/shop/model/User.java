@@ -1,8 +1,11 @@
 package com.sqe.shop.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
-public class User implements Serializable {
+import com.sqe.shop.common.BaseModel;
+
+public class User extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -10,6 +13,7 @@ public class User implements Serializable {
 	private String password;
 	private Integer userStatus;
 	private String userImage;
+	private Date createTime;
 	private String userPhone;
 	private String userMail;
 	private Long id;
@@ -40,6 +44,12 @@ public class User implements Serializable {
 	}
 	public void setUserImage(String userImage) {
 		this.userImage = userImage;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 	public String getUserPhone() {
 		return userPhone;

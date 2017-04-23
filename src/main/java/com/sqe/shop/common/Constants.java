@@ -134,4 +134,20 @@ public class Constants {
 			return "未读";
 		}
 	}
+    
+    //用户状态
+    public static final int USER_OFF = 0; //屏蔽
+    public static final int USER_ON = 1; //正常
+    public static String getUserStatus(Integer value) {
+    	if(value==null){
+    		return "未知";
+    	}
+		if(value==0){
+			return "已屏蔽";
+		} else if(value==1){
+			return "正常";
+		} else {
+			return "未知";
+		}
+	}
 }

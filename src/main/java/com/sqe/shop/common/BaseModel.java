@@ -6,7 +6,7 @@ public class BaseModel {
 	private String statusName;
 	private String shopName;
 	private String createTimeStr;
-	private String username;
+	private String userName;
 	private String title;
 
 	public String getTypeName() {
@@ -50,12 +50,12 @@ public class BaseModel {
 		this.title = title;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

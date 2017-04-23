@@ -26,20 +26,16 @@
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
 								<div class="col-sm-3">
-									${t.t_title }:
-									<input type="text" class="form-control input" name="title" value="">
+									${t.t_username }
+									<input type="text" class="form-control input" name="username" value="">
 								</div>
 								<div class="col-sm-3">
-									${t.t_menu }:
-									<select class="form-control select" name="menuId">
-										<option value="-1">-- ${t.t_select } --</option>
-										<option value="1">${t.m_ad_active }</option>
-										<option value="2">${t.m_ad_position }</option>
-									</select>
+									${t.t_mobile }
+									<input type="text" class="form-control input" name="userPhone" value="">
 								</div>
 								<div class="col-sm-2">
 									<br>
-									<button class="btn btn-info btn-icon" onclick="search()">
+									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
 										<i class="fa-search"></i>
 										<span>${t.t_search }</span>
 									</button>
@@ -57,7 +53,6 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">${t.t_list }</h3>
 						<div class="panel-options">
-							<a href="/backend/ad/edit" target="_blank"><i class="fa-plus"></i></a>
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
 					</div>
@@ -66,12 +61,12 @@
 							<thead>
 								<tr>
 									<th width="60" field="index">${t.t_no }</th>
-									<th field="title" url="http://my.blog/blog/detail?id=" parm="id">${t.t_title }</th>
-									<th field="img">${t.t_img }</th>
-									<th field="imgLink">${t.t_img_link }</th>
-									<th field="createTime">${t.t_createtime }</th>
-									<th field="updateTime">${t.t_updatetime }</th>
-									<th field="op" field-role="0"></th>
+									<th field="username" url="/backend/user/detail?id=" parm="id">${t.t_title }</th>
+									<th field="userPhone">${t.t_mobile }</th>
+									<th field="userEmail">${t.t_email }</th>
+									<th field="statusName">${t.t_status }</th>
+									<th field="createTimeStr">${t.t_createtime }</th>
+									<th field="op" field-role="0" width="80"></th>
 								</tr>
 							</thead>
 							<tbody class="middle-align"></tbody>
@@ -85,6 +80,7 @@
 		</div>
 	</div>
 	
+<jsp:include page="../dialog/dialog_delete.jsp"></jsp:include>
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
@@ -92,7 +88,8 @@ $(function(){
 	$('#main-menu li.li').eq(5).find('ul li').eq(0).addClass('active');
 	
 	$('#datatable').datatable({
-		url_load : '/backend/ad/getList',
+		url_load : '/backend/user/getList',
+		url_remove : '/backend/inform/doDelete',
 		backFn : function(p) {
 			// console.log(p);
 		}

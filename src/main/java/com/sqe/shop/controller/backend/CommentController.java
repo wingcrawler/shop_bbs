@@ -54,7 +54,7 @@ public class CommentController extends BaseController {
 			if(entity.getUserId()>0){
 				News news = newsService.getById(entity.getNewsId());
 				User user = userService.getById(entity.getUserId());
-				entity.setUsername(user.getUsername());
+				entity.setUserName(user.getUsername());
 				entity.setTitle(news.getTitle());
 				model.addObject("entity", entity);	
 			}
