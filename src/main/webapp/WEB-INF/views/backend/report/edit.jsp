@@ -5,12 +5,8 @@
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.m_report_edit }</title>
-	<script src="/ue/ueditor.config.js"></script>
-	<script src="/ue/ueditor.all.js"></script>
-	<!-- <script type="text/javascript" charset="utf-8" src="/ue/lang/en/en.js"></script> -->
-	<script type="text/javascript" charset="utf-8" src="/ue/lang/zh-cn/zh-cn.js"></script>
-	<link href="/ue/themes/default/css/ueditor.css" rel="stylesheet">
+	<title>${t.title_report_edit }</title>
+	
 </head>
 <body class="page-body">
 	<div class="page-container">
@@ -20,73 +16,63 @@
 			<!-- 头部栏 -->
 			<jsp:include page="../include/header.jsp"></jsp:include>	
 			
-			<!-- 编辑区 -->
+			<!-- 内容区 -->
 			<div class="row">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a><i class="fa-location-arrow"> 编辑新闻资讯</i></a> 
+							<a><i class="fa-location-arrow"> ${t.title_report_edit }</i></a> 
 						</h3>
 					</div>
 					<div class="panel-body">
 						<form class="form-horizontal form" action="javascript:void(0);">
 					        <div class="form-group">
 					          	<div class="col-sm-6">
-					          		<input type="hidden" value="${code.id}" name="id" />
-					          		<p>输入标题</p>
-					            	<input class="form-control" type="text" name="item" value="${code.item}" placeholder="输入标题">
+					          		<input type="hidden" value="${entity.id}" name="id" />
+					          		<p>${t.t_title }</p>
+					            	<input class="form-control" type="text" readonly="readonly"  value="${entity.informTitle}">
 					          	</div>
-					          	<div class="col-sm-6">
-					          		<p>选择是否是节点</p>
-										<input type="radio" name="isNode" class="cbr" value="node">
-										节点
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="radio" name="isNode" class="cbr" value="notnode">
-										非节点
+					        	<div class="col-sm-3">
+					          		<p>${t.t_status }</p>
+					          		<select class="form-control select" id="infromStatus" name="infromStatus">
+										<%-- <option value="-1">-- ${t.t_select } --</option> --%>
+										<option value="0">${t.t_undone }</option>
+										<option value="1">${t.t_done }</option>
+									</select>
 					          	</div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-3">
-					        		<p>选择主菜单</p>
-					        		<select class="form-control menuSelect" name="menuId" onchange="loadMenus()">
-					        			<option value="0">-- 选择主菜单 --</option>
-					        		</select>
+					        		<p>${t.t_report }</p>
+					            	<input class="form-control" type="text" readonly="readonly" value="${entity.reporter}">
+					    		</div>
+					        	<div class="col-sm-3">
+					        		<p>${t.t_reported }</p>
+					        		<input class="form-control" type="text" readonly="readonly" value="${entity.beReported}">
 					    		</div>
 					        </div>
 					        <div class="form-group">
+					        	<div class="col-sm-12">
+					        		<p>${t.t_report_content }</p>
+					        		<p>${entity.informContext}</p>
+					    		</div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
-					        		<%-- <b style="display:none;">${code.content}</b> --%>
-									<textarea id="myEditor">${code.content}</textarea>
-									<script type="text/javascript">
-										var ue = UE.getEditor('myEditor',{
-											toolbars: [
-									           ['fullscreen', 'source', 'undo', 'redo', 'bold','pasteplain','removeformat','link','unlink','cleardoc',
-									           'simpleupload','insertimage','imagecenter','justifyleft','justifyright','justifycenter','justifyjustify',
-									           'insertrow', 'insertcol', 'mergeright','mergedown', 'deleterow', 'deletecol', 'splittorows', 'splittocols', 
-									           'splittocells', 'deletecaption','inserttitle', 'mergecells', 'deletetable',  
-									           'insertparagraphbeforetable','edittable','edittd','inserttable','autotypeset','customstyle',
-									           'spechars','fontfamily','fontsize']
-									       ],
-									       initialFrameHeight:500,
-									       initialFrameWidth:'100%'
-									       /* autoHeightEnabled: true,
-									       autoFloatEnabled: true */
-										});
-									</script>
+					        		<p>${t.t_remark }</p>
+									<textarea id="myEditor" name="informRemark" cols="80" rows="6">${entity.informRemark }</textarea>
 					        	</div> 	
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
-					        		<a id="codeSubmit" class="btn btn-info" href="javascript:void(0);">提交</a>
+					        		<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
 					    		</div>
 					        </div>
 					     </form>
 					</div>
 				</div>
 			</div>
-			<!-- 编辑区结束 -->
+			<!-- 内容区结束 -->
 			
 		</div>
 	</div>
@@ -94,8 +80,20 @@
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(4).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(4).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(7).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(7).find('ul li').eq(0).addClass('active');
+	
+	$('#infromStatus').optionSelect({
+		compare:'${entity.status}',
+		backFn : function(p) {
+		}
+	});
+	
+	$('#submit').click(function(){
+	    var parm = $.fn.getFormJson('.form');
+	    var id = ${entity.id};
+		$.fn.doSave(parm,'/backend/inform/doSave','/backend/inform/list');
+	});	
 });
 </script>
 </body>

@@ -82,7 +82,7 @@
 			</li>
 			<!-- 举报信息 -->
 			<li class="li">
-				<a href="/backend/report/list"><i class="linecons-star"></i><span class="title">${t.m_report }</span></a>
+				<a href="/backend/inform/list"><i class="linecons-star"></i><span class="title">${t.m_report }</span></a>
 			</li>
 		</ul>
 

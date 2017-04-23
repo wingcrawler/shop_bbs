@@ -59,6 +59,17 @@
 	SELECT * FROM inform WHERE id=#{id} 
 </select>
 
+<select id="getDetailById" resultType="HashMap">
+	select i.inform_title as informTitle, i.inform_context as informContext,
+	i.id ,i.infrom_status as `status`, u1.username as reporter,u2.username as beReported, i.inform_remark as informRemark
+	from inform i
+	LEFT JOIN `user` u1 on i.user_post_id=u1.id
+	LEFT JOIN `user` u2 on i.user_reported_id=u2.id 
+	WHERE i.id=#{id} 
+</select>
+
+
+
 <select id="countByParm" resultType="integer">
 	select count(*) from inform  where 1=1 
 			<if test="parm.infromDate != null">
@@ -68,7 +79,7 @@
 		     	and inform_remark = #{parm.informRemark}
 		   	</if>
 			<if test="parm.informTitle != null">
-		     	and inform_title = #{parm.informTitle}
+		     	and inform_title like "%"#{parm.informTitle}"%"
 		   	</if>
 			<if test="parm.informContext != null">
 		     	and inform_context = #{parm.informContext}
@@ -93,7 +104,7 @@
 		     	and inform_remark = #{parm.informRemark}
 		   	</if>
 			<if test="parm.informTitle != null">
-		     	and inform_title = #{parm.informTitle}
+		     	and inform_title like "%"#{parm.informTitle}"%"
 		   	</if>
 			<if test="parm.informContext != null">
 		     	and inform_context = #{parm.informContext}
@@ -117,13 +128,24 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select * from inform where 1=1
-		<if test="parm.orderby != null">
-	   		order by ${parm.orderby}
-	   	</if>
-		<if test="parm.start != null">
-			limit #{parm.start},#{parm.limit}
-		</if>
+	select i.inform_title as informTitle, i.inform_context as informContext,i.infrom_date as date,
+	i.id,i.infrom_status as `status`, u1.username as reporter,u2.username as beReported, i.inform_remark as informRemark
+	from inform i
+	LEFT JOIN `user` u1 on i.user_post_id=u1.id
+	LEFT JOIN `user` u2 on i.user_reported_id=u2.id 
+	where 1=1
+	<if test="parm.informTitle != null">
+     	and inform_title like "%"#{parm.informTitle}"%"
+   	</if>
+   	<if test="parm.infromStatus != null">
+    	and infrom_status = #{parm.infromStatus}
+  	</if>
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
 </select>
 
 

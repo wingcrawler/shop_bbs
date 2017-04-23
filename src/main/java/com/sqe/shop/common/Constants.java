@@ -86,4 +86,20 @@ public class Constants {
 			return "未知";
 		}
 	}
+    
+    //举报消息状态
+    public static final int INFORM_TODO = 0; //待处理
+    public static final int INFORM_DONE = 1; //已处理
+    public static String getInformStatus(Integer value) {
+    	if(value==null){
+    		return "待处理";
+    	}
+		if(value==0){
+			return "待处理";
+		} else if(value==1){
+			return "已处理";
+		} else {
+			return "待处理";
+		}
+	}
 }

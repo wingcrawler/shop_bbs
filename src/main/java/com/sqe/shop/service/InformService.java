@@ -1,15 +1,19 @@
 package com.sqe.shop.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.InformMapper;
 import com.sqe.shop.model.Inform;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 
 @Component  
@@ -37,12 +41,13 @@ public class InformService extends AdapterService implements BaseService {
 	public int countByParm(Inform inform) {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(inform!=null){
-		
+			if(StringUtils.isNotBlank(inform.getInformTitle())){
+				parm.put("informTitle", inform.getInformTitle());	
+			}
+			if(inform.getInfromStatus()!=null && inform.getInfromStatus()>=0){
+				parm.put("infromStatus", inform.getInfromStatus());	
+			}
 		}
-		return informMapper.countByParm(parm);
-	}
-	
-	public int countByParm(Map<String, Object> parm) {
 		return informMapper.countByParm(parm);
 	}
 	
@@ -63,14 +68,35 @@ public class InformService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getMapListByParm(Inform inform,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = new HashMap<String, Object>();
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		parm.put("orderby", "id desc");
+		
+		if(inform!=null){
+			if(StringUtils.isNotBlank(inform.getInformTitle())){
+				parm.put("informTitle", inform.getInformTitle());	
+			}
+			if(inform.getInfromStatus()!=null && inform.getInfromStatus()>=0){
+				parm.put("infromStatus", inform.getInfromStatus());	
+			}
+		}
+		
 		int count = informMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
-			List<Map<String, Object>> list = informMapper.getMapListByParm(parm);
-			pageUtil.setList(list);
+			list = informMapper.getMapListByParm(parm);
+			for(Map<String, Object> map : list){
+				String statusStr = map.get("status")==null?"0":map.get("status").toString();
+				map.put("statusName", Constants.getInformStatus(Integer.valueOf(statusStr)));
+				Date date = (Date) map.get("date");
+				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
+			}
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -81,5 +107,11 @@ public class InformService extends AdapterService implements BaseService {
 			informMapper.insert(inform);
 		}
 	}
+
+	public Map<String, Object> getDetailById(Long id) {
+		Map<String, Object> detail = informMapper.getDetailById(id);
+		return detail;
+	}
+
 
 }

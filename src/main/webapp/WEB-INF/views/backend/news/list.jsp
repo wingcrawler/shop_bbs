@@ -27,7 +27,7 @@
 							<div class="form-group">
 								<div class="col-sm-3">
 									${t.t_title }:
-									<input type="text" class="form-control input" name="newsTitle" value="" placeholder="${t.t_input_title }">
+									<input type="text" class="form-control input" name="newsTitle" value="">
 								</div>
 								<div class="col-sm-2">
 									<br>

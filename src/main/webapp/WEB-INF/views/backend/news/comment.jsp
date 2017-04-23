@@ -36,11 +36,11 @@
 					          		<input type="hidden" value="${entity.id}" name="id" />
 					          		<input type="hidden" value="${entity.newsId}" name="newsId" />
 					          		<p>${t.t_title }</p>
-					            	<input class="form-control" type="text" readonly="readonly" value="${entity.title}">
+					            	<input class="form-control" type="text"   value="${entity.title}">
 					          	</div>
 					        	<div class="col-sm-3">
 					          		<p>${t.t_status }</p>
-					          		<select class="form-control select" name="status" id="commentStatus">
+					          		<select class="form-control select" readonly="readonly" id="commentStatus">
 										<%-- <option value="-1">-- ${t.t_select } --</option> --%>
 										<option value="0">${t.t_off }</option>
 										<option value="1">${t.t_on }</option>
