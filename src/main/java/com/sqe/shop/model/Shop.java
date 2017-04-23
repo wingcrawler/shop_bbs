@@ -1,12 +1,16 @@
 package com.sqe.shop.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
-public class Shop implements Serializable {
+import com.sqe.shop.common.BaseModel;
+
+public class Shop extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer shopStatus;
+	private Date createTime;
 	private String shopQualifies;
 	private String shopDescription;
 	private Integer shopRank;
@@ -19,6 +23,12 @@ public class Shop implements Serializable {
 	}
 	public void setShopStatus(Integer shopStatus) {
 		this.shopStatus = shopStatus;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 	public String getShopQualifies() {
 		return shopQualifies;

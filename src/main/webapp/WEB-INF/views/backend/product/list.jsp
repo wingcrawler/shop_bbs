@@ -45,7 +45,7 @@
 									<select class="form-control select" name="shopId">
 										<option value="-1">-- ${t.t_select } --</option>
 										<c:forEach items="${shopList}" var="item">
-										<option value="${item.id}">${item.name}</option>
+										<option value="${item.id}">${item.shopTitle}</option>
 										</c:forEach>
 									</select>
 								</div>

@@ -120,6 +120,13 @@
 		});
 	}
 	
+	/* 搜索 */
+	$.fn.removeUrlLoadArgs = function() {
+		debugger;
+		var lastIndex =_args.url_load.indexOf('?'); 
+		_args.url_load = _args.url_load.substring(0,lastIndex);
+	}
+	
 	/* 含图片的表单提交 */
 	$.fn.ajaxSubmit = function(_submitUrl, _jumpUrl) {
 		$(".form").ajaxSubmit({  
@@ -185,7 +192,7 @@
 							if (field == 'index') {
 								html += '<td>' + (i + 1) + '</td>';
 							}else if (field == 'op') {
-								//操作 : 0:删除; 1:添加; 2:编辑; 3:查看; 4:上移; 5:下移;
+								//操作 : 0:删除; 1:添加; 2:编辑; 3:查看; 4:上移; 5:下移;6:标记为已读;
 								var opHtml = '';
 								var field_role =  fields.eq(index).attr("field-role");//获取当前列op字段的field-role值
 								if (field_role.indexOf('1') >= 0) {										
@@ -195,13 +202,18 @@
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="$.fn.edit(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-edit"></i></a>';
 								}
 								if (field_role.indexOf('3') >= 0) {
-									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="viewDetail(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-eye"></i></a>';
+									if(item.status==0){
+										opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="viewDetail(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-eye"></i></a>';
+									}
 								}
 								if (field_role.indexOf('4') >= 0) {
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="moveUp(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-up"></i></a>';
 								}
 								if (field_role.indexOf('5') >= 0) {
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="moveDown(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-down"></i></a>';
+								}
+								if (field_role.indexOf('6') >= 0) {
+									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="doRead(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-toggle-off"></i></a>';										
 								}
 								if (field_role.indexOf('0') >= 0) {
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="$.fn.showDeleteDialog(this);" class="btn btn-danger btn-single btn-sm"><i class="fa-minus"></i></a>';

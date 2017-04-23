@@ -111,8 +111,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(1).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(1).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(2).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(2).find('ul li').eq(0).addClass('active');
 	
 	$('#StatusSelect').optionSelect({
 		compare:'${entity.productStatus}',

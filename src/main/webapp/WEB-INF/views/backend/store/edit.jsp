@@ -5,7 +5,8 @@
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.title_product_edit }</title>
+	<title>${t.t_store_edit }</title>
+	
 </head>
 <body class="page-body">
 	<div class="page-container">
@@ -15,12 +16,12 @@
 			<!-- 头部栏 -->
 			<jsp:include page="../include/header.jsp"></jsp:include>	
 			
-			<!-- 编辑区 -->
+			<!-- 内容区 -->
 			<div class="row">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a><i class="fa-location-arrow"> ${t.title_ad_edit }</i></a> 
+							<a><i class="fa-location-arrow"> ${t.t_store_edit }</i></a> 
 						</h3>
 					</div>
 					<div class="panel-body">
@@ -28,31 +29,31 @@
 					        <div class="form-group">
 					          	<div class="col-sm-6">
 					          		<input type="hidden" value="${entity.id}" name="id" />
-					          		<p>${t.t_weight }</p>
-					            	<input class="form-control" type="text" name="typeRank" value="${entity.typeRank}">
+					          		<p>${t.t_title }</p>
+					            	<input class="form-control" type="text" name="shopTitle"  value="${entity.shopTitle}">
 					          	</div>
-					        </div>
-					        <div class="form-group">
-					          	<div class="col-sm-6">
-					          		<p>${t.t_type_name }(${t.t_zh })</p>
-					            	<input class="form-control" type="text" name="typeNameCh" value="${entity.typeNameCh}">
+					        	<div class="col-sm-3">
+					          		<p>${t.t_status }</p>
+					          		<select class="form-control select" id="shopStatus" name="shopStatus">
+										<option value="0">${t.t_product_wait }</option>
+										<option value="1">${t.t_on }</option>
+									</select>
 					          	</div>
-					          	<div class="col-sm-6">
-					          		<p>${t.t_type_name }(${t.t_en })</p>
-					            	<input class="form-control" type="text" name="typeName" value="${entity.typeName}">
-					          	</div>
-					        </div>
-					        <div class="form-group">
-					        	<div class="col-sm-12">
-					          		<p>${t.t_desc }(${t.t_zh })</p>
-					            	<input class="form-control" type="text" name="typeDescriptionCh" value="${entity.typeDescriptionCh}">
-					          	</div>
+					          	<div class="col-sm-3">
+					        		<p>${t.t_weight }</p>
+					            	<input class="form-control" type="text" name="shopRank" value="${entity.shopRank}">
+					    		</div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
-					          		<p>${t.t_desc }(${t.t_en })</p>
-					            	<input class="form-control" type="text" name="typeDescription" value="${entity.typeDescription}">
-					          	</div>
+					        		<p>${t.t_desc }</p>
+					        		<textarea id="myEditor" name="shopDescription" cols="80" rows="6">${entity.shopDescription }</textarea>
+					    		</div>
+					        </div>
+					        <div class="form-group">
+					        	<div class="col-sm-12">
+					        		上传
+					    		</div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
@@ -63,7 +64,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- 编辑区结束 -->
+			<!-- 内容区结束 -->
 			
 		</div>
 	</div>
@@ -71,15 +72,20 @@
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(2).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(2).find('ul li').eq(1).addClass('active');
+	$('#main-menu li.li').eq(4).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(4).find('ul li').eq(0).addClass('active');
+	
+	$('#shopStatus').optionSelect({
+		compare:'${entity.shopStatus}',
+		backFn : function(p) {
+		}
+	});
 	
 	$('#submit').click(function(){
-        var parm = $.fn.getFormJson('.form');
-		$.fn.doSave(parm,'/backend/cate/doEdit','/backend/cate/list');
-	});
+	    var parm = $.fn.getFormJson('.form');
+		$.fn.doSave(parm,'/backend/shop/doSave','/backend/shop/list');
+	});	
 });
-
 </script>
 </body>
 </html>

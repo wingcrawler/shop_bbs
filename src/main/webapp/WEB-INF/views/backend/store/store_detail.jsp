@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -20,30 +22,41 @@
 			<div class="row">
 				<div class="col-sm-12 panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">搜索框</h3>
+						<h3 class="panel-title">${t.search_box }</h3>
 					</div>
 					<div class="panel-body">
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
-								<div class="col-sm-3">
-									标题:
-									<input type="text" class="form-control input" name="title" value="" placeholder="输入标题">
-								</div>
-								<div class="col-sm-3">
-									菜单：
-									<select class="form-control select" name="menuId">
-										<option value="-1">-- 选择菜单 --</option>
-										<option value="1">item1</option>
-										<option value="2">item2</option>
+								<c:if test="${pageflag==1 }">
+								<div class="col-sm-6">
+									${t.t_select_store }:
+									<select class="form-control select" name="shopId" id="shopId">
+										<option value="-1">-- ${t.t_select } --</option>
+										<c:forEach items="${shopList}" var="item">
+										<option value="${item.id}">${item.shopTitle}</option>
+										</c:forEach>
 									</select>
 								</div>
+								</c:if>
+								<c:if test="${pageflag==2 }">
+								<div class="col-sm-2">
+									${t.t_select }${t.t_status }:
+									<select class="form-control select" name="messageStatus" id="messageStatus">
+										<option value="-1">-- ${t.t_select } --</option>
+										<option value="0">${t.t_unreaded }</option>
+										<option value="1">${t.t_readed }</option>
+									</select>				
+								</div>				
+								</c:if>
 								<div class="col-sm-2">
 									<br>
-									<button class="btn btn-info btn-icon" onclick="search()">
+									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
 										<i class="fa-search"></i>
-										<span>搜索</span>
+										<span>${t.t_search }</span>
 									</button>
 								</div>
+							</div>
+							<div class="form-group">
 							</div>
 						</form>
 					</div>
@@ -51,57 +64,42 @@
 			</div>
 			<!-- 搜索区结束 -->
 			
-			<!-- 列表区 -->
 			<div class="row">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">列表</h3>
-						<div class="panel-options">
-							<a href="/backend/report/edit" target="_blank"><i class="fa-plus"></i></a>
-							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
+				<div class="col-sm-12">
+					<ul class="nav nav-tabs">
+						<li class="<c:if test="${pageflag==1 }">active</c:if>">
+							<a href="/backend/shop/product?id=${shopId }">
+								<span class="hidden-xs">${t.t_store_product }</span>
+							</a>
+						</li>
+						<li class="<c:if test="${pageflag==2 }">active</c:if>">
+							<a href="/backend/shop/msg?id=${shopId }">
+								<span class="hidden-xs">${t.t_store_msg }</span>
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active">
+							<c:if test="${pageflag==1 }">
+								<jsp:include page="store_product_verify.jsp"></jsp:include>
+							</c:if>
+							<c:if test="${pageflag==2 }">
+								<jsp:include page="store_msg.jsp"></jsp:include>
+							</c:if>
 						</div>
-					</div>
-					<div class="panel-body">
-						<table class="table table-bordered table-striped" id="datatable">
-							<thead>
-								<tr>
-									<th width="55" field="index">编号</th>
-									<th field="title" url="http://my.blog/blog/detail?id=" parm="id">标题</th>
-									<th field="username">用户名</th>
-									<th field="menuName">菜单</th>
-									<th field="click">点击</th>
-									<th field="createTime">创建时间</th>
-									<th field="updateTime">更新时间</th>
-									<th field="op" field-role="0"></th>
-								</tr>
-							</thead>
-							<tbody class="middle-align">
-								<tr>
-									<td>1</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td><a class="btn btn-info" href="/backend/news/edit">编辑</a></td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="pagebar"></div>
-					</div>
+					</div>			
 				</div>
 			</div>
-			<!-- 列表区结束 -->
 			
 		</div>
 	</div>
 	
+<jsp:include page="../dialog/dialog_delete.jsp"></jsp:include>
 <script type="text/javascript">
-$(function(){
-	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(4).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(4).find('ul li').eq(1).addClass('active');
+$('#shopId').optionSelect({
+	compare:'${shopId}',
+	backFn : function(p) {
+	}
 });
 </script>
 </body>

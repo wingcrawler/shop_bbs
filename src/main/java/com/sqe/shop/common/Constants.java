@@ -102,4 +102,36 @@ public class Constants {
 			return "待处理";
 		}
 	}
+    
+    //店家状态
+    public static final int STORE_OFF = 0; //待审核
+    public static final int STORE_ON = 1; //正常
+    public static String getStoreStatus(Integer value) {
+    	if(value==null){
+    		return "待审核";
+    	}
+		if(value==0){
+			return "待审核";
+		} else if(value==1){
+			return "正常";
+		} else {
+			return "待审核";
+		}
+	}
+    
+    //留言状态
+    public static final int MSG_OFF = 0; //未读
+    public static final int MSG_ON = 1; //已读
+    public static String getMsgStatus(Integer value) {
+    	if(value==null){
+    		return "未读";
+    	}
+		if(value==0){
+			return "未读";
+		} else if(value==1){
+			return "已读";
+		} else {
+			return "未读";
+		}
+	}
 }

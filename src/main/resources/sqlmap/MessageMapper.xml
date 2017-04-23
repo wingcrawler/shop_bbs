@@ -96,5 +96,18 @@
 		</if>
 </select>
 
+<select id="getAdminMessageListByParm" parameterType="HashMap" resultType="HashMap">
+	select m.post_id as postId, m.message_status as `status`, m.message_context as messageContext ,
+	m.id, u.username, DATE_FORMAT(m.create_time,'%Y-%m-%d %H:%i:%s')  as createTimeStr
+	from  message m
+	LEFT JOIN `user` u on m.post_id=u.id
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
+</select>
+
 
 </mapper>

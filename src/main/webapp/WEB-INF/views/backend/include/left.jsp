@@ -58,10 +58,9 @@
 					<span class="title">${t.m_store }</span>
 				</a>
 				<ul>
-					<li><a href="/backend/store/list"><span class="title">${t.m_store_list }</span></a></li>
-					<li><a href="/backend/store/detail"><span class="title">${t.m_store_detail }</span></a></li>
-					<li><a href="/backend/store/productVerify"><span class="title">${t.m_store_product }</span></a></li>
-					<li><a href="/backend/store/msg"><span class="title">${t.m_store_msg }</span></a></li>
+					<li><a href="/backend/shop/list"><span class="title">${t.m_store_list }</span></a></li>
+					<li><a href="/backend/shop/product"><span class="title">${t.m_store_product }</span></a></li>
+					<li><a href="/backend/shop/msg"><span class="title">${t.m_store_msg }</span></a></li>
 				</ul>
 			</li>
 			<!-- 用户管理 -->

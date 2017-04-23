@@ -31,7 +31,7 @@ public class PageUtil<E> {
 
     public PageUtil(int pageNo, Integer pageSize) {
     	if(pageSize==null || pageSize < 0){
-    		pageSize = MAX_PAGE_SIZE;
+    		this.pageSize = MAX_PAGE_SIZE;
     	} else {
     		this.pageSize = pageSize;
     	}
