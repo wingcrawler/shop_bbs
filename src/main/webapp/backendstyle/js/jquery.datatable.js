@@ -120,6 +120,24 @@
 		});
 	}
 	
+	/* 保存并刷新  */
+	$.fn.doSaveAndReload = function(_parm, _url) {
+		$.ajax({
+			type: "POST",
+			url: _url,
+			dataType : "json",
+			data: _parm,
+			success: function(data) {
+				if (data.errorNo != 200) {
+					$.commonUtil.showTip(data.errorInfo);
+				} else {
+					$.commonUtil.showTip(data.errorInfo);
+					action.load(_obj, _args);
+				}
+			}
+		});
+	}
+	
 	/* 搜索 */
 	$.fn.removeUrlLoadArgs = function() {
 		debugger;
@@ -194,28 +212,32 @@
 							}else if (field == 'op') {
 								//操作 : 0:删除; 1:添加; 2:编辑; 3:查看; 4:上移; 5:下移;6:标记为已读;
 								var opHtml = '';
+								debugger;
 								var field_role =  fields.eq(index).attr("field-role");//获取当前列op字段的field-role值
-								if (field_role.indexOf('1') >= 0) {										
+								if (field_role==1) {										
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="add(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-plus"></i></a>';
 								}
-								if (field_role.indexOf('2') >= 0) {
+								if (field_role==2) {
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="$.fn.edit(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-edit"></i></a>';
 								}
-								if (field_role.indexOf('3') >= 0) {
+								if (field_role==201) {
+									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="edit(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-edit"></i></a>';
+								}
+								if (field_role==3) {
 									if(item.status==0){
 										opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="viewDetail(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-eye"></i></a>';
 									}
 								}
-								if (field_role.indexOf('4') >= 0) {
+								if (field_role==4) {
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="moveUp(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-up"></i></a>';
 								}
-								if (field_role.indexOf('5') >= 0) {
+								if (field_role==5) {
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="moveDown(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-chevron-down"></i></a>';
 								}
-								if (field_role.indexOf('6') >= 0) {
+								if (field_role==6) {
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="doRead(this);" class="btn btn-secondary btn-single btn-sm"><i class="fa-toggle-off"></i></a>';										
 								}
-								if (field_role.indexOf('0') >= 0) {
+								if (field_role==0) {
 									opHtml += '<a href="javascript:;" index="'+i+'" opid="'+item.id+'" onclick="$.fn.showDeleteDialog(this);" class="btn btn-danger btn-single btn-sm"><i class="fa-minus"></i></a>';
 								}
 								text = opHtml;

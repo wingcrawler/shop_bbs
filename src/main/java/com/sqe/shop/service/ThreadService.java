@@ -35,24 +35,16 @@ public class ThreadService extends AdapterService implements BaseService {
 	}
 	
 	public int countByParm(Thread thread) {
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(thread!=null){
-		
-		}
-		return threadMapper.countByParm(parm);
-	}
-	
-	public int countByParm(Map<String, Object> parm) {
+		Map<String, Object> parm = queryParm(thread);
 		return threadMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Thread> getBeanListByParm(Thread thread, int pageNo, Integer pageSize) {
 		PageUtil<Thread> pageUtil = new PageUtil<Thread>(pageNo, pageSize);
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(thread!=null){
-			parm.put("start", pageUtil.getStartRow());
-			parm.put("limit", pageUtil.getPageSize());
-		}
+		Map<String, Object> parm = queryParm(thread);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		
 		int count = threadMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		List<Thread> list = new ArrayList<Thread>();
@@ -63,14 +55,16 @@ public class ThreadService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getMapListByParm(Thread thread,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(thread);
 		int count = threadMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
-			List<Map<String, Object>> list = threadMapper.getMapListByParm(parm);
-			pageUtil.setList(list);
+			list = threadMapper.getMapListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -80,6 +74,15 @@ public class ThreadService extends AdapterService implements BaseService {
 		} else {
 			threadMapper.insert(thread);
 		}
+	}
+	
+	private Map<String, Object> queryParm(Thread thread) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		if(thread!=null){
+			
+			parm.put("orderby", "id desc" );
+		}
+		return parm;
 	}
 
 }

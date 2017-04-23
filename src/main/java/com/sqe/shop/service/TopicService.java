@@ -35,24 +35,16 @@ public class TopicService extends AdapterService implements BaseService {
 	}
 	
 	public int countByParm(Topic topic) {
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(topic!=null){
-		
-		}
-		return topicMapper.countByParm(parm);
-	}
-	
-	public int countByParm(Map<String, Object> parm) {
+		Map<String, Object> parm = queryParm(topic);
 		return topicMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Topic> getBeanListByParm(Topic topic, int pageNo, Integer pageSize) {
 		PageUtil<Topic> pageUtil = new PageUtil<Topic>(pageNo, pageSize);
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(topic!=null){
-			parm.put("start", pageUtil.getStartRow());
-			parm.put("limit", pageUtil.getPageSize());
-		}
+		Map<String, Object> parm = queryParm(topic);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		
 		int count = topicMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		List<Topic> list = new ArrayList<Topic>();
@@ -63,14 +55,16 @@ public class TopicService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getMapListByParm(Topic topic,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(topic);
 		int count = topicMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
-			List<Map<String, Object>> list = topicMapper.getMapListByParm(parm);
-			pageUtil.setList(list);
+			list = topicMapper.getMapListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -80,6 +74,15 @@ public class TopicService extends AdapterService implements BaseService {
 		} else {
 			topicMapper.insert(topic);
 		}
+	}
+	
+	private Map<String, Object> queryParm(Topic topic) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		if(topic!=null){
+			
+			parm.put("orderby", "id desc" );
+		}
+		return parm;
 	}
 
 }

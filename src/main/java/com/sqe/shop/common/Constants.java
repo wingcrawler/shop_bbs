@@ -150,4 +150,20 @@ public class Constants {
 			return "未知";
 		}
 	}
+    
+    //版块状态
+    public static final int SECTION_OFF = 0; //关闭
+    public static final int SECTION_ON = 1; //正常
+    public static String getSectionStatus(Integer value) {
+    	if(value==null){
+    		return "关闭";
+    	}
+		if(value==0){
+			return "屏蔽";
+		} else if(value==1){
+			return "正常";
+		} else {
+			return "关闭";
+		}
+	}
 }

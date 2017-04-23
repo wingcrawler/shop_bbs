@@ -20,18 +20,19 @@
 				<div class="col-md-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">菜单列表</h3>
+							<h3 class="panel-title">${t.t_section_1 }</h3>
 							<div class="panel-options">
 								<a href="#" id="" name="" onclick="showMenuDialog(this)"><i class="fa-plus"></i></a>
-								<a href="#" id="" data-toggle="reload" onclick="loadMenu(this)"><i class="fa-rotate-right"></i></a>
+								<a href="#" id="" data-toggle="reload" onclick="loadFirstSection(this)"><i class="fa-rotate-right"></i></a>
 							</div>
 						</div>
 						<table class="table table-striped" url="/auth/codemenu/getCodeMenulist" id="datatable"> 
 							<thead>
 								<tr>
-									<th field="orderBy">编号</th>
-									<th field="name">菜单名称</th>
-									<th>操作</th>
+									<th field="index">${t.t_no }</th>
+									<th field="sectionTitle">${t.t_section_name }</th>
+									<th field="statusName">${t.t_status }</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -41,19 +42,19 @@
 				<div class="col-md-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">子菜单管理 <span class="father-menu-name"></span></h3>
+							<h3 class="panel-title">${t.t_section_2 } <span class="father-menu-name"></span></h3>
 							<div class="panel-options">
 								<a href="#" id="" name="" onclick="edit(this)"><i class="fa-plus"></i></a>
-								<a href="#" data-toggle="reload" onclick="loadSubMenu(this)"><i class="fa-rotate-right"></i></a>
+								<a href="#" id="secondReload" data-toggle="reload" onclick="loadSecondSection(this)"><i class="fa-rotate-right"></i></a>
 							</div>
 						</div>
 						<table class="table table-striped" id="table-sub"> 
 							<thead>
 								<tr>
-									<th field="id">ID</th>
-									<th field="name">子菜单名称</th>
-									<th field="status">状态</th>
-									<th field="op" field-role="2">操作</th>
+									<th field="index">${t.t_no }</th>
+									<th field="sectionTitle">${t.t_section_name }</th>
+									<th field="statusName">${t.t_status }</th>
+									<th field="op" field-role="201"></th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -65,19 +66,21 @@
 		</div>
 	</div>
 	
-	<%-- <jsp:include page="../dialog/dialog_menu_code.jsp"></jsp:include> --%>
-	
+<jsp:include page="../dialog/dialog_section.jsp"></jsp:include>	
 <script>
+var fatherId = -1;
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
 	$('#main-menu li.li').eq(6).addClass('active').addClass('opened');
 	$('#main-menu li.li').eq(6).find('ul li').eq(1).addClass('active');	
+	
+	loadFirstSection();	
 });
 
-//menu
-function loadMenu() {
+//一级版块
+function loadFirstSection() {
 	$.ajax({ 
-		url: "/auth/codemenu/getList",
+		url: "/backend/section/getFirstList",
 		data: {},  
 		type: 'get',  
 		cache: false,  
@@ -87,12 +90,13 @@ function loadMenu() {
 			for (var i=0; i<data.list.length; i++) {
 				var item = data.list[i];
 				html += '<tr>'
-					+ ' <td>'+item.orderBy+'</td>'	
-					+ ' <td><a type="button" id="'+item.id+'" onclick="loadSubMenu(this)" class="btn btn-white btn-xs">'+item.name+'</a></td>'
+					+ ' <td>'+(i+1)+'</td>'	
+					+ ' <td><a type="button" opid="'+item.id+'" onclick="loadSecondSection(this)" class="btn btn-white btn-xs">'+item.sectionTitle+'</a></td>'
+					+ ' <td>'+item.statusName+'</td>'
 					+ ' <td class="middle-align">'
-					+ ' <a href="javascript:;" id="'+item.id+'" name="'+item.name+'" onclick="showMenuDialog(this)" class="btn btn-secondary btn-sm btn-single"><i class="fa-edit"></i></a>'
-					+ ' <a href="#" class="btn btn-info btn-sm btn-single" onclick="moveUpOrDown('+item.id+',\'up\');"><i class="fa-chevron-up"></i></a>'
-					+ ' <a href="#" class="btn btn-info btn-sm btn-single" onclick="moveUpOrDown('+item.id+',\'down\');"><i class="fa-chevron-down"></i></a>'
+					+ '  <a href="javascript:;" opid="'+item.id+'" status="'+item.sectionStatus+'" name="'+item.sectionTitle+'" onclick="showMenuDialog(this)" class="btn btn-secondary btn-sm btn-single"><i class="fa-edit"></i></a>'
+					/* + ' <a href="#" class="btn btn-info btn-sm btn-single" onclick="moveUpOrDown('+item.id+',\'up\');"><i class="fa-chevron-up"></i></a>'
+					+ ' <a href="#" class="btn btn-info btn-sm btn-single" onclick="moveUpOrDown('+item.id+',\'down\');"><i class="fa-chevron-down"></i></a>' */
 					+ ' </td>'
 					+ '</tr>';
 			}
@@ -100,10 +104,16 @@ function loadMenu() {
 		}
 	});
 }
-// menu dialog
+//一级版块弹出框
 function showMenuDialog(obj){
-	var id = $(obj).attr('id');
+	var id = $(obj).attr('opid');
 	var name = $(obj).attr('name');
+	var status = $(obj).attr('status');
+	$('#menuStatus').optionSelect({
+		compare:status,
+		backFn : function(p) {
+		}
+	});
 	if(id!=''){
 		$('#modal-menu input[name="id"]').val(id);
 		$('#modal-menu input[name="name"]').val(name);	
@@ -117,78 +127,67 @@ function showMenuDialog(obj){
 function saveMenu(){
 	var id = $('#modal-menu input[name="id"]').val();
 	var name = $('#modal-menu input[name="name"]').val();
-	var _parm = {id:id,name:name};
-	var _url = '/auth/codemenu/saveMenu';
+	var status = $('#modal-menu select[name="menuStatus"]').val();
+	var _parm = {
+			id:id,
+			sectionTitle:name,
+			sectionStatus:status,
+			sectionType:0
+		};
+	var _url = '/backend/section/doSave';
 	$.ajax({
 		type: "POST",
 		url: _url,
 		dataType : "json",
 		data: _parm,
 		success: function(data) {
-			if (data.errorNo != 200) {
+			if (data.errorNo != 0) {
 				$.commonUtil.showTip(data.errorInfo);
 			} else {
-				$.commonUtil.showTip("提交成功");
-				loadMenu();
-			}
-		}
-	});
-}
-//move up or down
-function moveUpOrDown(id, type){
-	$.ajax({
-		type: 'GET',
-		url: '/auth/codemenu/doMenuMove',
-		dataType : "json",
-		data: {
-			menuId: id,
-			type: type
-		},
-		success: function(data) {
-			if (data.errorNo != 200) {
 				$.commonUtil.showTip(data.errorInfo);
-			} else {
-				$.commonUtil.showTip("操作成功");
-				loadMenu();
+				loadFirstSection();
 			}
 		}
 	});
 }
 
-
-//sub meun
-function loadSubMenu(obj) {
-	if($.commonUtil.isNotBlank($(obj).attr("id"))){
-		fatherId = $(obj).attr("id");
+//二级版块
+function loadSecondSection(obj) {
+	if($.commonUtil.isNotBlank($(obj).attr("opid"))){
+		fatherId = $(obj).attr("opid");
 		$('#datatable tbody tr').find('.btn-xs').removeClass('active');
 		$(obj).addClass('active');
 	} else {
 		fatherId = fatherId;	
 	}
 	$('#table-sub').datatable({
-		url_load : '/auth/codemenu/getSubMenuByFatherId',
+		url_load : '/backend/section/getSecondList',
 		parm :{
-			fatherId : fatherId
+			sectionParentId : fatherId
 		},
 		backFn : function(p) {
 			// console.log(p);
 		}
 	}); 
 }
-//sub menu dialog
+//二级版块弹出框
 function edit(obj){
 	if (fatherId == -1) {
 		return;
 	}
-	var id = $(obj).attr('id');
+	var id = $(obj).attr('opid');
 	var index = $(obj).attr('index');
 	if($.commonUtil.isNotBlank(id)){
 		var name = $('#table-sub tbody tr').eq(index).find('td').eq(1).text();
-		var status = $('#table-sub tbody tr').eq(index).find('td').eq(2).text();
+		var statusStr = $('#table-sub tbody tr').eq(index).find('td').eq(2).text();
+		var status=0;
+		if(statusStr=='正常' || statusStr=='Normal'){
+			status=1;
+		}
 		$('#modal-submenu input[name="id"]').val(id);
 		$('#modal-submenu input[name="name"]').val(name);
-		$('#modal-submenu select[name="status"]').val(status);
-		$('#subMenuStatus').onSelect({
+		$('#modal-submenu select[name="subMenuStatus"]').val(status);
+		$('#subMenuStatus').optionSelect({
 			compare:status,
 			backFn : function(p) {
 			}
@@ -196,27 +195,33 @@ function edit(obj){
 	} else {
 		$('#modal-submenu input[name="id"]').val('');
 		$('#modal-submenu input[name="name"]').val('');
-		$('#modal-submenu select[name="status"]').val('');
-		$('#subMenuStatus').onSelect({
+		$('#modal-submenu select[name="subMenuStatus"]').val('');
+		$('#subMenuStatus').optionSelect({
+			compare:1,
 			backFn : function(p) {
 			}
-		});
+		}); 
 	}
 	jQuery('#modal-submenu').modal('show', {backdrop: 'static'});
 }
 //save sub menu
 function saveSubMenu(){
+	debugger;
+	var sectionParentId = $('#datatable tbody tr').find('.btn-xs.active').attr("opid");
 	var id = $('#modal-submenu input[name="id"]').val();
 	var name = $('#modal-submenu input[name="name"]').val();
-	var status = $('#modal-submenu select[name="status"]').val();
+	var status = $('#modal-submenu select[name="subMenuStatus"]').val();
 	var parm = {
 			id : id,
 			fatherId : fatherId,
-			name : name,
-			status : status
+			sectionTitle : name,
+			sectionStatus : status,
+			sectionType:1,
+			sectionParentId:sectionParentId
 		};
-	var url = '/auth/codemenu/saveSubMenu';
-	$.fn.doSave(parm, url);
+	var url = '/backend/section/doSave';
+	$.fn.doSaveAndReload(parm, url);
+	$('#secondReload').trigger('click');
 }
 
 </script>
