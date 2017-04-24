@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -20,28 +22,37 @@
 			<div class="row">
 				<div class="col-sm-12 panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">搜索框</h3>
+						<h3 class="panel-title">${t.search_box }</h3>
 					</div>
 					<div class="panel-body">
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
 								<div class="col-sm-3">
-									标题:
-									<input type="text" class="form-control input" name="title" value="" placeholder="输入标题">
+									${t.t_thread }
+									<input type="text" class="form-control input" name="threadTitle">
 								</div>
 								<div class="col-sm-3">
-									菜单：
-									<select class="form-control select" name="menuId">
-										<option value="-1">-- 选择菜单 --</option>
-										<option value="1">item1</option>
-										<option value="2">item2</option>
+									${t.t_select }${t.t_topic }
+									<select class="form-control select" name=topicId>
+										<option value="-1">-- ${t.t_select } --</option>
+										<c:forEach items="${topicList}" var="item">
+										<option value="${item.id}">${item.topicTitle}</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									${t.t_select }${t.t_lang }
+									<select class="form-control select" name=threadType>
+										<option value="-1">-- ${t.t_select } --</option>
+										<option value="1">${t.t_zh}</option>
+										<option value="0">${t.t_en}</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
 									<br>
-									<button class="btn btn-info btn-icon" onclick="search()">
+									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
 										<i class="fa-search"></i>
-										<span>搜索</span>
+										<span>${t.t_search }</span>
 									</button>
 								</div>
 							</div>
@@ -55,7 +66,7 @@
 			<div class="row">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">列表</h3>
+						<h3 class="panel-title">${t.t_list }</h3>
 						<div class="panel-options">
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
@@ -64,28 +75,16 @@
 						<table class="table table-bordered table-striped" id="datatable">
 							<thead>
 								<tr>
-									<th width="55" field="index">编号</th>
-									<th field="title" url="http://my.blog/blog/detail?id=" parm="id">标题</th>
-									<th field="username">用户名</th>
-									<th field="menuName">菜单</th>
-									<th field="click">点击</th>
-									<th field="createTime">创建时间</th>
-									<th field="updateTime">更新时间</th>
-									<th field="op" field-role="0"></th>
+									<th width="60" field="index">${t.t_no }</th>
+									<th field="threadTitle">${t.t_thread }</th>
+									<th field="topicTitle">${t.t_topic }</th>
+									<th field="username">${t.t_username }</th>
+									<th field="typeName">${t.t_type }</th>
+									<th field="createTimeStr">${t.t_createtime }</th>
+									<th field="op" field-role="0" width="110"></th>
 								</tr>
 							</thead>
-							<tbody class="middle-align">
-								<tr>
-									<td>1</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td>sgarsgarw</td>
-									<td><a class="btn btn-info" href="/backend/news/edit">编辑</a></td>
-								</tr>
-							</tbody>
+							<tbody class="middle-align"></tbody>
 						</table>
 						<div class="pagebar"></div>
 					</div>
@@ -95,12 +94,21 @@
 			
 		</div>
 	</div>
-	
+
+<jsp:include page="../dialog/dialog_delete.jsp"></jsp:include>	
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
 	$('#main-menu li.li').eq(6).addClass('active').addClass('opened');
 	$('#main-menu li.li').eq(6).find('ul li').eq(0).addClass('active');
+	
+	$('#datatable').datatable({
+		url_load : '/backend/thread/getList',
+		url_remove : '/backend/thread/doDelete',
+		backFn : function(p) {
+			// console.log(p);
+		}
+	}); 
 });
 </script>
 </body>

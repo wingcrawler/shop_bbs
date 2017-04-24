@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.TopicMapper;
 import com.sqe.shop.model.Topic;
 import com.sqe.shop.util.PageUtil;
@@ -63,6 +65,10 @@ public class TopicService extends AdapterService implements BaseService {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
 			list = topicMapper.getMapListByParm(parm);
+			for(Map<String, Object> map : list){
+				String statusStr = map.get("topicStatus")==null?"0":map.get("topicStatus").toString();
+				map.put("statusName", Constants.getTopicStatus(Integer.valueOf(statusStr)));
+			}
 		}
 		pageUtil.setList(list);
 		return pageUtil;
@@ -79,7 +85,12 @@ public class TopicService extends AdapterService implements BaseService {
 	private Map<String, Object> queryParm(Topic topic) {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(topic!=null){
-			
+			if(StringUtils.isNotBlank(topic.getTopicTitle())){
+				parm.put("topicTitle", topic.getTopicTitle());
+			}
+			if(topic.getSectionId()!=null&&topic.getSectionId()>=0){
+				parm.put("sectionId", topic.getSectionId());	
+			}
 			parm.put("orderby", "id desc" );
 		}
 		return parm;

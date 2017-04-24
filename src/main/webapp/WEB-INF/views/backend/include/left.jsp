@@ -81,9 +81,9 @@
 					<span class="title">${t.m_bbs }</span>
 				</a>
 				<ul>
-					<li><a href="/backend/bbs/list"><span class="title">${t.m_bbs_list }</span></a></li>
-					<li><a href="/backend/bbs/plate"><span class="title">${t.m_bbs_plate }</span></a></li>
-					<li><a href="/backend/bbs/topic"><span class="title">${t.m_bbs_topic }</span></a></li>
+					<li><a href="/backend/thread/list"><span class="title">${t.m_bbs_list }</span></a></li>
+					<li><a href="/backend/section/list"><span class="title">${t.m_bbs_plate }</span></a></li>
+					<li><a href="/backend/topic/list"><span class="title">${t.m_bbs_topic }</span></a></li>
 				</ul>
 			</li>
 			<!-- 举报信息 -->

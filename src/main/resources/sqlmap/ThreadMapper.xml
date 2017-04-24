@@ -68,7 +68,7 @@
 		     	and thread_status = #{parm.threadStatus}
 		   	</if>
 			<if test="parm.threadTitle != null">
-		     	and thread_title = #{parm.threadTitle}
+		     	and thread_title like "%"#{parm.threadTitle}"%"
 		   	</if>
 			<if test="parm.threadTime != null">
 		     	and thread_time = #{parm.threadTime}
@@ -93,7 +93,7 @@
 		     	and thread_status = #{parm.threadStatus}
 		   	</if>
 			<if test="parm.threadTitle != null">
-		     	and thread_title = #{parm.threadTitle}
+		     	and thread_title like "%"#{parm.threadTitle}"%"
 		   	</if>
 			<if test="parm.threadTime != null">
 		     	and thread_time = #{parm.threadTime}
@@ -117,13 +117,26 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select * from thread where 1=1
-		<if test="parm.orderby != null">
-	   		order by ${parm.orderby}
-	   	</if>
-		<if test="parm.start != null">
-			limit #{parm.start},#{parm.limit}
-		</if>
+	select t.thread_title as threadTitle, t.thread_time as date, u.username,tp.topic_title as topicTitle,
+	t.thread_type as threadType
+	from thread t 
+	LEFT JOIN `user` u on t.user_id = u.id
+	LEFT JOIN topic tp on t.topic_id = tp.id
+	<if test="parm.topicId != null">
+     	and t.topic_id = #{parm.topicId}
+   	</if>
+	<if test="parm.threadType != null">
+     	and t.thread_type = #{parm.threadType}
+   	</if>
+	<if test="parm.threadTitle != null">
+     	and t.thread_title like "%"#{parm.threadTitle}"%"
+   	</if>
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
 </select>
 
 
