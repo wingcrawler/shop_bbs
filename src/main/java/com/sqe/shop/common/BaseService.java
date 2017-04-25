@@ -11,6 +11,8 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BaseService {
 
 	/**
@@ -32,6 +34,18 @@ public class BaseService {
         if(!dir.exists()){  
         	dir.mkdirs();  
         }
+	}
+	
+	public boolean checkFile(MultipartFile file, String targetFileFormate){
+		String fileName = file.getOriginalFilename();
+		String[] arr= fileName.split(".");
+		if(arr.length<2){
+			return false;
+		}
+		if(!arr[1].toLowerCase().equals(targetFileFormate)){
+			return false;
+		}
+		return true;
 	}
 	
 	/**

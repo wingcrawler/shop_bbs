@@ -6,6 +6,8 @@ public class MD5Util {
 
 	private final static String[] hexDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
 
+	public static final Object SALT = "shopping";
+
 	private Object salt;
 	private String algorithm;
 
@@ -18,7 +20,7 @@ public class MD5Util {
 		String result = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance(algorithm);
-			// ¼ÓÃÜºóµÄ×Ö·û´®
+			// ï¿½ï¿½ï¿½Üºï¿½ï¿½ï¿½Ö·ï¿½
 			result = byteArrayToHexString(md.digest(mergePasswordAndSalt(
 					rawPass).getBytes("utf-8")));
 		} catch (Exception ex) {
@@ -44,11 +46,11 @@ public class MD5Util {
 	}
 
 	/**
-	 * ×ª»»×Ö½ÚÊý×éÎª16½øÖÆ×Ö´®
+	 * ×ªï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½Îª16ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½
 	 * 
 	 * @param b
-	 *            ×Ö½ÚÊý×é
-	 * @return 16½øÖÆ×Ö´®
+	 *            ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @return 16ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½
 	 */
 	private static String byteArrayToHexString(byte[] b) {
 		StringBuffer resultSb = new StringBuffer();

@@ -122,4 +122,19 @@ public class UserService extends AdapterService implements BaseService {
 		}
 		return list;
 	}
+
+	public int batchInsert(List<User> list) {
+		int count = 0;
+		User u = new User();
+		for(User user : list){
+			u.setUsername(user.getUsername());
+			u.setUserPhone(user.getUserPhone());
+			if(this.countByParm(user)>0){
+				continue;
+			}
+			this.insert(user);
+			count++;
+		}
+		return count;
+	}
 }

@@ -145,7 +145,7 @@
 	}
 	
 	/* 含图片的表单提交 */
-	$.fn.ajaxSubmit = function(_submitUrl, _jumpUrl) {
+	$.fn.myAjaxSubmit = function(_submitUrl, _jumpUrl) {
 		$(".form").ajaxSubmit({  
             type:'post',  
             cache: false,  

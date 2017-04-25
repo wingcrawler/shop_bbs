@@ -71,7 +71,7 @@
 				</a>
 				<ul>
 					<li><a href="/backend/user/list"><span class="title">${t.t_user_list }</span></a></li>
-					<li><a href="/backend/user/import"><span class="title">${t.t_import }</span></a></li>
+					<li><a href="/backend/user/userImport"><span class="title">${t.t_import }</span></a></li>
 				</ul>
 			</li>
 			<!-- 论坛管理 -->
