@@ -53,7 +53,10 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">${t.t_list }</h3>
 						<div class="panel-options">
-							<a href="javascript:;" id="export"><i class="fa-download"></i></a>
+							<button class="btn btn-purple btn-icon btn-icon-standalone btn-xs" style="margin-bottom:0;" id="export">
+								<i class="fa-download"></i>
+								<span>${t.t_export }</span>
+							</button>
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
 					</div>

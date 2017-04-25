@@ -90,10 +90,6 @@
 			<li class="li">
 				<a href="/backend/inform/list"><i class="linecons-star"></i><span class="title">${t.m_report }</span></a>
 			</li>
-			<!-- 举报信息 -->
-			<li class="li">
-				<a href="/backend/logout"><i class="fa-lock"></i><span class="title">${t.sign_out }</span></a>
-			</li>
 		</ul>
 
 	</div>

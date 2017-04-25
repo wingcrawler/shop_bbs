@@ -1,6 +1,7 @@
 package com.sqe.shop.controller.backend;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseController;
+import com.sqe.shop.file.service.ExcelExportService;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.service.MessageService;
@@ -31,6 +33,8 @@ public class ShopController extends BaseController {
 	private ShopService shopService;
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private ExcelExportService excelExportService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -128,6 +132,13 @@ public class ShopController extends BaseController {
 			return responseError(-1, bundle.getString("error_del_failed"));
 		}
 		return responseOK(bundle.getString("op_success"));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/export", method = RequestMethod.GET)
+	public void export(Shop shop) {
+		List<Map<String, Object>> list = shopService.getListForExport(shop);
+		excelExportService.exportExcel(request, response, list);
 	}
 	
 	private PageUtil<Shop> getShopList() {

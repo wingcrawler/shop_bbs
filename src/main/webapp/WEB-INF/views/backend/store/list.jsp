@@ -57,6 +57,10 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">${t.t_list }</h3>
 						<div class="panel-options">
+							<button class="btn btn-purple btn-icon btn-icon-standalone btn-xs" style="margin-bottom:0;" id="export">
+								<i class="fa-download"></i>
+								<span>${t.t_export }</span>
+							</button>
 							<a href="/backend/shop/edit" target="_blank"><i class="fa-plus"></i></a>
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
@@ -100,6 +104,27 @@ $(function(){
 			// console.log(p);
 		}
 	}); 
+	
+	$('#export').click(function(){
+		debugger;
+		var shopTitle=$('input[name="shopTitle"]').val();
+		var shopStatus=$('select[name="shopStatus"]').val();
+		self.location = '/backend/shop/export?shopTitle='+shopTitle+'&shopStatus='+shopStatus+'&date='+new Date().getTime();
+		/* var parm = getFormJson('.form');
+		$.ajax({
+			type: "GET",
+			url: '/backend/shop/export',
+			dataType : "json",
+			data: parm,
+			success: function(data) {
+				if (data.errorNo != 0) {
+					$.commonUtil.showTip(data.errorInfo);
+				} else {
+					$.commonUtil.showTip(data.errorInfo);
+				}
+			}
+		}); */
+	});
 });
 </script>
 </body>
