@@ -104,4 +104,22 @@ public class UserService extends AdapterService implements BaseService {
 		user.setUserStatus(status);
 		userMapper.update(user);
 	}
+
+	public List<User> getListForExport(User user) {
+		int pageNo=1;
+		int pageSize=200;
+		boolean flag=true;
+		
+		List<User> list = new ArrayList<User>();
+		PageUtil<User> page = new PageUtil<User>(pageNo, pageSize);
+		while (flag) {
+			page = getBeanListByParm(user, pageNo, pageSize);
+			if(page.getList().size()<pageSize){
+				flag=false;
+			}
+			pageNo++;
+			list.addAll(page.getList());
+		}
+		return list;
+	}
 }

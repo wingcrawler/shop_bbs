@@ -140,7 +140,6 @@
 	
 	/* 搜索 */
 	$.fn.removeUrlLoadArgs = function() {
-		debugger;
 		var lastIndex =_args.url_load.indexOf('?'); 
 		_args.url_load = _args.url_load.substring(0,lastIndex);
 	}
@@ -153,7 +152,6 @@
             url: _submitUrl, 
             dataType : 'json', //返回值类型 一般设置为json  
             success : function(data, status) {  
-            	debugger;
 	        	if(data.errorNo==0){
 	        		self.location= _jumpUrl;
 				} else {
@@ -212,7 +210,6 @@
 							}else if (field == 'op') {
 								//操作 : 0:删除; 1:添加; 2:编辑; 3:查看; 4:上移; 5:下移;6:标记为已读;
 								var opHtml = '';
-								debugger;
 								var field_role =  fields.eq(index).attr("field-role");//获取当前列op字段的field-role值
 								var arr = field_role.split(',');
 								for(var r=0;r<arr.length;r++){

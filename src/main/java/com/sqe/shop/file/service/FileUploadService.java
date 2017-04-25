@@ -3,30 +3,20 @@ package com.sqe.shop.file.service;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.http.fileupload.FileItemIterator;
-import org.apache.tomcat.util.http.fileupload.FileItemStream;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.sqe.shop.common.BaseService;
 
 @Component
-public class FileUploadService {
+public class FileUploadService  extends BaseService {
 
 	public void uploadAttachFile(MultipartFile file, String uploadPath) {
 		File dir = new File(uploadPath, file.getOriginalFilename());
@@ -69,12 +59,6 @@ public class FileUploadService {
 			return "";
 		}
 		return "";
-	}
-	
-	private void checkDir(File dir) {
-        if(!dir.exists()){  
-        	dir.mkdirs();  
-        }
 	}
 	
 }

@@ -53,6 +53,7 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">${t.t_list }</h3>
 						<div class="panel-options">
+							<a href="javascript:;" id="export"><i class="fa-download"></i></a>
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
 					</div>
@@ -94,6 +95,12 @@ $(function(){
 			// console.log(p);
 		}
 	}); 
+	
+	$('#export').click(function(){
+		var username=$('input[name="username"]').val();
+		var userPhone=$('input[name="userPhone"]').val();
+		self.location='/backend/user/export?username='+username+'&userPhone='+userPhone+'&time='+new Date().getTime();
+	});
 });
 </script>
 </body>

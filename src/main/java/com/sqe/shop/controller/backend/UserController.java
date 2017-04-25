@@ -1,6 +1,7 @@
 package com.sqe.shop.controller.backend;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseController;
+import com.sqe.shop.file.service.TxtService;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.util.PageUtil;
@@ -26,6 +28,8 @@ public class UserController extends BaseController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private TxtService txtService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -80,6 +84,13 @@ public class UserController extends BaseController {
 	public Map<String, Object> onOroffUser(Long userId, Integer status) {
 		userService.onOroffUser(userId, status);
 		return responseOK(bundle.getString("save_success"));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/export", method = RequestMethod.GET)
+	public void export(User user) {
+		List<User> list = userService.getListForExport(user);
+		txtService.exportUser(request,response,list);
 	}
 
 }
