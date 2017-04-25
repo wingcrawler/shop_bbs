@@ -25,7 +25,6 @@ public class BBSFontController extends BaseController {
 		ModelAndView model = new ModelAndView("front/bbs/index");
 		String message = "这个是要传递的数据";
 		model.addObject("message", message);
-		
 		return model;
 	}
 	
