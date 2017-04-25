@@ -30,13 +30,13 @@ public class SectionController extends BaseController {
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("backend/section/list");
+		ModelAndView model = new ModelAndView("backend/bbs/plate");
 		return model;
 	}
 	
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
-		ModelAndView model = new ModelAndView("backend/section/edit");
+		ModelAndView model = new ModelAndView("backend/bbs/plate_edit");
 		if(id!=null){
 			Section entity = sectionService.getById(id);
 			model.addObject("entity", entity);

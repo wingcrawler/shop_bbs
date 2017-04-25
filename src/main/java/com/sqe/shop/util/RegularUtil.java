@@ -4,37 +4,39 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegularUtil {
-	
+
 	/**
-	 * ½ØÈ¡×Ö·û´®
+	 * ï¿½ï¿½È¡ï¿½Ö·ï¿½
+	 * 
 	 * @return
 	 */
 	public static String cutContent(String reg, String value) {
 		Pattern p = Pattern.compile(reg);
 		Matcher m = p.matcher(value);
 		String result = "";
-		if(m.find()){
+		if (m.find()) {
 			result = m.group();
 		}
 		return result;
 	}
-	
-	 public static void main(String[] args) {
-		 
-	        String test="<img height='231' alt='×°ÊÎÄ£Ê½ÀàÍ¼1' width='528' src='http://dl.iteye.com/upload/picture/pic/44707/d591f98f-6ebd-39a2-8450-0fc94a0ef4e1.jpg' style='border:0px;font-family:helvetica, tahoma, arial, sans-serif;font-size:14px;line-height:25.2px;background-color:#ffffff;' />";
-	        String reg = "(?<=src=\")[\\S\\s]+?(?=\")";
-	        String b=cutContent(reg, test);
-	 
-	        System.out.println(b);
-	    }
-	 
-	 /**
-	  * ¹ýÂËhtml±êÇ©£¬style£¬script ·µ»Ø´¿ÎÄ±¾
-	  * @param inputString
-	  * @return
-	  */
+
+	public static void main(String[] args) {
+
+		String test = "<img height='231' alt='×°ï¿½ï¿½Ä£Ê½ï¿½ï¿½Í¼1' width='528' src='http://dl.iteye.com/upload/picture/pic/44707/d591f98f-6ebd-39a2-8450-0fc94a0ef4e1.jpg' style='border:0px;font-family:helvetica, tahoma, arial, sans-serif;font-size:14px;line-height:25.2px;background-color:#ffffff;' />";
+		String reg = "(?<=src=\")[\\S\\s]+?(?=\")";
+		String b = cutContent(reg, test);
+
+		System.out.println(b);
+	}
+
+	/**
+	 * ï¿½ï¿½ï¿½ï¿½htmlï¿½ï¿½Ç©ï¿½ï¿½styleï¿½ï¿½script ï¿½ï¿½ï¿½Ø´ï¿½ï¿½Ä±ï¿½
+	 * 
+	 * @param inputString
+	 * @return
+	 */
 	public static String Html2Text(String inputString) {
-		String htmlStr = inputString; // º¬html±êÇ©µÄ×Ö·û´®
+		String htmlStr = inputString; // ï¿½ï¿½htmlï¿½ï¿½Ç©ï¿½ï¿½ï¿½Ö·ï¿½
 		String textStr = "";
 		java.util.regex.Pattern p_script;
 		java.util.regex.Matcher m_script;
@@ -43,27 +45,36 @@ public class RegularUtil {
 		java.util.regex.Pattern p_html;
 		java.util.regex.Matcher m_html;
 		try {
-			String regEx_script = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>"; // ¶¨ÒåscriptµÄÕýÔò±í´ïÊ½{»ò<script[^>]*?>[\\s\\S]*?<\\/script>
-			String regEx_style = "<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>"; // ¶¨ÒåstyleµÄÕýÔò±í´ïÊ½{»ò<style[^>]*?>[\\s\\S]*?<\\/style>
-			String regEx_html = "<[^>]+>"; // ¶¨ÒåHTML±êÇ©µÄÕýÔò±í´ïÊ½
-			
+			String regEx_script = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>"; // ï¿½ï¿½ï¿½ï¿½scriptï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½{ï¿½ï¿½<script[^>]*?>[\\s\\S]*?<\\/script>
+			String regEx_style = "<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>"; // ï¿½ï¿½ï¿½ï¿½styleï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½{ï¿½ï¿½<style[^>]*?>[\\s\\S]*?<\\/style>
+			String regEx_html = "<[^>]+>"; // ï¿½ï¿½ï¿½ï¿½HTMLï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
+
 			p_script = Pattern.compile(regEx_script, Pattern.CASE_INSENSITIVE);
 			m_script = p_script.matcher(htmlStr);
-			htmlStr = m_script.replaceAll(""); // ¹ýÂËscript±êÇ©
+			htmlStr = m_script.replaceAll(""); // ï¿½ï¿½ï¿½ï¿½scriptï¿½ï¿½Ç©
 
 			p_style = Pattern.compile(regEx_style, Pattern.CASE_INSENSITIVE);
 			m_style = p_style.matcher(htmlStr);
-			htmlStr = m_style.replaceAll(""); // ¹ýÂËstyle±êÇ©
+			htmlStr = m_style.replaceAll(""); // ï¿½ï¿½ï¿½ï¿½styleï¿½ï¿½Ç©
 
 			p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
 			m_html = p_html.matcher(htmlStr);
-			htmlStr = m_html.replaceAll(""); // ¹ýÂËhtml±êÇ©
+			htmlStr = m_html.replaceAll(""); // ï¿½ï¿½ï¿½ï¿½htmlï¿½ï¿½Ç©
 
 			textStr = htmlStr;
 		} catch (Exception e) {
 			System.err.println("Html2Text: " + e.getMessage());
 		}
 		return textStr;
+	}
+
+	public static boolean isNumeric(String str) {
+		Pattern pattern = Pattern.compile("[0-9]*");
+		Matcher isNum = pattern.matcher(str);
+		if (!isNum.matches()) {
+			return false;
+		}
+		return true;
 	}
 
 }

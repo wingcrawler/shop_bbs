@@ -10,7 +10,7 @@
 						</a>
 					</li>
 					
-					<li class="dropdown hover-line">
+					<!-- <li class="dropdown hover-line">
 						<a href="#" data-toggle="dropdown">
 							<i class="fa-envelope-o"></i>
 							<span class="badge badge-green">1</span>
@@ -40,9 +40,9 @@
 								</a>
 							</li>
 						</ul>
-					</li>
+					</li> -->
 					
-					<li class="dropdown hover-line">
+					<!-- <li class="dropdown hover-line">
 						<a href="#" data-toggle="dropdown">
 							<i class="fa-bell-o"></i>
 							<span class="badge badge-purple">7</span>
@@ -150,24 +150,23 @@
 								</a>
 							</li>
 						</ul>
-					</li>
-					
+					</li> -->
 				</ul>
-				
 				
 				<ul class="user-info-menu right-links list-inline list-unstyled">
 					<!-- 搜索框 -->
-					<li class="search-form">
+					<%-- <li class="search-form">
 						<form method="get" action="extra-search.html">
 							<input type="text" name="s" class="form-control search-field" placeholder="${t.head_search_placeholder }" />
 							<button type="submit" class="btn btn-link">
 								<i class="linecons-search"></i>
 							</button>
 						</form>
-					</li>
+					</li> --%>
 					<!-- 个人中心 -->
 					<li class="dropdown user-profile">
-						<a href="#" data-toggle="dropdown">
+						<a href="/backend/logout"><i class="fa-lock"></i><span class="title">&nbsp;${t.sign_out }</span></a>
+						<%-- <a href="#" data-toggle="dropdown">
 							<img src="/backendstyle/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
 							<span>${user.username}<i class="fa-angle-down"></i></span>
 						</a>
@@ -175,10 +174,9 @@
 							<li><a href="/auth/admin/profile"><i class="fa-user"></i>${t.head_usercenter }</a></li>
 							<li><a href="#settings"><i class="fa-wrench"></i>${t.head_setting }</a></li>
 							<li class="last"><a href="/account/logout"><i class="fa-lock"></i>${t.sign_out }</a></li>
-						</ul>
+						</ul> --%>
 					</li>
 				</ul>
-				
 			</nav>
 			
 <!-- <div class="page-loading-overlay">

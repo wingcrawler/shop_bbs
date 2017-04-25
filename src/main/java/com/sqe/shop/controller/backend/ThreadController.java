@@ -1,6 +1,7 @@
 package com.sqe.shop.controller.backend;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -15,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseController;
 import com.sqe.shop.model.Thread;
+import com.sqe.shop.model.Topic;
 import com.sqe.shop.service.ThreadService;
+import com.sqe.shop.service.TopicService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
@@ -26,16 +29,20 @@ public class ThreadController extends BaseController {
 	
 	@Autowired
 	private ThreadService threadService;
+	@Autowired
+	private TopicService topicService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("backend/thread/list");
+		ModelAndView model = new ModelAndView("backend/bbs/list");
+		List<Topic> topicList =  topicService.getBeanListByParm("TopicMapper", null);
+		model.addObject("topicList", topicList);
 		return model;
 	}
 	
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
-		ModelAndView model = new ModelAndView("backend/thread/edit");
+		ModelAndView model = new ModelAndView("backend/bbs/edit_list");
 		if(id!=null){
 			Thread entity = threadService.getById(id);
 			model.addObject("entity", entity);
@@ -48,7 +55,7 @@ public class ThreadController extends BaseController {
 	public Map<String, Object> getList(Thread thread,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
-		PageUtil<Thread> page = threadService.getBeanListByParm(thread, pageNo, pageSize);
+		PageUtil<Map<String, Object>> page = threadService.getMapListByParm(thread, pageNo, pageSize);
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
 		return resMap;

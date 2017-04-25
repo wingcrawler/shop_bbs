@@ -1,8 +1,10 @@
 package com.sqe.shop.controller.backend;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseController;
+import com.sqe.shop.file.service.FileUploadService;
+import com.sqe.shop.file.service.TxtService;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.util.PageUtil;
@@ -26,6 +32,10 @@ public class UserController extends BaseController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private TxtService txtService;
+	@Autowired
+	private FileUploadService fileUploadService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -41,6 +51,12 @@ public class UserController extends BaseController {
 			entity.setPassword("");
 			model.addObject("entity", entity);
 		}
+		return model;
+	}
+	
+	@RequestMapping(value="/userImport", method = RequestMethod.GET)
+	public ModelAndView userImport() {
+		ModelAndView model = new ModelAndView("backend/user/import");
 		return model;
 	}
 	
@@ -80,6 +96,32 @@ public class UserController extends BaseController {
 	public Map<String, Object> onOroffUser(Long userId, Integer status) {
 		userService.onOroffUser(userId, status);
 		return responseOK(bundle.getString("save_success"));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/export", method = RequestMethod.GET)
+	public void export(User user) {
+		List<User> list = userService.getListForExport(user);
+		txtService.exportUser(request,response,list);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/doImport", method = RequestMethod.POST)
+	public Map<String, Object> doImport(@RequestParam(name = "txtFile",value="txtFile", required = false) MultipartFile attachFile,
+			MultipartHttpServletRequest multiReq) {
+		if(fileUploadService.checkFile(attachFile, "txt")){
+			return responseError(-1, bundle.getString("error_file_formate"));
+		}
+		String filePath = "file/txt/";
+		String fileName = txtService.uploadTxtFile(attachFile, filePath);
+		if (StringUtils.isBlank(fileName)) {
+			return responseError(-1, bundle.getString("error_upload_failed"));
+		}
+		String result = txtService.userImport(filePath+fileName);
+		if(StringUtils.isBlank(result)){
+			return responseError(-1, bundle.getString("error_no_user"));
+		}
+		return responseOK(result);
 	}
 
 }

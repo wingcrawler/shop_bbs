@@ -127,7 +127,34 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select * from shop where 1=1
+	select s.shop_title as shopTitle, s.shop_description as description,s.shop_rank as shopRank,
+	s.shop_level as shopLevel, s.shop_status as shopStatus, u.username as shopOnwer 
+	from shop s 
+	LEFT JOIN `user` u on s.user_id=u.id
+		<if test="parm.shopStatus != null">
+	     	and s.shop_status = #{parm.shopStatus}
+	   	</if>
+		<if test="parm.createTime != null">
+	     	and s.create_time = #{parm.createTime}
+	   	</if>
+		<if test="parm.shopQualifies != null">
+	     	and s.shop_qualifies = #{parm.shopQualifies}
+	   	</if>
+		<if test="parm.shopDescription != null">
+	     	and s.shop_description = #{parm.shopDescription}
+	   	</if>
+		<if test="parm.shopRank != null">
+	     	and s.shop_rank = #{parm.shopRank}
+	   	</if>
+		<if test="parm.shopTitle != null">
+	     	and s.shop_title like "%"#{parm.shopTitle}"%"
+	   	</if>
+		<if test="parm.shopLicenes != null">
+	     	and s.shop_licenes = #{parm.shopLicenes}
+	   	</if>
+	   	<if test="parm.userId != null">
+	     	and s.user_id = #{parm.userId}
+	   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
 	   	</if>

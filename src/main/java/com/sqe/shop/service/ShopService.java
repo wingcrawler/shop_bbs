@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ShopMapper;
+import com.sqe.shop.model.Product;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
@@ -81,14 +82,19 @@ public class ShopService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getMapListByParm(Shop shop,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(shop);
+		parm.put("orderby", "s.id desc");
+		
 		int count = shopMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
-			List<Map<String, Object>> list = shopMapper.getMapListByParm(parm);
+			list = shopMapper.getMapListByParm(parm);
 			pageUtil.setList(list);
 		}
+		
 		return pageUtil;
 	}
 	
@@ -104,4 +110,35 @@ public class ShopService extends AdapterService implements BaseService {
 		}
 	}
 
+	public List<Map<String, Object>> getListForExport(Shop shop) {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		int pageNo=1;
+		int pageSize=200;
+		PageUtil<Map<String, Object>> page = new PageUtil<Map<String,Object>>(pageNo, pageSize);
+		boolean flag=true;
+		
+		while (flag) {
+			page = getMapListByParm(shop, pageNo, pageSize);
+			if(page.getList().size()<pageSize){
+				flag=false;
+			}
+			pageNo++;
+			list.addAll(page.getList());
+		}
+		return list;
+	}
+
+	private Map<String, Object> queryParm(Shop shop) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		if(shop!=null){
+			if(StringUtils.isNotBlank(shop.getShopTitle())){
+				parm.put("shopTitle", shop.getShopTitle());
+			}
+			if(shop.getShopStatus()!=null&&shop.getShopStatus()>=0){
+				parm.put("shopStatus", shop.getShopStatus());
+			}
+			parm.put("orderby", "id desc");
+		}
+		return parm;
+	}
 }

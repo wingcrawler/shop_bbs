@@ -3,6 +3,8 @@
 <mapper namespace="com.sqe.shop.mapper.TopicMapper">
 
 <resultMap type="com.sqe.shop.model.Topic" id="TopicBaseMapper">
+	<id property="topicStatus" column="topic_status" />
+	<id property="sectionId" column="section_id" />
 	<id property="id" column="id" />
 	<id property="topicDescription" column="topic_description" />
 	<id property="topicTitle" column="topic_title" />
@@ -13,14 +15,20 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into topic
-	(topic_description,topic_title)
+	(topic_status,section_id,topic_description,topic_title)
 	values
-	(#{topicDescription},#{topicTitle})
+	(#{topicStatus},#{sectionId},#{topicDescription},#{topicTitle})
 </insert>
 
 <update id="update">
 	UPDATE topic 
 	<set>
+			<if test="topicStatus != null">  
+	        	topic_status=#{topicStatus},
+	    	</if>
+			<if test="sectionId != null">  
+	        	section_id=#{sectionId},
+	    	</if>
 			<if test="topicDescription != null">  
 	        	topic_description=#{topicDescription},
 	    	</if>
@@ -41,21 +49,33 @@
 
 <select id="countByParm" resultType="integer">
 	select count(*) from topic  where 1=1 
+			<if test="parm.topicStatus != null">
+		     	and topic_status = #{parm.topicStatus}
+		   	</if>
+			<if test="parm.sectionId != null">
+		     	and section_id = #{parm.sectionId}
+		   	</if>
 			<if test="parm.topicDescription != null">
 		     	and topic_description = #{parm.topicDescription}
 		   	</if>
 			<if test="parm.topicTitle != null">
-		     	and topic_title = #{parm.topicTitle}
+		     	and topic_title like "%"#{parm.topicTitle}"%"
 		   	</if>
 </select>
 
 <select id="getBeanListByParm" resultMap="TopicBaseMapper">
 	select * from topic where 1=1 
+			<if test="parm.topicStatus != null">
+		     	and topic_status = #{parm.topicStatus}
+		   	</if>
+			<if test="parm.sectionId != null">
+		     	and section_id = #{parm.sectionId}
+		   	</if>
 			<if test="parm.topicDescription != null">
 		     	and topic_description = #{parm.topicDescription}
 		   	</if>
 			<if test="parm.topicTitle != null">
-		     	and topic_title = #{parm.topicTitle}
+		     	and topic_title like "%"#{parm.topicTitle}"%"
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
@@ -67,13 +87,25 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select * from topic where 1=1
-		<if test="parm.orderby != null">
-	   		order by ${parm.orderby}
-	   	</if>
-		<if test="parm.start != null">
-			limit #{parm.start},#{parm.limit}
-		</if>
+	select t.id,t.topic_title as topicTitle, t.topic_description as topicDescription ,
+	s.section_title as sectionTitle,t.topic_status as topicStatus
+	from topic t
+	LEFT JOIN section s on t.section_id = s.id and s.section_type=1
+	<if test="parm.topicStatus != null">
+     	and t.topic_status = #{parm.topicStatus}
+   	</if>
+	<if test="parm.sectionId != null">
+     	and t.section_id = #{parm.sectionId}
+   	</if>
+   	<if test="parm.topicTitle != null">
+     	and t.topic_title like "%"#{parm.topicTitle}"%"
+   	</if>
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
 </select>
 
 

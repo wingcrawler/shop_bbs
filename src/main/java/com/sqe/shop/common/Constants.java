@@ -166,4 +166,36 @@ public class Constants {
 			return "关闭";
 		}
 	}
+    
+    //话题状态
+    public static final int TOPIC_OFF = 0; //关闭
+    public static final int TOPIC_ON = 1; //正常
+    public static String getTopicStatus(Integer value) {
+    	if(value==null){
+    		return "关闭";
+    	}
+		if(value==0){
+			return "关闭";
+		} else if(value==1){
+			return "正常";
+		} else {
+			return "关闭";
+		}
+	}
+    
+    //帖子类型
+    public static final int THREAD_ZH = 1; //中文
+    public static final int THREAD_EN = 0; //英文
+    public static String getThreadType(Integer value) {
+    	if(value==null){
+    		return "未知";
+    	}
+		if(value==0){
+			return "英文";
+		} else if(value==1){
+			return "中文";
+		} else {
+			return "未知";
+		}
+	}
 }
