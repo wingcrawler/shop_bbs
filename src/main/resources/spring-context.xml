@@ -19,5 +19,6 @@
 	<bean id="SpringContextUtil" class="com.sqe.shop.util.SpringContextUtil" lazy-init="false"/>
 	
 	<import resource="classpath:config/mybatis-config.xml"/>
+	<import resource="classpath:config/shiro-config.xml"/>
 
 </beans>  

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.UserOrderMapper">
+
+<resultMap type="com.sqe.shop.model.UserOrder" id="UserOrderBaseMapper">
+	<id property="orderAddress" column="order_address" />
+	<id property="orderTime" column="order_time" />
+	<id property="productId" column="product_id" />
+	<id property="orderStatus" column="order_status" />
+	<id property="remark" column="remark" />
+	<id property="id" column="id" />
+	<id property="userId" column="user_id" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into user_order
+	(order_address,order_time,product_id,order_status,remark,user_id)
+	values
+	(#{orderAddress},#{orderTime},#{productId},#{orderStatus},#{remark},#{userId})
+</insert>
+
+<update id="update">
+	UPDATE user_order 
+	<set>
+			<if test="orderAddress != null">  
+	        	order_address=#{orderAddress},
+	    	</if>
+			<if test="orderTime != null">  
+	        	order_time=#{orderTime},
+	    	</if>
+			<if test="productId != null">  
+	        	product_id=#{productId},
+	    	</if>
+			<if test="orderStatus != null">  
+	        	order_status=#{orderStatus},
+	    	</if>
+			<if test="remark != null">  
+	        	remark=#{remark},
+	    	</if>
+			<if test="userId != null">  
+	        	user_id=#{userId},
+	    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from user_order where id=#{id}
+</delete>
+
+<select id="getById" resultMap="UserOrderBaseMapper">
+	SELECT * FROM user_order WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from user_order  where 1=1 
+			<if test="parm.orderAddress != null">
+		     	and order_address = #{parm.orderAddress}
+		   	</if>
+			<if test="parm.orderTime != null">
+		     	and order_time = #{parm.orderTime}
+		   	</if>
+			<if test="parm.productId != null">
+		     	and product_id = #{parm.productId}
+		   	</if>
+			<if test="parm.orderStatus != null">
+		     	and order_status = #{parm.orderStatus}
+		   	</if>
+			<if test="parm.remark != null">
+		     	and remark = #{parm.remark}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="UserOrderBaseMapper">
+	select * from user_order where 1=1 
+			<if test="parm.orderAddress != null">
+		     	and order_address = #{parm.orderAddress}
+		   	</if>
+			<if test="parm.orderTime != null">
+		     	and order_time = #{parm.orderTime}
+		   	</if>
+			<if test="parm.productId != null">
+		     	and product_id = #{parm.productId}
+		   	</if>
+			<if test="parm.orderStatus != null">
+		     	and order_status = #{parm.orderStatus}
+		   	</if>
+			<if test="parm.remark != null">
+		     	and remark = #{parm.remark}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
+		<if test="parm.orderby != null">
+	   		order by ${parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from user_order where 1=1
+		<if test="parm.orderby != null">
+	   		order by ${parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.sqe.shop.mapper.RoleMapper">
+
+<resultMap type="com.sqe.shop.model.Role" id="RoleBaseMapper">
+	<id property="roleName" column="role_name" />
+	<id property="id" column="id" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+	insert into role
+	(role_name)
+	values
+	(#{roleName})
+</insert>
+
+<update id="update">
+	UPDATE role 
+	<set>
+			<if test="roleName != null">  
+	        	role_name=#{roleName},
+	    	</if>
+	</set>   
+    WHERE id=#{id}
+</update>
+
+<delete id="delete">
+	delete from role where id=#{id}
+</delete>
+
+<select id="getById" resultMap="RoleBaseMapper">
+	SELECT * FROM role WHERE id=#{id} 
+</select>
+
+<select id="countByParm" resultType="integer">
+	select count(*) from role  where 1=1 
+			<if test="parm.roleName != null">
+		     	and role_name = #{parm.roleName}
+		   	</if>
+</select>
+
+<select id="getBeanListByParm" resultMap="RoleBaseMapper">
+	select * from role where 1=1 
+			<if test="parm.roleName != null">
+		     	and role_name = #{parm.roleName}
+		   	</if>
+		<if test="parm.orderby != null">
+	   		order by ${parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select * from role where 1=1
+		<if test="parm.orderby != null">
+	   		order by ${parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
+</mapper>

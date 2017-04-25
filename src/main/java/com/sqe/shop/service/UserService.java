@@ -137,4 +137,14 @@ public class UserService extends AdapterService implements BaseService {
 		}
 		return count;
 	}
+
+	public User findByName(String loginName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public User findUserByUsernameAndPassword(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
