@@ -179,6 +179,7 @@ public class TxtService extends BaseService {
 					user.setUserMail(mail);
 					user.setPassword(encode);
 					user.setUserStatus(1);
+					user.setUserPhone(phone);
 					user.setCreateTime(new Date());
 					list.add(user);
 				}
