@@ -10,7 +10,7 @@
 						</a>
 					</li>
 					
-					<li class="dropdown hover-line">
+					<!-- <li class="dropdown hover-line">
 						<a href="#" data-toggle="dropdown">
 							<i class="fa-envelope-o"></i>
 							<span class="badge badge-green">1</span>
@@ -40,9 +40,9 @@
 								</a>
 							</li>
 						</ul>
-					</li>
+					</li> -->
 					
-					<li class="dropdown hover-line">
+					<!-- <li class="dropdown hover-line">
 						<a href="#" data-toggle="dropdown">
 							<i class="fa-bell-o"></i>
 							<span class="badge badge-purple">7</span>
@@ -150,12 +150,10 @@
 								</a>
 							</li>
 						</ul>
-					</li>
-					
+					</li> -->
 				</ul>
 				
-				
-				<ul class="user-info-menu right-links list-inline list-unstyled">
+				<%-- <ul class="user-info-menu right-links list-inline list-unstyled">
 					<!-- 搜索框 -->
 					<li class="search-form">
 						<form method="get" action="extra-search.html">
@@ -177,8 +175,7 @@
 							<li class="last"><a href="/account/logout"><i class="fa-lock"></i>${t.sign_out }</a></li>
 						</ul>
 					</li>
-				</ul>
-				
+				</ul> --%>
 			</nav>
 			
 <!-- <div class="page-loading-overlay">
