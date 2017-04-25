@@ -8,6 +8,7 @@ public class Role implements Serializable {
 
 	private String roleName;
 	private Long id;
+	private String permissions;
 	
 	public String getRoleName() {
 		return roleName;
@@ -20,6 +21,12 @@ public class Role implements Serializable {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getPermissions() {
+		return permissions;
+	}
+	public void setPermissions(String permissions) {
+		this.permissions = permissions;
 	}
 	
 	
