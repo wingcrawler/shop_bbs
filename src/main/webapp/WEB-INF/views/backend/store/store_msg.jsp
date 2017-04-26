@@ -50,6 +50,13 @@ function viewDetail(obj){
 			if (data.errorNo != 0) {
 				$.commonUtil.showTip(data.errorInfo);
 			} else {
+				var messageCount = $("#messageCount").text();
+				messageCount--;
+				if(messageCount==0){
+					$("#messageCount").hide();
+				} else {
+					$("#messageCount").text(messageCount);
+				}
 				$.commonUtil.showTip(data.errorInfo);
 				$.fn.reload();
 			}
