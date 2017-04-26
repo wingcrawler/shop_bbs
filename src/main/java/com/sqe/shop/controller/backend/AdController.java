@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseController;
-import com.sqe.shop.file.service.FileUploadService;
+import com.sqe.shop.file.service.ImageFileService;
 import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.service.AdvertisementService;
 import com.sqe.shop.util.PageUtil;
@@ -32,7 +32,7 @@ public class AdController extends BaseController {
 	@Autowired
 	private AdvertisementService adService;
 	@Autowired
-	private FileUploadService fileUploadService;
+	private ImageFileService imageFileService;
 	
 	/**
 	 * 列表页
@@ -104,7 +104,7 @@ public class AdController extends BaseController {
 		
 		if(attachFile!=null){
 	    	String uploadPath = PropertiesUtil.get("path_img_ad"); 
-		    String fileName = fileUploadService.uploadImage(attachFile, uploadPath);
+		    String fileName = imageFileService.uploadImage(attachFile, uploadPath);
 		    if(StringUtils.isBlank(uploadPath)){
 		    	return responseError(-1, "error_upload_failed");
 		    }

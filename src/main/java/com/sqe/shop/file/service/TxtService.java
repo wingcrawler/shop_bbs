@@ -29,7 +29,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sqe.shop.common.BaseService;
-import com.sqe.shop.controller.backend.UserController;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.util.DateUtil;

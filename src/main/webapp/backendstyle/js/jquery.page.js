@@ -86,8 +86,8 @@
 			pageCount : 10,
 			current : 1,
 			fnName : '',
-			prevPage:'Prev Page',
-			nextPage:'Next Page',
+			prevPage:'<',
+			nextPage:'>',
 			backFn : function(){}
 		},options);
 		ms.init(this,args);
