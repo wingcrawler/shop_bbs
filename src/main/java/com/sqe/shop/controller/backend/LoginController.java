@@ -69,10 +69,10 @@ public class LoginController extends BaseController {
 	public Map<String, Object> logins(User user) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		if(StringUtils.isBlank(user.getUsername())){
-			return responseError(-1, bundle.getString("error_empty_username"));
+			return responseError(-1, "error_empty_username");
 		} 
 		if(StringUtils.isBlank(user.getPassword())){
-			return responseError(-1, bundle.getString("error_empty_pwd"));
+			return responseError(-1, "error_empty_pwd");
 		} else {
 			MD5Util md5 = new MD5Util(MD5Util.SALT, "MD5");
 			user.setPassword(md5.encode(user.getPassword()));
@@ -86,15 +86,15 @@ public class LoginController extends BaseController {
 			try {
 				currentUser.login(token);
 			} catch (AuthenticationException e) {
-				return responseError(-1, bundle.getString("error_empty_pwd"));
+				return responseError(-1, "error_empty_pwd");
 			}
 			if (currentUser.isAuthenticated()) {
 				currentUser.getSession().setAttribute("userInfo", u);
 			} else {
-				return responseError(-1, bundle.getString("error_unknow"));
+				return responseError(-1, "error_unknow");
 			}
 		} else {
-			return responseError(-1, bundle.getString("error_username_pwd"));
+			return responseError(-1, "error_username_pwd");
 		}
 		resMap = responseOK("");
 		resMap.put("url", "/backend/index");

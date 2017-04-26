@@ -75,27 +75,27 @@ public class UserController extends BaseController {
 	@RequestMapping(value="/doSave", method = RequestMethod.POST)
 	public Map<String, Object> save(User user) {
 		userService.save(user);
-		return responseOK(bundle.getString("save_success"));
+		return responseOK("save_success");
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/doDelete", method = RequestMethod.GET)
 	public Map<String, Object> doDelete(Long id) {
 		if(id==null){
-			return responseError(-1, bundle.getString("error_no_item"));
+			return responseError(-1, "error_no_item");
 		}
 		int i = userService.delete(id);
 		if(i==0){
-			return responseError(-1, bundle.getString("error_del_failed"));
+			return responseError(-1, "error_del_failed");
 		}
-		return responseOK(bundle.getString("op_success"));
+		return responseOK("op_success");
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/onOroffUser", method = RequestMethod.POST)
 	public Map<String, Object> onOroffUser(Long userId, Integer status) {
 		userService.onOroffUser(userId, status);
-		return responseOK(bundle.getString("save_success"));
+		return responseOK("save_success");
 	}
 	
 	@ResponseBody
@@ -110,16 +110,16 @@ public class UserController extends BaseController {
 	public Map<String, Object> doImport(@RequestParam(name = "txtFile",value="txtFile", required = false) MultipartFile attachFile,
 			MultipartHttpServletRequest multiReq) {
 		if(fileUploadService.checkFile(attachFile, "txt")){
-			return responseError(-1, bundle.getString("error_file_formate"));
+			return responseError(-1, "error_file_formate");
 		}
 		String filePath = "file/txt/";
 		String fileName = txtService.uploadTxtFile(attachFile, filePath);
 		if (StringUtils.isBlank(fileName)) {
-			return responseError(-1, bundle.getString("error_upload_failed"));
+			return responseError(-1, "error_upload_failed");
 		}
 		String result = txtService.userImport(filePath+fileName);
 		if(StringUtils.isBlank(result)){
-			return responseError(-1, bundle.getString("error_no_user"));
+			return responseError(-1, "error_no_user");
 		}
 		return responseOK(result);
 	}

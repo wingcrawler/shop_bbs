@@ -76,7 +76,7 @@ $(function(){
 	
 	$('#submit').click(function(){
         var parm = $.fn.getFormJson('.form');
-		$.fn.doSave(parm,'/backend/cate/doEdit','/backend/cate/list');
+		$.fn.doSave(parm,'/backend/cate/doSave','/backend/cate/list');
 	});
 });
 

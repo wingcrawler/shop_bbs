@@ -35,7 +35,7 @@
 					            	<input class="form-control" type="number" name="sort" value="${entity.sort}">
 					          	</div>
 					          	<div class="col-sm-6">
-					          		<p>${t.t_select_menu }</p>
+					          		<p>${t.t_select_type }<span style="color:#f00">*</span></p>
 									<select class="form-control select" name="type" id="typeSelect">
 										<option value="-1">-- ${t.t_select } --</option>
 										<option value="0">${t.m_ad_active }</option>
@@ -94,14 +94,7 @@ $(function(){
 		$(".form").ajaxSubmit({  
             type:'post',  
             cache: false,  
-            url: "/backend/ad/doEdit", 
-			/* data:{
-				id: $('input[name="id"]').val(),
-				sort: $('input[name="sort"]').val(),
-				imageUrl: $('input[name="imageUrl"]').val(),
-				description: $('input[name="description"]').val(),
-				type:$('select[name="type"]').val()
-			}, */
+            url: "/backend/ad/doSave", 
             dataType : 'json', //返回值类型 一般设置为json  
             success : function(data, status) {  
             	debugger;

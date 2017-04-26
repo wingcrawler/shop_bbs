@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseController;
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
@@ -91,20 +90,20 @@ public class ProductController extends BaseController {
 	@RequestMapping(value="/doSave", method = RequestMethod.POST)
 	public Map<String, Object> save(Product product) {
 		productService.save(product);
-		return responseOK(bundle.getString("save_success"));
+		return responseOK("save_success");
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/doDelete", method = RequestMethod.GET)
 	public Map<String, Object> doDelete(Long id) {
 		if(id==null){
-			return responseError(-1, bundle.getString("error_no_item"));
+			return responseError(-1, "error_no_item");
 		}
 		int i = productService.delete(id);
 		if(i==0){
-			return responseError(-1, bundle.getString("error_del_failed"));
+			return responseError(-1, "error_del_failed");
 		}
-		return responseOK(bundle.getString("op_success"));
+		return responseOK("op_success");
 	}
 
 }

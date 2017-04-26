@@ -1,6 +1,5 @@
 package com.sqe.shop.controller.backend;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,29 +59,29 @@ public class NewsController extends BaseController {
 	@RequestMapping(value="/doSave", method = RequestMethod.POST)
 	public Map<String, Object> save(News news) {
 		if(StringUtils.isBlank(news.getNewsTitle())){
-			return responseError(-1, bundle.getString("error_empty_title"));
+			return responseError(-1, "error_empty_title");
 		}
 		if(StringUtils.isBlank(news.getNewsContext())){
-			return responseError(-1, bundle.getString("error_empty_content"));
+			return responseError(-1, "error_empty_content");
 		}
 		if(news.getNewsType()==null || news.getNewsType()<0){
-			return responseError(-1, bundle.getString("error_empty_lang"));
+			return responseError(-1, "error_empty_lang");
 		}
 		newsService.save(news);
-		return responseOK(bundle.getString("save_success"));
+		return responseOK("save_success");
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/doDelete", method = RequestMethod.GET)
 	public Map<String, Object> doDelete(Long id) {
 		if(id==null){
-			return responseError(-1, bundle.getString("error_no_item"));
+			return responseError(-1, "error_no_item");
 		}
 		int i = newsService.delete(id);
 		if(i==0){
-			return responseError(-1, bundle.getString("error_del_failed"));
+			return responseError(-1, "error_del_failed");
 		}
-		return responseOK(bundle.getString("op_success"));
+		return responseOK("op_success");
 	}
 
 }

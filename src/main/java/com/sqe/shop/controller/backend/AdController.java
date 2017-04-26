@@ -1,8 +1,6 @@
 package com.sqe.shop.controller.backend;
 
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +20,6 @@ import com.sqe.shop.common.BaseController;
 import com.sqe.shop.file.service.FileUploadService;
 import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.service.AdvertisementService;
-import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.PropertiesUtil;
 
@@ -37,12 +34,21 @@ public class AdController extends BaseController {
 	@Autowired
 	private FileUploadService fileUploadService;
 	
+	/**
+	 * 列表页
+	 * @return
+	 */
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("backend/ad/list");
 		return model;
 	}
 	
+	/**
+	 * 编辑页
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
 		ModelAndView model = new ModelAndView("backend/ad/edit");
@@ -53,6 +59,13 @@ public class AdController extends BaseController {
 		return model;
 	}
 	
+	/**
+	 * 获取列表接口
+	 * @param ad
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getList", method = RequestMethod.GET)
 	public Map<String, Object> getList(Advertisement ad, 
@@ -64,17 +77,26 @@ public class AdController extends BaseController {
 		return resMap;
 	}
 	
+	/**
+	 * 新增或编辑
+	 * @param ad
+	 * @param attachFile
+	 * @param multiReq
+	 * @return
+	 */
 	@ResponseBody
-	@RequestMapping(value="/doEdit", method = RequestMethod.POST)
+	@RequestMapping(value="/doSave", method = RequestMethod.POST)
 	public Map<String, Object> doEdit(Advertisement ad, @RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile,MultipartHttpServletRequest multiReq) {
-		
 		/*String uploadFilePath = multiReq.getFile("attachFile").getOriginalFilename();*/
 		
 		if(StringUtils.isBlank(ad.getImageUrl())){
-			return responseError(-1, bundle.getString("error_empty_img_url"));
+			return responseError(-1, "error_empty_img_url");
 		}
 		if(ad.getType()<0){
-			return responseError(-1, bundle.getString("error_no_type"));
+			return responseError(-1, "error_no_type");
+		}
+		if(ad.getId()==null && attachFile==null){
+			return responseError(-1, "error_empty_img");
 		}
 		if(ad.getSort()==null){
 			ad.setSort(1);
@@ -84,25 +106,30 @@ public class AdController extends BaseController {
 	    	String uploadPath = PropertiesUtil.get("path_img_ad"); 
 		    String fileName = fileUploadService.uploadImage(attachFile, uploadPath);
 		    if(StringUtils.isBlank(uploadPath)){
-		    	return responseError(-1, bundle.getString("error_upload_failed"));
+		    	return responseError(-1, "error_upload_failed");
 		    }
 		    ad.setImagePath(PropertiesUtil.get("path_img_ad_save")+fileName);
 	    }
 		
 		adService.save(ad);
-		return responseOK(bundle.getString("save_success"));
+		return responseOK("save_success");
 	}
 
+	/**
+	 * 删除
+	 * @param id
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/doDelete", method = RequestMethod.GET)
 	public Map<String, Object> doDelete(Long id) {
 		if(id==null){
-			return responseError(-1, bundle.getString("error_no_item"));
+			return responseError(-1, "error_no_item");
 		}
 		int i = adService.delete(id);
 		if(i==0){
-			return responseError(-1, bundle.getString("error_del_failed"));
+			return responseError(-1, "error_del_failed");
 		}
-		return responseOK(bundle.getString("op_success"));
+		return responseOK("op_success");
 	}
 }

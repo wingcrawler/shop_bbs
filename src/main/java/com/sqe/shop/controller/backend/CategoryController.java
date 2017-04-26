@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseController;
-import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.util.PageUtil;
@@ -29,12 +28,21 @@ public class CategoryController extends BaseController {
 	@Autowired
 	private ProductTypeService productTypeService;
 	
+	/**
+	 * 列表页
+	 * @return
+	 */
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("backend/product/cate_list");
 		return model;
 	}
 	
+	/**
+	 * 编辑页
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
 		ModelAndView model = new ModelAndView("backend/product/cate_edit");
@@ -45,6 +53,13 @@ public class CategoryController extends BaseController {
 		return model;
 	}
 	
+	/**
+	 * 获取列表接口
+	 * @param productType
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getList", method = RequestMethod.GET)
 	public Map<String, Object> getList(ProductType productType,
@@ -59,28 +74,33 @@ public class CategoryController extends BaseController {
 		return resMap;
 	}
 	
+	/**
+	 * 保存
+	 * @param productType
+	 * @return
+	 */
 	@ResponseBody
-	@RequestMapping(value="/doEdit", method = RequestMethod.POST)
-	public Map<String, Object> doEdit(ProductType productType) {
+	@RequestMapping(value="/doSave", method = RequestMethod.POST)
+	public Map<String, Object> doSave(ProductType productType) {
 		if (StringUtils.isBlank(productType.getTypeName()) ||
 				StringUtils.isBlank(productType.getTypeNameCh()) ) {
-			return responseError(-1, bundle.getString("error_no_typename"));
+			return responseError(-1, "error_no_typename");
 		}
 		productTypeService.save(productType);
-		return responseOK(bundle.getString("op_success"));
+		return responseOK("op_success");
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/doDelete", method = RequestMethod.GET)
 	public Map<String, Object> doDelete(Long id) {
 		if(id==null){
-			return responseError(-1, bundle.getString("error_no_item"));
+			return responseError(-1, "error_no_item");
 		}
 		int i = productTypeService.delete(id);
 		if(i==0){
-			return responseError(-1, bundle.getString("error_del_failed"));
+			return responseError(-1, "error_del_failed");
 		}
-		return responseOK(bundle.getString("op_success"));
+		return responseOK("op_success");
 	}
 	
 }
