@@ -17,7 +17,7 @@ public class User extends BaseModel implements Serializable {
 	private String userPhone;
 	private String userMail;
 	private Long id;
-	private Integer userRole;
+	private Long userRole;
 	private String userIntroduce;
 	private String username;
 	
@@ -69,10 +69,10 @@ public class User extends BaseModel implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Integer getUserRole() {
+	public Long getUserRole() {
 		return userRole;
 	}
-	public void setUserRole(Integer userRole) {
+	public void setUserRole(Long userRole) {
 		this.userRole = userRole;
 	}
 	public String getUserIntroduce() {

@@ -20,7 +20,7 @@ public class AdminAuthenticationInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         if(AdminUtil.getAdminFromSession(request.getSession())==null){
             logger.info("管理员未登录,跳转到登录页面.");
-            response.sendRedirect("/backend/login");
+            response.sendRedirect("/back/login");
             return false;
         }
         return true;

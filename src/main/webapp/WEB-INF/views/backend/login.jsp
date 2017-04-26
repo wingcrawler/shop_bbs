@@ -55,8 +55,8 @@
 									"hideMethod": "fadeOut"
 								};
 								$.ajax({
-									url: "/account/doLogin",
-									method: 'GET',
+									url: "/back/doLogin",
+									method: 'POST',
 									dataType: 'json',
 									data: {
 										username: $(form).find('#username').val(),
@@ -68,10 +68,10 @@
 											pct: 100,
 											finish: function(){
 												// Redirect after successful login page (when progress bar reaches 100%)
-												if(resp.errorNo == 200) {
+												if(resp.errorNo == 0) {
 													window.location.href = resp.url;
 												} else {
-													toastr.error("You have entered wrong password, please try again. User and password is <strong>demo/demo</strong> :)", "Invalid Login!", opts);
+													toastr.error(resp.errorInfo, "Invalid Login!", opts);
 													//$passwd.select();
 												}
 											}
@@ -118,21 +118,21 @@
 			
 		</div>
 	</div>
-
-
-	<!-- Bottom Scripts -->
-	<script src="/admin/js/bootstrap.min.js"></script>
-	<script src="/admin/js/TweenMax.min.js"></script>
-	<script src="/admin/js/resizeable.js"></script>
-	<script src="/admin/js/joinable.js"></script>
-	<script src="/admin/js/xenon-api.js"></script>
-	<script src="/admin/js/xenon-toggles.js"></script>
-	<script src="/admin/js/jquery-validate/jquery.validate.min.js"></script>
-	<script src="/admin/js/toastr/toastr.min.js"></script>
+	
+		<!-- Bottom Scripts -->
+	<script src="/backendstyle/js/bootstrap.min.js"></script>
+	<script src="/backendstyle/js/TweenMax.min.js"></script>
+	<script src="/backendstyle/js/resizeable.js"></script>
+	<script src="/backendstyle/js/joinable.js"></script>
+	<script src="/backendstyle/js/xenon-api.js"></script>
+	<script src="/backendstyle/js/xenon-toggles.js"></script>
+	<script src="/backendstyle/js/jquery-validate/jquery.validate.min.js"></script>
+	<script src="/backendstyle/js/toastr/toastr.min.js"></script>
 
 
 	<!-- JavaScripts initializations and stuff -->
-	<script src="/admin/js/xenon-custom.js"></script>
+	<script src="/backendstyle/js/xenon-custom.js"></script>
+	
 
 </body>
 </html>
