@@ -20,7 +20,7 @@ import com.sqe.shop.service.SectionService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
-@RequestMapping("/backend/section")
+@RequestMapping("/bbs/section")
 public class BBSSectionController extends BaseController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BBSSectionController.class);
