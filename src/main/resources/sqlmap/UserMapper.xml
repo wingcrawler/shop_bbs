@@ -156,5 +156,13 @@
 		</if>
 </select>
 
+<select id="findByName" resultMap="UserBaseMapper">
+	SELECT * FROM user WHERE username=#{username}  and user_status=1
+</select>
+
+<select id="findUserByUsernameAndPassword" resultMap="UserBaseMapper">
+	SELECT * FROM user WHERE username=#{username} and password=#{password} and user_status=1 and user_role=#{userRole}
+</select>
+
 
 </mapper>

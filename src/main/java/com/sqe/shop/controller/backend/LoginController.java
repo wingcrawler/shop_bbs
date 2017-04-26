@@ -24,7 +24,7 @@ import com.sqe.shop.service.UserService;
 import com.sqe.shop.util.MD5Util;
 
 @Controller
-@RequestMapping("/backend")
+@RequestMapping("/back")
 public class LoginController extends BaseController {
 	
 	@Autowired
@@ -51,21 +51,22 @@ public class LoginController extends BaseController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/doLogin", method=RequestMethod.GET)
+	@RequestMapping(value = "/doLogin", method=RequestMethod.POST)
 	public Map<String, Object> doLogin(HttpServletRequest request, User user) {
-		Map<String, Object> resMap = login(user);
+		user.setUserRole(3L);
+		Map<String, Object> resMap = logins(user);
 		return resMap;
 	}
 	
 	@RequestMapping(value = "/logout", method=RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, User user) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("redirect:/login");
+		modelAndView.setViewName("backend/login");
 		this.logout();
 		return modelAndView;
 	}
 
-	public Map<String, Object> login(User user) {
+	public Map<String, Object> logins(User user) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		if(StringUtils.isBlank(user.getUsername())){
 			return responseError(-1, bundle.getString("error_empty_username"));
@@ -95,7 +96,9 @@ public class LoginController extends BaseController {
 		} else {
 			return responseError(-1, bundle.getString("error_username_pwd"));
 		}
-		return responseOK("");
+		resMap = responseOK("");
+		resMap.put("url", "/backend/index");
+		return resMap;
 	}
 	
 }

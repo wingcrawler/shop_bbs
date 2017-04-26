@@ -139,12 +139,10 @@ public class UserService extends AdapterService implements BaseService {
 	}
 
 	public User findByName(String loginName) {
-		// TODO Auto-generated method stub
-		return null;
+		return  userMapper.findByName(loginName);
 	}
 
 	public User findUserByUsernameAndPassword(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return  userMapper.findUserByUsernameAndPassword(user);
 	}
 }

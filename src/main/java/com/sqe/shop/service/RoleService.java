@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.RoleMapper;
+import com.sqe.shop.model.Permission;
 import com.sqe.shop.model.Role;
 import com.sqe.shop.util.PageUtil;
 
@@ -83,6 +84,11 @@ public class RoleService extends AdapterService implements BaseService {
 			parm.put("orderby", "id desc" );
 		}
 		return parm;
+	}
+
+	public List<String> getPermNameList(String permissions) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

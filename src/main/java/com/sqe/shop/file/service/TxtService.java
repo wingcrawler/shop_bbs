@@ -175,7 +175,7 @@ public class TxtService extends BaseService {
 						continue;
 					}
 					user.setUsername(username);
-					user.setUserRole(Integer.valueOf(role));
+					user.setUserRole(Long.valueOf(role));
 					user.setUserMail(mail);
 					user.setPassword(encode);
 					user.setUserStatus(1);

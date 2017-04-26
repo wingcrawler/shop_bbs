@@ -165,7 +165,7 @@
 					</li> --%>
 					<!-- 个人中心 -->
 					<li class="dropdown user-profile">
-						<a href="/backend/logout"><i class="fa-lock"></i><span class="title">&nbsp;${t.sign_out }</span></a>
+						<a href="/back/logout"><i class="fa-lock"></i><span class="title">&nbsp;${t.sign_out }</span></a>
 						<%-- <a href="#" data-toggle="dropdown">
 							<img src="/backendstyle/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
 							<span>${user.username}<i class="fa-angle-down"></i></span>

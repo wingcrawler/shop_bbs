@@ -18,9 +18,9 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">     
         <property name="securityManager" ref="securityManager"/>     
         <!-- 配置我们的登录请求地址 -->     
-        <property name="loginUrl" value="/login"/>      
+        <property name="loginUrl" value="/back/login"/>      
         <!-- 配置我们在登录页登录成功后的跳转地址，如果你访问的是非/login地址，则跳到您访问的地址 -->    
-        <property name="successUrl" value="/index"/>      
+        <property name="successUrl" value="/"/>      
         <!-- 如果您请求的资源不再您的权限范围，则跳转到/404请求地址 -->    
         <property name="unauthorizedUrl" value="/404"/>      
         <!-- 权限配置 -->    
@@ -32,10 +32,10 @@
                 <!-- /user=perms[user:query]     -->
                 <!-- roles[manager]表示访问此连接需要用户的角色为manager -->    
                 <!-- /user/add=roles[manager]    
-                /user/del/**=roles[admin]    
-                /user/edit/**=roles[manager] -->    
+                /user/del/**=roles[admin]    --> 
+                /backend/**=roles[admin]    
                 <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login-->      
-                /auth/** = authc    
+                /backend/** = authc    
             </value>      
         </property>      
     </bean>    
