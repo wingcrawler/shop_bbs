@@ -45,7 +45,7 @@
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-6">
-					          		<p>${t.t_img_link }</p>
+					          		<p>${t.t_img_link }<span style="color:#f00">*</span></p>
 					            	<input class="form-control" type="text" name="imageUrl" value="${entity.imageUrl}">
 					          	</div>
 					          	<div class="col-sm-6">
@@ -59,13 +59,13 @@
 					        			<a href="${entity.imageUrl}" target="_blank"><img border="0" src="${entity.imagePath}" /></a> 
 					        		</c:if>
     				        		<c:if test="${fn:length(entity.imageUrl)<=0}">
-					        			<input type="file" name="attachFile" id="attachFile" accept="image/*"/>
+					        			<input type="file" name="attachFile" id="attachFile" accept="image/*"/><span style="color:#f00">*</span>
 					        		</c:if>
 					        	</div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
-					        		<a id="codeSubmit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
+					        		<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
 					    		</div>
 					        </div>
 					     </form>
@@ -90,7 +90,7 @@ $(function(){
 	});
 	
 	//提交
-	$('#codeSubmit').click(function(){
+	$('#submit').click(function(){
 		$(".form").ajaxSubmit({  
             type:'post',  
             cache: false,  

@@ -34,11 +34,11 @@
 					        </div>
 					        <div class="form-group">
 					          	<div class="col-sm-6">
-					          		<p>${t.t_type_name }(${t.t_zh })</p>
+					          		<p>${t.t_type_name }(${t.t_zh })<span style="color:#f00">*</span></p>
 					            	<input class="form-control" type="text" name="typeNameCh" value="${entity.typeNameCh}">
 					          	</div>
 					          	<div class="col-sm-6">
-					          		<p>${t.t_type_name }(${t.t_en })</p>
+					          		<p>${t.t_type_name }(${t.t_en })<span style="color:#f00">*</span></p>
 					            	<input class="form-control" type="text" name="typeName" value="${entity.typeName}">
 					          	</div>
 					        </div>

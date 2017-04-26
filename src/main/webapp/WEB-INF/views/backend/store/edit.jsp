@@ -29,7 +29,7 @@
 					        <div class="form-group">
 					          	<div class="col-sm-6">
 					          		<input type="hidden" value="${entity.id}" name="id" />
-					          		<p>${t.t_title }</p>
+					          		<p>${t.t_title }<span style="color:#f00">*</span></p>
 					            	<input class="form-control" type="text" name="shopTitle"  value="${entity.shopTitle}">
 					          	</div>
 					        	<div class="col-sm-3">
@@ -40,7 +40,7 @@
 									</select>
 					          	</div>
 					          	<div class="col-sm-3">
-					        		<p>${t.t_weight }</p>
+					        		<p>${t.t_weight }<span style="color:#f00">*</span></p>
 					            	<input class="form-control" type="text" name="shopRank" value="${entity.shopRank}">
 					    		</div>
 					        </div>

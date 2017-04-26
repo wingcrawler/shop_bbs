@@ -50,7 +50,6 @@
 					        	<div class="col-sm-3">
 					          		<p>${t.t_product_status }</p>
 					          		<select class="form-control select" name="productStatus" id="StatusSelect">
-										<option value="">-- ${t.t_select } --</option>
 										<option value="0">${t.t_product_wait }</option>
 										<option value="1">${t.t_product_on }</option>
 										<option value="2">${t.t_product_off }</option>

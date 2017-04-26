@@ -92,7 +92,6 @@ $(function(){
 	}); 
 	
 	var newsId = '${news.id}';
-	debugger;
 	if(newsId!=''){
 		var parm = {id:newsId};
 		$.fn.doSearch(parm);	

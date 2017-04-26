@@ -110,20 +110,6 @@ $(function(){
 		var shopTitle=$('input[name="shopTitle"]').val();
 		var shopStatus=$('select[name="shopStatus"]').val();
 		self.location = '/backend/shop/export?shopTitle='+shopTitle+'&shopStatus='+shopStatus+'&date='+new Date().getTime();
-		/* var parm = getFormJson('.form');
-		$.ajax({
-			type: "GET",
-			url: '/backend/shop/export',
-			dataType : "json",
-			data: parm,
-			success: function(data) {
-				if (data.errorNo != 0) {
-					$.commonUtil.showTip(data.errorInfo);
-				} else {
-					$.commonUtil.showTip(data.errorInfo);
-				}
-			}
-		}); */
 	});
 });
 </script>

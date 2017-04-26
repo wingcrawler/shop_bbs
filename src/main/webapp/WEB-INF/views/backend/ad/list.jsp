@@ -88,24 +88,13 @@ $(function(){
 	
 	$('#datatable').datatable({
 		url_load : '/backend/ad/getList',
+		url_edit : '/backend/ad/edit',
+		url_remove : '/backend/ad/doDelete',
 		backFn : function(p) {
 			// console.log(p);
 		}
 	}); 
 });
-
-function edit(obj){
-	var url="/backend/ad/edit?id=" + $(obj).attr("opid");
-	window.open(url);
-}
-
-function showDeleteDialog(obj) {
-	var _id = $(obj).attr("opid");
-	var _url = '/backend/ad/doDelete';
-	$("input[name='hidden-url']").val(_url);
-	$("input[name='hidden-id']").val(_id);
-	jQuery("#modal-delete").modal("show", {backdrop: "fade"});
-}
 
 function search(){
 	var type=$('select[name="type"]').val();

@@ -106,7 +106,7 @@ $(function(){
 	
 	$('#submit').click(function(){
 	    var parm = $.fn.getFormJson('.form');
-	    var id = ${entity.id};
+	    var id = '${entity.id}';
 		$.fn.doSave(parm,'/backend/comment/doSave','/backend/comment/list?id='+id);
 	});	
 });

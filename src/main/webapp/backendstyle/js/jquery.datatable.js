@@ -19,12 +19,12 @@
 	// 扩展方式2
 	$.fn.datatable = function(options) {
 		var args = $.extend({
-			url_edit : '',
-			url_remove : '',
-			url_move_up : '',
-			url_move_down : '',
-			url_move_show : '',
-			url_load : '',
+			url_edit : '', //编辑或添加的页面接口
+			url_remove : '', //删除
+			url_move_up : '', //上移
+			url_move_down : '', //下移
+			url_move_show : '', //查看
+			url_load : '', //加载
 			parm : {
 				pageNum : 1,
 				pageSize : 10
@@ -138,7 +138,7 @@
 		});
 	}
 	
-	/* 搜索 */
+	/* 移除加载地址后面的参数 */
 	$.fn.removeUrlLoadArgs = function() {
 		var lastIndex =_args.url_load.indexOf('?'); 
 		_args.url_load = _args.url_load.substring(0,lastIndex);
