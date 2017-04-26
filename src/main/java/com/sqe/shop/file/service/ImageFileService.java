@@ -18,11 +18,10 @@ import com.sqe.shop.common.BaseService;
 @Component
 public class ImageFileService extends BaseService {
 
-	public String  uploadImage(MultipartFile attachFile, String uploadPath) {
+	public String uploadImage(MultipartFile attachFile, String uploadPath) {
 		if(attachFile==null){
 			return "";
 		}
-		
 		File dir = new File(uploadPath);
 		checkDir(dir);
 		
@@ -37,7 +36,7 @@ public class ImageFileService extends BaseService {
 					}
 					String ftype = matcher.group();
 					fileName = new Date().getTime() + ftype;
-					uploadPath = uploadPath + "/" + fileName;
+					uploadPath = uploadPath + fileName;
 					BufferedInputStream in = new BufferedInputStream(attachFile.getInputStream());
 					FileOutputStream a = new FileOutputStream(new File(uploadPath));
 					BufferedOutputStream output = new BufferedOutputStream(a);

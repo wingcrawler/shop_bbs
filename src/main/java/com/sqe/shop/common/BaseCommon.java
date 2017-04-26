@@ -33,6 +33,10 @@ public class BaseCommon {
 
 	public HashMap<String, Object> responseOK(String result){
 		result = getText(result);
+		return responseOK1(result);
+	}
+	
+	public HashMap<String, Object> responseOK1(String result){
 		HashMap<String, Object> resMap = new HashMap<String, Object>();
 		resMap.put(Constants.ERROR_NO, Constants.ERRORCODE_SUCCESS);
 		resMap.put(Constants.ERROR_INFO, result);

@@ -43,8 +43,7 @@ public class TxtService extends BaseService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TxtService.class);
 
-	public void exportUser(HttpServletRequest request, HttpServletResponse response, List<User> dataList) {
-        String filePath = "file/txt/";
+	public void exportUser(HttpServletRequest request, HttpServletResponse response, List<User> dataList, String filePath) {
 		checkDir(filePath);
 		String dateStr = DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1);
 		String fileName = "user_"+dateStr+".txt";
@@ -123,7 +122,7 @@ public class TxtService extends BaseService {
 					}
 					String ftype = matcher.group();
 					fileName = new Date().getTime() + ftype;
-					uploadPath = uploadPath + "/" + fileName;
+					uploadPath = uploadPath + fileName;
 					BufferedInputStream in = new BufferedInputStream(attachFile.getInputStream());
 					FileOutputStream a = new FileOutputStream(new File(uploadPath));
 					BufferedOutputStream output = new BufferedOutputStream(a);
@@ -138,10 +137,10 @@ public class TxtService extends BaseService {
 		return "";
 	}
 
-	public String userImport(String filePath) {
+	public String userImport(String fileName) {
 		List<User> list = new ArrayList<User>();
 		try {
-			File file=new File(filePath);
+			File file=new File(fileName);
 			if(file.isFile() && file.exists()){ //判断文件是否存在
 				InputStreamReader read = new InputStreamReader(new FileInputStream(file),"utf-8");//考虑到编码格式
 				BufferedReader bufferedReader = new BufferedReader(read);
@@ -190,6 +189,7 @@ public class TxtService extends BaseService {
 				sb.append("总数/total count:").append(totalCount);
 				sb.append("\r\n");
 				sb.append("有效数/effective count:").append(successCount);
+				deleteFile(fileName);
 				return sb.toString();
 			}else{
 				logger.error("找不到指定的文件");

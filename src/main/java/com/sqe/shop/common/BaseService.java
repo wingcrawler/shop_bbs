@@ -123,4 +123,18 @@ public class BaseService extends BaseCommon{
 		}
 	}
 	
+	/**
+	 * 删除单个文件
+	 * @param filePath
+	 *		 文件目录路径
+	 * @param fileName
+	 *		 文件名称
+	 */
+	public static void deleteFile(String fileName) {
+		File file = new File(fileName);
+		if (file.exists()) {
+			file.delete();
+		}
+	}
+	
 }

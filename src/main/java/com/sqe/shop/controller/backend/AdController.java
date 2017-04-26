@@ -87,7 +87,9 @@ public class AdController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/doSave", method = RequestMethod.POST)
-	public Map<String, Object> doEdit(Advertisement ad, @RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile,MultipartHttpServletRequest multiReq) {
+	public Map<String, Object> doEdit(Advertisement ad, 
+			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile,
+			MultipartHttpServletRequest multiReq) {
 		/*String uploadFilePath = multiReq.getFile("attachFile").getOriginalFilename();*/
 		
 		if(StringUtils.isBlank(ad.getImageUrl())){

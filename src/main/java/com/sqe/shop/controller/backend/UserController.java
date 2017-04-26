@@ -23,6 +23,7 @@ import com.sqe.shop.file.service.TxtService;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.PropertiesUtil;
 
 @Controller
 @RequestMapping("/backend/user")
@@ -102,7 +103,8 @@ public class UserController extends BaseController {
 	@RequestMapping(value="/export", method = RequestMethod.GET)
 	public void export(User user) {
 		List<User> list = userService.getListForExport(user);
-		txtService.exportUser(request,response,list);
+		String filePath = PropertiesUtil.get("path_txt_user_export");
+		txtService.exportUser(request,response,list,filePath);
 	}
 	
 	@ResponseBody
@@ -112,7 +114,7 @@ public class UserController extends BaseController {
 		if(fileUploadService.checkFile(attachFile, "txt")){
 			return responseError(-1, "error_file_formate");
 		}
-		String filePath = "file/txt/";
+		String filePath = PropertiesUtil.get("path_txt_user_import");
 		String fileName = txtService.uploadTxtFile(attachFile, filePath);
 		if (StringUtils.isBlank(fileName)) {
 			return responseError(-1, "error_upload_failed");
@@ -121,7 +123,7 @@ public class UserController extends BaseController {
 		if(StringUtils.isBlank(result)){
 			return responseError(-1, "error_no_user");
 		}
-		return responseOK(result);
+		return responseOK1(result);
 	}
 
 }

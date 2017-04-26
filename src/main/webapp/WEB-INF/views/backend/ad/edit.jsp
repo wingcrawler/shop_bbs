@@ -91,7 +91,10 @@ $(function(){
 	
 	//提交
 	$('#submit').click(function(){
-		$(".form").ajaxSubmit({  
+		$.fn.myAjaxSubmit(".form", "/backend/ad/doSave", "/backend/ad/list");
+	});
+	/* $('#submit').click(function(){
+		$(".form").ajaxSubmit({ 
             type:'post',  
             cache: false,  
             url: "/backend/ad/doSave", 
@@ -108,7 +111,7 @@ $(function(){
 	        	$.commonUtil.showTip(data.errorInfo); 
 	        }   
         });
-	});
+	}); */
 });
 
 

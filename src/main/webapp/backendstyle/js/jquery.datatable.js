@@ -144,9 +144,9 @@
 		_args.url_load = _args.url_load.substring(0,lastIndex);
 	}
 	
-	/* 含图片的表单提交 */
-	$.fn.myAjaxSubmit = function(_submitUrl, _jumpUrl) {
-		$(".form").ajaxSubmit({  
+	/* 含文件的表单提交 */
+	$.fn.myAjaxSubmit = function(elem ,_submitUrl, _jumpUrl) {
+		$(elem).ajaxSubmit({  
             type:'post',  
             cache: false,  
             url: _submitUrl, 
@@ -248,6 +248,10 @@
 								//是否有超链接
 								if ($.commonUtil.isNotBlank(fields.eq(index).attr('url'))) {
 									text = '<a href="' + fields.eq(index).attr("url") + item[fields.eq(index).attr("parm")] + '" target="_blank">' + text + '</a>';
+								}
+								//字段读取的链接地址 一般存于数据库
+								if ($.commonUtil.isNotBlank(fields.eq(index).attr('url-field'))) {
+									text = '<a href="' + item[fields.eq(index).attr("url-field")] + '" target="_blank">' + text + '</a>';
 								}
 								html += '<td>' + text + '</td>';
 							}
