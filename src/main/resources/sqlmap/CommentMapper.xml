@@ -130,6 +130,7 @@
 	select c.context,c.id,n.news_title as newsTitle,c.date,c.user_id as userId, c.`status`,u.username from comment c 
 	LEFT JOIN news n on c.news_id=n.id
 	LEFT JOIN `user` u on c.user_id=u.id
+	where 1=1
 	<if test="parm.newsId != null">
      	and n.id = #{parm.newsId}
    	</if>

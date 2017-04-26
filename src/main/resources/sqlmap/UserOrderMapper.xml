@@ -107,7 +107,30 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select * from user_order where 1=1
+		select p.product_name as productName, u.username, o.order_status as orderStatus,o.order_time as date, 
+		o.order_address as orderAddress
+		from user_order o 
+		LEFT JOIN `user` u on o.user_id=u.id
+		LEFT JOIN product p on o.product_id=p.id 
+		where 1=1
+			<if test="parm.orderAddress != null">
+		     	and o.order_address = #{parm.orderAddress}
+		   	</if>
+			<if test="parm.orderTime != null">
+		     	and o.order_time = #{parm.orderTime}
+		   	</if>
+			<if test="parm.productId != null">
+		     	and o.product_id = #{parm.productId}
+		   	</if>
+			<if test="parm.orderStatus != null">
+		     	and o.order_status = #{parm.orderStatus}
+		   	</if>
+			<if test="parm.remark != null">
+		     	and o.remark = #{parm.remark}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and o.user_id = #{parm.userId}
+		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
 	   	</if>

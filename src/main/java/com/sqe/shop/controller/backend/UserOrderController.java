@@ -3,6 +3,7 @@ package com.sqe.shop.controller.backend;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,28 +15,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseController;
+import com.sqe.shop.model.User;
 import com.sqe.shop.model.UserOrder;
 import com.sqe.shop.service.UserOrderService;
+import com.sqe.shop.service.UserService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
-@RequestMapping("/backend/userOrder")
+@RequestMapping("/backend/order")
 public class UserOrderController extends BaseController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserOrderController.class);
 	
 	@Autowired
 	private UserOrderService userOrderService;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("backend/userOrder/list");
+		ModelAndView model = new ModelAndView("backend/order/list");
 		return model;
 	}
 	
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
-		ModelAndView model = new ModelAndView("backend/userOrder/edit");
+		ModelAndView model = new ModelAndView("backend/order/edit");
 		if(id!=null){
 			UserOrder entity = userOrderService.getById(id);
 			model.addObject("entity", entity);
@@ -45,10 +50,19 @@ public class UserOrderController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value="/getList", method = RequestMethod.GET)
-	public Map<String, Object> getList(UserOrder userOrder,
-			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+	public Map<String, Object> getList(UserOrder userOrder,String username,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		if(StringUtils.isNotBlank(username)){
+			User user = userService.findByName(username);
+			if(user!=null){
+				userOrder.setUserId(user.getId());
+			} else {
+				userOrder.setUserId(-1L);
+			}
+		}
 		Map<String, Object> resMap = new HashMap<String, Object>();
-		PageUtil<UserOrder> page = userOrderService.getBeanListByParm(userOrder, pageNo, pageSize);
+		PageUtil<Map<String, Object>> page = userOrderService.getMapListByParm(userOrder, pageNo, pageSize);
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
 		return resMap;

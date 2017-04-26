@@ -96,7 +96,7 @@ public class LoginController extends BaseController {
 		} else {
 			return responseError(-1, "error_username_pwd");
 		}
-		resMap = responseOK("");
+		resMap = responseOK1("");
 		resMap.put("url", "/backend/index");
 		return resMap;
 	}

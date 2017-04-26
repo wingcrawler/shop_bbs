@@ -163,6 +163,7 @@
 	from product p 
 	LEFT JOIN product_type pt on p.product_type_id=pt.id
 	LEFT JOIN shop s on p.shop_id=s.id
+	where 1=1
 	<if test="parm.productStatus != null">
      	and p.product_status = #{parm.productStatus}
    	</if>

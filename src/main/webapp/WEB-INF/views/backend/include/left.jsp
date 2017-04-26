@@ -71,6 +71,16 @@
 					</li>
 				</ul>
 			</li>
+			<!-- 订单管理 -->
+			<li class="li">
+				<a href="ui-panels.html"> 
+					<i class="fa fa-file-text-o"></i> 
+					<span class="title">${t.m_order }</span>
+				</a>
+				<ul>
+					<li><a href="/backend/order/list"><span class="title">${t.m_order_list }</span></a></li>
+				</ul>
+			</li>
 			<!-- 用户管理 -->
 			<li class="li">
 				<a href="ui-panels.html"> 

@@ -10,6 +10,7 @@
 	<id property="shopRank" column="shop_rank" />
 	<id property="shopTitle" column="shop_title" />
 	<id property="id" column="id" />
+	<id property="shopLevel" column="shop_level" />
 	<id property="shopLicenes" column="shop_licenes" />
 	<id property="userId" column="user_id" />
 </resultMap>  
@@ -19,9 +20,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into shop
-	(shop_status,create_time,shop_qualifies,shop_description,shop_rank,shop_title,shop_licenes,user_id)
+	(shop_status,create_time,shop_qualifies,shop_description,shop_level,shop_rank,shop_title,shop_licenes,user_id)
 	values
-	(#{shopStatus},#{createTime},#{shopQualifies},#{shopDescription},#{shopRank},#{shopTitle},#{shopLicenes},#{userId})
+	(#{shopStatus},#{createTime},#{shopQualifies},#{shopDescription},#{shopLevel},#{shopRank},#{shopTitle},#{shopLicenes},#{userId})
 </insert>
 
 <update id="update">
@@ -39,6 +40,9 @@
 			<if test="shopDescription != null">  
 	        	shop_description=#{shopDescription},
 	    	</if>
+			<if test="shopLevel != null">  
+	        	shop_level=#{shopLevel},
+	    	</if>
 			<if test="shopRank != null">  
 	        	shop_rank=#{shopRank},
 	    	</if>
@@ -48,7 +52,7 @@
 			<if test="shopLicenes != null">  
 	        	shop_licenes=#{shopLicenes},
 	    	</if>
-	    	<if test="userId != null">  
+			<if test="userId != null">  
 	        	user_id=#{userId},
 	    	</if>
 	</set>   
@@ -76,6 +80,9 @@
 		   	</if>
 			<if test="parm.shopDescription != null">
 		     	and shop_description = #{parm.shopDescription}
+		   	</if>
+		   	<if test="parm.shopLevel != null">
+		     	and shop_level = #{parm.shopLevel}
 		   	</if>
 			<if test="parm.shopRank != null">
 		     	and shop_rank = #{parm.shopRank}
@@ -105,6 +112,9 @@
 			<if test="parm.shopDescription != null">
 		     	and shop_description = #{parm.shopDescription}
 		   	</if>
+		   	<if test="parm.shopLevel != null">
+		     	and shop_level = #{parm.shopLevel}
+		   	</if>
 			<if test="parm.shopRank != null">
 		     	and shop_rank = #{parm.shopRank}
 		   	</if>
@@ -131,6 +141,7 @@
 	s.shop_level as shopLevel, s.shop_status as shopStatus, u.username as shopOnwer 
 	from shop s 
 	LEFT JOIN `user` u on s.user_id=u.id
+	where 1=1
 		<if test="parm.shopStatus != null">
 	     	and s.shop_status = #{parm.shopStatus}
 	   	</if>
@@ -143,6 +154,9 @@
 		<if test="parm.shopDescription != null">
 	     	and s.shop_description = #{parm.shopDescription}
 	   	</if>
+	   	<if test="parm.shopLevel != null">
+		     	and shop_level = #{parm.shopLevel}
+		   	</if>
 		<if test="parm.shopRank != null">
 	     	and s.shop_rank = #{parm.shopRank}
 	   	</if>

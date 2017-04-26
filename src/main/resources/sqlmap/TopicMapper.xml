@@ -91,6 +91,7 @@
 	s.section_title as sectionTitle,t.topic_status as topicStatus
 	from topic t
 	LEFT JOIN section s on t.section_id = s.id and s.section_type=1
+	where 1=1
 	<if test="parm.topicStatus != null">
      	and t.topic_status = #{parm.topicStatus}
    	</if>

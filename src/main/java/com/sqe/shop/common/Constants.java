@@ -5,17 +5,36 @@ public class Constants extends BaseCommon{
 	
 	public static final String LOGIN_USER = "login_user";
 	public static final String LOGIN_ADMIN = "login_admin";
-	public static final String CART = "cart";
     public static final int IMG_WIDTH = 300;
     public static final int IMG_HEIGHT = 300;
 
-    public static class OrderStatus {
-        public static final Integer WAIT_PAY = 0;//代付款
-        public static final Integer PAYED = 1;//已付款
-        public static final Integer SHIPPED = 2;//已发货
-        public static final Integer DELETED = 3;//已删除
-        public static final Integer ENDED = 4;//已完成
-    }
+    //订单状态
+    public static final Integer ORDER_PAYING = 0;//待付款
+    public static final Integer ORDER_PAYED = 1;//已付款
+    public static final Integer ORDER_SHIPPED = 2;//已发货
+    public static final Integer ORDER_DELETED = 3;//已删除
+    public static final Integer ORDER_ENDED = 4;//已签收
+    public static final Integer ORDER_BACK = 5;//已退货
+    public static String getOrderType(Integer value) {
+    	if(value==null){
+    		return getText("t_unknow");
+    	}
+		if(value==0){
+			return getText("t_order_paying");
+		} else if(value==1){
+			return getText("t_order_payed");
+		} else if(value==2){
+			return getText("t_order_shipped");
+		} else if(value==3){
+			return getText("t_order_deleted");
+		} else if(value==4){
+			return getText("t_order_ended");
+		} else if(value==5){
+			return getText("t_order_back");
+		} else {
+			return getText("t_unknow");
+		}
+	}
     
     //用户权限
     public static final int ROLE_BUY = 1; //买家

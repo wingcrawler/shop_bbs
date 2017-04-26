@@ -13,6 +13,7 @@ public class Shop extends BaseModel implements Serializable {
 	private Date createTime;
 	private String shopQualifies;
 	private String shopDescription;
+	private Integer shopLevel;
 	private Integer shopRank;
 	private String shopTitle;
 	private Long id;
@@ -42,6 +43,12 @@ public class Shop extends BaseModel implements Serializable {
 	}
 	public void setShopDescription(String shopDescription) {
 		this.shopDescription = shopDescription;
+	}
+	public Integer getShopLevel() {
+		return shopLevel;
+	}
+	public void setShopLevel(Integer shopLevel) {
+		this.shopLevel = shopLevel;
 	}
 	public Integer getShopRank() {
 		return shopRank;

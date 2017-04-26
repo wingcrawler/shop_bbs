@@ -74,8 +74,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(6).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(6).find('ul li').eq(2).addClass('active');
+	$('#main-menu li.li').eq(7).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(7).find('ul li').eq(2).addClass('active');
 	
 	$('#sectionId').optionSelect({
 		compare:'${entity.sectionId}',
