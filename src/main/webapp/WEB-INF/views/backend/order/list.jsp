@@ -78,7 +78,7 @@
 									<th field="productName">${t.t_product_name }</th>
 									<th field="username">${t.t_username }</th>
 									<th field="statusName">${t.t_status }</th>
-									<th field="createTimrStr">${t.t_createtime }</th>
+									<th field="createTimeStr">${t.t_createtime }</th>
 									<th field="orderAddress">${t.t_address }</th>
 									<th field="op" field-role="2" width="80"></th>
 								</tr>
