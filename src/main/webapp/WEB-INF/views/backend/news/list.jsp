@@ -60,7 +60,7 @@
 									<th width="60" field="index">${t.t_no }</th>
 									<th field="newsTitle" url="/backend/comment/list?id=" parm="id">${t.t_title }</th>
 									<th field="typeName">${t.t_type }</th>
-									<th field="newsReaded">${t.t_read }</th>
+									<th field="newsReaded">${t.t_read_count }</th>
 									<th field="newsUp">${t.t_thumup }</th>
 									<th field="createTimeStr">${t.t_createtime }</th>
 									<th field="op" field-role="2,0"></th>

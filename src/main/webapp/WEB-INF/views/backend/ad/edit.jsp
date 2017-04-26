@@ -38,8 +38,8 @@
 					          		<p>${t.t_select_type }<span style="color:#f00">*</span></p>
 									<select class="form-control select" name="type" id="typeSelect">
 										<option value="-1">-- ${t.t_select } --</option>
-										<option value="0">${t.m_ad_active }</option>
-										<option value="1">${t.m_ad_position }</option>
+										<option value="0">${t.t_ad_lb }</option>
+										<option value="1">${t.t_ad_ggw }</option>
 									</select>
 					          	</div>
 					        </div>

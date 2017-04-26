@@ -26,11 +26,11 @@
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
 								<div class="col-sm-3">
-									${t.t_menu }:
+									<label>${t.t_select_type }</label>
 									<select class="form-control select" name="type">
 										<option value="-1">-- ${t.t_select } --</option>
-										<option value="0">${t.m_ad_active }</option>
-										<option value="1">${t.m_ad_position }</option>
+										<option value="0">${t.t_ad_lb }</option>
+										<option value="1">${t.t_ad_ggw }</option>
 									</select>
 								</div>
 								<div class="col-sm-2">

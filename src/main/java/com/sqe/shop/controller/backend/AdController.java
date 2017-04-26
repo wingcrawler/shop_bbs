@@ -69,9 +69,10 @@ public class AdController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value="/getList", method = RequestMethod.GET)
 	public Map<String, Object> getList(Advertisement ad, 
-			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
-		Map<String, Object> resMap = new HashMap<String, Object>();
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		PageUtil<Advertisement> page = adService.getBeanListByParm(ad, pageNo, pageSize);
+		Map<String, Object> resMap = new HashMap<String, Object>();
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
 		return resMap;

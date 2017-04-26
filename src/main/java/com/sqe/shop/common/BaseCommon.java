@@ -12,7 +12,7 @@ public class BaseCommon {
     static {
     }
     
-    public ResourceBundle getBundle() {
+    public static ResourceBundle getBundle() {
     	if(bundle == null){
         	String lang = PropertiesUtil.get("lang");
         	Locale locale = Locale.CHINA;
@@ -24,7 +24,7 @@ public class BaseCommon {
     	return bundle;
 	}
     
-    public String getText(String key) {
+    public static String getText(String key) {
     	if(bundle==null){
     		return Constants.UNKNOW_INFO;
     	}

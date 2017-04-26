@@ -45,7 +45,7 @@ jQuery.commonUtil = {
 				"showMethod": "fadeIn",
 				"hideMethod": "fadeOut"
 			};
-			toastr.info(text, "提示", opts);
+			toastr.info(text, "提示/Tip", opts);
 		}, 400);
 	}
 	

@@ -33,7 +33,7 @@
 									${t.t_status }
 									<select class="form-control select" name="shopStatus">
 										<option value="-1">-- ${t.t_select } --</option>
-										<option value="0">${t.t_product_wait }</option>
+										<option value="0">${t.t_pending }</option>
 										<option value="1">${t.t_on }</option>
 									</select>
 								</div>

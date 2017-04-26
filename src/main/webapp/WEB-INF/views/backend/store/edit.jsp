@@ -35,7 +35,7 @@
 					        	<div class="col-sm-3">
 					          		<p>${t.t_status }</p>
 					          		<select class="form-control select" id="shopStatus" name="shopStatus">
-										<option value="0">${t.t_product_wait }</option>
+										<option value="0">${t.t_pending }</option>
 										<option value="1">${t.t_on }</option>
 									</select>
 					          	</div>

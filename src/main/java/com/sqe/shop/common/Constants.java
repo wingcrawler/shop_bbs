@@ -1,6 +1,6 @@
 package com.sqe.shop.common;
 
-public class Constants {
+public class Constants extends BaseCommon{
 	public static final String UNKNOW_INFO = "Unknow Exception";
 	
 	public static final String LOGIN_USER = "login_user";
@@ -20,6 +20,7 @@ public class Constants {
     //用户权限
     public static final int ROLE_BUY = 1; //买家
     public static final int ROLE_SELL = 2; //卖家
+    public static final int ROLE_ADMIN = 3; //管理员
     
     //错误号
     public static final String ERROR_NO = "errorNo";
@@ -28,8 +29,20 @@ public class Constants {
     public static final int ERRORCODE_FAILED = -1; //失败
     
     //广告类型
-    public static final int AD_TYPE_HDT = 0; //活动图
+    public static final int AD_TYPE_LB = 0; //轮播图
     public static final int AD_TYPE_GGW = 1; //广告位
+    public static String getADType(Integer value) {
+    	if(value==null){
+    		return getText("t_unknow");
+    	}
+		if(value==0){
+			return getText("t_ad_lb");
+		} else if(value==1){
+			return getText("t_ad_ggw");
+		} else {
+			return getText("t_unknow");
+		}
+	}
     
     //产品状态
     public static final int PRODUCT_ON = 1; //上架
@@ -37,14 +50,14 @@ public class Constants {
     public static final int PRODUCT_WAIT = 0; //待审核
     public static String getProductStatus(Integer value) {
     	if(value==null){
-    		return "未知";
+    		return getText("t_unknow");
     	}
 		if(value==1){
-			return "已上架";
+			return getText("t_product_on");
 		} else if(value==2){
-			return "已下架";
+			return getText("t_product_off");
 		} else {
-			return "待审核";
+			return getText("t_pending");
 		}
 	}
     
@@ -53,30 +66,30 @@ public class Constants {
     public static final int NEWS_EN = 2; //英文
     public static String getNewsLang(Integer value) {
     	if(value==null){
-    		return "未知";
+    		return getText("t_unknow");
     	}
 		if(value==0){
-			return "中文";
+			return getText("t_zh");
 		} else if(value==1){
-			return "英文";
+			return getText("t_en");
 		} else {
-			return "未知";
+			return getText("t_unknow");
 		}
 	}
     
     //评论状态
     public static final int COMMENT_OFF = 0; //屏蔽
-    public static final int COMMENT_ON = 1; //显示
+    public static final int COMMENT_ON = 1; //正常
     public static String getCommentStatus(Integer value) {
     	if(value==null){
-    		return "未知";
+    		return getText("t_unknow");
     	}
 		if(value==0){
-			return "已屏蔽";
+			return getText("t_off");
 		} else if(value==1){
-			return "正常";
+			return getText("t_on");
 		} else {
-			return "未知";
+			return getText("t_unknow");
 		}
 	}
     
@@ -85,14 +98,14 @@ public class Constants {
     public static final int INFORM_DONE = 1; //已处理
     public static String getInformStatus(Integer value) {
     	if(value==null){
-    		return "待处理";
+    		return getText("t_undone");
     	}
 		if(value==0){
-			return "待处理";
+			return getText("t_undone");
 		} else if(value==1){
-			return "已处理";
+			return getText("t_done");
 		} else {
-			return "待处理";
+			return getText("t_undone");
 		}
 	}
     
@@ -101,14 +114,14 @@ public class Constants {
     public static final int STORE_ON = 1; //正常
     public static String getStoreStatus(Integer value) {
     	if(value==null){
-    		return "待审核";
+    		return getText("t_pending");
     	}
 		if(value==0){
-			return "待审核";
+			return getText("t_pending");
 		} else if(value==1){
-			return "正常";
+			return getText("t_on");
 		} else {
-			return "待审核";
+			return getText("t_pending");
 		}
 	}
     
@@ -117,14 +130,14 @@ public class Constants {
     public static final int MSG_ON = 1; //已读
     public static String getMsgStatus(Integer value) {
     	if(value==null){
-    		return "未读";
+    		return getText("t_unreaded");
     	}
 		if(value==0){
-			return "未读";
+			return getText("t_unreaded");
 		} else if(value==1){
-			return "已读";
+			return getText("t_readed");
 		} else {
-			return "未读";
+			return getText("t_unreaded");
 		}
 	}
     
@@ -133,14 +146,14 @@ public class Constants {
     public static final int USER_ON = 1; //正常
     public static String getUserStatus(Integer value) {
     	if(value==null){
-    		return "未知";
+    		return getText("t_unknow");
     	}
 		if(value==0){
-			return "已屏蔽";
+			return getText("t_off");
 		} else if(value==1){
-			return "正常";
+			return getText("t_on");
 		} else {
-			return "未知";
+			return getText("t_unknow");
 		}
 	}
     
@@ -149,14 +162,14 @@ public class Constants {
     public static final int SECTION_ON = 1; //正常
     public static String getSectionStatus(Integer value) {
     	if(value==null){
-    		return "关闭";
+    		return getText("t_off");
     	}
 		if(value==0){
-			return "屏蔽";
+			return getText("t_off");
 		} else if(value==1){
-			return "正常";
+			return getText("t_on");
 		} else {
-			return "关闭";
+			return getText("t_off");
 		}
 	}
     
@@ -165,14 +178,14 @@ public class Constants {
     public static final int TOPIC_ON = 1; //正常
     public static String getTopicStatus(Integer value) {
     	if(value==null){
-    		return "关闭";
+    		return getText("t_off");
     	}
 		if(value==0){
-			return "关闭";
+			return getText("t_off");
 		} else if(value==1){
-			return "正常";
+			return getText("t_on");
 		} else {
-			return "关闭";
+			return getText("t_off");
 		}
 	}
     
@@ -181,14 +194,14 @@ public class Constants {
     public static final int THREAD_EN = 0; //英文
     public static String getThreadType(Integer value) {
     	if(value==null){
-    		return "未知";
+    		return getText("t_unknow");
     	}
 		if(value==0){
-			return "英文";
+			return getText("t_en");
 		} else if(value==1){
-			return "中文";
+			return getText("t_zh");
 		} else {
-			return "未知";
+			return getText("t_unknow");
 		}
 	}
 }

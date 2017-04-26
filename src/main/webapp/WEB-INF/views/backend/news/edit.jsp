@@ -47,7 +47,7 @@
 									</select>
 					          	</div>
 					          	<div class="col-sm-3">
-					        		<p>${t.t_read }</p>
+					        		<p>${t.t_read_count }</p>
 					            	<input class="form-control" type="text" name="newsReaded" value="${entity.newsReaded}">
 					    		</div>
 					        	<div class="col-sm-3">
