@@ -168,7 +168,7 @@
      	and p.product_status = #{parm.productStatus}
    	</if>
    	<if test="parm.productName != null">
-     	and product_name like  "%"#{parm.productName}"%"
+     	and p.product_name like  "%"#{parm.productName}"%"
    	</if>
    	<if test="parm.shopId != null">
     	and p.shop_id = #{parm.shopId}

@@ -3,7 +3,9 @@ package com.sqe.shop.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserOrder implements Serializable {
+import com.sqe.shop.common.BaseModel;
+
+public class UserOrder extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

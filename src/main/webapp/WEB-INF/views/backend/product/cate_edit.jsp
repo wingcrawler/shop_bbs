@@ -5,7 +5,7 @@
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.title_product_edit }</title>
+	<title>${t.t_product_type_edit }</title>
 </head>
 <body class="page-body">
 	<div class="page-container">
@@ -20,7 +20,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a><i class="fa-location-arrow"> ${t.title_ad_edit }</i></a> 
+							<a><i class="fa-location-arrow"> ${t.t_product_type_edit }</i></a> 
 						</h3>
 					</div>
 					<div class="panel-body">

@@ -66,7 +66,6 @@
 								<i class="fa-download"></i>
 								<span>${t.t_export }</span>
 							</button> --%>
-							<a href="/backend/shop/edit" target="_blank"><i class="fa-plus"></i></a>
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
 					</div>

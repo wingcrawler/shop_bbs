@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.backend;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import com.sqe.shop.model.User;
 import com.sqe.shop.model.UserOrder;
 import com.sqe.shop.service.UserOrderService;
 import com.sqe.shop.service.UserService;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
@@ -41,10 +43,15 @@ public class UserOrderController extends BaseController {
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
 		ModelAndView model = new ModelAndView("backend/order/edit");
+		Map<String, Object> entity = new HashMap<>();
 		if(id!=null){
-			UserOrder entity = userOrderService.getById(id);
-			model.addObject("entity", entity);
+			entity = userOrderService.getMapById(id);
+			if(entity!=null){
+				Date date = (Date) entity.get("date");
+				entity.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
+			}
 		}
+		model.addObject("entity", entity);
 		return model;
 	}
 	

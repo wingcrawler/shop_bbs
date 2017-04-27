@@ -108,7 +108,7 @@
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 		select p.product_name as productName, u.username, o.order_status as orderStatus,o.order_time as date, 
-		o.order_address as orderAddress
+		o.order_address as orderAddress,o.id
 		from user_order o 
 		LEFT JOIN `user` u on o.user_id=u.id
 		LEFT JOIN product p on o.product_id=p.id 
@@ -137,6 +137,16 @@
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
 		</if>
+</select>
+
+<select id="getMapById" resultType="HashMap">
+	select p.product_name as productName, u.username, o.order_status as orderStatus,o.order_time as date, 
+		o.order_address as orderAddress,o.id,s.shop_title as shopName
+		from user_order o 
+		LEFT JOIN `user` u on o.user_id=u.id
+		LEFT JOIN product p on o.product_id=p.id 
+		LEFT JOIN shop s on p.shop_id=s.id
+		WHERE o.id=#{id} 
 </select>
 
 

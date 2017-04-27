@@ -64,19 +64,17 @@ public class ProductService extends AdapterService implements BaseService {
 		Map<String, Object> parm = queryParm(product);
 		parm.put("start", pageUtil.getStartRow());
 		parm.put("limit", pageUtil.getPageSize());
+		parm.put("orderby", "p.product_rank asc, p.id desc" );
 		
 		int count = productMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
 			list = productMapper.getMapListByParm(parm);
 			for(Map<String, Object> map : list){
-				Integer status = 0;
-				String statusStr = map.get("productStatus")==null?"":map.get("productStatus").toString();
-				if(StringUtils.isNotBlank(statusStr)){
-					status = Integer.valueOf(statusStr);
-				}
-				map.put("productStatusStr", Constants.getProductStatus(status));	
+				String statusStr = map.get("productStatus")==null?"0":map.get("productStatus").toString();
+				map.put("productStatusStr", Constants.getProductStatus(Integer.valueOf(statusStr)));	
 			}
 		}
 		pageUtil.setList(list);

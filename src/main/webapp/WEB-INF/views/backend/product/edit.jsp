@@ -22,7 +22,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a><i class="fa-location-arrow"> ${t.title_ad_edit }</i></a> 
+							<a><i class="fa-location-arrow"> ${t.title_product_edit }</i></a> 
 						</h3>
 					</div>
 					<div class="panel-body">

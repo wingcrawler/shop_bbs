@@ -57,7 +57,7 @@
 					        <div class="form-group">
 					        	<div class="col-sm-12">
 					        		<p>${t.t_img_list }</p>
-					        		<textarea id="myEditor" name="imgList">${entity.newsContext}</textarea>
+					        		<textarea id="myEditor" name="imgList"></textarea>
 									<script type="text/javascript">
 										var ue = UE.getEditor('myEditor',{
 											toolbars: [

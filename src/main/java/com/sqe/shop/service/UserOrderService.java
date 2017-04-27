@@ -100,4 +100,8 @@ public class UserOrderService extends AdapterService implements BaseService {
 		return parm;
 	}
 
+	public Map<String, Object> getMapById(Long id) {
+		return userOrderMapper.getMapById(id);
+	}
+
 }

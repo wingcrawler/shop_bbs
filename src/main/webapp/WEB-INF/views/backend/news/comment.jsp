@@ -26,7 +26,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a><i class="fa-location-arrow"> ${t.title_news_edit }</i></a> 
+							<a><i class="fa-location-arrow"> ${t.title_news_comment }</i></a> 
 						</h3>
 					</div>
 					<div class="panel-body">
@@ -48,7 +48,7 @@
 					          	</div>
 					          	<div class="col-sm-3">
 					        		<p>${t.t_username }</p>
-					            	<input class="form-control" type="text" readonly="readonly" value="${entity.username}">
+					            	<input class="form-control" type="text" readonly="readonly" value="${entity.userName}">
 					    		</div>
 					        </div>
 					        <div class="form-group">
