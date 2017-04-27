@@ -6,7 +6,11 @@
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
 	<title>${t.t_store_edit }</title>
-	
+	<script src="/ue/ueditor.config.js"></script>
+	<script src="/ue/ueditor.all.js"></script>
+	<!-- <script type="text/javascript" charset="utf-8" src="/ue/lang/en/en.js"></script> -->
+	<script type="text/javascript" charset="utf-8" src="/ue/lang/zh-cn/zh-cn.js"></script>
+	<link href="/ue/themes/default/css/ueditor.css" rel="stylesheet">
 </head>
 <body class="page-body">
 	<div class="page-container">
@@ -40,19 +44,31 @@
 									</select>
 					          	</div>
 					          	<div class="col-sm-3">
-					        		<p>${t.t_weight }<span style="color:#f00">*</span></p>
+					        		<p>${t.t_weight }</p>
 					            	<input class="form-control" type="text" name="shopRank" value="${entity.shopRank}">
 					    		</div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
 					        		<p>${t.t_desc }</p>
-					        		<textarea id="myEditor" name="shopDescription" cols="80" rows="6">${entity.shopDescription }</textarea>
+					        		<textarea name="shopDescription" cols="80" rows="6">${entity.shopDescription }</textarea>
 					    		</div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
-					        		上传
+					        		<p>${t.t_img_list }</p>
+					        		<textarea id="myEditor" name="imgList">${entity.newsContext}</textarea>
+									<script type="text/javascript">
+										var ue = UE.getEditor('myEditor',{
+											toolbars: [
+									           ['fullscreen', 'source','simpleupload', 'insertimage']
+									       ],
+									       initialFrameHeight:500,
+									       initialFrameWidth:'100%'
+									       /* autoHeightEnabled: true,
+									       autoFloatEnabled: true */
+										});
+									</script>
 					    		</div>
 					        </div>
 					        <div class="form-group">

@@ -28,11 +28,11 @@
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
 								<div class="col-sm-3">
-									${t.t_product_name }:
+									${t.t_product_name }
 									<input type="text" class="form-control input" name="productName" value="">
 								</div>
 								<div class="col-sm-3">
-									${t.t_product_status }:
+									${t.t_product_status }
 									<select class="form-control select" name="productStatus" id="StatusSelect">
 										<option value="">-- ${t.t_select } --</option>
 										<option value="0">${t.t_pending }</option>
@@ -41,7 +41,7 @@
 									</select>
 								</div>
 								<div class="col-sm-3">
-									${t.t_select_store }:
+									${t.t_select_store }
 									<select class="form-control select" name="shopId">
 										<option value="-1">-- ${t.t_select } --</option>
 										<c:forEach items="${shopList}" var="item">

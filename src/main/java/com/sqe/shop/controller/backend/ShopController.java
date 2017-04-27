@@ -100,7 +100,7 @@ public class ShopController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value="/doSave", method = RequestMethod.POST)
-	public Map<String, Object> save(Shop shop) {
+	public Map<String, Object> save(Shop shop, String imgList) {
 		if(StringUtils.isBlank(shop.getShopTitle())){
 			return responseError(-1, "error_empty_title");
 		}

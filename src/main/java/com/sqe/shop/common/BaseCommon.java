@@ -45,6 +45,10 @@ public class BaseCommon {
 	
 	public HashMap<String, Object> responseError(Integer errorNo, String errorInfo){
 		errorInfo = getText(errorInfo);
+		return responseError1(errorNo, errorInfo);
+	}
+	
+	public HashMap<String, Object> responseError1(Integer errorNo, String errorInfo){
 		HashMap<String, Object> resMap = new HashMap<String, Object>();
 		resMap.put(Constants.ERROR_NO, errorNo);
 		resMap.put(Constants.ERROR_INFO, errorInfo);

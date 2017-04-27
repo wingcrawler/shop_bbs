@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public class BaseService extends BaseCommon{
+	
+	public final int IMG_MAXI_SIZE = 524288;
 
 	/**
 	 * 创建文件目录

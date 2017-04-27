@@ -29,7 +29,7 @@
 							<div class="form-group">
 								<c:if test="${pageflag==1 }">
 								<div class="col-sm-6">
-									${t.t_select_store }:
+									${t.t_select_store }
 									<select class="form-control select" name="shopId" id="shopId">
 										<option value="-1">-- ${t.t_select } --</option>
 										<c:forEach items="${shopList}" var="item">
@@ -40,7 +40,7 @@
 								</c:if>
 								<c:if test="${pageflag==2 }">
 								<div class="col-sm-2">
-									${t.t_select }${t.t_status }:
+									${t.t_select }${t.t_status }
 									<select class="form-control select" name="messageStatus" id="messageStatus">
 										<option value="-1">-- ${t.t_select } --</option>
 										<option value="0">${t.t_unreaded }</option>

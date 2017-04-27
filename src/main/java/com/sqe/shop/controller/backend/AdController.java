@@ -107,9 +107,11 @@ public class AdController extends BaseController {
 		
 		if(attachFile!=null){
 	    	String uploadPath = PropertiesUtil.get("path_img_ad"); 
-		    String fileName = imageFileService.uploadImage(attachFile, uploadPath);
-		    if(StringUtils.isBlank(uploadPath)){
-		    	return responseError(-1, "error_upload_failed");
+		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile, uploadPath);
+		    int errorNo = (int) resMap.get("errorNo"); 
+		    String fileName = resMap.get("errorInfo").toString(); 
+		    if(errorNo!=0){
+		    	return resMap;
 		    }
 		    ad.setImagePath(PropertiesUtil.get("path_img_ad_save")+fileName);
 	    }

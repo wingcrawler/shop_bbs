@@ -26,7 +26,7 @@
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
 								<div class="col-sm-3">
-									${t.t_type_name }:
+									${t.t_type_name }
 									<input type="text" class="form-control input" name="typeName" value="">
 								</div>
 								<div class="col-sm-2">
