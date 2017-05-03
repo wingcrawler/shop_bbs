@@ -35,7 +35,7 @@
 								</div>
 								<div class="col-sm-2">
 									<br>
-									<button class="btn btn-info btn-icon" onclick="search()">
+									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
 										<i class="fa-search"></i>
 										<span>${t.t_search }</span>
 									</button>
@@ -95,14 +95,6 @@ $(function(){
 		}
 	}); 
 });
-
-function search(){
-	var type=$('select[name="type"]').val();
-	var parm = {
-		type:type
-	}
-	$.fn.doSearch(parm);
-}
 </script>
 </body>
 </html>
