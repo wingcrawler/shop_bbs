@@ -18,6 +18,7 @@ public class BackendController extends BaseController {
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
 		model = new ModelAndView("backend/index");
+		model.addObject("user", this.getCurrentUser());
 		return model;
 	}
 
