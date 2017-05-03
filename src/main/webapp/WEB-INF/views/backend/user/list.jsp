@@ -65,7 +65,7 @@
 							<thead>
 								<tr>
 									<th width="60" field="index">${t.t_no }</th>
-									<th field="username" url="/backend/user/detail?id=" parm="id">${t.t_title }</th>
+									<th field="username" url="/backend/user/detail?id=" parm="id">${t.t_username }</th>
 									<th field="userPhone">${t.t_mobile }</th>
 									<th field="userEmail">${t.t_email }</th>
 									<th field="statusName">${t.t_status }</th>
