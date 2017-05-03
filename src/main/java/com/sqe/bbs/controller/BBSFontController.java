@@ -30,13 +30,13 @@ public class BBSFontController extends BaseController {
 	
 	@RequestMapping(value="/plate", method = RequestMethod.GET)
 	public ModelAndView plate() {
-		ModelAndView model = new ModelAndView("/bbs/plate");
+		ModelAndView model = new ModelAndView("/plate");
 		return model;
 	}
 	
 	@RequestMapping(value="/topic", method = RequestMethod.GET)
 	public ModelAndView topic() {
-		ModelAndView model = new ModelAndView("backend/bbs/topic");
+		ModelAndView model = new ModelAndView("/topic");
 		return model;
 	}
 	
