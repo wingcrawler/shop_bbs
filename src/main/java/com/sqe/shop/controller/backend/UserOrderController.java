@@ -43,7 +43,7 @@ public class UserOrderController extends BaseController {
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
 		ModelAndView model = new ModelAndView("backend/order/edit");
-		Map<String, Object> entity = new HashMap<>();
+		Map<String, Object> entity = new HashMap<String, Object>();
 		if(id!=null){
 			entity = userOrderService.getMapById(id);
 			if(entity!=null){

@@ -72,7 +72,7 @@ public class AdvertisementService extends AdapterService implements BaseService 
 		
 		int count = advertisementMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
-		List<Map<String, Object>> list = new ArrayList<>();
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		if(count!=0){
 			list = advertisementMapper.getMapListByParm(parm);
 		}

@@ -5,7 +5,7 @@
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.t_order_Edit }</title>
+	<title>${t.t_order_detaial }</title>
 </head>
 <body class="page-body">
 	<div class="page-container">
@@ -20,19 +20,25 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a><i class="fa-location-arrow"> ${t.t_order_Edit }</i></a> 
+							<a><i class="fa-location-arrow"> ${t.t_order_detaial }</i></a> 
 						</h3>
 					</div>
 					<div class="panel-body">
 						<form class="form-horizontal form" action="javascript:void(0);">
 					        <div class="form-group">
-					          	<div class="col-sm-6">
+					          	<div class="col-sm-12">
 					          		<input type="hidden" value="${entity.id}" name="id" />
-					          		<p>${t.t_title }<span style="color:#f00">*</span></p>
-					            	<input class="form-control" type="text" readonly  value="${entity.productName}">
+					          		<p>${t.t_product_name }: <b>${entity.productName}</b></p>
 					          	</div>
+					        </div>
+					        <div class="form-group">
+					        	<div class="col-sm-12">
+					        		<p>${t.t_store_name }: <b>${entity.shopName}</b></p>
+					        	</div>
+					        </div>
+					        <div class="form-group">
 					        	<div class="col-sm-3">
-					          		${t.t_status }
+					          		${t.t_status }:
 									<select class="form-control select" name="orderStatus" id="orderStatus">
 										<option value="0">${t.t_order_paying }</option>
 										<option value="1">${t.t_order_payed }</option>
@@ -42,26 +48,21 @@
 										<option value="5">${t.t_order_back }</option>
 									</select>
 					          	</div>
-					          	<div class="col-sm-3">
-					        		<p>${t.t_store_name }</p>
-					            	<input class="form-control" type="text" readonly value="${entity.shopName}">
-					    		</div>
 					        </div>
 					        <div class="form-group">
-					        	<div class="col-sm-3">
-					        		<p>${t.t_buy }</p>
-					            	<input class="form-control" type="text" readonly value="${entity.username}">
-					    		</div>
-					    		<div class="col-sm-3">
-					        		<p>${t.t_address }</p>
-					            	<input class="form-control" type="text" readonly value="${entity.orderAddress}">
-					    		</div>
-					    		<div class="col-sm-3">
-					        		<p>${t.t_order_createtime }</p>
-					            	<input class="form-control" type="text" readonly value="${entity.createTimeStr}">
-					    		</div>
+					        	<div class="col-sm-12">
+					        		<p>${t.t_buy }: <b>${entity.username}</b></p>
+					        	</div>
 					        </div>
 					        <div class="form-group">
+					        	<div class="col-sm-12">
+					        		<p>${t.t_order_createtime }: <b>${entity.createTimeStr}</b></p>
+					        	</div>
+					        </div>
+					        <div class="form-group">
+					        	<div class="col-sm-12">
+					        		<p>${t.t_address }: <b>${entity.orderAddress}</b></p>
+					    		</div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
@@ -80,8 +81,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(4).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(4).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(5).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(5).find('ul li').eq(0).addClass('active');
 	
 	$('#orderStatus').optionSelect({
 		compare:'${entity.orderStatus}',
