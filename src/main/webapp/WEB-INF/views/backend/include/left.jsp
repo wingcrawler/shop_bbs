@@ -20,7 +20,7 @@
 		</header>
 
 		<ul id="main-menu" class="main-menu">
-			<li class="li active opened">
+			<li class="li">
 				<a href="/backend/index">
 					<i class="linecons-globe"></i>
 					<span class="title">${t.home}</span>
