@@ -31,5 +31,13 @@
 			
 		</div>
 	</div>
+	
+<script type="text/javascript">
+$(function(){
+	$('#main-menu li.li').removeClass('active').removeClass('opened');
+	$('#main-menu li.li').eq(0).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(0).find('ul li').eq(0).addClass('active');
+});
+</script>
 </body>
 </html>
