@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseFrontController;
 
 @Controller
 @RequestMapping("/bbs")
-public class BBSFontController extends BaseController {
+public class BBSFontController extends BaseFrontController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BBSFontController.class);
 	
