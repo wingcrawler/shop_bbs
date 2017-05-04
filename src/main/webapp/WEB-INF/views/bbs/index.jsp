@@ -17,8 +17,7 @@
 			<p>二级板块</p>
 
 			<p>
-				<a class="btn btn-primary btn-large"
-					href="http://github.com/vito16/shop">Github</a>
+			${message}
 			</p>
 		</div>
 
