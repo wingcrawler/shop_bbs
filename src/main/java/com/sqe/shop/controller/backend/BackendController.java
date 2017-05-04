@@ -16,7 +16,7 @@ public class BackendController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BackendController.class);
 	
-	@RequiresRoles(value="admin")
+	/*@RequiresRoles(value="admin")*/
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
 		model = new ModelAndView("backend/index");

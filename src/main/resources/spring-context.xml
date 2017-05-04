@@ -18,8 +18,6 @@
 
 	<bean id="SpringContextUtil" class="com.sqe.shop.util.SpringContextUtil" lazy-init="false"/>
 	
-	<aop:config proxy-target-class="true"/>
-	
 	<import resource="classpath:config/mybatis-config.xml"/>
 	<import resource="classpath:config/shiro-config.xml"/>
 
