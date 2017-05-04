@@ -4,7 +4,7 @@
 <html>
 <head>
 	<jsp:include page="include/meta.jsp"></jsp:include>
-	<title>Single</title>
+	<title>${product.productName }</title>
 
 	<link rel="stylesheet" href="/frontstyle/css/etalage.css">
 	<script src="/frontstyle/js/jquery.etalage.min.js"></script>
@@ -23,11 +23,6 @@
 		});
 	</script>
 	
-	<!-- pop-up-box -->
-	<script type="text/javascript" src="/frontstyle/js/modernizr.custom.min.js"></script>    
-	<link href="/frontstyle/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
-	<script src="/frontstyle/js/jquery.magnific-popup.js" type="text/javascript"></script>
-	<!--//pop-up-box -->
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
@@ -54,35 +49,19 @@
 									</li>
 								</c:if>
 							</c:forEach>
-							<!-- <li class="etalage_thumb thumb_1" style="display: none; opacity: 0; background-image: none;">
-								<a href="optionallink.html">
-									<img class="etalage_thumb_image" src="/frontstyle/images/d1.jpg" style="display: inline; width: 300px; height: 400px; opacity: 1;">
-									<img class="etalage_source_image" src="/frontstyle/images/d1.jpg" title="">
-								</a>
-							</li>
-							<li class="etalage_thumb thumb_2" style="display: none; opacity: 0; background-image: none;">
-								<img class="etalage_thumb_image" src="/frontstyle/images/d2.jpg" style="display: inline; width: 300px; height: 400px; opacity: 1;">
-								<img class="etalage_source_image" src="/frontstyle/images/d2.jpg" title="">
-							</li>
-							<li class="etalage_thumb thumb_3" style="display: none; opacity: 0; background-image: none;">
-								<img class="etalage_thumb_image" src="/frontstyle/images/d3.jpg" style="display: inline; width: 300px; height: 400px; opacity: 1;">
-								<img class="etalage_source_image" src="/frontstyle/images/d3.jpg">
-							</li>
-						    <li class="etalage_thumb thumb_4 etalage_thumb_active" style="display: list-item; opacity: 1; background-image: none;">
-								<img class="etalage_thumb_image" src="/frontstyle/images/d4.jpg" style="display: inline; width: 300px; height: 400px; opacity: 1;">
-								<img class="etalage_source_image" src="/frontstyle/images/d4.jpg">
-							</li> -->
 						</ul>
 						<div class="clearfix"></div>		
 					</div>
 					<div class="single-left-right">
 						<div class="single-left-info">
 							<h3>${product.productName }</h3>
-							<a href="#" class="view">View product details</a>
-							<p>$ ${product.productPrice } <a href="#" class="view">CLICK FOR OFFER</a></p>
+							<a href="#product-details" class="view">${t.t_view_detail }</a>
+							<p>$ ${product.productPrice }
+								<!-- <a href="#" class="view">CLICK FOR OFFER</a> -->
+							</p>
 						</div>
 						<div class="select-size">
-							<p>Select a size</p>
+							<p>${t.t_select_size }</p>
 								<ul>
 									 <li><a href="#">S</a></li>
 									 <li><a href="#">M</a></li>
@@ -90,11 +69,11 @@
 									 <li><a href="#">XL</a></li>
 								</ul>
 							<div class="buy-now">
-								<a href="#">BYE NOW</a>
+								<a href="#">${t.t_buynow }</a>
 							</div>
 							<div class="wishlist">
-								<a class="play-icon popup-with-zoom-anim" href="#small-dialog2">Add to Wishlist</a>
-								<div id="small-dialog2" class="mfp-hide">
+								<a class="play-icon popup-with-zoom-anim" href="#small-dialog2">${t.t_add_wishlist }</a>
+								<!-- <div id="small-dialog2" class="mfp-hide">
 									<h3>Create Account</h3> 
 									<div class="social-sits">
 										<ul>
@@ -126,13 +105,13 @@
 											mainClass: 'my-mfp-zoom-in'
 										});
 									});
-								</script>	
+								</script>	 -->
 							</div>
 							<div class="clearfix"> </div>
-							<div class="free">
+							<!-- <div class="free">
 								<p>20 day returns Free Delivery *</p>
-							</div>
-							<div class="delivery">
+							</div> -->
+							<!-- <div class="delivery">
 								<a class="play-icon popup-with-zoom-anim" href="#small-dialog">Check delivery options</a>
 								<div id="small-dialog" class="mfp-hide">
 									<h3>DELIVERY TIME & COD AVAILABILITY</h3>
@@ -147,18 +126,18 @@
 									</div>
 									<div class="clearfix"> </div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<div class="clearfix"> </div>
 					
-					<div class="product-details">
-						<h3>PRODUCT DETAILS</h3>
+					<div class="product-details" id="product-details" name="product-details">
+						<h3>${t.t_product_detail }</h3>
 						<p>${product.productDescripton }</p>
 					</div>
 					
 					<div class="related">
-						<h3>RELATED PRODUCTS</h3>
+						<h3>${t.t_related_product }</h3>
 						<div class="related-grids">
 							<div class="related-grid">
 								<div class="col-md-9 related-left">

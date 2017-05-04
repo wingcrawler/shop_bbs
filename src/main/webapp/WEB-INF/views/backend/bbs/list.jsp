@@ -106,7 +106,7 @@ $(function(){
 		url_load : '/backend/thread/getList',
 		url_remove : '/backend/thread/doDelete',
 		backFn : function(p) {
-			// console.log(p);
+			 console.log(p);
 		}
 	}); 
 });
