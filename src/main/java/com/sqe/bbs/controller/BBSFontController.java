@@ -22,7 +22,7 @@ public class BBSFontController extends BaseController {
 	
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("front/bbs/index");
+		ModelAndView model = new ModelAndView("bbs/index");
 		String message = "这个是要传递的数据";
 		model.addObject("message", message);
 		return model;
@@ -30,13 +30,13 @@ public class BBSFontController extends BaseController {
 	
 	@RequestMapping(value="/plate", method = RequestMethod.GET)
 	public ModelAndView plate() {
-		ModelAndView model = new ModelAndView("/plate");
+		ModelAndView model = new ModelAndView("bbs/plate");
 		return model;
 	}
 	
 	@RequestMapping(value="/topic", method = RequestMethod.GET)
 	public ModelAndView topic() {
-		ModelAndView model = new ModelAndView("/topic");
+		ModelAndView model = new ModelAndView("bbs/topic");
 		return model;
 	}
 	
