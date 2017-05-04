@@ -91,8 +91,10 @@ public class AdvertisementService extends AdapterService implements BaseService 
 	
 	private Map<String, Object> queryParm(Advertisement ad) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		if(ad.getType()!=null && ad.getType()>=0){
-			parm.put("type", ad.getType());
+		if(ad!=null){
+			if(ad.getType()!=null && ad.getType()>=0){
+				parm.put("type", ad.getType());
+			}
 		}
 		return parm;
 	}

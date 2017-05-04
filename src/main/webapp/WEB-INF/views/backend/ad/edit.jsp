@@ -55,12 +55,14 @@
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
-					        		<c:if test="${fn:length(entity.imageUrl)>0}">
-					        			<a href="${entity.imageUrl}" target="_blank"><img border="0" src="${entity.imagePath}" /></a> 
+					        		<%-- <c:if test="${fn:length(entity.imageUrl)>0}">
+					        			 <a href="${entity.imageUrl}" target="_blank"><img border="0" width="100%" src="${entity.imagePath}" /></a>
 					        		</c:if>
     				        		<c:if test="${fn:length(entity.imageUrl)<=0}">
-					        			<input type="file" name="attachFile" id="attachFile" accept="image/*"/><span style="color:#f00">*</span>
-					        		</c:if>
+					        			<input type="file" name="attachFile" id="attachFile" accept="image/*"/><span style="color:#f00">* ${t.t_advice_size }：1349*716</span>
+					        		</c:if> --%>
+					        		<input type="file" name="attachFile" id="attachFile" accept="image/*"/><span style="color:#f00">* ${t.t_advice_size }：1349*716</span>
+					        		<a href="${entity.imageUrl}" target="_blank"><img border="0" width="100%" src="${entity.imagePath}" /></a>
 					        	</div>
 					        </div>
 					        <div class="form-group">

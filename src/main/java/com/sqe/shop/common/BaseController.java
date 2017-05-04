@@ -27,6 +27,8 @@ public class BaseController extends BaseCommon {
         this.request = request;
         this.response = response;
         request.setAttribute("t", this.getBundle());
+        
+        //后台管理页面查询未读私信
         Message message = new Message();
         message.setReceiveId(-1L);
         message.setMessageStatus(0);

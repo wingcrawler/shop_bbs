@@ -33,11 +33,11 @@ html,body {
 }
 .header-right ul li.phone{
 	padding-left: 1.5em;
-	background: url(../images/phone.png) no-repeat 0px 3px;
+	background: url(/frontstyle/images/phone.png) no-repeat 0px 3px;
 }
 .header-right ul li.mail{
 	padding-left: 1.5em;
-	background: url(../images/msg.png) no-repeat 0px 4px;
+	background: url(/frontstyle/images/msg.png) no-repeat 0px 4px;
 }
 .header-right ul li.mail a{
 	color:#7e7f84;
@@ -55,12 +55,12 @@ html,body {
 	position:relative;
 }
 .header-right ul li.checkout a span.cart{
-	background: url(../images/add.png) no-repeat 0px 0px;
+	background: url(/frontstyle/images/add.png) no-repeat 0px 0px;
 	padding-left: 35px;
 	margin-right: 15px;
 }
 .header-right ul li.checkout a span.check{
-	background: url(../images/droup.png) no-repeat 79px 0px;
+	background: url(/frontstyle/images/droup.png) no-repeat 79px 0px;
 	padding-right: 35px;
 	text-transform: uppercase;
 }
@@ -168,7 +168,7 @@ ul.navig li a:after{
 }
 .search input[type="text"] {
   display: inline-block;
-  background: url(../images/search.png) no-repeat 0px 14px;
+  background: url(/frontstyle/images/search.png) no-repeat 0px 14px;
   border: none;
   margin: 0;
   outline: none;
@@ -178,16 +178,16 @@ ul.navig li a:after{
 }
 /*-- banner --*/
 .banner-bg{
-	background:url(../images/6.jpg) no-repeat 0px 0px;
+	/* background:url(/frontstyle/images/6.jpg) no-repeat 0px 0px; */
 	background-size:cover;
 	min-height: 716px;
 }
 .banner-img{
-	background:url(../images/1.jpg) no-repeat 0px 0px;
+	/* background:url(/frontstyle/images/1.jpg) no-repeat 0px 0px; */
 	background-size: cover;
 }
 .banner-img2{
-	background:url(../images/4.jpg) no-repeat 0px 0px;
+	/* background:url(/frontstyle/images/4.jpg) no-repeat 0px 0px; */
 	background-size: cover;
 }
 .banner-info {
@@ -323,7 +323,7 @@ ul.navig li a:after{
 	text-decoration: none;
 	height: 61px;
 	width: 55px;
-	background: transparent url("../images/themes.png") no-repeat left top;
+	background: transparent url("/frontstyle/images/themes.png") no-repeat left top;
 	margin-top: -65px;
 }
 .callbacks_nav:active {
@@ -417,7 +417,7 @@ ul.navig li a:after{
 ul.social-slide li i{
 	width:70px;
 	height:74px;
-	background:url(../images/img-resources.png)no-repeat;
+	background:url(/frontstyle/images/img-resources.png)no-repeat;
 	display: inline-block;
 	margin:0px 15px;
 }
@@ -736,7 +736,7 @@ a.detail1{
 	display:inline-block;
 }
 .social-icons ul a.facebook{
-	background:url(../images/social.png) no-repeat 0px 0px;
+	background:url(/frontstyle/images/social.png) no-repeat 0px 0px;
 	width:22px;
 	height:22px;
 	display:block;
@@ -747,7 +747,7 @@ a.detail1{
 	-ms-transition: 0.5s all;
 }
 .social-icons ul a.twitter{
-	background: url(../images/social.png) no-repeat -33px 0px;
+	background: url(/frontstyle/images/social.png) no-repeat -33px 0px;
 	width:22px;
 	height:22px;
 	display:block;
@@ -759,7 +759,7 @@ a.detail1{
 	-ms-transition: 0.5s all;
 }
 .social-icons ul a.chrome{
-	background: url(../images/social.png) no-repeat -70px 0px;
+	background: url(/frontstyle/images/social.png) no-repeat -70px 0px;
 	width:22px;
 	height:22px;
 	display:block;
@@ -771,7 +771,7 @@ a.detail1{
 	-ms-transition: 0.5s all;
 }
 .social-icons ul a.vimeo{
-	background: url(../images/social.png) no-repeat -106px 0px;
+	background: url(/frontstyle/images/social.png) no-repeat -106px 0px;
 	width:22px;
 	height:22px;
 	display:block;
@@ -783,7 +783,7 @@ a.detail1{
 	-ms-transition: 0.5s all;
 }
 .social-icons ul a.rss{
-	background: url(../images/social.png) no-repeat -143px 0px;
+	background: url(/frontstyle/images/social.png) no-repeat -143px 0px;
 	width:22px;
 	height:22px;
 	display:block;
@@ -794,19 +794,19 @@ a.detail1{
 	-ms-transition: 0.5s all;
 }
 .social-icons ul a.facebook:hover{
-	background:url(../images/social.png) no-repeat 0px -23px;
+	background:url(/frontstyle/images/social.png) no-repeat 0px -23px;
 }
 .social-icons ul a.twitter:hover{
-	background: url(../images/social.png) no-repeat -33px -23px;
+	background: url(/frontstyle/images/social.png) no-repeat -33px -23px;
 }
 .social-icons ul a.chrome:hover{
-	background: url(../images/social.png) no-repeat -70px -23px;
+	background: url(/frontstyle/images/social.png) no-repeat -70px -23px;
 }
 .social-icons ul a.vimeo:hover{
-	background: url(../images/social.png) no-repeat -106px -23px;
+	background: url(/frontstyle/images/social.png) no-repeat -106px -23px;
 }
 .social-icons ul a.rss:hover{
-	background: url(../images/social.png) no-repeat -143px -23px;
+	background: url(/frontstyle/images/social.png) no-repeat -143px -23px;
 }
 .products-bottom-middle {
   padding-left: 1em;
@@ -831,7 +831,7 @@ a.detail1{
 	color: #FFF;
 	font-size: 14px;
 	margin: 0;
-	background: url(../images/location.png) no-repeat 321px 14px #2a2d34;
+	background: url(/frontstyle/images/location.png) no-repeat 321px 14px #2a2d34;
 	padding: 1em;
 }
 /*-- sign-up --*/
@@ -913,19 +913,19 @@ a.detail1{
 	margin-top:2em;
 }
 .white-icons ul a.facebook{
-	background: url(../images/social.png) no-repeat 0px -48px;
+	background: url(/frontstyle/images/social.png) no-repeat 0px -48px;
 }
 .white-icons ul a.twitter{
-	background: url(../images/social.png) no-repeat -33px -48px;
+	background: url(/frontstyle/images/social.png) no-repeat -33px -48px;
 }
 .white-icons ul a.chrome{
-	background: url(../images/social.png) no-repeat -70px -48px;
+	background: url(/frontstyle/images/social.png) no-repeat -70px -48px;
 }
 .white-icons ul a.vimeo{
-	background: url(../images/social.png) no-repeat -106px -48px;
+	background: url(/frontstyle/images/social.png) no-repeat -106px -48px;
 }
 .white-icons ul a.rss{
-	background: url(../images/social.png) no-repeat -143px -48px;
+	background: url(/frontstyle/images/social.png) no-repeat -143px -48px;
 }
 .blog h3{
 	color:#fff;
@@ -1091,7 +1091,7 @@ a.detail1{
 	display:none;
 }
 .fashion-view span{
-	background:url(../images/plus2.png) no-repeat 0px 0px;
+	background:url(/frontstyle/images/plus2.png) no-repeat 0px 0px;
 	width:20px;
 	height:20px;
 	float:right;
@@ -1161,7 +1161,7 @@ h4.sold-out a{
 	display:inline-block;
 }
 .product p span{
-	background:url(../images/tralle.png) no-repeat 0px 0px;
+	background:url(/frontstyle/images/tralle.png) no-repeat 0px 0px;
 	width:15px;
 	height:15px;
 	display:inline-block;
@@ -1487,7 +1487,7 @@ h4.sold-out a{
 	text-decoration: none;
 	font-size: 14px;
 	padding-left: 3em;
-	background: url(../images/van.png) no-repeat 0px -7px;
+	background: url(/frontstyle/images/van.png) no-repeat 0px -7px;
 	height: 32px;
 }
 .delivery {
@@ -1925,7 +1925,7 @@ ul.navig li:nth-of-type(3) {
 		width: 50%;
 	}
 	.search input[type="text"] {
-	  background: url(../images/search.png) no-repeat 0px 18px;
+	  background: url(/frontstyle/images/search.png) no-repeat 0px 18px;
 	  padding: 1em .7em .7em 2em;
 	    width: 100%;
 	}
@@ -1946,7 +1946,7 @@ ul.navig li:nth-of-type(3) {
 	}
 	.banner-bg {
 	  min-height: 314px;
-		background: url(../images/6.jpg) no-repeat -62px 0px;
+		background: url(/frontstyle/images/6.jpg) no-repeat -62px 0px;
 		background-size:cover;
 	}
 	.callbacks_tabs {
@@ -2116,11 +2116,11 @@ ul.navig li:nth-of-type(3) {
 	  font-size: 12px;
 	}
 	.banner-img2 {
-		background: url(../images/4.jpg) no-repeat -63px 0px;
+		/* background: url(/frontstyle/images/4.jpg) no-repeat -63px 0px; */
 		background-size:cover;
 	}
 	.banner-img {
-	   background: url(../images/1.jpg) no-repeat -36px 0px;
+	   /* background: url(/frontstyle/images/1.jpg) no-repeat -36px 0px; */
 	  background-size: cover;
 	}
 }
