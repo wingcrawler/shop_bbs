@@ -250,7 +250,7 @@
 									<div class="clearfix"> </div>
 								</div>
 								<div class="plus">
-									<a href="single.html"><img src="/frontstyle/images/plus.png" alt="" /></a>
+									<a href="/single?productId=${item.id }"><img src="/frontstyle/images/plus.png" alt="" /></a>
 								</div>
 							</div>
 						</div>
