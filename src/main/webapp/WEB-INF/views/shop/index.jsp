@@ -237,7 +237,7 @@
 					<div class="col-md-3 product-left-grid">	
 						<div class="product-grid">
 							<div class="product-grid-text">
-								<a href="/single/productId=${item.id }"><img src="${item.imagePath }" alt="" /></a>
+								<a href="/single?productId=${item.id }"><img src="${item.imagePath }" alt="" /></a>
 								<div class="products-grid-info">
 									<h3>${item.productName }</h3>
 									<p>${item.productDesc }</p>
