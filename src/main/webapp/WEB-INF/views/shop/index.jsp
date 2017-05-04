@@ -1,4 +1,4 @@
-<jsp:include page="/common/global.jsp"></jsp:include>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,100 +6,10 @@
 	<title>Home</title>
 </head>
 <body>
-	<!-- header -->
-	<div class="header">
-		<!-- container -->
-		<div class="container">
-			<!-- header-top -->
-			<div class="header-top">
-				<div class="header-logo">
-					<a href="index.html"><img src="/frontstyle/images/logo.png" alt="" /></a>
-				</div>
-				<div class="header-right">
-					<ul>
-						<li class="phone">+371 282 20 760</li>
-						<li class="mail"><a href="mailto:example@mail.com">eony321v@gmail.com</a></li>
-						<li class="checkout">
-							<a href="add-to-cart.html">
-								<span class="cart">$ 99.54</span>
-								<span class="check">Checkout</span>
-							</a>
-							<div class="shopping">
-								<h5>Your Shopping Cart is empty.</h5>
-								<p>Give it purpose—fill it with books, movies, mobiles, cameras, toys and fashion jewellery.</p>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<!-- //header-top -->
-			<div class="top-nav">
-				<span class="menu"><img src="/frontstyle/images/menu.png" alt=""></span>
-				<ul class="nav">
-					<li class="dropdown1"><a href="index.html">首页</a>
-						<ul class="dropdown2">
-							<li><a href="single.html">lorem</a></li>
-							<li><a href="single.html">dorem sia</a></li>
-							<li><a href="single.html">erik</a></li>
-							<li><a href="single.html">ipsum padamans</a></li>
-							<li><a href="single.html">behance</a></li>
-						</ul>
-					</li>
-					<li class="dropdown1"><a href="men.html">MEN</a>
-						<ul class="dropdown2">
-							<li><a href="men.html">Clothing</a></li>
-							<li><a href="men.html">Footwear</a></li>
-							<li><a href="men.html">Watches</a></li>
-							<li><a href="men.html">Accessories</a></li>
-						</ul>
-					</li>     
-					<li class="dropdown1"><a href="women.html">WOMEN</a>
-						<ul class="dropdown2">
-							<li><a href="women.html">Ethnic Wear</a></li>
-							<li><a href="women.html">Western Wear</a></li>
-							<li><a href="women.html">All Jewellery</a></li>
-							<li><a href="women.html">Beauty & Wellness</a></li>
-						</ul>
-					</li>              
-					<li class="dropdown1"><a href="women.html">KIDS</a>
-						<ul class="dropdown2">
-							<li><a href="women.html">Clothing</a></li>
-							<li><a href="women.html">Footwear</a></li>
-							<li><a href="women.html">Accessories</a></li>
-						</ul>
-					</li>  
-					<li class="dropdown1"><a href="men.html">SALE</a>
-						<ul class="dropdown2">
-							<li><a href="men.html">Clothing</a></li>
-							<li><a href="men.html">Footwear</a></li>
-							<li><a href="men.html">Watches</a></li>
-							<li><a href="men.html">Accessories</a></li>
-						</ul>
-					</li>  					           
-					<li><a href="about.html">ABOUT US</a></li>            
-					<li><a href="404.html">SUPPORT</a></li>
-				</ul>
-			</div>
-			<div class="search">
-				<form>
-					<input type="text" value="Search..." onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Search...';}" required="">
-				</form>
-			</div>
-			<div class="clearfix"> </div>
-			<!-- script-for-menu -->
-		 <script>
-				$("span.menu").click(function(){
-					$(" ul.nav").slideToggle("slow" , function(){
-					});
-				});
-		 </script>
-		</div>
-		<!-- //container -->
-	</div>
-	<!-- //header -->
+	<jsp:include page="include/header.jsp"></jsp:include>
+	
 	<!-- banner -->
-    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >手机网站模板</a></div>
+    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >ææºç½ç«æ¨¡æ¿</a></div>
 	<div class="banner">
 			<!-- banner Slider starts Here -->
 					<script src="/frontstyle/js/responsiveslides.min.js"></script>
@@ -131,7 +41,7 @@
 									<div class="container">
 										<div class="banner-info">
 											<h2>RIGHT IS WHITE.<span>LEFT IS BLACK</span></h2>
-											<p>Inspired by Brasil’s bold colors and matching up to football’s on-pitch
+											<p>Inspired by Brasilâs bold colors and matching up to footballâs on-pitch
 												playmakers, these kicks are ready to stand out.
 											</p>
 											<a href="#">SHOP BRASIL</a>
@@ -144,7 +54,7 @@
 									<div class="container">
 										<div class="banner-info">
 											<h2>RIGHT IS BLUE.<span>LEFT IS PINK</span></h2>
-											<p>Inspired by bold colors and matching up to football’s on-pitch
+											<p>Inspired by bold colors and matching up to footballâs on-pitch
 												playmakers, these kicks are ready to stand out.
 											</p>
 											<a href="#">SHOP BRASIL</a>
@@ -157,8 +67,8 @@
 									<div class="container">
 										<div class="banner-info">
 											<h2>RIGHT IS PINK.<span>LEFT IS BLUE</span></h2>
-											<p>Inspired by Brasil’s bold colors and matching up to football’s on-pitch
-												playmakers, these Brasil’s kicks are ready to stand out.
+											<p>Inspired by Brasilâs bold colors and matching up to footballâs on-pitch
+												playmakers, these Brasilâs kicks are ready to stand out.
 											</p>
 											<a href="#">SHOP BRASIL</a>
 										</div>
@@ -170,7 +80,7 @@
 									<div class="container">
 										<div class="banner-info">
 											<h2>RIGHT IS WHITE.<span>LEFT IS BLACK</span></h2>
-											<p>Inspired by bold colors and matching up to football’s on-pitch
+											<p>Inspired by bold colors and matching up to footballâs on-pitch
 												playmakers, these kicks are ready to stand out.
 											</p>
 											<a href="#">SHOP BRASIL</a>
@@ -183,8 +93,8 @@
 									<div class="container">
 										<div class="banner-info">
 											<h2>RIGHT IS BLUE.<span>LEFT IS PINK</span></h2>
-											<p>Inspired by Brasil’s bold colors and matching up to football’s on-pitch
-												playmakers, these kicks Brasil’s are ready to stand out.
+											<p>Inspired by Brasilâs bold colors and matching up to footballâs on-pitch
+												playmakers, these kicks Brasilâs are ready to stand out.
 											</p>
 											<a href="#">SHOP BRASIL</a>
 										</div>
@@ -433,97 +343,7 @@
 		<!-- //container -->
 	</div>
 	<!-- //sign-up -->
-	<!-- footer -->
-	<div class="footer">
-		<!-- container -->
-		<div class="container">
-			<div class="col-md-3 stores-grid">
-				<div class="stores">
-					<h3>Our Stores</h3>
-					<ul>
-						<li>Feel free to visit our stores or contact us.</li>
-						<li>1401 South Grand Avenue </li>
-						<li>Los Angeles, CA 90015 </li>
-						<li>(213) 748-2411</li>
-
-						<span>
-						<li class="drive">100 Fairview Drive </li>
-						<li>Franklin, VA 23851</li> 
-						<li>(757) 569-6100 </li>
-						</span>
-					</ul>
-				</div>
-				<div class="social-icons white-icons">
-					<ul>
-						<li><a href="#" class="facebook"></a></li>
-						<li><a href="#" class="twitter"></a></li>
-						<li><a href="#" class="chrome"></a></li>
-						<li><a href="#" class="vimeo"></a></li>
-						<li><a href="#" class="rss"></a></li>
-				</div>
-			</div>
-			<div class="col-md-3 blog">
-				<h3>Blog posts</h3>
-				<a href="#">Justin Bieber confirmed that he is gay.</a>
-				<p>Lorem ipsum dolor sit amet, consectetur
-					adipiscing elit. Donec sed auctor elit.
-				</p>
-				<a href="#">New sexy sport clothes are here!</a>
-				<p>Lorem ipsum dolor sit amet, consectetur
-					adipiscing elit. Donec sed auctor elit.
-				</p>
-				<a href="#">Summer sales are coming!</a>
-				<p>Lorem ipsum dolor sit amet, consectetur
-					adipiscing elit. Donec sed auctor elit.
-				</p>
-			</div>
-			<div class="col-md-3 support">
-				<h3>Support</h3>
-				<div class="support-grids">
-					<div class="support-left">
-						<ul>
-							<li><a href="#">Terms & Conditions</a></li>
-							<li><a href="#">FAQ</a></li>
-							<li><a href="#">Payment</a></li>
-							<li><a href="#">Refunds</a></li>
-							<li><a href="#">Track Order</a></li>
-							<li><a href="#">Services</a></li>
-							<li><a href="#">Privacy & Security</a></li>
-							<li><a href="#">Careers</a></li>
-							<li><a href="#">Press</a></li>
-							<li><a href="#">Corporate Information</a></li>
-						</ul>
-					</div>
-					<div class="support-left support-right">
-						<ul>
-							<li><a href="#">Sizing</a></li>
-							<li><a href="#">Ordering</a></li>
-							<li><a href="#">Shipping</a></li>
-							<li><a href="#">Return Policy</a></li>
-							<li><a href="#">Affiliates</a></li>
-							<li><a href="#">Find A Store </a></li>
-							<li><a href="#">Site Map</a></li>
-							<li><a href="#">Sign Up & Save</a></li>
-						</ul>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-			</div>
-			<div class="col-md-3 contact">
-				<h3>Contact us</h3>
-				<form>
-					<input type="text" value="your e-mail..." onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'your e-mail...';}" required="">
-					<textarea value="your text...:" onFocus="if(this.value == 'your text...') this.value='';" onBlur="if(this.value == '') this.value='your text...';">your text...</textarea>
-					<input type="submit" value="Send MESSAGE">
-				</form>
-			</div>
-			<div class="clearfix"> </div>
-			<div class="copyright">
-				<p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a> - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a></p>
-			</p>
-		</div>
-		<!-- // container -->
-	</div>
-	<!-- //footer -->
+	
+	<jsp:include page="include/footer.jsp"></jsp:include>
 </body>
 </html>
