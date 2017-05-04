@@ -13,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseFrontController;
 import com.sqe.shop.model.Advertisement;
+import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.service.AdvertisementService;
+import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.ProductService;
 import com.sqe.shop.util.PageUtil;
 
@@ -28,11 +30,16 @@ public class HomeController extends BaseFrontController {
 	private ProductService productService;
 	@Autowired
 	private AdvertisementService advertisementService;
+	@Autowired
+	private ImageService imageService;
 
+	/**
+	 * 商城首页
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
-		model.setViewName("shop/index");
-		
 		//轮播图
 		Advertisement advertisement = new Advertisement();
 		advertisement.setType(0);
@@ -45,12 +52,27 @@ public class HomeController extends BaseFrontController {
 		PageUtil<Map<String, Object>> hotProductPage = productService.getHotProductList(product, 0, 4); 
 		model.addObject("hotProductList", hotProductPage.getList());
 		
+		model.setViewName("shop/index");
 		return model;
 	}
 	
+	/**
+	 * 商品详情
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="single", method = RequestMethod.GET)
-	public ModelAndView single(ModelAndView model) {
-		model = new ModelAndView("shop/single");
+	public ModelAndView single(ModelAndView model, Long productId) {
+		//查询单个商品
+		Product product = productService.getById(productId);
+		model.addObject("product", product);
+		//查询商品图片
+		Image image = new Image();
+		image.setProductId(productId);
+		PageUtil<Image> imgPage = imageService.getBeanListByParm(image, 0, -1);
+		model.addObject("imgList", imgPage.getList());
+		
+		model.setViewName("shop/single");
 		return model;
 	}
 

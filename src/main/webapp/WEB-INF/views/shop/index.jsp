@@ -281,6 +281,7 @@
 						<li><a href="#" class="chrome"></a></li>
 						<li><a href="#" class="vimeo"></a></li>
 						<li><a href="#" class="rss"></a></li>
+					</ul>
 				</div>
 			</div>
 			<div class="col-md-5">

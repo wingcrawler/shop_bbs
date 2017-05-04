@@ -40,7 +40,7 @@
 					</ul>
 				</li>
 				<c:forEach var="item" items="${productTypeList }">
-					<li><a href="/single?type=${item.id }">${item.typeName }</a></li>
+					<li><a href="/productType?type=${item.id }">${item.typeName }</a></li>
 				</c:forEach>
 				<li><a href="about.html">ABOUT US</a></li>            
 				<li><a href="404.html">SUPPORT</a></li>

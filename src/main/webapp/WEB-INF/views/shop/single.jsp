@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,12 @@
 			});
 		});
 	</script>
+	
+	<!-- pop-up-box -->
+	<script type="text/javascript" src="/frontstyle/js/modernizr.custom.min.js"></script>    
+	<link href="/frontstyle/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="/frontstyle/js/jquery.magnific-popup.js" type="text/javascript"></script>
+	<!--//pop-up-box -->
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
@@ -33,7 +40,21 @@
 				<div class="col-md-9">
 					<div class="single-left-left">
 						<ul id="etalage" class="etalage" style="display: block; width: 300px; height: 533px;">
-							<li class="etalage_thumb thumb_1" style="display: none; opacity: 0; background-image: none;">
+							<c:forEach var="item" items="${imgList }" varStatus="index">
+								<c:if test="${index.count==1 }">
+									<li class="etalage_thumb thumb_${index.count } etalage_thumb_active" style="display: list-item; opacity: 1; background-image: none;">
+										<img class="etalage_thumb_image" src="${item.imagePath }" style="display: inline; width: 300px; height: 400px; opacity: 1;">
+										<img class="etalage_source_image" src="${item.imagePath }" title="">
+									</li>
+								</c:if>
+								<c:if test="${index.count>1 }">
+									<li class="etalage_thumb thumb_${index.count } etalage_thumb_active" style="display: none; opacity: 0; background-image: none;">
+										<img class="etalage_thumb_image" src="${item.imagePath }" style="display: inline; width: 300px; height: 400px; opacity: 1;">
+										<img class="etalage_source_image" src="${item.imagePath }" title="">
+									</li>
+								</c:if>
+							</c:forEach>
+							<!-- <li class="etalage_thumb thumb_1" style="display: none; opacity: 0; background-image: none;">
 								<a href="optionallink.html">
 									<img class="etalage_thumb_image" src="/frontstyle/images/d1.jpg" style="display: inline; width: 300px; height: 400px; opacity: 1;">
 									<img class="etalage_source_image" src="/frontstyle/images/d1.jpg" title="">
@@ -50,15 +71,15 @@
 						    <li class="etalage_thumb thumb_4 etalage_thumb_active" style="display: list-item; opacity: 1; background-image: none;">
 								<img class="etalage_thumb_image" src="/frontstyle/images/d4.jpg" style="display: inline; width: 300px; height: 400px; opacity: 1;">
 								<img class="etalage_source_image" src="/frontstyle/images/d4.jpg">
-							</li>
+							</li> -->
 						</ul>
 						<div class="clearfix"></div>		
 					</div>
 					<div class="single-left-right">
 						<div class="single-left-info">
-							<h3>PRODUCT NAME HERE</h3>
+							<h3>${product.productName }</h3>
 							<a href="#" class="view">View product details</a>
-							<p>$ 20 <a href="#" class="view">CLICK FOR OFFER</a></p>
+							<p>$ ${product.productPrice } <a href="#" class="view">CLICK FOR OFFER</a></p>
 						</div>
 						<div class="select-size">
 							<p>Select a size</p>
@@ -73,11 +94,6 @@
 							</div>
 							<div class="wishlist">
 								<a class="play-icon popup-with-zoom-anim" href="#small-dialog2">Add to Wishlist</a>
-								<!-- pop-up-box -->
-								<script type="text/javascript" src="/frontstyle/js/modernizr.custom.min.js"></script>    
-								<link href="/frontstyle/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
-								<script src="/frontstyle/js/jquery.magnific-popup.js" type="text/javascript"></script>
-								<!--//pop-up-box -->
 								<div id="small-dialog2" class="mfp-hide">
 									<h3>Create Account</h3> 
 									<div class="social-sits">
@@ -97,7 +113,7 @@
 									<div class="clearfix"> </div>
 								</div>	
 								<script>
-										$(document).ready(function() {
+									$(document).ready(function() {
 										$('.popup-with-zoom-anim').magnificPopup({
 											type: 'inline',
 											fixedContentPos: false,
@@ -109,8 +125,7 @@
 											removalDelay: 300,
 											mainClass: 'my-mfp-zoom-in'
 										});
-																										
-										});
+									});
 								</script>	
 							</div>
 							<div class="clearfix"> </div>
@@ -136,16 +151,12 @@
 						</div>
 					</div>
 					<div class="clearfix"> </div>
+					
 					<div class="product-details">
 						<h3>PRODUCT DETAILS</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a est at leo dictum 
-							pharetra vel sit amet tellus. Vivamus vitae enim sit amet orci euismod consequat. 
-							Nulla porttitor vitae arcu ut porttitor. Pellentesque auctor enim eros, et malesuada 
-							ipsum suscipit quis. Aliquam sed ex risus. Etiam hendrerit velit luctus facilisis 
-							mollis. Integer auctor consequat est. Integer viverra fringilla finibus. Nunc id 
-							dignissim enim. 
-						</p>
+						<p>${product.productDescripton }</p>
 					</div>
+					
 					<div class="related">
 						<h3>RELATED PRODUCTS</h3>
 						<div class="related-grids">
@@ -209,6 +220,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-md-3 side-bar">
 					<div class="categories">
 						<h3>CATEGORIES</h3>
@@ -229,6 +241,7 @@
 					</div>
 				</div>
 				<div class="clearfix"> </div>
+			
 			</div>
 		</div>
 		<!-- //container -->
