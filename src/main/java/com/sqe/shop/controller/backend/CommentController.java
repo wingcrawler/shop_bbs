@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseBackendController;
 import com.sqe.shop.model.Comment;
 import com.sqe.shop.model.News;
 import com.sqe.shop.model.User;
@@ -25,7 +25,7 @@ import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/backend/comment")
-public class CommentController extends BaseController {
+public class CommentController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
 	

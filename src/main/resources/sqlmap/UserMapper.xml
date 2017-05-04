@@ -161,7 +161,7 @@
 </select>
 
 <select id="findUserByUsernameAndPassword" resultMap="UserBaseMapper">
-	SELECT * FROM user WHERE username=#{username} and password=#{password} and user_status=1 and user_role=#{userRole}
+	SELECT * FROM user WHERE username=#{username} and password=#{password} and user_status=1
 </select>
 
 

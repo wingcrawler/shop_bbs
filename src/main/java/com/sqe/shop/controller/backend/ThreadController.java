@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseBackendController;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.Topic;
 import com.sqe.shop.service.ThreadService;
@@ -23,7 +23,7 @@ import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/backend/thread")
-public class ThreadController extends BaseController {
+public class ThreadController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ThreadController.class);
 	

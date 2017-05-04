@@ -6,14 +6,14 @@
 		<!-- header-top -->
 		<div class="header-top">
 			<div class="header-logo">
-				<a href="index.html"><img src="/frontstyle/images/logo.png" alt="" /></a>
+				<a href="/"><img src="/frontstyle/images/logo.png" alt="" /></a>
 			</div>
 			<div class="header-right">
 				<ul>
 					<li class="phone">+371 282 20 760</li>
 					<li class="mail"><a href="mailto:example@mail.com">eony321v@gmail.com</a></li>
 					<li class="checkout">
-						<a href="add-to-cart.html">
+						<a href="/addToCart">
 							<span class="cart">$ 99.54</span>
 							<!-- <span class="check">Checkout</span> -->
 						</a>
@@ -43,8 +43,8 @@
 				<c:forEach var="item" items="${productTypeList }">
 					<li><a href="/productType?type=${item.id }">${item.typeName }</a></li>
 				</c:forEach>
-				<li><a href="about.html">${t.t_aboutus }</a></li>            
-				<li><a href="404.html">${t.t_support }</a></li>
+				<li><a href="/about">${t.t_aboutus }</a></li>            
+				<li><a href="/help">${t.t_help }</a></li>
 			</ul>
 		</div>
 		

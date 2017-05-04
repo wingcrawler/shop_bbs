@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseBackendController;
 import com.sqe.shop.model.Role;
 import com.sqe.shop.service.RoleService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/backend/role")
-public class RoleController extends BaseController {
+public class RoleController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 	

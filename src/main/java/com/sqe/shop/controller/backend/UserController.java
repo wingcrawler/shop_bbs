@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseBackendController;
 import com.sqe.shop.file.service.FileUploadService;
 import com.sqe.shop.file.service.TxtService;
 import com.sqe.shop.model.User;
@@ -27,7 +27,7 @@ import com.sqe.shop.util.PropertiesUtil;
 
 @Controller
 @RequestMapping("/backend/user")
-public class UserController extends BaseController {
+public class UserController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	

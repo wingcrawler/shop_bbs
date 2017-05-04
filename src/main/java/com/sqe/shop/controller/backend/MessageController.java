@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseBackendController;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/backend/message")
-public class MessageController extends BaseController {
+public class MessageController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
 	

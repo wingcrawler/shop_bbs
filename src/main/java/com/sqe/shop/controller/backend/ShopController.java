@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseBackendController;
 import com.sqe.shop.file.service.ExcelExportService;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Shop;
@@ -25,7 +25,7 @@ import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/backend/shop")
-public class ShopController extends BaseController {
+public class ShopController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
 	

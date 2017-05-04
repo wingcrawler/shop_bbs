@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseBackendController;
 import com.sqe.shop.model.Section;
 import com.sqe.bbs.service.BBSSectionService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/bbs/section")
-public class BBSSectionController extends BaseController {
+public class BBSSectionController extends BaseBackendController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BBSSectionController.class);
 

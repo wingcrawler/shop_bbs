@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+
+import com.sqe.shop.model.User;
 import com.sqe.shop.util.PropertiesUtil;
 
 public class BaseCommon {
@@ -53,6 +59,50 @@ public class BaseCommon {
 		resMap.put(Constants.ERROR_NO, errorNo);
 		resMap.put(Constants.ERROR_INFO, errorInfo);
 		return resMap;
+	}
+	
+	public static String getSavedRequestUrl() {  
+	    Subject subject = SecurityUtils.getSubject();  
+	    Session session = subject.getSession(false);  
+	    if (session != null) {  
+	    	SavedRequest savedRequest = (SavedRequest) session.getAttribute("shiroSavedRequest");
+	        if(savedRequest!=null){
+	        	return savedRequest.getRequestUrl();
+	        }
+	    } 
+	    return "";
+	}  
+
+	public User getCurrentUser() {
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession(false);  
+	    if (session != null) {
+	    	User user =  (User) session.getAttribute("userInfo");
+			if (user != null) {
+				return user;
+			}
+		}
+	    return null;
+	}
+	
+	public Long getCurrentUserId() {
+		User user = getCurrentUser();
+		if(user != null){
+			return user.getId();
+		}
+		return null;
+	}
+	
+	public boolean isLogin() {
+		if(getCurrentUser()!=null){
+			return true;
+		}
+		return false;
+	}
+	
+	public void logout() {
+		Subject currentUser = SecurityUtils.getSubject();
+		currentUser.logout();
 	}
 	
 }

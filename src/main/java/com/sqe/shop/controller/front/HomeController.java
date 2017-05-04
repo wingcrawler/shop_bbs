@@ -5,7 +5,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -73,6 +72,46 @@ public class HomeController extends BaseFrontController {
 		model.addObject("imgList", imgPage.getList());
 		
 		model.setViewName("shop/single");
+		return model;
+	}
+	
+	/**
+	 * 关于我们
+	 * @param model
+	 * @param productId
+	 * @return
+	 */
+	@RequestMapping(value="about", method = RequestMethod.GET)
+	public ModelAndView about(ModelAndView model) {
+		model.setViewName("shop/about");
+		return model;
+	}
+	/**
+	 * 帮助
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="help", method = RequestMethod.GET)
+	public ModelAndView help(ModelAndView model) {
+		model.setViewName("shop/help");
+		return model;
+	}
+	/**
+	 * 购物车
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="addToCart", method = RequestMethod.GET)
+	public ModelAndView addToCart(ModelAndView model) {
+		model.setViewName("shop/add-to-cart");
+		return model;
+	}
+	/**
+	 * 404页面
+	 */
+	@RequestMapping(value="404", method = RequestMethod.GET)
+	public ModelAndView error404(ModelAndView model) {
+		model.setViewName("shop/404");
 		return model;
 	}
 

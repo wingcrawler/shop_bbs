@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseBackendController;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/backend/cate")
-public class CategoryController extends BaseController {
+public class CategoryController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 	

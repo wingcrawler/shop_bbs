@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseBackendController;
 import com.sqe.shop.file.service.ImageFileService;
 import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.service.AdvertisementService;
@@ -25,7 +25,7 @@ import com.sqe.shop.util.PropertiesUtil;
 
 @Controller
 @RequestMapping("/backend/ad")
-public class AdController extends BaseController {
+public class AdController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdController.class);
 	

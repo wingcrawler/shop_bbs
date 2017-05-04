@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseController;
+import com.sqe.shop.common.BaseBackendController;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.model.Topic;
 import com.sqe.shop.service.SectionService;
@@ -25,7 +25,7 @@ import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/backend/topic")
-public class TopicController extends BaseController {
+public class TopicController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TopicController.class);
 	

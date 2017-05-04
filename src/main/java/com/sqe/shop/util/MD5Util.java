@@ -72,7 +72,7 @@ public class MD5Util {
 	public static void main(String[] args) {
 		String salt = "shopping";
 		MD5Util encoderMd5 = new MD5Util(salt, "MD5");
-		String encode = encoderMd5.encode("123456");
+		String encode = encoderMd5.encode("admin");
 		System.out.println(encode);
 		/*boolean passwordValid = encoderMd5.isPasswordValid(
 				"083a8db3ff5b9b4ece3ef2bde03226c8", "test");
