@@ -106,4 +106,22 @@ public class ProductService extends AdapterService implements BaseService {
 		return parm;
 	}
 
+	public PageUtil<Map<String, Object>> getHotProductList(Product product, int pageNo, int pageSize) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(product);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		parm.put("orderby", "p.product_view desc, p.id desc" );
+		
+		int count = productMapper.countByParm(parm);
+		pageUtil.setTotalRecords(count);
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		if(count!=0){
+			list = productMapper.getHotProductList(parm);
+		}
+		pageUtil.setList(list);
+		return pageUtil;
+	}
+
 }

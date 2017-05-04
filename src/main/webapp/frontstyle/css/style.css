@@ -687,7 +687,7 @@ a.detail1{
 }
 .like{
 	float:right;
-	padding-top: 1em;
+	padding-top: 0em;
 }
 .product-grid-text a img {
 	display: block;

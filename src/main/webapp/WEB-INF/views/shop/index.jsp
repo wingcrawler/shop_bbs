@@ -137,7 +137,7 @@
 				<h3>POPULAR PRODUCTS</h3>
 			</div>
 			<div class="products-grids">
-				<div class="col-md-3 product-left-grid">
+				<!-- <div class="col-md-3 product-left-grid">
 					<div class="product-grid">
 						<div class="sap_tabs">	
 							<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
@@ -232,32 +232,30 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-3 product-left-grid">	
-					<div class="product-grid">
-						<div class="product-grid-text">
-							<a href="single.html"><img src="/frontstyle/images/t6.jpg" alt="" /></a>
-							<div class="products-grid-info">
-								<h3>Nike lux</h3>
-								<h4>Running Top</h4>
-								<p>The Nike Tailwind Loose Women's Running Tank 
-									Top is made with sweat-wicking fabric to help you 
-									stay dry and comfortable on your run.
-								</p>
-								<div class="price">
-									<p>$ 28.49</p>
+				</div> -->
+				<c:forEach var="item" items="${hotProductList }">
+					<div class="col-md-3 product-left-grid">	
+						<div class="product-grid">
+							<div class="product-grid-text">
+								<a href="/single/productId=${item.id }"><img src="${item.imagePath }" alt="" /></a>
+								<div class="products-grid-info">
+									<h3>${item.productName }</h3>
+									<p>${item.productDesc }</p>
+									<div class="price">
+										<p>$ ${item.productPrice }</p>
+									</div>
+									<div class="like">
+										<a href="#"><img src="/frontstyle/images/like.png" alt="" /></a>
+									</div>
+									<div class="clearfix"> </div>
 								</div>
-								<div class="like">
-									<a href="#"><img src="/frontstyle/images/like.png" alt="" /></a>
+								<div class="plus">
+									<a href="single.html"><img src="/frontstyle/images/plus.png" alt="" /></a>
 								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="plus">
-								<a href="single.html"><img src="/frontstyle/images/plus.png" alt="" /></a>
 							</div>
 						</div>
 					</div>
-				</div>
+				</c:forEach>
 				<div class="clearfix"> </div>
 			</div>
 		</div>
