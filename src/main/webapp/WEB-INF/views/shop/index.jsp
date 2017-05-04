@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,98 +12,84 @@
 	<!-- banner -->
     <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >ææºç½ç«æ¨¡æ¿</a></div>
 	<div class="banner">
-			<!-- banner Slider starts Here -->
-					<script src="/frontstyle/js/responsiveslides.min.js"></script>
-					 <script>
-						// You can also use "$(window).load(function() {"
-						$(function () {
-						  // Slideshow 4
-						  $("#slider3").responsiveSlides({
-							auto: true,
-							pager: true,
-							nav: false,
-							speed: 500,
-							namespace: "callbacks",
-							before: function () {
-							  $('.events').append("<li>before event fired.</li>");
-							},
-							after: function () {
-							  $('.events').append("<li>after event fired.</li>");
-							}
-						  });
-					
-						});
-					  </script>
-					<!--//End-slider-script -->
-					<div  id="top" class="callbacks_container">
-						<ul class="rslides" id="slider3">
-							<li>
-								<div class="banner-bg">
-									<div class="container">
-										<div class="banner-info">
-											<h2>RIGHT IS WHITE.<span>LEFT IS BLACK</span></h2>
-											<p>Inspired by Brasilâs bold colors and matching up to footballâs on-pitch
-												playmakers, these kicks are ready to stand out.
-											</p>
-											<a href="#">SHOP BRASIL</a>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="banner-bg banner-img2">
-									<div class="container">
-										<div class="banner-info">
-											<h2>RIGHT IS BLUE.<span>LEFT IS PINK</span></h2>
-											<p>Inspired by bold colors and matching up to footballâs on-pitch
-												playmakers, these kicks are ready to stand out.
-											</p>
-											<a href="#">SHOP BRASIL</a>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="banner-bg banner-img">
-									<div class="container">
-										<div class="banner-info">
-											<h2>RIGHT IS PINK.<span>LEFT IS BLUE</span></h2>
-											<p>Inspired by Brasilâs bold colors and matching up to footballâs on-pitch
-												playmakers, these Brasilâs kicks are ready to stand out.
-											</p>
-											<a href="#">SHOP BRASIL</a>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="banner-bg">
-									<div class="container">
-										<div class="banner-info">
-											<h2>RIGHT IS WHITE.<span>LEFT IS BLACK</span></h2>
-											<p>Inspired by bold colors and matching up to footballâs on-pitch
-												playmakers, these kicks are ready to stand out.
-											</p>
-											<a href="#">SHOP BRASIL</a>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="banner-bg banner-img2">
-									<div class="container">
-										<div class="banner-info">
-											<h2>RIGHT IS BLUE.<span>LEFT IS PINK</span></h2>
-											<p>Inspired by Brasilâs bold colors and matching up to footballâs on-pitch
-												playmakers, these kicks Brasilâs are ready to stand out.
-											</p>
-											<a href="#">SHOP BRASIL</a>
-										</div>
-									</div>
-								</div>
-							</li>
-						</ul>
+		<!-- banner Slider starts Here -->
+		<script src="/frontstyle/js/responsiveslides.min.js"></script>
+		<script>
+			// You can also use "$(window).load(function() {"
+			$(function () {
+			  // Slideshow 4
+			  $("#slider3").responsiveSlides({
+				auto: true,
+				pager: true,
+				nav: false,
+				speed: 500,
+				namespace: "callbacks",
+				before: function () {
+				  $('.events').append("<li>before event fired.</li>");
+				},
+				after: function () {
+				  $('.events').append("<li>after event fired.</li>");
+				}
+			  });
+			});
+		</script>
+		<!--//End-slider-script -->
+		<div  id="top" class="callbacks_container">
+			<ul class="rslides" id="slider3">
+				<!-- <li>
+					<div class="banner-bg">
+						<div class="container">
+							<div class="banner-info">
+								<h2>RIGHT IS WHITE.<span>LEFT IS BLACK</span></h2>
+								<p>Inspired by Brasilâs bold colors and matching up to footballâs on-pitch
+									playmakers, these kicks are ready to stand out.
+								</p>
+								<a href="#">SHOP BRASIL</a>
+							</div>
+						</div>
 					</div>
+				</li>
+				<li>
+					<div class="banner-bg banner-img2">
+						<div class="container">
+							<div class="banner-info">
+								<h2>RIGHT IS BLUE.<span>LEFT IS PINK</span></h2>
+								<p>Inspired by bold colors and matching up to footballâs on-pitch
+									playmakers, these kicks are ready to stand out.
+								</p>
+								<a href="#">SHOP BRASIL</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="banner-bg banner-img">
+						<div class="container">
+							<div class="banner-info">
+								<h2>RIGHT IS PINK.<span>LEFT IS BLUE</span></h2>
+								<p>Inspired by Brasilâs bold colors and matching up to footballâs on-pitch
+									playmakers, these Brasilâs kicks are ready to stand out.
+								</p>
+								<a href="#">SHOP BRASIL</a>
+							</div>
+						</div>
+					</div>
+				</li> -->
+				<c:forEach var="item" items="${adList }">
+					<li>
+						<div class="banner-bg" style="background:url(${item.imagePath}) no-repeat 0px 0px;background-size:cover;">
+							<div class="container">
+								<div class="banner-info">
+									<h2></h2>
+									<p>${item.description }</p>
+									<a href="${item.imageUrl}">SHOP BRASIL</a>
+								</div>
+							</div>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
 	</div>
 	<!-- //banner -->
 	<!-- banner-bottom -->
@@ -141,6 +128,7 @@
 		</div>
 	</div>
 	<!-- banner-bottom -->
+	
 	<!-- products -->
 	<div class="products">
 		<!-- container -->
@@ -276,6 +264,7 @@
 		<!-- //container -->
 	</div>
 	<!-- // products -->
+	
 	<!-- products-bottom -->
 	<div class="products-bottom">
 		<!-- container -->
@@ -325,6 +314,7 @@
 		<!-- //container-->
 	</div>
 	<!-- //products-bottom -->
+	
 	<!-- sign-up -->
 	<div class="sign-up">
 		<!-- container -->

@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.ProductTypeMapper;
+import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.util.PageUtil;
 
@@ -35,26 +37,17 @@ public class ProductTypeService extends AdapterService implements BaseService {
 	}
 	
 	public int countByParm(ProductType productType) {
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(productType!=null){
-			parm.put("typeName", productType.getTypeName());
-		}
-		return productTypeMapper.countByParm(parm);
-	}
-	
-	public int countByParm(Map<String, Object> parm) {
+		Map<String, Object> parm = queryParm(productType);
 		return productTypeMapper.countByParm(parm);
 	}
 	
 	public PageUtil<ProductType> getBeanListByParm(ProductType productType, int pageNo, Integer pageSize) {
 		PageUtil<ProductType> pageUtil = new PageUtil<ProductType>(pageNo, pageSize);
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(productType!=null){
-			parm.put("typeName", productType.getTypeName());
-			parm.put("start", pageUtil.getStartRow());
-			parm.put("limit", pageUtil.getPageSize());
-			parm.put("orderby", "type_rank asc");
-		}
+		Map<String, Object> parm = queryParm(productType);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());	
+		parm.put("orderby", "type_rank asc");
+
 		int count = productTypeMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		List<ProductType> list = new ArrayList<ProductType>();
@@ -82,6 +75,17 @@ public class ProductTypeService extends AdapterService implements BaseService {
 		} else {
 			productTypeMapper.insert(productType);
 		}
+	}
+	
+	private Map<String, Object> queryParm(ProductType productType) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		if(productType!=null){
+			if(StringUtils.isNotBlank(productType.getTypeName())){
+				parm.put("typeName", productType.getTypeName());	
+			}
+		}
+		parm.put("orderby", "id asc" );
+		return parm;
 	}
 
 }

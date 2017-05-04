@@ -178,16 +178,16 @@ ul.navig li a:after{
 }
 /*-- banner --*/
 .banner-bg{
-	background:url(/frontstyle/images/6.jpg) no-repeat 0px 0px;
+	/* background:url(/frontstyle/images/6.jpg) no-repeat 0px 0px; */
 	background-size:cover;
 	min-height: 716px;
 }
 .banner-img{
-	background:url(/frontstyle/images/1.jpg) no-repeat 0px 0px;
+	/* background:url(/frontstyle/images/1.jpg) no-repeat 0px 0px; */
 	background-size: cover;
 }
 .banner-img2{
-	background:url(/frontstyle/images/4.jpg) no-repeat 0px 0px;
+	/* background:url(/frontstyle/images/4.jpg) no-repeat 0px 0px; */
 	background-size: cover;
 }
 .banner-info {
@@ -2116,11 +2116,11 @@ ul.navig li:nth-of-type(3) {
 	  font-size: 12px;
 	}
 	.banner-img2 {
-		background: url(/frontstyle/images/4.jpg) no-repeat -63px 0px;
+		/* background: url(/frontstyle/images/4.jpg) no-repeat -63px 0px; */
 		background-size:cover;
 	}
 	.banner-img {
-	   background: url(/frontstyle/images/1.jpg) no-repeat -36px 0px;
+	   /* background: url(/frontstyle/images/1.jpg) no-repeat -36px 0px; */
 	  background-size: cover;
 	}
 }
