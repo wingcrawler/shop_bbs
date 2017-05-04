@@ -15,12 +15,12 @@
 					<li class="checkout">
 						<a href="add-to-cart.html">
 							<span class="cart">$ 99.54</span>
-							<span class="check">Checkout</span>
+							<!-- <span class="check">Checkout</span> -->
 						</a>
-						<div class="shopping">
+						<!-- <div class="shopping">
 							<h5>Your Shopping Cart is empty.</h5>
 							<p>Give it purpose—fill it with books, movies, mobiles, cameras, toys and fashion jewellery.</p>
-						</div>
+						</div> -->
 					</li>
 				</ul>
 			</div>
@@ -30,7 +30,7 @@
 		<div class="top-nav">
 			<span class="menu"><img src="/frontstyle/images/menu.png" alt=""></span>
 			<ul class="nav">
-				<li class="dropdown1"><a href="/">HOME</a>
+				<%-- <li class="dropdown1"><a href="/">${t.t_home }</a>
 					<ul class="dropdown2">
 						<li><a href="single.html">lorem</a></li>
 						<li><a href="single.html">dorem sia</a></li>
@@ -38,18 +38,19 @@
 						<li><a href="single.html">ipsum padamans</a></li>
 						<li><a href="single.html">behance</a></li>
 					</ul>
-				</li>
+				</li> --%>
+				<li><a href="/">${t.t_home }</a></li>
 				<c:forEach var="item" items="${productTypeList }">
 					<li><a href="/productType?type=${item.id }">${item.typeName }</a></li>
 				</c:forEach>
-				<li><a href="about.html">ABOUT US</a></li>            
-				<li><a href="404.html">SUPPORT</a></li>
+				<li><a href="about.html">${t.t_aboutus }</a></li>            
+				<li><a href="404.html">${t.t_support }</a></li>
 			</ul>
 		</div>
 		
 		<div class="search">
-			<form>
-				<input type="text" value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search...';}" required="">
+			<form method="post" action="/search">
+				<input type="text" value="${t.b_search }..." name="keywords" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '${t.b_search }...';}" required="">
 			</form>
 		</div>
 		<div class="clearfix"></div>

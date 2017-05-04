@@ -40,3 +40,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	});
 </script>
+
+<!-- pop-up-box -->
+<script type="text/javascript" src="/frontstyle/js/modernizr.custom.min.js"></script>    
+<link href="/frontstyle/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+<script src="/frontstyle/js/jquery.magnific-popup.js" type="text/javascript"></script>
+<!--//pop-up-box -->

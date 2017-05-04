@@ -4,7 +4,7 @@
 <html>
 <head>
 	<jsp:include page="include/meta.jsp"></jsp:include>
-	<title>Home</title>
+	<title>${t.t_sqe } -- ${t.t_home }</title>
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
@@ -36,45 +36,6 @@
 		<!--//End-slider-script -->
 		<div  id="top" class="callbacks_container">
 			<ul class="rslides" id="slider3">
-				<!-- <li>
-					<div class="banner-bg">
-						<div class="container">
-							<div class="banner-info">
-								<h2>RIGHT IS WHITE.<span>LEFT IS BLACK</span></h2>
-								<p>Inspired by Brasilâs bold colors and matching up to footballâs on-pitch
-									playmakers, these kicks are ready to stand out.
-								</p>
-								<a href="#">SHOP BRASIL</a>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="banner-bg banner-img2">
-						<div class="container">
-							<div class="banner-info">
-								<h2>RIGHT IS BLUE.<span>LEFT IS PINK</span></h2>
-								<p>Inspired by bold colors and matching up to footballâs on-pitch
-									playmakers, these kicks are ready to stand out.
-								</p>
-								<a href="#">SHOP BRASIL</a>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="banner-bg banner-img">
-						<div class="container">
-							<div class="banner-info">
-								<h2>RIGHT IS PINK.<span>LEFT IS BLUE</span></h2>
-								<p>Inspired by Brasilâs bold colors and matching up to footballâs on-pitch
-									playmakers, these Brasilâs kicks are ready to stand out.
-								</p>
-								<a href="#">SHOP BRASIL</a>
-							</div>
-						</div>
-					</div>
-				</li> -->
 				<c:forEach var="item" items="${adList }">
 					<li>
 						<div class="banner-bg" style="background:url(${item.imagePath}) no-repeat 0px 0px;background-size:cover;">
@@ -82,7 +43,7 @@
 								<div class="banner-info">
 									<h2></h2>
 									<p>${item.description }</p>
-									<a href="${item.imageUrl}">SHOP BRASIL</a>
+									<a href="${item.imageUrl}" target="_blank">SHOP BRASIL</a>
 								</div>
 							</div>
 						</div>
@@ -92,152 +53,22 @@
 		</div>
 	</div>
 	<!-- //banner -->
-	<!-- banner-bottom -->
-	<div class="banner-bottom">
-		<div class="container">
-			<div class="banner-bottom-grids">
-				<div class="col-md-4 bottom-grid">
-					<img src="/frontstyle/images/3.jpg" alt="" />
-					<div class="bottom-grid-info">
-						<a href="#">FOOTBALL SHOES</a>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing,
-							vivamus congue nulla leo, quis imperdiet magna.
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4 bottom-grid">
-					<img src="/frontstyle/images/7.jpg" alt="" />
-					<div class="bottom-grid-info">
-						<a href="#">MODERN CLOTHES</a>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing,
-							vivamus congue nulla leo, quis imperdiet magna.
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4 bottom-grid">
-					<img src="/frontstyle/images/5.jpg" alt="" />
-					<div class="bottom-grid-info">
-						<a href="#">BAGS & ACCESSORIES</a>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing,
-							vivamus congue nulla leo, quis imperdiet magna.
-						</p>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<!-- banner-bottom -->
+	
+	<div class="clearfix"></div>
 	
 	<!-- products -->
-	<div class="products">
+	<div class="products" style="margin-top:40px;">
 		<!-- container -->
 		<div class="container">
 			<div class="products-heading">
-				<h3>POPULAR PRODUCTS</h3>
+				<h3>${t.t_hot_product }</h3>
 			</div>
 			<div class="products-grids">
-				<!-- <div class="col-md-3 product-left-grid">
-					<div class="product-grid">
-						<div class="sap_tabs">	
-							<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
-								<div class="resp-tabs-container">
-									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
-										<div class="facts">
-											<img src="/frontstyle/images/t1.jpg" class="img-responsive" alt=""/> 
-										</div>
-									</div>	
-									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
-										<div class="facts">
-											<img src="/frontstyle/images/t2.jpg" class="img-responsive" alt=""/>   
-										</div>
-									</div>	
-									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
-										<div class="facts">
-											<img src="/frontstyle/images/t3.jpg" class="img-responsive" alt=""/> 
-										</div>
-									</div>	         	  
-								</div>
-								<ul class="resp-tabs-list">
-									<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span><img src="/frontstyle/images/t1.jpg" class="img-responsive" alt=""/></span></li>
-									<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span><img src="/frontstyle/images/t2.jpg" class="img-responsive" alt=""/></span></li>
-									<li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span><img src="/frontstyle/images/t3.jpg" class="img-responsive" alt=""/></span></li>
-									<div class="clearfix"> </div>
-								</ul>	
-							</div>
-						</div>
-						<div class="products-grid-info">
-							<h3>Nike Tailwind Loose</h3>
-							<h4>Running Tank Top</h4>
-							<p>The Nike Tailwind Loose Women's Running Tank 
-								Top is made with sweat-wicking fabric to help you 
-								stay dry and comfortable on your run.
-							</p>
-							<div class="price">
-								<p>$ 36.99</p>
-							</div>
-							<div class="like">
-								<a href="#"><img src="/frontstyle/images/like.png" alt="" /></a>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 product-left-grid">
-					<div class="product-grid">
-						<div class="product-grid-text">
-							<a href="single.html"><img src="/frontstyle/images/t4.jpg" alt="" /></a>
-							<div class="products-grid-info">
-								<h3>Nike g87</h3>
-								<h4>Training Tank Top</h4>
-								<p>The Nike Tailwind Loose Women's Running Tank 
-									Top is made with sweat-wicking fabric to help you 
-									stay dry and comfortable on your run.
-								</p>
-								<div class="price">
-									<p>$ 49.99</p>
-								</div>
-								<div class="like">
-									<a href="#"><img src="/frontstyle/images/like.png" alt="" /></a>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="plus">
-								<a href="single.html"><img src="/frontstyle/images/plus.png" alt="" /></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 product-left-grid">
-					<div class="product-grid">
-						<div class="product-grid-text">
-							<a href="single.html"><img src="/frontstyle/images/t5.jpg" alt="" /></a>
-							<div class="products-grid-info">
-								<h3>Nike I-Beam Swoosh</h3>
-								<h4>Sports Top</h4>
-								<p>The Nike Tailwind Loose Women's Running Tank 
-									Top is made with sweat-wicking fabric to help you 
-									stay dry and comfortable on your run.
-								</p>
-								<div class="price">
-									<p>$ 70.00</p>
-								</div>
-								<div class="like">
-									<a href="#"><img src="/frontstyle/images/like.png" alt="" /></a>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="plus">
-								<a href="single.html"><img src="/frontstyle/images/plus.png" alt="" /></a>
-							</div>
-						</div>
-					</div>
-				</div> -->
 				<c:forEach var="item" items="${hotProductList }">
 					<div class="col-md-3 product-left-grid">	
 						<div class="product-grid">
 							<div class="product-grid-text">
-								<a href="/single?productId=${item.id }"><img src="${item.imagePath }" alt="" /></a>
+								<a href="/single?productId=${item.id }" target="_blank"><img src="${item.imagePath }" alt="" /></a>
 								<div class="products-grid-info">
 									<h3>${item.productName }</h3>
 									<p>${item.productDesc }</p>
@@ -250,7 +81,7 @@
 									<div class="clearfix"> </div>
 								</div>
 								<div class="plus">
-									<a href="/single?productId=${item.id }"><img src="/frontstyle/images/plus.png" alt="" /></a>
+									<a href="/single?productId=${item.id }" target="_blank"><img src="/frontstyle/images/plus.png" alt="" /></a>
 								</div>
 							</div>
 						</div>
