@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseBackendController;
+import com.sqe.shop.common.BaseFrontController;
 import com.sqe.shop.model.Section;
 import com.sqe.bbs.service.BBSSectionService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/bbs/section")
-public class BBSSectionController extends BaseBackendController {
+public class BBSSectionController extends BaseFrontController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BBSSectionController.class);
 
@@ -30,7 +31,7 @@ public class BBSSectionController extends BaseBackendController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("front/bbs/section/list");
+		ModelAndView model = new ModelAndView("bbs/section/list");
 		return model;
 	}
 
@@ -65,10 +66,29 @@ public class BBSSectionController extends BaseBackendController {
 	@ResponseBody
 	@RequestMapping(value = "/getSecondSection", method = RequestMethod.GET)
 	public Map<String, Object> getList(Section section, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
-			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+			@RequestParam(name = "pageSize", defaultValue = "20") int pageSize) {
 		section.setSectionType(1);
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		PageUtil<Section> page = sectionService.getBeanListByParm(section, pageNo, pageSize);
+		resMap.put("list", page.getList());
+		resMap.put("page", page);
+		return resMap;
+	}
+	
+	/**
+	 * 获取二级版块列表0
+	 * @param section
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getSecondSection", method = RequestMethod.GET)
+	public Map<String, Object> getList(Section section, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+			@RequestParam(name = "pageSize", defaultValue = "20") int pageSize,int ParentId) {
+		section.setSectionType(1);
+		Map<String, Object> resMap = new HashMap<String, Object>();
+		PageUtil<Section> page = sectionService.getBeanListByParm(section,ParentId, pageNo, pageSize);
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
 		return resMap;

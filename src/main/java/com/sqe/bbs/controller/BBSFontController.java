@@ -23,8 +23,6 @@ public class BBSFontController extends BaseFrontController {
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("bbs/index");
-		String message = "这个是要传递的数据";
-		model.addObject("message", message);
 		return model;
 	}
 	
