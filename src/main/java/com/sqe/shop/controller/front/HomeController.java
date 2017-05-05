@@ -64,6 +64,10 @@ public class HomeController extends BaseFrontController {
 	public ModelAndView single(ModelAndView model, Long productId) {
 		//查询单个商品
 		Product product = productService.getById(productId);
+		if(product==null){
+			model.setViewName("shop/404");
+			return model;
+		}
 		model.addObject("product", product);
 		//查询商品图片
 		Image image = new Image();

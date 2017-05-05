@@ -22,11 +22,12 @@ public class NotFoundInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
     	if(modelAndView!=null){
-    		if(httpServletResponse.getStatus()==500){  
-        		httpServletResponse.sendRedirect("/500");  
-            }else if(httpServletResponse.getStatus()==404){  
+    		int status = httpServletResponse.getStatus();
+    		if(status==404){  
             	httpServletResponse.sendRedirect("/404");
-            } 
+            } else if(status==500||status==400){
+            	httpServletResponse.sendRedirect("/500");
+            }
     	}
     }
 
