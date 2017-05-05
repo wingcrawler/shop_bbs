@@ -75,9 +75,9 @@
 									<div class="price">
 										<p>$ ${item.productPrice }</p>
 									</div>
-									<div class="like">
+									<!-- <div class="like">
 										<a href="#"><img src="/frontstyle/images/like.png" alt="" /></a>
-									</div>
+									</div> -->
 									<div class="clearfix"> </div>
 								</div>
 								<div class="plus">

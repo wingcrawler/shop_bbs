@@ -114,5 +114,13 @@ public class HomeController extends BaseFrontController {
 		model.setViewName("shop/404");
 		return model;
 	}
+	/**
+	 * 500页面
+	 */
+	@RequestMapping(value="500", method = RequestMethod.GET)
+	public ModelAndView error500(ModelAndView model) {
+		model.setViewName("shop/500");
+		return model;
+	}
 
 }

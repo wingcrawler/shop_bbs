@@ -4,6 +4,7 @@ import javax.servlet.MultipartConfigElement;
 
 import com.sqe.shop.interceptor.AdminAuthenticationInterceptor;
 import com.sqe.shop.interceptor.AuthenticationInterceptor;
+import com.sqe.shop.interceptor.NotFoundInterceptor;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -25,13 +26,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthenticationInterceptor())
-        	.addPathPatterns("/user/**","/order/**")
-        	.excludePathPatterns("/user/login","/user/reg","/user/logout");
+        registry.addInterceptor(new NotFoundInterceptor())
+        	.addPathPatterns("/**");
 
-        registry.addInterceptor(new AdminAuthenticationInterceptor())
-        	.addPathPatterns("/backend1/**","/*/backend1/**")
-        	.excludePathPatterns("/backend/login","/backend/logout");
+        /*registry.addInterceptor(new AdminAuthenticationInterceptor())
+        	.addPathPatterns("/backend1/**","/backend1/**")
+        	.excludePathPatterns("/backend/login","/backend/logout");*/
+        
+        /*super.addInterceptors(registry);*/
     }
 /*
     @Override
