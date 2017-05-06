@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ShopMapper;
-import com.sqe.shop.model.Product;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
@@ -85,6 +84,8 @@ public class ShopService extends AdapterService implements BaseService {
 	public PageUtil<Map<String, Object>> getMapListByParm(Shop shop,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(shop);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
 		parm.put("orderby", "s.id desc");
 		
 		int count = shopMapper.countByParm(parm);
@@ -92,9 +93,8 @@ public class ShopService extends AdapterService implements BaseService {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
 			list = shopMapper.getMapListByParm(parm);
-			pageUtil.setList(list);
 		}
-		
+		pageUtil.setList(list);		
 		return pageUtil;
 	}
 	
@@ -117,8 +117,12 @@ public class ShopService extends AdapterService implements BaseService {
 		PageUtil<Map<String, Object>> page = new PageUtil<Map<String,Object>>(pageNo, pageSize);
 		boolean flag=true;
 		
+		Map<String, Object> parm = queryParm(shop);
+		parm.put("start", page.getStartRow());
+		parm.put("limit", page.getPageSize());
+		parm.put("orderby", "s.shop_rank asc, s.id desc");
 		while (flag) {
-			page = getMapListByParm(shop, pageNo, pageSize);
+			page = getMapListByParm(parm);
 			if(page.getList().size()<pageSize){
 				flag=false;
 			}
@@ -126,6 +130,19 @@ public class ShopService extends AdapterService implements BaseService {
 			list.addAll(page.getList());
 		}
 		return list;
+	}
+
+	private PageUtil<Map<String, Object>> getMapListByParm( Map<String, Object> parm) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>();
+		int count = shopMapper.countByParm(parm);
+		pageUtil.setTotalRecords(count);
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		if(count!=0){
+			list = shopMapper.getMapListByParm(parm);
+		}
+		pageUtil.setList(list);
+		return pageUtil;
 	}
 
 	private Map<String, Object> queryParm(Shop shop) {
@@ -137,8 +154,8 @@ public class ShopService extends AdapterService implements BaseService {
 			if(shop.getShopStatus()!=null&&shop.getShopStatus()>=0){
 				parm.put("shopStatus", shop.getShopStatus());
 			}
-			parm.put("orderby", "id desc");
 		}
+		parm.put("orderby", "id desc");
 		return parm;
 	}
 }

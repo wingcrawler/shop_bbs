@@ -31,14 +31,20 @@ public class HomeController extends BaseFrontController {
 	private AdvertisementService advertisementService;
 	@Autowired
 	private ImageService imageService;
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView index(ModelAndView model) {
+		model.setViewName("front/index");
+		return model;
+	}
 
 	/**
 	 * 商城首页
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView index(ModelAndView model) {
+	@RequestMapping(value="shopIndex", method = RequestMethod.GET)
+	public ModelAndView shopIndex(ModelAndView model) {
 		//轮播图
 		Advertisement advertisement = new Advertisement();
 		advertisement.setType(0);
@@ -64,6 +70,10 @@ public class HomeController extends BaseFrontController {
 	public ModelAndView single(ModelAndView model, Long productId) {
 		//查询单个商品
 		Product product = productService.getById(productId);
+		if(product==null){
+			model.setViewName("shop/404");
+			return model;
+		}
 		model.addObject("product", product);
 		//查询商品图片
 		Image image = new Image();
@@ -112,6 +122,14 @@ public class HomeController extends BaseFrontController {
 	@RequestMapping(value="404", method = RequestMethod.GET)
 	public ModelAndView error404(ModelAndView model) {
 		model.setViewName("shop/404");
+		return model;
+	}
+	/**
+	 * 500页面
+	 */
+	@RequestMapping(value="500", method = RequestMethod.GET)
+	public ModelAndView error500(ModelAndView model) {
+		model.setViewName("shop/500");
 		return model;
 	}
 

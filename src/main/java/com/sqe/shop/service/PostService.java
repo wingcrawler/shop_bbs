@@ -35,10 +35,7 @@ public class PostService extends AdapterService implements BaseService {
 	}
 	
 	public int countByParm(Post post) {
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(post!=null){
-		
-		}
+		Map<String, Object> parm = queryParm(post);
 		return postMapper.countByParm(parm);
 	}
 	
@@ -48,13 +45,13 @@ public class PostService extends AdapterService implements BaseService {
 	
 	public PageUtil<Post> getBeanListByParm(Post post, int pageNo, Integer pageSize) {
 		PageUtil<Post> pageUtil = new PageUtil<Post>(pageNo, pageSize);
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(post!=null){
-			parm.put("start", pageUtil.getStartRow());
-			parm.put("limit", pageUtil.getPageSize());
-		}
+		Map<String, Object> parm = queryParm(post);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+
 		int count = postMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
 		List<Post> list = new ArrayList<Post>();
 		if(count!=0){
 			list = postMapper.getBeanListByParm(parm);
@@ -63,14 +60,20 @@ public class PostService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getMapListByParm(Post post,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(post);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		
 		int count = postMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
-			List<Map<String, Object>> list = postMapper.getMapListByParm(parm);
-			pageUtil.setList(list);
+			list = postMapper.getMapListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -80,6 +83,23 @@ public class PostService extends AdapterService implements BaseService {
 		} else {
 			postMapper.insert(post);
 		}
+	}
+	
+	private Map<String, Object> queryParm(Post post) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		if(post!=null){
+			if(post.getUserId()!=null && post.getUserId()>=0){
+				parm.put("userId", post.getUserId());	
+			}
+			if(post.getPostStatus()!=null && post.getPostStatus()>=0){
+				parm.put("postStatus", post.getPostStatus());	
+			}
+			if(post.getThreadId()!=null && post.getThreadId()>=0){
+				parm.put("threadId", post.getThreadId());	
+			}
+		}
+		parm.put("orderby", "id desc" );
+		return parm;
 	}
 
 }

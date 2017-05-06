@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -50,10 +49,7 @@ public class CommentService extends AdapterService implements BaseService {
 	}
 	
 	public int countByParm(Comment comment) {
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(comment!=null){
-		
-		}
+		Map<String, Object> parm = queryParm(comment);
 		return commentMapper.countByParm(parm);
 	}
 	
@@ -63,13 +59,13 @@ public class CommentService extends AdapterService implements BaseService {
 	
 	public PageUtil<Comment> getBeanListByParm(Comment comment, int pageNo, Integer pageSize) {
 		PageUtil<Comment> pageUtil = new PageUtil<Comment>(pageNo, pageSize);
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(comment!=null){
-			parm.put("start", pageUtil.getStartRow());
-			parm.put("limit", pageUtil.getPageSize());
-		}
+		Map<String, Object> parm =  queryParm(comment);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		
 		int count = commentMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
 		List<Comment> list = new ArrayList<Comment>();
 		if(count!=0){
 			list = commentMapper.getBeanListByParm(parm);
@@ -78,7 +74,7 @@ public class CommentService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public PageUtil<Map<String, Object>> getMapListByParm(News news,int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getNewsMapListByParm(News news,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		
@@ -107,6 +103,7 @@ public class CommentService extends AdapterService implements BaseService {
 		
 		int count = commentMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
 		if(count!=0){
 			list = commentMapper.getMapListByParm(parm);
 			for (Map<String, Object> map : list) {
@@ -131,5 +128,25 @@ public class CommentService extends AdapterService implements BaseService {
 			commentMapper.insert(comment);
 		}
 	}
-
+	
+	private Map<String, Object> queryParm(Comment comment) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		if(comment!=null){
+			if(comment.getNewsId()!=null && comment.getNewsId()>0){
+				parm.put("newsId", comment.getNewsId());
+			}
+			if(comment.getProductId()!=null && comment.getProductId()>0){
+				parm.put("productId", comment.getProductId());
+			}
+			if(comment.getShopId()!=null && comment.getShopId()>0){
+				parm.put("shopId", comment.getShopId());
+			}
+			if(comment.getUserId()!=null && comment.getNewsId()>0){
+				parm.put("userId", comment.getUserId());
+			}
+		}
+		parm.put("orderby", "order by id desc");
+		return parm;
+	}
+	
 }

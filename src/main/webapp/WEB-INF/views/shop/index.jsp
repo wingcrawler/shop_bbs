@@ -4,7 +4,7 @@
 <html>
 <head>
 	<jsp:include page="include/meta.jsp"></jsp:include>
-	<title>${t.t_sqe } -- ${t.t_home }</title>
+	<title>${t.t_sqe_mall } -- ${t.t_home }</title>
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
@@ -75,9 +75,9 @@
 									<div class="price">
 										<p>$ ${item.productPrice }</p>
 									</div>
-									<div class="like">
+									<!-- <div class="like">
 										<a href="#"><img src="/frontstyle/images/like.png" alt="" /></a>
-									</div>
+									</div> -->
 									<div class="clearfix"> </div>
 								</div>
 								<div class="plus">

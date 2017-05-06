@@ -128,7 +128,7 @@
 			dataType : "json",
 			data: _parm,
 			success: function(data) {
-				if (data.errorNo != 200) {
+				if (data.errorNo != 0) {
 					$.commonUtil.showTip(data.errorInfo);
 				} else {
 					$.commonUtil.showTip(data.errorInfo);

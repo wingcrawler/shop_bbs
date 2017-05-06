@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.ProductTypeMapper;
-import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.util.PageUtil;
 

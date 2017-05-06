@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,24 +39,19 @@ public class NewsService extends AdapterService implements BaseService {
 	}
 	
 	public int countByParm(News news) {
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(news!=null){
-			parm.put("newsTitle", news.getNewsTitle());
-		}
+		Map<String, Object> parm = queryParm(news);
 		return newsMapper.countByParm(parm);
 	}
 	
 	public PageUtil<News> getBeanListByParm(News news, int pageNo, Integer pageSize) {
 		PageUtil<News> pageUtil = new PageUtil<News>(pageNo, pageSize);
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(news!=null){
-			parm.put("newsTitle", news.getNewsTitle());
-			parm.put("start", pageUtil.getStartRow());
-			parm.put("limit", pageUtil.getPageSize());
-			parm.put("orderby", "id desc");
-		}
+		Map<String, Object> parm = queryParm(news);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+
 		int count = newsMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
 		List<News> list = new ArrayList<News>();
 		if(count!=0){
 			list = newsMapper.getBeanListByParm(parm);
@@ -69,14 +65,20 @@ public class NewsService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getMapListByParm(News news,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(news);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		
 		int count = newsMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
-			List<Map<String, Object>> list = newsMapper.getMapListByParm(parm);
-			pageUtil.setList(list);
+			list = newsMapper.getMapListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -99,6 +101,17 @@ public class NewsService extends AdapterService implements BaseService {
 			return null;
 		}
 		return list.get(0);
+	}
+	
+	private Map<String, Object> queryParm(News news) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		if(news!=null){
+			if(StringUtils.isNotBlank(news.getNewsTitle())){
+				parm.put("newsTitle", news.getNewsTitle());	
+			}
+		}
+		parm.put("orderby", "id desc" );
+		return parm;
 	}
 
 }

@@ -1,5 +1,4 @@
-<%@ page language="java" import="java.util.*"
-	contentType="text/html; charset=utf-8"%><!DOCTYPE html>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -7,7 +6,6 @@
 <html class="no-js">
 <!--<![endif]-->
 <head>
-<%@ include file="/common/meta.jsp"%>
 <meta charset="utf-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
 <!--
@@ -20,14 +18,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Google Web Font Embed -->
 
-
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/templatemo_main.css">
+<link rel="stylesheet" href="/frontstyle/css/bootstrap.min.css">
+<link rel="stylesheet" href="/frontstyle/css/font-awesome.min.css">
+<link rel="stylesheet" href="/frontstyle/css/templatemo_main.css">
 </head>
 <body>
 	<div id="main-wrapper">
-
 
 		<div
 			class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center templatemo-logo margin-top-20">
@@ -41,18 +37,18 @@
 
 		<div class="image-section">
 			<div class="image-container">
-				<img src="images/zoom-bg-1.jpg" id="menu-img"
+				<img src="/frontstyle/images/zoom-bg-1.jpg" id="menu-img"
 					class="main-img inactive"
 					alt="Zoom HTML5 Template by templatemo.com"> <img
-					src="images/zoom-bg-2.jpg" id="products-img" class="inactive"
-					alt="Product"> <img src="images/zoom-bg-3.jpg"
+					src="/frontstyle/images/zoom-bg-2.jpg" id="products-img" class="inactive"
+					alt="Product"> <img src="/frontstyle/images/zoom-bg-3.jpg"
 					id="services-img" class="inactive" alt="Services"> <img
-					src="images/zoom-bg-4.jpg" id="about-img" class="inactive"
-					alt="About"> <img src="images/zoom-bg-5.jpg" id="contact-img"
+					src="/frontstyle/images/zoom-bg-4.jpg" id="about-img" class="inactive"
+					alt="About"> <img src="/frontstyle/images/zoom-bg-5.jpg" id="contact-img"
 					class="inactive" alt="Contact"> <img
-					src="images/zoom-bg-6.jpg" id="company-intro-img"
+					src="/frontstyle/images/zoom-bg-6.jpg" id="company-intro-img"
 					class="main-img inactive" alt="Company Intro"> <img
-					src="images/zoom-bg-7.jpg" id="testimonials-img"
+					src="/frontstyle/images/zoom-bg-7.jpg" id="testimonials-img"
 					class="main-img inactive" alt="Testimonials">
 			</div>
 		</div>
@@ -65,7 +61,7 @@
 					<section id="menu-section" class="active">
 						<div class="row">
 							<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 margin-bottom-20">
-								<a href="#products" class="change-section">
+								<a href="/shopIndex" class="change-section">
 									<div class="black-bg btn-menu">
 										<i class="fa fa-cubes"></i>
 										<h2>商城</h2>
@@ -113,10 +109,18 @@
 
 	</div>
 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/jquery.backstretch.min.js"></script>
-	<script src="js/templatemo_script.js"></script>
+	<script src="/frontstyle/js/jquery.min.js"></script>
+	<script src="/frontstyle/js/jquery-ui.min.js"></script>
+	<script src="/frontstyle/js/jquery.backstretch.min.js"></script>
+	<script src="/frontstyle/js/templatemo_script.js"></script>
 
+<script type="text/javascript">
+$(function(){
+	$(".change-section").click(function(){
+		self.location= $(this).attr("href");
+	});
+	
+});
+</script>
 </body>
 </html>

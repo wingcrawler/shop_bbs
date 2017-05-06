@@ -39,27 +39,19 @@ public class InformService extends AdapterService implements BaseService {
 	}
 	
 	public int countByParm(Inform inform) {
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(inform!=null){
-			if(StringUtils.isNotBlank(inform.getInformTitle())){
-				parm.put("informTitle", inform.getInformTitle());	
-			}
-			if(inform.getInfromStatus()!=null && inform.getInfromStatus()>=0){
-				parm.put("infromStatus", inform.getInfromStatus());	
-			}
-		}
+		Map<String, Object> parm = queryParm(inform);
 		return informMapper.countByParm(parm);
 	}
 	
 	public PageUtil<Inform> getBeanListByParm(Inform inform, int pageNo, Integer pageSize) {
 		PageUtil<Inform> pageUtil = new PageUtil<Inform>(pageNo, pageSize);
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(inform!=null){
-			parm.put("start", pageUtil.getStartRow());
-			parm.put("limit", pageUtil.getPageSize());
-		}
+		Map<String, Object> parm = queryParm(inform);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+
 		int count = informMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+	
 		List<Inform> list = new ArrayList<Inform>();
 		if(count!=0){
 			list = informMapper.getBeanListByParm(parm);
@@ -70,10 +62,9 @@ public class InformService extends AdapterService implements BaseService {
 	
 	public PageUtil<Map<String, Object>> getMapListByParm(Inform inform,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
-		Map<String, Object> parm = new HashMap<String, Object>();
+		Map<String, Object> parm = queryParm(inform);
 		parm.put("start", pageUtil.getStartRow());
 		parm.put("limit", pageUtil.getPageSize());
-		parm.put("orderby", "id desc");
 		
 		if(inform!=null){
 			if(StringUtils.isNotBlank(inform.getInformTitle())){
@@ -113,5 +104,24 @@ public class InformService extends AdapterService implements BaseService {
 		return detail;
 	}
 
+	private Map<String, Object> queryParm(Inform inform) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		if(inform!=null){
+			if(inform.getUserPostId()!=null && inform.getUserPostId()>0){
+				parm.put("postId", inform.getUserPostId());	
+			}
+			if(inform.getInfromStatus()!=null && inform.getInfromStatus()>=0){
+				parm.put("informStatus", inform.getInfromStatus());
+			}
+			if(inform.getUserReportedId()!=null && inform.getUserReportedId()>0){
+				parm.put("userReportedId", inform.getUserReportedId());
+			}
+			if(StringUtils.isNotBlank(inform.getInformTitle())){
+				parm.put("informTitle", inform.getInformTitle());
+			}
+		}
+		parm.put("orderby", "id asc" );
+		return parm;
+	}
 
 }

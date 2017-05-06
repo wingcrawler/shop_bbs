@@ -101,8 +101,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(6).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(6).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(5).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(5).find('ul li').eq(0).addClass('active');
 	
 	var id='${entity.id}';
 	$('#offUser').click(function(){
