@@ -20,7 +20,7 @@ import com.sqe.shop.util.PageUtil;
 public class BBSSectionService extends AdapterService implements BaseService {
 
 	@Autowired
-	BBSSectionMapper sectionMapper;
+	SectionMapper sectionMapper;
 
 	public int insert(Section section) {
 		return sectionMapper.insert(section);
@@ -80,7 +80,7 @@ public class BBSSectionService extends AdapterService implements BaseService {
 		pageUtil.setTotalRecords(count);
 		List<Section> list = new ArrayList<Section>();
 		if (count != 0) {
-			list = sectionMapper.getBeanListByParmParent(parm ,ParentId);
+			list = sectionMapper.getBeanListByParm(parm);
 			for (Section s : list) {
 				s.setStatusName(Constants.getSectionStatus(s.getSectionStatus()));
 			}

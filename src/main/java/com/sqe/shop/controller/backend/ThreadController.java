@@ -50,6 +50,7 @@ public class ThreadController extends BaseBackendController {
 		return model;
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value="/getList", method = RequestMethod.GET)
 	public Map<String, Object> getList(Thread thread,

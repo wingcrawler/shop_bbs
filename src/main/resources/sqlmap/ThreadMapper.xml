@@ -140,5 +140,30 @@
 	</if>
 </select>
 
+<!-- 根据section 获取thread List -->
+<select id="getSectionMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select t.thread_title as threadTitle, t.thread_time as date, u.username,tp.topic_title as topicTitle,s.section_title,
+	t.thread_type as threadType
+	from thread t 
+	LEFT JOIN `user` u on t.user_id = u.id
+	LEFT JOIN topic tp on t.topic_id = tp.id
+	LEFT JOIN section s on t.section_id = s.id
+	where 1=1
+	<if test="parm.topicId != null">
+     	and t.topic_id = #{parm.topicId}
+   	</if>
+	<if test="parm.threadType != null">
+     	and t.thread_type = #{parm.threadType}
+   	</if>
+	<if test="parm.threadTitle != null">
+     	and t.thread_title like "%"#{parm.threadTitle}"%"
+   	</if>
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
+</select>
 
 </mapper>

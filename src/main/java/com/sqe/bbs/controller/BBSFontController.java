@@ -1,6 +1,7 @@
 package com.sqe.bbs.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -9,20 +10,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseFrontController;
+import com.sqe.shop.model.Section;
+import com.sqe.shop.model.Thread;
+import com.sqe.shop.model.Topic;
+import com.sqe.shop.service.SectionService;
+import com.sqe.shop.service.ThreadService;
+import com.sqe.shop.service.TopicService;
+import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/bbs")
 public class BBSFontController extends BaseFrontController {
+	@Autowired
+	private ThreadService threadService;
+	@Autowired
+	private TopicService topicService;
+	@Autowired
+	private SectionService sectionService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BBSFontController.class);
 	
 	@RequestMapping(value="/index", method = RequestMethod.GET)
-	public ModelAndView index() {
+	public ModelAndView index(Section section,Thread thread,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		ModelAndView model = new ModelAndView("bbs/index");
+		section.setSectionType(0);
+		PageUtil<Section> page = sectionService.getBeanListByParm(section, 0, -1);
+		model.addObject("section", page);
+		section.setSectionType(1);
+		PageUtil<Section> pageSecond = sectionService.getBeanListByParm(section, 0, -1);
+		model.addObject("sectionSecond", pageSecond);
+		section.setSectionType(1);
+		PageUtil<Thread> pageThread = threadService.getBeanListByParm(thread, 0, -1);
+		model.addObject("thread", pageThread);
+		
 		return model;
 	}
 	

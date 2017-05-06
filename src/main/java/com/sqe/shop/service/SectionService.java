@@ -39,7 +39,7 @@ public class SectionService extends AdapterService implements BaseService {
 		Map<String, Object> parm = queryParm(section);
 		return sectionMapper.countByParm(parm);
 	}
-	
+	//查询所有
 	public PageUtil<Section> getBeanListByParm(Section section, int pageNo, Integer pageSize) {
 		PageUtil<Section> pageUtil = new PageUtil<Section>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(section);

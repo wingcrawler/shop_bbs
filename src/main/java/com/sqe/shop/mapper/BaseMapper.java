@@ -14,7 +14,7 @@ public interface BaseMapper {
 	<T> T getById(@Param("id") Long id);
 	
 	int delete(@Param("id") Long id);
-
+    //param  map 对象
 	int countByParm(@Param("parm") Map<String, Object> paramMap);
 
 	<T> List<T> getBeanListByParm(@Param("parm") Map<String, Object> paramMap);

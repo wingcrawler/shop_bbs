@@ -3,7 +3,10 @@ package com.sqe.shop.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Thread implements Serializable {
+import com.sqe.bbs.controller.BBSSectionController;
+import com.sqe.shop.common.BaseModel;
+
+public class Thread extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

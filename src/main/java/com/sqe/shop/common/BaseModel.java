@@ -8,6 +8,7 @@ public class BaseModel {
 	private String createTimeStr;
 	private String userName;
 	private String title;
+	private String time;
 
 	public String getTypeName() {
 		return typeName;
@@ -56,6 +57,14 @@ public class BaseModel {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 }

@@ -83,7 +83,7 @@ public class BBSSectionController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getSecondSection", method = RequestMethod.GET)
+	@RequestMapping(value = "/getSecondSectionby", method = RequestMethod.GET)
 	public Map<String, Object> getList(Section section, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "20") int pageSize,int ParentId) {
 		section.setSectionType(1);
