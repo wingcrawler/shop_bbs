@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/common/meta.jsp"%>
 <title>主页</title>
 </head>
 

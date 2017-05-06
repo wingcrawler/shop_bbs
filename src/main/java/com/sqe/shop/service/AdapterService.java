@@ -71,6 +71,21 @@ public class AdapterService {
 		return (List<Map<String, Object>>) invokeMapper(mapperName, "getMapListByParm", paramMap);
 	}
 
+	/**
+	 * sample: super.getByParm("TProductMapper", "xmlId", parmMap)
+	 * @param mapperName
+	 * @param xmlId
+	 * @param paramMap
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> T getByParm(String mapperName, String xmlId, Map<String, Object> paramMap) {
+		if(paramMap==null){
+			paramMap = new HashMap<String, Object>();
+		}
+		return  (T) invokeMapper(mapperName, xmlId, paramMap);
+	}
+	
 	private Object invokeMapper(String mapperName, String sqlId, Object... args){
 		try {
 			Class<?> mapperClass = Class.forName(BASE_MAPPER_PATH+mapperName); //反射获取mapper的实例
