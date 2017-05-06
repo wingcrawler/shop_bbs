@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseFrontController;
 import com.sqe.shop.model.Advertisement;
-import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.service.AdvertisementService;
 import com.sqe.shop.service.ImageService;
@@ -61,29 +60,6 @@ public class HomeController extends BaseFrontController {
 		return model;
 	}
 	
-	/**
-	 * 商品详情
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="single", method = RequestMethod.GET)
-	public ModelAndView single(ModelAndView model, Long productId) {
-		//查询单个商品
-		Product product = productService.getById(productId);
-		if(product==null){
-			model.setViewName("shop/404");
-			return model;
-		}
-		model.addObject("product", product);
-		//查询商品图片
-		Image image = new Image();
-		image.setProductId(productId);
-		PageUtil<Image> imgPage = imageService.getBeanListByParm(image, 0, -1);
-		model.addObject("imgList", imgPage.getList());
-		
-		model.setViewName("shop/single");
-		return model;
-	}
 	
 	/**
 	 * 关于我们
@@ -104,16 +80,6 @@ public class HomeController extends BaseFrontController {
 	@RequestMapping(value="help", method = RequestMethod.GET)
 	public ModelAndView help(ModelAndView model) {
 		model.setViewName("shop/help");
-		return model;
-	}
-	/**
-	 * 购物车
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="addToCart", method = RequestMethod.GET)
-	public ModelAndView addToCart(ModelAndView model) {
-		model.setViewName("shop/add-to-cart");
 		return model;
 	}
 	/**

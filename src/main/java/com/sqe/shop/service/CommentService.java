@@ -148,5 +148,5 @@ public class CommentService extends AdapterService implements BaseService {
 		parm.put("orderby", "order by id desc");
 		return parm;
 	}
-	
+
 }

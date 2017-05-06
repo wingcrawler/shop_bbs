@@ -39,7 +39,7 @@
 						<li><a href="single.html">behance</a></li>
 					</ul>
 				</li> --%>
-				<li><a href="/">${t.t_home }</a></li>
+				<li><a href="/shopIndex">${t.t_sqe_mall }</a></li>
 				<c:forEach var="item" items="${productTypeList }">
 					<li><a href="/productType?type=${item.id }">${item.typeName }</a></li>
 				</c:forEach>
