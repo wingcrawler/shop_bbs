@@ -5,10 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sqe.shop.common.BaseCommon;
 import com.sqe.shop.mapper.BaseMapper;
 import com.sqe.shop.util.SpringContextUtil;
 
-public class AdapterService {
+public class AdapterService extends BaseCommon {
 	
 	private static String BASE_MAPPER_PATH = "com.sqe.shop.mapper.";
 

@@ -4,9 +4,11 @@
 
 <resultMap type="com.sqe.shop.model.Message" id="MessageBaseMapper">
 	<id property="messageStatus" column="message_status" />
+	<id property="productId" column="product_id" />
+	<id property="createTime" column="create_time" />
+	<id property="messageContext" column="message_context" />
 	<id property="postId" column="post_id" />
 	<id property="id" column="id" />
-	<id property="messageContext" column="message_context" />
 	<id property="receiveId" column="receive_id" />
 </resultMap>  
 
@@ -15,9 +17,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into message
-	(message_status,post_id,message_context,receive_id)
+	(message_status,product_id,create_time,message_context,post_id,receive_id)
 	values
-	(#{messageStatus},#{postId},#{messageContext},#{receiveId})
+	(#{messageStatus},#{productId},#{createTime},#{messageContext},#{postId},#{receiveId})
 </insert>
 
 <update id="update">
@@ -26,11 +28,17 @@
 			<if test="messageStatus != null">  
 	        	message_status=#{messageStatus},
 	    	</if>
-			<if test="postId != null">  
-	        	post_id=#{postId},
+			<if test="productId != null">  
+	        	product_id=#{productId},
+	    	</if>
+			<if test="createTime != null">  
+	        	create_time=#{createTime},
 	    	</if>
 			<if test="messageContext != null">  
 	        	message_context=#{messageContext},
+	    	</if>
+			<if test="postId != null">  
+	        	post_id=#{postId},
 	    	</if>
 			<if test="receiveId != null">  
 	        	receive_id=#{receiveId},
@@ -52,6 +60,12 @@
 			<if test="parm.messageStatus != null">
 		     	and message_status = #{parm.messageStatus}
 		   	</if>
+		   	<if test="parm.productId != null">
+		     	and product_id = #{parm.productId}
+		   	</if>
+			<if test="parm.createTime != null">
+		     	and create_time = #{parm.createTime}
+		   	</if>
 			<if test="parm.postId != null">
 		     	and post_id = #{parm.postId}
 		   	</if>
@@ -67,6 +81,12 @@
 	select * from message where 1=1 
 			<if test="parm.messageStatus != null">
 		     	and message_status = #{parm.messageStatus}
+		   	</if>
+		   	<if test="parm.productId != null">
+		     	and product_id = #{parm.productId}
+		   	</if>
+			<if test="parm.createTime != null">
+		     	and create_time = #{parm.createTime}
 		   	</if>
 			<if test="parm.postId != null">
 		     	and post_id = #{parm.postId}

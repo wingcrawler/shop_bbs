@@ -1,18 +1,23 @@
 package com.sqe.shop.controller.front;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseFrontController;
 import com.sqe.shop.model.Image;
+import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Product;
-import com.sqe.shop.service.AdvertisementService;
+import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
+import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ProductService;
 import com.sqe.shop.util.PageUtil;
 
@@ -25,10 +30,11 @@ public class FrontProductController extends BaseFrontController {
 	@Autowired
 	private ProductService productService;
 	@Autowired
-	private AdvertisementService advertisementService;
-	@Autowired
 	private ImageService imageService;
-	
+	@Autowired
+	private CommentService commentService;
+	@Autowired
+	private MessageService messageService;
 	
 	/**
 	 * 商品详情
@@ -52,6 +58,21 @@ public class FrontProductController extends BaseFrontController {
 		
 		model.setViewName("shop/single");
 		return model;
+	}
+	
+	/**
+	 * 产品私信
+	 * @param model
+	 * @param message
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="postMessage", method = RequestMethod.POST)
+	public Map<String, Object> postMessage(ModelAndView model, Message message) {
+		message.setMessageStatus(0);
+		message.setPostId(this.getCurrentUserId());
+		messageService.insert(message);
+		return responseOK("send_success");
 	}
 	
 }

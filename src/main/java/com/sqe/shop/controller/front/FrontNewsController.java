@@ -1,29 +1,20 @@
 package com.sqe.shop.controller.front;
 
-import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
-import org.aspectj.apache.bcel.generic.RET;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseFrontController;
-import com.sqe.shop.model.Comment;
-import com.sqe.shop.model.Image;
 import com.sqe.shop.model.News;
-import com.sqe.shop.model.Product;
-import com.sqe.shop.service.AdvertisementService;
 import com.sqe.shop.service.CommentService;
-import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.NewsService;
-import com.sqe.shop.service.ProductService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
@@ -50,23 +41,44 @@ public class FrontNewsController extends BaseFrontController {
 			return model;
 		}
 		model.addObject("news", news);
-		
-		model.addObject("commentPage", commentService.getNewsMapListByParm(news, 1, 10));
+		//阅读数+1
+		news.setNewsReaded(news.getNewsReaded()+1);
+		newsService.update(news);
 		
 		model.setViewName("shop/news/view");
 		return model;
 	}
 	
-	@Resource
+	/**
+	 * 异步加载新闻评论
+	 * @param newsId
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="getCommentList", method = RequestMethod.GET)
+	public PageUtil<Map<String, Object>> getCommentList(Long newsId, int pageNo, Integer pageSize) {
+		News news = new News();
+		news.setId(newsId);
+		return commentService.getNewsMapListByParm(news, pageNo, pageSize);
+	}
+	
+	/**
+	 * 点赞
+	 * @param newsId
+	 * @return
+	 */
+	@ResponseBody
 	@RequestMapping(value="thumb", method = RequestMethod.GET)
 	public Map<String, Object> thumb(Long newsId) {
 		News news = newsService.getById(newsId);
 		if(news==null){
-			return responseError(-1, "error_thumb_failed");
+			return responseError(-1, "error_thumb");
 		}
-		news.setNewsUp(news.getNewsUp()+1);
-		newsService.update(news);
-		return responseOK("error_thumb_success");
+		//点赞
+		newsService.updateThumb(news.getNewsUp(), newsId);
+		return responseOK("success_thumb");
 	}
 	
 }
