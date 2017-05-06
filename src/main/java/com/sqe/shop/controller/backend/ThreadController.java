@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,9 @@ public class ThreadController extends BaseBackendController {
 	
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
-		ModelAndView model = new ModelAndView("backend/bbs/edit_list");
+		ModelAndView model = new ModelAndView("backend/bbs/list_edit");
 		if(id!=null){
-			Thread entity = threadService.getById(id);
+			Map<String, Object> entity = threadService.getMapById(id);
 			model.addObject("entity", entity);
 		}
 		return model;
@@ -65,6 +66,12 @@ public class ThreadController extends BaseBackendController {
 	@ResponseBody
 	@RequestMapping(value="/doSave", method = RequestMethod.POST)
 	public Map<String, Object> save(Thread thread) {
+		if(StringUtils.isBlank(thread.getThreadTitle())){
+			return responseError(-1, "error_empty_title");
+		}
+		if(StringUtils.isBlank(thread.getThreadContext())){
+			return responseError(-1, "error_empty_content");
+		}
 		threadService.save(thread);
 		return responseOK("save_success");
 	}

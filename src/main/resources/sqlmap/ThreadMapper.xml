@@ -63,6 +63,19 @@
 	SELECT * FROM thread WHERE id=#{id} 
 </select>
 
+<select id="getMapById" resultType="HashMap">
+	select t.id, t.thread_title as threadTitle, t.thread_time as date, u.username,
+	tp.topic_title as topicTitle,t.thread_context as threadContext,
+	t.thread_type as threadType, t.thread_status as threadStatus,
+	s1.section_title as sectionOne, s2.section_title as sectionTwo
+	from thread t 
+	LEFT JOIN `user` u on t.user_id = u.id
+	LEFT JOIN topic tp on t.topic_id = tp.id
+	LEFT JOIN section s1 on tp.section_id = s1.id
+	LEFT JOIN section s2 on s1.section_parent_id = s2.id
+	WHERE t.id=#{id} 
+</select>
+
 <select id="countByParm" resultType="integer">
 	select count(*) from thread  where 1=1 
 			<if test="parm.topicId != null">
@@ -127,8 +140,8 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select t.thread_title as threadTitle, t.thread_time as date, u.username,tp.topic_title as topicTitle,
-	t.thread_type as threadType
+	select t.id, t.thread_title as threadTitle, t.thread_time as date, u.username,tp.topic_title as topicTitle,
+	t.thread_type as threadType,t.thread_status as threadStatus
 	from thread t 
 	LEFT JOIN `user` u on t.user_id = u.id
 	LEFT JOIN topic tp on t.topic_id = tp.id

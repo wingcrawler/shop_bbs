@@ -82,6 +82,8 @@ public class ThreadService extends AdapterService implements BaseService {
 				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
 				String type = map.get("threadType").toString();
 				map.put("typeName", Constants.getThreadType(Integer.valueOf(type)));
+				String status = map.get("threadStatus").toString();
+				map.put("statusName", Constants.getThreadStatus(Integer.valueOf(status)));
 			}
 		}
 		pageUtil.setList(list);
@@ -110,6 +112,10 @@ public class ThreadService extends AdapterService implements BaseService {
 			}
 		}
 		return parm;
+	}
+	
+	public Map<String, Object> getMapById(Long id) {
+		return threadMapper.getMapById(id);
 	}
 
 }

@@ -223,4 +223,16 @@ public class Constants extends BaseCommon{
 			return getText("t_unknow");
 		}
 	}
+	public static String getThreadStatus(Integer value) {
+		if(value==null){
+    		return getText("t_unknow");
+    	}
+		if(value==0){
+			return getText("t_off");
+		} else if(value==1){
+			return getText("t_on");
+		} else {
+			return getText("t_unknow");
+		}
+	}
 }

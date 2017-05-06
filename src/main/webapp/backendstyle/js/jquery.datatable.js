@@ -120,6 +120,26 @@
 		});
 	}
 	
+	/* 保存 */
+	$.fn.doSaveAndJump = function(_submitUrl, _jumpUrl) {
+		var _parm = $.fn.getFormJson('.form');
+		$.ajax({
+			type: "POST",
+			url: _submitUrl,
+			dataType : "json",
+			data: _parm,
+			success: function(data) {
+				if (data.errorNo != 0) {
+					$.commonUtil.showTip(data.errorInfo);
+				} else {
+					$.commonUtil.showTip(data.errorInfo);
+					self.location= _jumpUrl;
+				}
+			}
+		});
+	}
+	
+	
 	/* 保存并刷新  */
 	$.fn.doSaveAndReload = function(_parm, _url) {
 		$.ajax({
