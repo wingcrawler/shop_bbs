@@ -12,6 +12,7 @@ public class Thread implements Serializable {
 	private String threadTitle;
 	private Date threadTime;
 	private Integer threadType;
+	private Long sectionId;
 	private Long id;
 	private String threadContext;
 	private Long userId;
@@ -45,6 +46,12 @@ public class Thread implements Serializable {
 	}
 	public void setThreadType(Integer threadType) {
 		this.threadType = threadType;
+	}
+	public Long getSectionId() {
+		return sectionId;
+	}
+	public void setSectionId(Long sectionId) {
+		this.sectionId = sectionId;
 	}
 	public Long getId() {
 		return id;
