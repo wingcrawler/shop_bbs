@@ -35,10 +35,7 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 	}
 	
 	public int countByParm(QuestionAnswer questionAnswer) {
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(questionAnswer!=null){
-		
-		}
+		Map<String, Object> parm = queryParm(questionAnswer);
 		return questionAnswerMapper.countByParm(parm);
 	}
 	
@@ -48,13 +45,13 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 	
 	public PageUtil<QuestionAnswer> getBeanListByParm(QuestionAnswer questionAnswer, int pageNo, Integer pageSize) {
 		PageUtil<QuestionAnswer> pageUtil = new PageUtil<QuestionAnswer>(pageNo, pageSize);
-		Map<String, Object> parm = new HashMap<String, Object>();
-		if(questionAnswer!=null){
-			parm.put("start", pageUtil.getStartRow());
-			parm.put("limit", pageUtil.getPageSize());
-		}
+		Map<String, Object> parm = queryParm(questionAnswer);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+
 		int count = questionAnswerMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
 		List<QuestionAnswer> list = new ArrayList<QuestionAnswer>();
 		if(count!=0){
 			list = questionAnswerMapper.getBeanListByParm(parm);
@@ -63,14 +60,18 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 		return pageUtil;
 	}
 	
-	public PageUtil<Map<String, Object>> getMapListByParm(Map<String, Object> parm,int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getMapListByParm(QuestionAnswer questionAnswer,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(questionAnswer);
+		
 		int count = questionAnswerMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
-			List<Map<String, Object>> list = questionAnswerMapper.getMapListByParm(parm);
-			pageUtil.setList(list);
+			list = questionAnswerMapper.getMapListByParm(parm);
 		}
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 	
@@ -80,6 +81,15 @@ public class QuestionAnswerService extends AdapterService implements BaseService
 		} else {
 			questionAnswerMapper.insert(questionAnswer);
 		}
+	}
+	
+	private Map<String, Object> queryParm(QuestionAnswer questionAnswer) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		if(questionAnswer!=null){
+			
+		}
+		parm.put("orderby", "id desc" );
+		return parm;
 	}
 
 }

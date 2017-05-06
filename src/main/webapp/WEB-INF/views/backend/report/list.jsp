@@ -89,8 +89,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(8).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(8).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(7).addClass('active').addClass('opened');
+	$('#main-menu li.li').eq(7).find('ul li').eq(0).addClass('active');
 	
 	$('#datatable').datatable({
 		url_load : '/backend/inform/getList',

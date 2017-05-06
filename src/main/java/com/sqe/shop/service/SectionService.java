@@ -39,7 +39,7 @@ public class SectionService extends AdapterService implements BaseService {
 		Map<String, Object> parm = queryParm(section);
 		return sectionMapper.countByParm(parm);
 	}
-	//查询所有
+	
 	public PageUtil<Section> getBeanListByParm(Section section, int pageNo, Integer pageSize) {
 		PageUtil<Section> pageUtil = new PageUtil<Section>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(section);
@@ -48,6 +48,7 @@ public class SectionService extends AdapterService implements BaseService {
 		
 		int count = sectionMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
 		List<Section> list = new ArrayList<Section>();
 		if(count!=0){
 			list = sectionMapper.getBeanListByParm(parm);
@@ -62,8 +63,10 @@ public class SectionService extends AdapterService implements BaseService {
 	public PageUtil<Map<String, Object>> getMapListByParm(Section section,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(section);
+		
 		int count = sectionMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
+		
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
 			list = sectionMapper.getMapListByParm(parm);
@@ -89,9 +92,10 @@ public class SectionService extends AdapterService implements BaseService {
 			if(section.getSectionParentId()!=null && section.getSectionParentId()>0){
 				parm.put("sectionParentId", section.getSectionParentId());
 			}
-			parm.put("orderby", "id desc" );
 		}
+		parm.put("orderby", "id desc" );
 		return parm;
 	}
 
 }
+

@@ -8,6 +8,7 @@
 	<id property="threadTitle" column="thread_title" />
 	<id property="threadTime" column="thread_time" />
 	<id property="threadType" column="thread_type" />
+	<id property="sectionId" column="section_id" />
 	<id property="id" column="id" />
 	<id property="threadContext" column="thread_context" />
 	<id property="userId" column="user_id" />
@@ -18,9 +19,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into thread
-	(topic_id,thread_status,thread_title,thread_time,thread_type,thread_context,user_id)
+	(topic_id,thread_status,thread_title,thread_time,thread_type,section_id,thread_context,user_id)
 	values
-	(#{topicId},#{threadStatus},#{threadTitle},#{threadTime},#{threadType},#{threadContext},#{userId})
+	(#{topicId},#{threadStatus},#{threadTitle},#{threadTime},#{threadType},#{sectionId},#{threadContext},#{userId})
 </insert>
 
 <update id="update">
@@ -40,6 +41,9 @@
 	    	</if>
 			<if test="threadType != null">  
 	        	thread_type=#{threadType},
+	    	</if>
+			<if test="sectionId != null">  
+	        	section_id=#{sectionId},
 	    	</if>
 			<if test="threadContext != null">  
 	        	thread_context=#{threadContext},
@@ -76,6 +80,9 @@
 			<if test="parm.threadType != null">
 		     	and thread_type = #{parm.threadType}
 		   	</if>
+		   	<if test="parm.sectionId != null">
+		     	and section_id = #{parm.sectionId}
+		   	</if>
 			<if test="parm.threadContext != null">
 		     	and thread_context = #{parm.threadContext}
 		   	</if>
@@ -100,6 +107,9 @@
 		   	</if>
 			<if test="parm.threadType != null">
 		     	and thread_type = #{parm.threadType}
+		   	</if>
+		   	<if test="parm.sectionId != null">
+		     	and section_id = #{parm.sectionId}
 		   	</if>
 			<if test="parm.threadContext != null">
 		     	and thread_context = #{parm.threadContext}
@@ -132,6 +142,9 @@
 	<if test="parm.threadTitle != null">
      	and t.thread_title like "%"#{parm.threadTitle}"%"
    	</if>
+   	<if test="parm.sectionId != null">
+     	and t.section_id = #{parm.sectionId}
+   	</if>
 	<if test="parm.orderby != null">
    		order by ${parm.orderby}
    	</if>
@@ -139,6 +152,7 @@
 		limit #{parm.start},#{parm.limit}
 	</if>
 </select>
+
 
 <!-- 根据section 获取thread List -->
 <select id="getSectionMapListByParm" parameterType="HashMap" resultType="HashMap">
@@ -165,5 +179,4 @@
 		limit #{parm.start},#{parm.limit}
 	</if>
 </select>
-
 </mapper>

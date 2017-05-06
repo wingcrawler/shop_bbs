@@ -5,15 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.AdvertisementMapper;
 import com.sqe.shop.model.Advertisement;
-import com.sqe.shop.model.Product;
-import com.sqe.shop.model.ProductType;
 import com.sqe.shop.util.PageUtil;
 
 @Component  

@@ -68,7 +68,7 @@ public class CommentController extends BaseBackendController {
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		
-		PageUtil<Map<String, Object>> page = commentService.getMapListByParm(news, pageNo, pageSize);
+		PageUtil<Map<String, Object>> page = commentService.getNewsMapListByParm(news, pageNo, pageSize);
 		
 		resMap.put("list", page.getList());
 		resMap.put("page", page);

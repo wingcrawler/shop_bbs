@@ -3,7 +3,6 @@ package com.sqe.shop.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.sqe.bbs.controller.BBSSectionController;
 import com.sqe.shop.common.BaseModel;
 
 public class Thread extends BaseModel implements Serializable {
@@ -15,6 +14,7 @@ public class Thread extends BaseModel implements Serializable {
 	private String threadTitle;
 	private Date threadTime;
 	private Integer threadType;
+	private Long sectionId;
 	private Long id;
 	private String threadContext;
 	private Long userId;
@@ -48,6 +48,12 @@ public class Thread extends BaseModel implements Serializable {
 	}
 	public void setThreadType(Integer threadType) {
 		this.threadType = threadType;
+	}
+	public Long getSectionId() {
+		return sectionId;
+	}
+	public void setSectionId(Long sectionId) {
+		this.sectionId = sectionId;
 	}
 	public Long getId() {
 		return id;

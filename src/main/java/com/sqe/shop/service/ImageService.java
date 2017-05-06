@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.ImageMapper;
 import com.sqe.shop.model.Image;
-import com.sqe.shop.model.Product;
 import com.sqe.shop.util.PageUtil;
 
 @Component  

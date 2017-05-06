@@ -81,8 +81,8 @@ public class RoleService extends AdapterService implements BaseService {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(role!=null){
 			
-			parm.put("orderby", "id desc" );
 		}
+		parm.put("orderby", "id desc" );
 		return parm;
 	}
 
