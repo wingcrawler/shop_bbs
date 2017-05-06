@@ -59,9 +59,13 @@ public class MessageService extends AdapterService implements BaseService {
 	public PageUtil<Map<String, Object>> getAdminMessageListByParm(Message message,int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(message);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		
 		int count = messageMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		
 		if(count!=0){
 			list = messageMapper.getAdminMessageListByParm(parm);
 			for(Map<String, Object> map : list){
@@ -90,8 +94,8 @@ public class MessageService extends AdapterService implements BaseService {
 			if(message.getMessageStatus()!=null && message.getMessageStatus()>=0){
 				parm.put("messageStatus", message.getMessageStatus());	
 			}
-			parm.put("orderby", "id desc" );
 		}
+		parm.put("orderby", "id desc" );
 		return parm;
 	}
 

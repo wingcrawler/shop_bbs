@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ShopMapper;
-import com.sqe.shop.model.Product;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
@@ -137,8 +136,8 @@ public class ShopService extends AdapterService implements BaseService {
 			if(shop.getShopStatus()!=null&&shop.getShopStatus()>=0){
 				parm.put("shopStatus", shop.getShopStatus());
 			}
-			parm.put("orderby", "id desc");
 		}
+		parm.put("orderby", "id desc");
 		return parm;
 	}
 }
