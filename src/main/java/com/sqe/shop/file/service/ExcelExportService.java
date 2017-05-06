@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.common.BaseService;
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.util.DateUtil;
 
 @Component
@@ -74,11 +75,15 @@ public class ExcelExportService extends BaseService {
 			
 			HSSFRow row1 = null;
 			int i=0;
+			String status = "0";
 			for (Map<String, Object> map : list){
 				row1 = sheet.createRow((int) ++i);
 				row1.createCell(0).setCellValue(map.get("shopTitle")==null?"":map.get("shopTitle").toString());
 				row1.createCell(1).setCellValue(map.get("shopOnwer")==null?"":map.get("shopOnwer").toString());
-				row1.createCell(2).setCellValue(map.get("shopStatus")==null?"":map.get("shopStatus").toString());
+				
+				status= map.get("shopStatus")==null?"0":map.get("shopStatus").toString();
+				row1.createCell(2).setCellValue(Constants.getStoreStatus(Integer.valueOf(status)));
+				
 				row1.createCell(3).setCellValue(map.get("shopLevel")==null?"":map.get("shopLevel").toString());
 				row1.createCell(4).setCellValue(map.get("shopRank")==null?"":map.get("shopRank").toString());
 				row1.createCell(5).setCellValue(map.get("description")==null?"":map.get("description").toString());

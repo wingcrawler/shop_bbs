@@ -12,16 +12,16 @@
 				<ul>
 					<li class="phone">+371 282 20 760</li>
 					<li class="mail"><a href="mailto:example@mail.com">eony321v@gmail.com</a></li>
-					<li class="checkout">
+					<!-- <li class="checkout">
 						<a href="/addToCart">
 							<span class="cart">$ 99.54</span>
-							<!-- <span class="check">Checkout</span> -->
+							<span class="check">Checkout</span>
 						</a>
-						<!-- <div class="shopping">
+						<div class="shopping">
 							<h5>Your Shopping Cart is empty.</h5>
 							<p>Give it purpose—fill it with books, movies, mobiles, cameras, toys and fashion jewellery.</p>
-						</div> -->
-					</li>
+						</div>
+					</li> -->
 				</ul>
 			</div>
 			<div class="clearfix"> </div>

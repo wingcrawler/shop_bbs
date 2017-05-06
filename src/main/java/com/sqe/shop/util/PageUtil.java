@@ -29,6 +29,10 @@ public class PageUtil<E> {
     private int startRow;
     private String orderBy;
 
+    public PageUtil() {
+    	
+    }
+    
     public PageUtil(int pageNo, Integer pageSize) {
     	if(pageSize==null || pageSize < 0){
     		this.pageSize = MAX_PAGE_SIZE;

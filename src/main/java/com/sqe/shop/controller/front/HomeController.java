@@ -31,14 +31,20 @@ public class HomeController extends BaseFrontController {
 	private AdvertisementService advertisementService;
 	@Autowired
 	private ImageService imageService;
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView index(ModelAndView model) {
+		model.setViewName("front/index");
+		return model;
+	}
 
 	/**
 	 * 商城首页
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView index(ModelAndView model) {
+	@RequestMapping(value="shopIndex", method = RequestMethod.GET)
+	public ModelAndView shopIndex(ModelAndView model) {
 		//轮播图
 		Advertisement advertisement = new Advertisement();
 		advertisement.setType(0);

@@ -4,7 +4,7 @@
 <html>
 <head>
 	<jsp:include page="include/meta.jsp"></jsp:include>
-	<title>${t.t_sqe } -- ${t.t_home }</title>
+	<title>${t.t_sqe_mall } -- ${t.t_home }</title>
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
