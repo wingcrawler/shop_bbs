@@ -17,9 +17,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseBackendController;
-import com.sqe.shop.file.service.ImageFileService;
 import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.service.AdvertisementService;
+import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.PropertiesUtil;
 
