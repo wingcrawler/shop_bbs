@@ -69,7 +69,8 @@ public class TopicService extends AdapterService implements BaseService {
 			list = topicMapper.getMapListByParm(parm);
 			for(Map<String, Object> map : list){
 				String statusStr = map.get("topicStatus")==null?"0":map.get("topicStatus").toString();
-				map.put("statusName", constants.getTopicStatus(Integer.valueOf(statusStr)));
+
+				map.put("statusName", this.getTopicStatus(Integer.valueOf(statusStr)));
 			}
 		}
 		pageUtil.setList(list);

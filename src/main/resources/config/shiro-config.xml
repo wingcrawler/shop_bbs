@@ -33,10 +33,12 @@
                 <!-- roles[manager]表示访问此连接需要用户的角色为manager -->    
                 <!-- /user/add=roles[manager]    
                 /user/del/**=roles[admin]    --> 
-                /backend/**=roles[admin]    
+                /backend/**=roles[admin]
+                /front/sell/**=roles[sell]   
+                /front/buy/**=roles[buy]       
                 <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login-->      
                 <!-- /backend/** = authc --> 
-                /front/** = authc   
+                /auth/** = authc   
             </value>      
         </property>      
     </bean>    

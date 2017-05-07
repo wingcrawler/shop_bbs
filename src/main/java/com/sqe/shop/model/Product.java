@@ -1,6 +1,7 @@
 package com.sqe.shop.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.sqe.shop.common.BaseModel;
 
@@ -9,13 +10,20 @@ public class Product extends BaseModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String productDescripton;
+	private String productEnName;
+	private String productDim;
 	private Integer productStatus;
 	private Integer productCount;
 	private Integer productView;
 	private Integer productRank;
+	private Long userId;
 	private Long productTypeId;
 	private String productName;
+	private Long productSubtypeId;
+	private Date createTime;
 	private Integer productUrlClick;
+	private String productEnDescription;
+	private String productEnDim;
 	private Long shopId;
 	private Long id;
 	private String productUrl;
@@ -26,6 +34,18 @@ public class Product extends BaseModel implements Serializable {
 	}
 	public void setProductDescripton(String productDescripton) {
 		this.productDescripton = productDescripton;
+	}
+	public String getProductEnName() {
+		return productEnName;
+	}
+	public void setProductEnName(String productEnName) {
+		this.productEnName = productEnName;
+	}
+	public String getProductDim() {
+		return productDim;
+	}
+	public void setProductDim(String productDim) {
+		this.productDim = productDim;
 	}
 	public Integer getProductStatus() {
 		return productStatus;
@@ -51,6 +71,12 @@ public class Product extends BaseModel implements Serializable {
 	public void setProductRank(Integer productRank) {
 		this.productRank = productRank;
 	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 	public Long getProductTypeId() {
 		return productTypeId;
 	}
@@ -63,11 +89,35 @@ public class Product extends BaseModel implements Serializable {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+	public Long getProductSubtypeId() {
+		return productSubtypeId;
+	}
+	public void setProductSubtypeId(Long productSubtypeId) {
+		this.productSubtypeId = productSubtypeId;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 	public Integer getProductUrlClick() {
 		return productUrlClick;
 	}
 	public void setProductUrlClick(Integer productUrlClick) {
 		this.productUrlClick = productUrlClick;
+	}
+	public String getProductEnDescription() {
+		return productEnDescription;
+	}
+	public void setProductEnDescription(String productEnDescription) {
+		this.productEnDescription = productEnDescription;
+	}
+	public String getProductEnDim() {
+		return productEnDim;
+	}
+	public void setProductEnDim(String productEnDim) {
+		this.productEnDim = productEnDim;
 	}
 	public Long getShopId() {
 		return shopId;

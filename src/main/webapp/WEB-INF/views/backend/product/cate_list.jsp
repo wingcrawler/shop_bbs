@@ -5,7 +5,7 @@
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.m_product_cate }</title>
+	<title>${t.t_product_type_one }</title>
 	
 </head>
 <body class="page-body">
@@ -31,7 +31,7 @@
 								</div>
 								<div class="col-sm-2">
 									<br>
-									<button class="btn btn-info btn-icon" onclick="search()">
+									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
 										<i class="fa-search"></i>
 										<span>${t.t_search }</span>
 									</button>
@@ -93,13 +93,6 @@ $(function(){
 	}); 
 });
 
-function search(){
-	var typeName=$('input[name="typeName"]').val();
-	var parm = {
-			typeName:typeName
-	}
-	$.fn.doSearch(parm);
-}
 </script>
 </body>
 </html>

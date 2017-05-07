@@ -76,7 +76,8 @@ public class ShopService extends AdapterService implements BaseService {
 			list = shopMapper.getBeanListByParm(parm);
 			for(Shop s : list){
 				s.setCreateTimeStr(DateUtil.dateToString(s.getCreateTime(), DateUtil.DATETIME_FORMATE_2)); 
-				s.setStatusName(constants.getStoreStatus(s.getShopStatus()));
+
+				s.setStatusName(this.getStoreStatus(s.getShopStatus()));
 			}
 		}
 		pageUtil.setList(list);

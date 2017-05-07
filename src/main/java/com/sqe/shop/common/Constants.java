@@ -2,11 +2,10 @@ package com.sqe.shop.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.sqe.shop.service.cached.CachedService;
 
-@Service
+@Component
 public class Constants{
 	
 	@Autowired

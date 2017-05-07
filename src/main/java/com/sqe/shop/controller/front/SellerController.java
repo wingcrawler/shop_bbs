@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseBackendController;
@@ -45,7 +47,7 @@ public class SellerController extends BaseBackendController {
 	 */
 	@RequestMapping(value="/listPage", method = RequestMethod.GET)
 	public ModelAndView listPage(ModelAndView model) {
-		model = new ModelAndView("shop/sell/product_list");
+		model.setViewName("shop/sell/product_list");
 		return model;
 	}
 	
@@ -77,14 +79,17 @@ public class SellerController extends BaseBackendController {
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(ModelAndView model, Long id) {
 		if(id!=null){
-			Product entity = productService.getById(id);
+			Product entity = productService.getByIdAndUserId(id);
 			if(entity!=null){
 				List<Image> images = imageService.getByProductId(entity.getId());
 				model.addObject("imgList", images);
+			} else {
+				model.setViewName("shop/404");
+				return model;
 			}
 			model.addObject("entity", entity);
 		}
-		model = new ModelAndView("shop/sell/product_edit");
+		model.setViewName("shop/sell/product_edit");
 		return model;
 	}
 	
@@ -95,7 +100,21 @@ public class SellerController extends BaseBackendController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/doSave", method = RequestMethod.POST)
-	public Map<String, Object> save(Product product) {
+	public Map<String, Object> save(Product product,
+			@RequestParam(name = "indexFile",value="indexFile", required = false) MultipartFile indexFile,
+			@RequestParam(name = "listFile",value="listFile", required = false) MultipartFile listFile) {
+		if(StringUtils.isBlank(product.getProductName())){
+			return responseError(-1, "error_empty_product_name");
+		}
+		if(StringUtils.isBlank(product.getProductDescripton())){
+			return responseError(-1, "error_empty_description");
+		}
+		if(product.getProductTypeId()==null || product.getProductTypeId()<0){
+			return responseError(-1, "error_no_type");
+		}
+		if(product.getProductPrice()==null || product.getProductPrice()<0){
+			return responseError(-1, "error_empty_product_price");
+		}
 		productService.save(product);
 		return responseOK("save_success");
 	}
