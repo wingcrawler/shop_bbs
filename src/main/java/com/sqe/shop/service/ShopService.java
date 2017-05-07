@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ShopMapper;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.util.DateUtil;
@@ -74,7 +73,7 @@ public class ShopService extends AdapterService implements BaseService {
 			list = shopMapper.getBeanListByParm(parm);
 			for(Shop s : list){
 				s.setCreateTimeStr(DateUtil.dateToString(s.getCreateTime(), DateUtil.DATETIME_FORMATE_2)); 
-				s.setStatusName(Constants.getStoreStatus(s.getShopStatus()));
+				s.setStatusName(this.getStoreStatus(s.getShopStatus()));
 			}
 		}
 		pageUtil.setList(list);

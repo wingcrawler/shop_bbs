@@ -8,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.MessageMapper;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.util.PageUtil;
@@ -70,7 +69,7 @@ public class MessageService extends AdapterService implements BaseService {
 			list = messageMapper.getAdminMessageListByParm(parm);
 			for(Map<String, Object> map : list){
 				String statusStr = map.get("status")==null?"0":map.get("status").toString();
-				map.put("statusName", Constants.getMsgStatus(Integer.valueOf(statusStr)));
+				map.put("statusName", this.getMsgStatus(Integer.valueOf(statusStr)));
 			}
 		}
 		pageUtil.setList(list);

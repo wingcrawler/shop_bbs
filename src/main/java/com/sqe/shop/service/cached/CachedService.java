@@ -1,13 +1,16 @@
 package com.sqe.shop.service.cached;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.util.PageUtil;
@@ -25,6 +28,8 @@ public class CachedService {
     private ProductTypeService productTypeService;
 	
 	private Map<ProductType, List<ProductType>> productTypeList = null;//产品类别： 一级类别为key，二级类别列表为value
+	public ResourceBundle bundle = null; //国际化内容
+	private String lang = StringUtils.EMPTY; //国际化语言
 	
 	/**
 	 * 获取产品类别列表
@@ -72,6 +77,42 @@ public class CachedService {
 	public void refreshProductTypeList(){
 		productTypeList = null;
 		getProductTypeList();
+	}
+	
+	/**
+	 * 国际化语言
+	 * @return
+	 */
+	public String getLang() {
+		if(StringUtils.isBlank(lang)){
+			setLang(PropertiesUtil.get("lang"));
+		}
+		return lang;
+	}
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+	
+	/**
+	 * 国际化
+	 * @return
+	 */
+	public ResourceBundle getBundle() {
+    	if(bundle == null){
+        	String lang = this.getLang();
+        	Locale locale = Locale.CHINA;
+        	if(lang.equals("en")){
+        		locale = Locale.US;
+        	}
+        	bundle = ResourceBundle.getBundle("i18n", locale);
+        }
+    	return bundle;
+	}
+	public String getText(String key) {
+    	if(bundle==null){
+    		return Constants.UNKNOW_INFO;
+    	}
+    	return getBundle().getString(key);
 	}
 	
 }

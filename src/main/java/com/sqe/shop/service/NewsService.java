@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.NewsMapper;
 import com.sqe.shop.mapper.UserThumbMapper;
 import com.sqe.shop.model.News;
@@ -60,7 +59,7 @@ public class NewsService extends AdapterService implements BaseService {
 		if(count!=0){
 			list = newsMapper.getBeanListByParm(parm);
 			for(News n : list){
-				n.setTypeName(Constants.getNewsLang(n.getNewsType()));
+				n.setTypeName(this.getNewsLang(n.getNewsType()));
 				String dateStr = DateUtil.dateToString(n.getNewsDate(), DateUtil.DATETIME_FORMATE_2);
 				n.setCreateTimeStr(dateStr);
 			}

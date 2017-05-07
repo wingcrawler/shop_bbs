@@ -158,13 +158,13 @@ public class ShopController extends BaseBackendController {
 	@RequestMapping(value="/doMsgDelete", method = RequestMethod.GET)
 	public Map<String, Object> doMsgDelete(Long id) {
 		if(id==null){
-			return responseError(-1, bundle.getString("error_no_item"));
+			return responseError(-1, "error_no_item");
 		}
 		int i = messageService.delete(id);
 		if(i==0){
-			return responseError(-1, bundle.getString("error_del_failed"));
+			return responseError(-1, "error_del_failed");
 		}
-		return responseOK(bundle.getString("op_success"));
+		return responseOK("op_success");
 	}
 	
 	@ResponseBody

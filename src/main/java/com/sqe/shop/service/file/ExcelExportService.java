@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.common.BaseService;
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.util.DateUtil;
 
 @Component
@@ -82,7 +81,7 @@ public class ExcelExportService extends BaseService {
 				row1.createCell(1).setCellValue(map.get("shopOnwer")==null?"":map.get("shopOnwer").toString());
 				
 				status= map.get("shopStatus")==null?"0":map.get("shopStatus").toString();
-				row1.createCell(2).setCellValue(Constants.getStoreStatus(Integer.valueOf(status)));
+				row1.createCell(2).setCellValue(this.getStoreStatus(Integer.valueOf(status)));
 				
 				row1.createCell(3).setCellValue(map.get("shopLevel")==null?"":map.get("shopLevel").toString());
 				row1.createCell(4).setCellValue(map.get("shopRank")==null?"":map.get("shopRank").toString());

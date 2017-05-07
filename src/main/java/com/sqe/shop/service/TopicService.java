@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.TopicMapper;
 import com.sqe.shop.model.Topic;
 import com.sqe.shop.util.PageUtil;
@@ -67,7 +66,7 @@ public class TopicService extends AdapterService implements BaseService {
 			list = topicMapper.getMapListByParm(parm);
 			for(Map<String, Object> map : list){
 				String statusStr = map.get("topicStatus")==null?"0":map.get("topicStatus").toString();
-				map.put("statusName", Constants.getTopicStatus(Integer.valueOf(statusStr)));
+				map.put("statusName", this.getTopicStatus(Integer.valueOf(statusStr)));
 			}
 		}
 		pageUtil.setList(list);

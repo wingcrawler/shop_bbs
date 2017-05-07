@@ -27,7 +27,7 @@ public class BaseFrontController extends BaseCommon {
         this.request = request;
         this.response = response;
         //国际化内容
-        request.setAttribute("t", this.getBundle());
+        request.setAttribute("t", cachedService.getBundle());
         //获取产品类别列表
         request.setAttribute("productTypeList", cachedService.getProductTypeList());
     }

@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ProductMapper;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.util.PageUtil;
@@ -72,7 +71,7 @@ public class ProductService extends AdapterService implements BaseService {
 			list = productMapper.getMapListByParm(parm);
 			for(Map<String, Object> map : list){
 				String statusStr = map.get("productStatus")==null?"0":map.get("productStatus").toString();
-				map.put("productStatusStr", Constants.getProductStatus(Integer.valueOf(statusStr)));	
+				map.put("productStatusStr", this.getProductStatus(Integer.valueOf(statusStr)));	
 			}
 		}
 		pageUtil.setList(list);

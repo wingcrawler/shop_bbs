@@ -1,44 +1,23 @@
 package com.sqe.shop.common;
 
 import java.util.HashMap;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sqe.shop.model.User;
-import com.sqe.shop.util.PropertiesUtil;
+import com.sqe.shop.service.cached.CachedService;
 
-public class BaseCommon{
+public class BaseCommon extends Constants{
 	
-	public static ResourceBundle bundle = null;
-    static {
-    }
-    
-    public static ResourceBundle getBundle() {
-    	if(bundle == null){
-        	String lang = PropertiesUtil.get("lang");
-        	Locale locale = Locale.CHINA;
-        	if(lang.equals("en")){
-        		locale = Locale.US;
-        	}
-        	bundle = ResourceBundle.getBundle("i18n", locale);
-        }
-    	return bundle;
-	}
-    
-    public static String getText(String key) {
-    	if(bundle==null){
-    		return Constants.UNKNOW_INFO;
-    	}
-    	return getBundle().getString(key);
-	}
-
+	@Autowired
+	private CachedService cachedService;
+	
 	public HashMap<String, Object> responseOK(String result){
-		result = getText(result);
+		result = cachedService.getText(result);
 		return responseOK1(result);
 	}
 	
@@ -50,7 +29,7 @@ public class BaseCommon{
 	}
 	
 	public HashMap<String, Object> responseError(Integer errorNo, String errorInfo){
-		errorInfo = getText(errorInfo);
+		errorInfo = cachedService.getText(errorInfo);
 		return responseError1(errorNo, errorInfo);
 	}
 	

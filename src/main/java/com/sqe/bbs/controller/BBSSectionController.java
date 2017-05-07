@@ -1,4 +1,4 @@
-package com.sqe.bbs.controller;
+/*package com.sqe.bbs.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,14 +35,14 @@ public class BBSSectionController extends BaseFrontController {
 		return model;
 	}
 
-	/**
+	*//**
 	 * 获取一级版块列表0
 	 * 
 	 * @param section
 	 * @param pageNo
 	 * @param pageSize
 	 * @return
-	 */
+	 *//*
 	@ResponseBody
 	@RequestMapping(value = "/getFirstSection", method = RequestMethod.GET)
 	public Map<String, Object> getFirstList(Section section,
@@ -56,13 +56,13 @@ public class BBSSectionController extends BaseFrontController {
 		return resMap;
 	}
 
-	/**
+	*//**
 	 * 获取二级版块列表0
 	 * @param section
 	 * @param pageNo
 	 * @param pageSize
 	 * @return
-	 */
+	 *//*
 	@ResponseBody
 	@RequestMapping(value = "/getSecondSection", method = RequestMethod.GET)
 	public Map<String, Object> getList(Section section, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
@@ -75,13 +75,13 @@ public class BBSSectionController extends BaseFrontController {
 		return resMap;
 	}
 	
-	/**
+	*//**
 	 * 获取二级版块列表0
 	 * @param section
 	 * @param pageNo
 	 * @param pageSize
 	 * @return
-	 */
+	 *//*
 	@ResponseBody
 	@RequestMapping(value = "/getSecondSectionby", method = RequestMethod.GET)
 	public Map<String, Object> getList(Section section, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
@@ -94,3 +94,4 @@ public class BBSSectionController extends BaseFrontController {
 		return resMap;
 	}
 }
+*/
