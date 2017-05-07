@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseBackendController;
+import com.sqe.shop.common.BaseFrontController;
 import com.sqe.shop.model.Image;
+import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.service.ImageService;
+import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ProductService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.ShopService;
@@ -28,7 +30,7 @@ import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/front/sell")
-public class SellerController extends BaseBackendController {
+public class SellerController extends BaseFrontController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SellerController.class);
 	
@@ -40,13 +42,20 @@ public class SellerController extends BaseBackendController {
 	private ShopService shopService;
 	@Autowired
 	private ImageService imageService;
+	@Autowired
+	private MessageService messageService;
 	
+	//商品管理
 	/**
 	 * 商家产品列表页
 	 * @return
 	 */
-	@RequestMapping(value="/listPage", method = RequestMethod.GET)
-	public ModelAndView listPage(ModelAndView model) {
+	@RequestMapping(value="/productListPage", method = RequestMethod.GET)
+	public ModelAndView productListPage(ModelAndView model, Product product,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		/*product.setUserId(this.getCurrentUserId());*/
+		model.addObject("productPage", getProductList(product, pageNo, pageSize));
 		model.setViewName("shop/sell/product_list");
 		return model;
 	}
@@ -59,16 +68,16 @@ public class SellerController extends BaseBackendController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/getList", method = RequestMethod.GET)
+	@RequestMapping(value="getProductList", method = RequestMethod.GET)
 	@RequiresRoles(value="sell")
-	public Map<String, Object> getList(Product product,
+	public PageUtil<Map<String, Object>> getProductList(Product product,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
-		Map<String, Object> resMap = new HashMap<String, Object>();
+		
+		product.setUserId(this.getCurrentUserId());
 		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
-		resMap.put("list", page.getList());
-		resMap.put("page", page);
-		return resMap;
+		
+		return page;
 	}
 	
 	/**
@@ -94,7 +103,7 @@ public class SellerController extends BaseBackendController {
 	}
 	
 	/**
-	 * 保存产品
+	 * 保存商品
 	 * @param product
 	 * @return
 	 */
@@ -120,7 +129,7 @@ public class SellerController extends BaseBackendController {
 	}
 	
 	/**
-	 * 删除
+	 * 删除商品
 	 * @param id
 	 * @return
 	 */
@@ -135,6 +144,60 @@ public class SellerController extends BaseBackendController {
 			return responseError(-1, "error_del_failed");
 		}
 		return responseOK("op_success");
+	}
+	/**
+	 * 下架商品
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/cancelProduct", method = RequestMethod.GET)
+	public Map<String, Object> cancelProduct(Long id) {
+		if(id==null){
+			return responseError(-1, "error_no_item");
+		}
+		Product product = new Product();
+		product.setId(id);
+		product.setProductStatus(2);//下架
+		productService.update(product);
+		return responseOK("op_success");
+	}
+	
+	//私信
+	/**
+	 * 商品留言页面 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/messagePage", method = RequestMethod.GET)
+	public ModelAndView messagePage(ModelAndView model) {
+		model.setViewName("shop/sell/message_list");
+		return model;
+	}
+	/**
+	 * 私信列表
+	 * @param message
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getMessageList", method = RequestMethod.GET)
+	public PageUtil<Map<String, Object>> getMessageList(Message message, int pageNo, Integer pageSize) {
+		message.setReceiveId(this.getCurrentUserId());
+		PageUtil<Map<String, Object>> msgPage = messageService.getMapListByParm(message, 1, pageSize, "m.create_time desc");
+		return msgPage;
+	}
+	/**
+	 * 回复私信
+	 * @param msg
+	 * @param productId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/messageReply", method = RequestMethod.GET)
+	public Map<String, Object> messageReply(String msgContent, Long productId) {
+		return responseOK1("");
 	}
 
 }

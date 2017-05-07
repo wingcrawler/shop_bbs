@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -67,6 +68,30 @@ public class MessageService extends AdapterService implements BaseService {
 		
 		if(count!=0){
 			list = messageMapper.getAdminMessageListByParm(parm);
+			for(Map<String, Object> map : list){
+				String statusStr = map.get("status")==null?"0":map.get("status").toString();
+				map.put("statusName", this.getMsgStatus(Integer.valueOf(statusStr)));
+			}
+		}
+		pageUtil.setList(list);
+		return pageUtil;
+	}
+	
+	public PageUtil<Map<String, Object>> getMapListByParm(Message message,int pageNo, Integer pageSize, String orderby) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(message);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		if(StringUtils.isNotBlank(orderby)){
+			parm.put("orderby", orderby);	
+		}
+		
+		int count = messageMapper.countByParm(parm);
+		pageUtil.setTotalRecords(count);
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		
+		if(count!=0){
+			list = messageMapper.getMapListByParm(parm);
 			for(Map<String, Object> map : list){
 				String statusStr = map.get("status")==null?"0":map.get("status").toString();
 				map.put("statusName", this.getMsgStatus(Integer.valueOf(statusStr)));

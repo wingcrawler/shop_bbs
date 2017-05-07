@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ProductMapper;
 import com.sqe.shop.model.Product;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 
 @Component  
@@ -105,6 +106,9 @@ public class ProductService extends AdapterService implements BaseService {
 			}
 			if(StringUtils.isNotBlank(product.getProductName())){
 				parm.put("productName", product.getProductName());	
+			}
+			if(StringUtils.isNotBlank(product.getCreateTimeStr())){
+				parm.put("createTimeStr", product.getCreateTimeStr());
 			}
 			parm.put("orderby", "product_rank asc" );
 		}

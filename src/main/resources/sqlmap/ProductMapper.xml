@@ -233,7 +233,8 @@
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select p.id id,p.product_name as productName, p.product_price as productPrice,
 	p.product_rank as productRank, p.product_view as productView,p.product_count as productCount,
-	p.product_status as productStatus,s.shop_title as shopName,concat(pt.type_name_ch,'/',pt.type_name) as productTypeName
+	p.product_status as productStatus,s.shop_title as shopName,concat(pt.type_name_ch,'/',pt.type_name) as productTypeName,
+ 	date_format(p.create_time, '%Y-%m-%d') as createTimeStr
 	from product p 
 	LEFT JOIN product_type pt on p.product_type_id=pt.id
 	LEFT JOIN shop s on p.shop_id=s.id
@@ -267,6 +268,9 @@
 	   	</if>
 		<if test="parm.createTime != null">
 	     	and create_time = #{parm.createTime}
+	   	</if>
+	   	<if test="parm.createTimeStr != null">
+	     	and date_format(create_time,'%Y-%m-%d') = #{parm.parm.createTimeStr}
 	   	</if>
 		<if test="parm.productUrlClick != null">
 	     	and product_url_click = #{parm.productUrlClick}
