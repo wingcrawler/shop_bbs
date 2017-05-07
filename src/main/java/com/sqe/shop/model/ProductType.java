@@ -8,10 +8,12 @@ public class ProductType implements Serializable {
 
 	private String typeNameCh;
 	private String typeName;
+	private Integer typeLevel;
 	private Integer typeRank;
 	private String typeDescriptionCh;
 	private String typeDescription;
 	private Long id;
+	private Long parentId;
 	
 	public String getTypeNameCh() {
 		return typeNameCh;
@@ -24,6 +26,12 @@ public class ProductType implements Serializable {
 	}
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+	public Integer getTypeLevel() {
+		return typeLevel;
+	}
+	public void setTypeLevel(Integer typeLevel) {
+		this.typeLevel = typeLevel;
 	}
 	public Integer getTypeRank() {
 		return typeRank;
@@ -49,7 +57,12 @@ public class ProductType implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+	public Long getParentId() {
+		return parentId;
+	}
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
 	
 	
 }

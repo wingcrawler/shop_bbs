@@ -12,7 +12,7 @@ import org.apache.shiro.web.util.SavedRequest;
 import com.sqe.shop.model.User;
 import com.sqe.shop.util.PropertiesUtil;
 
-public class BaseCommon {
+public class BaseCommon{
 	
 	public static ResourceBundle bundle = null;
     static {

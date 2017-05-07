@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.t_product_type_one_edit }</title>
+	<title>${t.t_product_type_two_edit }</title>
 </head>
 <body class="page-body">
 	<div class="page-container">
@@ -20,7 +21,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a><i class="fa-location-arrow"> ${t.t_product_type_one_edit }</i></a> 
+							<a><i class="fa-location-arrow"> ${t.t_product_type_two_edit }</i></a> 
 						</h3>
 					</div>
 					<div class="panel-body">
@@ -31,6 +32,14 @@
 					          		<p>${t.t_weight }</p>
 					            	<input class="form-control" type="text" name="typeRank" value="${entity.typeRank}">
 					          	</div>
+					          	<div class="col-sm-3">
+									${t.t_select_type }
+									<select class="form-control select" name="parentId" id="parentId">
+										<c:forEach items="${typeList}" var="item">
+										<option value="${item.id}">${item.typeNameCh}/${item.typeName}</option>
+										</c:forEach>
+									</select>
+								</div>
 					        </div>
 					        <div class="form-group">
 					          	<div class="col-sm-6">
@@ -72,11 +81,17 @@
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
 	$('#main-menu li.li').eq(2).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(2).find('ul li').eq(1).addClass('active');
+	$('#main-menu li.li').eq(2).find('ul li').eq(2).addClass('active');
+	
+	$('#parentId').optionSelect({
+		compare:'${entity.parentId}',
+		backFn : function(p) {
+		}
+	});
 	
 	$('#submit').click(function(){
         var parm = $.fn.getFormJson('.form');
-		$.fn.doSave(parm,'/backend/cate/doSave','/backend/cate/list');
+		$.fn.doSave(parm,'/backend/cate2/doSave','/backend/cate2/list');
 	});
 });
 

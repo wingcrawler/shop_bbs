@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.front;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -71,8 +72,10 @@ public class FrontProductController extends BaseFrontController {
 	public Map<String, Object> postMessage(ModelAndView model, Message message) {
 		message.setMessageStatus(0);
 		message.setPostId(this.getCurrentUserId());
+		message.setCreateTime(new Date());
 		messageService.insert(message);
 		return responseOK("send_success");
 	}
+	
 	
 }

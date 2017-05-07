@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
 
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.t_product_type_one }</title>
+	<title>${t.t_product_type_two }</title>
 	
 </head>
 <body class="page-body">
@@ -26,8 +27,13 @@
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
 								<div class="col-sm-3">
-									${t.t_type_name }
-									<input type="text" class="form-control input" name="typeName" value="">
+									${t.t_select_type }
+									<select class="form-control select" name="parentId" id="parentId">
+										<option value="-1">-- ${t.t_select } --</option>
+										<c:forEach items="${typeList}" var="item">
+										<option value="${item.id}">${item.typeNameCh}/${item.typeName}</option>
+										</c:forEach>
+									</select>
 								</div>
 								<div class="col-sm-2">
 									<br>
@@ -49,7 +55,7 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">${t.t_list }</h3>
 						<div class="panel-options">
-							<a href="/backend/cate/edit" target="_blank"><i class="fa-plus"></i></a>
+							<a href="/backend/cate2/edit" target="_blank"><i class="fa-plus"></i></a>
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
 					</div>
@@ -81,12 +87,12 @@
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
 	$('#main-menu li.li').eq(2).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(2).find('ul li').eq(1).addClass('active');
+	$('#main-menu li.li').eq(2).find('ul li').eq(2).addClass('active');
 	
 	$('#datatable').datatable({
-		url_load : '/backend/cate/getList',
-		url_remove:'/backend/cate/doDelete',
-		url_edit:'/backend/cate/edit',
+		url_load : '/backend/cate2/getList',
+		url_remove:'/backend/cate2/doDelete',
+		url_edit:'/backend/cate2/edit',
 		backFn : function(p) {
 			// console.log(p);
 		}

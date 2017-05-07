@@ -1,4 +1,4 @@
-package com.sqe.shop.file.service;
+package com.sqe.shop.service.file;
 
 import java.io.OutputStream;
 import java.util.Date;
