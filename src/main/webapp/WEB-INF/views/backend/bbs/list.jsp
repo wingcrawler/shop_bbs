@@ -40,7 +40,7 @@
 										</c:forEach>
 									</select>
 								</div>
-								<div class="col-sm-3">
+								<div class="col-sm-2">
 									${t.t_select }${t.t_lang }
 									<select class="form-control select" name=threadType>
 										<option value="-1">-- ${t.t_select } --</option>
@@ -48,6 +48,13 @@
 										<option value="0">${t.t_en}</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+					          		<p>${t.t_select }${t.t_status }</p>
+					          		<select class="form-control select" id="threadStatus" name="threadStatus">
+										<option value="1">${t.t_on }</option>
+										<option value="0">${t.b_close }</option>
+									</select>
+					          	</div>
 								<div class="col-sm-2">
 									<br>
 									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
@@ -80,8 +87,9 @@
 									<th field="topicTitle">${t.t_topic }</th>
 									<th field="username">${t.t_username }</th>
 									<th field="typeName">${t.t_type }</th>
+									<th field="statusName">${t.t_status }</th>
 									<th field="createTimeStr">${t.t_createtime }</th>
-									<th field="op" field-role="0" width="110"></th>
+									<th field="op" field-role="2,0" width="110"></th>
 								</tr>
 							</thead>
 							<tbody class="middle-align"></tbody>
@@ -105,6 +113,7 @@ $(function(){
 	$('#datatable').datatable({
 		url_load : '/backend/thread/getList',
 		url_remove : '/backend/thread/doDelete',
+		url_edit : '/backend/thread/edit',
 		backFn : function(p) {
 			 console.log(p);
 		}

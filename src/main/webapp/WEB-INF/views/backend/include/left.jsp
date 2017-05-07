@@ -38,7 +38,8 @@
 				</a>
 				<ul>
 					<li><a href="/backend/product/list"><span class="title">${t.m_product_list }</span></a></li>
-					<li><a href="/backend/cate/list"><span class="title">${t.m_product_cate }</span></a></li>
+					<li><a href="/backend/cate/list"><span class="title">${t.t_product_type_one }</span></a></li>
+					<li><a href="/backend/cate2/list"><span class="title">${t.t_product_type_two }</span></a></li>
 				</ul>
 			</li>
 			<!-- 新闻资讯管理 -->

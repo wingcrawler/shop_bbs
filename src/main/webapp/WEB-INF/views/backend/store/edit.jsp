@@ -29,11 +29,11 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal form" action="javascript:void(0);">
+						<form class="form-horizontal form" method="post" enctype="multipart/form-data">
 					        <div class="form-group">
-					          	<div class="col-sm-6">
+					          	<div class="col-sm-3">
 					          		<input type="hidden" value="${entity.id}" name="id" />
-					          		<p>${t.t_title }<span style="color:#f00">*</span></p>
+					          		<p>${t.t_shop_name }<span style="color:#f00">*</span></p>
 					            	<input class="form-control" type="text" name="shopTitle"  value="${entity.shopTitle}">
 					          	</div>
 					        	<div class="col-sm-3">
@@ -41,6 +41,17 @@
 					          		<select class="form-control select" id="shopStatus" name="shopStatus">
 										<option value="0">${t.t_pending }</option>
 										<option value="1">${t.t_on }</option>
+									</select>
+					          	</div>
+					          	<div class="col-sm-3">
+					          		<p>${t.t_star }</p>
+					          		<select class="form-control select" id="shopLevel" name="shopLevel">
+										<option value="0">${t.t_select }</option>
+										<option value="1">${t.t_star1 }</option>
+										<option value="2">${t.t_star2 }</option>
+										<option value="3">${t.t_star3 }</option>
+										<option value="4">${t.t_star4 }</option>
+										<option value="5">${t.t_star5 }</option>
 									</select>
 					          	</div>
 					          	<div class="col-sm-3">
@@ -57,18 +68,8 @@
 					        <div class="form-group">
 					        	<div class="col-sm-12">
 					        		<p>${t.t_img_list }</p>
-					        		<textarea id="myEditor" name="imgList"></textarea>
-									<script type="text/javascript">
-										var ue = UE.getEditor('myEditor',{
-											toolbars: [
-									           ['fullscreen', 'source','simpleupload', 'insertimage']
-									       ],
-									       initialFrameHeight:500,
-									       initialFrameWidth:'100%'
-									       /* autoHeightEnabled: true,
-									       autoFloatEnabled: true */
-										});
-									</script>
+					        		<input type="file" name="attachFile" id="attachFile" accept="image/*"/>
+					        		<img border="0" width="60%" src="${imagePath}" />
 					    		</div>
 					        </div>
 					        <div class="form-group">
@@ -96,11 +97,16 @@ $(function(){
 		backFn : function(p) {
 		}
 	});
+	$('#shopLevel').optionSelect({
+		compare:'${entity.shopLevel}',
+		backFn : function(p) {
+		}
+	});
 	
 	$('#submit').click(function(){
-	    var parm = $.fn.getFormJson('.form');
-		$.fn.doSave(parm,'/backend/shop/doSave','/backend/shop/list');
-	});	
+		$.fn.myAjaxSubmit(".form", "/backend/shop/doSave", "/backend/shop/list");
+	});
+	
 });
 </script>
 </body>

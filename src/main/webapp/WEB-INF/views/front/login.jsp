@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="/common/meta.jsp" %>
     <title>登陆</title>
 </head>
 
@@ -19,6 +18,5 @@
 
 </div>
 <!-- /container -->
-<%@include file="/common/footer.jsp" %>
 </body>
 </html>

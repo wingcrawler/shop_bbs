@@ -39,10 +39,23 @@
 						<li><a href="single.html">behance</a></li>
 					</ul>
 				</li> --%>
-				<li><a href="/">${t.t_home }</a></li>
-				<c:forEach var="item" items="${productTypeList }">
-					<li><a href="/productType?type=${item.id }">${item.typeName }</a></li>
-				</c:forEach>
+				<li><a href="/shopIndex">${t.t_sqe_mall }</a></li>
+				
+				<c:if test="${not empty productTypeList }">
+					<c:forEach var="item" items="${productTypeList }">
+						<li>
+							<a href="/productType?parentType=${item.key.id }">${item.key.typeName }</a>
+							<c:if test="${not empty item.value }">
+								<ul class="dropdown2">
+									<c:forEach var="subitem" items="${item.value }">
+										<li><a href="/productType?parentType=${item.key.id }&childType=${subitem.id }">${subitem.typeName }</a></li>
+									</c:forEach>
+								</ul>
+							</c:if>			
+						</li>
+					</c:forEach>
+				</c:if>
+				
 				<li><a href="/about">${t.t_aboutus }</a></li>            
 				<li><a href="/help">${t.t_help }</a></li>
 			</ul>

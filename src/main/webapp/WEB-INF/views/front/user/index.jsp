@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="/common/meta.jsp" %>
     <title>个人中心</title>
 </head>
 
@@ -26,6 +25,5 @@
 
 </div>
 <!-- /container -->
-<%@include file="/common/footer.jsp" %>
 </body>
 </html>
