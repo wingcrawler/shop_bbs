@@ -1,5 +1,6 @@
 package com.sqe.shop.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +83,10 @@ public class ProductService extends AdapterService implements BaseService {
 		if(product.getId()!=null){
 			productMapper.update(product);
 		} else {
+			product.setCreateTime(new Date());
+			product.setProductStatus(0);
+			product.setProductView(0);
+			product.setProductUrlClick(0);
 			productMapper.insert(product);
 		}
 	}
@@ -119,6 +124,15 @@ public class ProductService extends AdapterService implements BaseService {
 		}
 		pageUtil.setList(list);
 		return pageUtil;
+	}
+
+	/**
+	 * 查询当前用户的商品
+	 * @param id
+	 * @return
+	 */
+	public Product getByIdAndUserId(Long id) {
+		return productMapper.getByIdAndUserId(id, this.getCurrentUserId());
 	}
 
 }

@@ -28,7 +28,7 @@ public class CachedService {
     private ProductTypeService productTypeService;
 	
 	private Map<ProductType, List<ProductType>> productTypeList = null;//产品类别： 一级类别为key，二级类别列表为value
-	public ResourceBundle bundle = null; //国际化内容
+	private ResourceBundle bundle = null; //国际化内容
 	private String lang = StringUtils.EMPTY; //国际化语言
 	
 	/**
@@ -85,7 +85,7 @@ public class CachedService {
 	 */
 	public String getLang() {
 		if(StringUtils.isBlank(lang)){
-			setLang(PropertiesUtil.get("lang"));
+			setLang(PropertiesUtil.get("lang", "zh"));
 		}
 		return lang;
 	}
