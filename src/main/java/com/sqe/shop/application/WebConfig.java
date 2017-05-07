@@ -1,22 +1,14 @@
 package com.sqe.shop.application;
 
-import javax.servlet.MultipartConfigElement;
 
-import com.sqe.shop.interceptor.AdminAuthenticationInterceptor;
-import com.sqe.shop.interceptor.AuthenticationInterceptor;
 import com.sqe.shop.interceptor.NotFoundInterceptor;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration;
 import org.springframework.boot.web.filter.OrderedCharacterEncodingFilter;
-import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 

@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.UserOrderMapper;
 import com.sqe.shop.model.UserOrder;
 import com.sqe.shop.util.DateUtil;
@@ -71,7 +70,7 @@ public class UserOrderService extends AdapterService implements BaseService {
 				Date date = (Date) map.get("date");
 				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
 				String statusStr = map.get("orderStatus").toString();
-				map.put("statusName", Constants.getOrderType(Integer.valueOf(statusStr)));
+				map.put("statusName", this.getOrderType(Integer.valueOf(statusStr)));
 			}
 		}
 		pageUtil.setList(list);

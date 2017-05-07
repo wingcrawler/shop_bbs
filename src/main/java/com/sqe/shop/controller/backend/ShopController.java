@@ -13,15 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseBackendController;
-import com.sqe.shop.file.service.ExcelExportService;
+import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Shop;
+import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ShopService;
+import com.sqe.shop.service.file.ExcelExportService;
+import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.PropertiesUtil;
 
 @Controller
 @RequestMapping("/backend/shop")
@@ -35,6 +40,10 @@ public class ShopController extends BaseBackendController {
 	private MessageService messageService;
 	@Autowired
 	private ExcelExportService excelExportService;
+	@Autowired
+	private ImageFileService imageFileService;
+	@Autowired
+	private ImageService imageService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -45,9 +54,14 @@ public class ShopController extends BaseBackendController {
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
 		ModelAndView model = new ModelAndView("backend/store/edit");
+		model.addObject("imagePath", "");
 		if(id!=null){
 			Shop entity = shopService.getById(id);
 			model.addObject("entity", entity);
+			if(entity!=null){
+				Image image = imageService.getByShopId(entity.getId());
+				model.addObject("imagePath", image.getImagePath());
+			}
 		}
 		return model;
 	}
@@ -100,12 +114,31 @@ public class ShopController extends BaseBackendController {
 	
 	@ResponseBody
 	@RequestMapping(value="/doSave", method = RequestMethod.POST)
-	public Map<String, Object> save(Shop shop, String imgList) {
+	public Map<String, Object> save(Shop shop, @RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile) {
 		if(StringUtils.isBlank(shop.getShopTitle())){
 			return responseError(-1, "error_empty_title");
 		}
+		
+		String fileName = "";
+		if(attachFile!=null){
+	    	String uploadPath = PropertiesUtil.get("path_img_shop"); 
+		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile, uploadPath);
+		    fileName = resMap.get("errorInfo").toString(); 
+		    if(!resMap.get("errorNo").equals(0)){
+		    	return resMap;
+		    }
+	    }
+		
 		shopService.save(shop);
-		return responseOK("save_success");
+		
+		if(attachFile!=null){
+			Image image = imageService.getByShopId(shop.getId());
+		    image.setShopId(shop.getId());
+		    image.setImagePath(PropertiesUtil.get("path_img_shop_save")+fileName);
+		    imageService.save(image);
+		}
+		
+	    return responseOK("save_success");
 	}
 	
 	@ResponseBody
@@ -125,13 +158,13 @@ public class ShopController extends BaseBackendController {
 	@RequestMapping(value="/doMsgDelete", method = RequestMethod.GET)
 	public Map<String, Object> doMsgDelete(Long id) {
 		if(id==null){
-			return responseError(-1, bundle.getString("error_no_item"));
+			return responseError(-1, "error_no_item");
 		}
 		int i = messageService.delete(id);
 		if(i==0){
-			return responseError(-1, bundle.getString("error_del_failed"));
+			return responseError(-1, "error_del_failed");
 		}
-		return responseOK(bundle.getString("op_success"));
+		return responseOK("op_success");
 	}
 	
 	@ResponseBody

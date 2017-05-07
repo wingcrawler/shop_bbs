@@ -19,6 +19,8 @@ public class ProductService extends AdapterService implements BaseService {
 	
 	@Autowired
     ProductMapper productMapper;
+	@Autowired
+	Constants constants;
     
     public int insert(Product product) {
 		return productMapper.insert(product);
@@ -72,7 +74,7 @@ public class ProductService extends AdapterService implements BaseService {
 			list = productMapper.getMapListByParm(parm);
 			for(Map<String, Object> map : list){
 				String statusStr = map.get("productStatus")==null?"0":map.get("productStatus").toString();
-				map.put("productStatusStr", Constants.getProductStatus(Integer.valueOf(statusStr)));	
+				map.put("productStatusStr", constants.getProductStatus(Integer.valueOf(statusStr)));	
 			}
 		}
 		pageUtil.setList(list);

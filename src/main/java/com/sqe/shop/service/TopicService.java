@@ -19,6 +19,8 @@ public class TopicService extends AdapterService implements BaseService {
 	
 	@Autowired
     TopicMapper topicMapper;
+	@Autowired
+	Constants constants;
     
     public int insert(Topic topic) {
 		return topicMapper.insert(topic);
@@ -67,7 +69,7 @@ public class TopicService extends AdapterService implements BaseService {
 			list = topicMapper.getMapListByParm(parm);
 			for(Map<String, Object> map : list){
 				String statusStr = map.get("topicStatus")==null?"0":map.get("topicStatus").toString();
-				map.put("statusName", Constants.getTopicStatus(Integer.valueOf(statusStr)));
+				map.put("statusName", constants.getTopicStatus(Integer.valueOf(statusStr)));
 			}
 		}
 		pageUtil.setList(list);

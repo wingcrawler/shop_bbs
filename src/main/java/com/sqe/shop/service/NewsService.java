@@ -10,9 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.NewsMapper;
+import com.sqe.shop.mapper.UserThumbMapper;
 import com.sqe.shop.model.News;
+import com.sqe.shop.model.UserThumb;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 
@@ -20,7 +21,9 @@ import com.sqe.shop.util.PageUtil;
 public class NewsService extends AdapterService implements BaseService {
 	
 	@Autowired
-    NewsMapper newsMapper;
+	private NewsMapper newsMapper;
+	@Autowired
+	private UserThumbMapper userThumbMapper;
     
     public int insert(News news) {
 		return newsMapper.insert(news);
@@ -56,7 +59,7 @@ public class NewsService extends AdapterService implements BaseService {
 		if(count!=0){
 			list = newsMapper.getBeanListByParm(parm);
 			for(News n : list){
-				n.setTypeName(Constants.getNewsLang(n.getNewsType()));
+				n.setTypeName(this.getNewsLang(n.getNewsType()));
 				String dateStr = DateUtil.dateToString(n.getNewsDate(), DateUtil.DATETIME_FORMATE_2);
 				n.setCreateTimeStr(dateStr);
 			}
@@ -112,6 +115,17 @@ public class NewsService extends AdapterService implements BaseService {
 		}
 		parm.put("orderby", "id desc" );
 		return parm;
+	}
+
+	public void updateThumb(Integer newsUpCount, Long newsId) {
+		News news = new News();
+		news.setNewsUp(news.getNewsUp()+1);
+		this.update(news);
+		
+		UserThumb thumb = new UserThumb();
+		thumb.setNewsId(newsId);
+		thumb.setUserId(this.getCurrentUserId());
+		userThumbMapper.insert(thumb);
 	}
 
 }

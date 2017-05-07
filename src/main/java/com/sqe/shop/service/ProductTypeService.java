@@ -82,6 +82,12 @@ public class ProductTypeService extends AdapterService implements BaseService {
 			if(StringUtils.isNotBlank(productType.getTypeName())){
 				parm.put("typeName", productType.getTypeName());	
 			}
+			if(productType.getTypeLevel()!=null && productType.getTypeLevel()>0){
+				parm.put("typeLevel", productType.getTypeLevel());
+			}
+			if(productType.getParentId()!=null && productType.getParentId()>=0){
+				parm.put("parentId", productType.getParentId());
+			}
 		}
 		parm.put("orderby", "id asc" );
 		return parm;

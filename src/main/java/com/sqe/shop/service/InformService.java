@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.InformMapper;
 import com.sqe.shop.model.Inform;
 import com.sqe.shop.util.DateUtil;
@@ -82,7 +81,7 @@ public class InformService extends AdapterService implements BaseService {
 			list = informMapper.getMapListByParm(parm);
 			for(Map<String, Object> map : list){
 				String statusStr = map.get("status")==null?"0":map.get("status").toString();
-				map.put("statusName", Constants.getInformStatus(Integer.valueOf(statusStr)));
+				map.put("statusName", this.getInformStatus(Integer.valueOf(statusStr)));
 				Date date = (Date) map.get("date");
 				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
 			}

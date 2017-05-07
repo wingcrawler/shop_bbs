@@ -101,4 +101,14 @@ public class ImageService extends AdapterService implements BaseService {
 		return parm;
 	}
 
+	public Image getByShopId(Long shopId) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		parm.put("shopId", shopId);	
+		List<Image> images = this.getBeanListByParm("ImageMapper", parm);
+		if (images!=null && !images.isEmpty()) {
+			return images.get(0);
+		}
+		return new Image();
+	}
+
 }

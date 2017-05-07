@@ -1,10 +1,6 @@
 package com.sqe.shop.shiro;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -16,7 +12,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import com.sqe.shop.model.Permission;
 import com.sqe.shop.model.Role;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.RoleService;

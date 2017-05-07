@@ -1,6 +1,6 @@
 package com.sqe.shop.controller.front;
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -13,26 +13,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.BaseBackendController;
-import com.sqe.shop.model.Message;
-import com.sqe.shop.service.MessageService;
+import com.sqe.shop.model.Inform;
+import com.sqe.shop.service.InformService;
 
 @Controller
-@RequestMapping("/front/report")
+@RequestMapping("/front")
 public class ReportController extends BaseBackendController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReportController.class);
 	
 	@Autowired
-	private MessageService messageService;
+	private InformService informService;
 	
+	/**
+	 * 举报页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/reportPage", method = RequestMethod.GET)
+	public ModelAndView reportPage(ModelAndView model) {
+		model.setViewName("shop/report");
+		return model;
+	}
+	
+	/**
+	 * 举报
+	 * @param inform
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/reportMessage", method = RequestMethod.GET)
-	public Map<String, Object> reportMessage(Message message) {
+	public Map<String, Object> reportMessage(Inform inform) {
 		Long userId = this.getCurrentUserId();
-		message.setPostId(userId);
-		message.setReceiveId(-1L);
-		messageService.insert(message);
-		return responseOK1("ok");
+		inform.setUserPostId(userId);
+		inform.setInfromStatus(0);
+		inform.setInfromDate(new Date());
+		informService.insert(inform);
+		return responseOK("report_success");
 	}
 	
 }

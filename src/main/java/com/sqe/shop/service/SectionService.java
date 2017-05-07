@@ -8,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.SectionMapper;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.util.PageUtil;
@@ -53,7 +52,7 @@ public class SectionService extends AdapterService implements BaseService {
 		if(count!=0){
 			list = sectionMapper.getBeanListByParm(parm);
 			for(Section s : list){
-				s.setStatusName(Constants.getSectionStatus(s.getSectionStatus()));
+				s.setStatusName(this.getSectionStatus(s.getSectionStatus()));
 			}
 		}
 		pageUtil.setList(list);

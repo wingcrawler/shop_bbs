@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ThreadMapper;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.util.DateUtil;
@@ -81,7 +80,9 @@ public class ThreadService extends AdapterService implements BaseService {
 				Date date = (Date) map.get("date");
 				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
 				String type = map.get("threadType").toString();
-				map.put("typeName", Constants.getThreadType(Integer.valueOf(type)));
+				map.put("typeName", this.getThreadType(Integer.valueOf(type)));
+				String status = map.get("threadStatus").toString();
+				map.put("statusName", this.getThreadStatus(Integer.valueOf(status)));
 			}
 		}
 		pageUtil.setList(list);
@@ -110,6 +111,10 @@ public class ThreadService extends AdapterService implements BaseService {
 			}
 		}
 		return parm;
+	}
+	
+	public Map<String, Object> getMapById(Long id) {
+		return threadMapper.getMapById(id);
 	}
 
 }

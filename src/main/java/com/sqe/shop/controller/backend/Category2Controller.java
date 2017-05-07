@@ -1,6 +1,7 @@
 package com.sqe.shop.controller.backend;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -20,15 +21,15 @@ import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.util.PageUtil;
 
 /**
- * 产品类别 一级分类
+ * 产品类别 二级分类
  * @author Administrator
  *
  */
 @Controller
-@RequestMapping("/backend/cate")
-public class CategoryController extends BaseBackendController {
+@RequestMapping("/backend/cate2")
+public class Category2Controller extends BaseBackendController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+	private static final Logger logger = LoggerFactory.getLogger(Category2Controller.class);
 	
 	@Autowired
 	private ProductTypeService productTypeService;
@@ -38,8 +39,14 @@ public class CategoryController extends BaseBackendController {
 	 * @return
 	 */
 	@RequestMapping(value="/list", method = RequestMethod.GET)
-	public ModelAndView index() {
-		ModelAndView model = new ModelAndView("backend/product/cate_list");
+	public ModelAndView index(ModelAndView model) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		parm.put("typeLevel", 1);
+		parm.put("orderby", "type_rank asc");
+		List<ProductType> typeList = productTypeService.getBeanListByParm("ProductTypeMapper", parm);
+		model.addObject("typeList", typeList);
+		
+		model.setViewName("backend/product/cate2_list");
 		return model;
 	}
 	
@@ -50,11 +57,18 @@ public class CategoryController extends BaseBackendController {
 	 */
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
-		ModelAndView model = new ModelAndView("backend/product/cate_edit");
+		ModelAndView model = new ModelAndView("backend/product/cate2_edit");
 		if(id!=null){
 			ProductType entity = productTypeService.getById(id);
 			model.addObject("entity", entity);
 		}
+		
+		Map<String, Object> parm = new HashMap<String, Object>();
+		parm.put("typeLevel", 1);
+		parm.put("orderby", "type_rank asc");
+		List<ProductType> typeList = productTypeService.getBeanListByParm("ProductTypeMapper", parm);
+		model.addObject("typeList", typeList);
+		
 		return model;
 	}
 	
@@ -68,11 +82,10 @@ public class CategoryController extends BaseBackendController {
 	@ResponseBody
 	@RequestMapping(value="/getList", method = RequestMethod.GET)
 	public Map<String, Object> getList(ProductType productType,
-			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
-		if(StringUtils.isBlank(productType.getTypeName())){
-			productType.setTypeName(null);
-		}
+		productType.setTypeLevel(2);
 		PageUtil<ProductType> page = productTypeService.getBeanListByParm(productType, pageNo, pageSize);
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
@@ -91,8 +104,7 @@ public class CategoryController extends BaseBackendController {
 				StringUtils.isBlank(productType.getTypeNameCh()) ) {
 			return responseError(-1, "error_no_typename");
 		}
-		productType.setParentId(0L);
-		productType.setTypeLevel(1);
+		productType.setTypeLevel(2);
 		productTypeService.save(productType);
 		return responseOK("op_success");
 	}

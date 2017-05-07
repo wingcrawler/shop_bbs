@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.CommentMapper;
 import com.sqe.shop.model.Comment;
 import com.sqe.shop.model.News;
@@ -110,7 +109,7 @@ public class CommentService extends AdapterService implements BaseService {
 				Date date = (Date) map.get("date");
 				map.put("dateStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
 				String statusStr = map.get("status").toString();
-				map.put("statusStr", Constants.getCommentStatus(Integer.valueOf(statusStr)));
+				map.put("statusStr", this.getCommentStatus(Integer.valueOf(statusStr)));
 				String userIdStr = map.get("userId").toString();
 				if(Integer.valueOf(userIdStr)<0){
 					map.put("username", "admin");
@@ -148,5 +147,5 @@ public class CommentService extends AdapterService implements BaseService {
 		parm.put("orderby", "order by id desc");
 		return parm;
 	}
-	
+
 }

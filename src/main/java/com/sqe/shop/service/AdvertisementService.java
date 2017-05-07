@@ -8,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.AdvertisementMapper;
 import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.util.PageUtil;
@@ -53,7 +52,7 @@ public class AdvertisementService extends AdapterService implements BaseService 
 		if(count!=0){
 			list = advertisementMapper.getBeanListByParm(parm);
 			for(Advertisement ad : list){
-				ad.setTypeName(Constants.getADType(ad.getType()));
+				ad.setTypeName(this.getADType(ad.getType()));
 			}
 		}
 		pageUtil.setList(list);

@@ -21,6 +21,8 @@ public class ShopService extends AdapterService implements BaseService {
 	
 	@Autowired
     ShopMapper shopMapper;
+	@Autowired	
+	Constants constants;
     
     public int insert(Shop shop) {
 		return shopMapper.insert(shop);
@@ -74,7 +76,7 @@ public class ShopService extends AdapterService implements BaseService {
 			list = shopMapper.getBeanListByParm(parm);
 			for(Shop s : list){
 				s.setCreateTimeStr(DateUtil.dateToString(s.getCreateTime(), DateUtil.DATETIME_FORMATE_2)); 
-				s.setStatusName(Constants.getStoreStatus(s.getShopStatus()));
+				s.setStatusName(constants.getStoreStatus(s.getShopStatus()));
 			}
 		}
 		pageUtil.setList(list);

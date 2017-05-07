@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BaseService extends BaseCommon{
 	
-	public final int IMG_MAXI_SIZE = 524288;
+	public final int IMG_MAXI_SIZE = 1024000;
 
 	/**
 	 * 创建文件目录
