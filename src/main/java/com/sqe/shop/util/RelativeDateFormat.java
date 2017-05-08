@@ -4,9 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class RelativeDateFormat {
 	private static final long ONE_MINUTE = 60000L;
 	private static final long ONE_HOUR = 3600000L;
@@ -26,7 +23,7 @@ public class RelativeDateFormat {
 		// System.out.println(format(date));
 	}
 
-	public String format(Date date) {
+	public static String format(Date date) {
 		long delta = new Date().getTime() - date.getTime();
 		if (delta < 1L * ONE_MINUTE) {
 			long seconds = toSeconds(delta);

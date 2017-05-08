@@ -39,7 +39,7 @@
 											<tr class="tr-td selected">
 												<td class="td1">
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" name="" id="table-checkbox3" >
+														<input type="checkbox" class="u-ipt-checkbox" name="item" value="${item.id }" id="table-checkbox3" >
 														<label for="table-checkbox3">
 															<div class="i-checkbox">
 																<i></i>
@@ -59,9 +59,12 @@
 												<%-- <td class="td6">${${item.tag }</td> --%>
 												<td class="td7">
 													<div class="td_btn">
-														<p><span class="red edit">${t.b_edit }</span>|<span class="red del">${t.b_delete }</span></p>
 														<p>
-															<span class="cancel">${t.t_product_off }</span>
+															<span class="red edit"><a href="/front/sell/editProduct?id=${item.id}">${t.b_edit }</a></span>
+															|
+															<span onclick="deleteOne(${item.id })" class="red del">${t.b_delete }</span></p>
+														<p>
+															<span onclick="productOff(${item.id })" class="cancel">${t.t_product_off }</span>
 														</p>
 													</div>
 												</td>
@@ -73,10 +76,10 @@
 					</div>
 					<div class="operation">
 						<input type="checkbox" class="u-ipt-checkbox" id="all-ipt-checkbox">
-						<label class="all-ipt-checkbox" for="all-ipt-checkbox">${t.b_select_all }</label>
-						<span class="table-btn">${t.b_delete }</span>
-						<span class="table-btn">${t.t_product_on }</span>
-						<span class="table-btn">${t.t_product_off }</span>
+						<label class="all-ipt-checkbox" onclick="selectAll()" for="all-ipt-checkbox">${t.b_select_all }</label>
+						<span class="table-btn" onclick="deleteAll()">${t.b_delete }</span>
+						<span class="table-btn" onclick="productOnAll()">${t.t_product_on }</span>
+						<span class="table-btn" onclick="productOffAll()">${t.t_product_off }</span>
 					</div>
 					<div class="pagebar"></div>
 					<!-- <div class="page-toolbar">
@@ -142,16 +145,7 @@
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 
 <script type="text/javascript">
-$(function(){
-	$(".pagebar").createPage({
-		pageCount : '${productPage.pageCount}',
-		current : '${productPage.currentPage}',
-		fnName : 'nextPage',
-		backFn : function(p) {
-			// console.log(p);
-		}
-	});	
-})
+
 </script>
 </body>
 </html>

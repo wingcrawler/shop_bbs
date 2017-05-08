@@ -21,8 +21,6 @@ public class ThreadService extends AdapterService implements BaseService {
 
 	@Autowired
 	ThreadMapper threadMapper;
-	@Autowired
-	RelativeDateFormat dateFormat;
 
 	public int insert(Thread thread) {
 		return threadMapper.insert(thread);
@@ -58,7 +56,7 @@ public class ThreadService extends AdapterService implements BaseService {
 			list = threadMapper.getBeanListByParm(parm);
 			for (Thread t : list) {
 				Date time = t.getThreadTime();
-				t.setTime(dateFormat.format(time));
+				t.setTime(RelativeDateFormat.format(time));
 
 			}
 		}

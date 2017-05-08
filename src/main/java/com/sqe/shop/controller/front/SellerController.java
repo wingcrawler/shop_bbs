@@ -85,8 +85,8 @@ public class SellerController extends BaseFrontController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/edit", method = RequestMethod.GET)
-	public ModelAndView edit(ModelAndView model, Long id) {
+	@RequestMapping(value="/editProduct", method = RequestMethod.GET)
+	public ModelAndView editProduct(ModelAndView model, Long id) {
 		if(id!=null){
 			Product entity = productService.getByIdAndUserId(id);
 			if(entity!=null){
@@ -108,8 +108,8 @@ public class SellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/doSave", method = RequestMethod.POST)
-	public Map<String, Object> save(Product product,
+	@RequestMapping(value="/doSaveProduct", method = RequestMethod.POST)
+	public Map<String, Object> doSaveProduct(Product product,
 			@RequestParam(name = "indexFile",value="indexFile", required = false) MultipartFile indexFile,
 			@RequestParam(name = "listFile",value="listFile", required = false) MultipartFile listFile) {
 		if(StringUtils.isBlank(product.getProductName())){
@@ -134,8 +134,8 @@ public class SellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/doDelete", method = RequestMethod.GET)
-	public Map<String, Object> doDelete(Long id) {
+	@RequestMapping(value="/deleteProductById", method = RequestMethod.GET)
+	public Map<String, Object> deleteProductById(Long id) {
 		if(id==null){
 			return responseError(-1, "error_no_item");
 		}
@@ -151,8 +151,26 @@ public class SellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/cancelProduct", method = RequestMethod.GET)
-	public Map<String, Object> cancelProduct(Long id) {
+	@RequestMapping(value="/offProductById", method = RequestMethod.GET)
+	public Map<String, Object> offProductById(Long id) {
+		if(id==null){
+			return responseError(-1, "error_no_item");
+		}
+		Product product = new Product();
+		product.setId(id);
+		product.setProductStatus(2);//下架
+		productService.update(product);
+		return responseOK("op_success");
+	}
+	
+	/**
+	 * 上架商品
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/onProductById", method = RequestMethod.GET)
+	public Map<String, Object> onProductById(Long id) {
 		if(id==null){
 			return responseError(-1, "error_no_item");
 		}
