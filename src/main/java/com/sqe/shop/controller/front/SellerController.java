@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
@@ -87,8 +88,9 @@ public class SellerController extends BaseFrontController {
 	 */
 	@RequestMapping(value="/editProduct", method = RequestMethod.GET)
 	public ModelAndView editProduct(ModelAndView model, Long id) {
+		Product entity = new Product();
 		if(id!=null){
-			Product entity = productService.getByIdAndUserId(id);
+			entity = productService.getByIdAndUserId(id);
 			if(entity!=null){
 				List<Image> images = imageService.getByProductId(entity.getId());
 				model.addObject("imgList", images);
@@ -96,8 +98,9 @@ public class SellerController extends BaseFrontController {
 				model.setViewName("shop/404");
 				return model;
 			}
-			model.addObject("entity", entity);
 		}
+		model.addObject("entity", entity);
+
 		model.setViewName("shop/sell/product_edit");
 		return model;
 	}
@@ -135,15 +138,17 @@ public class SellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/deleteProductById", method = RequestMethod.GET)
-	public Map<String, Object> deleteProductById(Long id) {
-		if(id==null){
-			return responseError(-1, "error_no_item");
+	public Map<String, Object> deleteProductById(String idList) {
+		if(StringUtils.isBlank(idList)){
+			return responseOK1("");	
 		}
-		int i = productService.delete(id);
-		if(i==0){
-			return responseError(-1, "error_del_failed");
+		String arr[] = idList.split(",");
+		for(String str : arr){
+			if(StringUtils.isBlank(str.trim())){
+				productService.delete(Long.valueOf(str));
+			}
 		}
-		return responseOK("op_success");
+		return responseOK1("");
 	}
 	/**
 	 * 下架商品
@@ -152,15 +157,18 @@ public class SellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/offProductById", method = RequestMethod.GET)
-	public Map<String, Object> offProductById(Long id) {
-		if(id==null){
-			return responseError(-1, "error_no_item");
+	public Map<String, Object> offProductById(String idList) {
+		if(StringUtils.isBlank(idList)){
+			return responseOK1("");	
 		}
+		String arr[] = idList.split(",");
 		Product product = new Product();
-		product.setId(id);
-		product.setProductStatus(2);//下架
-		productService.update(product);
-		return responseOK("op_success");
+		for(String str : arr){
+			product.setId(Long.valueOf(str));
+			product.setProductStatus(Constants.PRODUCT_OFF);//下架
+			productService.update(product);
+		}
+		return responseOK1("");
 	}
 	
 	/**
@@ -170,15 +178,18 @@ public class SellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/onProductById", method = RequestMethod.GET)
-	public Map<String, Object> onProductById(Long id) {
-		if(id==null){
-			return responseError(-1, "error_no_item");
+	public Map<String, Object> onProductById(String idList) {
+		if(StringUtils.isBlank(idList)){
+			return responseOK1("");	
 		}
+		String arr[] = idList.split(",");
 		Product product = new Product();
-		product.setId(id);
-		product.setProductStatus(2);//下架
-		productService.update(product);
-		return responseOK("op_success");
+		for(String str : arr){
+			product.setId(Long.valueOf(str));
+			product.setProductStatus(Constants.PRODUCT_ON);//下架
+			productService.update(product);
+		}
+		return responseOK1("");
 	}
 	
 	//私信
