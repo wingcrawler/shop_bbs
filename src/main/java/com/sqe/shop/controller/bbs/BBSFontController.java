@@ -20,9 +20,11 @@ import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.Topic;
+import com.sqe.shop.model.User;
 import com.sqe.shop.service.SectionService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.TopicService;
+import com.sqe.shop.service.UserService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
@@ -34,6 +36,8 @@ public class BBSFontController extends BaseFrontController {
 	private TopicService topicService;
 	@Autowired
 	private SectionService sectionService;
+	@Autowired
+	private UserService userService;
 
 	private static final Logger logger = LoggerFactory.getLogger(BBSFontController.class);
 	
@@ -55,9 +59,12 @@ public class BBSFontController extends BaseFrontController {
 	}
 	
 	@RequestMapping(value="/thread", method = RequestMethod.GET)
-	public ModelAndView thread(@RequestParam(name="pageNo", defaultValue="1") int pageNo) {
+	public ModelAndView thread(@RequestParam(name="thread", defaultValue="1") Long threadId) {
 		ModelAndView model = new ModelAndView("bbs/thread");
-		
+		Thread thread=threadService.getById(threadId);
+		User user=userService.getById(thread.getUserId());
+		model.addObject("thread", thread);
+		model.addObject("user", user);
 		return model;
 	}
 	
