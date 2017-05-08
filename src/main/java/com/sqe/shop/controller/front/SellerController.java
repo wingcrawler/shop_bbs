@@ -1,5 +1,7 @@
 package com.sqe.shop.controller.front;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +23,13 @@ import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Product;
+import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ProductService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.ShopService;
+import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.RegularUtil;
 
@@ -45,6 +49,8 @@ public class SellerController extends BaseFrontController {
 	private ImageService imageService;
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private CachedService cachedService;
 	
 	//商品管理
 	/**
@@ -77,6 +83,16 @@ public class SellerController extends BaseFrontController {
 		product.setUserId(this.getCurrentUserId());
 		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
 		
+		if(page.getList().size()>0){
+			String productId = "";
+			List<Image> images = null;
+			for(Map<String, Object> map : page.getList()){
+				productId = map.get("id").toString();
+				images = imageService.getByProductId(Long.valueOf(productId));
+				map.put("img", images.get(0));
+			}
+		}
+		
 		return page;
 	}
 	
@@ -92,7 +108,9 @@ public class SellerController extends BaseFrontController {
 			entity = productService.getByIdAndUserId(id);
 			if(entity!=null){
 				List<Image> images = imageService.getByProductId(entity.getId());
-				model.addObject("imgList", images);
+				model.addObject("img", images.get(0));
+				images.remove(0);
+				model.addObject("images", images);
 			} else {
 				model.setViewName("shop/404");
 				return model;
@@ -101,6 +119,56 @@ public class SellerController extends BaseFrontController {
 		model.addObject("entity", entity);
 
 		model.setViewName("shop/sell/product_edit");
+		return model;
+	}
+	
+	/**
+	 * 商品详情
+	 * @param model
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/productDetail", method = RequestMethod.GET)
+	public ModelAndView productDetail(ModelAndView model, Long id) {
+		if(id==null){
+			model.setViewName("shop/404");
+			return model;
+		}
+		
+		Map<String, Object> resMap = new HashMap<String, Object>();
+		
+		Product	entity = productService.getByIdAndUserId(id);
+		if(entity==null){
+			model.setViewName("shop/404");
+			return model;
+		}
+		
+		ProductType typeOne = productTypeService.getById(entity.getProductTypeId());
+		resMap.put("typeOne", typeOne.getTypeName());
+		ProductType typeTwo = productTypeService.getById(entity.getProductSubtypeId());
+		resMap.put("typeTwo", typeTwo.getTypeName());
+		
+		List<Image> images = imageService.getByProductId(entity.getId());
+		resMap.put("showImg", images.get(0));
+		images.remove(0);
+		resMap.put("imgList", images);
+		
+		resMap.put("count", entity.getProductCount());
+		resMap.put("view", entity.getProductView());
+		resMap.put("urlClick", entity.getProductUrlClick());
+		resMap.put("price", entity.getProductPrice());
+		resMap.put("status", entity.getProductStatus());
+		resMap.put("statusStr", this.getProductStatus(entity.getProductStatus()));
+		if(cachedService.getLang().equals("zh")){
+			resMap.put("productName", entity.getProductName());
+			resMap.put("description", entity.getProductDescripton());
+		} else {
+			resMap.put("productName", entity.getProductEnName());
+			resMap.put("description", entity.getProductEnDescription());
+		}
+		
+		model.addObject("entity", resMap);
+		model.setViewName("shop/sell/product_details");
 		return model;
 	}
 	

@@ -78,6 +78,7 @@ public class ImageService extends AdapterService implements BaseService {
 	public List<Image> getByProductId(Long id) {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		parm.put("productId", id);
+		parm.put("orderBy", "id asc");
 		return imageMapper.getBeanListByParm(parm);
 	}
 	

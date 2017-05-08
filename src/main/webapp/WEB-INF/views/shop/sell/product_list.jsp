@@ -6,7 +6,6 @@
 	<jsp:include page="../include/meta.jsp"></jsp:include>
 	<title>${t.m_product_list }</title>
 	<link href="/frontstyle/sell/css/allProduct.css" rel="stylesheet" type="text/css">
-	<script src="/frontstyle/js/common.js"></script>
 	<script src="/frontstyle/sell/js/all_product.js"></script>
 </head>
 <body>
@@ -48,10 +47,12 @@
 													</div>
 												</td>
 												<td class="td2">
+													<a href="/front/sell/productDetail?id=${item.id }" target="_blank">
 													<span class="imgBox">
-														<img src="images/img1001.jpg">
+														<img src="${item.img.imagePath }">
 													</span>
 													<span>${item.productName }</span>
+													</a>
 												</td>
 												<td class="td3">${item.productTypeName }</td>
 												<td class="td4">${item.createTimeStr }</td>

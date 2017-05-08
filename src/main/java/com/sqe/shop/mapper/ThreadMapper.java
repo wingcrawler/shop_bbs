@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface ThreadMapper extends BaseMapper {
 
-	Map<String, Object> getMapById(Long id);
+	Map<String, Object> getMapById(@Param("id") Long id);
 	
 	List<Map<String, Object>> getSectionMapListByParm(@Param("parm") Map<String, Object> paramMap);
 
