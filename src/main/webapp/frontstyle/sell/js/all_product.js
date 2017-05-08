@@ -95,6 +95,8 @@ function getSelectedItem(){
  * 全选与反选
  */
 function selectAll() {
+	var allCheckbox = document.getElementsByName("all-ipt-checkbox");
+	allCheckbox.checked = !allCheckbox.checked;
 	var checkboxs = document.getElementsByName("item");
 	for (var i = 0; i < checkboxs.length; i++) {
 		var e = checkboxs[i];
