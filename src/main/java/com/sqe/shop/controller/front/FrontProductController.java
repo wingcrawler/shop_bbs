@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
@@ -70,7 +71,7 @@ public class FrontProductController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value="postMessage", method = RequestMethod.POST)
 	public Map<String, Object> postMessage(ModelAndView model, Message message) {
-		message.setMessageStatus(0);
+		message.setMessageStatus(Constants.MSG_OFF);
 		message.setPostId(this.getCurrentUserId());
 		message.setCreateTime(new Date());
 		messageService.insert(message);

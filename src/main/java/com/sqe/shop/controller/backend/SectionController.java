@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.service.SectionService;
@@ -60,7 +61,7 @@ public class SectionController extends BaseBackendController {
 	@RequestMapping(value="/getSecondList", method = RequestMethod.GET)
 	public Map<String, Object> getList(Section section,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
-		section.setSectionType(1);
+		section.setSectionType(Constants.SECTION_ON);
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		PageUtil<Section> page = sectionService.getBeanListByParm(section, pageNo, pageSize);
 		resMap.put("list", page.getList());

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.model.Topic;
@@ -54,7 +55,7 @@ public class TopicController extends BaseBackendController {
 	
 	private List<Section> getSectonSectionList() {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("sectionType", 1);
+		paramMap.put("sectionType", Constants.SECTION_ON);
 		List<Section> list = sectionService.getBeanListByParm("SectionMapper", paramMap);
 		if(list==null || list.isEmpty()){
 			return new ArrayList<Section>();

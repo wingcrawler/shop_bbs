@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.service.MessageService;
@@ -64,7 +65,7 @@ public class MessageController extends BaseBackendController {
 	@ResponseBody
 	@RequestMapping(value="/read", method = RequestMethod.POST)
 	public Map<String, Object> read(Message message) {
-		message.setMessageStatus(1);
+		message.setMessageStatus(Constants.MSG_ON);
 		messageService.update(message);
 		return responseOK("save_success");
 	}

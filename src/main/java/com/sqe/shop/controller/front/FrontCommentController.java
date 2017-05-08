@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Comment;
 import com.sqe.shop.service.CommentService;
@@ -36,7 +37,7 @@ public class FrontCommentController extends BaseFrontController {
 		if(StringUtils.isBlank(comment.getContext())){
 			return responseError(-1, "error_empty_content");
 		}
-		comment.setStatus(1);
+		comment.setStatus(Constants.COMMENT_ON);
 		comment.setUserId(this.getCurrentUserId());
 		comment.setDate(new Date());
 		commentService.insert(comment);

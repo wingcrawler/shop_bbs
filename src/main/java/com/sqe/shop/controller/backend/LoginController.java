@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.LoginService;
@@ -49,7 +50,7 @@ public class LoginController extends BaseBackendController {
 	@ResponseBody
 	@RequestMapping(value = "/doLogin", method=RequestMethod.POST)
 	public Map<String, Object> doLogin(HttpServletRequest request, User user) {
-		user.setUserRole(3L);
+		user.setUserRole(Constants.ROLE_ADMIN);
 		Map<String, Object> resMap = loginService.login(user);
 		return resMap;
 	}

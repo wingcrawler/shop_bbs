@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Product;
@@ -44,7 +45,7 @@ public class ProductController extends BaseBackendController {
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("backend/product/list");
 		Shop shop = new Shop();
-		shop.setShopStatus(1);
+		shop.setShopStatus(Constants.STORE_ON);
 		PageUtil<Shop> shops = shopService.getBeanListByParm(shop, 0, -1);
 		model.addObject("shopList", shops.getList());
 		return model;

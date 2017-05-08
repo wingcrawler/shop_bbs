@@ -40,9 +40,9 @@ public class Constants{
 	}
     
     //用户权限
-    public static final int ROLE_BUY = 1; //买家
-    public static final int ROLE_SELL = 2; //卖家
-    public static final int ROLE_ADMIN = 3; //管理员
+    public static final Long ROLE_BUY = 1L; //买家
+    public static final Long ROLE_SELL = 2L; //卖家
+    public static final Long ROLE_ADMIN = 3L; //管理员
     
     //错误号
     public static final String ERROR_NO = "errorNo";
@@ -63,6 +63,13 @@ public class Constants{
     public static final int PRODUCT_WAIT = 0; //待审核
     public String getProductStatus(Integer value) {
     	return cachedService.getString("product_status_"+value);
+	}
+    
+    //产品分类等级
+    public static final int PRODUCT_LEVEL_ONE = 1; //一级分类
+    public static final int PRODUCT_LEVEL_TWO = 2; //二级分类
+    public String getProductLevel(Integer value) {
+    	return cachedService.getString("product_level_"+value);
 	}
     
     //news 语言
@@ -127,6 +134,10 @@ public class Constants{
     public String getThreadType(Integer value) {
     	return cachedService.getString("thread_type_"+value);
 	}
+   
+    //帖子状态
+    public static final int THREAD_OFF = 0; //关闭
+    public static final int THREAD_ON = 1; //正常
 	public String getThreadStatus(Integer value) {
 		return cachedService.getString("thread_status_"+value);
 	}

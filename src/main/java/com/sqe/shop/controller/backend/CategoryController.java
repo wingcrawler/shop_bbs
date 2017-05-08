@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.ProductTypeService;
@@ -70,7 +71,7 @@ public class CategoryController extends BaseBackendController {
 	public Map<String, Object> getList(ProductType productType,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
-		productType.setTypeLevel(1);
+		productType.setTypeLevel(Constants.PRODUCT_LEVEL_ONE);
 		PageUtil<ProductType> page = productTypeService.getBeanListByParm(productType, pageNo, pageSize);
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		resMap.put("list", page.getList());
@@ -91,7 +92,7 @@ public class CategoryController extends BaseBackendController {
 			return responseError(-1, "error_no_typename");
 		}
 		productType.setParentId(0L);
-		productType.setTypeLevel(1);
+		productType.setTypeLevel(Constants.PRODUCT_LEVEL_ONE);
 		productTypeService.save(productType);
 		return responseOK("op_success");
 	}

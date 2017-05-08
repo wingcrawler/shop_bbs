@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.ProductTypeService;
@@ -41,7 +42,7 @@ public class Category2Controller extends BaseBackendController {
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
 		Map<String, Object> parm = new HashMap<String, Object>();
-		parm.put("typeLevel", 1);
+		parm.put("typeLevel", Constants.PRODUCT_LEVEL_ONE);
 		parm.put("orderby", "type_rank asc");
 		List<ProductType> typeList = productTypeService.getBeanListByParm("ProductTypeMapper", parm);
 		model.addObject("typeList", typeList);
@@ -64,7 +65,7 @@ public class Category2Controller extends BaseBackendController {
 		}
 		
 		Map<String, Object> parm = new HashMap<String, Object>();
-		parm.put("typeLevel", 1);
+		parm.put("typeLevel", Constants.PRODUCT_LEVEL_ONE);
 		parm.put("orderby", "type_rank asc");
 		List<ProductType> typeList = productTypeService.getBeanListByParm("ProductTypeMapper", parm);
 		model.addObject("typeList", typeList);
@@ -85,7 +86,7 @@ public class Category2Controller extends BaseBackendController {
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
-		productType.setTypeLevel(2);
+		productType.setTypeLevel(Constants.PRODUCT_LEVEL_TWO);
 		PageUtil<ProductType> page = productTypeService.getBeanListByParm(productType, pageNo, pageSize);
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
@@ -104,7 +105,7 @@ public class Category2Controller extends BaseBackendController {
 				StringUtils.isBlank(productType.getTypeNameCh()) ) {
 			return responseError(-1, "error_no_typename");
 		}
-		productType.setTypeLevel(2);
+		productType.setTypeLevel(Constants.PRODUCT_LEVEL_TWO);
 		productTypeService.save(productType);
 		return responseOK("op_success");
 	}
