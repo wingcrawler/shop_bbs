@@ -73,19 +73,19 @@ input{
 	top:0;
 }
 .main .menu_box .menu_list .bgImg1{
-	background: url(../images/menu_01.png) no-repeat ;
+	background: url(/frontstyle/images/menu_01.png) no-repeat ;
 	background-size:100% 100%;
 }
 .main .menu_box .menu_list .bgImg2{
-	background: url(../images/menu_02.png) no-repeat ;
+	background: url(/frontstyle/images/menu_02.png) no-repeat ;
 	background-size:100% 100%;
 }
 .main .menu_box .menu_list .bgImg3{
-	background: url(../images/menu_03.png) no-repeat ;
+	background: url(/frontstyle/images/menu_03.png) no-repeat ;
 	background-size:100% 100%;
 }
 .main .menu_box .menu_list .bgImg4{
-	background: url(../images/menu_04.png) no-repeat ;
+	background: url(/frontstyle/images/menu_04.png) no-repeat ;
 	background-size:100% 100%;
 }
 .main .menu_box .menu_list  .module{
@@ -126,7 +126,6 @@ input{
 	width:11.625rem;
 	height:7.25rem;
 	border:0.0625rem solid #e0e0e0;
-	background: #fff url(../images/companyDataLogo.png)no-repeat ;
 	background-size: 100% auto;
 	position: absolute;
 	left:3.4375rem;
@@ -263,7 +262,7 @@ input{
 	font-size: 1.25rem;
 	border-radius: 0.1875rem;
 	cursor: pointer;
-	background: url(../images/saveBg.png) repeat-x;
+	background: url(/frontstyle/images/saveBg.png) repeat-x;
 	position: relative;
 	margin-left:3.625rem;
 	margin-bottom: 6.875rem;

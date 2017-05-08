@@ -1,6 +1,5 @@
 package com.sqe.shop.controller.front;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +24,8 @@ import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
+import com.sqe.shop.model.Shop;
+import com.sqe.shop.model.User;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ProductService;
@@ -275,6 +277,33 @@ public class SellerController extends BaseFrontController {
 	@RequestMapping(value="/messageReply", method = RequestMethod.GET)
 	public Map<String, Object> messageReply(String msgContent, Long productId) {
 		return responseOK1("");
+	}
+	
+	//商家资料
+	/**
+	 * 商家信息页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/merchantPage", method = RequestMethod.GET)
+	public ModelAndView merchantPage(ModelAndView model){
+		model.setViewName("shop/sell/merchantCA");
+		
+		User user = this.getCurrentUser();
+		Shop shop = new Shop();
+		shop.setUserId(user.getId());
+		PageUtil<Shop> shopPage = shopService.getBeanListByParm(shop, 0, -1);
+		if(shopPage.getTotalRecords()==0){
+			return model;
+		}
+		shop = shopPage.getList().get(0);
+		
+		Image Image = imageService.getByShopId(shop.getId());
+		
+		model.addObject("shop", shop);
+		model.addObject("user", user);
+		model.addObject("img", Image);
+		return model;
 	}
 
 }

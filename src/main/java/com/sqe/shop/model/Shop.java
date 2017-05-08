@@ -9,17 +9,58 @@ public class Shop extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer shopStatus;
-	private Date createTime;
-	private String shopQualifies;
-	private String shopDescription;
 	private Integer shopLevel;
 	private Integer shopRank;
-	private String shopTitle;
-	private Long id;
 	private String shopLicenes;
+	private String shopAddress;
 	private Long userId;
+	private String workTo;
+	private Integer shopStatus;
+	private Date createTime;
+	private String workFrom;
+	private String shopQualifies;
+	private String shopDescription;
+	private String shopTitle;
+	private String shopPhone;
+	private Long id;
+	private String shopQq;
 	
+	public Integer getShopLevel() {
+		return shopLevel;
+	}
+	public void setShopLevel(Integer shopLevel) {
+		this.shopLevel = shopLevel;
+	}
+	public Integer getShopRank() {
+		return shopRank;
+	}
+	public void setShopRank(Integer shopRank) {
+		this.shopRank = shopRank;
+	}
+	public String getShopLicenes() {
+		return shopLicenes;
+	}
+	public void setShopLicenes(String shopLicenes) {
+		this.shopLicenes = shopLicenes;
+	}
+	public String getShopAddress() {
+		return shopAddress;
+	}
+	public void setShopAddress(String shopAddress) {
+		this.shopAddress = shopAddress;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public String getWorkTo() {
+		return workTo;
+	}
+	public void setWorkTo(String workTo) {
+		this.workTo = workTo;
+	}
 	public Integer getShopStatus() {
 		return shopStatus;
 	}
@@ -31,6 +72,12 @@ public class Shop extends BaseModel implements Serializable {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public String getWorkFrom() {
+		return workFrom;
+	}
+	public void setWorkFrom(String workFrom) {
+		this.workFrom = workFrom;
 	}
 	public String getShopQualifies() {
 		return shopQualifies;
@@ -44,23 +91,17 @@ public class Shop extends BaseModel implements Serializable {
 	public void setShopDescription(String shopDescription) {
 		this.shopDescription = shopDescription;
 	}
-	public Integer getShopLevel() {
-		return shopLevel;
-	}
-	public void setShopLevel(Integer shopLevel) {
-		this.shopLevel = shopLevel;
-	}
-	public Integer getShopRank() {
-		return shopRank;
-	}
-	public void setShopRank(Integer shopRank) {
-		this.shopRank = shopRank;
-	}
 	public String getShopTitle() {
 		return shopTitle;
 	}
 	public void setShopTitle(String shopTitle) {
 		this.shopTitle = shopTitle;
+	}
+	public String getShopPhone() {
+		return shopPhone;
+	}
+	public void setShopPhone(String shopPhone) {
+		this.shopPhone = shopPhone;
 	}
 	public Long getId() {
 		return id;
@@ -68,17 +109,11 @@ public class Shop extends BaseModel implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getShopLicenes() {
-		return shopLicenes;
+	public String getShopQq() {
+		return shopQq;
 	}
-	public void setShopLicenes(String shopLicenes) {
-		this.shopLicenes = shopLicenes;
-	}
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setShopQq(String shopQq) {
+		this.shopQq = shopQq;
 	}
 	
 	

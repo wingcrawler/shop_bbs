@@ -3,16 +3,21 @@
 <mapper namespace="com.sqe.shop.mapper.ShopMapper">
 
 <resultMap type="com.sqe.shop.model.Shop" id="ShopBaseMapper">
+	<id property="shopLevel" column="shop_level" />
+	<id property="shopRank" column="shop_rank" />
+	<id property="shopLicenes" column="shop_licenes" />
+	<id property="shopAddress" column="shop_address" />
+	<id property="userId" column="user_id" />
+	<id property="workTo" column="work_to" />
 	<id property="shopStatus" column="shop_status" />
 	<id property="createTime" column="create_time" />
+	<id property="workFrom" column="work_from" />
 	<id property="shopQualifies" column="shop_qualifies" />
 	<id property="shopDescription" column="shop_description" />
-	<id property="shopRank" column="shop_rank" />
 	<id property="shopTitle" column="shop_title" />
+	<id property="shopPhone" column="shop_phone" />
 	<id property="id" column="id" />
-	<id property="shopLevel" column="shop_level" />
-	<id property="shopLicenes" column="shop_licenes" />
-	<id property="userId" column="user_id" />
+	<id property="shopQq" column="shop_qq" />
 </resultMap>  
 
 <insert id="insert">
@@ -20,19 +25,40 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into shop
-	(shop_status,create_time,shop_qualifies,shop_description,shop_level,shop_rank,shop_title,shop_licenes,user_id)
+	(shop_level,shop_rank,shop_licenes,shop_address,user_id,work_to,shop_status,create_time,work_from,shop_qualifies,shop_description,shop_title,shop_phone,shop_qq)
 	values
-	(#{shopStatus},#{createTime},#{shopQualifies},#{shopDescription},#{shopLevel},#{shopRank},#{shopTitle},#{shopLicenes},#{userId})
+	(#{shopLevel},#{shopRank},#{shopLicenes},#{shopAddress},#{userId},#{workTo},#{shopStatus},#{createTime},#{workFrom},#{shopQualifies},#{shopDescription},#{shopTitle},#{shopPhone},#{shopQq})
 </insert>
 
 <update id="update">
 	UPDATE shop 
 	<set>
+			<if test="shopLevel != null">  
+	        	shop_level=#{shopLevel},
+	    	</if>
+			<if test="shopRank != null">  
+	        	shop_rank=#{shopRank},
+	    	</if>
+			<if test="shopLicenes != null">  
+	        	shop_licenes=#{shopLicenes},
+	    	</if>
+			<if test="shopAddress != null">  
+	        	shop_address=#{shopAddress},
+	    	</if>
+			<if test="userId != null">  
+	        	user_id=#{userId},
+	    	</if>
+			<if test="workTo != null">  
+	        	work_to=#{workTo},
+	    	</if>
 			<if test="shopStatus != null">  
 	        	shop_status=#{shopStatus},
 	    	</if>
 			<if test="createTime != null">  
 	        	create_time=#{createTime},
+	    	</if>
+			<if test="workFrom != null">  
+	        	work_from=#{workFrom},
 	    	</if>
 			<if test="shopQualifies != null">  
 	        	shop_qualifies=#{shopQualifies},
@@ -40,20 +66,14 @@
 			<if test="shopDescription != null">  
 	        	shop_description=#{shopDescription},
 	    	</if>
-			<if test="shopLevel != null">  
-	        	shop_level=#{shopLevel},
-	    	</if>
-			<if test="shopRank != null">  
-	        	shop_rank=#{shopRank},
-	    	</if>
 			<if test="shopTitle != null">  
 	        	shop_title=#{shopTitle},
 	    	</if>
-			<if test="shopLicenes != null">  
-	        	shop_licenes=#{shopLicenes},
+			<if test="shopPhone != null">  
+	        	shop_phone=#{shopPhone},
 	    	</if>
-			<if test="userId != null">  
-	        	user_id=#{userId},
+			<if test="shopQq != null">  
+	        	shop_qq=#{shopQq},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -69,11 +89,32 @@
 
 <select id="countByParm" resultType="integer">
 	select count(*) from shop  where 1=1 
+			<if test="parm.shopLevel != null">
+		     	and shop_level = #{parm.shopLevel}
+		   	</if>
+			<if test="parm.shopRank != null">
+		     	and shop_rank = #{parm.shopRank}
+		   	</if>
+			<if test="parm.shopLicenes != null">
+		     	and shop_licenes = #{parm.shopLicenes}
+		   	</if>
+			<if test="parm.shopAddress != null">
+		     	and shop_address = #{parm.shopAddress}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
+			<if test="parm.workTo != null">
+		     	and work_to = #{parm.workTo}
+		   	</if>
 			<if test="parm.shopStatus != null">
 		     	and shop_status = #{parm.shopStatus}
 		   	</if>
 			<if test="parm.createTime != null">
 		     	and create_time = #{parm.createTime}
+		   	</if>
+			<if test="parm.workFrom != null">
+		     	and work_from = #{parm.workFrom}
 		   	</if>
 			<if test="parm.shopQualifies != null">
 		     	and shop_qualifies = #{parm.shopQualifies}
@@ -81,30 +122,45 @@
 			<if test="parm.shopDescription != null">
 		     	and shop_description = #{parm.shopDescription}
 		   	</if>
-		   	<if test="parm.shopLevel != null">
-		     	and shop_level = #{parm.shopLevel}
+			<if test="parm.shopPhone != null">
+		     	and shop_phone = #{parm.shopPhone}
 		   	</if>
-			<if test="parm.shopRank != null">
-		     	and shop_rank = #{parm.shopRank}
+			<if test="parm.shopQq != null">
+		     	and shop_qq = #{parm.shopQq}
 		   	</if>
-			<if test="parm.shopTitle != null">
+		   	<if test="parm.shopTitle != null">
 		     	and shop_title like "%"#{parm.shopTitle}"%"
-		   	</if>
-			<if test="parm.shopLicenes != null">
-		     	and shop_licenes = #{parm.shopLicenes}
-		   	</if>
-		   	<if test="parm.userId != null">
-		     	and user_id = #{parm.userId}
 		   	</if>
 </select>
 
 <select id="getBeanListByParm" resultMap="ShopBaseMapper">
 	select * from shop where 1=1 
+			<if test="parm.shopLevel != null">
+		     	and shop_level = #{parm.shopLevel}
+		   	</if>
+			<if test="parm.shopRank != null">
+		     	and shop_rank = #{parm.shopRank}
+		   	</if>
+			<if test="parm.shopLicenes != null">
+		     	and shop_licenes = #{parm.shopLicenes}
+		   	</if>
+			<if test="parm.shopAddress != null">
+		     	and shop_address = #{parm.shopAddress}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
+			<if test="parm.workTo != null">
+		     	and work_to = #{parm.workTo}
+		   	</if>
 			<if test="parm.shopStatus != null">
 		     	and shop_status = #{parm.shopStatus}
 		   	</if>
 			<if test="parm.createTime != null">
 		     	and create_time = #{parm.createTime}
+		   	</if>
+			<if test="parm.workFrom != null">
+		     	and work_from = #{parm.workFrom}
 		   	</if>
 			<if test="parm.shopQualifies != null">
 		     	and shop_qualifies = #{parm.shopQualifies}
@@ -112,20 +168,14 @@
 			<if test="parm.shopDescription != null">
 		     	and shop_description = #{parm.shopDescription}
 		   	</if>
-		   	<if test="parm.shopLevel != null">
-		     	and shop_level = #{parm.shopLevel}
+			<if test="parm.shopPhone != null">
+		     	and shop_phone = #{parm.shopPhone}
 		   	</if>
-			<if test="parm.shopRank != null">
-		     	and shop_rank = #{parm.shopRank}
+			<if test="parm.shopQq != null">
+		     	and shop_qq = #{parm.shopQq}
 		   	</if>
-			<if test="parm.shopTitle != null">
+		   	<if test="parm.shopTitle != null">
 		     	and shop_title like "%"#{parm.shopTitle}"%"
-		   	</if>
-			<if test="parm.shopLicenes != null">
-		     	and shop_licenes = #{parm.shopLicenes}
-		   	</if>
-		   	<if test="parm.userId != null">
-		     	and user_id = #{parm.userId}
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
@@ -142,33 +192,48 @@
 	from shop s 
 	LEFT JOIN `user` u on s.user_id=u.id
 	where 1=1
-		<if test="parm.shopStatus != null">
-	     	and s.shop_status = #{parm.shopStatus}
-	   	</if>
-		<if test="parm.createTime != null">
-	     	and s.create_time = #{parm.createTime}
-	   	</if>
-		<if test="parm.shopQualifies != null">
-	     	and s.shop_qualifies = #{parm.shopQualifies}
-	   	</if>
-		<if test="parm.shopDescription != null">
-	     	and s.shop_description = #{parm.shopDescription}
-	   	</if>
-	   	<if test="parm.shopLevel != null">
+		<if test="parm.shopLevel != null">
 		     	and shop_level = #{parm.shopLevel}
 		   	</if>
-		<if test="parm.shopRank != null">
-	     	and s.shop_rank = #{parm.shopRank}
-	   	</if>
-		<if test="parm.shopTitle != null">
-	     	and s.shop_title like "%"#{parm.shopTitle}"%"
-	   	</if>
-		<if test="parm.shopLicenes != null">
-	     	and s.shop_licenes = #{parm.shopLicenes}
-	   	</if>
-	   	<if test="parm.userId != null">
-	     	and s.user_id = #{parm.userId}
-	   	</if>
+			<if test="parm.shopRank != null">
+		     	and shop_rank = #{parm.shopRank}
+		   	</if>
+			<if test="parm.shopLicenes != null">
+		     	and shop_licenes = #{parm.shopLicenes}
+		   	</if>
+			<if test="parm.shopAddress != null">
+		     	and shop_address = #{parm.shopAddress}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
+			<if test="parm.workTo != null">
+		     	and work_to = #{parm.workTo}
+		   	</if>
+			<if test="parm.shopStatus != null">
+		     	and shop_status = #{parm.shopStatus}
+		   	</if>
+			<if test="parm.createTime != null">
+		     	and create_time = #{parm.createTime}
+		   	</if>
+			<if test="parm.workFrom != null">
+		     	and work_from = #{parm.workFrom}
+		   	</if>
+			<if test="parm.shopQualifies != null">
+		     	and shop_qualifies = #{parm.shopQualifies}
+		   	</if>
+			<if test="parm.shopDescription != null">
+		     	and shop_description = #{parm.shopDescription}
+		   	</if>
+			<if test="parm.shopPhone != null">
+		     	and shop_phone = #{parm.shopPhone}
+		   	</if>
+			<if test="parm.shopQq != null">
+		     	and shop_qq = #{parm.shopQq}
+		   	</if>
+		   	<if test="parm.shopTitle != null">
+		     	and shop_title like "%"#{parm.shopTitle}"%"
+		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
 	   	</if>

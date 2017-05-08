@@ -19,7 +19,7 @@
 			</p>
 			<div class="module">
 				<p>${t.t_business_intro }</p>
-				<p>${t.t_business_info }</p>
+				<p><a href="/front/sell/merchantPage">${t.t_business_info }</a></p>
 			</div>
 		</li>
 		<li class="menu_list">
