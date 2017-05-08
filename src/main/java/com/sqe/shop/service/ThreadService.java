@@ -21,6 +21,8 @@ public class ThreadService extends AdapterService implements BaseService {
 
 	@Autowired
 	ThreadMapper threadMapper;
+	@Autowired
+	private RelativeDateFormat relativeDateFormat;
 
 	public int insert(Thread thread) {
 		return threadMapper.insert(thread);
@@ -56,7 +58,7 @@ public class ThreadService extends AdapterService implements BaseService {
 			list = threadMapper.getBeanListByParm(parm);
 			for (Thread t : list) {
 				Date time = t.getThreadTime();
-				t.setTime(RelativeDateFormat.format(time));
+				t.setTime(relativeDateFormat.format(time));
 
 			}
 		}
@@ -87,6 +89,27 @@ public class ThreadService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 
+	public PageUtil<Map<String, Object>> getSectionMapListByParm(Thread thread, int pageNo, Integer pageSize) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(thread);
+		parm.put("orderby", "t.id desc");
+		int count = threadMapper.countByParm(parm);
+		pageUtil.setTotalRecords(count);
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		if (count != 0) {
+			list = threadMapper.getSectionMapListByParm(parm);
+			for (Map<String, Object> map : list) {
+				Date date = (Date) map.get("date");
+				map.put("timeAgo", relativeDateFormat.format(date));
+				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
+				String type = map.get("threadType").toString();
+				map.put("typeName", this.getThreadType(Integer.valueOf(type)));
+			}
+		}
+		pageUtil.setList(list);
+		return pageUtil;
+	}
+
 	public void save(Thread thread) {
 		if (thread.getId() != null) {
 			threadMapper.update(thread);
@@ -110,7 +133,7 @@ public class ThreadService extends AdapterService implements BaseService {
 		}
 		return parm;
 	}
-	
+
 	public Map<String, Object> getMapById(Long id) {
 		return threadMapper.getMapById(id);
 	}

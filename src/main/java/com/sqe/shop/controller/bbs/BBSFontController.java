@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.lang.model.type.PrimitiveType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class BBSFontController extends BaseFrontController {
 	private TopicService topicService;
 	@Autowired
 	private SectionService sectionService;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(BBSFontController.class);
 	
 	@RequestMapping(value="/index", method = RequestMethod.GET)
@@ -46,7 +48,7 @@ public class BBSFontController extends BaseFrontController {
 		PageUtil<Section> pageSecond = sectionService.getBeanListByParm(section, 0, -1);
 		model.addObject("sectionSecond", pageSecond);
 		section.setSectionType(1);
-		PageUtil<Thread> pageThread = threadService.getBeanListByParm(thread, 0, -1);
+		PageUtil<Map<String, Object>> pageThread = threadService.getSectionMapListByParm(thread, 0, -1);
 		model.addObject("thread", pageThread);
 		
 		return model;
