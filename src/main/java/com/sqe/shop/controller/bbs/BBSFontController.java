@@ -54,9 +54,10 @@ public class BBSFontController extends BaseFrontController {
 		return model;
 	}
 	
-	@RequestMapping(value="/plate", method = RequestMethod.GET)
-	public ModelAndView plate() {
-		ModelAndView model = new ModelAndView("bbs/plate");
+	@RequestMapping(value="/thread", method = RequestMethod.GET)
+	public ModelAndView thread(@RequestParam(name="pageNo", defaultValue="1") int pageNo) {
+		ModelAndView model = new ModelAndView("bbs/thread");
+		
 		return model;
 	}
 	
