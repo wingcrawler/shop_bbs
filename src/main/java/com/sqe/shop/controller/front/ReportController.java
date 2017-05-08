@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseBackendController;
+import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Inform;
 import com.sqe.shop.service.InformService;
 
 @Controller
 @RequestMapping("/front")
-public class ReportController extends BaseBackendController {
+public class ReportController extends BaseFrontController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReportController.class);
 	

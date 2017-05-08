@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseBackendController;
+import com.sqe.shop.controller.base.BaseBackendController;
 
 @Controller
 @RequestMapping("/backend")

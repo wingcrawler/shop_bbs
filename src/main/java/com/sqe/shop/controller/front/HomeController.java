@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseFrontController;
+import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.service.AdvertisementService;

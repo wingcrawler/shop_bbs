@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseFrontController;
+import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.News;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.NewsService;

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseFrontController;
+import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Product;

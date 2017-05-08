@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseBackendController;
+import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.service.file.FileUploadService;

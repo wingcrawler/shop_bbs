@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sqe.shop.common.BaseFrontController;
+import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Comment;
 import com.sqe.shop.service.CommentService;
 

@@ -1,4 +1,4 @@
-/*package com.sqe.shop.common;
+package com.sqe.shop.controller.base;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.sqe.shop.common.BaseCommon;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.cached.CachedService;
@@ -39,4 +40,3 @@ public class BaseBackendController extends BaseCommon {
 	
 	
 }
-*/

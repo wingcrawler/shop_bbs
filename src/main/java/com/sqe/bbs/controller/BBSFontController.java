@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseFrontController;
+import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.Topic;

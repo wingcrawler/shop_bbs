@@ -1,6 +1,5 @@
 package com.sqe.shop.controller.backend;
 
-
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseBackendController;
+import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.LoginService;
 import com.sqe.shop.service.UserService;
