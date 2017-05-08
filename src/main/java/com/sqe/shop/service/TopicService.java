@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.TopicMapper;
 import com.sqe.shop.model.Topic;
 import com.sqe.shop.util.PageUtil;
@@ -18,9 +17,7 @@ import com.sqe.shop.util.PageUtil;
 public class TopicService extends AdapterService implements BaseService {
 	
 	@Autowired
-    TopicMapper topicMapper;
-	@Autowired
-	Constants constants;
+    private TopicMapper topicMapper;
     
     public int insert(Topic topic) {
 		return topicMapper.insert(topic);

@@ -10,19 +10,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ProductMapper;
 import com.sqe.shop.model.Product;
-import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 
 @Component  
 public class ProductService extends AdapterService implements BaseService {
 	
 	@Autowired
-    ProductMapper productMapper;
-	@Autowired
-	Constants constants;
+    private ProductMapper productMapper;
     
     public int insert(Product product) {
 		return productMapper.insert(product);

@@ -8,7 +8,7 @@
 /**
  * 
  */
-package com.sqe.bbs.controller;
+package com.sqe.shop.controller.bbs;
 
 public class BBSTopicController {
 

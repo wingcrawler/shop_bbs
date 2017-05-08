@@ -5,4 +5,4 @@
  * @author Andy
  *
  */
-package com.sqe.bbs.controller;
+package com.sqe.shop.controller.bbs;

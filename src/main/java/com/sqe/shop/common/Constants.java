@@ -1,11 +1,9 @@
 package com.sqe.shop.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.sqe.shop.service.cached.CachedService;
 
-@Component
 public class Constants{
 	
 	@Autowired
@@ -56,16 +54,7 @@ public class Constants{
     public static final int AD_TYPE_LB = 0; //轮播图
     public static final int AD_TYPE_GGW = 1; //广告位
     public String getADType(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_unknow");
-    	}
-		if(value==0){
-			return cachedService.getText("t_ad_lb");
-		} else if(value==1){
-			return cachedService.getText("t_ad_ggw");
-		} else {
-			return cachedService.getText("t_unknow");
-		}
+    	return cachedService.getString("ad_type_"+value);
 	}
     
     //产品状态
@@ -73,171 +62,72 @@ public class Constants{
     public static final int PRODUCT_OFF = 2; //下架
     public static final int PRODUCT_WAIT = 0; //待审核
     public String getProductStatus(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_unknow");
-    	}
-		if(value==1){
-			return cachedService.getText("t_product_on");
-		} else if(value==2){
-			return cachedService.getText("t_product_off");
-		} else {
-			return cachedService.getText("t_pending");
-		}
+    	return cachedService.getString("product_status_"+value);
 	}
     
     //news 语言
     public static final int NEWS_ZH = 1; //中文
     public static final int NEWS_EN = 2; //英文
     public String getNewsLang(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_unknow");
-    	}
-		if(value==0){
-			return cachedService.getText("t_zh");
-		} else if(value==1){
-			return cachedService.getText("t_en");
-		} else {
-			return cachedService.getText("t_unknow");
-		}
+    	return cachedService.getString("news_lang_"+value);
 	}
     
     //评论状态
     public static final int COMMENT_OFF = 0; //屏蔽
     public static final int COMMENT_ON = 1; //正常
     public String getCommentStatus(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_unknow");
-    	}
-		if(value==0){
-			return cachedService.getText("t_off");
-		} else if(value==1){
-			return cachedService.getText("t_on");
-		} else {
-			return cachedService.getText("t_unknow");
-		}
+    	return cachedService.getString("comment_status_"+value);
 	}
     
     //举报消息状态
     public static final int INFORM_TODO = 0; //待处理
     public static final int INFORM_DONE = 1; //已处理
     public String getInformStatus(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_undone");
-    	}
-		if(value==0){
-			return cachedService.getText("t_undone");
-		} else if(value==1){
-			return cachedService.getText("t_done");
-		} else {
-			return cachedService.getText("t_undone");
-		}
+    	return cachedService.getString("inform_status_"+value);
 	}
     
     //店家状态
     public static final int STORE_OFF = 0; //待审核
     public static final int STORE_ON = 1; //正常
     public String  getStoreStatus(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_pending");
-    	}
-		if(value==0){
-			return cachedService.getText("t_pending");
-		} else if(value==1){
-			return cachedService.getText("t_on");
-		} else {
-			return cachedService.getText("t_pending");
-		}
+    	return cachedService.getString("shop_status_"+value);
 	}
     
     //留言状态
     public static final int MSG_OFF = 0; //未读
     public static final int MSG_ON = 1; //已读
     public String getMsgStatus(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_unreaded");
-    	}
-		if(value==0){
-			return cachedService.getText("t_unreaded");
-		} else if(value==1){
-			return cachedService.getText("t_readed");
-		} else {
-			return cachedService.getText("t_unreaded");
-		}
+    	return cachedService.getString("msg_status_"+value);
 	}
     
     //用户状态
     public static final int USER_OFF = 0; //屏蔽
     public static final int USER_ON = 1; //正常
     public String getUserStatus(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_unknow");
-    	}
-		if(value==0){
-			return cachedService.getText("t_off");
-		} else if(value==1){
-			return cachedService.getText("t_on");
-		} else {
-			return cachedService.getText("t_unknow");
-		}
+    	return cachedService.getString("user_status_"+value);
 	}
     
     //版块状态
     public static final int SECTION_OFF = 0; //关闭
     public static final int SECTION_ON = 1; //正常
     public String getSectionStatus(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_off");
-    	}
-		if(value==0){
-			return cachedService.getText("t_off");
-		} else if(value==1){
-			return cachedService.getText("t_on");
-		} else {
-			return cachedService.getText("t_off");
-		}
+    	return cachedService.getString("section_status_"+value);
 	}
     
     //话题状态
     public static final int TOPIC_OFF = 0; //关闭
     public static final int TOPIC_ON = 1; //正常
     public String getTopicStatus(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_off");
-    	}
-		if(value==0){
-			return cachedService.getText("t_off");
-		} else if(value==1){
-			return cachedService.getText("t_on");
-		} else {
-			return cachedService.getText("t_off");
-		}
+    	return cachedService.getString("topic_status_"+value);
 	}
     
     //帖子类型
     public static final int THREAD_ZH = 1; //中文
     public static final int THREAD_EN = 0; //英文
     public String getThreadType(Integer value) {
-    	if(value==null){
-    		return cachedService.getText("t_unknow");
-    	}
-		if(value==0){
-			return cachedService.getText("t_en");
-		} else if(value==1){
-			return cachedService.getText("t_zh");
-		} else {
-			return cachedService.getText("t_unknow");
-		}
+    	return cachedService.getString("thread_type_"+value);
 	}
 	public String getThreadStatus(Integer value) {
-		if(value==null){
-    		return cachedService.getText("t_unknow");
-    	}
-		if(value==0){
-			return cachedService.getText("t_off");
-		} else if(value==1){
-			return cachedService.getText("t_on");
-		} else {
-			return cachedService.getText("t_unknow");
-		}
+		return cachedService.getString("thread_status_"+value);
 	}
 }

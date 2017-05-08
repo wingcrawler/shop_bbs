@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ShopMapper;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.util.DateUtil;
@@ -20,9 +19,7 @@ import com.sqe.shop.util.PageUtil;
 public class ShopService extends AdapterService implements BaseService {
 	
 	@Autowired
-    ShopMapper shopMapper;
-	@Autowired	
-	Constants constants;
+    private ShopMapper shopMapper;
     
     public int insert(Shop shop) {
 		return shopMapper.insert(shop);

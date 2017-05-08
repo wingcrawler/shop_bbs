@@ -1,3 +1,4 @@
+package com.sqe.shop.controller.bbs;
 /*package com.sqe.bbs.controller;
 
 import java.util.HashMap;
