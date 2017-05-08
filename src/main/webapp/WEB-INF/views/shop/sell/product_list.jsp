@@ -55,7 +55,15 @@
 												</td>
 												<td class="td3">${item.productTypeName }</td>
 												<td class="td4">${item.createTimeStr }</td>
-												<td class="td5">${item.productStatusStr }</td>
+												<td class="td5">
+													<c:if test="${item.productStatus==1 }">
+														<b>${item.productStatusStr }</b>
+													</c:if>
+													<c:if test="${item.productStatus==2 }">
+														<span style="color:#f00">${item.productStatusStr }</span>
+													</c:if>
+													
+												</td>
 												<%-- <td class="td6">${${item.tag }</td> --%>
 												<td class="td7">
 													<div class="td_btn">
@@ -64,7 +72,12 @@
 															|
 															<span onclick="deleteOne(${item.id })" class="red del">${t.b_delete }</span></p>
 														<p>
-															<span onclick="productOff(${item.id })" class="cancel">${t.t_product_off }</span>
+															<c:if test="${item.productStatus==1 }">
+																<span onclick="productOff(${item.id })" class="cancel">${t.t_product_off }</span>
+															</c:if>
+															<c:if test="${item.productStatus==2 }">
+																<span onclick="productOn(${item.id })" class="cancel">${t.t_product_on }</span>
+															</c:if>
 														</p>
 													</div>
 												</td>
@@ -75,8 +88,8 @@
 							</table>
 					</div>
 					<div class="operation">
-						<input type="checkbox" class="u-ipt-checkbox" id="all-ipt-checkbox">
-						<label class="all-ipt-checkbox" onclick="selectAll()" for="all-ipt-checkbox">${t.b_select_all }</label>
+						<input type="checkbox" class="u-ipt-checkbox" id="all-ipt-checkbox" onclick="selectAll()">
+						<label class="all-ipt-checkbox" onclick="selectAllCheckbox()" for="all-ipt-checkbox">${t.b_select_all }</label>
 						<span class="table-btn" onclick="deleteAll()">${t.b_delete }</span>
 						<span class="table-btn" onclick="productOnAll()">${t.t_product_on }</span>
 						<span class="table-btn" onclick="productOffAll()">${t.t_product_off }</span>
@@ -145,7 +158,16 @@
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 
 <script type="text/javascript">
-
+$(function(){
+	$(".pagebar").createPage({
+		pageCount : '${productPage.pageCount}',
+		current : '${productPage.currentPage}',
+		fnName : 'nextPage',
+		backFn : function(p) {
+			// console.log(p);
+		}
+	});	
+});
 </script>
 </body>
 </html>

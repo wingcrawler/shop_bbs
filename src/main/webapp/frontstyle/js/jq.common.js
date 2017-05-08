@@ -1,15 +1,15 @@
-jq.common = {
+jQuery.common = {
 		
 	/**
 	 * 删除
 	 */
-	deleteObj: function(_id, _deleteUrl, _isRefrush, _jumpUrl) {
+	deleteById: function(_id, _deleteUrl, _isRefrush, _jumpUrl) {
 		$.ajax({
 			type: "GET",
 			url: _deleteUrl,
 			dataType : "json",
 			data: {
-				id : _id
+				idList : _id
 			},
 			success: function(data) {
 				if (data.errorNo != 0) {

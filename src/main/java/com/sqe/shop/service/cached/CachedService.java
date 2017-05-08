@@ -101,8 +101,8 @@ public class CachedService extends BaseCached {
 		map.put("product_status_1", getText("t_product_on"));
 		map.put("product_status_2", getText("t_product_off"));
 		//产品分类等级
-		map.put("product_status_1", getText("t_product_type_one"));
-		map.put("product_status_2", getText("t_product_type_two"));
+		map.put("product_level_1", getText("t_product_type_one"));
+		map.put("product_level_2", getText("t_product_type_two"));
 		//news 语言
 		map.put("news_lang_0", getText("t_zh"));
 		map.put("news_lang_1", getText("t_en"));

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.sqe.shop.mapper.ProductMapper;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.RegularUtil;
 
 @Component  
 public class ProductService extends AdapterService implements BaseService {
@@ -106,8 +107,11 @@ public class ProductService extends AdapterService implements BaseService {
 			if(StringUtils.isNotBlank(product.getCreateTimeStr())){
 				parm.put("createTimeStr", product.getCreateTimeStr());
 			}
-			parm.put("orderby", "product_rank asc" );
+			if(product.getUserId()!=null && product.getUserId()>=0){
+				parm.put("userId", product.getUserId());	
+			}
 		}
+		parm.put("orderby", "product_rank asc" );
 		return parm;
 	}
 
@@ -136,6 +140,34 @@ public class ProductService extends AdapterService implements BaseService {
 	 */
 	public Product getByIdAndUserId(Long id) {
 		return productMapper.getByIdAndUserId(id, this.getCurrentUserId());
+	}
+
+	/**
+	 * 删除这个用户的产品
+	 * @param productId
+	 */
+	public int deleteByIdAndUserId(Long productId) {
+		return productMapper.deleteByIdAndUserId(productId, this.getCurrentUserId());
+	}
+
+	public Map<String, Object> updateProductStatus(String idList, int productStatus) {
+		if(StringUtils.isBlank(idList)){
+			return responseOK1("");	
+		}
+		String arr[] = idList.split(",");
+		Product product = null;
+		for(String str : arr){
+			if(StringUtils.isNotBlank(str.trim()) && RegularUtil.isNumeric(str.trim())){
+				Long productId = Long.valueOf(str.trim());
+				product = productMapper.getByIdAndUserId(productId, this.getCurrentUserId());
+				if(product!=null){
+					product.setId(Long.valueOf(str));
+					product.setProductStatus(productStatus);
+					this.update(product);
+				}
+			}
+		}
+		return responseOK1("");
 	}
 
 }

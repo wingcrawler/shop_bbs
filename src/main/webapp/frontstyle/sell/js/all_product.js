@@ -1,13 +1,3 @@
-$(function(){
-	$(".pagebar").createPage({
-		pageCount : '${productPage.pageCount}',
-		current : '${productPage.currentPage}',
-		fnName : 'nextPage',
-		backFn : function(p) {
-			// console.log(p);
-		}
-	});	
-});
 
 /**
  * 翻页
@@ -23,15 +13,21 @@ function nextPage(pageNo){
  * 删除单个产品
  */
 function deleteOne(id){
-	jq.common.deleteObj(id, "/front/sell/deleteProductById", true, "");
+	 if(confirm("确定删除/Confirm to delete?")) {
+		 jQuery.common.deleteById(id, "/front/sell/deleteProductById", true, "");
+	 }
 }
 
 /**
  * 删除勾选的产品
  */
 function deleteAll(){
-	var id = getSelectedItem();
-	jq.common.deleteObj(id, "/front/sell/deleteProductById", true, "");
+	if(confirm("确定删除/Confirm to delete?")) {
+		var id = getSelectedItem();
+		if(id!=''){
+			jQuery.common.deleteById(id, "/front/sell/deleteProductById", true, "");	
+		}
+	}
 }
 
 /**
@@ -41,7 +37,7 @@ function deleteAll(){
 function productOff(id){
 	var obj = {};
 	obj["idList"]=id;
-	jq.common.updateObj(obj, "/front/sell/offProductById", true, "");
+	jQuery.common.updateObj(obj, "/front/sell/offProductById", true, "");
 }
 
 /**
@@ -52,7 +48,7 @@ function productOffAll(){
 	var id = getSelectedItem();
 	var obj = {};
 	obj["idList"]=id;
-	jq.common.updateObj(obj, "/front/sell/offProductById", true, "");
+	jQuery.common.updateObj(obj, "/front/sell/offProductById", true, "");
 }
 
 /**
@@ -62,7 +58,7 @@ function productOffAll(){
 function productOn(id){
 	var obj = {};
 	obj["idList"]=id;
-	jq.common.updateObj(obj, "/front/sell/onProductById", true, "");
+	jQuery.common.updateObj(obj, "/front/sell/onProductById", true, "");
 }
 
 /**
@@ -73,7 +69,7 @@ function productOnAll(){
 	var id = getSelectedItem();
 	var obj = {};
 	obj["idList"]=id;
-	jq.common.updateObj(obj, "/front/sell/onProductById", true, "");
+	jQuery.common.updateObj(obj, "/front/sell/onProductById", true, "");
 }
 
 
@@ -88,18 +84,24 @@ function getSelectedItem(){
 			idList+=obj[i].value+',';
 		}
 	} 
-	return idList;
+	if(idList==''){
+		alert("请勾选产品/Please select product");
+	} else {
+		return idList;	
+	}
 }
 
 /**
  * 全选与反选
  */
 function selectAll() {
-	var allCheckbox = document.getElementsByName("all-ipt-checkbox");
-	allCheckbox.checked = !allCheckbox.checked;
 	var checkboxs = document.getElementsByName("item");
 	for (var i = 0; i < checkboxs.length; i++) {
 		var e = checkboxs[i];
 		e.checked = !e.checked;
 	}
+}
+function selectAllCheckbox(){
+	var allCheckbox = document.getElementsByName("all-ipt-checkbox");
+	allCheckbox.checked = !allCheckbox.checked;
 }

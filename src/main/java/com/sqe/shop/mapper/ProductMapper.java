@@ -11,6 +11,8 @@ public interface ProductMapper extends BaseMapper {
 
 	List<Map<String, Object>> getHotProductList(@Param("parm") Map<String, Object> parm);
 
-	Product getByIdAndUserId(Long id, Long userId);
+	Product getByIdAndUserId(@Param("id") Long id, @Param("userId") Long userId);
+
+	int deleteByIdAndUserId(@Param("id") Long id, @Param("userId") Long userId);
 
 }

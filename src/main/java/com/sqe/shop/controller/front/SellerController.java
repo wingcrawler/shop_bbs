@@ -1,6 +1,5 @@
 package com.sqe.shop.controller.front;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +27,7 @@ import com.sqe.shop.service.ProductService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.ShopService;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.RegularUtil;
 
 @Controller
 @RequestMapping("/front/sell")
@@ -55,8 +55,8 @@ public class SellerController extends BaseFrontController {
 	public ModelAndView productListPage(ModelAndView model, Product product,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
-		/*product.setUserId(this.getCurrentUserId());*/
 		model.addObject("productPage", getProductList(product, pageNo, pageSize));
+		
 		model.setViewName("shop/sell/product_list");
 		return model;
 	}
@@ -74,7 +74,6 @@ public class SellerController extends BaseFrontController {
 	public PageUtil<Map<String, Object>> getProductList(Product product,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
-		
 		product.setUserId(this.getCurrentUserId());
 		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
 		
@@ -144,8 +143,9 @@ public class SellerController extends BaseFrontController {
 		}
 		String arr[] = idList.split(",");
 		for(String str : arr){
-			if(StringUtils.isBlank(str.trim())){
-				productService.delete(Long.valueOf(str));
+			if(StringUtils.isNotBlank(str.trim()) && RegularUtil.isNumeric(str.trim())){
+				Long productId = Long.valueOf(str.trim());
+				productService.deleteByIdAndUserId(productId);	
 			}
 		}
 		return responseOK1("");
@@ -156,19 +156,9 @@ public class SellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/offProductById", method = RequestMethod.GET)
+	@RequestMapping(value="/offProductById", method = RequestMethod.POST)
 	public Map<String, Object> offProductById(String idList) {
-		if(StringUtils.isBlank(idList)){
-			return responseOK1("");	
-		}
-		String arr[] = idList.split(",");
-		Product product = new Product();
-		for(String str : arr){
-			product.setId(Long.valueOf(str));
-			product.setProductStatus(Constants.PRODUCT_OFF);//下架
-			productService.update(product);
-		}
-		return responseOK1("");
+		return productService.updateProductStatus(idList, Constants.PRODUCT_OFF);
 	}
 	
 	/**
@@ -177,19 +167,9 @@ public class SellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/onProductById", method = RequestMethod.GET)
+	@RequestMapping(value="/onProductById", method = RequestMethod.POST)
 	public Map<String, Object> onProductById(String idList) {
-		if(StringUtils.isBlank(idList)){
-			return responseOK1("");	
-		}
-		String arr[] = idList.split(",");
-		Product product = new Product();
-		for(String str : arr){
-			product.setId(Long.valueOf(str));
-			product.setProductStatus(Constants.PRODUCT_ON);//下架
-			productService.update(product);
-		}
-		return responseOK1("");
+		return productService.updateProductStatus(idList, Constants.PRODUCT_ON);
 	}
 	
 	//私信
