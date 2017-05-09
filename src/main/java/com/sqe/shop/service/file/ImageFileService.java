@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sqe.shop.common.BaseService;
+import com.sqe.shop.util.DateUtil;
+import com.sqe.shop.util.PropertiesUtil;
 
 @Component
 public class ImageFileService extends BaseService {
@@ -59,6 +61,12 @@ public class ImageFileService extends BaseService {
 			return responseError1(-1, e.getMessage());
 		}
 		return responseError(-1, "error_unknow");
+	}
+
+	public Map<String, Object> uploadImage(MultipartFile attachFile) {
+		String uploadPath = PropertiesUtil.get("upload_path"); 
+    	uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"//";
+		return this.uploadImage(attachFile, uploadPath);
 	}
 	
 }

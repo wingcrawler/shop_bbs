@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.backend;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.file.ExcelExportService;
 import com.sqe.shop.service.file.ImageFileService;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.PropertiesUtil;
 
@@ -121,8 +123,7 @@ public class ShopController extends BaseBackendController {
 		
 		String fileName = "";
 		if(attachFile!=null){
-	    	String uploadPath = PropertiesUtil.get("path_img_shop"); 
-		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile, uploadPath);
+			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
 		    fileName = resMap.get("errorInfo").toString(); 
 		    if(!resMap.get("errorNo").equals(0)){
 		    	return resMap;
@@ -132,10 +133,7 @@ public class ShopController extends BaseBackendController {
 		shopService.save(shop);
 		
 		if(attachFile!=null){
-			Image image = imageService.getByShopId(shop.getId());
-		    image.setShopId(shop.getId());
-		    image.setImagePath(PropertiesUtil.get("path_img_shop_save")+fileName);
-		    imageService.save(image);
+			imageService.saveShopImg(shop, fileName);
 		}
 		
 	    return responseOK("save_success");

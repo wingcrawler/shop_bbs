@@ -1,5 +1,6 @@
 package com.sqe.shop.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.ImageMapper;
 import com.sqe.shop.model.Image;
+import com.sqe.shop.model.Shop;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.PropertiesUtil;
 
 @Component  
 public class ImageService extends AdapterService implements BaseService {
@@ -110,6 +114,14 @@ public class ImageService extends AdapterService implements BaseService {
 			return images.get(0);
 		}
 		return new Image();
+	}
+
+	public void saveShopImg(Shop shop, String fileName) {
+		Image image = this.getByShopId(shop.getId());
+	    image.setShopId(shop.getId());
+	    String uploadPath = PropertiesUtil.get("upload_path_save"); 
+	    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+	    image.setImagePath(uploadPath+fileName);
 	}
 
 }

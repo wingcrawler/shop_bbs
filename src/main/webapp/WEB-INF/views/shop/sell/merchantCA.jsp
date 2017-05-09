@@ -37,8 +37,9 @@
 				<div class="company_data_edit">
 					<h2 class="companyTitle">${t.t_business_info }</h2>
 					<div class="company_forms">
-						<form>
+						<form enctype="multipart/form-data" method="POST" id="form">
 							<div class="name">
+								<input type="hidden" value="${shop.id }" name="id">
 								<span class="lab">${t.t_shop_name }: </span>
 								<input type="text" name="shopTitle" value="${shop.shopTitle }">
 							</div>
@@ -46,10 +47,10 @@
 								<span class="lab">${t.t_shop_logo }: </span>
 								<c:if test="${empty img }">
 									<div class="upload">
-										<input type="file">
-										<p class="one">ææ½logoå¾è³æ­¤</p>
-										<p class="two">æ</p>
-										<p class="three">éæ©logoå¾</p>
+										<input type="file" name="attachFile">
+										<p class="one">拖动文件到这</p>
+										<p class="two">OR</p>
+										<p class="three">${t.select }</p>
 									</div>
 								</c:if>
 								<c:if test="${not empty img }">
@@ -101,7 +102,7 @@
 							</div>
 
 							<div  class="save">
-								<input type="button">
+								<input type="button" onclick="jQuery.common.ajaxFileSubmit('#form','/front/sell/doSaveMerchant',true,'')">
 								${t.b_submit }
 							</div>
 						</form>

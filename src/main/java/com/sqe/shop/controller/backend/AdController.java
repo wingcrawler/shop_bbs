@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.backend;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.service.AdvertisementService;
 import com.sqe.shop.service.file.ImageFileService;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.PropertiesUtil;
 
@@ -106,13 +108,14 @@ public class AdController extends BaseBackendController {
 		}
 		
 		if(attachFile!=null){
-	    	String uploadPath = PropertiesUtil.get("path_img_ad"); 
-		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile, uploadPath);
+		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
 		    String fileName = resMap.get("errorInfo").toString(); 
 		    if(!resMap.get("errorNo").equals(0)){
 		    	return resMap;
 		    }
-		    ad.setImagePath(PropertiesUtil.get("path_img_ad_save")+fileName);
+		    String savePath = PropertiesUtil.get("upload_path_save");
+		    savePath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+		    ad.setImagePath(savePath+fileName);
 	    }
 		
 		adService.save(ad);

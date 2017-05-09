@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.front;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,10 @@ import com.sqe.shop.service.ProductService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.cached.CachedService;
+import com.sqe.shop.service.file.ImageFileService;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.PropertiesUtil;
 import com.sqe.shop.util.RegularUtil;
 
 @Controller
@@ -53,6 +57,8 @@ public class SellerController extends BaseFrontController {
 	private MessageService messageService;
 	@Autowired
 	private CachedService cachedService;
+	@Autowired
+	private ImageFileService imageFileService;
 	
 	//商品管理
 	/**
@@ -304,6 +310,32 @@ public class SellerController extends BaseFrontController {
 		model.addObject("user", user);
 		model.addObject("img", Image);
 		return model;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/doSaveMerchant", method = RequestMethod.POST)
+	public Map<String, Object> doSaveMerchant(ModelAndView model, Shop shop,
+			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile){
+		if(StringUtils.isBlank(shop.getShopTitle())){
+			return responseError(-1, "error_empty_shop_name");
+		}
+		
+		String fileName = "";
+		if(attachFile!=null){
+		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+		    fileName = resMap.get("errorInfo").toString(); 
+		    if(!resMap.get("errorNo").equals(0)){
+		    	return resMap;
+		    }
+	    }
+		
+		shopService.save(shop);
+		
+		if(attachFile!=null){
+		    imageService.saveShopImg(shop, fileName);
+		}
+		
+		return responseOK1("");
 	}
 
 }

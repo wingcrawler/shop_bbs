@@ -43,6 +43,29 @@ jQuery.common = {
 				}
 			}
 		});
+	},
+	
+	/* 含文件的表单提交 */
+	ajaxFileSubmit : function(elem ,_submitUrl,_isRefrush, _jumpUrl) {
+		$(elem).ajaxSubmit({  
+            type:'post',  
+            cache: false,  
+            url: _submitUrl, 
+            dataType : 'json', //返回值类型 一般设置为json  
+            success : function(data, status) {  
+	        	if(data.errorNo==0){
+	        		if(_isRefrush){
+	        			self.location= _jumpUrl;
+	        		}
+				} else {
+					alert(data.errorInfo);
+				}
+	        },  
+	        error : function(data, status, e) {  
+	        	alert(data.errorInfo); 
+	        }   
+        });
 	}
+	
 }
 
