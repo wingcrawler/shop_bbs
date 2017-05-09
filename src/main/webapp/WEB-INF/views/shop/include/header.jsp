@@ -12,8 +12,11 @@
 				<ul>
 					<li class="phone">+371 282 20 760</li>
 					<li class="mail"><a href="mailto:example@mail.com">eony321v@gmail.com</a></li>
-					<c:if test="${isLogin }">
+					<c:if test="${isSellLogin }">
 						<li class=""><a href="/front/sell/productListPage">${t.t_bussiness_center }</a></li>
+					</c:if>
+					<c:if test="${isBuyLogin }">
+						<li class=""><a href="/front/buy/index">${t.t_welcome } ${user.username }</a></li>
 					</c:if>
 					
 					<!-- <li class="checkout">

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.sqe.shop.common.BaseCommon;
+import com.sqe.shop.common.Constants;
+import com.sqe.shop.model.User;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.cached.CachedService;
@@ -32,7 +34,13 @@ public class BaseFrontController extends BaseCommon {
         //获取产品类别列表
         request.setAttribute("productTypeList", cachedService.getProductTypeList());
         //是否登陆
-        request.setAttribute("isLogin", this.isLogin());
+        User user = this.getCurrentUser();
+        if(user!=null && user.getUserRole().equals(Constants.ROLE_SELL)){
+        	request.setAttribute("isSellLogin", true);
+        } else if(user!=null && user.getUserRole().equals(Constants.ROLE_BUY)){
+        	request.setAttribute("isBuyLogin", true);
+        	request.setAttribute("user", user);
+        }
     }
 	
 }
