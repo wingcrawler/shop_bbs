@@ -109,10 +109,33 @@ public class SellerController extends BaseFrontController {
 	public ModelAndView editProduct(ModelAndView model, Long id) {
 		model.setViewName("shop/sell/product_edit");
 		
+		//产品一级分类
+		ProductType type = new ProductType();
+		type.setTypeLevel(1);
+		PageUtil<ProductType> typeOnePage = productTypeService.getBeanListByParm(type, 1, -1);
+		if(cachedService.getLang().equals("zh")){
+			for(ProductType pt : typeOnePage.getList()){
+				pt.setTypeName(pt.getTypeNameCh());
+			}
+		}
+		model.addObject("typeList", typeOnePage.getList());
+
 		Product	entity = productService.getByIdAndUserId(id);
 		if(entity==null){
+			model.addObject("inputCount", 6);
 			return model;
 		}
+		
+		//产品二级分类
+		type.setTypeLevel(2);
+		type.setParentId(entity.getProductTypeId());
+		PageUtil<ProductType> typeTwoPage = productTypeService.getBeanListByParm(type, 1, -1);
+		if(cachedService.getLang().equals("zh")){
+			for(ProductType pt : typeTwoPage.getList()){
+				pt.setTypeName(pt.getTypeNameCh());
+			}
+		}
+		model.addObject("subtypeList", typeTwoPage.getList());
 		
 		List<Image> images = imageService.getByProductId(entity.getId());
 		model.addObject("img", images.get(0));
@@ -164,13 +187,10 @@ public class SellerController extends BaseFrontController {
 		resMap.put("price", entity.getProductPrice());
 		resMap.put("status", entity.getProductStatus());
 		resMap.put("statusStr", this.getProductStatus(entity.getProductStatus()));
-		if(cachedService.getLang().equals("zh")){
-			resMap.put("productName", entity.getProductName());
-			resMap.put("description", entity.getProductDescripton());
-		} else {
-			resMap.put("productName", entity.getProductEnName());
-			resMap.put("description", entity.getProductEnDescription());
-		}
+		resMap.put("productName", entity.getProductName());
+		resMap.put("description", entity.getProductDescripton());
+		resMap.put("productNameEn", entity.getProductEnName());
+		resMap.put("descriptionEn", entity.getProductEnDescription());
 		
 		model.addObject("entity", resMap);
 		model.setViewName("shop/sell/product_details");
@@ -187,6 +207,13 @@ public class SellerController extends BaseFrontController {
 	public Map<String, Object> doSaveProduct(Product product,
 			@RequestParam(name = "indexFile",value="indexFile", required = false) MultipartFile indexFile,
 			@RequestParam(name = "listFile",value="listFile", required = false) MultipartFile[] listFile) {
+		if(product.getId()!=null){
+			Product p = productService.getByIdAndUserId(product.getId());
+			if(p==null){
+				return responseError(-1, "save_failed");
+			}
+		}
+		
 		if(StringUtils.isBlank(product.getProductName())){
 			return responseError(-1, "error_empty_product_name");
 		}
@@ -199,7 +226,11 @@ public class SellerController extends BaseFrontController {
 		if(product.getProductPrice()==null || product.getProductPrice()<0){
 			return responseError(-1, "error_empty_product_price");
 		}
+		if(product.getProductCount()==null || product.getProductCount()<0){
+			return responseError(-1, "error_empty_product_count");
+		}
 		
+		product.setUserId(this.getCurrentUserId());
 		int count = productService.save(product);
 		if(count==0){
 			return responseError(-1, "save_failed");
@@ -211,14 +242,14 @@ public class SellerController extends BaseFrontController {
 		    resMap = imageFileService.uploadImage(indexFile);
 		    indexFileName = resMap.get("errorInfo").toString(); 
 		    if(StringUtils.isNotBlank(indexFileName)){
-				imageService.saveProductImg(product, indexFileName);	
+				imageService.saveProductImg(product, indexFileName, 1);	
 			}
 	    }
 		for(MultipartFile file : listFile){
 			resMap = imageFileService.uploadImage(file);
 		    indexFileName = resMap.get("errorInfo").toString(); 
 		    if(StringUtils.isNotBlank(indexFileName)){
-				imageService.saveProductImg(product, indexFileName);	
+				imageService.saveProductImg(product, indexFileName, 0);	
 			}
 		}
 		

@@ -93,4 +93,5 @@ public class ProductTypeService extends AdapterService implements BaseService {
 		return parm;
 	}
 
+	
 }

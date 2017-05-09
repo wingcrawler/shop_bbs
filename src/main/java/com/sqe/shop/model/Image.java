@@ -6,6 +6,7 @@ public class Image implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Integer indexShow;
 	private Long newsId;
 	private String imageLocalurl;
 	private Long productId;
@@ -15,6 +16,12 @@ public class Image implements Serializable {
 	private Long id;
 	private String imageTitle;
 	
+	public Integer getIndexShow() {
+		return indexShow;
+	}
+	public void setIndexShow(Integer indexShow) {
+		this.indexShow = indexShow;
+	}
 	public Long getNewsId() {
 		return newsId;
 	}

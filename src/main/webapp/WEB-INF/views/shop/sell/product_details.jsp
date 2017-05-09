@@ -67,7 +67,7 @@
 										  <div class="col-xs-6 col-md-6">
 										  	<div class="m-form-item">
 												<label class="m-form-hd">
-													<span class="u-hd-txt">${t.t_product_name }:</span>
+													<span class="u-hd-txt">${t.t_product_name }${t.t_zh }:</span>
 												</label>
 												<span class="u-text">${entity.productName }</span>
 											</div>
@@ -107,6 +107,14 @@
 													</label>
 													<span class="u-text">${entity.price }</span>
 												</div>
+												<div class="col-xs-6 col-md-6">
+												  	<div class="m-form-item">
+														<label class="m-form-hd">
+															<span class="u-hd-txt">${t.t_product_name }${t.t_en }:</span>
+														</label>
+														<span class="u-text">${entity.productNameEn }</span>
+													</div>
+												  </div>
 										  </div>
 										</div>
 									</div>
@@ -134,6 +142,18 @@
 											<span class="labe">${t.t_desc }: </span>
 											<div class="text_editing">
 												<span class="test">${entity.description }</span>
+											</div>
+										</div>
+										<div class="product_description">
+											<span class="labe">${t.t_desc }(${t.t_zh }): </span>
+											<div class="text_editing">
+												<span class="test">${entity.description }</span>
+											</div>
+										</div>
+										<div class="product_description">
+											<span class="labe">${t.t_desc }(${t.t_en }): </span>
+											<div class="text_editing">
+												<span class="test">${entity.descriptionEn }</span>
 											</div>
 										</div>
 									</div>

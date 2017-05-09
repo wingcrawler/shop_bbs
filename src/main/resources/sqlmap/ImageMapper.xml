@@ -3,6 +3,7 @@
 <mapper namespace="com.sqe.shop.mapper.ImageMapper">
 
 <resultMap type="com.sqe.shop.model.Image" id="ImageBaseMapper">
+	<id property="indexShow" column="index_show" />
 	<id property="newsId" column="news_id" />
 	<id property="imageLocalurl" column="image_localURL" />
 	<id property="productId" column="product_id" />
@@ -18,14 +19,17 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into image
-	(news_id,image_localURL,product_id,psot_id,image_path,shop_id,image_title)
+	(index_show,news_id,image_localURL,product_id,psot_id,image_path,shop_id,image_title)
 	values
-	(#{newsId},#{imageLocalurl},#{productId},#{psotId},#{imagePath},#{shopId},#{imageTitle})
+	(#{indexShow},#{newsId},#{imageLocalurl},#{productId},#{psotId},#{imagePath},#{shopId},#{imageTitle})
 </insert>
 
 <update id="update">
 	UPDATE image 
 	<set>
+			<if test="indexShow != null">  
+	        	index_show=#{indexShow},
+	    	</if>
 			<if test="newsId != null">  
 	        	news_id=#{newsId},
 	    	</if>
@@ -61,6 +65,9 @@
 
 <select id="countByParm" resultType="integer">
 	select count(*) from image  where 1=1 
+			<if test="parm.indexShow != null">
+		     	and index_show = #{parm.indexShow}
+		   	</if>
 			<if test="parm.newsId != null">
 		     	and news_id = #{parm.newsId}
 		   	</if>
@@ -86,6 +93,9 @@
 
 <select id="getBeanListByParm" resultMap="ImageBaseMapper">
 	select * from image where 1=1 
+			<if test="parm.indexShow != null">
+		     	and index_show = #{parm.indexShow}
+		   	</if>
 			<if test="parm.newsId != null">
 		     	and news_id = #{parm.newsId}
 		   	</if>

@@ -53,7 +53,7 @@ public class ShopService extends AdapterService implements BaseService {
 	
 	public PageUtil<Shop> getBeanListByParm(Shop shop, int pageNo, Integer pageSize) {
 		PageUtil<Shop> pageUtil = new PageUtil<Shop>(pageNo, pageSize);
-		Map<String, Object> parm = new HashMap<String, Object>();
+		Map<String, Object> parm = queryParm(shop);
 		parm.put("start", pageUtil.getStartRow());
 		parm.put("limit", pageUtil.getPageSize());
 		parm.put("orderby", "shop_rank asc");
@@ -157,6 +157,9 @@ public class ShopService extends AdapterService implements BaseService {
 			}
 			if(shop.getShopStatus()!=null&&shop.getShopStatus()>=0){
 				parm.put("shopStatus", shop.getShopStatus());
+			}
+			if(shop.getUserId()!=null){
+				parm.put("userId", shop.getUserId());
 			}
 		}
 		parm.put("orderby", "id desc");

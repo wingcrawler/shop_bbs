@@ -7,7 +7,7 @@
 				<span class="menu_list_title">${t.m_product }</span>
 			</p>
 			<div class="module">
-				<p><a href="/front/sell/editProduct">${t.t_product_upload }</a></p>
+				<p><a href="/front/sell/editProduct" target="_blank">${t.t_product_upload }</a></p>
 				<p><a href="/front/sell/productListPage">${t.m_product_list }</a></p>
 				<p>${t.t_product_msg }</p>
 			</div>

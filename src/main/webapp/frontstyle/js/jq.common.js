@@ -65,6 +65,33 @@ jQuery.common = {
 	        	alert(data.errorInfo); 
 	        }   
         });
+	},
+	
+	/* 联动刷新select */
+	refreshSelect : function(_currentElem, _targetElem, _getUrl){
+		var parentId = $(_currentElem).val();
+		$.ajax({
+			type: "GET",
+			url: _getUrl,
+			dataType : "json",
+			data: {
+				id : parentId 
+			},
+			success: function(data) {
+				if (data.errorNo == 0) {
+					if(data.list==undefined){
+						return;
+					}
+					var html = '';
+					var len = data.list.length;
+					for (var i = 0; i < len; i++) {
+						var item = data.list[i];
+						html += '<option value="'+item.id+'">'+item.typeName+'</option>';
+					}
+					$(_targetElem).html(html);
+				} 
+			}
+		});
 	}
 	
 }

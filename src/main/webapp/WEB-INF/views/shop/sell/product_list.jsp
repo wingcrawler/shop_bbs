@@ -57,6 +57,9 @@
 												<td class="td3">${item.productTypeName }</td>
 												<td class="td4">${item.createTimeStr }</td>
 												<td class="td5">
+													<c:if test="${item.productStatus==0 }">
+														<b>${item.productStatusStr }</b>
+													</c:if>
 													<c:if test="${item.productStatus==1 }">
 														<b>${item.productStatusStr }</b>
 													</c:if>
@@ -69,7 +72,7 @@
 												<td class="td7">
 													<div class="td_btn">
 														<p>
-															<span class="red edit"><a href="/front/sell/editProduct?id=${item.id}">${t.b_edit }</a></span>
+															<span class="red edit"><a href="/front/sell/editProduct?id=${item.id}" target="_blank">${t.b_edit }</a></span>
 															|
 															<span onclick="deleteOne(${item.id })" class="red del">${t.b_delete }</span></p>
 														<p>

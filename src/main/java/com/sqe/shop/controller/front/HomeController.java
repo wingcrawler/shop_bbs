@@ -8,14 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.model.Product;
+import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.AdvertisementService;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.ProductService;
+import com.sqe.shop.service.ProductTypeService;
+import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
 
 @Controller
@@ -27,9 +31,13 @@ public class HomeController extends BaseFrontController {
 	@Autowired
 	private ProductService productService;
 	@Autowired
+	private ProductTypeService productTypeService;
+	@Autowired
 	private AdvertisementService advertisementService;
 	@Autowired
 	private ImageService imageService;
+	@Autowired
+	private CachedService cachedService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
@@ -97,6 +105,25 @@ public class HomeController extends BaseFrontController {
 	public ModelAndView error500(ModelAndView model) {
 		model.setViewName("shop/500");
 		return model;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="getProductTypeTwoLevel", method = RequestMethod.GET)
+	public Map<String, Object> getProductTypeTwoLevel(Long id){
+		ProductType productType = new ProductType();
+		productType.setTypeLevel(2);
+		productType.setParentId(id);
+		PageUtil<ProductType> page = productTypeService.getBeanListByParm(productType, 1, -1);
+
+		if(cachedService.getLang().equals("zh")){
+			for(ProductType pt : page.getList()){
+				pt.setTypeName(pt.getTypeNameCh());
+			}
+		}
+		
+		Map<String, Object> resMap = this.responseOK1("");
+		resMap.put("list", page.getList());
+		return resMap;
 	}
 
 }

@@ -81,6 +81,9 @@ public class ProductService extends AdapterService implements BaseService {
 	}
 	
 	public int save(Product product) {
+		if(product.getProductRank()==null){
+			product.setProductRank(0);
+		}
 		if(product.getId()!=null){
 			return productMapper.update(product);
 		} else {
