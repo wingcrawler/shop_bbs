@@ -80,15 +80,15 @@ public class ProductService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public void save(Product product) {
+	public int save(Product product) {
 		if(product.getId()!=null){
-			productMapper.update(product);
+			return productMapper.update(product);
 		} else {
 			product.setCreateTime(new Date());
 			product.setProductStatus(0);
 			product.setProductView(0);
 			product.setProductUrlClick(0);
-			productMapper.insert(product);
+			return productMapper.insert(product);
 		}
 	}
 	

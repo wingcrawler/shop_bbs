@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.ImageMapper;
 import com.sqe.shop.model.Image;
+import com.sqe.shop.model.Product;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
@@ -122,6 +123,16 @@ public class ImageService extends AdapterService implements BaseService {
 	    String uploadPath = PropertiesUtil.get("upload_path_save"); 
 	    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
 	    image.setImagePath(uploadPath+fileName);
+	    this.save(image);
+	}
+
+	public void saveProductImg(Product product, String fileName) {
+		Image image = new Image();
+	    image.setProductId(product.getId());
+	    String uploadPath = PropertiesUtil.get("upload_path_save"); 
+	    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+	    image.setImagePath(uploadPath+fileName);
+	    this.save(image);
 	}
 
 }

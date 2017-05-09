@@ -1,6 +1,5 @@
 package com.sqe.shop.controller.front;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +9,6 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,9 +32,7 @@ import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.service.file.ImageFileService;
-import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
-import com.sqe.shop.util.PropertiesUtil;
 import com.sqe.shop.util.RegularUtil;
 
 @Controller
@@ -111,22 +107,23 @@ public class SellerController extends BaseFrontController {
 	 */
 	@RequestMapping(value="/editProduct", method = RequestMethod.GET)
 	public ModelAndView editProduct(ModelAndView model, Long id) {
-		Product entity = new Product();
-		if(id!=null){
-			entity = productService.getByIdAndUserId(id);
-			if(entity!=null){
-				List<Image> images = imageService.getByProductId(entity.getId());
-				model.addObject("img", images.get(0));
-				images.remove(0);
-				model.addObject("images", images);
-			} else {
-				model.setViewName("shop/404");
-				return model;
-			}
+		model.setViewName("shop/sell/product_edit");
+		
+		Product	entity = productService.getByIdAndUserId(id);
+		if(entity==null){
+			return model;
 		}
+		
+		List<Image> images = imageService.getByProductId(entity.getId());
+		model.addObject("img", images.get(0));
+		images.remove(0);
+		model.addObject("imgList", images);
+		
+		model.addObject("imgCount", images.size());
+		model.addObject("inputCount", 6-images.size());
+		
 		model.addObject("entity", entity);
 
-		model.setViewName("shop/sell/product_edit");
 		return model;
 	}
 	
@@ -143,13 +140,13 @@ public class SellerController extends BaseFrontController {
 			return model;
 		}
 		
-		Map<String, Object> resMap = new HashMap<String, Object>();
-		
 		Product	entity = productService.getByIdAndUserId(id);
 		if(entity==null){
 			model.setViewName("shop/404");
 			return model;
 		}
+		
+		Map<String, Object> resMap = new HashMap<String, Object>();
 		
 		ProductType typeOne = productTypeService.getById(entity.getProductTypeId());
 		resMap.put("typeOne", typeOne.getTypeName());
@@ -189,7 +186,7 @@ public class SellerController extends BaseFrontController {
 	@RequestMapping(value="/doSaveProduct", method = RequestMethod.POST)
 	public Map<String, Object> doSaveProduct(Product product,
 			@RequestParam(name = "indexFile",value="indexFile", required = false) MultipartFile indexFile,
-			@RequestParam(name = "listFile",value="listFile", required = false) MultipartFile listFile) {
+			@RequestParam(name = "listFile",value="listFile", required = false) MultipartFile[] listFile) {
 		if(StringUtils.isBlank(product.getProductName())){
 			return responseError(-1, "error_empty_product_name");
 		}
@@ -202,7 +199,29 @@ public class SellerController extends BaseFrontController {
 		if(product.getProductPrice()==null || product.getProductPrice()<0){
 			return responseError(-1, "error_empty_product_price");
 		}
-		productService.save(product);
+		
+		int count = productService.save(product);
+		if(count==0){
+			return responseError(-1, "save_failed");
+		}
+		
+		String indexFileName="";
+		Map<String, Object> resMap = null;
+		if(indexFile!=null){
+		    resMap = imageFileService.uploadImage(indexFile);
+		    indexFileName = resMap.get("errorInfo").toString(); 
+		    if(StringUtils.isNotBlank(indexFileName)){
+				imageService.saveProductImg(product, indexFileName);	
+			}
+	    }
+		for(MultipartFile file : listFile){
+			resMap = imageFileService.uploadImage(file);
+		    indexFileName = resMap.get("errorInfo").toString(); 
+		    if(StringUtils.isNotBlank(indexFileName)){
+				imageService.saveProductImg(product, indexFileName);	
+			}
+		}
+		
 		return responseOK("save_success");
 	}
 	
