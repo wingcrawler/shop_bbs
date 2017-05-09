@@ -31,6 +31,8 @@ public class BaseFrontController extends BaseCommon {
         request.setAttribute("t", cachedService.getBundle());
         //获取产品类别列表
         request.setAttribute("productTypeList", cachedService.getProductTypeList());
+        //是否登陆
+        request.setAttribute("isLogin", this.isLogin());
     }
 	
 }

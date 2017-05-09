@@ -12,6 +12,10 @@
 				<ul>
 					<li class="phone">+371 282 20 760</li>
 					<li class="mail"><a href="mailto:example@mail.com">eony321v@gmail.com</a></li>
+					<c:if test="${isLogin }">
+						<li class=""><a href="/front/sell/productListPage">${t.t_bussiness_center }</a></li>
+					</c:if>
+					
 					<!-- <li class="checkout">
 						<a href="/addToCart">
 							<span class="cart">$ 99.54</span>
