@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ShopMapper;
 import com.sqe.shop.model.Shop;
+import com.sqe.shop.model.User;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 
@@ -164,5 +165,24 @@ public class ShopService extends AdapterService implements BaseService {
 		}
 		parm.put("orderby", "id desc");
 		return parm;
+	}
+	
+	// 获取当前用户shop
+	public Shop getCurrentUserShop() {
+		Shop shop = new Shop();
+		shop.setUserId(this.getCurrentUserId());
+		PageUtil<Shop> shopPage = this.getBeanListByParm(shop, 0, -1);
+		if(shopPage.getTotalRecords()==0){
+			return null;
+		}
+		return shopPage.getList().get(0);
+	}
+
+	public boolean exitShop(Long id) {
+		Shop shop = shopMapper.getShopByIdAndUserId(id, this.getCurrentUserId());
+		if(shop!=null){
+			return true;
+		}
+		return false;
 	}
 }

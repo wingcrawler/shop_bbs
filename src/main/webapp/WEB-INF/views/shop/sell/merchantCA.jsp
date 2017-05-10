@@ -22,7 +22,7 @@
 				
 				<c:if test="${not empty shop}">
 					<div class="company_data">
-						<div class="img" style="background: #fff url(${img.imagePath})no-repeat ;"></div>
+						<div class="img" style="background: #fff url(${img})no-repeat ;"></div>
 						<div>
 							<p>${t.t_shop_name }: <span class="cyan">${shop.shopTitle }</span></p>
 							<p>${t.t_star }: <span>${shop.shopLevel }</span></p>
@@ -45,7 +45,7 @@
 							</div>
 							<div class="logo">
 								<span class="lab">${t.t_shop_logo }: </span>
-								<c:if test="${empty img.imagePath }">
+								<c:if test="${empty img }">
 									<div class="upload">
 										<input type="file" name="attachFile">
 										<p class="one">${t.t_drag_file }</p>
@@ -53,9 +53,9 @@
 										<p class="three">${t.t_select }</p>
 									</div>
 								</c:if>
-								<c:if test="${not empty img.imagePath }">
+								<c:if test="${not empty img }">
 									<div class="upload">
-										<img alt="" src="${img.imagePath}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
+										<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
 									</div>
 								</c:if>
 							</div>

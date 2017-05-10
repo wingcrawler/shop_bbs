@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.front;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,9 @@ import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.service.file.ImageFileService;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.PropertiesUtil;
 import com.sqe.shop.util.RegularUtil;
 
 @Controller
@@ -345,46 +348,128 @@ public class SellerController extends BaseFrontController {
 	public ModelAndView merchantPage(ModelAndView model){
 		model.setViewName("shop/sell/merchantCA");
 		
-		User user = this.getCurrentUser();
-		Shop shop = new Shop();
-		shop.setUserId(user.getId());
-		PageUtil<Shop> shopPage = shopService.getBeanListByParm(shop, 0, -1);
-		if(shopPage.getTotalRecords()==0){
-			return model;
-		}
-		shop = shopPage.getList().get(0);
-		
-		Image Image = imageService.getByShopId(shop.getId());
+		Shop shop = shopService.getCurrentUserShop();
 		
 		model.addObject("shop", shop);
-		model.addObject("user", user);
-		model.addObject("img", Image);
+		model.addObject("user", this.getCurrentUser());
+		model.addObject("img", shop.getShopLogoImg());
 		return model;
 	}
-	
+	/**
+	 * 保存商家基本信息
+	 * @param model
+	 * @param shop
+	 * @param attachFile
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/doSaveMerchant", method = RequestMethod.POST)
-	public Map<String, Object> doSaveMerchant(ModelAndView model, Shop shop,
+	public Map<String, Object> doSaveMerchant(Shop shop,
 			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile){
 		if(StringUtils.isBlank(shop.getShopTitle())){
 			return responseError(-1, "error_empty_shop_name");
 		}
 		
-		String fileName = "";
+		boolean exitShop = shopService.exitShop(shop.getId());
+		if(!exitShop){
+			return responseError(-1, "error_illegal");
+		}
+		
 		if(attachFile!=null){
 		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
-		    fileName = resMap.get("errorInfo").toString(); 
+		    String fileName = resMap.get("errorInfo").toString(); 
 		    if(!resMap.get("errorNo").equals(0)){
 		    	return resMap;
 		    }
+		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
+		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+		    shop.setShopImg(uploadPath+fileName);
 	    }
 		
 		shopService.save(shop);
 		
-		if(attachFile!=null){
-		    imageService.saveShopImg(shop, fileName);
+		return responseOK1("");
+	}
+	/**
+	 * 营业执照页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/businessLicense", method = RequestMethod.GET)
+	public ModelAndView businessLicense(ModelAndView model){
+		model.setViewName("shop/sell/business_license");
+		Shop shop = shopService.getCurrentUserShop();
+		model.addObject("shop", shop);
+		return model;
+	}
+	/**
+	 * 保存营业执照
+	 * @param model
+	 * @param shop
+	 * @param attachFile
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/saveBusinessLicense", method = RequestMethod.POST)
+	public Map<String, Object> saveBusinessLicense(Shop shop,
+			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile){
+		boolean exitShop = shopService.exitShop(shop.getId());
+		if(!exitShop){
+			return responseError(-1, "error_illegal");
 		}
 		
+		if(attachFile!=null){
+		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+		    String fileName = resMap.get("errorInfo").toString(); 
+		    if(!resMap.get("errorNo").equals(0)){
+		    	return resMap;
+		    }
+		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
+		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+		    shop.setShopLicenesImg(uploadPath+fileName);
+	    }
+		shopService.save(shop);
+		return responseOK1("");
+	}
+	/**
+	 * 商家介绍页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/merchantIntroduce", method = RequestMethod.GET)
+	public ModelAndView merchantIntroduce(ModelAndView model){
+		model.setViewName("shop/sell/merchant_introduce");
+		Shop shop = shopService.getCurrentUserShop();
+		model.addObject("shop", shop);
+		return model;
+	}
+	/**
+	 * 保存商家介绍
+	 * @param model
+	 * @param shop
+	 * @param attachFile
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/saveMerchantIntroduce", method = RequestMethod.POST)
+	public Map<String, Object> saveMerchantIntroduce(Shop shop,
+			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile){
+		boolean exitShop = shopService.exitShop(shop.getId());
+		if(!exitShop){
+			return responseError(-1, "error_illegal");
+		}
+		
+		if(attachFile!=null){
+		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+		    String fileName = resMap.get("errorInfo").toString(); 
+		    if(!resMap.get("errorNo").equals(0)){
+		    	return resMap;
+		    }
+		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
+		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+		    shop.setShopImg(uploadPath+fileName);
+	    }
+		shopService.save(shop);
 		return responseOK1("");
 	}
 

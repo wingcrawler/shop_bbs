@@ -117,14 +117,14 @@ public class ImageService extends AdapterService implements BaseService {
 		return new Image();
 	}
 
-	public void saveShopImg(Shop shop, String fileName) {
+	/*public void saveShopImg(Shop shop, String fileName) {
 		Image image = this.getByShopId(shop.getId());
 	    image.setShopId(shop.getId());
 	    String uploadPath = PropertiesUtil.get("upload_path_save"); 
 	    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
 	    image.setImagePath(uploadPath+fileName);
 	    this.save(image);
-	}
+	}*/
 
 	public void saveProductImg(Product product, String fileName, int indexShow) {
 		Image image = new Image();

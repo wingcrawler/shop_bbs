@@ -1,0 +1,319 @@
+@charset "UTF-8";
+ul, li {
+  list-style: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, p {
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  outline: none;
+  padding: 0.125rem;
+  border: 0.0625rem solid #e0e0e0;
+}
+
+.gray {
+  color: #999;
+}
+.red{
+  color: #f45a40;
+}
+.f-dn {
+  display: none !important;
+}
+
+.f-fl {
+  float: left !important;
+}
+
+.f-fr {
+  float: right !important;
+}
+
+/*-- main --*/
+.main .container {
+  margin-top: 1.25rem;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/*-- menu --*/
+.main .container .menu {
+  width: 11.875rem;
+  height: 25.625rem;
+  margin-right: 0.875rem;
+  background: #fff;
+  border: 0.0625rem solid #e0e0e0;
+}
+
+.main .menu .title {
+  width: 100%;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  font-size: 0.875rem;
+  background: #f5f5f5;
+  border-bottom: 0.0625rem solid #e0e0e0;
+  padding-left: 1.0rem;
+}
+
+.main .menu .menu_box {
+  width: 100%;
+  margin: 0;
+  padding: 0 1.0rem;
+}
+
+.main .menu .menu_box .menu_list {
+  width: 100%;
+  font-size: 0.875rem;
+  padding: 1.125rem;
+  border-bottom: 0.0625rem solid #e0e0e0;
+}
+
+.main .menu .menu_box .menu_list:last-child {
+  border-bottom: none;
+}
+
+.main .menu_box .menu_list p {
+  position: relative;
+}
+
+.main .menu_box .menu_list .menu_list_title {
+  height: 1.375rem;
+  line-height: 1.375rem;
+  font-size: 0.875rem;
+  display: inline-block;
+  padding-left: 1.5rem;
+  font-weight: 900;
+}
+
+.main .menu_box .menu_list .bgImg {
+  display: inline-block;
+  height: 1.375rem;
+  width: 1.375rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.main .menu_box .menu_list .bgImg1 {
+  background: url(/frontstyle/images/menu_01.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.main .menu_box .menu_list .bgImg2 {
+  background: url(/frontstyle/images/menu_02.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.main .menu_box .menu_list .bgImg3 {
+  background: url(/frontstyle/images/menu_03.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.main .menu_box .menu_list .bgImg4 {
+  background: url(/frontstyle/images/menu_04.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.main .menu_box .menu_list .module {
+  overflow: hidden;
+  padding-top: 0.5rem;
+}
+
+.main .menu_box .menu_list .module p {
+  width: 50%;
+  line-height: 1.25rem;
+  float: left;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+/*-- companyData --*/
+.companyData {
+  -webkit-box-flex: 1;
+     -moz-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.companyData .header {
+  width: 100%;
+  height: 2.75rem;
+  line-height: 2.625rem;
+  border: 0.0625rem solid #e0e0e0;
+  padding-left: 1.25rem;
+  color: #f45a40;
+  background: #fafafa;
+  margin-bottom: 0.875rem;
+}
+
+/*-- 翻页 --*/
+.companyData .page-toolbar .page-pagination{
+  width: 100%;
+  font-size: 0;
+  text-align:right;
+}
+.companyData .page-toolbar .page-pagination li{
+  width:1.75rem;
+  height:1.75rem;
+  text-align: center;
+  line-height: 1.75rem;
+  border:1px solid #e0e0e0;
+  display: inline-block;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.875rem;
+  margin-right: 0.25rem;
+}
+.companyData .page-toolbar .page-pagination li:last-child{
+  margin-right: 0.25rem;
+}
+.companyData .page-toolbar .page-pagination li.active{
+  background-color: #f45a40;
+  color: #fff;
+}
+
+.companyData .product_message .ulbox{
+  width: 100%;
+  min-height:6.25rem;
+  border:0.0625rem solid #e0e0e0;
+  padding:1.25rem 1.25rem 0 1.25rem;
+  margin-bottom:1.6rem;
+}
+/*-- tab --*/
+.companyData .product_message .g-tabHd {
+  width: 100%;
+}
+
+.companyData .product_message .g-tabHd li {
+  display: inline-block;
+  margin-right: 0.25rem;
+  border: 0.0625rem solid #f45a40;
+  padding: 0.3125rem 1.25rem;
+  border-radius: 0.375rem 0.375rem 0 0;
+  color: #333;
+  background: #fff6f4;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.companyData .product_message .g-tabHd li.f-active {
+  border-bottom: none;
+  padding-top: 0.6em;
+  background: #fff;
+  font-weight: 900;
+}
+
+/*-- tab child --*/
+.companyData .product_message .g-tabMn {
+  width: 100%;
+}
+
+.companyData .product_message .g-tabMn .basic {
+  width: 100%;
+  background: #fafafa;
+  border: 0.0625rem solid #e0e0e0;
+  padding: 1.875rem 1.75rem 0 1.75rem;
+}
+
+.companyData .product_message .g-tabMn .g-tabMnItem {
+  width: 100%;
+  display: none;
+}
+
+.companyData .product_message .g-tabMn .g-tabMnItem.f-active {
+  display: block;
+}
+.companyData .product_message .g-tabMn .g-tabMnItem li{
+  display: flex;
+  height:3.375rem;
+  border-bottom: 0.0625rem solid #e0e0e0;
+}
+.companyData .product_message .g-tabMn .g-tabMnItem li:last-child{
+  border-bottom: 0;
+}
+.companyData .product_message .g-tabMn .g-tabMnItem li .invitation{
+  line-height:3.375rem;
+  font-size: 0.875rem;
+  max-width: 80%;
+}
+.companyData .product_message .g-tabMn .g-tabMnItem li .time{
+  flex: 1;
+  text-align: right;
+  line-height:3.375rem;
+  font-size: 0.75rem;
+  color: #757474;
+}
+
+/*-- 首页 --*/
+.companyData .page-toolbar .page-pagination li.first-page{
+  width: 4.375rem;
+  border-radius: 0.25rem 0 0 0.25rem;
+  padding-left: 0.6rem;
+}
+/*-- 上一页 --*/
+.companyData .page-toolbar .page-pagination li.previous-page{
+  width: 4.375rem;
+  border-radius: 0 0.25rem  0.25rem  0;
+  padding-left: 0.6rem;
+}
+/*-- 下一页 --*/
+.companyData .page-toolbar .page-pagination li.next-page{
+  width: 4.375rem;
+  border-radius: 0 0.25rem  0.25rem  0;
+  padding-right: 0.6rem;
+}
+/*-- 省略 --*/
+.companyData .page-toolbar .page-pagination li.omit{
+  width: 3.25rem;
+}
+/*-- 跳转 --*/
+.companyData .page-toolbar .page-pagination li.skip{
+  width:6.25rem;
+  background: #fff;
+  color: #333;
+}
+.companyData .page-toolbar .page-pagination li.skip input{
+  width:1.875rem;
+  height:80%;
+}
+.companyData .page-toolbar .page-pagination li:hover{
+  background-color: #f45a40;
+  color:#fff;
+}
+.companyData .page-toolbar .page-pagination li.skip:hover{
+  background: #fff;
+  color: #333;
+  cursor: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

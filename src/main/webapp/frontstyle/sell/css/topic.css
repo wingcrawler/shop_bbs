@@ -34,11 +34,11 @@
 
 /*楼中楼*/
 .lzl{position:relative;margin-top:20px;padding:10px 20px 20px 20px;background:#f3f3f3;border-radius:2px;}
-.lzl .ico{position:absolute;width:26px;height:13px;top:-13px;right:18px;background:url(../images/up.png) no-repeat;}
+.lzl .ico{position:absolute;width:26px;height:13px;top:-13px;right:18px;background:url(/frontstyle/images/up.png) no-repeat;}
 .lzl .op{height: 22px;padding:0 10px;line-height: 22px;}
 .lzl .rf, .lzl .cl{height:100%;float:right;color:#369;text-decoration:none;}
-.lzl .rf{margin-right:20px;padding-left:22px;background: url(../images/common.png) no-repeat -190px -80px;background-size:210px 99px;}
-.lzl .cl{padding-left:21px;background:url(../images/bup.png) no-repeat 0 1px;background-size:19px 19px;}
+.lzl .rf{margin-right:20px;padding-left:22px;background: url(/frontstyle/images/common.png) no-repeat -190px -80px;background-size:210px 99px;}
+.lzl .cl{padding-left:21px;background:url(/frontstyle/images/bup.png) no-repeat 0 1px;background-size:19px 19px;}
 
 .lzl .llist{}
 .lzl .llist li{padding: 10px 0;border-bottom:1px solid #ccc;}

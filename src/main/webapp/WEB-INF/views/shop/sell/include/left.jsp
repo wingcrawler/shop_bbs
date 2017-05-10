@@ -18,7 +18,7 @@
 				<span class="menu_list_title">${t.t_bussiness_about }</span>
 			</p>
 			<div class="module">
-				<p>${t.t_business_intro }</p>
+				<p><a href="/front/sell/merchantIntroduce">${t.t_business_intro }</a></p>
 				<p><a href="/front/sell/merchantPage">${t.t_business_info }</a></p>
 			</div>
 		</li>
@@ -28,7 +28,7 @@
 				<span class="menu_list_title">${t.t_business_data }</span>
 			</p>
 			<div class="module">
-				<p>${t.t_business_license }</p>
+				<p><a href="/front/sell/businessLicense">${t.t_business_license }</a></p>
 				<p>${t.t_business_qualif }</p>
 			</div>
 		</li>

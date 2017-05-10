@@ -11,19 +11,23 @@ public class Shop extends BaseModel implements Serializable {
 
 	private Integer shopLevel;
 	private Integer shopRank;
+	private String shopLogoImg;
 	private String shopLicenes;
 	private String shopAddress;
 	private Long userId;
 	private String workTo;
+	private String shopLicenesImg;
 	private Integer shopStatus;
 	private Date createTime;
 	private String workFrom;
 	private String shopQualifies;
 	private String shopDescription;
+	private String shopImg;
 	private String shopTitle;
 	private String shopPhone;
 	private Long id;
 	private String shopQq;
+	private String shopLicenesDesc;
 	
 	public Integer getShopLevel() {
 		return shopLevel;
@@ -61,6 +65,12 @@ public class Shop extends BaseModel implements Serializable {
 	public void setWorkTo(String workTo) {
 		this.workTo = workTo;
 	}
+	public String getShopLicenesImg() {
+		return shopLicenesImg;
+	}
+	public void setShopLicenesImg(String shopLicenesImg) {
+		this.shopLicenesImg = shopLicenesImg;
+	}
 	public Integer getShopStatus() {
 		return shopStatus;
 	}
@@ -91,6 +101,12 @@ public class Shop extends BaseModel implements Serializable {
 	public void setShopDescription(String shopDescription) {
 		this.shopDescription = shopDescription;
 	}
+	public String getShopImg() {
+		return shopImg;
+	}
+	public void setShopImg(String shopImg) {
+		this.shopImg = shopImg;
+	}
 	public String getShopTitle() {
 		return shopTitle;
 	}
@@ -114,6 +130,18 @@ public class Shop extends BaseModel implements Serializable {
 	}
 	public void setShopQq(String shopQq) {
 		this.shopQq = shopQq;
+	}
+	public String getShopLicenesDesc() {
+		return shopLicenesDesc;
+	}
+	public void setShopLicenesDesc(String shopLicenesDesc) {
+		this.shopLicenesDesc = shopLicenesDesc;
+	}
+	public String getShopLogoImg() {
+		return shopLogoImg;
+	}
+	public void setShopLogoImg(String shopLogoImg) {
+		this.shopLogoImg = shopLogoImg;
 	}
 	
 	

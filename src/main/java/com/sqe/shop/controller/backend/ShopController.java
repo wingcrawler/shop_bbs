@@ -18,10 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.controller.base.BaseBackendController;
-import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Shop;
-import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.file.ExcelExportService;
@@ -44,8 +42,6 @@ public class ShopController extends BaseBackendController {
 	private ExcelExportService excelExportService;
 	@Autowired
 	private ImageFileService imageFileService;
-	@Autowired
-	private ImageService imageService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -60,10 +56,7 @@ public class ShopController extends BaseBackendController {
 		if(id!=null){
 			Shop entity = shopService.getById(id);
 			model.addObject("entity", entity);
-			if(entity!=null){
-				Image image = imageService.getByShopId(entity.getId());
-				model.addObject("imagePath", image.getImagePath());
-			}
+			model.addObject("imagePath", entity.getShopImg());
 		}
 		return model;
 	}
@@ -121,20 +114,18 @@ public class ShopController extends BaseBackendController {
 			return responseError(-1, "error_empty_title");
 		}
 		
-		String fileName = "";
 		if(attachFile!=null){
 			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
-		    fileName = resMap.get("errorInfo").toString(); 
+			String fileName = resMap.get("errorInfo").toString(); 
 		    if(!resMap.get("errorNo").equals(0)){
 		    	return resMap;
 		    }
+		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
+		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+		    shop.setShopImg(uploadPath+fileName);
 	    }
 		
 		shopService.save(shop);
-		
-		if(attachFile!=null){
-			imageService.saveShopImg(shop, fileName);
-		}
 		
 	    return responseOK("save_success");
 	}
