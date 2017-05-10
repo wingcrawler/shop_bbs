@@ -25,12 +25,14 @@ import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.model.Shop;
+import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ProductService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.ShopService;
+import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.DateUtil;
@@ -58,6 +60,8 @@ public class SellerController extends BaseFrontController {
 	private CachedService cachedService;
 	@Autowired
 	private ImageFileService imageFileService;
+	@Autowired
+	private ThreadService threadService;
 	
 	//商品管理
 	/**
@@ -471,6 +475,24 @@ public class SellerController extends BaseFrontController {
 	    }
 		shopService.save(shop);
 		return responseOK1("");
+	}
+	
+	//论坛
+	/**
+	 * 发帖回复页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/postReply", method = RequestMethod.GET)
+	public ModelAndView postReply(ModelAndView model, Thread thread,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize){
+		thread.setUserId(this.getCurrentUserId());
+		PageUtil<Map<String, Object>> page = threadService.getSellThreadList(thread, pageNo, pageSize);
+		
+		model.addObject("page", page);
+		model.setViewName("shop/sell/posted_reply");
+		return model;
 	}
 
 }

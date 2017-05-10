@@ -38,7 +38,7 @@
 				<span class="menu_list_title">${t.m_bbs }</span>
 			</p>
 			<div class="module">
-				<p>${t.t_post_reply }</p>
+				<p><a href="/front/sell/postReply">${t.t_post_reply }</a></p>
 			</div>
 		</li>
 	</ul>

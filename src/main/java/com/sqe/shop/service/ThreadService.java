@@ -10,7 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sqe.shop.mapper.PostMapper;
 import com.sqe.shop.mapper.ThreadMapper;
+import com.sqe.shop.mapper.TopicMapper;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
@@ -20,9 +22,13 @@ import com.sqe.shop.util.RelativeDateFormat;
 public class ThreadService extends AdapterService implements BaseService {
 
 	@Autowired
-	ThreadMapper threadMapper;
+	private ThreadMapper threadMapper;
 	@Autowired
 	private RelativeDateFormat relativeDateFormat;
+	@Autowired
+	private TopicMapper topicMapper;
+	@Autowired
+	private PostMapper postMapper;
 
 	public int insert(Thread thread) {
 		return threadMapper.insert(thread);
@@ -136,6 +142,37 @@ public class ThreadService extends AdapterService implements BaseService {
 
 	public Map<String, Object> getMapById(Long id) {
 		return threadMapper.getMapById(id);
+	}
+
+	//商家页面的发帖回复列表
+	public PageUtil<Map<String, Object>> getSellThreadList(Thread thread, int pageNo, int pageSize) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(thread);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		parm.put("orderby", "t.id desc");
+		
+		int count = threadMapper.countByParm(parm);
+		pageUtil.setTotalRecords(count);
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		int postCount = 0;
+		Map<String, Object> postMap = new HashMap<String, Object>();
+		if (count != 0) {
+			list = threadMapper.getMapListByParm(parm);
+			for (Map<String, Object> t : list) {
+				//时间转换
+				Date time = (Date) t.get("date");
+				t.put("time", DateUtil.dateToString(time, DateUtil.DATETIME_FORMATE_2));
+				//跟帖数量
+				postMap.put("threadId", t.get("id"));
+				postCount = postMapper.countByParm(postMap);
+				t.put("count", postCount);
+			}
+		}
+		pageUtil.setList(list);
+		
+		return pageUtil;
 	}
 
 }
