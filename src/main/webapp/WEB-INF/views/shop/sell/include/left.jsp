@@ -9,7 +9,7 @@
 			<div class="module">
 				<p><a href="/front/sell/editProduct" target="_blank">${t.t_product_upload }</a></p>
 				<p><a href="/front/sell/productListPage">${t.m_product_list }</a></p>
-				<p>${t.t_product_msg }</p>
+				<p><a href="/front/sell/messagePage?type=1">${t.t_product_msg }</a></p>
 			</div>
 		</li>
 		<li class="menu_list">

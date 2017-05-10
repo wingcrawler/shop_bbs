@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
+import com.sqe.shop.model.Comment;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Product;
@@ -27,6 +28,7 @@ import com.sqe.shop.model.ProductType;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.User;
+import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ProductService;
@@ -62,6 +64,8 @@ public class SellerController extends BaseFrontController {
 	private ImageFileService imageFileService;
 	@Autowired
 	private ThreadService threadService;
+	@Autowired
+	private CommentService commentService;
 	
 	//商品管理
 	/**
@@ -309,11 +313,26 @@ public class SellerController extends BaseFrontController {
 	/**
 	 * 商品留言页面 
 	 * @param model
+	 * @param type 1:留言 2：私信
 	 * @return
 	 */
 	@RequestMapping(value="/messagePage", method = RequestMethod.GET)
-	public ModelAndView messagePage(ModelAndView model) {
-		model.setViewName("shop/sell/message_list");
+	public ModelAndView messagePage(ModelAndView model, String type,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		PageUtil<Map<String, Object>> page = new PageUtil<Map<String,Object>>();
+		if(type.equals("1")){//产品留言
+			page = getCommentList(this.getCurrentUserId(), pageNo, pageSize);
+		} else if(type.equals("2")){//私信
+			page = getMessageList(this.getCurrentUserId(), pageNo, pageSize);
+		} else {
+			model.setViewName("shop/404");
+			return model;
+		}
+		
+		model.addObject("type", type);
+		model.addObject("page", page);
+		model.setViewName("shop/sell/leave_message");
 		return model;
 	}
 	/**
@@ -325,20 +344,38 @@ public class SellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getMessageList", method = RequestMethod.GET)
-	public PageUtil<Map<String, Object>> getMessageList(Message message, int pageNo, Integer pageSize) {
-		message.setReceiveId(this.getCurrentUserId());
-		PageUtil<Map<String, Object>> msgPage = messageService.getMapListByParm(message, 1, pageSize, "m.create_time desc");
+	public PageUtil<Map<String, Object>> getMessageList(Long userId, int pageNo, Integer pageSize) {
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("userId", userId);
+		parmMap.put("orderby", "m.create_time desc");
+		PageUtil<Map<String, Object>> msgPage = messageService.getSellerMessageListByParm(parmMap, pageNo, pageSize);
 		return msgPage;
 	}
 	/**
-	 * 回复私信
+	 * 产品评论列表
+	 * @param comment
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getCommentList", method = RequestMethod.GET)
+	public PageUtil<Map<String, Object>> getCommentList(Long userId, int pageNo, Integer pageSize) {
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("userId", userId);
+		parmMap.put("orderby", "c.date desc");
+		PageUtil<Map<String, Object>> msgPage = commentService.getSellerProductCommentListByParm(parmMap, pageNo, pageSize);
+		return msgPage;
+	}
+	/**
+	 * 回复私信或者产品留言
 	 * @param msg
 	 * @param productId
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value="/messageReply", method = RequestMethod.GET)
-	public Map<String, Object> messageReply(String msgContent, Long productId) {
+	public Map<String, Object> messageReply(String msgContent, String type, Long messageId, String commentId) {
 		return responseOK1("");
 	}
 	

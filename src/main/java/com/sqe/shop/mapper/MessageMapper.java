@@ -9,4 +9,6 @@ public interface MessageMapper extends BaseMapper {
 
 	List<Map<String, Object>> getAdminMessageListByParm(@Param("parm") Map<String, Object> parm);
 
+	List<Map<String, Object>> getSellerMessageListByParm(@Param("parm") Map<String, Object> parmMap);
+
 }

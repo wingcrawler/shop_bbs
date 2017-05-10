@@ -132,5 +132,20 @@
 	</if>
 </select>
 
+<select id="getSellerMessageListByParm" parameterType="HashMap" resultType="HashMap">
+	select p.product_name as productName, p.id as productId, p.product_price as price,
+ 	m.id as messageId, m.message_context as content, DATE_FORMAT(m.create_time,'%Y-%c-%d %h:%i:%s') as date,u.username ,
+	m.post_id as userId
+	from message m
+	LEFT JOIN product p on m.product_id=p.id
+	LEFT JOIN `user` u on m.post_id=u.id
+	where m.receive_id=#{parm.userId}
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
+</select>
 
 </mapper>

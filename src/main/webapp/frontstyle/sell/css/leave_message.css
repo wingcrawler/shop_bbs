@@ -110,22 +110,22 @@ input {
 }
 
 .main .menu_box .menu_list .bgImg1 {
-  background: url(../images/menu_01.png) no-repeat;
+  background: url(/frontstyle/images/menu_01.png) no-repeat;
   background-size: 100% 100%;
 }
 
 .main .menu_box .menu_list .bgImg2 {
-  background: url(../images/menu_02.png) no-repeat;
+  background: url(/frontstyle/images/menu_02.png) no-repeat;
   background-size: 100% 100%;
 }
 
 .main .menu_box .menu_list .bgImg3 {
-  background: url(../images/menu_03.png) no-repeat;
+  background: url(/frontstyle/images/menu_03.png) no-repeat;
   background-size: 100% 100%;
 }
 
 .main .menu_box .menu_list .bgImg4 {
-  background: url(../images/menu_04.png) no-repeat;
+  background: url(/frontstyle/images/menu_04.png) no-repeat;
   background-size: 100% 100%;
 }
 
@@ -328,11 +328,12 @@ input {
   height:1.25rem;
   line-height: 1.25rem;
   background:#f45a40;
-  display: inline-block;
+  /* display: inline-block; */
   text-align: center;
   font-size: 0.75rem;
   color: #fff;
   cursor: pointer;
+  padding:4px 6px;
 }
 .companyData .product_message .g-tabMn .list .edit .edit_btn .cancel{
   width: 3.75rem;

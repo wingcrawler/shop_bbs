@@ -148,4 +148,21 @@ public class CommentService extends AdapterService implements BaseService {
 		return parm;
 	}
 
+	public PageUtil<Map<String, Object>> getSellerProductCommentListByParm(Map<String, Object> parmMap, int pageNo, Integer pageSize) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		parmMap.put("start", pageUtil.getStartRow());
+		parmMap.put("limit", pageUtil.getPageSize());
+		
+		int count = commentMapper.countSellerProductCommentList(parmMap);
+		pageUtil.setTotalRecords(count);
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		if(count!=0){
+			list = commentMapper.getSellerProductCommentListByParm(parmMap);
+			pageUtil.setList(list);
+		}
+		
+		return pageUtil;
+	}
+
 }

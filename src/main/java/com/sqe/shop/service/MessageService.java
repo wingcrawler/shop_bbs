@@ -122,5 +122,23 @@ public class MessageService extends AdapterService implements BaseService {
 		parm.put("orderby", "id desc" );
 		return parm;
 	}
+	
+	public PageUtil<Map<String, Object>> getSellerMessageListByParm(Map<String, Object> parmMap, int pageNo, Integer pageSize) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		parmMap.put("start", pageUtil.getStartRow());
+		parmMap.put("limit", pageUtil.getPageSize());
+		
+		int count = messageMapper.countByParm(parmMap);
+		pageUtil.setTotalRecords(count);
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		if(count!=0){
+			list = messageMapper.getSellerMessageListByParm(parmMap);
+			pageUtil.setList(list);
+		}
+		
+		return pageUtil;
+	}
+
 
 }
