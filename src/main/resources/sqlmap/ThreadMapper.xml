@@ -1,196 +1,202 @@
 <?xml version="1.0" encoding="UTF-8" ?>   
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sqe.shop.mapper.ThreadMapper">
 
-<resultMap type="com.sqe.shop.model.Thread" id="ThreadBaseMapper">
-	<id property="topicId" column="topic_id" />
-	<id property="threadStatus" column="thread_status" />
-	<id property="threadTitle" column="thread_title" />
-	<id property="threadTime" column="thread_time" />
-	<id property="threadType" column="thread_type" />
-	<id property="sectionId" column="section_id" />
-	<id property="id" column="id" />
-	<id property="threadContext" column="thread_context" />
-	<id property="userId" column="user_id" />
-</resultMap>  
+	<resultMap type="com.sqe.shop.model.Thread" id="ThreadBaseMapper">
+		<id property="topicId" column="topic_id" />
+		<id property="threadStatus" column="thread_status" />
+		<id property="threadTitle" column="thread_title" />
+		<id property="threadTime" column="thread_time" />
+		<id property="threadType" column="thread_type" />
+		<id property="sectionId" column="section_id" />
+		<id property="id" column="id" />
+		<id property="threadContext" column="thread_context" />
+		<id property="userId" column="user_id" />
+	</resultMap>
 
-<insert id="insert">
-	<selectKey resultType="long" keyProperty="id">  
-   		select LAST_INSERT_ID()
-   	</selectKey>
-	insert into thread
-	(topic_id,thread_status,thread_title,thread_time,thread_type,section_id,thread_context,user_id)
-	values
-	(#{topicId},#{threadStatus},#{threadTitle},#{threadTime},#{threadType},#{sectionId},#{threadContext},#{userId})
-</insert>
+	<insert id="insert">
+		<selectKey resultType="long" keyProperty="id">
+			select LAST_INSERT_ID()
+		</selectKey>
+		insert into thread
+		(topic_id,thread_status,thread_title,thread_time,thread_type,section_id,thread_context,user_id)
+		values
+		(#{topicId},#{threadStatus},#{threadTitle},#{threadTime},#{threadType},#{sectionId},#{threadContext},#{userId})
+	</insert>
 
-<update id="update">
-	UPDATE thread 
-	<set>
-			<if test="topicId != null">  
-	        	topic_id=#{topicId},
-	    	</if>
-			<if test="threadStatus != null">  
-	        	thread_status=#{threadStatus},
-	    	</if>
-			<if test="threadTitle != null">  
-	        	thread_title=#{threadTitle},
-	    	</if>
-			<if test="threadTime != null">  
-	        	thread_time=#{threadTime},
-	    	</if>
-			<if test="threadType != null">  
-	        	thread_type=#{threadType},
-	    	</if>
-			<if test="sectionId != null">  
-	        	section_id=#{sectionId},
-	    	</if>
-			<if test="threadContext != null">  
-	        	thread_context=#{threadContext},
-	    	</if>
-			<if test="userId != null">  
-	        	user_id=#{userId},
-	    	</if>
-	</set>   
-    WHERE id=#{id}
-</update>
+	<update id="update">
+		UPDATE thread
+		<set>
+			<if test="topicId != null">
+				topic_id=#{topicId},
+			</if>
+			<if test="threadStatus != null">
+				thread_status=#{threadStatus},
+			</if>
+			<if test="threadTitle != null">
+				thread_title=#{threadTitle},
+			</if>
+			<if test="threadTime != null">
+				thread_time=#{threadTime},
+			</if>
+			<if test="threadType != null">
+				thread_type=#{threadType},
+			</if>
+			<if test="sectionId != null">
+				section_id=#{sectionId},
+			</if>
+			<if test="threadContext != null">
+				thread_context=#{threadContext},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
 
-<delete id="delete">
-	delete from thread where id=#{id}
-</delete>
+	<delete id="delete">
+		delete from thread where id=#{id}
+	</delete>
 
-<select id="getById" resultMap="ThreadBaseMapper">
-	SELECT * FROM thread WHERE id=#{id} 
-</select>
+	<select id="getById" resultMap="ThreadBaseMapper">
+		SELECT * FROM thread WHERE id=#{id}
+	</select>
 
-<select id="getMapById" resultType="HashMap">
-	select t.id, t.thread_title as threadTitle, t.thread_time as date, u.username,
-	tp.topic_title as topicTitle,t.thread_context as threadContext,
-	t.thread_type as threadType, t.thread_status as threadStatus,
-	s1.section_title as sectionOne, s2.section_title as sectionTwo
-	from thread t 
-	LEFT JOIN `user` u on t.user_id = u.id
-	LEFT JOIN topic tp on t.topic_id = tp.id
-	LEFT JOIN section s1 on tp.section_id = s1.id
-	LEFT JOIN section s2 on s1.section_parent_id = s2.id
-	WHERE t.id=#{id} 
-</select>
+	<select id="getMapById" resultType="HashMap">
+		select t.id, t.thread_title as threadTitle, t.thread_time as date,
+		u.username,
+		tp.topic_title as topicTitle,t.thread_context as threadContext,
+		t.thread_type as threadType, t.thread_status as threadStatus,
+		s1.section_title as sectionOne, s2.section_title as sectionTwo
+		from thread t
+		LEFT JOIN `user` u on t.user_id = u.id
+		LEFT JOIN topic tp on t.topic_id = tp.id
+		LEFT JOIN section s1 on tp.section_id = s1.id
+		LEFT JOIN section s2 on s1.section_parent_id = s2.id
+		WHERE t.id=#{id}
+	</select>
 
-<select id="countByParm" resultType="integer">
-	select count(*) from thread  where 1=1 
-			<if test="parm.topicId != null">
-		     	and topic_id = #{parm.topicId}
-		   	</if>
-			<if test="parm.threadStatus != null">
-		     	and thread_status = #{parm.threadStatus}
-		   	</if>
-			<if test="parm.threadTitle != null">
-		     	and thread_title like "%"#{parm.threadTitle}"%"
-		   	</if>
-			<if test="parm.threadTime != null">
-		     	and thread_time = #{parm.threadTime}
-		   	</if>
-			<if test="parm.threadType != null">
-		     	and thread_type = #{parm.threadType}
-		   	</if>
-		   	<if test="parm.sectionId != null">
-		     	and section_id = #{parm.sectionId}
-		   	</if>
-			<if test="parm.threadContext != null">
-		     	and thread_context = #{parm.threadContext}
-		   	</if>
-			<if test="parm.userId != null">
-		     	and user_id = #{parm.userId}
-		   	</if>
-</select>
+	<select id="countByParm" resultType="integer">
+		select count(*) from thread where 1=1
+		<if test="parm.topicId != null">
+			and topic_id = #{parm.topicId}
+		</if>
+		<if test="parm.threadStatus != null">
+			and thread_status = #{parm.threadStatus}
+		</if>
+		<if test="parm.threadTitle != null">
+			and thread_title like "%"#{parm.threadTitle}"%"
+		</if>
+		<if test="parm.threadTime != null">
+			and thread_time = #{parm.threadTime}
+		</if>
+		<if test="parm.threadType != null">
+			and thread_type = #{parm.threadType}
+		</if>
+		<if test="parm.sectionId != null">
+			and section_id = #{parm.sectionId}
+		</if>
+		<if test="parm.threadContext != null">
+			and thread_context = #{parm.threadContext}
+		</if>
+		<if test="parm.userId != null">
+			and user_id = #{parm.userId}
+		</if>
+	</select>
 
-<select id="getBeanListByParm" resultMap="ThreadBaseMapper">
-	select * from thread where 1=1 
-			<if test="parm.topicId != null">
-		     	and topic_id = #{parm.topicId}
-		   	</if>
-			<if test="parm.threadStatus != null">
-		     	and thread_status = #{parm.threadStatus}
-		   	</if>
-			<if test="parm.threadTitle != null">
-		     	and thread_title like "%"#{parm.threadTitle}"%"
-		   	</if>
-			<if test="parm.threadTime != null">
-		     	and thread_time = #{parm.threadTime}
-		   	</if>
-			<if test="parm.threadType != null">
-		     	and thread_type = #{parm.threadType}
-		   	</if>
-		   	<if test="parm.sectionId != null">
-		     	and section_id = #{parm.sectionId}
-		   	</if>
-			<if test="parm.threadContext != null">
-		     	and thread_context = #{parm.threadContext}
-		   	</if>
-			<if test="parm.userId != null">
-		     	and user_id = #{parm.userId}
-		   	</if>
+	<select id="getBeanListByParm" resultMap="ThreadBaseMapper">
+		select * from thread where 1=1
+		<if test="parm.topicId != null">
+			and topic_id = #{parm.topicId}
+		</if>
+		<if test="parm.threadStatus != null">
+			and thread_status = #{parm.threadStatus}
+		</if>
+		<if test="parm.threadTitle != null">
+			and thread_title like "%"#{parm.threadTitle}"%"
+		</if>
+		<if test="parm.threadTime != null">
+			and thread_time = #{parm.threadTime}
+		</if>
+		<if test="parm.threadType != null">
+			and thread_type = #{parm.threadType}
+		</if>
+		<if test="parm.sectionId != null">
+			and section_id = #{parm.sectionId}
+		</if>
+		<if test="parm.threadContext != null">
+			and thread_context = #{parm.threadContext}
+		</if>
+		<if test="parm.userId != null">
+			and user_id = #{parm.userId}
+		</if>
 		<if test="parm.orderby != null">
-	   		order by ${parm.orderby}
-	   	</if>
+			order by ${parm.orderby}
+		</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
 		</if>
-</select>
+	</select>
 
 
-<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select t.id, t.thread_title as threadTitle, t.thread_time as date, u.username,tp.topic_title as topicTitle,
-	t.thread_type as threadType,t.thread_status as threadStatus
-	from thread t 
-	LEFT JOIN `user` u on t.user_id = u.id
-	LEFT JOIN topic tp on t.topic_id = tp.id
-	where 1=1
-	<if test="parm.topicId != null">
-     	and t.topic_id = #{parm.topicId}
-   	</if>
-	<if test="parm.threadType != null">
-     	and t.thread_type = #{parm.threadType}
-   	</if>
-	<if test="parm.threadTitle != null">
-     	and t.thread_title like "%"#{parm.threadTitle}"%"
-   	</if>
-   	<if test="parm.sectionId != null">
-     	and t.section_id = #{parm.sectionId}
-   	</if>
-	<if test="parm.orderby != null">
-   		order by ${parm.orderby}
-   	</if>
-	<if test="parm.start != null">
-		limit #{parm.start},#{parm.limit}
-	</if>
-</select>
+	<select id="getMapListByParm" parameterType="HashMap"
+		resultType="HashMap">
+		select t.id, t.thread_title as threadTitle, t.thread_time as date,
+		u.username,tp.topic_title as topicTitle,
+		t.thread_type as threadType,t.thread_status as threadStatus
+		from thread t
+		LEFT JOIN `user` u on t.user_id = u.id
+		LEFT JOIN topic tp on t.topic_id = tp.id
+		where 1=1
+		<if test="parm.topicId != null">
+			and t.topic_id = #{parm.topicId}
+		</if>
+		<if test="parm.threadType != null">
+			and t.thread_type = #{parm.threadType}
+		</if>
+		<if test="parm.threadTitle != null">
+			and t.thread_title like "%"#{parm.threadTitle}"%"
+		</if>
+		<if test="parm.sectionId != null">
+			and t.section_id = #{parm.sectionId}
+		</if>
+		<if test="parm.orderby != null">
+			order by ${parm.orderby}
+		</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+	</select>
 
 
-<!-- 根据section 获取thread List -->
-<select id="getSectionMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select t.thread_title as threadTitle, t.thread_time as date, u.username,tp.topic_title as topicTitle,s.section_title,
-	t.thread_type as threadType
-	from thread t 
-	LEFT JOIN `user` u on t.user_id = u.id
-	LEFT JOIN topic tp on t.topic_id = tp.id
-	LEFT JOIN section s on t.section_id = s.id
-	where 1=1
-	<if test="parm.topicId != null">
-     	and t.topic_id = #{parm.topicId}
-   	</if>
-	<if test="parm.threadType != null">
-     	and t.thread_type = #{parm.threadType}
-   	</if>
-	<if test="parm.threadTitle != null">
-     	and t.thread_title like "%"#{parm.threadTitle}"%"
-   	</if>
-	<if test="parm.orderby != null">
-   		order by ${parm.orderby}
-   	</if>
-	<if test="parm.start != null">
-		limit #{parm.start},#{parm.limit}
-	</if>
-</select>
+	<!-- 根据section 获取thread List -->
+	<select id="getSectionMapListByParm" parameterType="HashMap"
+		resultType="HashMap">
+		select t.id as id, t.thread_title as threadTitle, t.thread_time as
+		date, u.username,tp.topic_title as topicTitle,s.section_title,
+		t.thread_type as threadType
+		from thread t
+		LEFT JOIN `user` u on t.user_id = u.id
+		LEFT JOIN topic tp on t.topic_id = tp.id
+		LEFT JOIN section s on t.section_id = s.id
+		where 1=1
+		and t.thread_status=1
+		<if test="parm.topicId != null">
+			and t.topic_id = #{parm.topicId}
+		</if>
+		<if test="parm.threadType != null">
+			and t.thread_type = #{parm.threadType}
+		</if>
+		<if test="parm.threadTitle != null">
+			and t.thread_title like "%"#{parm.threadTitle}"%"
+		</if>
+		<if test="parm.orderby != null">
+			order by ${parm.orderby}
+		</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+	</select>
 
 </mapper>

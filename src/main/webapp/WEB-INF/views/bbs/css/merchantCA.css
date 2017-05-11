@@ -1,0 +1,298 @@
+ul,li{
+	list-style: none;
+}
+*{
+	margin:0;
+	padding:0;
+}
+h1,h2,h3,h4,h5,p{
+	margin:0;
+	padding:0;
+}
+input{
+	outline: none;
+	padding:0.125rem;
+	border:0.0625rem solid #e0e0e0;
+}
+.gray{
+	color:#999;
+}
+/*-- main --*/
+.main .container {
+	margin-top: 1.25rem;
+	display: flex;
+}
+/*-- menu --*/
+.main .container .menu{
+	width: 11.875rem;
+	height:25.625rem;
+	margin-right:0.875rem;
+	background: #fff;
+	border:0.0625rem solid #e0e0e0;
+}
+.main .menu .title{
+	width: 100%;
+	height:2.5rem;
+	line-height:2.5rem;
+	font-size: 0.875rem;
+	background: #f5f5f5;
+	border-bottom: 0.0625rem solid #e0e0e0;
+	padding-left: 1.0rem;
+}
+.main .menu .menu_box{
+	width:100%;
+	margin:0;
+	padding:0 1.0rem;
+}
+.main .menu .menu_box .menu_list{
+	width: 100%;
+	font-size: 0.875rem;
+	padding:1.125rem;
+	border-bottom:0.0625rem solid #e0e0e0;
+}
+.main .menu .menu_box .menu_list:last-child{
+	border-bottom:none;
+}
+.main .menu_box .menu_list p{
+	position: relative;
+}
+.main .menu_box .menu_list .menu_list_title{
+	height:1.375rem;
+	line-height: 1.375rem;
+	font-size: 0.875rem;
+	display: inline-block;
+	padding-left: 1.5rem;
+	font-weight: 900;
+}
+.main .menu_box .menu_list .bgImg{
+	display: inline-block;
+	height:1.375rem;
+	width: 1.375rem;
+	position: absolute;
+	left:0;
+	top:0;
+}
+.main .menu_box .menu_list .bgImg1{
+	background: url(../images/menu_01.png) no-repeat ;
+	background-size:100% 100%;
+}
+.main .menu_box .menu_list .bgImg2{
+	background: url(../images/menu_02.png) no-repeat ;
+	background-size:100% 100%;
+}
+.main .menu_box .menu_list .bgImg3{
+	background: url(../images/menu_03.png) no-repeat ;
+	background-size:100% 100%;
+}
+.main .menu_box .menu_list .bgImg4{
+	background: url(../images/menu_04.png) no-repeat ;
+	background-size:100% 100%;
+}
+.main .menu_box .menu_list  .module{
+	overflow: hidden;
+	padding-top: 0.5rem;
+}
+.main .menu_box .menu_list  .module p{
+	width: 50%;
+	line-height: 1.25rem;
+	float: left;
+	font-size: 0.75rem;
+	cursor: pointer;
+}
+/*-- companyData --*/
+.companyData{
+	flex: 1;
+}
+.companyData .header{
+	width:100%;
+	height:2.75rem;
+	line-height: 2.625rem;
+	border:0.0625rem solid #e0e0e0;
+	padding-left: 1.25rem;
+	color:#f45a40;
+	background: #fafafa;
+	margin-bottom: 0.875rem;
+}
+.companyData  .company_data{
+	width:100%;
+	position: relative;
+	padding:1.25rem 0 1.25rem 18.125rem;
+	height:10.0rem;
+	background: #fafafa;
+	border:0.0625rem solid #e0e0e0;
+	margin-bottom: 0.875rem;
+}
+.companyData  .company_data .img{
+	width:11.625rem;
+	height:7.25rem;
+	border:0.0625rem solid #e0e0e0;
+	background: #fff url(../images/companyDataLogo.png)no-repeat ;
+	background-size: 100% auto;
+	position: absolute;
+	left:3.4375rem;
+	top:1.5rem;
+}
+.companyData  .company_data p{
+	font-size: 0.875rem;
+	line-height: 1.5625rem
+}
+.companyData  .company_data span{
+	font-size: 0.875rem;
+}
+.companyData  .company_data .cyan{
+	color: #4fa600;
+}
+.companyData  .enter_shop{
+	width: 7.5rem;
+	height:2.375rem;
+	line-height: 2.25rem;
+	text-align: center;
+	cursor: pointer;
+	position: absolute;
+	top:3.75rem;
+	right:1.25rem;
+	color: #f45a40;
+	background: #fff;
+	border:0.0625rem dashed #e0e0e0;
+}
+/*-- company_data_edit --*/
+.company_data_edit{
+	width:100%;
+
+}
+.company_data_edit .companyTitle{
+	width:100%;
+	height:2.75rem;
+	line-height: 2.625rem;
+	padding-left: 1.25rem;
+	border:0.0625rem solid #e0e0e0;
+	background: #fafafa;
+	color:#000;
+	font-size: 1.125rem;
+	margin-bottom: 2.25rem;
+}
+.company_forms .name,.company_forms .logo,.company_forms .work_time,.company_forms .number,.company_forms .service,.company_forms .address{
+	margin-bottom: 1.25rem;
+	font-size: 0;
+}
+.company_data_edit .name input,.company_data_edit .number input,.company_data_edit .service input,.company_data_edit .address input{
+	width:19.625rem;
+	height:2.5rem;
+	font-size: 0.875rem;
+}
+.company_data_edit .work_time{
+	font-size: 0.875rem;
+}
+.company_data_edit .work_time input{
+	width:7.375rem;
+	height:2.5rem;
+}
+.company_data_edit .service input::-ms-input-placeholder{text-align: center;}
+.company_data_edit .service input::-webkit-input-placeholder{text-align: center;}
+.company_data_edit .company_forms{
+	width:100%;
+}
+.company_data_edit .address {
+	font-size: 0.875rem;
+}
+.company_data_edit .address select{
+	width:5.0rem;
+	margin-right: 1.25rem;
+	outline: none;
+	border:0.0625rem solid #e0e0e0;
+}
+.company_data_edit .address input{
+	margin-left: 7.5rem;
+	margin-top: 0.75rem;
+}
+.company_data_edit .company_forms .lab{
+	width:7.5rem;
+	display: inline-block;
+	text-align: right;
+	font-size: 0.75rem;
+}
+.company_data_edit  .logo .lab{
+	position: relative;
+    top: -1.875rem;
+}
+.company_data_edit  .logo .upload{
+	width:11.625rem;
+	height:7.25rem;
+	display: inline-block;
+	font-size: 0.875rem;
+	background: #fff;
+	border:0.0625rem dashed #e0e0e0;
+	padding:0.75rem 0;
+	cursor: pointer;
+	position: relative;
+}
+.company_data_edit  .logo .upload input{
+	width:100%;
+	height:100%;
+	position: absolute;
+	top:0;
+	left:0;
+	opacity: 0;
+	cursor: pointer;
+}
+.company_data_edit  .logo .upload p{
+	text-align: center;
+	pointer-events: none;
+}
+.company_data_edit  .logo .upload p.one{
+	color: #f45a40;
+}
+.company_data_edit  .logo .upload p.two{
+	line-height: 2.125rem;
+}
+.company_data_edit  .logo .upload p.three{
+	width:6.625rem;
+	height:2.125rem;
+	line-height: 2.125rem;
+	text-align: center;
+	margin:0 auto;
+	background: #f45a40;
+	color: #fff;
+}
+.company_data_edit .company_forms .save{
+	width:27.75rem;
+	height:3.0rem;
+	line-height: 3.0rem;
+	text-align: center;
+	color: #fff;
+	font-size: 1.25rem;
+	border-radius: 0.1875rem;
+	cursor: pointer;
+	background: url(../images/saveBg.png) repeat-x;
+	position: relative;
+	margin-left:3.625rem;
+	margin-bottom: 6.875rem;
+}
+.company_data_edit .company_forms .save input{
+	width:100%;
+	height:100%;
+	opacity: 0;
+	position: absolute;
+	top:0;
+	left:0;
+}
+.margin_left_minus {
+	margin-left: -0.3rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -53,13 +53,12 @@ public class BBSFontController extends BaseFrontController {
 		model.addObject("sectionSecond", pageSecond);
 		section.setSectionType(1);
 		PageUtil<Map<String, Object>> pageThread = threadService.getSectionMapListByParm(thread, 0, -1);
-		model.addObject("thread", pageThread);
-		
+		model.addObject("thread", pageThread);	
 		return model;
 	}
-	
+	//thread  不存在显示为空
 	@RequestMapping(value="/thread", method = RequestMethod.GET)
-	public ModelAndView thread(@RequestParam(name="thread", defaultValue="1") Long threadId) {
+	public ModelAndView thread(@RequestParam(name="threadId") Long threadId) {
 		ModelAndView model = new ModelAndView("bbs/thread");
 		Thread thread=threadService.getById(threadId);
 		User user=userService.getById(thread.getUserId());
