@@ -7,6 +7,7 @@
 	<id property="productId" column="product_id" />
 	<id property="createTime" column="create_time" />
 	<id property="messageContext" column="message_context" />
+	<id property="messageId" column="message_id" />
 	<id property="postId" column="post_id" />
 	<id property="id" column="id" />
 	<id property="receiveId" column="receive_id" />
@@ -17,9 +18,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into message
-	(message_status,product_id,create_time,message_context,post_id,receive_id)
+	(message_status,product_id,create_time,message_context,message_id,post_id,receive_id)
 	values
-	(#{messageStatus},#{productId},#{createTime},#{messageContext},#{postId},#{receiveId})
+	(#{messageStatus},#{productId},#{createTime},#{messageContext},#{messageId},#{postId},#{receiveId})
 </insert>
 
 <update id="update">
@@ -36,6 +37,9 @@
 	    	</if>
 			<if test="messageContext != null">  
 	        	message_context=#{messageContext},
+	    	</if>
+			<if test="messageId != null">  
+	        	message_id=#{messageId},
 	    	</if>
 			<if test="postId != null">  
 	        	post_id=#{postId},
@@ -65,6 +69,9 @@
 		   	</if>
 			<if test="parm.createTime != null">
 		     	and create_time = #{parm.createTime}
+		   	</if>
+		   	<if test="parm.messageId != null">
+		     	and message_id = #{parm.messageId}
 		   	</if>
 			<if test="parm.postId != null">
 		     	and post_id = #{parm.postId}
@@ -96,6 +103,9 @@
 		   	</if>
 			<if test="parm.receiveId != null">
 		     	and receive_id = #{parm.receiveId}
+		   	</if>
+		   	<if test="parm.messageId != null">
+		     	and message_id = #{parm.messageId}
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}

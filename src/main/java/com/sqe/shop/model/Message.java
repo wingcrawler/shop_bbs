@@ -14,6 +14,7 @@ public class Message implements Serializable {
 	private Long postId;
 	private Long id;
 	private Long receiveId;
+	private Long messageId;
 	
 	public Integer getMessageStatus() {
 		return messageStatus;
@@ -56,6 +57,12 @@ public class Message implements Serializable {
 	}
 	public void setReceiveId(Long receiveId) {
 		this.receiveId = receiveId;
+	}
+	public Long getMessageId() {
+		return messageId;
+	}
+	public void setMessageId(Long messageId) {
+		this.messageId = messageId;
 	}
 	
 	

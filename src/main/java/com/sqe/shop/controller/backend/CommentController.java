@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.backend;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.Comment;
 import com.sqe.shop.model.News;
@@ -81,6 +83,10 @@ public class CommentController extends BaseBackendController {
 		if(StringUtils.isBlank(comment.getContext())){
     		return responseError(-1, "error_empty_content");
     	}
+		comment.setCommentId(comment.getId());
+    	comment.setDate(new Date());
+    	comment.setStatus(Constants.COMMENT_ON);
+    	comment.setUserId(-1L);
 		commentService.insert(comment);
 		return responseOK("save_success");
 	}

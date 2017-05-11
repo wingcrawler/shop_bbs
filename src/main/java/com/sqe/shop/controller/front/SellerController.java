@@ -66,7 +66,12 @@ public class SellerController extends BaseFrontController {
 	@Autowired
 	private CommentService commentService;
 	
-	//商品管理
+	/*
+	 * **************************************************
+	 * *********************商品管理************************
+	 * **************************************************
+	 */
+	
 	/**
 	 * 商家产品列表页
 	 * @return
@@ -308,7 +313,12 @@ public class SellerController extends BaseFrontController {
 		return productService.updateProductStatus(idList, Constants.PRODUCT_ON);
 	}
 	
-	//私信
+	/*
+	 * **************************************************
+	 * *********************产品留言************************
+	 * **************************************************
+	 */
+	
 	/**
 	 * 商品留言页面 
 	 * @param model
@@ -362,6 +372,7 @@ public class SellerController extends BaseFrontController {
 	public PageUtil<Map<String, Object>> getCommentList(Long userId, int pageNo, Integer pageSize) {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
 		parmMap.put("userId", userId);
+		parmMap.put("nullCommentId", true);
 		parmMap.put("orderby", "c.date desc");
 		PageUtil<Map<String, Object>> msgPage = commentService.getSellerProductCommentListByParm(parmMap, pageNo, pageSize);
 		return msgPage;
@@ -373,8 +384,11 @@ public class SellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/messageReply", method = RequestMethod.GET)
+	@RequestMapping(value="/messageReply", method = RequestMethod.POST)
 	public Map<String, Object> messageReply(String msgContent, String type,Long productId, Long messageId, Long commentId, Long replyToId) {
+		if(StringUtils.isBlank(msgContent)){
+			return responseError(-1, "error_empty_content");
+		}
 		if(type.equals("1")){//留言
 			Comment comment = new Comment();
 			comment.setContext(msgContent);
@@ -391,6 +405,8 @@ public class SellerController extends BaseFrontController {
 			message.setProductId(productId);
 			message.setPostId(this.getCurrentUserId());
 			message.setReceiveId(replyToId);
+			message.setMessageStatus(Constants.MSG_ON);
+			message.setMessageId(messageId);
 			messageService.insert(message);
 		} else {
 			responseError(-1, "error_illegal");
@@ -398,7 +414,14 @@ public class SellerController extends BaseFrontController {
 		return responseOK1("");
 	}
 	
-	//商家资料
+
+	/*
+	 * **************************************************
+	 * 
+	 * *********************商家资料************************
+	 * 
+	 * **************************************************
+	 */
 	/**
 	 * 商家信息页面
 	 * @param model

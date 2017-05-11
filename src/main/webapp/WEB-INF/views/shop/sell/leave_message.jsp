@@ -62,30 +62,32 @@
 											</div>
 											<div class="date_reply">
 												<!-- <span>2016-06-27 17:55</span> -->
-												<span class="reply" productId="${item.productId }" commentId="${item.commentId }" replyToId=${item.replyToId } messageId="${item.messageId }">${t.t_reply }</span>
+												<span class="reply">${t.t_reply }</span>
 											</div>	
 											<div class="edit" style="display:none;">
-												<textarea></textarea>
+												<textarea id="msgContent"></textarea>
 												<div class="edit_btn">
 													<span class="cancel">${t.b_cancel }</span>
-													<span class="affirm">${t.b_confirm }</span>
+													<span class="affirm" productId="${item.productId }" commentId="${item.commentId }" replyToId="${item.postId }" messageId="${item.messageId }">${t.b_confirm }</span>
 												</div>
 											</div>
 										</div>
 										<div class="write_back_box">
 											<ul class="write_back">
-												<li>
-													<p class="quietly">
-														<span class="red">${t.t_me }</span>
-														<span>${t.t_reply }</span>
-														<span class="red">等一个孩子的归来：</span>
-														<span>绝对可以的，您买了我们产品肯定会见效的，感谢对本产品的支持。</span>
-													</p>
-													<%-- <p class="reply_box">
-														<span>2016-06-27 17:55</span>
-														<span class="reply">${item.t_reply }</span>
-													</p> --%>
-												</li>
+												<c:forEach var="reply" items="${item.replyList }">
+													<li>
+														<p class="quietly">
+															<span class="red">${reply.postName }</span>
+															<span>${t.t_reply }</span>
+															<span class="red">${reply.receiveName }：</span>
+															<span>${reply.content }</span>
+														</p>
+														<%-- <p class="reply_box">
+															<span>2016-06-27 17:55</span>
+															<span class="reply">${item.t_reply }</span>
+														</p> --%>
+													</li>												
+												</c:forEach>
 											</ul>
 											<!-- <div class="unfold red">
 												<div class="spread">
@@ -137,6 +139,7 @@ $(function(){
 		
 		parm.type=type;
 		parm.productId=productId;
+		parm.msgContent=$(this).parent().prev().val();
 		if(type==1){
 			parm.commentId=commentId;
 		} else {

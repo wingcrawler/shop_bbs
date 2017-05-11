@@ -24,10 +24,6 @@ public class CommentService extends AdapterService implements BaseService {
 	private NewsService newsService;
     
     public int insert(Comment comment) {
-    	comment.setCommentId(comment.getId());
-    	comment.setDate(new Date());
-    	comment.setStatus(1);
-    	comment.setUserId(-1L);
     	String context = comment.getContext();
     	if(context.length()>1000){
     		comment.setContext(context.substring(0, 1000));
@@ -152,7 +148,6 @@ public class CommentService extends AdapterService implements BaseService {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		parmMap.put("start", pageUtil.getStartRow());
 		parmMap.put("limit", pageUtil.getPageSize());
-		parmMap.put("orderby", "c.date desc");
 		
 		int count = commentMapper.countSellerProductCommentList(parmMap);
 		pageUtil.setTotalRecords(count);
@@ -163,7 +158,8 @@ public class CommentService extends AdapterService implements BaseService {
 			//查询是否有回复
 			List<Map<String, Object>> replyList = new ArrayList<Map<String,Object>>();
 			Map<String, Object> replyMap = new HashMap<String, Object>();
-			replyMap.put("orderby", "c.date desc");
+			replyMap.put("orderby", "c.date asc");
+			parmMap.put("nullCommentId", false);
 			for(Map<String, Object> map : list){
 				replyMap.put("commentId", map.get("commentId"));
 				replyList = commentMapper.getSellerProductCommentListByParm(replyMap);	
