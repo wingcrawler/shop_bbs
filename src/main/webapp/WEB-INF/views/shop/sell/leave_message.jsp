@@ -35,7 +35,7 @@
 							<div class="g-tabMnItem f-active">
 								<ul>
 								<c:forEach var="item" items="${page.list }">
-									<li class="list">
+									<l  i class="list">
 										<div class="item">
 											<div class="headline">
 												<div class="head_text">${item.content }</div>
@@ -62,9 +62,9 @@
 											</div>
 											<div class="date_reply">
 												<!-- <span>2016-06-27 17:55</span> -->
-												<span class="reply">${t.t_reply }</span>
+												<span class="reply" productId="${item.productId }" commentId="${item.commentId }" replyToId=${item.replyToId } messageId="${item.messageId }">${t.t_reply }</span>
 											</div>	
-											<div class="edit">
+											<div class="edit" style="display:none;">
 												<textarea></textarea>
 												<div class="edit_btn">
 													<span class="cancel">${t.b_cancel }</span>
@@ -81,10 +81,10 @@
 														<span class="red">等一个孩子的归来：</span>
 														<span>绝对可以的，您买了我们产品肯定会见效的，感谢对本产品的支持。</span>
 													</p>
-													<p class="reply_box">
+													<%-- <p class="reply_box">
 														<span>2016-06-27 17:55</span>
-														<span class="reply">${item.productName }</span>
-													</p>
+														<span class="reply">${item.t_reply }</span>
+													</p> --%>
 												</li>
 											</ul>
 											<!-- <div class="unfold red">
@@ -121,6 +121,34 @@ $(function(){
 			// console.log(p);
 		}
 	});	
+	
+	//显示输入框
+	$('.reply').click(function(){
+		$('.edit').hide();
+		$(this).parent(".date_reply").next('.edit').show();
+	});
+	//回复
+	$('.affirm').click(function(){
+		var parm={};
+		var productId = $(this).attr('productId');
+		var commentId = $(this).attr('commentId');
+		var messageId = $(this).attr('messageId');
+		var replyToId = $(this).attr('replyToId');
+		
+		parm.type=type;
+		parm.productId=productId;
+		if(type==1){
+			parm.commentId=commentId;
+		} else {
+			parm.messageId=messageId;
+			parm.replyToId=replyToId;
+		}
+		jQuery.common.updateObj(parm,'/front/sell/messageReply',true,'');
+	});
+	//取消回复
+	$('.cancel').click(function(){
+		$('.edit').hide();
+	});
 });
 var type="${type}";//1留言 2私信
 function nextPage(pageNo){
