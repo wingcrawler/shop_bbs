@@ -27,7 +27,6 @@ import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.model.Thread;
-import com.sqe.shop.model.User;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
@@ -346,7 +345,7 @@ public class SellerController extends BaseFrontController {
 	@RequestMapping(value="/getMessageList", method = RequestMethod.GET)
 	public PageUtil<Map<String, Object>> getMessageList(Long userId, int pageNo, Integer pageSize) {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
-		parmMap.put("userId", userId);
+		parmMap.put("receiveId", userId);
 		parmMap.put("orderby", "m.create_time desc");
 		PageUtil<Map<String, Object>> msgPage = messageService.getSellerMessageListByParm(parmMap, pageNo, pageSize);
 		return msgPage;
@@ -375,7 +374,27 @@ public class SellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/messageReply", method = RequestMethod.GET)
-	public Map<String, Object> messageReply(String msgContent, String type, Long messageId, String commentId) {
+	public Map<String, Object> messageReply(String msgContent, String type,Long productId, Long messageId, Long commentId, Long replyToId) {
+		if(type.equals("1")){//留言
+			Comment comment = new Comment();
+			comment.setContext(msgContent);
+			comment.setDate(new Date());
+			comment.setCommentId(commentId);
+			comment.setUserId(this.getCurrentUserId());
+			comment.setProductId(productId);
+			comment.setStatus(Constants.COMMENT_ON); 
+			commentService.insert(comment);
+		} else if(type.equals("2")){//私信
+			Message message = new Message();
+			message.setMessageContext(msgContent);
+			message.setCreateTime(new Date());
+			message.setProductId(productId);
+			message.setPostId(this.getCurrentUserId());
+			message.setReceiveId(replyToId);
+			messageService.insert(message);
+		} else {
+			responseError(-1, "error_illegal");
+		}
 		return responseOK1("");
 	}
 	

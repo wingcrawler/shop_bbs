@@ -44,7 +44,7 @@
 														<img src="images/head_portrait.jpg">
 													</div>
 													<div class="name_time">
-														<p class="name">${item.username }</p>
+														<p class="name">${item.postName }</p>
 														<p class="time">${item.date }</p>
 													</div>
 

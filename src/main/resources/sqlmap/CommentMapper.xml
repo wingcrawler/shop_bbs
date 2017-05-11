@@ -151,14 +151,31 @@
 	where p.user_id=#{parm.userId}
 </select>
 <select id="getSellerProductCommentListByParm" parameterType="HashMap" resultType="HashMap">
-	select p.product_name as productName, p.id as productId, p.product_price as price,
-	c.id as commentId, c.context as content, DATE_FORMAT(c.date,'%Y-%c-%d %h:%i:%s') as date,u.username ,
-	c.user_id as userId
+	select 
+	p.product_name as productName, 
+	p.id as productId, 
+	p.product_price as price,
+	c.id as commentId, 
+	c.context as content, 
+	DATE_FORMAT(c.date,'%Y-%c-%d %h:%i') as date,
+	u.username as postName ,
+	c.user_id as userId,
+	u.username as receiveName
 	from `comment` c
 	LEFT JOIN product p on c.product_id=p.id
 	LEFT JOIN `user` u on c.user_id=u.id
-	where p.user_id=#{parm.userId}
-	order by c.date desc
+	left join `comment` c1 on c1.comment_id=c.id
+	LEFT JOIN `user` u1 on c1.user_id=u1.id
+	where 1=1
+	<if test="parm.userId != null">
+   		and p.user_id=#{parm.userId}
+   	</if>
+   	<if test="parm.commentId != null">
+   		and c.comment_id = #{parm.commentId}
+   	</if>
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
 	<if test="parm.start != null">
 		limit #{parm.start},#{parm.limit}
 	</if>

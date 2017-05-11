@@ -134,9 +134,18 @@ public class MessageService extends AdapterService implements BaseService {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
 			list = messageMapper.getSellerMessageListByParm(parmMap);
-			pageUtil.setList(list);
+			//查询是否有回复
+			List<Map<String, Object>> replyList = new ArrayList<Map<String,Object>>();
+			Map<String, Object> replyMap = new HashMap<String, Object>();
+			replyMap.put("orderby", "m.create_time desc");
+			for(Map<String, Object> map : list){
+				replyMap.put("messageId", map.get("messageId"));
+				replyList = messageMapper.getSellerMessageListByParm(replyMap);	
+				map.put("replyList", replyList);
+			}
 		}
 		
+		pageUtil.setList(list);
 		return pageUtil;
 	}
 
