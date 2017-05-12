@@ -3,17 +3,18 @@
 <mapper namespace="com.sqe.shop.mapper.ThreadMapper">
 
 	<resultMap type="com.sqe.shop.model.Thread" id="ThreadBaseMapper">
+	<id property="threadTime" column="thread_time" />
+	<id property="sectionId" column="section_id" />
+	<id property="threadContext" column="thread_context" />
+	<id property="userId" column="user_id" />
 	<id property="threadView" column="thread_view" />
 	<id property="threadUp" column="thread_up" />
 	<id property="topicId" column="topic_id" />
 	<id property="threadStatus" column="thread_status" />
+	<id property="threadIdentify" column="thread_identify" />
 	<id property="threadTitle" column="thread_title" />
-	<id property="threadTime" column="thread_time" />
 	<id property="threadType" column="thread_type" />
-	<id property="sectionId" column="section_id" />
 	<id property="id" column="id" />
-	<id property="threadContext" column="thread_context" />
-	<id property="userId" column="user_id" />
 </resultMap>  
 
 <insert id="insert">
@@ -21,14 +22,26 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into thread
-	(thread_view,thread_up,topic_id,thread_status,thread_title,thread_time,thread_type,section_id,thread_context,user_id)
+	(thread_time,section_id,thread_context,user_id,thread_view,thread_up,topic_id,thread_status,thread_identify,thread_title,thread_type)
 	values
-	(#{threadView},#{threadUp},#{topicId},#{threadStatus},#{threadTitle},#{threadTime},#{threadType},#{sectionId},#{threadContext},#{userId})
+	(#{threadTime},#{sectionId},#{threadContext},#{userId},#{threadView},#{threadUp},#{topicId},#{threadStatus},#{threadIdentify},#{threadTitle},#{threadType})
 </insert>
 
 <update id="update">
 	UPDATE thread 
 	<set>
+			<if test="threadTime != null">  
+	        	thread_time=#{threadTime},
+	    	</if>
+			<if test="sectionId != null">  
+	        	section_id=#{sectionId},
+	    	</if>
+			<if test="threadContext != null">  
+	        	thread_context=#{threadContext},
+	    	</if>
+			<if test="userId != null">  
+	        	user_id=#{userId},
+	    	</if>
 			<if test="threadView != null">  
 	        	thread_view=#{threadView},
 	    	</if>
@@ -41,23 +54,14 @@
 			<if test="threadStatus != null">  
 	        	thread_status=#{threadStatus},
 	    	</if>
+			<if test="threadIdentify != null">  
+	        	thread_identify=#{threadIdentify},
+	    	</if>
 			<if test="threadTitle != null">  
 	        	thread_title=#{threadTitle},
 	    	</if>
-			<if test="threadTime != null">  
-	        	thread_time=#{threadTime},
-	    	</if>
 			<if test="threadType != null">  
 	        	thread_type=#{threadType},
-	    	</if>
-			<if test="sectionId != null">  
-	        	section_id=#{sectionId},
-	    	</if>
-			<if test="threadContext != null">  
-	        	thread_context=#{threadContext},
-	    	</if>
-			<if test="userId != null">  
-	        	user_id=#{userId},
 	    	</if>
 	</set>   
     WHERE id=#{id}

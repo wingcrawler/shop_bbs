@@ -7,20 +7,45 @@ import com.sqe.shop.common.BaseModel;
 
 public class Thread extends BaseModel implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static  final long serialVersionUID = 1L;
 
+	private Date threadTime;
+	private Long sectionId;
+	private String threadContext;
+	private Long userId;
 	private Long threadView;
 	private Long threadUp;
 	private Long topicId;
 	private Integer threadStatus;
+	private Long threadIdentify;
 	private String threadTitle;
-	private Date threadTime;
 	private Integer threadType;
-	private Long sectionId;
 	private Long id;
-	private String threadContext;
-	private Long userId;
 	
+	public Date getThreadTime() {
+		return threadTime;
+	}
+	public void setThreadTime(Date threadTime) {
+		this.threadTime = threadTime;
+	}
+	public Long getSectionId() {
+		return sectionId;
+	}
+	public void setSectionId(Long sectionId) {
+		this.sectionId = sectionId;
+	}
+	public String getThreadContext() {
+		return threadContext;
+	}
+	public void setThreadContext(String threadContext) {
+		this.threadContext = threadContext;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 	public Long getThreadView() {
 		return threadView;
 	}
@@ -45,17 +70,17 @@ public class Thread extends BaseModel implements Serializable {
 	public void setThreadStatus(Integer threadStatus) {
 		this.threadStatus = threadStatus;
 	}
+	public Long getThreadIdentify() {
+		return threadIdentify;
+	}
+	public void setThreadIdentify(Long threadIdentify) {
+		this.threadIdentify = threadIdentify;
+	}
 	public String getThreadTitle() {
 		return threadTitle;
 	}
 	public void setThreadTitle(String threadTitle) {
 		this.threadTitle = threadTitle;
-	}
-	public Date getThreadTime() {
-		return threadTime;
-	}
-	public void setThreadTime(Date threadTime) {
-		this.threadTime = threadTime;
 	}
 	public Integer getThreadType() {
 		return threadType;
@@ -63,29 +88,11 @@ public class Thread extends BaseModel implements Serializable {
 	public void setThreadType(Integer threadType) {
 		this.threadType = threadType;
 	}
-	public Long getSectionId() {
-		return sectionId;
-	}
-	public void setSectionId(Long sectionId) {
-		this.sectionId = sectionId;
-	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public String getThreadContext() {
-		return threadContext;
-	}
-	public void setThreadContext(String threadContext) {
-		this.threadContext = threadContext;
-	}
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
 	}
 	
 	
