@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.sqe.shop.mapper.PostMapper;
 import com.sqe.shop.mapper.ThreadMapper;
 import com.sqe.shop.mapper.TopicMapper;
+import com.sqe.shop.model.Section;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
@@ -116,6 +117,29 @@ public class ThreadService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 
+	// 重载
+	public PageUtil<Map<String, Object>> getSectionMapListByParm(Section section, Thread thread, int pageNo,
+			Integer pageSize) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(thread, section);
+		parm.put("orderby", "t.id desc");
+		int count = threadMapper.countByParm(parm);
+		pageUtil.setTotalRecords(count);
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		if (count != 0) {
+			list = threadMapper.getSectionMapListByParm(parm);
+			for (Map<String, Object> map : list) {
+				Date date = (Date) map.get("date");
+				map.put("timeAgo", relativeDateFormat.format(date));
+				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
+				String type = map.get("threadType").toString();
+				map.put("typeName", this.getThreadType(Integer.valueOf(type)));
+			}
+		}
+		pageUtil.setList(list);
+		return pageUtil;
+	}
+
 	public void save(Thread thread) {
 		if (thread.getId() != null) {
 			threadMapper.update(thread);
@@ -140,38 +164,57 @@ public class ThreadService extends AdapterService implements BaseService {
 		return parm;
 	}
 
+	private Map<String, Object> queryParm(Thread thread, Section section) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		if (section != null) {
+			if (StringUtils.isNotBlank(thread.getThreadTitle())) {
+				parm.put("threadTitle", thread.getThreadTitle());
+			}
+			if (thread.getThreadType() != null && thread.getThreadType() >= 0) {
+				parm.put("threadType", thread.getThreadType());
+			}
+			if (thread.getTopicId() != null && thread.getTopicId() >= 0) {
+				parm.put("topicId", thread.getTopicId());
+			}
+			if (section.getId() != null && section.getId() >= 0) {
+				parm.put("sectionId", section.getId());
+			}
+		}
+		return parm;
+	}
+
 	public Map<String, Object> getMapById(Long id) {
 		return threadMapper.getMapById(id);
 	}
 
-	//商家页面的发帖回复列表
+	// 商家页面的发帖回复列表
 	public PageUtil<Map<String, Object>> getSellThreadList(Thread thread, int pageNo, int pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(thread);
 		parm.put("start", pageUtil.getStartRow());
 		parm.put("limit", pageUtil.getPageSize());
 		parm.put("orderby", "t.id desc");
-		
+
 		int count = threadMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
-		
+
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		int postCount = 0;
 		Map<String, Object> postMap = new HashMap<String, Object>();
 		if (count != 0) {
 			list = threadMapper.getMapListByParm(parm);
 			for (Map<String, Object> t : list) {
-				//时间转换
+				// 时间转换
 				Date time = (Date) t.get("date");
 				t.put("time", DateUtil.dateToString(time, DateUtil.DATETIME_FORMATE_2));
-				//跟帖数量
+				// 跟帖数量
 				postMap.put("threadId", t.get("id"));
 				postCount = postMapper.countByParm(postMap);
 				t.put("count", postCount);
 			}
 		}
 		pageUtil.setList(list);
-		
+
 		return pageUtil;
 	}
 
