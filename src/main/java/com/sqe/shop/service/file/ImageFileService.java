@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

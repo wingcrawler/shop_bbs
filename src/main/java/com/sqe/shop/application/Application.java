@@ -1,4 +1,4 @@
-package com.sqe.shop.application;
+/*package com.sqe.shop.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,9 +9,9 @@ import org.springframework.context.annotation.ImportResource;
 
 @Configuration
 @ImportResource("classpath:spring-context.xml")
-@ComponentScan(basePackages = "com.sqe")  
+@ComponentScan(basePackages = "com.sqe.shop")  
 @EnableAutoConfiguration
-/*@SpringBootApplication*/
+@SpringBootApplication
 public class Application {
 	
 	public static void main(String[] args) {
@@ -19,3 +19,4 @@ public class Application {
 	}
 
 }
+*/

@@ -1,4 +1,4 @@
-package com.sqe.shop.application;
+/*package com.sqe.shop.application;
 
 
 import com.sqe.shop.interceptor.NotFoundInterceptor;
@@ -21,13 +21,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new NotFoundInterceptor())
         	.addPathPatterns("/**");
 
-        /*registry.addInterceptor(new AdminAuthenticationInterceptor())
+        registry.addInterceptor(new AdminAuthenticationInterceptor())
         	.addPathPatterns("/backend1/**","/backend1/**")
-        	.excludePathPatterns("/backend/login","/backend/logout");*/
+        	.excludePathPatterns("/backend/login","/backend/logout");
         
-        /*super.addInterceptors(registry);*/
+        super.addInterceptors(registry);
     }
-/*
+
     @Override
     public void addFormatters(FormatterRegistry registry) {
         // Add formatters and/or converters
@@ -43,15 +43,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             }
         };
         registry.addFormatter(formatter);
-    }*/
+    }
 
-   /* @Bean(name = "multipartResolver")
+    @Bean(name = "multipartResolver")
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver=new CommonsMultipartResolver();
         resolver.setDefaultEncoding("utf-8");
         resolver.setMaxUploadSize(10240000);
         return resolver;
-    }*/
+    }
     
     @Bean
 	@ConditionalOnMissingBean(CharacterEncodingFilter.class)
@@ -64,3 +64,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	}
     
 }
+*/

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- [concole] -->
+	<appender name="myConsole" class="org.apache.log4j.ConsoleAppender">
+		<param name="encoding" value="GBK" />
+		<param name="target" value="System.out" />
+		<param name="threshold" value="info" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p %c{2} - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- [error] -->
+	<appender name="ERROR-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="F:\\logs\\shop_log\\error\\error.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="GBK" />
+		<param name="threshold" value="error" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %c{2} - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- [info] -->
+	<appender name="INFO-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="F:\\logs\\shop_log\\info\\info.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="GBK" />
+		<param name="threshold" value="info" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %c{2} - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- [debug] -->
+	<appender name="DEBUG-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="F:\\logs\\shop_log\\debug\\debug.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="GBK" />
+		<param name="threshold" value="debug" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %c{2} - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- [warn] -->
+	<appender name="WARN-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="F:\\logs\\shop_log\\warn\\warn.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="GBK" />
+		<param name="threshold" value="warn" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %c{2} - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Root Logger -->
+	<root>
+		<level value="${rootLevel}"></level>
+		<appender-ref ref="INFO-APPENDER" />
+		<appender-ref ref="myConsole" />
+		<appender-ref ref="WARN-APPENDER" />
+		<appender-ref ref="DEBUG-APPENDER" />
+		<appender-ref ref="ERROR-APPENDER" />
+	</root>
+</log4j:configuration>
