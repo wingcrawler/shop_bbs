@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%><!DOCTYPE html>
+<%@ page language="java" import="java.util.*"
+	contentType="text/html; charset=utf-8"%><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -31,7 +32,7 @@
 				<a href="#">赛奇尔</a>
 			</h1>
 			<h3 class="templatemo-site-title">
-				<a href="#"><span class="blue">平台</span><span class="green"></span></a>
+				<a href="#"><span class="blue"></span><span class="green"></span></a>
 			</h3>
 		</div>
 
@@ -40,11 +41,13 @@
 				<img src="/frontstyle/images/zoom-bg-1.jpg" id="menu-img"
 					class="main-img inactive"
 					alt="Zoom HTML5 Template by templatemo.com"> <img
-					src="/frontstyle/images/zoom-bg-2.jpg" id="products-img" class="inactive"
-					alt="Product"> <img src="/frontstyle/images/zoom-bg-3.jpg"
-					id="services-img" class="inactive" alt="Services"> <img
-					src="/frontstyle/images/zoom-bg-4.jpg" id="about-img" class="inactive"
-					alt="About"> <img src="/frontstyle/images/zoom-bg-5.jpg" id="contact-img"
+					src="/frontstyle/images/zoom-bg-2.jpg" id="products-img"
+					class="inactive" alt="Product"> <img
+					src="/frontstyle/images/zoom-bg-3.jpg" id="services-img"
+					class="inactive" alt="Services"> <img
+					src="/frontstyle/images/zoom-bg-4.jpg" id="about-img"
+					class="inactive" alt="About"> <img
+					src="/frontstyle/images/zoom-bg-5.jpg" id="contact-img"
 					class="inactive" alt="Contact"> <img
 					src="/frontstyle/images/zoom-bg-6.jpg" id="company-intro-img"
 					class="main-img inactive" alt="Company Intro"> <img
@@ -77,7 +80,7 @@
 								</a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 margin-bottom-20">
-								<a href="#about" class="change-section">
+								<a href="/bbs/index" class="change-section">
 									<div class="black-bg btn-menu">
 										<i class="fa fa-users"></i>
 										<h2>论坛</h2>
@@ -114,13 +117,13 @@
 	<script src="/frontstyle/js/jquery.backstretch.min.js"></script>
 	<script src="/frontstyle/js/templatemo_script.js"></script>
 
-<script type="text/javascript">
-$(function(){
-	$(".change-section").click(function(){
-		self.location= $(this).attr("href");
-	});
-	
-});
-</script>
+	<script type="text/javascript">
+		$(function() {
+			$(".change-section").click(function() {
+				self.location = $(this).attr("href");
+			});
+
+		});
+	</script>
 </body>
 </html>

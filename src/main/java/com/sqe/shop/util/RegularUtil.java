@@ -20,7 +20,7 @@ public class RegularUtil {
 		return result;
 	}
 
-	public static void main(String[] args) {
+	public static void main3(String[] args) {
 
 		String test = "<img height='231' alt='װ��ģʽ��ͼ1' width='528' src='http://dl.iteye.com/upload/picture/pic/44707/d591f98f-6ebd-39a2-8450-0fc94a0ef4e1.jpg' style='border:0px;font-family:helvetica, tahoma, arial, sans-serif;font-size:14px;line-height:25.2px;background-color:#ffffff;' />";
 		String reg = "(?<=src=\")[\\S\\s]+?(?=\")";

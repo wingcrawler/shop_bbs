@@ -63,6 +63,7 @@ public class BBSFontController extends BaseFrontController {
 	public ModelAndView thread(@RequestParam(name = "threadId") Long threadId) {
 		ModelAndView model = new ModelAndView("bbs/thread");
 		Thread thread = threadService.getById(threadId);
+		threadService.viewUpdate(thread);
 		User user = userService.getById(thread.getUserId());
 		model.addObject("thread", thread);
 		model.addObject("user", user);

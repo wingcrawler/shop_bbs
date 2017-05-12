@@ -18,7 +18,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 
@@ -179,10 +181,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<c:if test="${not empty thread.list }">
 							<c:forEach var="item" items="${thread.list }">
 								<li><a href="thread?threadId=${item.id }" class="tx">${item.threadTitle }</a>
-									<br />
+									<c:if test="${not empty item.identify }">
+										<em class="jh">${item.identify }</em>
+									</c:if> <br />
 									<div class="tR">
-										<a href="/sectionindex?sectionId=" ${item.section_id} } class="qq l">${item.section_title }</a>
-										<span class="rp">494</span> &nbsp;|&nbsp; <span class="tm">${item.timeAgo }</span>
+										<a href="/sectionindex?sectionId="
+											${item.section_id} } class="qq l">${item.section_title }</a>
+										<span class="rp">${item.thread_view }</span> &nbsp;|&nbsp; <span
+											class="tm">${item.timeAgo }</span>
 									</div></li>
 							</c:forEach>
 						</c:if>

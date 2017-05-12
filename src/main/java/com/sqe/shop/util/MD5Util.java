@@ -69,7 +69,7 @@ public class MD5Util {
 		return hexDigits[d1] + hexDigits[d2];
 	}
 
-	public static void main(String[] args) {
+	public static void main2(String[] args) {
 		String salt = "shopping";
 		MD5Util encoderMd5 = new MD5Util(salt, "MD5");
 		String encode = encoderMd5.encode("admin");
