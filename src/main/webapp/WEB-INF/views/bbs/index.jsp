@@ -17,7 +17,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 
@@ -159,7 +161,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				<c:if test="${not empty section.list }">
 					<c:forEach var="item" items="${section.list }">
-						<li><a href="bbs/section?sectionId=${item.id }" class="qb wb">${item.sectionTitle }</a></li>
+						<li><a href="sectionindex?sectionId=${item.id }"
+							class="qb wb">${item.sectionTitle }</a></li>
 					</c:forEach>
 				</c:if>
 
@@ -178,7 +181,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="thread?threadId=${item.id }" class="tx">${item.threadTitle }</a>
 									<br />
 									<div class="tR">
-										<a href="liebiao.html" class="qq l">${item.section_title }</a>
+										<a href="/sectionindex?sectionId=" ${item.section_id} } class="qq l">${item.section_title }</a>
 										<span class="rp">494</span> &nbsp;|&nbsp; <span class="tm">${item.timeAgo }</span>
 									</div></li>
 							</c:forEach>

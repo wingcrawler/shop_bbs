@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -17,7 +18,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
+	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
+
 
 
 
@@ -164,6 +173,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<img src="${user.userImage }" />
 						</p>
 			</c:if>
+
+
+			<p>主贴正文</p>
+			<p>${thread.threadTitle }</p>
+			<p>
+				<fmt:formatDate value="${thread.threadTime }"
+					pattern="yyyy-MM-dd HH:mm" />
+			</p>
+			<p>${thread.threadContext }</p>
 			<!--1楼的顶-->
 			<div class="dwp">
 				<a href="#ajax#" class="dbt bb"><span class="num">0</span>顶</a>

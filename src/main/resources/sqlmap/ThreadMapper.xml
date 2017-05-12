@@ -16,7 +16,8 @@
 
 	<insert id="insert">
 		<selectKey resultType="long" keyProperty="id">
-			select LAST_INSERT_ID()
+			select
+			LAST_INSERT_ID()
 		</selectKey>
 		insert into thread
 		(topic_id,thread_status,thread_title,thread_time,thread_type,section_id,thread_context,user_id)
@@ -60,20 +61,27 @@
 	</delete>
 
 	<select id="getById" resultMap="ThreadBaseMapper">
-		SELECT * FROM thread WHERE id=#{id}
+		SELECT * FROM thread WHERE
+		id=#{id}
 	</select>
 
 	<select id="getMapById" resultType="HashMap">
-		select t.id, t.thread_title as threadTitle, t.thread_time as date,
+		select t.id, t.thread_title
+		as threadTitle, t.thread_time as date,
 		u.username,
-		tp.topic_title as topicTitle,t.thread_context as threadContext,
-		t.thread_type as threadType, t.thread_status as threadStatus,
-		s1.section_title as sectionOne, s2.section_title as sectionTwo
+		tp.topic_title as
+		topicTitle,t.thread_context as threadContext,
+		t.thread_type as
+		threadType, t.thread_status as threadStatus,
+		s1.section_title as
+		sectionOne, s2.section_title as sectionTwo
 		from thread t
-		LEFT JOIN `user` u on t.user_id = u.id
+		LEFT JOIN
+		`user` u on t.user_id = u.id
 		LEFT JOIN topic tp on t.topic_id = tp.id
 		LEFT JOIN section s1 on tp.section_id = s1.id
-		LEFT JOIN section s2 on s1.section_parent_id = s2.id
+		LEFT JOIN section s2 on
+		s1.section_parent_id = s2.id
 		WHERE t.id=#{id}
 	</select>
 
@@ -144,9 +152,11 @@
 		resultType="HashMap">
 		select t.id, t.thread_title as threadTitle, t.thread_time as date,
 		u.username,tp.topic_title as topicTitle,
-		t.thread_type as threadType,t.thread_status as threadStatus
+		t.thread_type as
+		threadType,t.thread_status as threadStatus
 		from thread t
-		LEFT JOIN `user` u on t.user_id = u.id
+		LEFT JOIN
+		`user` u on t.user_id = u.id
 		LEFT JOIN topic tp on t.topic_id = tp.id
 		where 1=1
 		<if test="parm.topicId != null">
@@ -174,12 +184,14 @@
 	<select id="getSectionMapListByParm" parameterType="HashMap"
 		resultType="HashMap">
 		select t.id as id, t.thread_title as threadTitle, t.thread_time as
-		date, u.username,tp.topic_title as topicTitle,s.section_title,
+		date, u.username,tp.topic_title as topicTitle,s.id as section_id, s.section_title,
 		t.thread_type as threadType
 		from thread t
-		LEFT JOIN `user` u on t.user_id = u.id
+		LEFT JOIN `user` u on
+		t.user_id = u.id
 		LEFT JOIN topic tp on t.topic_id = tp.id
-		LEFT JOIN section s on t.section_id = s.id
+		LEFT JOIN
+		section s on t.section_id = s.id
 		where 1=1
 		and t.thread_status=1
 		<if test="parm.topicId != null">
@@ -190,6 +202,9 @@
 		</if>
 		<if test="parm.threadTitle != null">
 			and t.thread_title like "%"#{parm.threadTitle}"%"
+		</if>
+		<if test="parm.sectionId != null">
+			and t.section_id = #{parm.sectionId}
 		</if>
 		<if test="parm.orderby != null">
 			order by ${parm.orderby}
