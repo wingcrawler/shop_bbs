@@ -9,6 +9,8 @@ public class Thread extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Long threadView;
+	private Long threadUp;
 	private Long topicId;
 	private Integer threadStatus;
 	private String threadTitle;
@@ -19,6 +21,18 @@ public class Thread extends BaseModel implements Serializable {
 	private String threadContext;
 	private Long userId;
 	
+	public Long getThreadView() {
+		return threadView;
+	}
+	public void setThreadView(Long threadView) {
+		this.threadView = threadView;
+	}
+	public Long getThreadUp() {
+		return threadUp;
+	}
+	public void setThreadUp(Long threadUp) {
+		this.threadUp = threadUp;
+	}
 	public Long getTopicId() {
 		return topicId;
 	}
