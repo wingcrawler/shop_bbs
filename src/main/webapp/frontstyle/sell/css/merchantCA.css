@@ -201,7 +201,7 @@ input{
 	border:0.0625rem solid #e0e0e0;
 }
 .company_data_edit .address input{
-	margin-left: 7.5rem;
+	/* margin-left: 7.5rem; */
 	margin-top: 0.75rem;
 }
 .company_data_edit .company_forms .lab{

@@ -28,6 +28,7 @@ public class Product extends BaseModel implements Serializable {
 	private Long id;
 	private String productUrl;
 	private Double productPrice;
+	private String productTag;
 	
 	public String getProductDescripton() {
 		return productDescripton;
@@ -142,6 +143,12 @@ public class Product extends BaseModel implements Serializable {
 	}
 	public void setProductPrice(Double productPrice) {
 		this.productPrice = productPrice;
+	}
+	public String getProductTag() {
+		return productTag;
+	}
+	public void setProductTag(String productTag) {
+		this.productTag = productTag;
 	}
 	
 	

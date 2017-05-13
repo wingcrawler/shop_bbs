@@ -18,6 +18,7 @@
 	<id property="productUrlClick" column="product_url_click" />
 	<id property="productEnDescription" column="product_en_description" />
 	<id property="productEnDim" column="product_en_dim" />
+	<id property="productTag" column="product_tag" />
 	<id property="shopId" column="shop_id" />
 	<id property="id" column="id" />
 	<id property="productUrl" column="product_url" />
@@ -29,9 +30,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into product
-	(product_descripton,product_en_name,product_dim,product_status,product_count,product_view,product_rank,user_id,product_type_id,product_name,product_subtype_id,create_time,product_url_click,product_en_description,product_en_dim,shop_id,product_url,product_price)
+	(product_descripton,product_en_name,product_dim,product_status,product_count,product_view,product_rank,user_id,product_type_id,product_name,product_subtype_id,create_time,product_url_click,product_en_description,product_en_dim,product_tag,shop_id,product_url,product_price)
 	values
-	(#{productDescripton},#{productEnName},#{productDim},#{productStatus},#{productCount},#{productView},#{productRank},#{userId},#{productTypeId},#{productName},#{productSubtypeId},#{createTime},#{productUrlClick},#{productEnDescription},#{productEnDim},#{shopId},#{productUrl},#{productPrice})
+	(#{productDescripton},#{productEnName},#{productDim},#{productStatus},#{productCount},#{productView},#{productRank},#{userId},#{productTypeId},#{productName},#{productSubtypeId},#{createTime},#{productUrlClick},#{productEnDescription},#{productEnDim},#{productTag},#{shopId},#{productUrl},#{productPrice})
 </insert>
 
 <update id="update">
@@ -81,6 +82,9 @@
 	    	</if>
 			<if test="productEnDim != null">  
 	        	product_en_dim=#{productEnDim},
+	    	</if>
+			<if test="productTag != null">  
+	        	product_tag=#{productTag},
 	    	</if>
 			<if test="shopId != null">  
 	        	shop_id=#{shopId},
@@ -238,7 +242,7 @@
 	select p.id id,p.product_name as productName, p.product_price as productPrice,
 	p.product_rank as productRank, p.product_view as productView,p.product_count as productCount,
 	p.product_status as productStatus,s.shop_title as shopName,concat(pt.type_name_ch,'/',pt.type_name) as productTypeName,
- 	date_format(p.create_time, '%Y-%m-%d') as createTimeStr
+ 	date_format(p.create_time, '%Y-%m-%d') as createTimeStr,p.product_tag as productTag
 	from product p 
 	LEFT JOIN product_type pt on p.product_type_id=pt.id
 	LEFT JOIN shop s on p.shop_id=s.id

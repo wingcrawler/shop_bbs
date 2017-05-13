@@ -115,6 +115,8 @@
 	
 <script type="text/javascript">
 $(function(){
+	$('.menu_box .menu_list div.module a').eq(2).addClass('active');
+	
 	$(".pagebar").createPage({
 		pageCount : '${page.pageCount}',
 		current : '${page.currentPage}',

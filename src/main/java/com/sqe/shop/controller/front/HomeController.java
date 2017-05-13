@@ -41,7 +41,7 @@ public class HomeController extends BaseFrontController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
-		model.setViewName("front/index");
+		model.setViewName("index");
 		return model;
 	}
 

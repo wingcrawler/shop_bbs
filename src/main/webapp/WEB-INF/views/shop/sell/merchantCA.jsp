@@ -75,7 +75,7 @@
 							</div>
 							<div class="address">
 								<div>
-									<span  class="lab">地址</span>
+									<span  class="lab">地址: </span>
 									<input type="text" name="shopAddress" value="${shop.shopAddress }">
 									<!-- <select class="margin_left_minus">
 										<option>xxxx</option>
@@ -116,5 +116,11 @@
 	<!-- //main -->
 	
 	<jsp:include page="../include/footer.jsp"></jsp:include>
+	
+<script type="text/javascript">
+$(function(){
+	$('.menu_box .menu_list div.module a').eq(4).addClass('active');
+})
+</script>	
 </body>
 </html>

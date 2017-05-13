@@ -35,10 +35,14 @@ public class BaseFrontController extends BaseCommon {
         request.setAttribute("productTypeList", cachedService.getProductTypeList());
         //是否登陆
         User user = this.getCurrentUser();
-        if(user!=null && user.getUserRole().equals(Constants.ROLE_SELL)){
+        if(user==null){
+        	request.setAttribute("isLogin", false);
+        } else if(user!=null && user.getUserRole().equals(Constants.ROLE_SELL)){
         	request.setAttribute("isSellLogin", true);
+        	request.setAttribute("isLogin", true);
         } else if(user!=null && user.getUserRole().equals(Constants.ROLE_BUY)){
         	request.setAttribute("isBuyLogin", true);
+        	request.setAttribute("isLogin", true);
         	request.setAttribute("user", user);
         }
     }

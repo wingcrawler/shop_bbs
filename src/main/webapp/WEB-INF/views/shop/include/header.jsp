@@ -18,6 +18,12 @@
 					<c:if test="${isBuyLogin }">
 						<li class=""><a href="/front/buy/index">${t.t_welcome } ${user.username }</a></li>
 					</c:if>
+					<c:if test="${!isLogin }">
+						<li class=""><a href="/back/login">${t.sign_in }</a></li>
+					</c:if>
+					<c:if test="${isLogin }">
+						<li class=""><a href="/back/logout">${t.sign_out }</a></li>
+					</c:if>
 					
 					<!-- <li class="checkout">
 						<a href="/addToCart">

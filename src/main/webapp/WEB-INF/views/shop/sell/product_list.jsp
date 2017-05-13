@@ -28,7 +28,7 @@
 										<td class="td3">${t.t_product_type }</td>
 										<td class="td4">${t.t_release_time }</td>
 										<td class="td5">${t.t_product_status }</td>
-										<!-- <td class="td6">标签</td> -->
+										<td class="td6">${t.t_product_tag }</td>
 										<td class="td7"></td>
 									</tr>
 								</thead>
@@ -68,7 +68,7 @@
 													</c:if>
 													
 												</td>
-												<%-- <td class="td6">${${item.tag }</td> --%>
+												<td class="td6">${item.productTag }</td>
 												<td class="td7">
 													<div class="td_btn">
 														<p>
@@ -163,6 +163,8 @@
 
 <script type="text/javascript">
 $(function(){
+	$('.menu_box .menu_list div.module a').eq(1).addClass('active');
+	
 	$(".pagebar").createPage({
 		pageCount : '${productPage.pageCount}',
 		current : '${productPage.currentPage}',

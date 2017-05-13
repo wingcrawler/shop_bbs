@@ -99,7 +99,18 @@
 													</div>
 											  </div>
 										</div>
-										<%-- <div class="row">
+										<div class="row">
+											<div class="col-xs-6 col-md-6">
+											  	<div class="m-form-item">
+													<label class="m-form-hd">
+														<span class="u-hd-require">*</span>
+														<span class="u-hd-txt">${t.t_product_url }:</span>
+													</label>
+													<input type="text" class="u-ipt-text" name="productUrl" value="${entity.productUrl }">
+												</div>
+											  </div>
+										</div>
+										<div class="row">
 										  <div class="col-xs-6 col-md-6">
 											<div class="m-form-item">
 												<label class="m-form-hd">
@@ -108,36 +119,36 @@
 												</label>
 												<div class="m-checkboxgroup">
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" name="" id="checkbox1" checked="">
+														<input type="checkbox" class="u-ipt-checkbox" name="productTag" value="${t.t_product_tag_new }" id="checkbox1" checked="">
 														<label for="checkbox1">
 															<div class="i-checkbox z-checked">
 																<i></i>
 															</div>
-															<span class="i-checkboxtxt">æ°å</span>
+															<span class="i-checkboxtxt">${t.t_product_tag_new }</span>
 														</label>
 													</div>
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" name="" id="checkbox2">
+														<input type="checkbox" class="u-ipt-checkbox" value="${t.t_product_tag_hot }" name="productTag" id="checkbox2">
 														<label for="checkbox2">
 															<div class="i-checkbox">
 																<i></i>
 															</div>
-															<span class="i-checkboxtxt">ç­å</span>
+															<span class="i-checkboxtxt">${t.t_product_tag_hot }</span>
 														</label>
 													</div>
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" name="" id="checkbox3">
+														<input type="checkbox" class="u-ipt-checkbox" value="${t.t_product_tag_half }" name="productTag" id="checkbox3">
 														<label for="checkbox3">
 															<div class="i-checkbox">
 																<i></i>
 															</div>
-															<span class="i-checkboxtxt">5æ</span>
+															<span class="i-checkboxtxt">${t.t_product_tag_half }</span>
 														</label>
 													</div>
 												</div>
 											</div>
 										  </div> 
-										</div>  --%>
+										</div> 
 									</div>
 									<%-- <div class="audit">
 										<div class="m-form-item putaway">
@@ -171,7 +182,7 @@
 									<div class="heade">${t.t_img_desc }</div>
 									<div class="imgDescribe">
 										<div class="show_img">
-											<span class="labe">${t.t_show_img }： </span>
+											<span class="labe">${t.t_show_img }: </span>
 											<div class="upimg">
 												<c:if test="${not empty img}">
 													<img alt="" src="${img.imagePath}" width="100%" height="100%" style="padding:0;">
@@ -235,6 +246,8 @@
 
 <script type="text/javascript">
 $(function(){
+	$('.menu_box .menu_list div.module a').eq(0).addClass('active');
+	
 	$('#productTypeId').optionSelect({
 		compare:'${entity.productTypeId}',
 		backFn : function(p) {

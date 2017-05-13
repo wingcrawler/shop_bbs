@@ -63,5 +63,11 @@
 	<!-- //main -->
 	
 	<jsp:include page="../include/footer.jsp"></jsp:include>
+	
+<script type="text/javascript">
+$(function(){
+	$('.menu_box .menu_list div.module a').eq(3).addClass('active');
+})
+</script>	
 </body>
 </html>
