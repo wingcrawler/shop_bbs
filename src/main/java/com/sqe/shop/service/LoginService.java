@@ -63,5 +63,20 @@ public class LoginService extends BaseCommon{
 		}
 		return resMap;
 	}
+
+	public void autoLogin() {
+		Subject subject = SecurityUtils.getSubject();
+		 if(!subject.isAuthenticated() && subject.isRemembered()){
+			String username = subject.getPrincipal().toString();
+			User user = userMapper.findByName(username);
+			if(user==null){
+				return;
+			}
+			UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
+			token.setRememberMe(true);	
+			subject.login(token);
+			subject.getSession().setAttribute("userInfo", user);
+		 }
+	}
 	
 }

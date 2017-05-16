@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.model.User;
+import com.sqe.shop.service.LoginService;
 import com.sqe.shop.service.UserService;
 
 @Aspect  
@@ -18,13 +19,16 @@ public class LoginAop {
 
 	@Autowired 
 	private UserService userService;
+	@Autowired 
+	private LoginService loginService;
 	
 	@Pointcut("execution(* com.sqe.shop.controller.*.LoginController.login(..))")  
     private void before() {} 
 	
-	 @Before("before()")  
+	@Before("before()")  
     public void beforeMethod() {  
-		 Subject subject = SecurityUtils.getSubject();
+		loginService.autoLogin();
+		 /*Subject subject = SecurityUtils.getSubject();
 		 if(!subject.isAuthenticated() && subject.isRemembered()){
 			String username = subject.getPrincipal().toString();
 			User user = userService.findByName(username);
@@ -32,6 +36,6 @@ public class LoginAop {
 			token.setRememberMe(true);	
 			subject.login(token);
 			subject.getSession().setAttribute("userInfo", user);
-		 }
+		 }*/
     }  
 }

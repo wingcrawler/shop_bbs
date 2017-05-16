@@ -139,12 +139,6 @@
 										</div>
 										</c:if>
 										<div class="product_description">
-											<span class="labe">${t.t_desc }: </span>
-											<div class="text_editing">
-												<span class="test">${entity.description }</span>
-											</div>
-										</div>
-										<div class="product_description">
 											<span class="labe">${t.t_desc }(${t.t_zh }): </span>
 											<div class="text_editing">
 												<span class="test">${entity.description }</span>

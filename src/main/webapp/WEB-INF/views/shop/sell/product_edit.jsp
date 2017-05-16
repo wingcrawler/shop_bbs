@@ -119,7 +119,7 @@
 												</label>
 												<div class="m-checkboxgroup">
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" name="productTag" value="${t.t_product_tag_new }" id="checkbox1" checked="">
+														<input type="checkbox" class="u-ipt-checkbox" name="productTag" value="${t.t_product_tag_new }" id="checkbox1" checked>
 														<label for="checkbox1">
 															<div class="i-checkbox z-checked">
 																<i></i>

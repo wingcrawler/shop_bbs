@@ -26,7 +26,7 @@
 			url_move_show : '', //查看
 			url_load : '', //加载
 			parm : {
-				pageNum : 1,
+				pageNo : 1,
 				pageSize : 10
 			},
 			cache : false,
@@ -46,8 +46,8 @@
 	}
 	
 	/* 翻页 */
-	$.fn.nextPage = function(_pageNum) {
-		_args.parm.pageNum = _pageNum;
+	$.fn.nextPage = function(_pageNo) {
+		_args.parm.pageNo = _pageNo;
 		action.load(_obj, _args);
 	}
 	
@@ -292,7 +292,7 @@
 				}
 			});
 		},
-		nextPage: function(pageNum) {
+		nextPage: function(pageNo) {
 			console.log(11);
 		}
 	}

@@ -44,6 +44,7 @@ public class PageUtil<E> {
 			this.startRow = 0;
 		} else {
 			this.startRow = (pageNo-1)*pageSize;
+			this.pageNo = pageNo;
 		}
 		this.currentPage = this.pageNo;
 	}

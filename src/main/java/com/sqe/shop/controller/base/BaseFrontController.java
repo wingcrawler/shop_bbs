@@ -6,9 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.mysql.jdbc.log.Log;
 import com.sqe.shop.common.BaseCommon;
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.model.User;
+import com.sqe.shop.service.LoginService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.cached.CachedService;
@@ -24,6 +26,8 @@ public class BaseFrontController extends BaseCommon {
     private ProductTypeService productTypeService;
     @Autowired
     private CachedService cachedService;
+    @Autowired
+    private LoginService loginService;
     
 	@ModelAttribute
     public void setReqAndRes(HttpServletRequest request, HttpServletResponse response){  
@@ -35,6 +39,10 @@ public class BaseFrontController extends BaseCommon {
         request.setAttribute("productTypeList", cachedService.getProductTypeList());
         //是否登陆
         User user = this.getCurrentUser();
+        if(user==null){
+        	loginService.autoLogin();
+        }
+        user = this.getCurrentUser();
         if(user==null){
         	request.setAttribute("isLogin", false);
         } else if(user!=null && user.getUserRole().equals(Constants.ROLE_SELL)){
