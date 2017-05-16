@@ -1,44 +1,53 @@
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Xenon Boostrap Admin Panel" />
-	<meta name="author" content="" />
-	
-	<link rel="stylesheet" href="/backendstyle/css/fonts/linecons/css/linecons.css">
-	<link rel="stylesheet" href="/backendstyle/css/fonts/fontawesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/backendstyle/css/bootstrap.css">
-	<link rel="stylesheet" href="/backendstyle/css/xenon-core.css">
-	<link rel="stylesheet" href="/backendstyle/css/xenon-forms.css">
-	<link rel="stylesheet" href="/backendstyle/css/xenon-components.css">
-	<link rel="stylesheet" href="/backendstyle/css/xenon-skins.css">
-	<link rel="stylesheet" href="/backendstyle/css/custom.css">
-	<link rel="stylesheet" href="/backendstyle/css/jquery.page.css">
-	
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-	<script src="/backendstyle/js/jquery-1.11.1.min.js"></script>
-	<script src="/backendstyle/js/bootstrap.min.js"></script>
-	<script src="/backendstyle/js/TweenMax.min.js"></script>
-	<script src="/backendstyle/js/resizeable.js"></script>
-	<script src="/backendstyle/js/joinable.js"></script>
-	<script src="/backendstyle/js/xenon-api.js"></script>
-	<script src="/backendstyle/js/xenon-toggles.js"></script>
-	<script src="/backendstyle/js/xenon-widgets.js"></script>
-	<!-- <script src="/backendstyle/js/devexpress-web-14.1/js/globalize.min.js"></script>
-	<script src="/backendstyle/js/devexpress-web-14.1/js/dx.chartjs.js"></script> -->
-	<script src="/backendstyle/js/toastr/toastr.min.js"></script>
-	<script src="/backendstyle/js/xenon-custom.js"></script>
-	
-	<script src="/backendstyle/js/jquery.form.js"></script>
-	<script src="/backendstyle/js/common-util.js"></script>	
-	<script src="/backendstyle/js/jquery.page.js"></script>
-	<script src="/backendstyle/js/jquery.dateutil.js"></script>
-	<script src="/backendstyle/js/jquery.datatable.js"></script>
-	<script src="/backendstyle/js/jquery.select.js"></script>
-	
-	
-	
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="Biruang Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript">
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+<!-- bootstarp-css -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css"
+	media="all" />
+<!--// bootstarp-css -->
+<!-- css -->
+<link rel="stylesheet" href="css/common.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<!--// css -->
+<script src="bbs/js/jquery.min.js"></script>
+<!--fonts-->
+<!--/fonts-->
+<!-- dropdown -->
+<script src="js/jquery.easydropdown.js"></script>
+<link href="css/nav.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/scripts.js" type="text/javascript"></script>
+<!--js-->
+<!--/js-->
+<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#horizontalTab').easyResponsiveTabs({
+			type : 'default', //Types: default, vertical, accordion           
+			width : 'auto', //auto or any width like 600px
+			fit : true
+		// 100% fit in a container
+		});
+	});
+</script>
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop : $(this.hash).offset().top
+			}, 1000);
+		});
+	});
+</script>
+
+
