@@ -4,160 +4,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords"
-	content="Biruang Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript">
-	
-	
-	
-	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-
-
-
-</script>
-<!-- bootstarp-css -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css"
-	media="all" />
-<!--// bootstarp-css -->
-<!-- css -->
-<link rel="stylesheet" href="css/common.css" type="text/css" media="all" />
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-<!--// css -->
-<script src="js/jquery.min.js"></script>
-<!--fonts-->
-<!--/fonts-->
-<!-- dropdown -->
-<script src="js/jquery.easydropdown.js"></script>
-<link href="css/nav.css" rel="stylesheet" type="text/css" media="all" />
-<script src="js/scripts.js" type="text/javascript"></script>
-<!--js-->
-<!--/js-->
-<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#horizontalTab').easyResponsiveTabs({
-			type : 'default', //Types: default, vertical, accordion           
-			width : 'auto', //auto or any width like 600px
-			fit : true
-		// 100% fit in a container
-		});
-	});
-</script>
-<!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event) {
-			event.preventDefault();
-			$('html,body').animate({
-				scrollTop : $(this.hash).offset().top
-			}, 1000);
-		});
-	});
-</script>
+<jsp:include page="include/meta.jsp"></jsp:include>
 </head>
 <body>
 	<!-- header -->
-	<div class="header">
-		<!-- container -->
-		<div class="container">
-			<!-- header-top -->
-			<div class="header-top">
-				<div class="header-logo">
-					<a href="index.html"><img src="images/logo.png" alt="" /></a>
-				</div>
-				<div class="header-right">
-					<ul>
-						<li class="phone">+371 282 20 760</li>
-						<li class="mail"><a href="mailto:example@mail.com">eony321v@gmail.com</a></li>
-						<li class="checkout"><input type="text" value="Search..."
-							onFocus="this.value = '';"
-							onBlur="if (this.value == '') {this.value = 'Search...';}"
-							required="">
-							<div class="shopping">
-								<h5>Your Shopping Cart is empty.</h5>
-								<p>Give it purpose—fill it with books, movies, mobiles,
-									cameras, toys and fashion jewellery.</p>
-							</div></li>
-					</ul>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-			<!-- //header-top -->
-			<div class="top-nav">
-				<span class="menu"><img src="images/menu.png" alt=""></span>
-				<ul class="nav">
-					<li class="dropdown1"><a href="index.html">首页</a>
-						<ul class="dropdown2">
-							<li><a href="single.html">lorem</a></li>
-							<li><a href="single.html">dorem sia</a></li>
-							<li><a href="single.html">erik</a></li>
-							<li><a href="single.html">ipsum padamans</a></li>
-							<li><a href="single.html">behance</a></li>
-						</ul></li>
-					<li class="dropdown1"><a href="men.html">产品介绍</a>
-						<ul class="dropdown2">
-							<li><a href="men.html">Clothing</a></li>
-							<li><a href="men.html">Footwear</a></li>
-							<li><a href="men.html">Watches</a></li>
-							<li><a href="men.html">Accessories</a></li>
-						</ul></li>
-					<li class="dropdown1"><a href="women.html">新闻资讯</a>
-						<ul class="dropdown2">
-							<li><a href="women.html">Ethnic Wear</a></li>
-							<li><a href="women.html">Western Wear</a></li>
-							<li><a href="women.html">All Jewellery</a></li>
-							<li><a href="women.html">Beauty & Wellness</a></li>
-						</ul></li>
-					<li class="dropdown1"><a href="women.html" class="on">论坛</a>
-						<ul class="dropdown2">
-							<li><a href="women.html">Clothing</a></li>
-							<li><a href="women.html">Footwear</a></li>
-							<li><a href="women.html">Accessories</a></li>
-						</ul></li>
-					<li class="dropdown1"><a href="men.html">个人中心</a>
-						<ul class="dropdown2">
-							<li><a href="men.html">Clothing</a></li>
-							<li><a href="men.html">Footwear</a></li>
-							<li><a href="men.html">Watches</a></li>
-							<li><a href="men.html">Accessories</a></li>
-						</ul></li>
-				</ul>
-			</div>
-			<div class="clearfix"></div>
-			<!-- script-for-menu -->
-			<script>
-				$("span.menu").click(function() {
-					$(" ul.nav").slideToggle("slow", function() {
-					});
-				});
-			</script>
-		</div>
-		<!-- //container -->
-	</div>
+	<jsp:include page="include/header.jsp"></jsp:include>
 	<!-- //header -->
 	<!-- 新增的圈子和精彩 -->
-
 	<div class="tj_t_q">
 		<div class="container">
 
 			<!--圈子信息-->
 			<div id="qms">
-				<img src="images/xzQ.gif" class="ico" /> <span class="m1">星座圈(32786)人</span>
-				<span class="m2">昨日话题:5558&nbsp;|&nbsp;今日话题:3844</span>
-				<!--是圈圈公务圈,则不显示加入和签到按钮-->
+				<c:if test="${not empty sectionindex }">
+					<img src="images/xzQ.gif" class="ico" />
+					<span class="m1">${sectionindex.sectionTitle }</span>
+					<span class="m2">帖子总数${thread.list.size() }</span>
+					<!--是圈圈公务圈,则不显示加入和签到按钮-->
 
 
-				<a class="b1 collect" href="javascript:void(0);"
-					data-url="http://m.100bt.com/JoinToCategory.action?ttqId=20"></a> <a
-					href="javascript:void(0);"
-					data-url="http://m.100bt.com/CheckIn.action?ttqId=20"
-					class="b1 sign hid"></a>
+					<a class="b1 collect" href="javascript:void(0);"
+						data-url="http://m.100bt.com/JoinToCategory.action?ttqId=20"></a>
+					<a href="javascript:void(0);"
+						data-url="http://m.100bt.com/CheckIn.action?ttqId=20"
+						class="b1 sign hid"></a>
+				</c:if>
 			</div>
 			<!--话题筛选-->
 
@@ -175,69 +46,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!--END 展开的内容-->
 			</div>
 			<!--数据列表,通过AJAX请求回来-->
-			<div id="ajaxList"></div>
-
-
-
-
-
-
+			<div id="ajaxList"></div>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\]\['[p][]p-]p-00
 			<ul class="list">
 
-				<!-- 		<li>
-			
-			
-				<em class="at">全站置顶</em>
-			
-			
-			<a href="zhengwen.html" class="tx">【手机圈圈】体验活动第二波，奥币大奖等你拿！</a>
-			
-			
-			
-			
-			<br/>
-			<div class="tR">
-				<span class="qq l">377</span>
-				
-				
-					<a class="sd" href="../Home/1806745.html">小编燕子</a>
-				
-				&nbsp;|&nbsp;
-				<span class="tm">
-				
-				
-					<a href="../Home/15045622.html">147716445</a>
-				&nbsp;&nbsp;刚刚
-				</span>
-			</div>
-		</li>
-	
-		<li>
-			
-			
-				<em class="at">全站置顶</em>
-			
-			
-			<a href="zhengwen.html" class="tx">【圈圈大招募】王者之战，最强工作室选拔赛！</a>
-			
-			
-			
-			<br/>
-			<div class="tR">
-				<span class="qq l">751</span>
-				
-				
-					<a class="sd" href="../Home/1806745.html">小编燕子</a>
-				
-				&nbsp;|&nbsp;
-				<span class="tm">
-				
-				
-					<a href="../Home/27614943.html">岛是海的心&deg;</a>
-				&nbsp;&nbsp;刚刚
-				</span>
-			</div> -->
-				<!-- </li> -->
 
 				<li><em class="t">置顶</em> <a href="zhengwen.html" class="tx">[水泽]新人孩子们不要顾着排名,和我一起了解下家史可好</a>
 

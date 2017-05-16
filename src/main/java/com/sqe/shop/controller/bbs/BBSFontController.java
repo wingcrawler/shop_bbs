@@ -74,6 +74,9 @@ public class BBSFontController extends BaseFrontController {
 	@RequestMapping(value = "/sectionindex", method = RequestMethod.GET)
 	public ModelAndView section(Thread thread, @RequestParam(name = "sectionId") Long sectionId) {
 		ModelAndView model = new ModelAndView("bbs/section");
+		Section index=new Section();
+		index=sectionService.getById(sectionId);
+		model.addObject("sectionindex", index);
 		Section section = new Section();
 		section.setSectionParentId(sectionId);
 		PageUtil<Section> page = sectionService.getBeanListByParm(section, 0, -1);
