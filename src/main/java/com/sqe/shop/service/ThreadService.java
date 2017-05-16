@@ -103,6 +103,13 @@ public class ThreadService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 
+	/**
+	 * 
+	 * @param thread
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
 	public PageUtil<Map<String, Object>> getSectionMapListByParm(Thread thread, int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(thread);
@@ -125,7 +132,15 @@ public class ThreadService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 
-	// 重载
+	/**
+	 * 根据section 获取该版块下帖子
+	 * 
+	 * @param section
+	 * @param thread
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
 	public PageUtil<Map<String, Object>> getSectionMapListByParm(Section section, Thread thread, int pageNo,
 			Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
