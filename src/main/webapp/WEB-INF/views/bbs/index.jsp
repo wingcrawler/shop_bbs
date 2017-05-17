@@ -37,7 +37,7 @@
 				<div id="ajaxdata">
 					<!--10条数据-->
 					<ul class="list">
-						<c:if test="${not empty thread.list }">
+						<!-- 	<c:if test="${not empty thread.list }">
 							<c:forEach var="item" items="${thread.list }">
 								<li><a href="thread?threadId=${item.id }" class="tx">${item.threadTitle }</a>
 									<c:if test="${not empty item.identify }">
@@ -50,69 +50,27 @@
 									</div></li>
 							</c:forEach>
 						</c:if>
-						<li><a href="zhengwen.html" class="tx">【造句活动】若你喜欢怪人，其实我很美。</a>
-
-
-
-							<br />
+ -->
+						<li v-for="item in items"><em v-if="item.thread_identify==2"
+							class="t">置顶</em> <a v-bind:href='"thread?threadId="+item.id'
+							class="tx">{{item.threadTitle}}</a><em
+							v-if="item.thread_identify==1" class="jh">精</em> <br />
 							<div class="tR">
-								<a href="liebiao.html" class="qq l">小说圈</a> <span class="rp">235</span>
-								&nbsp;|&nbsp; <span class="tm">1小时前</span>
+								<a href="#" class="qq l">{{item.section_title}}</a> <span
+									class="rp">{{item.thread_view}}</span> &nbsp;|&nbsp; <span
+									class="tm">{{item.timeAgo}}</span>
 							</div></li>
-						<li><a href="zhengwen.html" class="tx">【香槟】当你准备放弃的时候，看看这个吧</a>
-
-
-
-							<br />
-							<div class="tR">
-								<a href="liebiao.html" class="qq l">田田圈</a> <span class="rp">102</span>
-								&nbsp;|&nbsp; <span class="tm">37分钟前</span>
-							</div></li>
-						<li><a href="zhengwen.html" class="tx">【忧桑】如果你回到家发现窝睡在你家床上，你会说什么</a>
-
-
-
-							<br />
-							<div class="tR">
-								<a href="liebiao.html" class="qq l">奥雅之光粉丝圈</a> <span class="rp">667</span>
-								&nbsp;|&nbsp; <span class="tm">5分钟前</span>
-							</div></li>
-						<li><a href="zhengwen.html" class="tx">【彤彤】明星们的撞脸</a> <br />
-							<div class="tR">
-								<a href="zn/TTQInfo/23_0_0_0.html" class="qq l">明星圈</a> <span
-									class="rp">55</span> &nbsp;|&nbsp; <span class="tm">1小时前</span>
-							</div></li>
-						<li><a href="zhengwen.html" class="tx">韩国SM旗下艺人的悲惨内幕 【2】</a>
-
-
-
-							<br />
-							<div class="tR">
-								<a href="liebiao.html" class="qq l">明星圈</a> <span class="rp">42</span>
-								&nbsp;|&nbsp; <span class="tm">7小时前</span>
-							</div></li>
-						<li><a href="zhengwen.html" class="tx">【男神】致吾辈最爱的男神们？有你的他么！</a>
-
-
-
-							<br />
-							<div class="tR">
-								<a href="liebiao.html" class="qq l">动漫圈</a> <span class="rp">286</span>
-								&nbsp;|&nbsp; <span class="tm">13分钟前</span>
-							</div></li>
-						<li><a href="zhengwen.html" class="tx">你的腹黑指度有多少</a> <em
-							class="jh">精</em> <br />
-							<div class="tR">
-								<a href="liebiao.html" class="qq l">星座圈</a> <span class="rp">324</span>
-								&nbsp;|&nbsp; <span class="tm">28分钟前</span>
-							</div></li>
+						<li v-if="loaded==false">
+							<div>正在加载数据......</div>
+						</li>
+						<li v-if="loaded==true && items.length==0">
+							<div colspan="3" class="text-center">暂无数据</div>
+						</li>
 					</ul>
 				</div>
 				<!--相关按钮-->
 				<div class="info hyh">
-					<a href="javascript:void(0);"
-						data-url="http://m.100bt.com/zn/LoadIndexTopics.html?limit=10"
-						class="changeb wb">换一换</a>
+					<a id="getchange" class="changeb wb">换一换</a>
 				</div>
 			</div>
 			<!--END 精彩推荐-->
@@ -123,5 +81,49 @@
 	<jsp:include page="include/footer.jsp"></jsp:include>
 
 	<!-- //footer -->
+	<script type="text/javascript">
+		var playTableVue = new Vue({
+			el : "#ajaxdata",
+			data : {
+				items : [],
+				loaded : false
+			}
+		});
+		$(function() {
+			$.getJSON("threads", {
+				playid : '${sectionId.sectionId}'
+			}, function(json) {
+				if (!json)
+					json = [];
+				playTableVue.items = json.list;
+				playTableVue.loaded = true;
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
+			$("#getchange").click(function() {
+				var goodsVue = new Vue({
+					el : '#app',
+					data : {
+						goodsList : ''
+					},
+					methods : {
+						nameSearch : function() {
+							var _self = this;
+							$.ajax({
+								type : 'GET',
+								url : 'topic/test',
+								success : function(data) {
+									_self.goodsList = data;
+								}
+							});
+						}
+					}
+				})
+			});
+		});
+	</script>
+
 </body>
 </html>

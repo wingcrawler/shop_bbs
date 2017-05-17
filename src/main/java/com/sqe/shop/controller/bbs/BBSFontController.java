@@ -58,7 +58,7 @@ public class BBSFontController extends BaseFrontController {
 		return model;
 	}
 
-	// thread 不存在显示为空
+	// thread 不存在显示404
 	@RequestMapping(value = "/thread", method = RequestMethod.GET)
 	public ModelAndView thread(@RequestParam(name = "threadId") Long threadId) {
 		ModelAndView model = new ModelAndView("bbs/thread");
@@ -74,8 +74,8 @@ public class BBSFontController extends BaseFrontController {
 	@RequestMapping(value = "/sectionindex", method = RequestMethod.GET)
 	public ModelAndView section(Thread thread, @RequestParam(name = "sectionId") Long sectionId) {
 		ModelAndView model = new ModelAndView("bbs/section");
-		Section index=new Section();
-		index=sectionService.getById(sectionId);
+		Section index = new Section();
+		index = sectionService.getById(sectionId);
 		model.addObject("sectionindex", index);
 		Section section = new Section();
 		section.setSectionParentId(sectionId);
@@ -92,6 +92,25 @@ public class BBSFontController extends BaseFrontController {
 	public ModelAndView topic() {
 		ModelAndView model = new ModelAndView("bbs/topic");
 		return model;
+	}
+
+	/**
+	 * 根据版块id 返回列表
+	 * 
+	 * @param thread
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/threads", method = RequestMethod.GET)
+	public Map<String, Object> getList(Thread thread, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+		Map<String, Object> resMap = new HashMap<String, Object>();
+		PageUtil<Map<String, Object>> page = threadService.getThreadsMapListByParm(thread, pageNo, pageSize);
+		resMap.put("list", page.getList());
+		resMap.put("page", page);
+		return resMap;
 	}
 
 }
