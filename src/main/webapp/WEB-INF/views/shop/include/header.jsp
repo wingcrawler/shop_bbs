@@ -16,7 +16,7 @@
 						<li class=""><a href="/front/sell/productListPage">${t.t_bussiness_center }</a></li>
 					</c:if>
 					<c:if test="${isBuyLogin }">
-						<li class=""><a href="/front/buy/index">${t.t_welcome } ${user.username }</a></li>
+						<li class=""><a href="/front/buy/basicInfo">${t.t_welcome } ${user.username }</a></li>
 					</c:if>
 					<c:if test="${!isLogin }">
 						<li class=""><a href="/back/login">${t.sign_in }</a></li>

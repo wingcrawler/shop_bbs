@@ -48,6 +48,7 @@ public class BaseFrontController extends BaseCommon {
         } else if(user!=null && user.getUserRole().equals(Constants.ROLE_SELL)){
         	request.setAttribute("isSellLogin", true);
         	request.setAttribute("isLogin", true);
+        	request.setAttribute("user", user);
         } else if(user!=null && user.getUserRole().equals(Constants.ROLE_BUY)){
         	request.setAttribute("isBuyLogin", true);
         	request.setAttribute("isLogin", true);

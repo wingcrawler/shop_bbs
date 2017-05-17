@@ -75,7 +75,7 @@
 							</div>
 							<div class="address">
 								<div>
-									<span  class="lab">地址: </span>
+									<span  class="lab">${t.t_address}: </span>
 									<input type="text" name="shopAddress" value="${shop.shopAddress }">
 									<!-- <select class="margin_left_minus">
 										<option>xxxx</option>

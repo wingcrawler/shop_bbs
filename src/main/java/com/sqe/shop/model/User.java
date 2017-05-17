@@ -20,6 +20,7 @@ public class User extends BaseModel implements Serializable {
 	private Long userRole;
 	private String userIntroduce;
 	private String username;
+	private String userQq;
 	
 	public String getUserAddress() {
 		return userAddress;
@@ -86,6 +87,12 @@ public class User extends BaseModel implements Serializable {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getUserQq() {
+		return userQq;
+	}
+	public void setUserQq(String userQq) {
+		this.userQq = userQq;
 	}
 	
 	

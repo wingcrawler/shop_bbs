@@ -3,12 +3,13 @@
 <mapper namespace="com.sqe.shop.mapper.UserMapper">
 
 <resultMap type="com.sqe.shop.model.User" id="UserBaseMapper">
+	<id property="userQq" column="user_qq" />
+	<id property="userStatus" column="user_status" />
+	<id property="userPhone" column="user_phone" />
 	<id property="userAddress" column="user_address" />
 	<id property="password" column="password" />
-	<id property="userStatus" column="user_status" />
 	<id property="userImage" column="user_image" />
 	<id property="createTime" column="create_time" />
-	<id property="userPhone" column="user_phone" />
 	<id property="userMail" column="user_mail" />
 	<id property="id" column="id" />
 	<id property="userRole" column="user_role" />
@@ -21,31 +22,34 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into user
-	(user_address,password,user_status,user_image,create_time,user_phone,user_mail,user_role,user_introduce,username)
+	(user_qq,user_status,user_phone,user_address,password,user_image,create_time,user_mail,user_role,user_introduce,username)
 	values
-	(#{userAddress},#{password},#{userStatus},#{userImage},#{createTime},#{userPhone},#{userMail},#{userRole},#{userIntroduce},#{username})
+	(#{userQq},#{userStatus},#{userPhone},#{userAddress},#{password},#{userImage},#{createTime},#{userMail},#{userRole},#{userIntroduce},#{username})
 </insert>
 
 <update id="update">
 	UPDATE user 
 	<set>
+			<if test="userQq != null">  
+	        	user_qq=#{userQq},
+	    	</if>
+			<if test="userStatus != null">  
+	        	user_status=#{userStatus},
+	    	</if>
+			<if test="userPhone != null">  
+	        	user_phone=#{userPhone},
+	    	</if>
 			<if test="userAddress != null">  
 	        	user_address=#{userAddress},
 	    	</if>
 			<if test="password != null">  
 	        	password=#{password},
 	    	</if>
-			<if test="userStatus != null">  
-	        	user_status=#{userStatus},
-	    	</if>
 			<if test="userImage != null">  
 	        	user_image=#{userImage},
 	    	</if>
 			<if test="createTime != null">  
 	        	create_time=#{createTime},
-	    	</if>
-			<if test="userPhone != null">  
-	        	user_phone=#{userPhone},
 	    	</if>
 			<if test="userMail != null">  
 	        	user_mail=#{userMail},
