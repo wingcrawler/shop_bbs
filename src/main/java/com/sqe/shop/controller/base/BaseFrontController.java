@@ -1,5 +1,7 @@
 package com.sqe.shop.controller.base;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,9 +32,13 @@ public class BaseFrontController extends BaseCommon {
     private LoginService loginService;
     
 	@ModelAttribute
-    public void setReqAndRes(HttpServletRequest request, HttpServletResponse response){  
+    public void setReqAndRes(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{  
         this.request = request;
         this.response = response;
+        
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json;charset=UTF-8");//防止数据传递乱码
+        
         //国际化内容
         request.setAttribute("t", cachedService.getBundle());
         //获取产品类别列表

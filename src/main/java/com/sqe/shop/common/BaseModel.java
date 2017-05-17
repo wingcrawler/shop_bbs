@@ -9,6 +9,7 @@ public class BaseModel {
 	private String userName;
 	private String title;
 	private String time;
+	private String showImage;
 
 	public String getTypeName() {
 		return typeName;
@@ -65,6 +66,14 @@ public class BaseModel {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public String getShowImage() {
+		return showImage;
+	}
+
+	public void setShowImage(String showImage) {
+		this.showImage = showImage;
 	}
 
 }

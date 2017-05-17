@@ -101,6 +101,12 @@ public class ProductService extends AdapterService implements BaseService {
 			if(product.getProductStatus()!=null && product.getProductStatus()>=0){
 				parm.put("productStatus", product.getProductStatus());	
 			}
+			if(product.getProductTypeId()!=null && product.getProductTypeId()>=0){
+				parm.put("productTypeId", product.getProductTypeId());	
+			}
+			if(product.getProductSubtypeId()!=null && product.getProductSubtypeId()>=0){
+				parm.put("productSubtypeId", product.getProductSubtypeId());	
+			}
 			if(product.getShopId()!=null && product.getShopId()>=0){
 				parm.put("shopId", product.getShopId());	
 			}

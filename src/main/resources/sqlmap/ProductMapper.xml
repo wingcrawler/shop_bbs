@@ -242,10 +242,12 @@
 	select p.id id,p.product_name as productName, p.product_price as productPrice,
 	p.product_rank as productRank, p.product_view as productView,p.product_count as productCount,
 	p.product_status as productStatus,s.shop_title as shopName,concat(pt.type_name_ch,'/',pt.type_name) as productTypeName,
- 	date_format(p.create_time, '%Y-%m-%d') as createTimeStr,p.product_tag as productTag
+ 	date_format(p.create_time, '%Y-%m-%d') as createTimeStr,p.product_tag as productTag,
+	i.image_path as imagePath
 	from product p 
 	LEFT JOIN product_type pt on p.product_type_id=pt.id
 	LEFT JOIN shop s on p.shop_id=s.id
+	LEFT JOIN image i on p.id=i.product_id and i.index_show=1
 	where 1=1
 	<if test="parm.productDescripton != null">
 	     	and p.product_descripton = #{parm.productDescripton}
