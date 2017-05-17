@@ -49,12 +49,12 @@ public class BBSFontController extends BaseFrontController {
 		section.setSectionType(0);
 		PageUtil<Section> page = sectionService.getBeanListByParm(section, 0, -1);
 		model.addObject("section", page);
-		section.setSectionType(1);
-		PageUtil<Section> pageSecond = sectionService.getBeanListByParm(section, 0, -1);
-		model.addObject("sectionSecond", pageSecond);
-		section.setSectionType(1);
-		PageUtil<Map<String, Object>> pageThread = threadService.getSectionMapListByParm(thread, 0, -1);
-		model.addObject("thread", pageThread);
+//		section.setSectionType(1);
+//		PageUtil<Section> pageSecond = sectionService.getBeanListByParm(section, 0, -1);
+//		model.addObject("sectionSecond", pageSecond);
+//		section.setSectionType(1);
+//		PageUtil<Map<String, Object>> pageThread = threadService.getSectionMapListByParm(thread, 0, -1);
+//		model.addObject("thread", pageThread);
 		return model;
 	}
 

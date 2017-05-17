@@ -204,7 +204,9 @@
 		LEFT JOIN
 		section s on t.section_id = s.id
 		where 1=1
-		and t.thread_status=1
+		<if test="parm.threadStatus != null">
+			and t.thread_status = #{parm.threadStatus}
+		</if>
 		<if test="parm.topicId != null">
 			and t.topic_id = #{parm.topicId}
 		</if>

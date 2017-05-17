@@ -165,7 +165,7 @@ public class ThreadService extends AdapterService implements BaseService {
 	}
 
 	/**
-	 * 根据section 获取该版块下帖子V2 ajax 调用
+	 * 根据section 获取该版块下帖子V2 ajax 调用 10篇帖子
 	 * 
 	 * @param section
 	 * @param thread
@@ -177,7 +177,10 @@ public class ThreadService extends AdapterService implements BaseService {
 			Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(thread);
+		parm.put("threadStatus", 1);
 		parm.put("orderby", "t.thread_identify desc , t.id desc ");
+		parm.put("start", 0);
+		parm.put("limit", 10);
 		int count = threadMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
