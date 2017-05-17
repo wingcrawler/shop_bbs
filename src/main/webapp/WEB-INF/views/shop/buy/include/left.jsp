@@ -7,18 +7,18 @@
 	</div>
 	<div class="menu_list">
 		<ul>
-			<li>${t.t_user_center }</li>
-			<li>${t.t_basic_info }</li>
-			<li>${t.t_post_record }</li>
-			<li>${t.t_my_comment }</li>
-			<li>${t.t_my_message }</li>
-			<li>${t.t_change_pwd }</li>
-			<li>${t.t_want_report }</li>      
+			<li><a href="#">${t.t_user_center }</a></li>
+			<li><a href="/front/buy/basicInfo">${t.t_basic_info }</a></li>
+			<li><a href="#">${t.t_post_record }</a></li>
+			<li><a href="#">${t.t_my_comment }</a></li>
+			<li><a href="#">${t.t_my_message }</a></li>
+			<li><a href="/front/buy/changePwd">${t.t_change_pwd }</a></li>
+			<li><a href="#">${t.t_want_report }</a></li>      
 		</ul>
 	</div>
 </div> 
 <!-- //menu -->
 
 <style>
-.active{color:red}
+.active{color:#f00}
 </style>

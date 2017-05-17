@@ -105,7 +105,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.menu_list ul li').eq(1).addClass('active');
+	$('.menu_list ul li a').eq(1).addClass('active');
 });
 </script>
 </body>

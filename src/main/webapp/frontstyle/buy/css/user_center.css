@@ -110,7 +110,7 @@ input {
   line-height: 3.125rem;
   font-size: 0.875rem;
   cursor: pointer;
-  color: #333333;
+  /* color: #333333; */
 }
 @media (min-width: 1200px){
   .main .container .menu  .menu_list li:hover{

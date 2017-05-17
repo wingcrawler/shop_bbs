@@ -23,6 +23,7 @@ import com.sqe.shop.model.User;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.DateUtil;
+import com.sqe.shop.util.MD5Util;
 import com.sqe.shop.util.PropertiesUtil;
 
 @Controller
@@ -88,5 +89,49 @@ public class BuyerCenterController extends BaseFrontController {
 		
 		return responseOK1("");
 	}
+	
+	/**
+	 * 进入修改密码页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/changePwd", method = RequestMethod.GET)
+	public ModelAndView changePwd(ModelAndView model){
+		model.setViewName("shop/buy/change_password");
+		return model;
+	}
+	/**
+	 * 修改密码
+	 * @param oldPwd
+	 * @param newPwd
+	 * @param confirmPwd
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/doChangePwd", method = RequestMethod.POST)
+	public Map<String, Object> doChangePwd(String oldPwd, String newPwd, String confirmPwd){
+		if(StringUtils.isBlank(oldPwd)){
+			return responseError(-1, "error_empty_oldpwd");
+		} else if(StringUtils.isBlank(newPwd)){
+			return responseError(-1, "error_empty_newpwd");
+		} else if(StringUtils.isBlank(confirmPwd)){
+			return responseError(-1, "error_empty_confirmpwd");
+		} else if(!newPwd.equals(confirmPwd)){
+			return responseError(-1, "error_twopwd_not_match");
+		}
+		
+		MD5Util md5 = new MD5Util(MD5Util.SALT, "MD5");
+		String oldPwdMd5 = md5.encode(oldPwd);
+		User user = userService.getById(this.getCurrentUserId());
+		if(!user.getPassword().equals(oldPwdMd5)){
+			return responseError(-1, "error_oldpwd");
+		}
+		
+		String newPwdMd5 = md5.encode(newPwd);
+		user.setPassword(newPwdMd5);
+		userService.update(user);
+		return responseOK1("");
+	}
+			
 	
 }
