@@ -17,7 +17,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/topic.css" type="text/css" media="all" />
 <!--// css -->
-<script src="bbs/js/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/laypage.js"></script>
 <!--fonts-->
 <!--/fonts-->
 <!-- dropdown -->
@@ -25,6 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/nav.css" rel="stylesheet" type="text/css" media="all" />
 <script src="js/scripts.js" type="text/javascript"></script>
 <!--js-->
+<script src="js/vue.js" type="text/javascript"></script>
 <!--/js-->
 <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
 <script type="text/javascript">

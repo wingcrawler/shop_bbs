@@ -1,108 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
 
-	<jsp:include page="include/meta.jsp"></jsp:include>
-	<title>${t.m_bbs_topic }</title>
-	
+<jsp:include page="include/meta.jsp"></jsp:include>
+
+
 </head>
 <body class="page-body">
-	<div class="page-container">
-		<!-- 左边栏 -->
-		<jsp:include page="include/left.jsp"></jsp:include>
-		<div class="main-content">
-			<!-- 头部栏 -->
-			<jsp:include page="include/header.jsp"></jsp:include>	
-			
-			<!-- 搜索区 -->
-			<div class="row">
-				<div class="col-sm-12 panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">${t.search_box }</h3>
-					</div>
-					<div class="panel-body">
-						<form class="form-horizontal form" id="form" action="javascript:void(0);">
-							<div class="form-group">
-								<div class="col-sm-3">
-									${t.t_topic }
-									<input type="text" class="form-control input" name="topicTitle">
-								</div>
-								<div class="col-sm-3">
-									${t.t_select_section }
-									<select class="form-control select" name="sectionId">
-										<option value="-1">-- ${t.t_select } --</option>
-										<c:forEach items="${secondSectionList}" var="item">
-										<option value="${item.id}">${item.sectionTitle}</option>
-										</c:forEach>
-									</select>
-								</div>
-								<div class="col-sm-2">
-									<br>
-									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
-										<i class="fa-search"></i>
-										<span>${t.t_search }</span>
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!-- 搜索区结束 -->
-			
-			<!-- 列表区 -->
-			<div class="row">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">${t.t_list }</h3>
-						<div class="panel-options">
-							<a href="/backend/topic/edit" target="_blank"><i class="fa-plus"></i></a>
-							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
-						</div>
-					</div>
-					<div class="panel-body">
-						<table class="table table-bordered table-striped" id="datatable">
-							<thead>
-								<tr>
-									<th width="60" field="index">${t.t_no }</th>
-									<th field="topicTitle">${t.t_topic }</th>
-									<th field="sectionTitle">${t.t_section_2 }</th>
-									<th field="statusName">${t.t_status }</th>
-									<th field="topicDescription">${t.t_desc }</th>
-									<th field="op" field-role="2,0" width="110"></th>
-								</tr>
-							</thead>
-							<tbody class="middle-align"></tbody>
-						</table>
-						<div class="pagebar"></div>
-					</div>
-				</div>
-			</div>
-			<!-- 列表区结束 -->
-			
-		</div>
-	</div>
 
-<jsp:include page="dialog/dialog_delete.jsp"></jsp:include>	
-<script type="text/javascript">
-$(function(){
-	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(7).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(7).find('ul li').eq(2).addClass('active');
-	
-	$('#datatable').datatable({
-		url_load : '/backend/topic/getList',
-		url_edit : '/backend/topic/edit',
-		url_remove : '/backend/topic/doDelete',
-		backFn : function(p) {
-			// console.log(p);
-		}
-	}); 
-});
-</script>
+	<table class="table table-bordered table-striped table-condensed"
+		id="recentPlayTable">
+		<tr>
+			<th>名称</th>
+			<th>时间</th>
+			<th>人数</th>
+			<th>人数</th>
+			<th>人数</th>
+		</tr>
+		<tr v-for="item in items">
+			<td>{{item.date}}</td>
+			<td>{{item.threadTitle}}</td>
+			<td>{{item.createTimeStr}}</td>
+			<td>{{item.username}}</td>
+		</tr>
+		<tr v-if="loaded==false">
+			<td colspan="3" class="text-center">正在加载数据......</td>
+		</tr>
+		<tr v-if="loaded==true && items.length==0">
+			<td colspan="3" class="text-center">暂无数据</td>
+		</tr>
+	</table>
+	<!-- 分页测试 -->
+	<div id="page1" style="margin-top: 5px; text-align: center;"></div>
+	<ul id="biuuu_list"></ul>
+	<ul id="biuuu_city_list"></ul>
+	<div id="biuuu_city"></div>
+	<script type="text/javascript">
+		var playTableVue = new Vue({
+			el : "#recentPlayTable",
+			data : {
+				items : [],
+				loaded : false
+			}
+		});
+		$(function() {
+			$.getJSON("test", {
+				playid : '${play.playid}'
+			}, function(json) {
+				if (!json)
+					json = [];
+				playTableVue.items = json.list;
+				playTableVue.loaded = true;
+			});
+		});
+	</script>
+
+	<script type="text/javascript">
+		//以下将以jquery.ajax为例，演示一个异步分页
+		function demo(curr) {
+			$.getJSON('test', {
+				playid : '${play.playid}'
+			}, function(json) {
+				if (!json)
+					json = [];
+				//显示分页
+				laypage({
+					cont : 'page1',
+					pages : json.page.totalRecords, //可以叫服务端把总页数放在某一个隐藏域，再获取。假设我们获取到的是18
+					curr : function() { //通过url获取当前页，也可以同上（pages）方式获取
+						var page = location.search.match(/pageNo=(\d+)/);
+						return page ? page[1] : 1;
+					}(),
+					jump : function(e, first) { //触发分页后的回调
+						if (!first) { //一定要加此判断，否则初始时会无限刷新
+							location.href = '?pageNo=' + e.curr;
+						}
+					}
+				});
+			});
+		};
+		//运行
+		demo();
+	</script>
+
 </body>
 </html>
