@@ -107,5 +107,10 @@
 	</div>
 	<!-- //main -->
 
+<script type="text/javascript">
+$(function(){
+	$('.menu_list ul li a').eq(2).addClass('active');
+});
+</script>
 </body>
 </html>

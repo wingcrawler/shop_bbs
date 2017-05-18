@@ -1,6 +1,7 @@
 package com.sqe.shop.controller.front;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +22,7 @@ import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.User;
+import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.service.file.ImageFileService;
@@ -41,6 +43,8 @@ public class BuyerCenterController extends BaseFrontController {
 	private ImageFileService imageFileService;
 	@Autowired
 	private ThreadService threadService;
+	@Autowired
+	private CommentService commentService;
 	
 	/**
 	 * 进入用户基本信息页面
@@ -154,6 +158,34 @@ public class BuyerCenterController extends BaseFrontController {
 		model.setViewName("shop/buy/posting_record");
 		return model;
 	}
-			
+	
+	/**
+	 * 我的留言
+	 * @param model
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping(value="/myMessage", method = RequestMethod.GET)
+	public ModelAndView messagePage(ModelAndView model, 
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		
+		PageUtil<Map<String, Object>> page = new PageUtil<Map<String,Object>>();
+		page = getCommentList(this.getCurrentUserId(), pageNo, pageSize);
+		
+		model.addObject("page", page);
+		model.setViewName("shop/buy/leave_message");
+		return model;
+	}
+	
+	public PageUtil<Map<String, Object>> getCommentList(Long userId, int pageNo, Integer pageSize) {
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("userId", userId);
+		parmMap.put("nullCommentId", true);
+		parmMap.put("orderby", "c.date desc");
+		PageUtil<Map<String, Object>> msgPage = commentService.getSellerProductCommentListByParm(parmMap, pageNo, pageSize);
+		return msgPage;
+	}
 	
 }
