@@ -161,7 +161,8 @@
 
 	<select id="getMapListByParm" parameterType="HashMap"
 		resultType="HashMap">
-		select t.id, t.thread_title as threadTitle, t.thread_time as date,
+		select t.id, t.thread_title as threadTitle, 
+		t.thread_time as date,
 		u.username,tp.topic_title as topicTitle,
 		t.thread_type as
 		threadType,t.thread_status as threadStatus
@@ -171,16 +172,28 @@
 		LEFT JOIN topic tp on t.topic_id = tp.id
 		where 1=1
 		<if test="parm.topicId != null">
-			and t.topic_id = #{parm.topicId}
+			and topic_id = #{parm.topicId}
 		</if>
-		<if test="parm.threadType != null">
-			and t.thread_type = #{parm.threadType}
+		<if test="parm.threadStatus != null">
+			and thread_status = #{parm.threadStatus}
 		</if>
 		<if test="parm.threadTitle != null">
-			and t.thread_title like "%"#{parm.threadTitle}"%"
+			and thread_title like "%"#{parm.threadTitle}"%"
+		</if>
+		<if test="parm.threadTime != null">
+			and thread_time = #{parm.threadTime}
+		</if>
+		<if test="parm.threadType != null">
+			and thread_type = #{parm.threadType}
 		</if>
 		<if test="parm.sectionId != null">
-			and t.section_id = #{parm.sectionId}
+			and section_id = #{parm.sectionId}
+		</if>
+		<if test="parm.threadContext != null">
+			and thread_context = #{parm.threadContext}
+		</if>
+		<if test="parm.userId != null">
+			and user_id = #{parm.userId}
 		</if>
 		<if test="parm.orderby != null">
 			order by ${parm.orderby}
@@ -218,6 +231,9 @@
 		</if>
 		<if test="parm.sectionId != null">
 			and t.section_id = #{parm.sectionId}
+		</if>
+		<if test="parm.userId != null">
+			and user_id = #{parm.userId}
 		</if>
 		<if test="parm.orderby != null">
 			order by ${parm.orderby}

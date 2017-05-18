@@ -19,11 +19,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Shop;
+import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.User;
+import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.MD5Util;
+import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.PropertiesUtil;
 
 @Controller
@@ -36,6 +39,8 @@ public class BuyerCenterController extends BaseFrontController {
 	private UserService userService;
 	@Autowired
 	private ImageFileService imageFileService;
+	@Autowired
+	private ThreadService threadService;
 	
 	/**
 	 * 进入用户基本信息页面
@@ -131,6 +136,23 @@ public class BuyerCenterController extends BaseFrontController {
 		user.setPassword(newPwdMd5);
 		userService.update(user);
 		return responseOK1("");
+	}
+	
+	/**
+	 * 发帖回复页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/postRecord", method = RequestMethod.GET)
+	public ModelAndView postReply(ModelAndView model, Thread thread,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize){
+		thread.setUserId(this.getCurrentUserId());
+		PageUtil<Map<String, Object>> page = threadService.getSellThreadList(thread, pageNo, pageSize);
+		
+		model.addObject("page", page);
+		model.setViewName("shop/buy/posting_record");
+		return model;
 	}
 			
 	

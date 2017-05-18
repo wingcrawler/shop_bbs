@@ -218,6 +218,9 @@ public class ThreadService extends AdapterService implements BaseService {
 			if (thread.getTopicId() != null && thread.getTopicId() >= 0) {
 				parm.put("topicId", thread.getTopicId());
 			}
+			if (thread.getUserId() != null && thread.getUserId() >= 0) {
+				parm.put("userId", thread.getUserId());
+			}
 		}
 		return parm;
 	}
@@ -236,6 +239,9 @@ public class ThreadService extends AdapterService implements BaseService {
 			}
 			if (section.getId() != null && section.getId() >= 0) {
 				parm.put("sectionId", section.getId());
+			}
+			if (thread.getUserId() != null && thread.getUserId() >= 0) {
+				parm.put("userId", thread.getUserId());
 			}
 		}
 		return parm;
