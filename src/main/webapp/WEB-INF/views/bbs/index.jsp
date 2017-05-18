@@ -37,20 +37,6 @@
 				<div id="ajaxdata">
 					<!--10条数据-->
 					<ul class="list">
-						<!-- 	<c:if test="${not empty thread.list }">
-							<c:forEach var="item" items="${thread.list }">
-								<li><a href="thread?threadId=${item.id }" class="tx">${item.threadTitle }</a>
-									<c:if test="${not empty item.identify }">
-										<em class="jh">${item.identify }</em>
-									</c:if> <br />
-									<div class="tR">
-										<a href="sectionindex?sectionId=${item.section_id}"
-											class="qq l">${item.section_title }</a> <span class="rp">${item.thread_view }</span>
-										&nbsp;|&nbsp; <span class="tm">${item.timeAgo }</span>
-									</div></li>
-							</c:forEach>
-						</c:if>
- -->
 						<li v-for="item in items"><em v-if="item.thread_identify==2"
 							class="t">置顶</em> <a v-bind:href='"thread?threadId="+item.id'
 							class="tx">{{item.threadTitle}}</a><em
@@ -82,46 +68,71 @@
 
 	<!-- //footer -->
 	<script type="text/javascript">
-		var playTableVue = new Vue({
-			el : "#ajaxdata",
-			data : {
-				items : [],
-				loaded : false
-			}
-		});
-		$(function() {
-			$.getJSON("threads", {
-				playid : '${sectionId.sectionId}'
-			}, function(json) {
-				if (!json)
-					json = [];
-				playTableVue.items = json.list;
-				playTableVue.loaded = true;
+		$(document).ready(function() {
+			var playTableVue = new Vue({
+				el : "#ajaxdata",
+				data : {
+					items : [],
+					loaded : false
+				}
 			});
+			$(function() {
+				$.getJSON("threads", {
+					playid : '${sectionId.sectionId}'
+				}, function(json) {
+					if (!json)
+						json = [];
+					playTableVue.items = json.list;
+					playTableVue.loaded = true;
+				});
+			});
+			
+			
 		});
+		
+		
 	</script>
 	<script>
-		$(document).ready(function() {
-			$("#getchange").click(function() {
-				var goodsVue = new Vue({
-					el : '#app',
-					data : {
-						goodsList : ''
-					},
-					methods : {
-						nameSearch : function() {
-							var _self = this;
-							$.ajax({
-								type : 'GET',
-								url : 'topic/test',
-								success : function(data) {
-									_self.goodsList = data;
-								}
-							});
-						}
-					}
-				})
+		$("#getchange").click(function() {
+			console.log('click change begin');
+			var playTableVue2 = new Vue({
+				el : '#ajaxdata',
+				data : {
+					items : [],
+					loaded : false
+				}
 			});
+
+			$(function() {
+				$.getJSON("threads", {
+					sectionId : '2'
+				}, function(json) {
+					if (!json)
+						json = [];
+					playTableVue2.items = json.list;
+					playTableVue2.loaded = true;
+				});
+
+			})
+			
+		  console.log('click change end');
+			$(function() {
+				var section2;
+				var list;
+				$.getJSON("section/getSecondSection", {
+					sectionId : '2'
+				}, function(json) {
+					if (!json)
+						json = [];
+					section2 = json.list;
+					console.log('#'+section2);
+				});
+				for(var p in section2){
+				    str = str+obj[p]+',';
+				    console.log('#'+str);
+				}
+
+			}) 
 		});
 	</script>
 
