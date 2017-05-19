@@ -23,6 +23,7 @@ import com.sqe.shop.model.Shop;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.CommentService;
+import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.service.file.ImageFileService;
@@ -45,6 +46,8 @@ public class BuyerCenterController extends BaseFrontController {
 	private ThreadService threadService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private MessageService messageService;
 	
 	/**
 	 * 进入用户基本信息页面
@@ -179,6 +182,34 @@ public class BuyerCenterController extends BaseFrontController {
 		return model;
 	}
 	
+	/**
+	 * 商品留言页面 
+	 * @param model
+	 * @param type 1:留言 2：私信
+	 * @return
+	 */
+	@RequestMapping(value="/messagePage", method = RequestMethod.GET)
+	public ModelAndView messagePage(ModelAndView model, String type,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		pageSize = 10;
+		PageUtil<Map<String, Object>> page = new PageUtil<Map<String,Object>>();
+		if(type.equals("1")){//产品评论
+			page = getCommentList(this.getCurrentUserId(), pageNo, pageSize);
+			model.setViewName("shop/buy/leave_message");
+		} else if(type.equals("2")){//私信
+			page = getMessageList(this.getCurrentUserId(), pageNo, pageSize);
+			model.setViewName("shop/buy/direct_messages");
+		} else {
+			model.setViewName("shop/404");
+			return model;
+		}
+		
+		model.addObject("type", type);
+		model.addObject("page", page);
+		return model;
+	}
+	
 	public PageUtil<Map<String, Object>> getCommentList(Long userId, int pageNo, Integer pageSize) {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
 		parmMap.put("userId", userId);
@@ -187,5 +218,18 @@ public class BuyerCenterController extends BaseFrontController {
 		PageUtil<Map<String, Object>> msgPage = commentService.getSellerProductCommentListByParm(parmMap, pageNo, pageSize);
 		return msgPage;
 	}
-	
+	/**
+	 * 私信列表
+	 * @param message
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public PageUtil<Map<String, Object>> getMessageList(Long userId, int pageNo, Integer pageSize) {
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("receiveId", userId);
+		parmMap.put("orderby", "m.create_time desc");
+		PageUtil<Map<String, Object>> msgPage = messageService.getSellerMessageListByParm(parmMap, pageNo, pageSize);
+		return msgPage;
+	}
 }
