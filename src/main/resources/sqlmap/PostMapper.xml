@@ -107,4 +107,21 @@
 </select>
 
 
+<select id="getUserMapListByParm" parameterType="HashMap" resultType="HashMap">
+	select  p.id as id, p.post_context as context,p.thread_id,p.user_id,p.post_date, p.floor, u.username as name ,u.user_role as role  from post  
+	LEFT JOIN `user` u on
+		p.user_id = u.id
+	where 1=1
+	   <if test="parm.postStatus != null">
+		     	and post_status = #{parm.postStatus}
+		   	</if>
+		<if test="parm.orderby != null">
+	   		order by ${parm.orderby}
+	   	</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+</select>
+
+
 </mapper>

@@ -73,7 +73,13 @@ public class BBSPostController extends BaseBackendController{
 		}
 		return list;
 	}
-	
+	/**
+	 * 联表获取用户信息
+	 * @param post
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getList", method = RequestMethod.GET)
 	public Map<String, Object> getList(Post post,
