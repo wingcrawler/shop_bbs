@@ -58,7 +58,21 @@
 			<!--数据列表,通过AJAX请求回来-->
 			<div id="ajaxList"></div>
 			<ul class="list">
-
+						<li v-if="loaded==true  v-for="item in items"><em v-if="item.thread_identify==2"
+							class="t">置顶</em> <a v-bind:href='"thread?threadId="+item.id'
+							class="tx">{{item.threadTitle}}</a><em
+							v-if="item.thread_identify==1" class="jh">精</em> <br />
+							<div class="tR">
+								<a href="#" class="qq l">{{item.section_title}}</a> <span
+									class="rp">{{item.thread_view}}</span> &nbsp;|&nbsp; <span
+									class="tm">{{item.timeAgo}}</span>
+							</div></li>
+						<li v-if="loaded==false">
+							<div>正在加载数据......</div>
+						</li>
+						<li v-if="loaded==true && items.length==0">
+							<div colspan="3" class="text-center">暂无数据</div>
+						</li>
 
 				<li><em class="t">置顶</em> <a href="zhengwen.html" class="tx">[水泽]新人孩子们不要顾着排名,和我一起了解下家史可好</a>
 
@@ -253,86 +267,75 @@
 
 		</div>
 		<!-- 内容区 -->
-			<div class="row">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<a><i class="fa-location-arrow"> ${t.t_thread_edit }</i></a> 
-						</h3>
-					</div>
-					<div class="panel-body">
-						<form class="form-horizontal form" action="javascript:void(0);">
-					        <div class="form-group">
-					          	<div class="col-sm-3">
-					          		<input type="hidden" value="${entity.id}" name="id" />
-					          		<p>${t.t_thread }<span style="color:#f00">*</span></p>
-					            	<input class="form-control" type="text" name="threadTitle" value="${entity.threadTitle}">
-					          	</div>
-					        	<div class="col-sm-3">
-									${t.t_select }${t.t_lang }
-									<select class="form-control select" id="threadType" name="threadType">
-										<option value="1">${t.t_zh}</option>
-										<option value="0">${t.t_en}</option>
-									</select>
-								</div>
-					          	<div class="col-sm-3">
-					          		<p>${t.t_status }</p>
-					          		<select class="form-control select" id="threadStatus" name="threadStatus">
-										<option value="1">${t.t_on }</option>
-										<option value="0">${t.b_close }</option>
-									</select>
-					          	</div>
-					        </div>
-					        <div class="form-group">
-					        	<div class="col-sm-3">
-					          		<p>${t.t_username }</p>
-					          		<p>${entity.username }</p>
-					          	</div>
-					        	<div class="col-sm-3">
-					          		<p>${t.t_section_1 }</p>
-					          		<p>${entity.sectionOne }</p>
-					          	</div>
-					          	<div class="col-sm-3">
-					          		<p>${t.t_section_2 }</p>
-					          		<p>${entity.sectionTwo }</p>
-					          	</div>
-					          	<div class="col-sm-3">
-					          		<p>${t.t_topic }</p>
-					          		<p>${entity.topicTitle }</p>
-					          	</div>
-					        </div>
-					        <div class="form-group">
-					        	<div class="col-sm-12">
-									<textarea id="myEditor" name="threadContext">${entity.threadContext}</textarea>
-									<script type="text/javascript">
-										var ue = UE.getEditor('myEditor',{
-											toolbars: [
-									           ['fullscreen', 'source', 'undo', 'redo', 'bold','pasteplain','removeformat','link','unlink','cleardoc',
-									           'simpleupload','insertimage','imagecenter','justifyleft','justifyright','justifycenter','justifyjustify',
-									           'insertrow', 'insertcol', 'mergeright','mergedown', 'deleterow', 'deletecol', 'splittorows', 'splittocols', 
-									           'splittocells', 'deletecaption','inserttitle', 'mergecells', 'deletetable',  
-									           'insertparagraphbeforetable','edittable','edittd','inserttable','autotypeset','customstyle',
-									           'spechars','fontfamily','fontsize']
-									       ],
-									       initialFrameHeight:500,
-									       initialFrameWidth:'100%'
-									       /* autoHeightEnabled: true,
-									       autoFloatEnabled: true */
-										});
-									</script>
-					        	</div> 	
-					        </div>
-					        <div class="form-group">
-					        	<div class="col-sm-12">
-					        		<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
-					    		</div>
-					        </div>
-					     </form>
-					</div>
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a><i class="fa-location-arrow"> 发帖</i></a>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<form class="form-horizontal form" action="javascript:void(0);">
+						<div class="form-group">
+							<div class="col-sm-3">
+								<input type="hidden" value="${entity.id}" name="id" />
+								<p>${t.t_thread }<span style="color: #f00">*</span>
+								</p>
+								<input class="form-control" type="text" name="threadTitle"
+									value="${entity.threadTitle}">
+							</div>
+							<div class="col-sm-3">
+								${t.t_select }${t.t_lang } <select class="form-control select"
+									id="threadType" name="threadType">
+									<option value="1">${t.t_zh}</option>
+									<option value="0">${t.t_en}</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<textarea id="myEditor" name="threadContext">${entity.threadContext}</textarea>
+								<script type="text/javascript">
+									var ue = UE.getEditor('myEditor', {
+										toolbars : [ [ 'source', 'undo',
+												'redo', 'bold', 'pasteplain',
+												'removeformat', 'link',
+												'unlink', 'cleardoc',
+												'simpleupload', 'insertimage',
+												'imagecenter', 'justifyleft',
+												'justifyright',
+												'justifycenter',
+												'justifyjustify', 'insertrow',
+												'insertcol', 'mergeright',
+												'mergedown', 'deleterow',
+												'deletecol', 'splittorows',
+												'splittocols', 'splittocells',
+												'deletecaption', 'inserttitle',
+												'mergecells', 'deletetable',
+												'insertparagraphbeforetable',
+												'edittable', 'edittd',
+												'inserttable', 'autotypeset',
+												'customstyle', 'spechars',
+												'fontfamily', 'fontsize' ] ],
+										initialFrameHeight : 340,
+										initialFrameWidth : 1150,
+										autoHeightEnabled : true,
+										autoFloatEnabled : true
+									});
+								</script>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
-			<!-- 内容区结束 -->
-		
+		</div>
+		<!-- 内容区结束 -->
+
 		<br>
 		<div class="page-toolbar">
 			<div class="ajax-page">
@@ -359,134 +362,64 @@
 		<!--END 数据列表-->
 
 
-<script type="text/javascript">
-$(function(){
-	$('#main-menu li.li').removeClass('active').removeClass('opened');
-	$('#main-menu li.li').eq(6).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(6).find('ul li').eq(0).addClass('active');
-	
-	$('#threadType').optionSelect({
-		compare:'${entity.threadType}',
-		backFn : function(p) {
-		}
-	});
-	
-	$('#threadStatus').optionSelect({
-		compare:'${entity.threadStatus}',
-		backFn : function(p) {
-		}
-	});
-	
-	$('#submit').click(function(){
-	    var parm = $.fn.getFormJson('.form');
-		$.fn.doSave(parm,'/backend/thread/doSave','/backend/thread/list');
-	});	
-});
-</script>
+		<script type="text/javascript">
+			$(function() {
+				$('#main-menu li.li').removeClass('active').removeClass(
+						'opened');
+				$('#main-menu li.li').eq(6).addClass('active').addClass(
+						'opened');
+				$('#main-menu li.li').eq(6).find('ul li').eq(0).addClass(
+						'active');
+
+				$('#threadType').optionSelect({
+					compare : '${entity.threadType}',
+					backFn : function(p) {
+					}
+				});
+
+				$('#threadStatus').optionSelect({
+					compare : '${entity.threadStatus}',
+					backFn : function(p) {
+					}
+				});
+
+				$('#submit').click(
+						function() {
+							var parm = $.fn.getFormJson('.form');
+							$.fn.doSave(parm, '/backend/thread/doSave',
+									'/backend/thread/list');
+						});
+			});
+		</script>
 
 
 
 
 
 		<!-- 新增的圈子和精彩end -->
-		<!-- footer -->
-		<div class="footer">
-			<!-- container -->
-			<div class="container">
-				<div class="col-md-3 stores-grid">
-					<div class="stores">
-						<h3>Our Stores</h3>
-						<ul>
-							<li>Feel free to visit our stores or contact us.</li>
-							<li>1401 South Grand Avenue</li>
-							<li>Los Angeles, CA 90015</li>
-							<li>(213) 748-2411</li>
+		<!-- footer --><jsp:include page="include/footer.jsp"></jsp:include>
+		<!-- //footer -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var playTableVue = new Vue({
+					el : "#ajaxdata",
+					data : {
+						items : [],
+						loaded : false
+					}
+				});
+				$(function() {
+					$.getJSON("threads", {
+						sectionId : '${item.id }',
+					}, function(json) {
+						if (!json)
+							json = [];
+						playTableVue.items = json.list;
+						playTableVue.loaded = true;
+					});
+				});
 
-							<span>
-								<li class="drive">100 Fairview Drive</li>
-								<li>Franklin, VA 23851</li>
-								<li>(757) 569-6100</li>
-							</span>
-						</ul>
-					</div>
-					<div class="social-icons white-icons">
-						<ul>
-							<li><a href="#" class="facebook"></a></li>
-							<li><a href="#" class="twitter"></a></li>
-							<li><a href="#" class="chrome"></a></li>
-							<li><a href="#" class="vimeo"></a></li>
-							<li><a href="#" class="rss"></a></li>
-					</div>
-				</div>
-				<div class="col-md-3 blog">
-					<h3>Blog posts</h3>
-					<a href="#">Justin Bieber confirmed that he is gay.</a>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Donec sed auctor elit.</p>
-					<a href="#">New sexy sport clothes are here!</a>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Donec sed auctor elit.</p>
-					<a href="#">Summer sales are coming!</a>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Donec sed auctor elit.</p>
-				</div>
-				<div class="col-md-3 support">
-					<h3>Support</h3>
-					<div class="support-grids">
-						<div class="support-left">
-							<ul>
-								<li><a href="#">Terms & Conditions</a></li>
-								<li><a href="#">FAQ</a></li>
-								<li><a href="#">Payment</a></li>
-								<li><a href="#">Refunds</a></li>
-								<li><a href="#">Track Order</a></li>
-								<li><a href="#">Services</a></li>
-								<li><a href="#">Privacy & Security</a></li>
-								<li><a href="#">Careers</a></li>
-								<li><a href="#">Press</a></li>
-								<li><a href="#">Corporate Information</a></li>
-							</ul>
-						</div>
-						<div class="support-left support-right">
-							<ul>
-								<li><a href="#">Sizing</a></li>
-								<li><a href="#">Ordering</a></li>
-								<li><a href="#">Shipping</a></li>
-								<li><a href="#">Return Policy</a></li>
-								<li><a href="#">Affiliates</a></li>
-								<li><a href="#">Find A Store </a></li>
-								<li><a href="#">Site Map</a></li>
-								<li><a href="#">Sign Up & Save</a></li>
-							</ul>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="col-md-3 contact">
-					<h3>Contact us</h3>
-					<form>
-						<input type="text" value="your e-mail..."
-							onFocus="this.value = '';"
-							onBlur="if (this.value == '') {this.value = 'your e-mail...';}"
-							required="">
-						<textarea value="your text...:"
-							onFocus="if(this.value == 'your text...') this.value='';"
-							onBlur="if(this.value == '') this.value='your text...';">your text...</textarea>
-						<input type="submit" value="Send MESSAGE">
-					</form>
-				</div>
-				<div class="clearfix"></div>
-				<div class="copyright">
-					<p>
-						Copyright &copy; 2015.Company name All rights reserved.<a
-							target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
-						- More Templates <a href="http://www.cssmoban.com/"
-							target="_blank" title="模板之家">模板之家</a>
-					</p>
-					</p>
-				</div>
-				<!-- // container -->
-			</div>
-			<!-- //footer -->
+			});
+		</script>
 </body>
 </html>

@@ -27,21 +27,17 @@
 						</p>
 			</c:if>
 
-
-			<p>主贴正文</p>
 			<p>${thread.threadTitle }</p>
-			<p>
-				<fmt:formatDate value="${thread.threadTime }"
-					pattern="yyyy-MM-dd HH:mm" />
-			</p>
+				
 			<p>${thread.threadContext }</p>
 			<!--1楼的顶-->
 			<div class="dwp">
 				<a href="#ajax#" class="dbt bb"><span class="num">0</span>顶</a>
 			</div>
 		</div>
-		<a href="#bReply" class="rbt wb first">回复</a> <span class="msg">1楼2013-12-08
-			15:30</span> <br class="c" />
+		<span class="msg">2楼<fmt:formatDate value="${thread.threadTime }"
+					pattern="yyyy-MM-dd HH:mm" />
+			</p></span> <br class="c" />
 	</div>
 	<!--楼层-->
 	<div class="tItem cnt" quotedCommentId="45470767" id="45470767">
@@ -233,29 +229,30 @@
 				style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
 
 		</div>
-		<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
+		<!--  <a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>-->
 
 		<span class="msg">5楼2013-12-08 15:35</span> <br class="c" />
 
-		<!--楼中楼内容-->
-		<div class="lzl hid">
-			<em class="ico"></em>
+		<!--楼中楼内容  隐藏掉-->
+		<!--  <div class="lzl hid">
+			<em class="ico"></em>-->
 			<!--刷新和收起-->
-			<div class="op">
-				<a href="javascript:;" class="cl">收起回复</a> <a
-					href="javascript:void(0);"
-					data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470923"
-					class="rf">刷新</a> <br class="c" />
-			</div>
-			<!--楼中楼数据-->
-			<ul class="llist">
-				<li>唐伯虎回顧秋香：</li>
-				<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-			</ul>
-		</div>
-		<!--END 楼中楼内容-->
-
+		<!-- <div class="op">
+			<a href="javascript:;" class="cl">收起回复</a> <a
+				href="javascript:void(0);"
+				data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470923"
+				class="rf">刷新</a> <br class="c" />
+		</div>-->
+		<!--楼中楼数据-->
+		<!--<ul class="llist">
+			<li>唐伯虎回顧秋香：</li>
+			<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+		</ul>
 	</div>
+	-->
+	<!--END 楼中楼内容-->
+	
+	<!--</div> -->
 
 	<!--分页-->
 	</div>
