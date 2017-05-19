@@ -1,5 +1,4 @@
 package com.sqe.shop.controller.bbs;
-/*package com.sqe.bbs.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.BaseBackendController;
-import com.sqe.shop.common.BaseFrontController;
+import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.service.SectionService;
 import com.sqe.shop.util.PageUtil;
@@ -36,14 +34,6 @@ public class BBSSectionController extends BaseFrontController {
 		return model;
 	}
 
-	*//**
-	 * 获取一级版块列表0
-	 * 
-	 * @param section
-	 * @param pageNo
-	 * @param pageSize
-	 * @return
-	 *//*
 	@ResponseBody
 	@RequestMapping(value = "/getFirstSection", method = RequestMethod.GET)
 	public Map<String, Object> getFirstList(Section section,
@@ -57,13 +47,7 @@ public class BBSSectionController extends BaseFrontController {
 		return resMap;
 	}
 
-	*//**
-	 * 获取二级版块列表0
-	 * @param section
-	 * @param pageNo
-	 * @param pageSize
-	 * @return
-	 *//*
+
 	@ResponseBody
 	@RequestMapping(value = "/getSecondSection", method = RequestMethod.GET)
 	public Map<String, Object> getList(Section section, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
@@ -76,18 +60,13 @@ public class BBSSectionController extends BaseFrontController {
 		return resMap;
 	}
 	
-	*//**
-	 * 获取二级版块列表0
-	 * @param section
-	 * @param pageNo
-	 * @param pageSize
-	 * @return
-	 *//*
+
 	@ResponseBody
 	@RequestMapping(value = "/getSecondSectionby", method = RequestMethod.GET)
 	public Map<String, Object> getList(Section section, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
-			@RequestParam(name = "pageSize", defaultValue = "20") int pageSize,int ParentId) {
+			@RequestParam(name = "pageSize", defaultValue = "20") int pageSize,Long ParentId) {
 		section.setSectionType(1);
+		section.setSectionParentId(ParentId);
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		PageUtil<Section> page = sectionService.getBeanListByParm(section, pageNo, pageSize);
 		resMap.put("list", page.getList());
@@ -95,4 +74,3 @@ public class BBSSectionController extends BaseFrontController {
 		return resMap;
 	}
 }
-*/
