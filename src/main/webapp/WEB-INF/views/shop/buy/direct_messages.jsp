@@ -4,8 +4,8 @@
 <html>
 <head>
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.t_my_message }</title>
-	<link href="/frontstyle/buy/css/leave_message.css" rel="stylesheet" type="text/css">
+	<title>${t.t_my_comment }</title>
+	<link href="/frontstyle/buy/css/direct_messages.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<jsp:include page="../include/header.jsp"></jsp:include>
@@ -18,12 +18,12 @@
 			
 			<!-- companyData -->
 			<div class="companyData">
-				<div class="header"><span>${t.t_user_center } >  ${t.t_my_message }</span></div>
+				<div class="header"><span>${t.m_product }>  ${t.t_my_comment }</span></div>
 				<div class="product_message">
 					<div class="g-tabWrap">
 						<div class="g-tabHdWrap">
 							<ul class="g-tabHd">
-								<li class="f-active"><span>${t.t_my_message}</span></li>
+								<span><a href="#">${t.t_my_comment}</a></span>
 							</ul>
 						</div>
 						<div class="g-tabMn">
@@ -134,9 +134,11 @@ $(function(){
 		var messageId = $(this).attr('messageId');
 		var replyToId = $(this).attr('replyToId');
 		
+		parm.type=type;
 		parm.productId=productId;
 		parm.msgContent=$(this).parent().prev().val();
-		parm.commentId=commentId;
+		parm.messageId=messageId;
+		parm.replyToId=replyToId;
 		jQuery.common.updateObjByParm(parm,'/front/sell/messageReply',true,'');
 	});
 	//取消回复
@@ -144,9 +146,10 @@ $(function(){
 		$('.edit').hide();
 	});
 });
+
 function nextPage(pageNo){
 	var parm = "";
-	parm = parm + "type=1";
+	parm = parm + "type=2";
 	parm = parm + "&pageNo="+pagerNo;
 	parm = parm + "&pageSize="+10;
 	self.location.href="/front/buy/messagePage?"+parm;
