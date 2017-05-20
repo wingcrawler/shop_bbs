@@ -79,6 +79,7 @@ public class BBSFontController extends BaseFrontController {
 		model.addObject("sectionindex", index);
 		Section section = new Section();
 		section.setSectionParentId(sectionId);
+		section.setSectionStatus(1);
 		PageUtil<Section> page = sectionService.getBeanListByParm(section, 0, -1);
 		model.addObject("section", page);
 		section.setId(sectionId);

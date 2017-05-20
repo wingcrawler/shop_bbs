@@ -6,7 +6,9 @@
 	content="Biruang Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript">
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 </script>
 <!-- bootstarp-css -->
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css"
@@ -27,6 +29,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/scripts.js" type="text/javascript"></script>
 <!--js-->
 <script src="js/vue.js" type="text/javascript"></script>
+<script src="/backendstyle/js/jquery-1.11.1.min.js"></script>
+<script src="/backendstyle/js/bootstrap.min.js"></script>
+<script src="/backendstyle/js/TweenMax.min.js"></script>
+<script src="/backendstyle/js/resizeable.js"></script>
+<script src="/backendstyle/js/joinable.js"></script>
+<script src="/backendstyle/js/xenon-api.js"></script>
+<script src="/backendstyle/js/xenon-toggles.js"></script>
+<script src="/backendstyle/js/xenon-widgets.js"></script>
+<!-- <script src="/backendstyle/js/devexpress-web-14.1/js/globalize.min.js"></script>
+	<script src="/backendstyle/js/devexpress-web-14.1/js/dx.chartjs.js"></script> -->
+<script src="/backendstyle/js/toastr/toastr.min.js"></script>
+<script src="/backendstyle/js/xenon-custom.js"></script>
+
+<script src="/backendstyle/js/jquery.form.js"></script>
+<script src="/backendstyle/js/common-util.js"></script>
+<script src="/backendstyle/js/jquery.page.js"></script>
+<script src="/backendstyle/js/jquery.dateutil.js"></script>
+<script src="/backendstyle/js/jquery.datatable.js"></script>
+<script src="/backendstyle/js/jquery.select.js"></script>
 <!--/js-->
 <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
 <script type="text/javascript">

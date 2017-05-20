@@ -56,23 +56,28 @@
 				<!--END 展开的内容-->
 			</div>
 			<!--数据列表,通过AJAX请求回来-->
-			<div id="ajaxList"></div>
+			<div id="ajaxList">
 			<ul class="list">
-						<li v-if="loaded==true  v-for="item in items"><em v-if="item.thread_identify==2"
-							class="t">置顶</em> <a v-bind:href='"thread?threadId="+item.id'
-							class="tx">{{item.threadTitle}}</a><em
-							v-if="item.thread_identify==1" class="jh">精</em> <br />
-							<div class="tR">
-								<a href="#" class="qq l">{{item.section_title}}</a> <span
-									class="rp">{{item.thread_view}}</span> &nbsp;|&nbsp; <span
-									class="tm">{{item.timeAgo}}</span>
-							</div></li>
-						<li v-if="loaded==false">
-							<div>正在加载数据......</div>
-						</li>
-						<li v-if="loaded==true && items.length==0">
-							<div colspan="3" class="text-center">暂无数据</div>
-						</li>
+				<li v-for=" item in items"> <em v-if="item.thread_identify==2"
+					class="t">置顶</em> <a v-bind:href='"thread?threadId="+item.id'
+					class="tx">{{item.threadTitle}}</a><em
+					v-if="item.thread_identify==1" class="jh">精</em> <br />
+					<div class="tR">
+					<span class="qq l">{{item.thread_view}}</span> 
+						<a class="sd"
+							href="../Home/1808520.html">{{item.username}}</a> &nbsp;&nbsp;
+
+
+							<a href="../Home/1686708.html"></a> &nbsp;|&nbsp; <span
+							class="tm">{{item.timeAgo}}</span>
+							
+					</div></li>
+				<li v-if="loaded==false">
+					<div>正在加载数据......</div>
+				</li>
+				<li v-if="loaded==true && items.length==0">
+					<div colspan="3" class="text-center">暂无数据</div>
+				</li>
 
 				<li><em class="t">置顶</em> <a href="zhengwen.html" class="tx">[水泽]新人孩子们不要顾着排名,和我一起了解下家史可好</a>
 
@@ -100,17 +105,6 @@
 							&nbsp;&nbsp;2小时前
 						</span>
 					</div></li>
-
-				<c:if test="${not empty thread.list }">
-					<c:forEach var="item" items="${thread.list }">
-						<li><a href="thread?threadId=${item.id }" class="tx">${item.threadTitle }</a>
-							<br />
-							<div class="tR">
-								<span class="qq l">4</span> <a href="#" class="qq l">${item.section_title }</a>
-								&nbsp;|&nbsp; <span class="tm">${item.timeAgo }</span>
-							</div></li>
-					</c:forEach>
-				</c:if>
 
 				<li><a href="zhengwen.html" class="tx">十二星座那些事.......</a> <br />
 					<div class="tR">
@@ -149,98 +143,6 @@
 						</span>
 					</div></li>
 
-				<li><a href="zhengwen.html" class="tx">星座最全的秘密，戳进！！！</a> <br />
-					<div class="tR">
-						<span class="qq l">39</span> <a class="sd"
-							href="../Home/3198599.html">浅唱灬幸福</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/3198599.html">浅唱灬幸福</a>
-							&nbsp;&nbsp;刚刚
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">【原点】周年回忆之人物篇</a> <br />
-					<div class="tR">
-						<span class="qq l">46</span> <a class="sd"
-							href="../Home/295673.html">原 点</a> &nbsp;|&nbsp; <span class="tm">
-
-
-							<a href="../Home/14852120.html">翔幽</a> &nbsp;&nbsp;刚刚
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">【子白】=转=电梯里的十大禁忌！不能不看！</a>
-
-
-
-					<br />
-					<div class="tR">
-						<span class="qq l">80</span> <a class="sd"
-							href="../Home/1999158.html">故人归。</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/2239121.html">☪我是阿肖</a>
-							&nbsp;&nbsp;刚刚
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">【浅浅】一天一种花
-						365天你的生日是哪天</a> <em class="jh">精</em> <br />
-					<div class="tR">
-						<span class="qq l">635</span> <a class="sd"
-							href="../Home/34695329.html">夜夜夜夜未央、</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/118609.html">Strx 高傲-╰＇</a>
-							&nbsp;&nbsp;刚刚
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">【阿昱】十二星座的各种性格，超 准！</a> <br />
-					<div class="tR">
-						<span class="qq l">233</span> <a class="sd"
-							href="../Home/12934107.html">阿昱♫阿双</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/25826503.html">318884320</a>
-							&nbsp;&nbsp;刚刚
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">【小小】恐怖童谣，你看懂了吗？</a> <br />
-					<div class="tR">
-						<span class="qq l">12</span> <a class="sd"
-							href="../Home/45991490.html">筱筱滴、小小</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/45991490.html">筱筱滴、小小</a>
-							&nbsp;&nbsp;1分钟前
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">星座控。世界最准的星座排名！截进来！！</a>
-
-
-
-					<br />
-					<div class="tR">
-						<span class="qq l">112</span> <a class="sd"
-							href="../Home/1785420.html">艾莎尔&middot;铁塔</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/1785420.html">椅子</a>
-							&nbsp;&nbsp;2分钟前
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">【小染】星座们 匹配的 花</a> <br />
-					<div class="tR">
-						<span class="qq l">150</span> <a class="sd"
-							href="../Home/33342186.html">小染</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/441692.html">溅溅丶</a>
-							&nbsp;&nbsp;2分钟前
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">【木测】你拥有哪种潜在超能力？</a> <em
-					class="jh">精</em> <br />
-					<div class="tR">
-						<span class="qq l">315</span> <a class="sd"
-							href="../Home/12141164.html">下一道_彩虹</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/6168949.html">113227002</a>
-							&nbsp;&nbsp;4分钟前
-						</span>
-					</div></li>
-
 				<li><a href="zhengwen.html" class="tx">【月弦】你认为你的星座是最顶尖的吗？一戳见分晓。</a>
 
 
@@ -263,79 +165,123 @@
 					</div></li>
 
 			</ul>
-
+</div>
 
 		</div>
+
+
+
 		<!-- 内容区 -->
-		<div class="row">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<a><i class="fa-location-arrow"> 发帖</i></a>
-					</h3>
-				</div>
-				<div class="panel-body">
-					<form class="form-horizontal form" action="javascript:void(0);">
-						<div class="form-group">
-							<div class="col-sm-3">
-								<input type="hidden" value="${entity.id}" name="id" />
-								<p>${t.t_thread }<span style="color: #f00">*</span>
-								</p>
-								<input class="form-control" type="text" name="threadTitle"
-									value="${entity.threadTitle}">
+		<c:if test="${isLogin }">
+			<div v-if="${isLogin }==true" class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a><i class="fa-location-arrow"> 发帖</i></a>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal form" action="javascript:void(0);">
+							<div class="form-group">
+								<div class="col-sm-3">
+									<input type="hidden" value="" name="id" />
+									<p>${t.t_thread }<span style="color: #f00">*</span>
+									</p>
+									<input class="form-control" type="text" name="threadTitle"
+										value="${entity.threadTitle}">
+								</div>
+								<div class="col-sm-3">
+									${t.t_select }${t.t_lang }
+									 <select class="form-control select"
+										id="threadType" name="threadType">
+										<option value="1">${t.t_zh}</option>
+										<option value="0">${t.t_en}</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									${t.t_select } 板块 <select class="form-control select"
+										id="threadType" name="sectionId">
+										<c:if test="${not empty section.list }">
+											<c:forEach var="item" items="${section.list }">
+												<option value="${item.id }">${item.sectionTitle }</option>
+
+											</c:forEach>
+										</c:if>
+
+
+									</select>
+								</div>
 							</div>
-							<div class="col-sm-3">
-								${t.t_select }${t.t_lang } <select class="form-control select"
-									id="threadType" name="threadType">
-									<option value="1">${t.t_zh}</option>
-									<option value="0">${t.t_en}</option>
-								</select>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<textarea id="myEditor" name="threadContext"> </textarea>
+									<script type="text/javascript">
+										var ue = UE
+												.getEditor(
+														'myEditor',
+														{
+															toolbars : [ [
+																	'source',
+																	'undo',
+																	'redo',
+																	'bold',
+																	'pasteplain',
+																	'removeformat',
+																	'link',
+																	'unlink',
+																	'cleardoc',
+																	'simpleupload',
+																	'insertimage',
+																	'imagecenter',
+																	'justifyleft',
+																	'justifyright',
+																	'justifycenter',
+																	'justifyjustify',
+																	'insertrow',
+																	'insertcol',
+																	'mergeright',
+																	'mergedown',
+																	'deleterow',
+																	'deletecol',
+																	'splittorows',
+																	'splittocols',
+																	'splittocells',
+																	'deletecaption',
+																	'inserttitle',
+																	'mergecells',
+																	'deletetable',
+																	'insertparagraphbeforetable',
+																	'edittable',
+																	'edittd',
+																	'inserttable',
+																	'autotypeset',
+																	'customstyle',
+																	'spechars',
+																	'fontfamily',
+																	'fontsize' ] ],
+															initialFrameHeight : 340,
+															initialFrameWidth : 1150,
+															autoHeightEnabled : true,
+															autoFloatEnabled : true
+														});
+									</script>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-12">
-								<textarea id="myEditor" name="threadContext">${entity.threadContext}</textarea>
-								<script type="text/javascript">
-									var ue = UE.getEditor('myEditor', {
-										toolbars : [ [ 'source', 'undo',
-												'redo', 'bold', 'pasteplain',
-												'removeformat', 'link',
-												'unlink', 'cleardoc',
-												'simpleupload', 'insertimage',
-												'imagecenter', 'justifyleft',
-												'justifyright',
-												'justifycenter',
-												'justifyjustify', 'insertrow',
-												'insertcol', 'mergeright',
-												'mergedown', 'deleterow',
-												'deletecol', 'splittorows',
-												'splittocols', 'splittocells',
-												'deletecaption', 'inserttitle',
-												'mergecells', 'deletetable',
-												'insertparagraphbeforetable',
-												'edittable', 'edittd',
-												'inserttable', 'autotypeset',
-												'customstyle', 'spechars',
-												'fontfamily', 'fontsize' ] ],
-										initialFrameHeight : 340,
-										initialFrameWidth : 1150,
-										autoHeightEnabled : true,
-										autoFloatEnabled : true
-									});
-								</script>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-12">
-								<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
-							</div>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
-		</div>
-		<!-- 内容区结束 -->
+			<!-- 内容区结束 -->
+		</c:if>
+		<c:if test="${!isLogin }">
+请登录
 
+</c:if>
 		<br>
 		<div class="page-toolbar">
 			<div class="ajax-page">
@@ -369,25 +315,13 @@
 				$('#main-menu li.li').eq(6).addClass('active').addClass(
 						'opened');
 				$('#main-menu li.li').eq(6).find('ul li').eq(0).addClass(
-						'active');
-
-				$('#threadType').optionSelect({
-					compare : '${entity.threadType}',
-					backFn : function(p) {
-					}
-				});
-
-				$('#threadStatus').optionSelect({
-					compare : '${entity.threadStatus}',
-					backFn : function(p) {
-					}
-				});
+						'active');						
 
 				$('#submit').click(
 						function() {
 							var parm = $.fn.getFormJson('.form');
-							$.fn.doSave(parm, '/backend/thread/doSave',
-									'/backend/thread/list');
+							$.fn.doSave(parm, '/bbs/thread/doSave',
+									'/bbs/thread/list');
 						});
 			});
 		</script>
@@ -399,18 +333,19 @@
 		<!-- 新增的圈子和精彩end -->
 		<!-- footer --><jsp:include page="include/footer.jsp"></jsp:include>
 		<!-- //footer -->
+		
 		<script type="text/javascript">
 			$(document).ready(function() {
 				var playTableVue = new Vue({
-					el : "#ajaxdata",
+					el : "#ajaxList",
 					data : {
 						items : [],
 						loaded : false
 					}
 				});
 				$(function() {
-					$.getJSON("threads", {
-						sectionId : '${item.id }',
+					$.getJSON("thread/getSectionList", {
+						sectionId : '${sectionindex.id }',
 					}, function(json) {
 						if (!json)
 							json = [];

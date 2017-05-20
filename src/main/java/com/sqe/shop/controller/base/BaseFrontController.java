@@ -59,6 +59,10 @@ public class BaseFrontController extends BaseCommon {
         	request.setAttribute("isBuyLogin", true);
         	request.setAttribute("isLogin", true);
         	request.setAttribute("user", user);
+        }else if(user!=null && user.getUserRole().equals(Constants.ROLE_ADMIN)){
+        	request.setAttribute("isAdminLogin", true);
+        	request.setAttribute("isLogin", true);
+        	request.setAttribute("user", user);
         }
     }
 	

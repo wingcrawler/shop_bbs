@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.bbs;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.controller.base.BaseBackendController;
+import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.Topic;
 import com.sqe.shop.service.ThreadService;
@@ -24,7 +26,7 @@ import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/bbs")
-public class BBSThreadController extends BaseBackendController {
+public class BBSThreadController extends BaseFrontController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BBSThreadController.class);
 
@@ -52,7 +54,7 @@ public class BBSThreadController extends BaseBackendController {
 	}
 
 	/**
-	 * 根据版块id 返回列表
+	 *
 	 * 
 	 * @param thread
 	 * @param pageNo
@@ -69,6 +71,28 @@ public class BBSThreadController extends BaseBackendController {
 		resMap.put("page", page);
 		return resMap;
 	}
+	
+	/**
+	 * 根据版块id 返回列表
+	 * 
+	 * @param thread
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/thread/getSectionList", method = RequestMethod.GET)
+	public Map<String, Object> getSectionList(Thread thread, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+		Map<String, Object> resMap = new HashMap<String, Object>();
+		if(thread.getSectionId()==null){
+			return resMap;
+		}
+		PageUtil<Map<String, Object>> page = threadService.getSectionMapListByParm(thread, pageNo, pageSize);
+		resMap.put("list", page.getList());
+		resMap.put("page", page);
+		return resMap;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/thread/doSave", method = RequestMethod.POST)
@@ -79,6 +103,8 @@ public class BBSThreadController extends BaseBackendController {
 		if (StringUtils.isBlank(thread.getThreadContext())) {
 			return responseError(-1, "error_empty_content");
 		}
+		thread.setUserId(this.getCurrentUserId());
+		thread.setThreadTime(new Date());
 		threadService.save(thread);
 		return responseOK("save_success");
 	}
