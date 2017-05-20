@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ibm.db2.jcc.a.s;
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Comment;
@@ -95,22 +96,11 @@ public class SellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="getProductList", method = RequestMethod.GET)
-	@RequiresRoles(value="sell")
 	public PageUtil<Map<String, Object>> getProductList(Product product,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		product.setUserId(this.getCurrentUserId());
 		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
-		
-		if(page.getList().size()>0){
-			String productId = "";
-			List<Image> images = null;
-			for(Map<String, Object> map : page.getList()){
-				productId = map.get("id").toString();
-				images = imageService.getByProductId(Long.valueOf(productId));
-				map.put("img", images.get(0));
-			}
-		}
 		
 		return page;
 	}
@@ -246,6 +236,11 @@ public class SellerController extends BaseFrontController {
 		}
 		
 		product.setUserId(this.getCurrentUserId());
+		Shop shop = shopService.getByUserId(this.getCurrentUserId());
+		if(shop==null){
+			return responseError(-1, "error_illegal");
+		}
+		product.setShopId(shop.getId());
 		int count = productService.save(product);
 		if(count==0){
 			return responseError(-1, "save_failed");
@@ -551,6 +546,47 @@ public class SellerController extends BaseFrontController {
 		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
 		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
 		    shop.setShopImg(uploadPath+fileName);
+	    }
+		shopService.save(shop);
+		return responseOK1("");
+	}
+	/**
+	 * 上架资质页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/businessQualif", method = RequestMethod.GET)
+	public ModelAndView businessQualif(ModelAndView model){
+		model.setViewName("shop/sell/shelf_qualification");
+		Shop shop = shopService.getCurrentUserShop();
+		model.addObject("shop", shop);
+		return model;
+	}
+	/**
+	 * 保存上架资质
+	 * @param model
+	 * @param shop
+	 * @param attachFile
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/saveShelfQualification", method = RequestMethod.POST)
+	public Map<String, Object> saveShelfQualification(Shop shop,
+			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile){
+		boolean exitShop = shopService.exitShop(shop.getId());
+		if(!exitShop){
+			return responseError(-1, "error_illegal");
+		}
+		
+		if(attachFile!=null){
+		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+		    String fileName = resMap.get("errorInfo").toString(); 
+		    if(!resMap.get("errorNo").equals(0)){
+		    	return resMap;
+		    }
+		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
+		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+		    shop.setShelfQualificationImg(uploadPath+fileName);
 	    }
 		shopService.save(shop);
 		return responseOK1("");

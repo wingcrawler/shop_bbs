@@ -28,6 +28,8 @@ public class Shop extends BaseModel implements Serializable {
 	private Long id;
 	private String shopQq;
 	private String shopLicenesDesc;
+	private String shelfQualificationDesc;
+	private String shelfQualificationImg;
 	
 	public Integer getShopLevel() {
 		return shopLevel;
@@ -142,6 +144,18 @@ public class Shop extends BaseModel implements Serializable {
 	}
 	public void setShopLogoImg(String shopLogoImg) {
 		this.shopLogoImg = shopLogoImg;
+	}
+	public String getShelfQualificationDesc() {
+		return shelfQualificationDesc;
+	}
+	public void setShelfQualificationDesc(String shelfQualificationDesc) {
+		this.shelfQualificationDesc = shelfQualificationDesc;
+	}
+	public String getShelfQualificationImg() {
+		return shelfQualificationImg;
+	}
+	public void setShelfQualificationImg(String shelfQualificationImg) {
+		this.shelfQualificationImg = shelfQualificationImg;
 	}
 	
 	

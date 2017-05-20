@@ -49,7 +49,7 @@
 												<td class="td2">
 													<a href="/front/sell/productDetail?id=${item.id }" target="_blank">
 													<span class="imgBox">
-														<img src="${item.img.imagePath }">
+														<img src="${item.imagePath }">
 													</span>
 													<span>${item.productName }</span>
 													</a>

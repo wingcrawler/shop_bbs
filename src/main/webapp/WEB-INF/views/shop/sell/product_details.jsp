@@ -67,7 +67,7 @@
 										  <div class="col-xs-6 col-md-6">
 										  	<div class="m-form-item">
 												<label class="m-form-hd">
-													<span class="u-hd-txt">${t.t_product_name }${t.t_zh }:</span>
+													<span class="u-hd-txt">${t.t_product_name }(${t.t_zh }):</span>
 												</label>
 												<span class="u-text">${entity.productName }</span>
 											</div>
@@ -110,7 +110,7 @@
 												<div class="col-xs-6 col-md-6">
 												  	<div class="m-form-item">
 														<label class="m-form-hd">
-															<span class="u-hd-txt">${t.t_product_name }${t.t_en }:</span>
+															<span class="u-hd-txt">${t.t_product_name }(${t.t_en }):</span>
 														</label>
 														<span class="u-text">${entity.productNameEn }</span>
 													</div>

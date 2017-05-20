@@ -29,7 +29,7 @@
 			</p>
 			<div class="module">
 				<p><a href="/front/sell/businessLicense">${t.t_business_license }</a></p>
-				<p>${t.t_business_qualif }</p>
+				<p><a href="/front/sell/businessQualif">${t.t_business_qualif }</a></p>
 			</div>
 		</li>
 		<li class="menu_list">

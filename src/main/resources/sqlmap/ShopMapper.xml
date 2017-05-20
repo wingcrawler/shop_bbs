@@ -3,6 +3,7 @@
 <mapper namespace="com.sqe.shop.mapper.ShopMapper">
 
 <resultMap type="com.sqe.shop.model.Shop" id="ShopBaseMapper">
+	<id property="shelfQualificationImg" column="shelf_qualification_img" />
 	<id property="shopLogoImg" column="shop_logo_img" />
 	<id property="shopLevel" column="shop_level" />
 	<id property="shopRank" column="shop_rank" />
@@ -11,6 +12,7 @@
 	<id property="userId" column="user_id" />
 	<id property="workTo" column="work_to" />
 	<id property="shopLicenesImg" column="shop_licenes_img" />
+	<id property="shelfQualificationDesc" column="shelf_qualification_desc" />
 	<id property="shopStatus" column="shop_status" />
 	<id property="createTime" column="create_time" />
 	<id property="workFrom" column="work_from" />
@@ -29,14 +31,17 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into shop
-	(shop_logo_img,shop_level,shop_rank,shop_licenes,shop_address,user_id,work_to,shop_licenes_img,shop_status,create_time,work_from,shop_qualifies,shop_description,shop_licenes_desc,shop_img,shop_title,shop_phone,shop_qq)
+	(shelf_qualification_img,shop_logo_img,shop_level,shop_rank,shop_licenes,shop_address,user_id,work_to,shop_licenes_img,shelf_qualification_desc,shop_status,create_time,work_from,shop_qualifies,shop_description,shop_licenes_desc,shop_img,shop_title,shop_phone,shop_qq)
 	values
-	(#{shopLogoImg},#{shopLevel},#{shopRank},#{shopLicenes},#{shopAddress},#{userId},#{workTo},#{shopLicenesImg},#{shopStatus},#{createTime},#{workFrom},#{shopQualifies},#{shopDescription},#{shopLicenesDesc},#{shopImg},#{shopTitle},#{shopPhone},#{shopQq})
+	(#{shelfQualificationImg},#{shopLogoImg},#{shopLevel},#{shopRank},#{shopLicenes},#{shopAddress},#{userId},#{workTo},#{shopLicenesImg},#{shelfQualificationDesc},#{shopStatus},#{createTime},#{workFrom},#{shopQualifies},#{shopDescription},#{shopLicenesDesc},#{shopImg},#{shopTitle},#{shopPhone},#{shopQq})
 </insert>
 
 <update id="update">
 	UPDATE shop 
 	<set>
+			<if test="shelfQualificationImg != null">  
+	        	shelf_qualification_img=#{shelfQualificationImg},
+	    	</if>
 			<if test="shopLogoImg != null">  
 	        	shop_logo_img=#{shopLogoImg},
 	    	</if>
@@ -60,6 +65,9 @@
 	    	</if>
 			<if test="shopLicenesImg != null">  
 	        	shop_licenes_img=#{shopLicenesImg},
+	    	</if>
+			<if test="shelfQualificationDesc != null">  
+	        	shelf_qualification_desc=#{shelfQualificationDesc},
 	    	</if>
 			<if test="shopStatus != null">  
 	        	shop_status=#{shopStatus},

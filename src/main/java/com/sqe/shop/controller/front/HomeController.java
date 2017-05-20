@@ -67,7 +67,7 @@ public class HomeController extends BaseFrontController {
 		//8个商品
 		Product product = new Product();
 		product.setProductStatus(1);
-		PageUtil<Map<String, Object>> hotProductPage = productService.getHotProductList(product, 0, 4); 
+		PageUtil<Map<String, Object>> hotProductPage = productService.getHotProductList(product, 1, 8); 
 		model.addObject("hotProductList", hotProductPage.getList());
 		
 		//3个新闻资讯

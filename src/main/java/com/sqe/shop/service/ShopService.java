@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ibm.db2.jcc.a.a;
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ShopMapper;
 import com.sqe.shop.model.Shop;
@@ -184,5 +185,15 @@ public class ShopService extends AdapterService implements BaseService {
 			return true;
 		}
 		return false;
+	}
+
+	public Shop getByUserId(Long currentUserId) { 
+		Map<String, Object> parm = new HashMap<String, Object>();
+		parm.put("userId", currentUserId);
+		List<Shop> list = shopMapper.getBeanListByParm(parm);
+		if(list!=null && list.size()>0){
+			return list.get(0);
+		}
+		return null;
 	}
 }
