@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -59,19 +60,59 @@
 					            	<input class="form-control" type="text" name="shopRank" value="${entity.shopRank}">
 					    		</div>
 					        </div>
+					        
+					        <!-- 商家logo -->
 					        <div class="form-group">
 					        	<div class="col-sm-12">
-					        		<p>${t.t_desc }</p>
-					        		<textarea name="shopDescription" cols="80" rows="6">${entity.shopDescription }</textarea>
+					        		<p>${t.t_shop_logo }</p>
+					        		<img border="0" width="30%" src="${entity.shopLogoImg}" />
 					    		</div>
 					        </div>
+					        <!-- 商家logo -->
+					        
+					        <!-- 商家营业执照 -->
 					        <div class="form-group">
 					        	<div class="col-sm-12">
-					        		<p>${t.t_img_list }</p>
-					        		<input type="file" name="attachFile" id="attachFile" accept="image/*"/>
-					        		<img border="0" width="60%" src="${imagePath}" />
+					        		<p>${t.t_shop_licenes_desc }</p>
+					        		<textarea name="shopLicenesDesc" cols="80" rows="6">${entity.shopLicenesDesc }</textarea>
+					        	
+					        		<p>${t.t_business_license }</p>
+					        		<img border="0" width="30%" src="${entity.shopLicenesImg}" />
 					    		</div>
 					        </div>
+					        <!-- 商家营业执照 -->
+					        
+					         <!-- 上架资质 -->
+					        <div class="form-group">
+					        	<div class="col-sm-12">
+					        		<p>${t.t_shelf_qualification_desc }</p>
+					        		<textarea name="shelfQualificationDesc" cols="80" rows="6">${entity.shelfQualificationDesc }</textarea>
+					        	
+					        		<p>${t.t_business_qualif }</p>
+					        		<img border="0" width="30%" src="${entity.shelfQualificationImg}" />
+					    		</div>
+					        </div>
+					        <!-- 上架资质 -->
+					        
+					        <!-- 商家环境 -->
+					        <div class="form-group">
+					        	<div class="col-sm-12">
+									<div class="panel panel-default">
+										<div class="panel-heading">${t.t_shop_envir }</div>
+										<div class="panel-body">
+											<p>${t.t_shop_desc_envir }</p>
+					        				<textarea name="shopDescription" cols="80" rows="6">${entity.shopDescription }</textarea>
+											
+											<p>${t.t_shop_img_envir }</p>
+											<c:forEach var="item" items="${imageList }">
+												<img border="0" width="30%" src="${item.imagePath}" />
+											</c:forEach>
+										</div>
+									</div>
+					    		</div>
+					        </div>
+					        <!-- 商家环境 -->
+					        
 					        <div class="form-group">
 					        	<div class="col-sm-12">
 					        		<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>

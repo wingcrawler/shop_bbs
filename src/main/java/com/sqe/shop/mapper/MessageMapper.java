@@ -11,4 +11,6 @@ public interface MessageMapper extends BaseMapper {
 
 	List<Map<String, Object>> getSellerMessageListByParm(@Param("parm") Map<String, Object> parmMap);
 
+	int countAdminMessageListByParm(@Param("parm") Map<String, Object> parm);
+
 }

@@ -1,5 +1,7 @@
 package com.sqe.shop.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +88,12 @@ public class UserService extends AdapterService implements BaseService {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(user!=null){
 			if(StringUtils.isNotBlank(user.getUsername())){
-				parm.put("username", user.getUsername());	
+				try {
+					parm.put("username", URLDecoder.decode(user.getUsername(), UTF8));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
 			}
 			if(StringUtils.isNotBlank(user.getUserPhone())){
 				parm.put("userPhone", user.getUserPhone());	

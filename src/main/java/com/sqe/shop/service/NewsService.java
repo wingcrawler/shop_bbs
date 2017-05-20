@@ -1,5 +1,7 @@
 package com.sqe.shop.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -111,7 +113,12 @@ public class NewsService extends AdapterService implements BaseService {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(news!=null){
 			if(StringUtils.isNotBlank(news.getNewsTitle())){
-				parm.put("newsTitle", news.getNewsTitle());	
+				try {
+					parm.put("newsTitle", URLDecoder.decode(news.getNewsTitle(), UTF8));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
 			}
 		}
 		parm.put("orderby", "id desc" );

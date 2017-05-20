@@ -194,9 +194,10 @@
                 }
                 o[this.name].push(this.value || '');
             } else {
-                o[this.name] = this.value || '';
+                o[this.name] = encodeURIComponent(this.value) || '';
             }
         });
+        /*o = encodeURI(encodeURI(o));*/
         return o;
     }
 	

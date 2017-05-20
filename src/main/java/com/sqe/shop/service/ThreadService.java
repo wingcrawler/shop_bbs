@@ -1,5 +1,7 @@
 package com.sqe.shop.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -212,7 +214,12 @@ public class ThreadService extends AdapterService implements BaseService {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if (thread != null) {
 			if (StringUtils.isNotBlank(thread.getThreadTitle())) {
-				parm.put("threadTitle", thread.getThreadTitle());
+				try {
+					parm.put("threadTitle", URLDecoder.decode(thread.getThreadTitle(), UTF8));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			if (thread.getThreadType() != null && thread.getThreadType() >= 0) {
 				parm.put("threadType", thread.getThreadType());

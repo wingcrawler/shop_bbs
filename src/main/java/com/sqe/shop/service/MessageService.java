@@ -56,13 +56,17 @@ public class MessageService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public PageUtil<Map<String, Object>> getAdminMessageListByParm(Message message,int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getAdminMessageListByParm(Message message,int pageNo, Integer pageSize, String shopName) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(message);
 		parm.put("start", pageUtil.getStartRow());
 		parm.put("limit", pageUtil.getPageSize());
+		parm.put("orderby", "m.id desc" );
+		if(StringUtils.isNotBlank(shopName)){
+			parm.put("shopName", shopName);	
+		}
 		
-		int count = messageMapper.countByParm(parm);
+		int count = messageMapper.countAdminMessageListByParm(parm);
 		pageUtil.setTotalRecords(count);
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		
@@ -112,7 +116,7 @@ public class MessageService extends AdapterService implements BaseService {
 	private Map<String, Object> queryParm(Message message) {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(message!=null){
-			if(message.getReceiveId()!=null){
+			if(message.getReceiveId()!=null && message.getReceiveId()>0){
 				parm.put("receiveId", message.getReceiveId());	
 			}
 			if(message.getMessageStatus()!=null && message.getMessageStatus()>=0){

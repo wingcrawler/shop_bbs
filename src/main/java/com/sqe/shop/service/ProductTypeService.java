@@ -1,5 +1,7 @@
 package com.sqe.shop.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,7 +82,12 @@ public class ProductTypeService extends AdapterService implements BaseService {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(productType!=null){
 			if(StringUtils.isNotBlank(productType.getTypeName())){
-				parm.put("typeName", productType.getTypeName());	
+				try {
+					parm.put("typeName", URLDecoder.decode(productType.getTypeName(),"utf-8"));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
 			}
 			if(productType.getTypeLevel()!=null && productType.getTypeLevel()>0){
 				parm.put("typeLevel", productType.getTypeLevel());

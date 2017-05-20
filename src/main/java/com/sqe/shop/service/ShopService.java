@@ -1,5 +1,7 @@
 package com.sqe.shop.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -11,10 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
+
+
+
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ShopMapper;
 import com.sqe.shop.model.Shop;
-import com.sqe.shop.model.User;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 
@@ -58,16 +62,7 @@ public class ShopService extends AdapterService implements BaseService {
 		Map<String, Object> parm = queryParm(shop);
 		parm.put("start", pageUtil.getStartRow());
 		parm.put("limit", pageUtil.getPageSize());
-		parm.put("orderby", "shop_rank asc");
-		
-		if(shop!=null){
-			if(StringUtils.isNotBlank(shop.getShopTitle())){
-				parm.put("shopTitle", shop.getShopTitle());	
-			}
-			if(shop.getShopStatus()!=null && shop.getShopStatus()>=0){
-				parm.put("shopStatus", shop.getShopStatus());	
-			}
-		}
+		parm.put("orderby", "id desc");
 		
 		int count = shopMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
@@ -155,7 +150,12 @@ public class ShopService extends AdapterService implements BaseService {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(shop!=null){
 			if(StringUtils.isNotBlank(shop.getShopTitle())){
-				parm.put("shopTitle", shop.getShopTitle());
+				try {
+					parm.put("shopTitle", URLDecoder.decode(shop.getShopTitle(), UTF8));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			if(shop.getShopStatus()!=null&&shop.getShopStatus()>=0){
 				parm.put("shopStatus", shop.getShopStatus());
@@ -190,6 +190,16 @@ public class ShopService extends AdapterService implements BaseService {
 	public Shop getByUserId(Long currentUserId) { 
 		Map<String, Object> parm = new HashMap<String, Object>();
 		parm.put("userId", currentUserId);
+		List<Shop> list = shopMapper.getBeanListByParm(parm);
+		if(list!=null && list.size()>0){
+			return list.get(0);
+		}
+		return null;
+	}
+
+	public Shop getByName(String shopName) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		parm.put("shopTitle", shopName);
 		List<Shop> list = shopMapper.getBeanListByParm(parm);
 		if(list!=null && list.size()>0){
 			return list.get(0);

@@ -157,7 +157,7 @@
 		     	and shop_qq = #{parm.shopQq}
 		   	</if>
 		   	<if test="parm.shopTitle != null">
-		     	and shop_title like "%"#{parm.shopTitle}"%"
+		     	and shop_title = #{parm.shopTitle}
 		   	</if>
 </select>
 
@@ -203,7 +203,7 @@
 		     	and shop_qq = #{parm.shopQq}
 		   	</if>
 		   	<if test="parm.shopTitle != null">
-		     	and shop_title like "%"#{parm.shopTitle}"%"
+		     	and shop_title = #{parm.shopTitle}
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
@@ -260,7 +260,7 @@
 		     	and shop_qq = #{parm.shopQq}
 		   	</if>
 		   	<if test="parm.shopTitle != null">
-		     	and shop_title like "%"#{parm.shopTitle}"%"
+		     	and shop_title = #{parm.shopTitle}
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}

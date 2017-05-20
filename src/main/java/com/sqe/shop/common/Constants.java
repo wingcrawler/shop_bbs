@@ -11,6 +11,8 @@ public class Constants{
 	
 	public static final String UNKNOW_INFO = "Unknow Exception";
 	
+	public static final String UTF8 = "utf-8";
+	
     //订单状态
     public static final Integer ORDER_PAYING = 0;//待付款
     public static final Integer ORDER_PAYED = 1;//已付款

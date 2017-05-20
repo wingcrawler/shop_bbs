@@ -27,17 +27,10 @@
 					<div class="panel-body">
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
-								<c:if test="${pageflag==1 }">
-								<div class="col-sm-6">
-									${t.t_select_store }
-									<select class="form-control select" name="shopId" id="shopId">
-										<option value="-1">-- ${t.t_select } --</option>
-										<c:forEach items="${shopList}" var="item">
-										<option value="${item.id}">${item.shopTitle}</option>
-										</c:forEach>
-									</select>
+								<div class="col-sm-4">
+									${t.t_shop_name }
+									<input type="text" class="form-control input" name="shopName" value="">
 								</div>
-								</c:if>
 								<c:if test="${pageflag==2 }">
 								<div class="col-sm-2">
 									${t.t_select }${t.t_status }

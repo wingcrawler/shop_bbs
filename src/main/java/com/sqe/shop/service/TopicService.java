@@ -1,5 +1,7 @@
 package com.sqe.shop.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +88,12 @@ public class TopicService extends AdapterService implements BaseService {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(topic!=null){
 			if(StringUtils.isNotBlank(topic.getTopicTitle())){
-				parm.put("topicTitle", topic.getTopicTitle());
+				try {
+					parm.put("topicTitle", URLDecoder.decode(topic.getTopicTitle(), UTF8));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			if(topic.getSectionId()!=null&&topic.getSectionId()>=0){
 				parm.put("sectionId", topic.getSectionId());	

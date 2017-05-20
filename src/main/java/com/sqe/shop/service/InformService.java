@@ -1,5 +1,7 @@
 package com.sqe.shop.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -116,7 +118,12 @@ public class InformService extends AdapterService implements BaseService {
 				parm.put("userReportedId", inform.getUserReportedId());
 			}
 			if(StringUtils.isNotBlank(inform.getInformTitle())){
-				parm.put("informTitle", inform.getInformTitle());
+				try {
+					parm.put("informTitle", URLDecoder.decode(inform.getInformTitle(), UTF8));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		parm.put("orderby", "id asc" );

@@ -1,5 +1,7 @@
 package com.sqe.shop.controller.backend;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.controller.base.BaseBackendController;
+import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Shop;
+import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.file.ExcelExportService;
@@ -27,6 +31,7 @@ import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.PropertiesUtil;
+import com.sun.mail.handlers.image_gif;
 
 @Controller
 @RequestMapping("/backend/shop")
@@ -42,6 +47,8 @@ public class ShopController extends BaseBackendController {
 	private ExcelExportService excelExportService;
 	@Autowired
 	private ImageFileService imageFileService;
+	@Autowired
+	private ImageService imageService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -52,11 +59,14 @@ public class ShopController extends BaseBackendController {
 	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView edit(Long id) {
 		ModelAndView model = new ModelAndView("backend/store/edit");
-		model.addObject("imagePath", "");
 		if(id!=null){
 			Shop entity = shopService.getById(id);
 			model.addObject("entity", entity);
-			model.addObject("imagePath", entity.getShopImg());
+			
+			Image image = new Image();
+			image.setShopId(id);
+			PageUtil<Image> imgPage = imageService.getBeanListByParm(image, 1, 10);
+			model.addObject("imageList", imgPage.getList());
 		}
 		return model;
 	}
@@ -97,11 +107,20 @@ public class ShopController extends BaseBackendController {
 	
 	@ResponseBody
 	@RequestMapping(value="/getMsgList", method = RequestMethod.GET)
-	public Map<String, Object> getMsgList(Message message,
-			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+	public Map<String, Object> getMsgList(Message message,String shopName,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		if(StringUtils.isNotBlank(shopName)){
+			try {
+				shopName = URLDecoder.decode(shopName, "utf8");
+			} catch (UnsupportedEncodingException e) {
+				shopName = "";
+			}
+		}
+		
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		message.setReceiveId(-1L);
-		PageUtil<Map<String, Object>> page = messageService.getAdminMessageListByParm(message, pageNo, pageSize);
+		PageUtil<Map<String, Object>> page = messageService.getAdminMessageListByParm(message, pageNo, pageSize, shopName);
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
 		return resMap;

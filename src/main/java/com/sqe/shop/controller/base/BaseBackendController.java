@@ -1,5 +1,7 @@
 package com.sqe.shop.controller.base;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,11 +25,13 @@ public class BaseBackendController extends BaseCommon {
     private CachedService cachedService;
     
 	@ModelAttribute
-    public void setReqAndRes(HttpServletRequest request, HttpServletResponse response){  
+    public void setReqAndRes(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{  
         this.request = request;
         this.response = response;
         request.setAttribute("t", cachedService.getBundle());
         request.setAttribute("lang", PropertiesUtil.get("lang"));
+        
+        request.setCharacterEncoding("utf-8");
         
         //后台管理页面查询未读私信
         Message message = new Message();

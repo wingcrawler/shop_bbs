@@ -41,13 +41,8 @@
 									</select>
 								</div>
 								<div class="col-sm-3">
-									${t.t_select_store }
-									<select class="form-control select" name="shopId">
-										<option value="-1">-- ${t.t_select } --</option>
-										<c:forEach items="${shopList}" var="item">
-										<option value="${item.id}">${item.shopTitle}</option>
-										</c:forEach>
-									</select>
+									${t.t_shop_name }
+									<input type="text" class="form-control input" name="shopName" value="">
 								</div>
 								<div class="col-sm-2">
 									<br>

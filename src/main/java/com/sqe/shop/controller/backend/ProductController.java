@@ -1,9 +1,12 @@
 package com.sqe.shop.controller.backend;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Product;
@@ -44,10 +46,10 @@ public class ProductController extends BaseBackendController {
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("backend/product/list");
-		Shop shop = new Shop();
+		/*Shop shop = new Shop();
 		shop.setShopStatus(Constants.STORE_ON);
 		PageUtil<Shop> shops = shopService.getBeanListByParm(shop, 0, -1);
-		model.addObject("shopList", shops.getList());
+		model.addObject("shopList", shops.getList());*/
 		return model;
 	}
 	
@@ -78,9 +80,16 @@ public class ProductController extends BaseBackendController {
 	
 	@ResponseBody
 	@RequestMapping(value="/getList", method = RequestMethod.GET)
-	public Map<String, Object> getList(Product product,
-			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+	public Map<String, Object> getList(Product product, String shopName,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) throws UnsupportedEncodingException {
 		Map<String, Object> resMap = new HashMap<String, Object>();
+		
+		if(StringUtils.isNotBlank(shopName)){
+			shopName = URLDecoder.decode(shopName, "utf8");
+			Shop shop = shopService.getByName(shopName);
+			product.setShopId(shop.getId());
+		}
 		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
 		resMap.put("list", page.getList());
 		resMap.put("page", page);

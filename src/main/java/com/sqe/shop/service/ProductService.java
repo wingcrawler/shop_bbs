@@ -1,5 +1,7 @@
 package com.sqe.shop.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -111,7 +113,12 @@ public class ProductService extends AdapterService implements BaseService {
 				parm.put("shopId", product.getShopId());	
 			}
 			if(StringUtils.isNotBlank(product.getProductName())){
-				parm.put("productName", product.getProductName());	
+				try {
+					parm.put("productName", URLDecoder.decode(product.getProductName(), "utf8"));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
 			}
 			if(StringUtils.isNotBlank(product.getCreateTimeStr())){
 				parm.put("createTimeStr", product.getCreateTimeStr());

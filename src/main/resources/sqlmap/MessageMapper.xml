@@ -116,11 +116,77 @@
 </select>
 
 
-<select id="getAdminMessageListByParm" parameterType="HashMap" resultType="HashMap">
-	select m.post_id as postId, m.message_status as `status`, m.message_context as messageContext ,
-	m.id, u.username, DATE_FORMAT(m.create_time,'%Y-%m-%d %H:%i:%s')  as createTimeStr
+<select id="countAdminMessageListByParm" parameterType="HashMap" resultType="integer">
+	select count(*)
 	from  message m
 	LEFT JOIN `user` u on m.post_id=u.id
+	LEFT JOIN shop s on s.user_id = u.id
+	where 1=1
+	<if test="parm.messageStatus != null">
+     	and m.message_status = #{parm.messageStatus}
+   	</if>
+   	<if test="parm.productId != null">
+     	and m.product_id = #{parm.productId}
+   	</if>
+	<if test="parm.createTime != null">
+     	and m.create_time = #{parm.createTime}
+   	</if>
+   	<if test="parm.messageId != null">
+     	and m.message_id = #{parm.messageId}
+   	</if>
+	<if test="parm.postId != null">
+     	and m.post_id = #{parm.postId}
+   	</if>
+	<if test="parm.messageContext != null">
+     	and m.message_context = #{parm.messageContext}
+   	</if>
+	<if test="parm.receiveId != null">
+     	and m.receive_id = #{parm.receiveId}
+   	</if>
+   	<if test="parm.shopName != null">
+     	and s.shop_title = #{parm.shopName}
+   	</if>
+	
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
+</select>
+<select id="getAdminMessageListByParm" parameterType="HashMap" resultType="HashMap">
+	select m.id as id, m.post_id as postId, m.message_status as `status`, m.message_context as messageContext ,
+	m.id, u.username, DATE_FORMAT(m.create_time,'%Y-%m-%d %H:%i:%s')  as createTimeStr,
+	s.shop_title as shopTitle
+	from  message m
+	LEFT JOIN `user` u on m.post_id=u.id
+	LEFT JOIN shop s on s.user_id = u.id
+	where 1=1
+	<if test="parm.messageStatus != null">
+     	and m.message_status = #{parm.messageStatus}
+   	</if>
+   	<if test="parm.productId != null">
+     	and m.product_id = #{parm.productId}
+   	</if>
+	<if test="parm.createTime != null">
+     	and m.create_time = #{parm.createTime}
+   	</if>
+   	<if test="parm.messageId != null">
+     	and m.message_id = #{parm.messageId}
+   	</if>
+	<if test="parm.postId != null">
+     	and m.post_id = #{parm.postId}
+   	</if>
+	<if test="parm.messageContext != null">
+     	and m.message_context = #{parm.messageContext}
+   	</if>
+	<if test="parm.receiveId != null">
+     	and m.receive_id = #{parm.receiveId}
+   	</if>
+   	<if test="parm.shopName != null">
+     	and s.shop_title = #{parm.shopName}
+   	</if>
+	
 	<if test="parm.orderby != null">
    		order by ${parm.orderby}
    	</if>
