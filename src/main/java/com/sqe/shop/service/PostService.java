@@ -2,6 +2,7 @@ package com.sqe.shop.service;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.PostMapper;
 import com.sqe.shop.model.Post;
+import com.sqe.shop.model.Thread;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 
 @Component  
@@ -71,7 +74,12 @@ public class PostService extends AdapterService implements BaseService {
 		
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
-			list = postMapper.getMapListByParm(parm);
+			list = postMapper.getUserMapListByParm(parm);
+			for (Map<String, Object> p : list) {
+				Date time = (Date) p.get("post_date");
+				p.put("time",(DateUtil.dateToString(time, DateUtil.DATETIME_FORMATE_4)));
+
+			}
 		}
 		pageUtil.setList(list);
 		return pageUtil;

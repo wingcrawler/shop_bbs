@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ibm.db2.jcc.a.a;
+
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ShopMapper;
 import com.sqe.shop.model.Shop;

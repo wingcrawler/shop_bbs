@@ -20,6 +20,7 @@ public class DateUtil {
 	public static final String DATETIME_FORMATE_1 = "yyyyMMddHHmmss";
 	public static final String DATETIME_FORMATE_2 = "yyyy-MM-dd HH:mm:ss";
 	public static final String DATETIME_FORMATE_3 = "yyyy/MM/dd HH:mm:ss";
+	public static final String DATETIME_FORMATE_4 = "yyyy-MM-dd HH:mm";
 
 	/**
 	 * String to Date

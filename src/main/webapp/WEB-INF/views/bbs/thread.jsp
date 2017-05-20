@@ -87,14 +87,13 @@
 		<!--楼层-->
 						
 		<div  v-for="item in items" class="tItem cnt" quotedCommentId="45470737" id="45470737">
-			<a href="../Home/755355.html" class="name">{{item.user_id}}</a> <span
-				class="lv">LV6</span> <em class="isLz"></em>
+			<a href="#" class="name">{{item.name}}</a>  <em class="isLz"></em>
 
 			<div class="tmain">
-				{{item.post_context}}
+				{{item.context}}
 			</div>
-			<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
-			<span class="msg">{{item.floor}}楼{{item.post_date}}</span> <br class="c" />
+			<!-- <a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a> -->
+			<span class="msg">{{item.floor}}楼{{item.time}}</span> <br class="c" />
 			<!--楼中楼内容-->
 			<div class="lzl hid">
 				<em class="ico"></em>

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ibm.db2.jcc.a.s;
+
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Comment;
