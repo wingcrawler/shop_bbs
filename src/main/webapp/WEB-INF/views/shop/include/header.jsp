@@ -60,7 +60,7 @@
 					<ul class="dropdown2">
 					<c:forEach var="item" items="${productTypeList }">
 						<li>
-							<a href="/product/list?typeName=${item.key.typeName }&parentType=${item.key.id }"  target="_blank">${item.key.typeName }</a>
+							<a href="/product/list?parentType=${item.key.id }"  target="_blank">${item.key.typeName }</a>
 							<%-- <c:if test="${not empty item.value }">
 								<ul class="dropdown2">
 									<c:forEach var="subitem" items="${item.value }">

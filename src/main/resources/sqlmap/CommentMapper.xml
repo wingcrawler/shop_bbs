@@ -89,6 +89,9 @@
 			<if test="parm.status != null">
 		     	and status = #{parm.status}
 		   	</if>
+		   	<if test="parm.nullCommentId">
+		  		and c.comment_id is null
+		  	</if>
 </select>
 
 <select id="getBeanListByParm" resultMap="CommentBaseMapper">
@@ -187,6 +190,13 @@
    	<if test="parm.nullCommentId">
    		and c.comment_id is null
    	</if>
+   	<if test="parm.newsId != null">
+     	and c.news_id = #{parm.newsId}
+   	</if>
+	<if test="parm.productId != null">
+     	and c.product_id = #{parm.productId}
+   	</if>
+	
 	<if test="parm.orderby != null">
    		order by ${parm.orderby}
    	</if>

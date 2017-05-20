@@ -1,9 +1,9 @@
 package com.sqe.shop.controller.front;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +20,13 @@ import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
+import com.sqe.shop.model.Shop;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ProductService;
 import com.sqe.shop.service.ProductTypeService;
+import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
 
@@ -46,17 +48,32 @@ public class FrontProductController extends BaseFrontController {
 	private ProductTypeService productTypeService;
 	@Autowired
 	private CachedService cachedService;
+	@Autowired
+	private ShopService shopService;
 	
 	@RequestMapping(value="list", method = RequestMethod.GET)
 	public ModelAndView list(ModelAndView model, Long parentType, Long childType,String typeName,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="12") int pageSize) {
-		if(parentType==null){
-			model.setViewName("shop/404");
-			return model;
-		}
+		pageSize=12;
 		
 		Product product = new Product();
+		ProductType productType = new ProductType();
+		
+		//没有一级分类 选取默认分类
+		if(parentType==null && childType==null){
+			productType = new ProductType();
+			productType.setTypeLevel(1);
+			PageUtil<ProductType> typePage = productTypeService.getBeanListByParm(productType, 1, -1);
+			if(typePage!=null && !typePage.getList().isEmpty()){
+				productType = typePage.getList().get(0);
+				product.setProductTypeId(productType.getId());
+			}
+			/*model.setViewName("shop/404");
+			return model;*/
+		}
+		
+		//查询条件里拼接是一级分类还是二级分类
 		if(parentType!=null){
 			product.setProductTypeId(parentType);
 		}
@@ -64,19 +81,23 @@ public class FrontProductController extends BaseFrontController {
 			product.setProductSubtypeId(childType);
 		}
 		product.setProductStatus(Constants.PRODUCT_ON);
+		//查询
 		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
 		model.addObject("page", page);
 		
+		//title参数国际化
 		ProductType type= new ProductType();
 		if(childType!=null){
 			type = productTypeService.getById(childType);
-		} else {
+		} else if(parentType!=null) {
 			type = productTypeService.getById(parentType);
+		} else {
+			type = productType;
 		}
 		if(cachedService.getLang().equals("zh")){
-			model.addObject("title", type.getTypeNameCh());
+			model.addObject("title", type.getTypeNameCh()==null?"":type.getTypeNameCh());
 		} else {
-			model.addObject("title", type.getTypeName());
+			model.addObject("title", type.getTypeName()==null?"":type.getTypeName());
 		}
 		
 		model.setViewName("shop/product_list");
@@ -97,11 +118,30 @@ public class FrontProductController extends BaseFrontController {
 			return model;
 		}
 		model.addObject("product", product);
+		
+		//产品对应的商家
+		Shop shop =  shopService.getById(product.getShopId());
+		model.addObject("shop", shop);
+		
 		//查询商品图片
 		Image image = new Image();
 		image.setProductId(productId);
 		PageUtil<Image> imgPage = imageService.getBeanListByParm(image, 0, -1);
 		model.addObject("imgList", imgPage.getList());
+		
+		//相关产品
+		product = new Product();
+		product.setProductTypeId(product.getProductTypeId());
+		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, 1, 3);
+		model.addObject("relateList", page.getList());
+		
+		//产品评论列表
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("productId", productId);
+		parmMap.put("nullCommentId", true);
+		parmMap.put("orderby", "c.date desc");
+		PageUtil<Map<String, Object>> commentPage = commentService.getSellerProductCommentListByParm(parmMap, 1, 10);
+		model.addObject("commentPage", commentPage);
 		
 		model.setViewName("shop/single");
 		return model;

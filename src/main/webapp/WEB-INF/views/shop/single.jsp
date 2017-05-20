@@ -56,56 +56,12 @@
 						<div class="single-left-info">
 							<h3>${product.productName }</h3>
 							<a href="#product-details" class="view">${t.t_view_detail }</a>
-							<p>$ ${product.productPrice }
-								<!-- <a href="#" class="view">CLICK FOR OFFER</a> -->
-							</p>
+							<p>$ ${product.productPrice }</p>
+							<p><a href="/shop/product?shopId=${shop.id }" class="view">${t.t_shop_name }: ${shop.shopTitle }</a></p>
 						</div>
 						<div class="select-size">
-							<p>${t.t_select_size }</p>
-								<ul>
-									 <li><a href="#">S</a></li>
-									 <li><a href="#">M</a></li>
-									 <li><a href="#">L</a></li>
-									 <li><a href="#">XL</a></li>
-								</ul>
 							<div class="buy-now">
-								<a href="#">${t.t_buynow }</a>
-							</div>
-							<div class="wishlist">
-								<a class="play-icon popup-with-zoom-anim" href="#small-dialog2">${t.t_add_wishlist }</a>
-								<!-- <div id="small-dialog2" class="mfp-hide">
-									<h3>Create Account</h3> 
-									<div class="social-sits">
-										<ul>
-											<li><a class="fb" href="#">Connect with Facebook</a></li>
-											<li><a class="fb google" href="#">Connect with Google</a></li>
-										</ul>
-									</div>
-									<div class="signup">
-										<form>
-											<input type="text" class="email" placeholder="Email" required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" />
-											<input type="password" placeholder="Password" required="required" pattern=".{6,}" title="Minimum 6 characters required" autocomplete="off" />
-											<input type="text" class="email" placeholder="Mobile Number" maxlength="10" pattern="[1-9]{1}\d{9}" title="Enter a valid mobile number" />
-											<input type="submit"  value="Sign In"/>
-										</form>
-									</div>
-									<div class="clearfix"> </div>
-								</div>	
-								<script>
-									$(document).ready(function() {
-										$('.popup-with-zoom-anim').magnificPopup({
-											type: 'inline',
-											fixedContentPos: false,
-											fixedBgPos: true,
-											overflowY: 'auto',
-											closeBtnInside: true,
-											preloader: false,
-											midClick: true,
-											removalDelay: 300,
-											mainClass: 'my-mfp-zoom-in'
-										});
-									});
-								</script>	 -->
+								<a href="${product.productUrl }">${t.t_buynow }</a>
 							</div>
 							<div class="clearfix"> </div>
 							<!-- <div class="free">
@@ -131,96 +87,92 @@
 					</div>
 					<div class="clearfix"> </div>
 					
+					<!-- 产品描述 -->
 					<div class="product-details" id="product-details" name="product-details">
 						<h3>${t.t_product_detail }</h3>
 						<p>${product.productDescripton }</p>
 					</div>
+					<!-- 产品描述 -->
 					
+					<!-- 相关产品 -->
 					<div class="related">
 						<h3>${t.t_related_product }</h3>
 						<div class="related-grids">
+						<c:forEach var="item" items="${relateList }" varStatus="index">
 							<div class="related-grid">
 								<div class="col-md-9 related-left">
 									<div class="col-md-3 related-left-left">
-										<img src="/frontstyle/images/c1.jpg" alt="" />
+										<img src="${item.imagePath }" alt="" />
 									</div>
 									<div class="col-md-9 related-left-right">
-										<h5>Vestibulum</h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a est at leo dictum 
-											pharetra vel sit amet tellus.
+										<h5>${item.productName }</h5>
+										<p>${item.productDescripton }
 										</p>
 									</div>
 									<div class="clearfix"> </div>
 								</div>
 								<div class="col-md-3 related-right">
-									<p>$ 19</p>
-									<a href="#">Add to cart</a>
+									<p>$ ${item.productPrice }</p>
+									<a href="/product/single?productId=${item.id }">${t.t_view_detail }</a>
 								</div>
 								<div class="clearfix"> </div>
 							</div>
-							<div class="related-grid">
-								<div class="col-md-9 related-left">
-									<div class="col-md-3 related-left-left">
-										<img src="/frontstyle/images/c2.jpg" alt="" />
-									</div>
-									<div class="col-md-9 related-left-right">
-										<h5>Vestibulum</h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a est at leo dictum 
-											pharetra vel sit amet tellus.
-										</p>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="col-md-3 related-right">
-									<p>$ 19</p>
-									<a href="#">Add to cart</a>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="related-grid">
-								<div class="col-md-9 related-left">
-									<div class="col-md-3 related-left-left">
-										<img src="/frontstyle/images/c3.jpg" alt="" />
-									</div>
-									<div class="col-md-9 related-left-right">
-										<h5>Vestibulum</h5>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a est at leo dictum 
-											pharetra vel sit amet tellus.
-										</p>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="col-md-3 related-right">
-									<p>$ 19</p>
-									<a href="#">Add to cart</a>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
+						</c:forEach>
 						</div>
 					</div>
+					<!-- 相关产品 -->
+					
+					<!-- 产品评论 -->
+					<div class="related">
+						<h3>${t.t_product_comment }</h3>
+						<div class="related-grids">
+							<ul>
+								<c:forEach var="item" items="${commentPage.list }">
+									<li class="list">
+										<div class="item">
+											<div class="headline">
+												<div class="head_text">
+													<div class="one">${item.context }</div>
+													<c:forEach var="reply" items="${item.replyList }">
+														<div class="single_reply">${reply.postName } ${t.t_reply }：${reply.content }</div>
+													</c:forEach>	
+												</div>
+												<div class="head_portrait">
+													<div class="img_head_portrait">
+														<img src="images/head_portrait.jpg">
+													</div>
+													<div class="name_time">
+														<p class="name">${item.postName }</p>
+														<p class="time">${reply.date }</p>
+													</div>
+	
+												</div>
+											</div>
+										</div>
+									</li>		
+								</c:forEach>	
+							</ul>
+						</div>
+					</div>
+				<!-- 产品评论 -->
 				</div>
 				
+				<!-- 产品类别 -->
 				<div class="col-md-3 side-bar">
 					<div class="categories">
-						<h3>CATEGORIES</h3>
+						<h3>${t.t_product_type }</h3>
 						<ul>
-							<li><a href="#">accessories</a></li>
-							<li><a href="#">basics</a></li>
-							<li><a href="#">jackets</a></li>
-							<li><a href="#">jeans</a></li>
-							<li><a href="#">knits</a></li>
-							<li><a href="#">overalls</a></li>
-							<li><a href="#">over coats</a></li>
-							<li><a href="#">shoes</a></li>
-							<li><a href="#">sweatshirts</a></li>
-							<li><a href="#">trousers</a></li>
-							<li><a href="#"><del>tops</del></a></li>
-							<li><a href="#">watersuits</a></li>
+							<c:forEach var="item" items="${productTypeList }">
+								<li>
+								<a href="/product/list?parentType=${item.key.id }"  target="_blank">${item.key.typeName }</a>
+								</li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>
-				<div class="clearfix"> </div>
-			
+				<!-- 产品类别 -->
+				
+			<div class="clearfix"> </div>
 			</div>
 		</div>
 		<!-- //container -->

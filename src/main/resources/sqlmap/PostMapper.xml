@@ -3,11 +3,14 @@
 <mapper namespace="com.sqe.shop.mapper.PostMapper">
 
 <resultMap type="com.sqe.shop.model.Post" id="PostBaseMapper">
+	<id property="replyToFloor" column="reply_to_floor" />
 	<id property="threadId" column="thread_id" />
 	<id property="postContext" column="post_context" />
+	<id property="replyToUserId" column="reply_to_user_id" />
 	<id property="postStatus" column="post_status" />
 	<id property="postDate" column="post_date" />
 	<id property="id" column="id" />
+	<id property="floor" column="floor" />
 	<id property="userId" column="user_id" />
 </resultMap>  
 
@@ -16,25 +19,34 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into post
-	(thread_id,post_context,post_status,post_date,user_id)
+	(reply_to_floor,thread_id,post_context,reply_to_user_id,post_status,post_date,floor,user_id)
 	values
-	(#{threadId},#{postContext},#{postStatus},#{postDate},#{userId})
+	(#{replyToFloor},#{threadId},#{postContext},#{replyToUserId},#{postStatus},#{postDate},#{floor},#{userId})
 </insert>
 
 <update id="update">
 	UPDATE post 
 	<set>
+			<if test="replyToFloor != null">  
+	        	reply_to_floor=#{replyToFloor},
+	    	</if>
 			<if test="threadId != null">  
 	        	thread_id=#{threadId},
 	    	</if>
 			<if test="postContext != null">  
 	        	post_context=#{postContext},
 	    	</if>
+			<if test="replyToUserId != null">  
+	        	reply_to_user_id=#{replyToUserId},
+	    	</if>
 			<if test="postStatus != null">  
 	        	post_status=#{postStatus},
 	    	</if>
 			<if test="postDate != null">  
 	        	post_date=#{postDate},
+	    	</if>
+			<if test="floor != null">  
+	        	floor=#{floor},
 	    	</if>
 			<if test="userId != null">  
 	        	user_id=#{userId},
@@ -53,17 +65,26 @@
 
 <select id="countByParm" resultType="integer">
 	select count(*) from post  where 1=1 
+			<if test="parm.replyToFloor != null">
+		     	and reply_to_floor = #{parm.replyToFloor}
+		   	</if>
 			<if test="parm.threadId != null">
 		     	and thread_id = #{parm.threadId}
 		   	</if>
 			<if test="parm.postContext != null">
 		     	and post_context = #{parm.postContext}
 		   	</if>
+			<if test="parm.replyToUserId != null">
+		     	and reply_to_user_id = #{parm.replyToUserId}
+		   	</if>
 			<if test="parm.postStatus != null">
 		     	and post_status = #{parm.postStatus}
 		   	</if>
 			<if test="parm.postDate != null">
 		     	and post_date = #{parm.postDate}
+		   	</if>
+			<if test="parm.floor != null">
+		     	and floor = #{parm.floor}
 		   	</if>
 			<if test="parm.userId != null">
 		     	and user_id = #{parm.userId}
@@ -72,17 +93,26 @@
 
 <select id="getBeanListByParm" resultMap="PostBaseMapper">
 	select * from post where 1=1 
+			<if test="parm.replyToFloor != null">
+		     	and reply_to_floor = #{parm.replyToFloor}
+		   	</if>
 			<if test="parm.threadId != null">
 		     	and thread_id = #{parm.threadId}
 		   	</if>
 			<if test="parm.postContext != null">
 		     	and post_context = #{parm.postContext}
 		   	</if>
+			<if test="parm.replyToUserId != null">
+		     	and reply_to_user_id = #{parm.replyToUserId}
+		   	</if>
 			<if test="parm.postStatus != null">
 		     	and post_status = #{parm.postStatus}
 		   	</if>
 			<if test="parm.postDate != null">
 		     	and post_date = #{parm.postDate}
+		   	</if>
+			<if test="parm.floor != null">
+		     	and floor = #{parm.floor}
 		   	</if>
 			<if test="parm.userId != null">
 		     	and user_id = #{parm.userId}
@@ -112,11 +142,29 @@
 	LEFT JOIN `user` u on
 		p.user_id = u.id
 	where 1=1
-	   <if test="parm.postStatus != null">
-		     	and post_status = #{parm.postStatus}
-		</if>
-		<if test="parm.threadId != null">
-		     	and thread_id = #{parm.threadId}
+	  <if test="parm.replyToFloor != null">
+		     	and p.reply_to_floor = #{parm.replyToFloor}
+		   	</if>
+			<if test="parm.threadId != null">
+		     	and p.thread_id = #{parm.threadId}
+		   	</if>
+			<if test="parm.postContext != null">
+		     	and p.post_context = #{parm.postContext}
+		   	</if>
+			<if test="parm.replyToUserId != null">
+		     	and p.reply_to_user_id = #{parm.replyToUserId}
+		   	</if>
+			<if test="parm.postStatus != null">
+		     	and p.post_status = #{parm.postStatus}
+		   	</if>
+			<if test="parm.postDate != null">
+		     	and p.post_date = #{parm.postDate}
+		   	</if>
+			<if test="parm.floor != null">
+		     	and p.floor = #{parm.floor}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and p.user_id = #{parm.userId}
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}

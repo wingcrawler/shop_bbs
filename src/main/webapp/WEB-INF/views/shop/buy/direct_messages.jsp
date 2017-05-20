@@ -30,7 +30,7 @@
 							<div class="g-tabMnItem f-active">
 								<ul>
 								<c:forEach var="item" items="${page.list }">
-									<l  i class="list">
+									<li class="list">
 										<div class="item">
 											<div class="headline">
 												<div class="head_text">${item.content }</div>

@@ -7,13 +7,22 @@ public class Post implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Long replyToFloor;
 	private Long threadId;
 	private String postContext;
+	private Long replyToUserId;
 	private Integer postStatus;
 	private Date postDate;
 	private Long id;
+	private Long floor;
 	private Long userId;
 	
+	public Long getReplyToFloor() {
+		return replyToFloor;
+	}
+	public void setReplyToFloor(Long replyToFloor) {
+		this.replyToFloor = replyToFloor;
+	}
 	public Long getThreadId() {
 		return threadId;
 	}
@@ -25,6 +34,12 @@ public class Post implements Serializable {
 	}
 	public void setPostContext(String postContext) {
 		this.postContext = postContext;
+	}
+	public Long getReplyToUserId() {
+		return replyToUserId;
+	}
+	public void setReplyToUserId(Long replyToUserId) {
+		this.replyToUserId = replyToUserId;
 	}
 	public Integer getPostStatus() {
 		return postStatus;
@@ -43,6 +58,12 @@ public class Post implements Serializable {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Long getFloor() {
+		return floor;
+	}
+	public void setFloor(Long floor) {
+		this.floor = floor;
 	}
 	public Long getUserId() {
 		return userId;

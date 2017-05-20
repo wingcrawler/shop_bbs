@@ -84,6 +84,8 @@ public class ThreadService extends AdapterService implements BaseService {
 	public PageUtil<Map<String, Object>> getMapListByParm(Thread thread, int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(thread);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
 		parm.put("orderby", "t.id desc");
 		int count = threadMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);

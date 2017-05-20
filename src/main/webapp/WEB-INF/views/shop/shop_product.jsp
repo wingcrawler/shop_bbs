@@ -4,7 +4,8 @@
 <html>
 <head>
 	<jsp:include page="include/meta.jsp"></jsp:include>
-	<title>${title }</title>
+	<title>${shop.shopTitle }</title>
+	<link rel="stylesheet" href="/frontstyle/css/men.css">
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
@@ -14,12 +15,22 @@
 		<!-- container -->
 		<div class="container">
 			<div class="col-md-9 fashions">
+				<div class="store_name">
+					<div>
+						<div class="store_left">
+							<a href="/shop/detail?shopId=${shop.id }"><img src="${shop.shopLogoImg }" alt=""></a>
+						</div>
+						<div class="store_right">
+							<a href="/shop/detail?shopId=${shop.id }"><p class="name">${shop.shopTitle }</p></a>
+						</div>
+					</div>
+				</div>
 				<div class="title">
-					<h3>${title }</h3>
+					<h3>${productType.typeName }</h3>
 				</div>
 				<div class="fashion-section">
 					<div class="fashion-grid1">
-					<c:forEach var="item" items="${page.list }" varStatus="status">
+					<c:forEach var="item" items="${productPage.list }" varStatus="status">
 						 <div class="col-md-3 fashion-grid">
 							 <a href="single.html"><img src="${item.imagePath }" width="190" height="292" alt=""/>
 								 <div class="product <c:if test="${item.productCount==0 }">not-avaliable</c:if>">
@@ -59,7 +70,7 @@
 					<ul>
 						<c:forEach var="item" items="${productTypeList }">
 							<li>
-							<a href="/product/list?parentType=${item.key.id }"  target="_blank">${item.key.typeName }</a>
+							<a href="/shop/product?shopId=${shop.id }&productTypeId=${item.key.id }">${item.key.typeName }</a>
 							</li>
 						</c:forEach>
 					</ul>
