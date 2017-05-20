@@ -74,7 +74,7 @@
 				</c:if>
 				</li>
 				
-				<li><a href="/news"  target="_blank">${t.t_news }</a></li>            
+				<li><a href="/news/list"  target="_blank">${t.t_news }</a></li>            
 				<li><a href="/bbs/index"  target="_blank">${t.t_bbs }</a></li>
 				<li><a href="/about"  target="_blank">${t.t_aboutus }</a></li>            
 				<li><a href="/help"  target="_blank">${t.t_help }</a></li>

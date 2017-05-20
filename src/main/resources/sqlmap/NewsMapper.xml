@@ -112,7 +112,7 @@
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select n.news_title as newsTitle, n.news_context as newsContent, n.id as id, i.image_path as imagePath,
-	n.news_date as date, DATE_FORMAT(n.news_date,'%Y-%m_%d %H-%m-%s') as dateStr,
+	n.news_date as date, DATE_FORMAT(n.news_date,'%Y-%m-%d %H-%m-%s') as dateStr,
 	n.news_type as newsType,n.news_up as newsUp, n.news_readed as newsRead, i.id as imageId
 	from news n
 	LEFT JOIN image i on n.id=i.news_id

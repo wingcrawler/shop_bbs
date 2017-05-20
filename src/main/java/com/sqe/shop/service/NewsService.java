@@ -73,6 +73,7 @@ public class NewsService extends AdapterService implements BaseService {
 		Map<String, Object> parm = queryParm(news);
 		parm.put("start", pageUtil.getStartRow());
 		parm.put("limit", pageUtil.getPageSize());
+		parm.put("orderby", "n.id desc" );
 		
 		int count = newsMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);

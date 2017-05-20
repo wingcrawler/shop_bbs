@@ -59,9 +59,9 @@
 			<div class="banner-bottom-grids">
 				<c:forEach var="item" items="${newsList }">
 					<div class="col-md-4 bottom-grid">
-						<a href="/news/view?newsId=${item.id }"><img src="${item.imagePath }" alt="" /></a>
+						<a href="/news/detail?newsId=${item.id }"><img src="${item.imagePath }" alt="" /></a>
 						<div class="bottom-grid-info">
-							<a href="/news/view?newsId=${item.id }">${item.newsTitle }</a>
+							<a href="/news/detail?newsId=${item.id }">${item.newsTitle }</a>
 							<p></p>
 						</div>
 					</div>
