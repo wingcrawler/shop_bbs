@@ -66,7 +66,6 @@
 		</div>
 	</div>
 	
-<jsp:include page="dialog/dialog_section.jsp"></jsp:include>	
 <script>
 var fatherId = -1;
 $(function(){
