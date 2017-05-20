@@ -53,11 +53,29 @@
 		</div>
 	</div>
 	<!-- //banner -->
+	<!-- banner-bottom -->
+	<div class="banner-bottom">
+		<div class="container">
+			<div class="banner-bottom-grids">
+				<c:forEach var="item" items="${newsList }">
+					<div class="col-md-4 bottom-grid">
+						<a href="/news/view?newsId=${item.id }"><img src="${item.imagePath }" alt="" /></a>
+						<div class="bottom-grid-info">
+							<a href="/news/view?newsId=${item.id }">${item.newsTitle }</a>
+							<p></p>
+						</div>
+					</div>
+				</c:forEach>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+	<!-- banner-bottom -->
 	
 	<div class="clearfix"></div>
 	
 	<!-- products -->
-	<div class="products" style="margin-top:40px;">
+	<div class="products">
 		<!-- container -->
 		<div class="container">
 			<div class="products-heading">

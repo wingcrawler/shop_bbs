@@ -111,7 +111,30 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select * from news where 1=1
+	select n.news_title as newsTitle, n.news_context as newsContent, n.id as id, i.image_path as imagePath,
+	n.news_date as date, DATE_FORMAT(n.news_date,'%Y-%m_%d %H-%m-%s') as dateStr,
+	n.news_type as newsType,n.news_up as newsUp, n.news_readed as newsRead, i.id as imageId
+	from news n
+	LEFT JOIN image i on n.id=i.news_id
+	where 1=1
+	<if test="parm.newsUp != null">
+     	and news_up = #{parm.newsUp}
+   	</if>
+	<if test="parm.newsTitle != null">
+     	and news_title like "%"#{parm.newsTitle}"%"
+   	</if>
+	<if test="parm.newsContext != null">
+     	and news_context = #{parm.newsContext}
+   	</if>
+	<if test="parm.newsReaded != null">
+     	and news_readed = #{parm.newsReaded}
+   	</if>
+	<if test="parm.newsDate != null">
+     	and news_date = #{parm.newsDate}
+   	</if>
+	<if test="parm.newsType != null">
+     	and news_type = #{parm.newsType}
+   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
 	   	</if>

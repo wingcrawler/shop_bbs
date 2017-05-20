@@ -54,23 +54,30 @@
 				</li> --%>
 				<li><a href="/shopIndex">${t.t_sqe_mall }</a></li>
 				
-				<c:if test="${not empty productTypeList }">
+				<li>
+					<a href="/product/list" target="_blank">${t.t_product_intro }</a>
+					<c:if test="${not empty productTypeList }">
+					<ul class="dropdown2">
 					<c:forEach var="item" items="${productTypeList }">
 						<li>
-							<a href="/product/list?typeName=${item.key.typeName }&parentType=${item.key.id }">${item.key.typeName }</a>
-							<c:if test="${not empty item.value }">
+							<a href="/product/list?typeName=${item.key.typeName }&parentType=${item.key.id }"  target="_blank">${item.key.typeName }</a>
+							<%-- <c:if test="${not empty item.value }">
 								<ul class="dropdown2">
 									<c:forEach var="subitem" items="${item.value }">
 										<li><a href="/product/list?typeName=${item.key.typeName }&parentType=${item.key.id }&childType=${subitem.id }">${subitem.typeName }</a></li>
 									</c:forEach>
 								</ul>
-							</c:if>			
+							</c:if>		 --%>	
 						</li>
 					</c:forEach>
+					</ul>
 				</c:if>
+				</li>
 				
-				<li><a href="/about">${t.t_aboutus }</a></li>            
-				<li><a href="/help">${t.t_help }</a></li>
+				<li><a href="/news"  target="_blank">${t.t_news }</a></li>            
+				<li><a href="/bbs/index"  target="_blank">${t.t_bbs }</a></li>
+				<li><a href="/about"  target="_blank">${t.t_aboutus }</a></li>            
+				<li><a href="/help"  target="_blank">${t.t_help }</a></li>
 			</ul>
 		</div>
 		

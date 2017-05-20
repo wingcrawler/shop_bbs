@@ -1,5 +1,7 @@
 package com.sqe.shop.controller.front;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -13,10 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Advertisement;
+import com.sqe.shop.model.News;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.AdvertisementService;
 import com.sqe.shop.service.ImageService;
+import com.sqe.shop.service.NewsService;
 import com.sqe.shop.service.ProductService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.cached.CachedService;
@@ -38,6 +42,8 @@ public class HomeController extends BaseFrontController {
 	private ImageService imageService;
 	@Autowired
 	private CachedService cachedService;
+	@Autowired
+	private NewsService newsService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView model) {
@@ -58,11 +64,15 @@ public class HomeController extends BaseFrontController {
 		PageUtil<Advertisement> adPage = advertisementService.getBeanListByParm(advertisement, 1, -1);
 		model.addObject("adList", adPage.getList());
 		
-		//商品列表
+		//8个商品
 		Product product = new Product();
 		product.setProductStatus(1);
 		PageUtil<Map<String, Object>> hotProductPage = productService.getHotProductList(product, 0, 4); 
 		model.addObject("hotProductList", hotProductPage.getList());
+		
+		//3个新闻资讯
+		PageUtil<Map<String, Object>> newPage = newsService.getMapListByParm(new News(), 1, 3);
+		model.addObject("newsList", newPage.getList());
 		
 		model.setViewName("shop/index");
 		return model;
