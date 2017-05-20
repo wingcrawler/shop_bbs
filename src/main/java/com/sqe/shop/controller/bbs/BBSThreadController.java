@@ -105,6 +105,9 @@ public class BBSThreadController extends BaseFrontController {
 		}
 		thread.setUserId(this.getCurrentUserId());
 		thread.setThreadTime(new Date());
+		thread.setThreadStatus(1);
+		thread.setThreadView(5L);
+		thread.setThreadUp(1L);
 		threadService.save(thread);
 		return responseOK("save_success");
 	}
