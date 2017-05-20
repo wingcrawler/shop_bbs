@@ -91,6 +91,9 @@ public class SectionService extends AdapterService implements BaseService {
 			if(section.getSectionParentId()!=null && section.getSectionParentId()>0){
 				parm.put("sectionParentId", section.getSectionParentId());
 			}
+			if(section.getSectionStatus()!=null ){
+				parm.put("sectionStatus", section.getSectionStatus());
+			}
 		}
 		parm.put("orderby", "id desc" );
 		return parm;

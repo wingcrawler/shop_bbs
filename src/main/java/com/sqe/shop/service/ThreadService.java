@@ -223,6 +223,10 @@ public class ThreadService extends AdapterService implements BaseService {
 			if (thread.getUserId() != null && thread.getUserId() >= 0) {
 				parm.put("userId", thread.getUserId());
 			}
+			if (thread.getSectionId() != null) {
+				parm.put("sectionId", thread.getSectionId());
+			}
+			
 		}
 		return parm;
 	}
