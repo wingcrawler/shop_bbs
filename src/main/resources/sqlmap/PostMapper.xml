@@ -173,6 +173,14 @@
 			limit #{parm.start},#{parm.limit}
 		</if>
 </select>
-
+<select id="getFloorByParm" parameterType="HashMap" resultType="HashMap">
+	select floor from post where 1=1
+		<if test="parm.orderby != null">
+	   		order by ${parm.orderby}
+	   	</if>
+	   	<if test="parm.threadId != null">
+		     	and p.thread_id = #{parm.threadId}
+		 </if>
+</select>
 
 </mapper>
