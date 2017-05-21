@@ -7,6 +7,8 @@
 <html lang="en">
 <head>
 <jsp:include page="include/meta.jsp"></jsp:include>
+<script src="/ue/ueditor.config.js"></script>
+<script src="/ue/ueditor.all.js"></script>
 <title>${t.m_bbs_list }</title>
 </head>
 <body>
@@ -15,241 +17,307 @@
 	<!-- //header -->
 	<!-- 新增的樓層-->
 	<div class="container">
-		<section class="m" id="content"> <!--楼层-->
-		
-			<!--楼层-->
-			<c:if test="${not empty user }">
-				<div class="tItem cnt" quotedCommentId="45470309" id="45470309">
-					<a href="#" class="name">${user.username }</a> <em class="isLz"></em>
-					<div class="tmain">
-						<p>
-							<img src="${user.userImage }" />
-						</p>
-			</c:if>
+		<section class="m" id="content"> <!--楼层--> <!--楼层--> <c:if
+			test="${not empty user }">
+			<div class="tItem cnt" quotedCommentId="45470309" id="45470309">
+				<a href="#" class="name">${user.username }</a> <em class="isLz"></em>
+				<div class="tmain">
+					<p>
+						<img src="${user.userImage }" />
+					</p>
+		</c:if>
 
-			<p>${thread.threadTitle }</p>
+		<p>${thread.threadTitle }</p>
 
-			<p>${thread.threadContext }</p>
-			<!--1楼的顶-->
-			<div class="dwp">
-				<a href="#ajax#" class="dbt bb"><span class="num">0</span>顶</a>
-			</div>
+		<p>${thread.threadContext }</p>
+		<!--1楼的顶-->
+		<div class="dwp">
+			<a href="#ajax#" class="dbt bb"><span class="num">0</span>顶</a>
+		</div>
 
-			<span class="msg">1楼<fmt:formatDate
-					value="${thread.threadTime }" pattern="yyyy-MM-dd HH:mm" />
-				</p></span> <br class="c" />
+		<span class="msg">1楼<fmt:formatDate
+				value="${thread.threadTime }" pattern="yyyy-MM-dd HH:mm" />
+			</p></span> <br class="c" />
 		<div id="ajaxList">
-		<!--楼层-->
-		<div class="tItem cnt" quotedCommentId="45470767" id="45470767">
-			<a href="../Home/755355.html" class="name">95912180</a> <span
-				class="lv">LV6</span> <em class="isLz"></em>
-			<div class="tmain">
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【发火最狂暴的星座排名】</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">冠军(天蝎座）、亚军(狮子座）、季军(白羊座）、第4名(魔羯座）、第5名(金牛座）、第6名(射手座）、第7名(双鱼座）、第8名(水瓶座）、第9名(处女座）、第10名(巨蟹座）、第11名(天秤座）、第12名(双子座）</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【天秤座的几桩“最”】</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">最可爱星座——天秤座；最聪明星座——天秤座；最善良型星座——天秤座；最好玩星座——天秤座；最严谨星座——天秤座；最无私星座——天秤座；最宅星座——天秤座；最勇敢星座——天秤座；最有才星座——天秤座；最温柔星座——天秤座。</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
+			<!--楼层-->
+			<div class="tItem cnt" quotedCommentId="45470767" id="45470767">
+				<a href="../Home/755355.html" class="name">95912180</a> <span
+					class="lv">LV6</span> <em class="isLz"></em>
+				<div class="tmain">
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【发火最狂暴的星座排名】</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">冠军(天蝎座）、亚军(狮子座）、季军(白羊座）、第4名(魔羯座）、第5名(金牛座）、第6名(射手座）、第7名(双鱼座）、第8名(水瓶座）、第9名(处女座）、第10名(巨蟹座）、第11名(天秤座）、第12名(双子座）</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【天秤座的几桩“最”】</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">最可爱星座——天秤座；最聪明星座——天秤座；最善良型星座——天秤座；最好玩星座——天秤座；最严谨星座——天秤座；最无私星座——天秤座；最宅星座——天秤座；最勇敢星座——天秤座；最有才星座——天秤座；最温柔星座——天秤座。</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
 
-			</div>
-			<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
-			<span class="msg">2楼2013-12-08 15:35</span> <br class="c" />
-			<!--楼中楼内容-->
-			<div class="lzl hid">
-				<em class="ico"></em>
-				<!--刷新和收起-->
-				<div class="op">
-					<a href="javascript:;" class="cl">收起回复</a> <a
-						href="javascript:void(0);"
-						data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470767"
-						class="rf">刷新</a> <br class="c" />
 				</div>
-				<!--楼中楼数据-->
-				<ul class="llist">
-					<li>唐伯虎回顧秋香：</li>
-					<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-				</ul>
-			</div>
-			<!--END 楼中楼内容-->
-		</div>
-		<!--楼层-->
-						
-		<div  v-for="item in items" class="tItem cnt" quotedCommentId="45470737" id="45470737">
-			<a href="#" class="name">{{item.name}}</a>  <em class="isLz"></em>
-
-			<div class="tmain">
-				{{item.context}}
-			</div>
-			<!-- <a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a> -->
-			<span class="msg">{{item.floor}}楼{{item.time}}</span> <br class="c" />
-			<!--楼中楼内容-->
-			<div class="lzl hid">
-				<em class="ico"></em>
-				<!--刷新和收起-->
-				<div class="op">
-					<a href="javascript:;" class="cl">收起回复</a> <a
-						href="javascript:void(0);"
-						data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470737"
-						class="rf">刷新</a> <br class="c" />
+				<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
+				<span class="msg">2楼2013-12-08 15:35</span> <br class="c" />
+				<!--楼中楼内容-->
+				<div class="lzl hid">
+					<em class="ico"></em>
+					<!--刷新和收起-->
+					<div class="op">
+						<a href="javascript:;" class="cl">收起回复</a> <a
+							href="javascript:void(0);"
+							data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470767"
+							class="rf">刷新</a> <br class="c" />
+					</div>
+					<!--楼中楼数据-->
+					<ul class="llist">
+						<li>唐伯虎回顧秋香：</li>
+						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+					</ul>
 				</div>
-				<!--楼中楼数据-->
-				<ul class="llist">
-					<li>唐伯虎回顧秋香：</li>
-					<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-				</ul>
+				<!--END 楼中楼内容-->
 			</div>
-			<!--END 楼中楼内容-->
+			<!--楼层-->
 
-		</div>
-		<!--楼层-->
-		<li v-if="loaded==false">
-							<div>正在加载数据......</div>
-						</li>
-						<li v-if="loaded==true && items.length==0">
-							<div colspan="3" class="text-center">暂无数据</div>
-						</li>
-		<div class="tItem cnt" quotedCommentId="45470874" id="45470874">
+			<div v-for="item in items" class="tItem cnt"
+				quotedCommentId="45470737" id="45470737">
+				<a href="#" class="name">{{item.name}}</a> <em class="isLz"></em>
 
-
-			<a href="../Home/755355.html" class="name">95912180</a> <span
-				class="lv">LV6</span> <em class="isLz"></em>
-
-			<div class="tmain">
-				<p></p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【12星座的情人节】</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★感情甜蜜榜—NO.1魔羯座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2处女座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3射手座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★意外惊喜榜—NO.1白羊座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2天秤座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3天蝎座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★迷离暧昧榜—NO.1双鱼座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2巨蟹座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3金牛座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★心事纠结榜—NO.1狮子座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2水瓶座</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3双子座</p>
-
-			</div>
-
-
-			<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
-
-			<span class="msg">4楼2013-12-08 15:35</span> <br class="c" />
-
-			<!--楼中楼内容-->
-			<div class="lzl hid">
-				<em class="ico"></em>
-				<!--刷新和收起-->
-				<div class="op">
-					<a href="javascript:;" class="cl">收起回复</a> <a
-						href="javascript:void(0);"
-						data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470874"
-						class="rf">刷新</a> <br class="c" />
+				<div class="tmain">
+				<p v-html="item.context"></p>
 				</div>
-				<!--楼中楼数据-->
-				<ul class="llist">
-					<li>唐伯虎回顧秋香：</li>
-					<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-				</ul>
-			</div>
-			<!--END 楼中楼内容-->
-
-		</div>
-		<!--楼层-->
-		<div class="tItem cnt" quotedCommentId="45470923" id="45470923">
-
-
-			<a href="../Home/755355.html" class="name">95912180</a> <span
-				class="lv">LV6</span> <em class="isLz"></em>
-
-			<div class="tmain">
-				<p></p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【12星座最大的缺点是什么?】</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">白羊座-心太软</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">金牛座-不太现实</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">双子座-不够坚强</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">巨蟹座-脾气不太好</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">狮子座-容易相信他</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">处女座-太依赖别人</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">天秤座-心肠太好</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">天蝎座-太追求完美</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">射手座-有点任性</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">摩羯座-性格刚烈</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">水瓶座-对自己不够好</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">双鱼座-太过于追求时尚</p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
-				<p
-					style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
+				<!-- <a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a> -->
+				<span class="msg">{{item.floor}}楼{{item.time}}</span> <br class="c" />
+				<!--楼中楼内容-->
+				<div class="lzl hid">
+					<em class="ico"></em>
+					<!--刷新和收起-->
+					<div class="op">
+						<a href="javascript:;" class="cl">收起回复</a> <a
+							href="javascript:void(0);"
+							data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470737"
+							class="rf">刷新</a> <br class="c" />
+					</div>
+					<!--楼中楼数据-->
+					<ul class="llist">
+						<li>唐伯虎回顧秋香：</li>
+						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+					</ul>
+				</div>
+				<!--END 楼中楼内容-->
 
 			</div>
-			<!--  <a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>-->
+			<!--楼层-->
+			<li v-if="loaded==false">
+				<div>正在加载数据......</div>
+			</li>
+			<li v-if="loaded==true && items.length==0">
+				<div colspan="3" class="text-center">暂无数据</div>
+			</li>
+			<div class="tItem cnt" quotedCommentId="45470874" id="45470874">
 
-			<span class="msg">5楼2013-12-08 15:35</span> <br class="c" />
 
-			<!--楼中楼内容  隐藏掉-->
-			<!--  <div class="lzl hid">
+				<a href="../Home/755355.html" class="name">95912180</a> <span
+					class="lv">LV6</span> <em class="isLz"></em>
+
+				<div class="tmain">
+					<p></p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【12星座的情人节】</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★感情甜蜜榜—NO.1魔羯座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2处女座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3射手座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★意外惊喜榜—NO.1白羊座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2天秤座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3天蝎座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★迷离暧昧榜—NO.1双鱼座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2巨蟹座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3金牛座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★心事纠结榜—NO.1狮子座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2水瓶座</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3双子座</p>
+
+				</div>
+
+
+				<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
+
+				<span class="msg">4楼2013-12-08 15:35</span> <br class="c" />
+
+				<!--楼中楼内容-->
+				<div class="lzl hid">
+					<em class="ico"></em>
+					<!--刷新和收起-->
+					<div class="op">
+						<a href="javascript:;" class="cl">收起回复</a> <a
+							href="javascript:void(0);"
+							data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470874"
+							class="rf">刷新</a> <br class="c" />
+					</div>
+					<!--楼中楼数据-->
+					<ul class="llist">
+						<li>唐伯虎回顧秋香：</li>
+						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+					</ul>
+				</div>
+				<!--END 楼中楼内容-->
+
+			</div>
+			<!--楼层-->
+			<div class="tItem cnt" quotedCommentId="45470923" id="45470923">
+
+
+				<a href="../Home/755355.html" class="name">95912180</a> <span
+					class="lv">LV6</span> <em class="isLz"></em>
+
+				<div class="tmain">
+					<p></p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【12星座最大的缺点是什么?】</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">白羊座-心太软</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">金牛座-不太现实</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">双子座-不够坚强</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">巨蟹座-脾气不太好</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">狮子座-容易相信他</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">处女座-太依赖别人</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">天秤座-心肠太好</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">天蝎座-太追求完美</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">射手座-有点任性</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">摩羯座-性格刚烈</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">水瓶座-对自己不够好</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">双鱼座-太过于追求时尚</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
+
+				</div>
+				<!--  <a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>-->
+
+				<span class="msg">5楼2013-12-08 15:35</span> <br class="c" />
+
+				<!--楼中楼内容  隐藏掉-->
+				<!--  <div class="lzl hid">
 			<em class="ico"></em>-->
-			<!--刷新和收起-->
-			<!-- <div class="op">
+				<!--刷新和收起-->
+				<!-- <div class="op">
 			<a href="javascript:;" class="cl">收起回复</a> <a
 				href="javascript:void(0);"
 				data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470923"
 				class="rf">刷新</a> <br class="c" />
 		</div>-->
-			<!--楼中楼数据-->
-			<!--<ul class="llist">
+				<!--楼中楼数据-->
+				<!--<ul class="llist">
 			<li>唐伯虎回顧秋香：</li>
 			<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
 		</ul>
 	</div>
 	-->
-			<!--END 楼中楼内容-->
+				<!--END 楼中楼内容-->
 
-			<!--</div> -->
+				<!--</div> -->
+			</div>
+
+
 		</div>
-		<!--分页-->
 	</div>
-	</div>
+	<!-- 回帖框 -->
+
+	<c:if test="${isLogin }">
+		<div v-if="${isLogin }==true" class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a><i class="fa-location-arrow"> 跟帖</i></a>
+					</h3>
+				</div>
+				<form class="form-horizontal form" action="javascript:void(0);">
+				<div class="panel-body">
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="hidden" value="${thread.id }" name="threadId" />
+						<input type="hidden" value="${user.id }" name="replyToUserId" />
+						<textarea id="myEditor" name="postContext"> </textarea>
+						<script type="text/javascript">
+							var ue = UE.getEditor('myEditor',
+									{
+										toolbars : [ [ 'source', 'undo',
+												'redo', 'bold', 'pasteplain',
+												'removeformat', 'link',
+												'unlink', 'cleardoc',
+												'justifyleft', 'justifyright',
+												'justifycenter',
+												'justifyjustify', 'insertrow',
+												'insertcol', 'mergeright',
+												'mergedown', 'deleterow',
+												'deletecol', 'splittorows',
+												'splittocols', 'splittocells',
+												'deletecaption', 'inserttitle',
+												'mergecells', 'deletetable',
+												'insertparagraphbeforetable',
+												'edittable', 'edittd',
+												'inserttable', 'autotypeset',
+												'customstyle', 'spechars',
+												'fontfamily', 'fontsize' ] ],
+										initialFrameHeight : 340,
+										initialFrameWidth : 1100,
+										autoHeightEnabled : true,
+										autoFloatEnabled : true
+									});
+						</script>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+		</div>
+		<!-- 内容区结束 -->
+	</c:if>
+	<c:if test="${!isLogin }">
+请登录
+
+</c:if>
+	<br>
+
+
+
+	<!--分页-->
 	<div class="page-toolbar">
 		<div class="ajax-page">
 			<ul class="page-pagination">
@@ -300,6 +368,20 @@
 				});
 			});
 
+		});
+	</script>
+	<script type="text/javascript">
+		$(function() {
+			$('#main-menu li.li').removeClass('active').removeClass('opened');
+			$('#main-menu li.li').eq(6).addClass('active').addClass('opened');
+			$('#main-menu li.li').eq(6).find('ul li').eq(0).addClass('active');
+
+			$('#submit').click(
+					function() {
+						var parm = $.fn.getFormJson('.form');
+						$.fn.doSave(parm, '/bbs/post/doSave',
+								'/bbs/thread?threadId=${thread.id }');
+					});
 		});
 	</script>
 </body>

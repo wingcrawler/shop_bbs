@@ -207,6 +207,11 @@
 
 											</c:forEach>
 										</c:if>
+										<c:if test="${empty section.list }">
+											
+												<option value="${sectionindex.id }">${sectionindex.sectionTitle }</option>
+
+										</c:if>
 
 
 									</select>
@@ -321,7 +326,7 @@
 						function() {
 							var parm = $.fn.getFormJson('.form');
 							$.fn.doSave(parm, '/bbs/thread/doSave',
-									'/bbs/thread/list');
+									'/bbs/sectionindex?sectionId=${sectionindex.id }');
 						});
 			});
 		</script>
@@ -346,6 +351,7 @@
 				$(function() {
 					$.getJSON("thread/getSectionList", {
 						sectionId : '${sectionindex.id }',
+						pageNo : '1',
 					}, function(json) {
 						if (!json)
 							json = [];

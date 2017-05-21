@@ -31,7 +31,7 @@ import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.PropertiesUtil;
-import com.sun.mail.handlers.image_gif;
+
 
 @Controller
 @RequestMapping("/backend/shop")

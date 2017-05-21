@@ -11,6 +11,7 @@
 package com.sqe.shop.controller.bbs;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,6 +98,12 @@ public class BBSPostController extends BaseBackendController{
 		if(StringUtils.isBlank(post.getPostContext())){
 			return responseError(-1, "error_empty_content");
 		}
+		//
+		
+		post.setFloor((Long)postService.floorNum(post).get("floor"));
+		post.setPostDate(new Date());
+		post.setUserId(postService.getCurrentUserId());
+		post.setPostStatus(1);
 		postService.save(post);
 		return responseOK("save_success");
 	}

@@ -49,7 +49,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="/backendstyle/js/jquery.datatable.js"></script>
 <script src="/backendstyle/js/jquery.select.js"></script>
 <!--/js-->
-<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="/bbs/css/bootstrap-wysihtml5.css"></link>
+<link rel="stylesheet" type="text/css" href="/bbs/css/bootstrap.min.css"></link>
+<script src="/bbs/js/wysihtml5-0.3.0.js"></script>
+<script src="/bbs/js/jquery-1.7.2.min.js"></script>
+<script src="/bbs/js/bootstrap-wysihtml5.js"></script>
+<script src="/bbs/js/easyResponsiveTabs.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#horizontalTab').easyResponsiveTabs({
