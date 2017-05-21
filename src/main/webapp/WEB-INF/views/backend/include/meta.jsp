@@ -39,6 +39,7 @@
 	<script src="/backendstyle/js/jquery.dateutil.js"></script>
 	<script src="/backendstyle/js/jquery.datatable.js"></script>
 	<script src="/backendstyle/js/jquery.select.js"></script>
+	<script src="/frontstyle/js/jq.common.js"></script>
 	
 	
 	

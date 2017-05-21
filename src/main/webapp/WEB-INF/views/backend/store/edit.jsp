@@ -61,6 +61,19 @@
 					    		</div>
 					        </div>
 					        
+					        <!-- 给新用户开店，输入用户名完整名字 -->
+					        <div class="form-group">
+					        	<div class="col-sm-3">
+					          		<p>${t.t_username }<span style="color:#f00">*</span></p>
+					          		<c:if test="${not empty entity.id }">
+						        		<input class="form-control" type="text" disabled value="${ownerName}">
+						        	</c:if>
+						        	<c:if test="${empty entity.id }">
+						        		<input class="form-control" type="text" name="ownerName" value="${ownerName}">
+						        	</c:if>
+					          	</div>
+					        </div>
+					        
 					        <!-- 商家logo -->
 					        <div class="form-group">
 					        	<div class="col-sm-12">

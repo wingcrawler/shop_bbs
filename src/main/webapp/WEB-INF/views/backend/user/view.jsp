@@ -20,7 +20,9 @@
 			<!-- 用户信息区 -->
 			<section class="profile-env">
 				<div class="row">
-				
+					<form class="form">
+						<input type="hidden" value="${entity.id }" name="id">
+					
 					<!-- 用户头像部分 -->
 					<div class="col-sm-3">
 						<div class="user-info-sidebar">
@@ -67,8 +69,29 @@
 					</div>
 					<!-- 用户头像部分 结束-->
 					
-					<!-- 商家介绍 -->
 					<div class="col-sm-9">
+						<!-- 基本信息 -->
+						<section class="user-timeline-stories">
+							<article class="timeline-story">
+								<i class="fa-paper-plane-empty block-icon"></i>
+								<header>
+									<!-- <a href="#" class="user-img">
+										<img src="assets/images/user-4.png" alt="user-img" class="img-responsive img-circle">
+									</a> -->
+									<div class="user-details">
+										${t.t_user_role }:
+									</div>
+								</header>
+								<div class="story-content">
+									<select class="form-control select" name="userRole" id="userRole">
+										<option value="1" <c:if test="${entity.userRole==1 }">selected</c:if>>${t.t_buy}</option>
+										<option value="2" <c:if test="${entity.userRole==2 }">selected</c:if>>${t.t_sell}</option>
+									</select>
+								</div>
+							</article>
+						</section>
+						
+						<!-- 商家介绍 -->
 						<section class="user-timeline-stories">
 							<article class="timeline-story">
 								<i class="fa-paper-plane-empty block-icon"></i>
@@ -90,8 +113,23 @@
 								</div>
 							</article>
 						</section>
+						
+						<!-- 提交 -->
+						<section class="user-timeline-stories">
+							<article class="timeline-story">
+								<i class="fa-paper-plane-empty block-icon"></i>
+								<header>
+									<div class="user-details">
+										<button class="btn btn-blue btn-lg" onclick="$.fn.doSaveAndTip('/backend/user/doSave')">
+											${t.b_submit }
+										</button>
+									</div>
+								</header>
+							</article>
+						</section>
 					</div>
 					
+					</form>
 				</div>
 			</section>
 			<!-- 用户信息结束 -->

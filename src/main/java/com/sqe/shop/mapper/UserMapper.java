@@ -10,4 +10,6 @@ public interface UserMapper extends BaseMapper {
 
 	User findUserByUsernameAndPassword(User user);
 
+	User findOwnerUser(@Param("username")String ownerName);
+
 }

@@ -23,9 +23,11 @@ import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Shop;
+import com.sqe.shop.model.User;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ShopService;
+import com.sqe.shop.service.UserService;
 import com.sqe.shop.service.file.ExcelExportService;
 import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.DateUtil;
@@ -49,6 +51,8 @@ public class ShopController extends BaseBackendController {
 	private ImageFileService imageFileService;
 	@Autowired
 	private ImageService imageService;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -60,13 +64,19 @@ public class ShopController extends BaseBackendController {
 	public ModelAndView edit(Long id) {
 		ModelAndView model = new ModelAndView("backend/store/edit");
 		if(id!=null){
+			//查询店铺
 			Shop entity = shopService.getById(id);
 			model.addObject("entity", entity);
-			
+			//店铺图片
 			Image image = new Image();
 			image.setShopId(id);
 			PageUtil<Image> imgPage = imageService.getBeanListByParm(image, 1, 10);
 			model.addObject("imageList", imgPage.getList());
+			//店家信息
+			User user = userService.getById(entity.getUserId());
+			model.addObject("ownerName", user.getUsername());
+		} else {
+			model.addObject("ownerName", "");
 		}
 		return model;
 	}
@@ -128,9 +138,20 @@ public class ShopController extends BaseBackendController {
 	
 	@ResponseBody
 	@RequestMapping(value="/doSave", method = RequestMethod.POST)
-	public Map<String, Object> save(Shop shop, @RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile) {
+	public Map<String, Object> save(Shop shop, String ownerName, 
+			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile) {
 		if(StringUtils.isBlank(shop.getShopTitle())){
 			return responseError(-1, "error_empty_title");
+		}
+		
+		if(shop.getId()==null && StringUtils.isBlank(ownerName)){
+			return responseError(-1, "error_empty_onwername");
+		} else if(shop.getId()==null && StringUtils.isNotBlank(ownerName)){
+			User user = userService.findOwnerUser(ownerName);
+			if(user==null){
+				return responseError(-1, "error_empty_onwername");	
+			} 
+			shop.setUserId(user.getId());
 		}
 		
 		if(attachFile!=null){

@@ -146,6 +146,28 @@ jQuery.common = {
 		});
 	},
 	
+	login : function(_elem ,_submitUrl) {
+		var parm = this.getFormJson(_elem);
+		$.ajax({  
+            type:'post',  
+            cache: false,  
+            url: _submitUrl, 
+            data:parm,
+            dataType : 'json', //返回值类型 一般设置为json  
+            success : function(data, status) {  
+	        	if(data.errorNo==0){
+	        		var url = data.url;
+	        		self.location= url;
+				} else {
+					alert(data.errorInfo);
+				}
+	        },  
+	        error : function(data, status, e) {  
+	        	alert(data.errorInfo); 
+	        }   
+        });
+	},
+	
 	getFormJson : function(elem) {
         var o = {};
         var a = $(elem).serializeArray();

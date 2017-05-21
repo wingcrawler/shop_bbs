@@ -67,6 +67,7 @@
 									<th width="60" field="index">${t.t_no }</th>
 									<th field="username" url="/backend/user/detail?id=" parm="id">${t.t_username }</th>
 									<th field="userPhone">${t.t_mobile }</th>
+									<th field="userRole">${t.t_user_role }</th>
 									<th field="userEmail">${t.t_email }</th>
 									<th field="statusName">${t.t_status }</th>
 									<th field="createTimeStr">${t.t_createtime }</th>

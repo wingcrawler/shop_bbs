@@ -78,6 +78,12 @@ public class UserController extends BaseBackendController {
 		userService.save(user);
 		return responseOK("save_success");
 	}
+	@ResponseBody
+	@RequestMapping(value="/doSaveGet", method = RequestMethod.GET)
+	public Map<String, Object> doSaveGet(User user) {
+		userService.save(user);
+		return responseOK("save_success");
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/doDelete", method = RequestMethod.GET)

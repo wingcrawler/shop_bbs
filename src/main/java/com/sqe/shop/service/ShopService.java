@@ -103,10 +103,10 @@ public class ShopService extends AdapterService implements BaseService {
 		if(shop.getId()!=null){
 			shopMapper.update(shop);
 		} else {
-			shop.setShopLevel(0);
-			shop.setShopStatus(Constants.STORE_OFF);
+			if(shop.getShopLevel()==null){
+				shop.setShopLevel(0);	
+			}
 			shop.setCreateTime(new Date());
-			shop.setUserId(this.getCurrentUserId());
 			shopMapper.insert(shop);
 		}
 	}

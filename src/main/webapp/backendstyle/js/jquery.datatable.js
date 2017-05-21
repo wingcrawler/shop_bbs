@@ -120,8 +120,28 @@
 		});
 	}
 	
+	/* 保存并提示 */
+	$.fn.doSaveAndTip = function(_submitUrl) {
+		debugger;
+		var _parm = $.fn.getFormJson('.form');
+		$.ajax({
+			type: "POST",
+			url: _submitUrl,
+			dataType : "json",
+			data: _parm,
+			success: function(data) {
+				if (data.errorNo != 0) {
+					$.commonUtil.showTip(data.errorInfo);
+				} else {
+					$.commonUtil.showTip(data.errorInfo);
+				}
+			}
+		});
+	}
+	
 	/* 保存 */
 	$.fn.doSaveAndJump = function(_submitUrl, _jumpUrl) {
+		debugger;
 		var _parm = $.fn.getFormJson('.form');
 		$.ajax({
 			type: "POST",

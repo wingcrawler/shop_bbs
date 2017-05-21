@@ -77,6 +77,7 @@
 
 <select id="countByParm" resultType="integer">
 	select count(*) from user  where 1=1 
+	and user_role != 3
 			<if test="parm.userAddress != null">
 		     	and user_address = #{parm.userAddress}
 		   	</if>
@@ -111,6 +112,7 @@
 
 <select id="getBeanListByParm" resultMap="UserBaseMapper">
 	select * from user where 1=1 
+	and user_role != 3
 			<if test="parm.userAddress != null">
 		     	and user_address = #{parm.userAddress}
 		   	</if>
@@ -152,6 +154,7 @@
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from user where 1=1
+	and user_role != 3
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
 	   	</if>
@@ -162,6 +165,11 @@
 
 <select id="findByName" resultMap="UserBaseMapper">
 	SELECT * FROM user WHERE username=#{username}  and user_status=1
+</select>
+
+<select id="findOwnerUser" resultMap="UserBaseMapper">
+	SELECT * FROM user WHERE username=#{username}  and user_status=1 and user_role=2  
+	and id not in (select user_id from shop)
 </select>
 
 <select id="findUserByUsernameAndPassword" resultMap="UserBaseMapper">

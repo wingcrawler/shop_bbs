@@ -5,10 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +19,6 @@ public class RegisterService extends BaseCommon {
 	@Autowired
 	private UserMapper userMapper;
 	
-	@Autowired
-	private UserService userService;
-
 	public Map<String, Object> register(User user) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 
@@ -35,7 +28,7 @@ public class RegisterService extends BaseCommon {
 			return responseError(-1, "error_length_username");
 		}
 		
-		User u=userService.findByName(user.getUsername());
+		User u=userMapper.findByName(user.getUsername());
 		if (u != null) {
 			return responseError(-1, "error_username_used");
 		}

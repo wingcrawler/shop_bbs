@@ -30,8 +30,12 @@
 					        <div class="form-group">
 					          	<div class="col-sm-3">
 					          		<input type="hidden" value="${entity.id}" name="id" />
-					          		<p>${t.t_product_name }</p>
-					            	<input class="form-control" type="text" readonly="readonly" value="${entity.productName}">
+					          		<p>${t.t_product_name }(${t.t_zh })</p>
+					            	<input class="form-control" type="text" name="productName" value="${entity.productName}">
+					          	</div>
+					          	<div class="col-sm-3">
+					          		<p>${t.t_product_name }(${t.t_en })</p>
+					            	<input class="form-control" type="text" name="productEnName" value="${entity.productEnName}">
 					          	</div>
 					          	<div class="col-sm-3">
 					          		<p>${t.t_price }</p>
@@ -41,12 +45,13 @@
 					          		<p>${t.t_weight }</p>
 					            	<input class="form-control" type="text" name="productRank" value="${entity.productRank}">
 					          	</div>
-					          	<div class="col-sm-3">
+					          	
+					        </div>
+					        <div class="form-group">
+					        	<div class="col-sm-3">
 					          		<p>${t.t_product_view }</p>
 					            	<input class="form-control" type="text" readonly="readonly" value="${entity.productView}">
 					          	</div>
-					        </div>
-					        <div class="form-group">
 					        	<div class="col-sm-3">
 					          		<p>${t.t_product_status }</p>
 					          		<select class="form-control select" name="productStatus" id="StatusSelect">
@@ -63,9 +68,23 @@
 					          		<p>${t.t_product_type }</p>
 					            	<input class="form-control" type="text" readonly="readonly" value="${entity.typeName}">
 					          	</div>
+					        </div>
+					        <div class="form-group">
 					          	<div class="col-sm-3">
 					          		<p>${t.t_shop_name }</p>
 					            	<input class="form-control" type="text" readonly="readonly" value="${entity.shopName}">
+					          	</div>
+					        </div>
+					        <div class="form-group">
+					        	<div class="col-sm-6">
+					          		<p>${t.t_desc }(${t.t_zh })</p>
+					          		<textarea rows="6" cols="80" name="productDescripton">${entity.productDescripton}</textarea>
+					          	</div>
+					        </div>
+					        <div class="form-group">
+					          	<div class="col-sm-6">
+					          		<p>${t.t_desc }(${t.t_en })</p>
+					          		<textarea rows="6" cols="80" name="productEnDescription">${entity.productEnDescription}</textarea>
 					          	</div>
 					        </div>
 					        <div class="form-group">

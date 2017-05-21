@@ -59,7 +59,7 @@ public class LoginService extends BaseCommon{
 		if(u.getUserRole().equals(3L)){
 			resMap.put("url", "/backend/index");	
 		} else {
-			resMap.put("url", "/");
+			resMap.put("url", "/shopIndex");
 		}
 		return resMap;
 	}

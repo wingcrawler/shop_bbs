@@ -150,4 +150,8 @@ public class UserService extends AdapterService implements BaseService {
 	public User findUserByUsernameAndPassword(User user) {
 		return  userMapper.findUserByUsernameAndPassword(user);
 	}
+
+	public User findOwnerUser(String ownerName) {
+		return  userMapper.findOwnerUser(ownerName);
+	}
 }
