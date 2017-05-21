@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.Constants;
+import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.RegisterService;
 import com.sqe.shop.service.UserService;
 
 @Controller
 @RequestMapping("/user")
-public class FrontRegisterController {
+public class FrontRegisterController extends BaseFrontController{
 	@Autowired
 	RegisterService registerservice;
 
