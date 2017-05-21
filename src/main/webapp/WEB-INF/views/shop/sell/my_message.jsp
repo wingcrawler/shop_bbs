@@ -29,6 +29,9 @@
 								<li class="<c:if test="${type==2 }">f-active</c:if>">
 									<span><a href="/front/sell/messagePage?type=2">${t.t_myletter}</a></span>
 								</li>
+								<li class="<c:if test="${type==3 }">f-active</c:if>">
+									<span><a href="/front/sell/messagePage?type=3">${t.t_my_news_comment}</a></span>
+								</li>
 							</ul>
 						</div>
 						<div class="g-tabMn">
@@ -41,7 +44,7 @@
 												<div class="head_text">${item.content }</div>
 												<div class="head_portrait">
 													<div class="img_head_portrait">
-														<img src="images/head_portrait.jpg">
+														<img src="${item.receiveImg }">
 													</div>
 													<div class="name_time">
 														<p class="name">${item.postName }</p>
@@ -52,7 +55,7 @@
 											</div>
 											<div class="content">
 												<div class="img_box">
-													<img src="images/img1001.jpg" alt="">
+													<img src="${item.imagePath }" alt="">
 												</div>
 												<div class="introduce">
 													<p class="name"><span>${item.productName }</span> <!-- <span>25</span>kg/盒 --></p>
@@ -139,15 +142,12 @@ $(function(){
 		var messageId = $(this).attr('messageId');
 		var replyToId = $(this).attr('replyToId');
 		
-		parm.type=type;
+		parm.type=2;
 		parm.productId=productId;
 		parm.msgContent=$(this).parent().prev().val();
-		if(type==1){
-			parm.commentId=commentId;
-		} else {
-			parm.messageId=messageId;
-			parm.replyToId=replyToId;
-		}
+		parm.messageId=messageId;
+		parm.replyToId=replyToId;
+		
 		jQuery.common.updateObjByParm(parm,'/front/sell/messageReply',true,'');
 	});
 	//取消回复
@@ -155,10 +155,10 @@ $(function(){
 		$('.edit').hide();
 	});
 });
-var type="${type}";//1留言 2私信
+//1产品评论 2私信3新闻评论
 function nextPage(pageNo){
 	var parm = "";
-	parm = parm + "type="+type;
+	parm = parm + "type=2";
 	parm = parm + "&pageNo="+pagerNo;
 	parm = parm + "&pageSize="+10;
 	self.location.href="/front/sell/messagePage?"+parm;
