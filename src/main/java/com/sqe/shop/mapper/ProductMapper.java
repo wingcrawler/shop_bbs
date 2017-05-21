@@ -15,4 +15,6 @@ public interface ProductMapper extends BaseMapper {
 
 	int deleteByIdAndUserId(@Param("id") Long id, @Param("userId") Long userId);
 
+	List<Map<String, Object>> searchProduct(@Param("parm") Map<String, Object> parm);
+
 }

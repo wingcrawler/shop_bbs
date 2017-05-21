@@ -3,41 +3,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="include/meta.jsp"></jsp:include>
-	<title>${shop.shopTitle }</title>
-	<link rel="stylesheet" href="/frontstyle/css/men.css">
+	<jsp:include page="../include/meta.jsp"></jsp:include>
+	<title>${title }</title>
 </head>
 <body>
-	<jsp:include page="include/header.jsp"></jsp:include>
+	<jsp:include page="../include/header.jsp"></jsp:include>
 	
 	<!-- men -->
 	<div class="men">
 		<!-- container -->
 		<div class="container">
 			<div class="col-md-9 fashions">
-				<div class="store_name">
-					<div>
-						<div class="store_left">
-							<a href="/shop/detail?shopId=${shop.id }"><img src="${shop.shopLogoImg }" alt=""></a>
-						</div>
-						<div class="store_right">
-							<a href="/shop/detail?shopId=${shop.id }"><p class="name">${shop.shopTitle }</p></a>
-						</div>
-					</div>
-				</div>
 				<div class="title">
-					<h3>${productType.typeName }</h3>
+					<h3>${title }</h3>
 				</div>
 				<div class="fashion-section">
 					<div class="fashion-grid1">
-					<c:forEach var="item" items="${productPage.list }" varStatus="status">
+					<c:forEach var="item" items="${page.list }" varStatus="status">
 						 <div class="col-md-3 fashion-grid">
 							 <a href="single.html"><img src="${item.imagePath }" width="190" height="292" alt=""/>
 								 <div class="product <c:if test="${item.productCount==0 }">not-avaliable</c:if>">
 									 <h3>${item.productName }</h3>
 									 <p>
 									 	<c:if test="${item.productCount==0 }">
-											<del><span></span> ¥ ${item.productPrice } </del>										 	
+											<del><span></span> ¥ ${item.productPrice }</del>										 	
 									 	</c:if>
 									 	<c:if test="${item.productCount!=0 }">
 									 		<span></span> ¥ ${item.productPrice } 
@@ -70,7 +59,7 @@
 					<ul>
 						<c:forEach var="item" items="${productTypeList }">
 							<li>
-							<a href="/shop/product?shopId=${shop.id }&productTypeId=${item.key.id }">${item.key.typeName }</a>
+							<a href="/product/list?parentType=${item.key.id }"  target="_blank">${item.key.typeName }</a>
 							</li>
 						</c:forEach>
 					</ul>
@@ -78,11 +67,35 @@
 			</div>
 
 			<div class="clearfix"> </div>
+			<div class="pagebar"></div>
+			
 		</div>
 		<!-- //container -->
 	</div>
 	<!-- //men -->
 	
-	<jsp:include page="include/footer.jsp"></jsp:include>
+	<jsp:include page="../include/footer.jsp"></jsp:include>
+	
+<script type="text/javascript">
+var parentType = '${parentType}';
+$(function(){
+	$(".pagebar").createPage({
+		pageCount : '${page.pageCount}',
+		current : '${page.currentPage}',
+		fnName : 'nextPage',
+		backFn : function(p) {
+			// console.log(p);
+		}
+	});	
+});
+
+function nextPage(pageNo){
+	var args = '?pageNo='+pageNo;
+	if(parentType!=''){
+		args = args+'&parentType='+parentType;
+	}
+	self.location="/product/list"+args;
+}
+</script>
 </body>
 </html>

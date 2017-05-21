@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="include/meta.jsp"></jsp:include>
+	<jsp:include page="../include/meta.jsp"></jsp:include>
 	<title>${product.productName }</title>
 
 	<link rel="stylesheet" href="/frontstyle/css/etalage.css">
@@ -25,7 +25,7 @@
 	
 </head>
 <body>
-	<jsp:include page="include/header.jsp"></jsp:include>
+	<jsp:include page="../include/header.jsp"></jsp:include>
 	
 	<!-- single -->
 	<div class="single">
@@ -56,7 +56,7 @@
 						<div class="single-left-info">
 							<h3>${product.productName }</h3>
 							<a href="#product-details" class="view">${t.t_view_detail }</a>
-							<p>$ ${product.productPrice }</p>
+							<p>¥ ${product.productPrice }</p>
 							<p><a href="/shop/product?shopId=${shop.id }" class="view">${t.t_shop_name }: ${shop.shopTitle }</a></p>
 						</div>
 						<div class="select-size">
@@ -112,7 +112,7 @@
 									<div class="clearfix"> </div>
 								</div>
 								<div class="col-md-3 related-right">
-									<p>$ ${item.productPrice }</p>
+									<p>¥ ${item.productPrice }</p>
 									<a href="/product/single?productId=${item.id }">${t.t_view_detail }</a>
 								</div>
 								<div class="clearfix"> </div>
@@ -132,18 +132,22 @@
 										<div class="item">
 											<div class="headline">
 												<div class="head_text">
-													<div class="one">${item.context }</div>
+													<div class="one">${item.content }</div>
 													<c:forEach var="reply" items="${item.replyList }">
 														<div class="single_reply">${reply.postName } ${t.t_reply }：${reply.content }</div>
+														<div>${reply.date }</div>
 													</c:forEach>	
 												</div>
 												<div class="head_portrait">
 													<div class="img_head_portrait">
-														<img src="images/head_portrait.jpg">
+														<c:if test="${not empty item.userImage }">
+														
+														</c:if>
+														<img src="${item.userImage }">
 													</div>
 													<div class="name_time">
 														<p class="name">${item.postName }</p>
-														<p class="time">${reply.date }</p>
+														<p class="time">${item.date }</p>
 													</div>
 	
 												</div>
@@ -179,6 +183,6 @@
 	</div>
 	<!-- //single -->
 	
-	<jsp:include page="include/footer.jsp"></jsp:include>
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

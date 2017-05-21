@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
+import com.sqe.shop.model.Comment;
+import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.CommentService;
@@ -164,26 +167,6 @@ public class BuyerCenterController extends BaseFrontController {
 	}
 	
 	/**
-	 * 我的留言
-	 * @param model
-	 * @param pageNo
-	 * @param pageSize
-	 * @return
-	 */
-	@RequestMapping(value="/myMessage", method = RequestMethod.GET)
-	public ModelAndView messagePage(ModelAndView model, 
-			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
-			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
-		
-		PageUtil<Map<String, Object>> page = new PageUtil<Map<String,Object>>();
-		page = getCommentList(this.getCurrentUserId(), pageNo, pageSize);
-		
-		model.addObject("page", page);
-		model.setViewName("shop/buy/leave_message");
-		return model;
-	}
-	
-	/**
 	 * 商品留言页面 
 	 * @param model
 	 * @param type 1:留言 2：私信
@@ -196,11 +179,14 @@ public class BuyerCenterController extends BaseFrontController {
 		pageSize = 10;
 		PageUtil<Map<String, Object>> page = new PageUtil<Map<String,Object>>();
 		if(type.equals("1")){//产品评论
-			page = getCommentList(this.getCurrentUserId(), pageNo, pageSize);
-			model.setViewName("shop/buy/leave_message");
+			page = getProductCommentList(this.getCurrentUserId(), pageNo, pageSize);
+			model.setViewName("shop/buy/my_product_comment");
 		} else if(type.equals("2")){//私信
 			page = getMessageList(this.getCurrentUserId(), pageNo, pageSize);
-			model.setViewName("shop/buy/direct_messages");
+			model.setViewName("shop/buy/my_message");
+		} else if(type.equals("3")){//新闻资讯评论
+			page = getNewsCommentList(this.getCurrentUserId(), pageNo, pageSize);
+			model.setViewName("shop/buy/my_news_comment");
 		} else {
 			model.setViewName("shop/404");
 			return model;
@@ -211,12 +197,21 @@ public class BuyerCenterController extends BaseFrontController {
 		return model;
 	}
 	
-	public PageUtil<Map<String, Object>> getCommentList(Long userId, int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getProductCommentList(Long userId, int pageNo, Integer pageSize) {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
 		parmMap.put("userId", userId);
 		parmMap.put("nullCommentId", true);
 		parmMap.put("orderby", "c.date desc");
-		PageUtil<Map<String, Object>> msgPage = commentService.getSellerProductCommentListByParm(parmMap, pageNo, pageSize);
+		PageUtil<Map<String, Object>> msgPage = commentService.getProductCommentListByParm(parmMap, pageNo, pageSize);
+		return msgPage;
+	}
+	
+	public PageUtil<Map<String, Object>> getNewsCommentList(Long userId, int pageNo, Integer pageSize) {
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("userId", userId);
+		parmMap.put("nullCommentId", true);
+		parmMap.put("orderby", "c.date desc");
+		PageUtil<Map<String, Object>> msgPage = commentService.getNewsCommentListByParm(parmMap, pageNo, pageSize);
 		return msgPage;
 	}
 	/**
@@ -228,9 +223,47 @@ public class BuyerCenterController extends BaseFrontController {
 	 */
 	public PageUtil<Map<String, Object>> getMessageList(Long userId, int pageNo, Integer pageSize) {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
-		parmMap.put("receiveId", userId);
+		parmMap.put("postId", userId);
+		parmMap.put("nullMessageId", true);
 		parmMap.put("orderby", "m.create_time desc");
 		PageUtil<Map<String, Object>> msgPage = messageService.getSellerMessageListByParm(parmMap, pageNo, pageSize);
 		return msgPage;
+	}
+	
+	/**
+	 * 回复私信或者产品留言
+	 * @param msg
+	 * @param productId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/messageReply", method = RequestMethod.POST)
+	public Map<String, Object> messageReply(String msgContent, String type,Long productId, Long messageId, Long commentId, Long replyToId) {
+		if(StringUtils.isBlank(msgContent)){
+			return responseError(-1, "error_empty_content");
+		}
+		if(type.equals("1")){//产品留言
+			Comment comment = new Comment();
+			comment.setContext(msgContent);
+			comment.setDate(new Date());
+			comment.setCommentId(commentId);
+			comment.setUserId(this.getCurrentUserId());
+			comment.setProductId(productId);
+			comment.setStatus(Constants.COMMENT_ON); 
+			commentService.insert(comment);
+		} else if(type.equals("2")){//私信
+			Message message = new Message();
+			message.setMessageContext(msgContent);
+			message.setCreateTime(new Date());
+			message.setProductId(productId);
+			message.setPostId(this.getCurrentUserId());
+			message.setReceiveId(replyToId);
+			message.setMessageStatus(Constants.MSG_ON);
+			message.setMessageId(messageId);
+			messageService.insert(message);
+		} else {
+			responseError(-1, "error_illegal");
+		}
+		return responseOK1("");
 	}
 }

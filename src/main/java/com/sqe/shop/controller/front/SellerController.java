@@ -351,6 +351,7 @@ public class SellerController extends BaseFrontController {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
 		parmMap.put("receiveId", userId);
 		parmMap.put("orderby", "m.create_time desc");
+		parmMap.put("nullMessageId", true);
 		PageUtil<Map<String, Object>> msgPage = messageService.getSellerMessageListByParm(parmMap, pageNo, pageSize);
 		return msgPage;
 	}

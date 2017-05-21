@@ -4,7 +4,7 @@
 <html>
 <head>
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.t_my_comment }</title>
+	<title>${t.t_my_product_comment }</title>
 	<link href="/frontstyle/buy/css/direct_messages.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -18,44 +18,46 @@
 			
 			<!-- companyData -->
 			<div class="companyData">
-				<div class="header"><span>${t.m_product }>  ${t.t_my_comment }</span></div>
+				<div class="header"><span>${t.t_user_center }>  ${t.t_my_product_comment }</span></div>
 				<div class="product_message">
 					<div class="g-tabWrap">
-						<div class="g-tabHdWrap">
+						<%-- <div class="g-tabHdWrap">
 							<ul class="g-tabHd">
-								<span><a href="#">${t.t_my_comment}</a></span>
+								<span><a href="#">${t.t_my_news_comment}</a></span>
 							</ul>
-						</div>
+						</div> --%>
 						<div class="g-tabMn">
 							<div class="g-tabMnItem f-active">
 								<ul>
 								<c:forEach var="item" items="${page.list }">
 									<li class="list">
 										<div class="item">
+											<p style="color:#aaa;text-decoration:underline"><a target="_blank" href="/product/single?productId=${item.productId }">${item.productName }</a></p>
 											<div class="headline">
-												<div class="head_text">${item.content }</div>
-												<div class="head_portrait">
+												<div class="head_text">
+													${item.content }
+													<span style="margin-left:30px;color:#aaa;">${item.date }</span>
+												</div>
+												<%-- <div class="head_portrait">
 													<div class="img_head_portrait">
 														<img src="images/head_portrait.jpg">
 													</div>
 													<div class="name_time">
-														<%-- <p class="name">${item.postName }</p> --%>
+														<p class="name">${item.postName }</p>
 														<p class="time">${item.date }</p>
 													</div>
-
-												</div>
+												</div> --%>
 											</div>
-											<div class="content">
+											<%-- <div class="content">
 												<div class="img_box">
 													<img src="images/img1001.jpg" alt="">
 												</div>
 												<div class="introduce">
-													<p class="name"><span>${item.productName }</span> <!-- <span>25</span>kg/盒 --></p>
 													<p class="referral">${item.desc }</p>
-													<p class="tariff">${t.t_price }：＄<span>${item.price }</span></p>
+													<p class="tariff">${t.t_price }：¥<span>${item.price }</span></p>
 												</div>
-											</div>
-											<div class="date_reply">
+											</div> --%>
+											<%-- <div class="date_reply">
 												<!-- <span>2016-06-27 17:55</span> -->
 												<span class="reply">${t.t_reply }</span>
 											</div>	
@@ -65,7 +67,7 @@
 													<span class="cancel">${t.b_cancel }</span>
 													<span class="affirm" productId="${item.productId }" commentId="${item.commentId }" replyToId="${item.postId }" messageId="${item.messageId }">${t.b_confirm }</span>
 												</div>
-											</div>
+											</div> --%>
 										</div>
 										<div class="write_back_box">
 											<ul class="write_back">
@@ -75,7 +77,7 @@
 															<span class="red">${reply.postName }</span>
 															<span>${t.t_reply }</span>
 															<span class="red">${reply.receiveName }：</span>
-															<span>${reply.content }</span>
+															<span>${reply.content } <span style="margin-left:30px;color:#aaa;">${reply.date }</span></span>
 														</p>
 														<%-- <p class="reply_box">
 															<span>2016-06-27 17:55</span>
@@ -110,7 +112,7 @@
 	
 <script type="text/javascript">
 $(function(){
-	$('.menu_list ul li a').eq(4).addClass('active');
+	$('.menu_list ul li a').eq(5).addClass('active');
 	
 	$(".pagebar").createPage({
 		pageCount : '${page.pageCount}',
@@ -139,7 +141,7 @@ $(function(){
 		parm.msgContent=$(this).parent().prev().val();
 		parm.messageId=messageId;
 		parm.replyToId=replyToId;
-		jQuery.common.updateObjByParm(parm,'/front/sell/messageReply',true,'');
+		/* jQuery.common.updateObjByParm(parm,'/front/buy/messageReply',true,''); */
 	});
 	//取消回复
 	$('.cancel').click(function(){
@@ -149,7 +151,7 @@ $(function(){
 
 function nextPage(pageNo){
 	var parm = "";
-	parm = parm + "type=2";
+	parm = parm + "type=1";
 	parm = parm + "&pageNo="+pagerNo;
 	parm = parm + "&pageSize="+10;
 	self.location.href="/front/buy/messagePage?"+parm;

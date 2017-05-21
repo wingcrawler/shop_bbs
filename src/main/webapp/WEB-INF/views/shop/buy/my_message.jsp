@@ -4,8 +4,8 @@
 <html>
 <head>
 	<jsp:include page="../include/meta.jsp"></jsp:include>
-	<title>${t.t_product_msg }</title>
-	<link href="/frontstyle/sell/css/leave_message.css" rel="stylesheet" type="text/css">
+	<title>${t.t_my_message }</title>
+	<link href="/frontstyle/buy/css/leave_message.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<jsp:include page="../include/header.jsp"></jsp:include>
@@ -18,17 +18,12 @@
 			
 			<!-- companyData -->
 			<div class="companyData">
-				<div class="header"><span>${t.m_product }>  ${t.t_product_msg }</span></div>
+				<div class="header"><span>${t.t_user_center } >  ${t.t_my_message }</span></div>
 				<div class="product_message">
 					<div class="g-tabWrap">
 						<div class="g-tabHdWrap">
 							<ul class="g-tabHd">
-								<li class="<c:if test="${type==1 }">f-active</c:if>">
-									<span><a href="/front/sell/messagePage?type=1">${t.t_mymsg}</a></span>
-								</li>
-								<li class="<c:if test="${type==2 }">f-active</c:if>">
-									<span><a href="/front/sell/messagePage?type=2">${t.t_myletter}</a></span>
-								</li>
+								<li class="f-active"><span>${t.t_my_message}</span></li>
 							</ul>
 						</div>
 						<div class="g-tabMn">
@@ -40,11 +35,11 @@
 											<div class="headline">
 												<div class="head_text">${item.content }</div>
 												<div class="head_portrait">
-													<div class="img_head_portrait">
+													<!-- <div class="img_head_portrait">
 														<img src="images/head_portrait.jpg">
-													</div>
+													</div> -->
 													<div class="name_time">
-														<p class="name">${item.postName }</p>
+														<%-- <p class="name">${item.postName }</p> --%>
 														<p class="time">${item.date }</p>
 													</div>
 
@@ -52,7 +47,7 @@
 											</div>
 											<div class="content">
 												<div class="img_box">
-													<img src="images/img1001.jpg" alt="">
+													<img src="${item.imagePath }" alt="">
 												</div>
 												<div class="introduce">
 													<p class="name"><span>${item.productName }</span> <!-- <span>25</span>kg/盒 --></p>
@@ -68,7 +63,7 @@
 												<textarea id="msgContent"></textarea>
 												<div class="edit_btn">
 													<span class="cancel">${t.b_cancel }</span>
-													<span class="affirm" productId="${item.productId }" commentId="${item.commentId }" replyToId="${item.postId }" messageId="${item.messageId }">${t.b_confirm }</span>
+													<span class="affirm" productId="${item.productId }" commentId="${item.commentId }" replyToId="${item.receiveId }" messageId="${item.messageId }">${t.b_confirm }</span>
 												</div>
 											</div>
 										</div>
@@ -80,7 +75,7 @@
 															<span class="red">${reply.postName }</span>
 															<span>${t.t_reply }</span>
 															<span class="red">${reply.receiveName }：</span>
-															<span>${reply.content }</span>
+															<span>${reply.content } <span style="margin-left:30px;color:#aaa;">${reply.date }</span></span>
 														</p>
 														<%-- <p class="reply_box">
 															<span>2016-06-27 17:55</span>
@@ -115,7 +110,7 @@
 	
 <script type="text/javascript">
 $(function(){
-	$('.menu_box .menu_list div.module a').eq(2).addClass('active');
+	$('.menu_list ul li a').eq(4).addClass('active');
 	
 	$(".pagebar").createPage({
 		pageCount : '${page.pageCount}',
@@ -139,29 +134,25 @@ $(function(){
 		var messageId = $(this).attr('messageId');
 		var replyToId = $(this).attr('replyToId');
 		
-		parm.type=type;
 		parm.productId=productId;
 		parm.msgContent=$(this).parent().prev().val();
-		if(type==1){
-			parm.commentId=commentId;
-		} else {
-			parm.messageId=messageId;
-			parm.replyToId=replyToId;
-		}
-		jQuery.common.updateObjByParm(parm,'/front/sell/messageReply',true,'');
+		parm.commentId=commentId;
+		parm.replyToId=replyToId;
+		parm.messageId=messageId;
+		parm.type=2;
+		jQuery.common.updateObjByParm(parm,'/front/buy/messageReply',true,'');
 	});
 	//取消回复
 	$('.cancel').click(function(){
 		$('.edit').hide();
 	});
 });
-var type="${type}";//1留言 2私信
 function nextPage(pageNo){
 	var parm = "";
-	parm = parm + "type="+type;
+	parm = parm + "type=2";
 	parm = parm + "&pageNo="+pagerNo;
 	parm = parm + "&pageSize="+10;
-	self.location.href="/front/sell/messagePage?"+parm;
+	self.location.href="/front/buy/messagePage?"+parm;
 }
 
 </script>

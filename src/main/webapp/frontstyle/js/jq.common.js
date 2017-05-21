@@ -97,6 +97,28 @@ jQuery.common = {
         });
 	},
 	
+	saveObjByParm : function(_parm ,_submitUrl,_isRefrush, _jumpUrl) {
+		$.ajax({  
+            type:'post',  
+            cache: false,  
+            url: _submitUrl, 
+            data:_parm,
+            dataType : 'json', //返回值类型 一般设置为json  
+            success : function(data, status) {  
+	        	if(data.errorNo==0){
+	        		if(_isRefrush){
+	        			self.location= _jumpUrl;
+	        		}
+				} else {
+					alert(data.errorInfo);
+				}
+	        },  
+	        error : function(data, status, e) {  
+	        	alert(data.errorInfo); 
+	        }   
+        });
+	},
+	
 	/* 联动刷新select */
 	refreshSelect : function(_currentElem, _targetElem, _getUrl){
 		var parentId = $(_currentElem).val();

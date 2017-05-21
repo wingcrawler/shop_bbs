@@ -18,6 +18,7 @@ public class Comment extends BaseModel implements Serializable {
 	private Long id;
 	private Long userId;
 	private Integer status;
+	private Long replyToUserId;
 	
 	public Date getDate() {
 		return date;
@@ -72,6 +73,12 @@ public class Comment extends BaseModel implements Serializable {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public Long getReplyToUserId() {
+		return replyToUserId;
+	}
+	public void setReplyToUserId(Long replyToUserId) {
+		this.replyToUserId = replyToUserId;
 	}
 	
 	
