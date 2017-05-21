@@ -109,5 +109,14 @@ public class PostService extends AdapterService implements BaseService {
 		parm.put("orderby", "id desc" );
 		return parm;
 	}
+	
+	public Map<String, Object> floorNum(Post post) {
+		Map<String, Object> parm = new HashMap<String, Object>();	
+		if(post.getThreadId()!=null && post.getThreadId()>=0){
+			parm.put("threadId", post.getThreadId());	
+		}
+		parm.put("orderby", "id desc" );
+		return parm;
+	}
 
 }
