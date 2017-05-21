@@ -11,4 +11,10 @@ public interface CommentMapper extends BaseMapper {
 
 	int countSellerProductCommentList(@Param("parm") Map<String, Object> parmMap);
 
+	List<Map<String, Object>> getNewsCommentListByParm(@Param("parm") Map<String, Object> parmMap);
+
+	List<Map<String, Object>> getSubCommentListByParm(@Param("parm") Map<String, Object> replyMap);
+
+	List<Map<String, Object>> getProductCommentListByParm(@Param("parm") Map<String, Object> parmMap);
+
 }

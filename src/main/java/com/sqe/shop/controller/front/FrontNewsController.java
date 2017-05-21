@@ -112,7 +112,7 @@ public class FrontNewsController extends BaseFrontController {
 		parmMap.put("newsId", newsId);
 		parmMap.put("nullCommentId", true);
 		parmMap.put("orderby", "c.date desc");
-		PageUtil<Map<String, Object>> commentPage = commentService.getSellerProductCommentListByParm(parmMap, 1, -1);
+		PageUtil<Map<String, Object>> commentPage = commentService.getNewsCommentListByParm(parmMap, 1, -1);
 		model.addObject("commentPage", commentPage);
 		
 		model.setViewName("shop/news/newsdetail");

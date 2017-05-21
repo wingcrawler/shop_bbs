@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ibm.db2.jcc.a.c;
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.CommentMapper;
 import com.sqe.shop.model.Comment;
@@ -171,6 +170,66 @@ public class CommentService extends AdapterService implements BaseService {
 			}
 		}
 		pageUtil.setList(list);
+		return pageUtil;
+	}
+
+	/**
+	 * 新闻评论列表
+	 * @param parmMap
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public PageUtil<Map<String, Object>> getNewsCommentListByParm(Map<String, Object> parmMap, int pageNo, Integer pageSize) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		parmMap.put("start", pageUtil.getStartRow());
+		parmMap.put("limit", pageUtil.getPageSize());
+		
+		List<Map<String, Object>> list = commentMapper.getNewsCommentListByParm(parmMap);
+		pageUtil.setTotalRecords(list.size());
+		pageUtil.setList(list);
+		
+		//查询是否有回复
+		List<Map<String, Object>> replyList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> replyMap = new HashMap<String, Object>();
+		replyMap.put("orderby", "c.date asc");
+		parmMap.put("nullCommentId", false);
+		for(Map<String, Object> map : list){
+			replyMap.put("commentId", map.get("commentId"));
+			replyList = commentMapper.getSubCommentListByParm(replyMap);	
+			map.put("replyList", replyList);
+		}
+		
+		return pageUtil;
+	}
+
+	/**
+	 * 获取产品的评论列表
+	 * @param parmMap
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public PageUtil<Map<String, Object>> getProductCommentListByParm(Map<String, Object> parmMap, int pageNo, Integer pageSize) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		parmMap.put("start", pageUtil.getStartRow());
+		parmMap.put("limit", pageUtil.getPageSize());
+		
+		List<Map<String, Object>> list = commentMapper.getProductCommentListByParm(parmMap);
+		pageUtil.setTotalRecords(list.size());
+		pageUtil.setList(list);
+		
+		//查询是否有回复
+		List<Map<String, Object>> replyList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> replyMap = new HashMap<String, Object>();
+		replyMap.put("orderby", "c.date asc");
+		parmMap.put("nullCommentId", false);
+		for(Map<String, Object> map : list){
+			replyMap.put("commentId", map.get("commentId"));
+			replyList = commentMapper.getSubCommentListByParm(replyMap);	
+			map.put("replyList", replyList);
+		}
+		
 		return pageUtil;
 	}
 

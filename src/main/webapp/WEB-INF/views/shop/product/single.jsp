@@ -132,18 +132,22 @@
 										<div class="item">
 											<div class="headline">
 												<div class="head_text">
-													<div class="one">${item.context }</div>
+													<div class="one">${item.content }</div>
 													<c:forEach var="reply" items="${item.replyList }">
 														<div class="single_reply">${reply.postName } ${t.t_reply }：${reply.content }</div>
+														<div>${reply.date }</div>
 													</c:forEach>	
 												</div>
 												<div class="head_portrait">
 													<div class="img_head_portrait">
-														<img src="images/head_portrait.jpg">
+														<c:if test="${not empty item.userImage }">
+														
+														</c:if>
+														<img src="${item.userImage }">
 													</div>
 													<div class="name_time">
 														<p class="name">${item.postName }</p>
-														<p class="time">${reply.date }</p>
+														<p class="time">${item.date }</p>
 													</div>
 	
 												</div>

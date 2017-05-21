@@ -56,6 +56,7 @@
 						<div class="news_reply" style="display: none;">
 							<form method="POST" class="commentReplyForm${itemStatus.index }">
 								<input type="hidden" name="commentId" value="${item.commentId }">
+								<input type="hidden" name="replyToUserId" value="${item.commentUserId }">
 								<textarea class="editor" name="context" placeholder="${t.tip_comment_1 }"></textarea>
 								<input type="button" onclick="postReplyComment(this)" value="${t.b_submit }">
 								<input type="button" class="bg-grey" style="background-color:#aaa;" onclick="cancelComment(this)" value="${t.b_cancel }">
@@ -73,6 +74,7 @@
 										<div class="news_reply" style="display: none;">
 											<form method="POST" class="commentReplyForm${itemStatus.index }${replyStatus.index }">
 												<input type="hidden" name="commentId" value="${item.commentId }">
+												<input type="hidden" name="replyToUserId" value="${reply.postId }">
 												<textarea class="editor" name="context" placeholder="${t.tip_comment_1 }"></textarea>
 												<input type="button" onclick="postReplyComment(this)" value="${t.b_submit }">
 												<input type="button" class="bg-grey" style="background-color:#aaa;"  onclick="cancelComment(this)" value="${t.b_cancel }">

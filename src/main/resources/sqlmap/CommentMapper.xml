@@ -5,11 +5,12 @@
 <resultMap type="com.sqe.shop.model.Comment" id="CommentBaseMapper">
 	<id property="date" column="date" />
 	<id property="newsId" column="news_id" />
+	<id property="replyToUserId" column="reply_to_user_id" />
 	<id property="productId" column="product_id" />
 	<id property="context" column="context" />
+	<id property="commentId" column="comment_id" />
 	<id property="shopId" column="shop_id" />
 	<id property="id" column="id" />
-	<id property="commentId" column="comment_id" />
 	<id property="userId" column="user_id" />
 	<id property="status" column="status" />
 </resultMap>  
@@ -19,9 +20,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into comment
-	(date,news_id,product_id,context,comment_id,shop_id,user_id,status)
+	(date,news_id,reply_to_user_id,product_id,context,comment_id,shop_id,user_id,status)
 	values
-	(#{date},#{newsId},#{productId},#{context},#{commentId},#{shopId},#{userId},#{status})
+	(#{date},#{newsId},#{replyToUserId},#{productId},#{context},#{commentId},#{shopId},#{userId},#{status})
 </insert>
 
 <update id="update">
@@ -33,13 +34,16 @@
 			<if test="newsId != null">  
 	        	news_id=#{newsId},
 	    	</if>
+			<if test="replyToUserId != null">  
+	        	reply_to_user_id=#{replyToUserId},
+	    	</if>
 			<if test="productId != null">  
 	        	product_id=#{productId},
 	    	</if>
 			<if test="context != null">  
 	        	context=#{context},
 	    	</if>
-	    	<if test="commentId != null">  
+			<if test="commentId != null">  
 	        	comment_id=#{commentId},
 	    	</if>
 			<if test="shopId != null">  
@@ -205,5 +209,101 @@
 	</if>
 </select>
 
+<!-- 直接评论产品的评论列表 -->
+<select id="getProductCommentListByParm" parameterType="HashMap" resultType="HashMap">
+	select 
+	p.product_name as productName, 
+	p.id as productId, 
+	p.product_price as price,
+	c.id as commentId, 
+  c.context as content, 
+  DATE_FORMAT(c.date,'%Y-%c-%d %h:%i') as date,
+  u.username as postName ,
+	p.user_id as productUserId,
+	c.user_id as commentUserId,
+	u.user_image as userImage
+	from `comment` c
+	LEFT JOIN product p on c.product_id=p.id
+	LEFT JOIN `user` u on c.user_id=u.id
+	where 1=1
+	and comment_id is null
+	and c.product_id is not null
+   	<if test="parm.userId != null">
+   		and c.user_id=#{parm.userId}
+   	</if>
+	<if test="parm.productId != null">
+     	and c.product_id = #{parm.productId}
+   	</if>
+   	
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
+</select>
+
+<!-- 直接评论新闻资讯的评论列表 -->
+<select id="getNewsCommentListByParm" parameterType="HashMap" resultType="HashMap">
+	select 
+	c.id as commentId, 
+  c.context as content, 
+  DATE_FORMAT(c.date,'%Y-%c-%d %h:%i') as date,
+  u.username as postName ,
+	c.user_id as commentUserId,
+n.id as newsId,
+n.news_title as newsTitle,
+n.news_date as newsDate,
+DATE_FORMAT(n.news_date,'%Y-%c-%d %h:%i') as newsDateStr
+	from `comment` c
+	LEFT JOIN news n on n.id=c.news_id
+	LEFT JOIN `user` u on c.user_id=u.id
+	where 1=1
+	and comment_id is null
+	and c.news_id is not null
+	<if test="parm.userId != null">
+   		and c.user_id=#{parm.userId}
+   	</if>
+	<if test="parm.newsId != null">
+     	and c.news_id = #{parm.newsId}
+   	</if>
+   	
+	<if test="parm.orderby != null">
+   		order by ${parm.orderby}
+   	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
+</select>
+
+<!-- 获取对评论的评论列表 -->
+<select id="getSubCommentListByParm" parameterType="HashMap" resultType="HashMap">
+	SELECT 
+rc.id as subCommentId,
+DATE_FORMAT(rc.date,'%Y-%c-%d %h:%i') as date,
+rc.user_id as postId,
+rc.reply_to_user_id as reciveId,
+rc.context as content,
+u1.username as postName,
+u2.username as reciveName
+from `comment` c
+LEFT JOIN `comment` rc on rc.comment_id = c.id
+LEFT JOIN `user` u1 on u1.id = rc.user_id
+LEFT JOIN `user` u2 on u2.id = rc.reply_to_user_id
+where 1=1
+and c.comment_id is null
+<if test="parm.commentId != null">
+	and c.id=#{parm.commentId}
+</if>
+<if test="parm.userId != null">
+	and c.userId=#{parm.userId}
+</if>
+<if test="parm.orderby != null">
+	order by ${parm.orderby}
+</if>
+<if test="parm.start != null">
+	limit #{parm.start},#{parm.limit}
+</if>
+</select>
 
 </mapper>

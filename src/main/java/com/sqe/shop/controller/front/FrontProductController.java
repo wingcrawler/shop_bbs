@@ -1,7 +1,6 @@
 package com.sqe.shop.controller.front;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
@@ -157,7 +156,7 @@ public class FrontProductController extends BaseFrontController {
 		parmMap.put("productId", productId);
 		parmMap.put("nullCommentId", true);
 		parmMap.put("orderby", "c.date desc");
-		PageUtil<Map<String, Object>> commentPage = commentService.getSellerProductCommentListByParm(parmMap, 1, 10);
+		PageUtil<Map<String, Object>> commentPage = commentService.getProductCommentListByParm(parmMap, 1, 10);
 		model.addObject("commentPage", commentPage);
 		
 		model.setViewName("shop/product/single");
