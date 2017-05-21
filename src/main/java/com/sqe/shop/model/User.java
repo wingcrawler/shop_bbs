@@ -8,9 +8,10 @@ import com.sqe.shop.common.BaseModel;
 public class User extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+    
 	private String userAddress;
 	private String password;
+	private String repassword;
 	private Integer userStatus;
 	private String userImage;
 	private Date createTime;
@@ -33,6 +34,13 @@ public class User extends BaseModel implements Serializable {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getRepassword() {
+		return repassword;
+	}
+	public void setRepassword(String repassword) {
+		this.repassword = repassword;
 	}
 	public Integer getUserStatus() {
 		return userStatus;

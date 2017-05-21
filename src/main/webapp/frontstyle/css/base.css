@@ -1,0 +1,41 @@
+*{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+body,button,input,select,textarea{font:12px/2 Verdana, "微软雅黑", Helvetica, sans-serif;}/*宋体 \5FAE\8F6F\96C5\9ED1  Verdana, Helvetica, sans-serif*/
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+address,cite,dfn,em,var{font-style:normal;}
+code,kbd,pre,samp{font-family:courier new,courier,monospace;word-wrap: break-word; white-space: normal;}
+small{font-size:12px;}
+ul,ol{list-style:none;}
+a:link,a:visited{color:#555;text-decoration:none;}
+a:hover{color:#666;}
+sup{vertical-align:text-top;}
+sub{vertical-align:text-bottom;}
+legend{color:#555;}
+fieldset,img{border:0;}
+button,textarea{font-size:100%;outline: none;-moz-appearance: none;-webkit-appearance: none;appearance: none;}
+table{border-collapse:collapse;border-spacing:0;}
+
+html,body{ color:#555;}
+.fl{float:left;display: inline;}
+.fr{float:right;display: inline;}
+.clear{clear: both;}
+.clear:after{content: "";display: table;clear: both;overflow: hidden;}
+
+@media (max-width: 768px) {
+	.mg {width: 100%;padding: 0 10px;}
+	.mg2 {width: 100%;padding: 0 10px;}
+}
+@media (max-width: 420px) {
+	
+}
+@media (min-width: 769px) and (max-width: 992px) {
+	.mg {margin: 0 auto;width: 760px;}
+	.mg2 {margin: 0 auto;width: 760px;}
+}
+@media (min-width: 993px) and (max-width: 1300px) {
+	.mg {margin: 0 auto;width: 1000px;}
+	.mg2 {margin: 0 auto;width: 1000px;}
+}
+@media (min-width: 1301px) {
+	.mg {margin: 0 auto;width: 1000px;}
+	.mg2 {margin: 0 auto;width: 1200px;}
+}

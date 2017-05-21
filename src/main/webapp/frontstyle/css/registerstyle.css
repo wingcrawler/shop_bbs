@@ -1,0 +1,50 @@
+body,div,a,span,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,input,textarea,img{padding:0; margin:0; border:0; list-style:none;}
+input{outline:none;}
+body{font-size:12px; font-family:"微软雅黑"; color:#646464;}
+a{text-decoration:none; color:#646464;}
+a:hover{text-decoration:none;/*color:#b90101;*/}
+
+.noborder{border:none;}
+.header .top .padding{padding-top:50px;margin-left:20px}
+.register{padding-top:70px;overflow: hidden;float:right;}
+.register a{color:#008aff;}
+
+.register1{position: relative; width:100%;height: 721px;margin-top: 10px}
+.register1 img.reg_bg{ width:100%;height: 721px;}
+.register1 .box{overflow: hidden; font-size:14px; position: absolute;left:50%;margin-left:-347px;top: 50%;margin-top: -270px; width:694px;height:500px;background:url(../images/box.png);background-size:cover;}
+.register1 .box p:nth-of-type(1){text-align: center;font-size: 28px;font-weight:bold;color:#000;}
+.register1 .box .pload{padding:5px 0;background:#45a8e7;display: block;width:40%;margin: 0 auto;color:#fff;font-size:18px;margin-top:20px;text-align: center;}
+.register1 .box .input input{width:50%;height: 40px;border:1px solid #ccc;margin-top:3%;}
+.register1 .box .input{margin-left:17%;width: 100%;overflow: hidden;}
+.register1 .box span{color:red;}
+.register1 .box .margin span{margin-left:41px;}
+.register1 .box span:nth-of-type(4){margin-left:41px;}
+.register1 .margin{overflow: hidden;}
+.register1 .box .check{width:14px;height:14px;border:1px solid #ccc;text-align: center;margin-left:30%;margin-top: 40px;}
+a.ftp{color:#45a8e7;}
+
+
+.register1 .box .user{background:url(../images/user.png) no-repeat 310px center;}
+.register1 .box .key{background:url(../images/key.png) no-repeat 310px center;}
+.register1 .box .key1{background:url(../images/key.png) no-repeat 310px center;}
+.register1 .box .email{background:url(../images/email.png) no-repeat 310px center;}
+.plast{text-align: center;line-height: 40px;}
+
+
+
+/*onloadpage*/
+.onload1{overflow: hidden; font-size:14px; position: absolute;left:50%;margin-left:-511px;top: 50%;margin-top: -219px; width:1023px;height:438px;background:url(../images/onload_bg.png);background-size:cover;}
+.load1{float:right;width:322px;height:auto;}
+.load1 .userload{text-align:left;line-height:100px;font-size:28px;}
+.load1 input{width:75%;height: 40px;border:1px solid #ccc;margin-bottom:5%;font-size: 16px;padding-left:40px;}
+.load1 .user1{background:url(../images/user.png) no-repeat 10px center,url(../images/user.png) no-repeat 250px center;}
+.load1 .key1{background:url(../images/key.png) no-repeat 10px center,url(../images/jianpan.png) no-repeat 250px center;}
+.load1 .code{background:url(../images/dun.png) no-repeat 10px center,url(../images/shuaxin.png) no-repeat 250px center;}
+.load1 input.pload{background:#45a8e7;margin:0;border:0;line-height:40px;text-align:center;width:78%;font-size: 18px;color:#fff;border-radius: 2px;margin-top: 20px;padding:0;}
+.load1 .pload a{color:#fff;}
+.load1 .check1{width:14px;float:left;height:20px;}
+.load1 .span{ float: left; display: block; margin-top: 10px; margin-left: 5px; height: 20px; overflow: hidden; line-height: 20px;}
+.load1 .forget{float:right;margin-right:30px;margin-top:10px;}
+.load1 .forget a{margin-right:10px;}
+.load1 .forget a:nth-of-type(2){color:#008aff;}
+.load1 .forget a:hover{color:#008aff;}
