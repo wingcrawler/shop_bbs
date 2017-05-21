@@ -72,10 +72,8 @@ $(function(){
 	});	
 });
 function nextPage(pageNo){
-	var parm = "";
-	parm = parm + "pageNo="+pagerNo;
-	parm = parm + "&pageSize="+10;
-	self.location.href="/front/sell/postReply?"+parm;
+	var args = '?pageNo='+pageNo;
+	self.location.href="/front/sell/postReply?"+args;
 }
 
 </script>

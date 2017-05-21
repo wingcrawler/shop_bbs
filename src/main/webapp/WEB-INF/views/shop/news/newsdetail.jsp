@@ -19,8 +19,8 @@
 				<div class="tR">
 					<span class="qq">${news.createTimeStr}</span>
 					<span class="tm">
-						<a class="zan" href="###">12</a>
-						<a class="mass" href="###">2</a>
+						<a class="zan" href="###">${news.newsUp }</a>
+						<a class="mass" href="###"></a>
 					</span>
 				</div>
 			</div>

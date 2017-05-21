@@ -22,12 +22,12 @@
 								<div class="news_pic"><img src="${item.imagePath}"></div>
 								<div class="word">
 									<h1>${item.newsTitle}</h1>
-									<p>${item.newsShotDesc}</p>
+									<p>${item.newsContent}</p>
 								</div></a>
 								<div class="tR">
 									${item.dateStr}&nbsp;|&nbsp;
 									<span class="tm">
-										<a class="zan" href="###"></a>
+										<a class="zan" href="###"> ${item.newsUp }</a>
 										<a class="mass" href="###"></a>
 									</span>
 								</div>	
@@ -38,7 +38,7 @@
 								<div class="tR">
 									${item.dateStr}&nbsp;|&nbsp;
 									<span class="tm">dfsdfsrrfw
-										<a class="zan" href="###"></a>
+										<a class="zan" href="###"> ${item.newsUp }</a>
 										<a class="mass" href="###"></a>
 									</span>
 								</div>
@@ -47,11 +47,32 @@
 					</li>	
 				</c:forEach>
 			</ul>
+			
+			<div class="pagebar"></div>
+			
 			<!-- <div class="ads"><a href="###"><img src="images/ads.png" alt=""></a></div> -->
 		</div>
 	</div>
 	<!-- 新闻end -->
 
 	<jsp:include page="../include/footer.jsp"></jsp:include>
+	
+<script type="text/javascript">
+$(function(){
+	$(".pagebar").createPage({
+		pageCount : '${page.pageCount}',
+		current : '${page.currentPage}',
+		fnName : 'nextPage',
+		backFn : function(p) {
+			// console.log(p);
+		}
+	});	
+});
+
+function nextPage(pageNo){
+	var args = '?pageNo='+pageNo;
+	self.location="/news/list"+args;
+}
+</script>
 </body>
 </html>

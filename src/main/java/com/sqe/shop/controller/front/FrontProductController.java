@@ -56,12 +56,13 @@ public class FrontProductController extends BaseFrontController {
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="12") int pageSize) {
 		pageSize=12;
+		model.addObject("parentType", parentType);
 		
 		Product product = new Product();
 		ProductType productType = new ProductType();
 		
 		//没有一级分类 选取默认分类
-		if(parentType==null && childType==null){
+		/*if(parentType==null && childType==null){
 			productType = new ProductType();
 			productType.setTypeLevel(1);
 			PageUtil<ProductType> typePage = productTypeService.getBeanListByParm(productType, 1, -1);
@@ -69,9 +70,9 @@ public class FrontProductController extends BaseFrontController {
 				productType = typePage.getList().get(0);
 				product.setProductTypeId(productType.getId());
 			}
-			/*model.setViewName("shop/404");
-			return model;*/
-		}
+			model.setViewName("shop/404");
+			return model;
+		}*/
 		
 		//查询条件里拼接是一级分类还是二级分类
 		if(parentType!=null){

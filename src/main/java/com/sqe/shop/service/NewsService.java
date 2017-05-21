@@ -12,8 +12,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sqe.shop.mapper.ImageMapper;
 import com.sqe.shop.mapper.NewsMapper;
 import com.sqe.shop.mapper.UserThumbMapper;
+import com.sqe.shop.model.Image;
 import com.sqe.shop.model.News;
 import com.sqe.shop.model.UserThumb;
 import com.sqe.shop.util.DateUtil;
@@ -26,6 +28,8 @@ public class NewsService extends AdapterService implements BaseService {
 	private NewsMapper newsMapper;
 	@Autowired
 	private UserThumbMapper userThumbMapper;
+	@Autowired
+	private ImageMapper imageMapper;
     
     public int insert(News news) {
 		return newsMapper.insert(news);
@@ -88,14 +92,36 @@ public class NewsService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public void save(News news) {
+	public void save(News news, String fileName) {
 		if(news.getId()!=null){
+			if(StringUtils.isNotBlank(fileName)){
+				Map<String, Object> parmMap = new HashMap<String, Object>();
+				parmMap.put("newsId", news.getId());
+				List<Image> imgList = imageMapper.getBeanListByParm(parmMap);
+				if(imgList!=null && !imgList.isEmpty()){
+					Image image = imgList.get(0);
+					image.setImagePath(fileName);
+					imageMapper.update(image);
+				} else {
+					Image image = new Image();
+					image.setImagePath(fileName);
+					image.setNewsId(news.getId());
+					imageMapper.insert(image);
+				}
+			}
 			newsMapper.update(news);
 		} else {
 			news.setNewsDate(new Date());
 			news.setNewsReaded(0);
 			news.setNewsUp(0);
 			newsMapper.insert(news);
+			
+			if(StringUtils.isNotBlank(fileName)){
+				Image image = new Image();
+				image.setImagePath(fileName);
+				image.setNewsId(news.getId());
+				imageMapper.insert(image);
+			}
 		}
 	}
 

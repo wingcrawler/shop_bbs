@@ -23,6 +23,7 @@ import com.sqe.shop.service.ProductService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.RegularUtil;
 
 @Controller
 @RequestMapping("/")
@@ -70,6 +71,28 @@ public class HomeController extends BaseFrontController {
 		
 		//3个新闻资讯
 		PageUtil<Map<String, Object>> newPage = newsService.getMapListByParm(new News(), 1, 3);
+		if(newPage.getList()!=null && !newPage.getList().isEmpty()){
+			String newsTitle = "";
+			String newsContent = "";
+			for(Map<String, Object> map : newPage.getList()){
+				newsTitle = map.get("newsTitle").toString();
+				if(newsTitle.length()>10){
+					map.put("newsShortTitle", newsTitle.substring(0, 9)+"...");
+				} else {
+					map.put("newsShortTitle", newsTitle);
+				}
+				
+				newsContent = map.get("newsContent").toString();
+				newsContent = RegularUtil.Html2Text(newsContent);
+				if(newsContent.length()>100){
+					newsContent = newsContent.substring(0,100) + "...";
+					map.put("newsContent", newsContent);
+				} else {
+					map.put("newsContent", newsContent);
+				}
+				
+			}
+		}
 		model.addObject("newsList", newPage.getList());
 		
 		model.setViewName("shop/index");

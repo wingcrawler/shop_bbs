@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,16 +55,16 @@
 		</div>
 	</div>
 	<!-- //banner -->
-	<!-- banner-bottom -->
+	<!-- banner-bottom 新闻资讯 -->
 	<div class="banner-bottom">
 		<div class="container">
 			<div class="banner-bottom-grids">
 				<c:forEach var="item" items="${newsList }">
 					<div class="col-md-4 bottom-grid">
-						<a href="/news/detail?newsId=${item.id }"><img src="${item.imagePath }" alt="" /></a>
+						<a href="/news/detail?newsId=${item.id }" target="_blank"><img src="${item.imagePath }" alt="" /></a>
 						<div class="bottom-grid-info">
-							<a href="/news/detail?newsId=${item.id }">${item.newsTitle }</a>
-							<p></p>
+							<a href="/news/detail?newsId=${item.id }" target="_blank" title="${item.newsTitle }">${item.newsShortTitle }</a>
+							<p>${item.newsContent }</p>
 						</div>
 					</div>
 				</c:forEach>
@@ -70,7 +72,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- banner-bottom -->
+	<!-- banner-bottom 新闻资讯 -->
 	
 	<div class="clearfix"></div>
 	

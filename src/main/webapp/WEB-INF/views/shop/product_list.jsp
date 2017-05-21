@@ -67,11 +67,35 @@
 			</div>
 
 			<div class="clearfix"> </div>
+			<div class="pagebar"></div>
+			
 		</div>
 		<!-- //container -->
 	</div>
 	<!-- //men -->
 	
 	<jsp:include page="include/footer.jsp"></jsp:include>
+	
+<script type="text/javascript">
+var parentType = '${parentType}';
+$(function(){
+	$(".pagebar").createPage({
+		pageCount : '${page.pageCount}',
+		current : '${page.currentPage}',
+		fnName : 'nextPage',
+		backFn : function(p) {
+			// console.log(p);
+		}
+	});	
+});
+
+function nextPage(pageNo){
+	var args = '?pageNo='+pageNo;
+	if(parentType!=''){
+		args = args+'&parentType='+parentType;
+	}
+	self.location="/product/list"+args;
+}
+</script>
 </body>
 </html>

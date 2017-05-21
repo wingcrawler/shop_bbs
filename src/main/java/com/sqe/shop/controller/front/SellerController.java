@@ -79,6 +79,7 @@ public class SellerController extends BaseFrontController {
 	public ModelAndView productListPage(ModelAndView model, Product product,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		pageSize = 10;
 		model.addObject("productPage", getProductList(product, pageNo, pageSize));
 		
 		model.setViewName("shop/sell/product_list");

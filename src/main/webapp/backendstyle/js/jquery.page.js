@@ -47,7 +47,7 @@
 					obj.append('<a href="javascript:;" class="tcdNumber" onClick="'+args.fnName+'('+args.ageCount+')">'+args.pageCount+'</a>');
 				}
 				if(args.current < args.pageCount){
-					obj.append('<a href="javascript:;" class="nextPage" onClick="'+args.fnName+'('+(args.current+1)+')">'+args.nextPage+'</a>');
+					obj.append('<a href="javascript:;" class="nextPage" onClick="'+args.fnName+'('+(parseInt(args.current)+parseInt(1))+')">'+args.nextPage+'</a>');
 				}else{
 					obj.remove('.nextPage');
 					obj.append('<span class="disabled">'+args.nextPage+'</span>');

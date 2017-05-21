@@ -18,6 +18,9 @@
 					<c:if test="${isBuyLogin }">
 						<li class=""><a href="/front/buy/basicInfo">${t.t_welcome } ${user.username }</a></li>
 					</c:if>
+					<c:if test="${isAdminLogin }">
+						<li class=""><a href="/backend/index">${t.t_welcome } ${user.username }</a></li>
+					</c:if>
 					<c:if test="${!isLogin }">
 						<li class=""><a href="/back/login">${t.sign_in }</a></li>
 					</c:if>

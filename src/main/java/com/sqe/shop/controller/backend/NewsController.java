@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.backend;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.News;
 import com.sqe.shop.service.NewsService;
+import com.sqe.shop.service.file.ImageFileService;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.PropertiesUtil;
 
 @Controller
 @RequestMapping("/backend/news")
@@ -27,6 +32,8 @@ public class NewsController extends BaseBackendController {
 	
 	@Autowired
 	private NewsService newsService;
+	@Autowired
+	private ImageFileService imageFileService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -57,7 +64,8 @@ public class NewsController extends BaseBackendController {
 	
 	@ResponseBody
 	@RequestMapping(value="/doSave", method = RequestMethod.POST)
-	public Map<String, Object> save(News news) {
+	public Map<String, Object> save(News news,
+			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile) {
 		if(StringUtils.isBlank(news.getNewsTitle())){
 			return responseError(-1, "error_empty_title");
 		}
@@ -67,7 +75,26 @@ public class NewsController extends BaseBackendController {
 		if(news.getNewsType()==null || news.getNewsType()<0){
 			return responseError(-1, "error_empty_lang");
 		}
-		newsService.save(news);
+		
+		
+		String fileName = "";
+		if(attachFile!=null){
+		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+		    fileName = resMap.get("errorInfo").toString(); 
+		    if(!resMap.get("errorNo").equals(0)){
+		    	return resMap;
+		    }
+		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
+		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+		    fileName = uploadPath+fileName;
+	    } else {
+	    	if(news.getId()==null){
+	    		return responseError(-1, "error_empty_img");
+	    	}
+	    }
+		
+		newsService.save(news, fileName);
+		
 		return responseOK("save_success");
 	}
 	

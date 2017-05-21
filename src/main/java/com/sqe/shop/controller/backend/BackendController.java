@@ -1,6 +1,5 @@
 package com.sqe.shop.controller.backend;
 
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

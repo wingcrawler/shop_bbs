@@ -153,6 +153,8 @@ public class BuyerCenterController extends BaseFrontController {
 	public ModelAndView postReply(ModelAndView model, Thread thread,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize){
+		pageSize = 10;
+		
 		thread.setUserId(this.getCurrentUserId());
 		PageUtil<Map<String, Object>> page = threadService.getSellThreadList(thread, pageNo, pageSize);
 		

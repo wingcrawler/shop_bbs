@@ -29,7 +29,7 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal form" action="javascript:void(0);">
+						<form class="form-horizontal form" method="post" enctype="multipart/form-data">
 					        <div class="form-group">
 					          	<div class="col-sm-6">
 					          		<input type="hidden" value="${entity.id}" name="id" />
@@ -54,6 +54,11 @@
 					        		<p>${t.t_thumup }</p>
 					            	<input class="form-control" type="text" name="newsUp" value="${entity.newsUp}">
 					    		</div>
+					        </div>
+					        <div class="form-group">
+						        <div class="col-sm-3">
+						        	<span style="color:#f00;">*</span><input type="file" name="attachFile" id="attachFile" />
+						        </div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-12">
@@ -104,8 +109,7 @@ $(function(){
 	});
 	
 	$('#submit').click(function(){
-	    var parm = $.fn.getFormJson('.form');
-		$.fn.doSave(parm,'/backend/news/doSave','/backend/news/list');
+		$.fn.myAjaxSubmit('.form','/backend/news/doSave','/backend/news/list');
 	});	
 });
 </script>

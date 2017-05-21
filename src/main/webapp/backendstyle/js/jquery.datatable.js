@@ -57,9 +57,9 @@
 		action.load(_obj, _args);
 	}
 	
-	/* 搜索 */
+	/* 自动搜索 */
 	$.fn.doAutoSearch = function() {
-		var _parm = $.fn.getFormJson('.form');
+		var _parm = $.fn.getFormJsonEncode('.form');
 		_args.parm = _parm;
 		action.load(_obj, _args);
 	}
@@ -184,6 +184,23 @@
         });
 	}
 	
+	 $.fn.getFormJsonEncode = function(elem) {
+	        var o = {};
+	        var a = $(elem).serializeArray();
+	        $.each(a, function () {
+	            if (o[this.name] !== undefined) {
+	                if (!o[this.name].push) {
+	                    o[this.name] = [o[this.name]];
+	                }
+	                o[this.name].push(this.value || '');
+	            } else {
+	                o[this.name] = encodeURIComponent(this.value) || '';
+	            }
+	        });
+	        /*o = encodeURI(encodeURI(o));*/
+	        return o;
+	    }
+	
 	 $.fn.getFormJson = function(elem) {
         var o = {};
         var a = $(elem).serializeArray();
@@ -194,7 +211,7 @@
                 }
                 o[this.name].push(this.value || '');
             } else {
-                o[this.name] = encodeURIComponent(this.value) || '';
+                o[this.name] = this.value || '';
             }
         });
         /*o = encodeURI(encodeURI(o));*/

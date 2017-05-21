@@ -48,58 +48,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="page-toolbar">
-					<div class="ajax-page">
-						<ul class="page-pagination">
-							<li class="first-page">
-								<span>首页</span>
-							</li>
-							<li class="previous-page">
-								<span>上一页</span>
-							</li>
-							<li class="active">
-								<span>1</span>
-							</li>
-							<li>
-								<span>2</span>
-							</li>
-							<li>
-								<span>3</span>
-							</li>
-							<li>
-								<span>4</span>
-							</li>
-							<li>
-								<span>5</span>
-							</li>
-							<li>
-								<span>6</span>
-							</li>
-							<li>
-								<span>7</span>
-							</li>
-							<li>
-								<span>8</span>
-							</li>
-							<li>
-								<span>9</span>
-							</li>
-							<li>
-								<span>10</span>
-							</li>
-							<li class="omit">
-								<span><i>...</i>15</span>
-							</li>
-							<li class="skip">
-								<input type="text" value="1">/
-								<span>15</span>页
-							</li>
-							<li class="next-page">
-								<span>下一页</span>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<div class="pagebar"></div>
 			</div>
 			<!-- //companyData -->
 		</div>
@@ -110,7 +59,22 @@
 <script type="text/javascript">
 $(function(){
 	$('.menu_list ul li a').eq(2).addClass('active');
+	
+	$(".pagebar").createPage({
+		pageCount : '${page.pageCount}',
+		current : '${page.currentPage}',
+		fnName : 'nextPage',
+		backFn : function(p) {
+			// console.log(p);
+		}
+	});	
 });
+
+function nextPage(pageNo){
+	var args = '?pageNo='+pageNo;
+	self.location="/front/buy/postRecord"+args;
+}
 </script>
+
 </body>
 </html>

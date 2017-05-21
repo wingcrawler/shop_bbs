@@ -19,6 +19,7 @@ import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.NewsService;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.RegularUtil;
 
 @Controller
 @RequestMapping("/news")
@@ -44,6 +45,20 @@ public class FrontNewsController extends BaseFrontController {
 		
 		News news = new News();
 		PageUtil<Map<String, Object>> newsPage = newsService.getMapListByParm(news, pageNo, pageSize);
+		if(newsPage.getList()!=null && !newsPage.getList().isEmpty()){
+			String newsContent = "";
+			for(Map<String, Object> map : newsPage.getList()){
+				newsContent = map.get("newsContent").toString();
+				newsContent = RegularUtil.Html2Text(newsContent);
+				if(newsContent.length()>100){
+					newsContent = newsContent.substring(0,100) + "...";
+					map.put("newsContent", newsContent);
+				} else {
+					map.put("newsContent", newsContent);
+				}
+				
+			}
+		}
 		model.addObject("list", newsPage.getList());
 		model.addObject("page", newsPage);
 		
