@@ -1,9 +1,13 @@
 package com.sqe.shop.controller.front;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +55,16 @@ public class FrontProductController extends BaseFrontController {
 	@Autowired
 	private ShopService shopService;
 	
+	/**
+	 * 产品列表页
+	 * @param model
+	 * @param parentType
+	 * @param childType
+	 * @param typeName
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
 	@RequestMapping(value="list", method = RequestMethod.GET)
 	public ModelAndView list(ModelAndView model, Long parentType, Long childType,String typeName,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
@@ -103,7 +117,7 @@ public class FrontProductController extends BaseFrontController {
 			model.addObject("title", type.getTypeName()==null?"":type.getTypeName());
 		}
 		
-		model.setViewName("shop/product_list");
+		model.setViewName("shop/product/product_list");
 		return model;
 	}
 	
@@ -146,7 +160,7 @@ public class FrontProductController extends BaseFrontController {
 		PageUtil<Map<String, Object>> commentPage = commentService.getSellerProductCommentListByParm(parmMap, 1, 10);
 		model.addObject("commentPage", commentPage);
 		
-		model.setViewName("shop/single");
+		model.setViewName("shop/product/single");
 		return model;
 	}
 	
@@ -166,5 +180,48 @@ public class FrontProductController extends BaseFrontController {
 		return responseOK("send_success");
 	}
 	
+	@RequestMapping(value="search", method = RequestMethod.POST)
+	public ModelAndView search(ModelAndView model, String productName,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="12") int pageSize) {
+		if(StringUtils.isBlank(productName)){
+			model.setViewName("redirect:/shopIndex");
+			return model;	
+		}
+		pageSize=2;
+		try {
+			model.addObject("productName", URLEncoder.encode(productName, UTF8));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Product product = new Product();
+		product.setProductName(productName);
+		PageUtil<Map<String, Object>> productPage = productService.getMapListByParm(product, pageNo, pageSize);
+		model.addObject("page", productPage);
+		
+		model.setViewName("shop/product/product_search");
+		return model;
+	}
+	@RequestMapping(value="searchGet", method = RequestMethod.GET)
+	public ModelAndView searchGet(ModelAndView model, String productName,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="12") int pageSize) {
+		if(StringUtils.isBlank(productName)){
+			model.setViewName("redirect:/shopIndex");
+			return model;	
+		}
+		pageSize=2;
+		model.addObject("productName", productName);
+		
+		Product product = new Product();
+		product.setProductName(productName);
+		PageUtil<Map<String, Object>> productPage = productService.getMapListByParm(product, pageNo, pageSize);
+		model.addObject("page", productPage);
+		
+		model.setViewName("shop/product/product_search");
+		return model;
+	}
 	
 }

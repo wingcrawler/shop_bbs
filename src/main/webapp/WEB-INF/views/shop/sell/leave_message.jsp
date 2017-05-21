@@ -57,7 +57,7 @@
 												<div class="introduce">
 													<p class="name"><span>${item.productName }</span> <!-- <span>25</span>kg/盒 --></p>
 													<p class="referral">${item.desc }</p>
-													<p class="tariff">${t.t_price }：＄<span>${item.price }</span></p>
+													<p class="tariff">${t.t_price }：¥<span>${item.price }</span></p>
 												</div>
 											</div>
 											<div class="date_reply">

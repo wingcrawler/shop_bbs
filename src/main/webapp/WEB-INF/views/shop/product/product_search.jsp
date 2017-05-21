@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="include/meta.jsp"></jsp:include>
-	<title>${title }</title>
+	<jsp:include page="../include/meta.jsp"></jsp:include>
+	<title>${t.t_search_result } -- ${productName }</title>
 </head>
 <body>
-	<jsp:include page="include/header.jsp"></jsp:include>
+	<jsp:include page="../include/header.jsp"></jsp:include>
 	
 	<!-- men -->
 	<div class="men">
@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="col-md-9 fashions">
 				<div class="title">
-					<h3>${title }</h3>
+					<%-- <h3>${title }</h3> --%>
 				</div>
 				<div class="fashion-section">
 					<div class="fashion-grid1">
@@ -26,10 +26,10 @@
 									 <h3>${item.productName }</h3>
 									 <p>
 									 	<c:if test="${item.productCount==0 }">
-											<del><span></span> $ ${item.productPrice }</del>										 	
+											<del><span></span> ¥ ${item.productPrice }</del>										 	
 									 	</c:if>
 									 	<c:if test="${item.productCount!=0 }">
-									 		<span></span> $ ${item.productPrice } 
+									 		<span></span> ¥ ${item.productPrice } 
 									 	</c:if>
 									 </p>
 								 </div>
@@ -74,10 +74,10 @@
 	</div>
 	<!-- //men -->
 	
-	<jsp:include page="include/footer.jsp"></jsp:include>
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 	
 <script type="text/javascript">
-var parentType = '${parentType}';
+var productName = '${productName}';
 $(function(){
 	$(".pagebar").createPage({
 		pageCount : '${page.pageCount}',
@@ -91,10 +91,10 @@ $(function(){
 
 function nextPage(pageNo){
 	var args = '?pageNo='+pageNo;
-	if(parentType!=''){
-		args = args+'&parentType='+parentType;
+	if(productName!=''){
+		args = args+'&productName='+ encodeURIComponent(productName);
 	}
-	self.location="/product/list"+args;
+	self.location="/product/searchGet"+args;
 }
 </script>
 </body>

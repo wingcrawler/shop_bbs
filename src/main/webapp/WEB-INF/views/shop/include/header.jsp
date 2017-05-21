@@ -85,8 +85,9 @@
 		</div>
 		
 		<div class="search">
-			<form method="post" action="/search">
-				<input type="text" value="${t.b_search }..." name="keywords" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '${t.b_search }...';}" required="">
+			<form method="post" action="/product/search">
+				<input type="text" placeHolder="${t.b_search }..." name="productName" >
+				<%-- <input type="text" value="${t.b_search }..." name="productName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '${t.b_search }...';}" required=""> --%>
 			</form>
 		</div>
 		<div class="clearfix"></div>

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="include/meta.jsp"></jsp:include>
+	<jsp:include page="../include/meta.jsp"></jsp:include>
 	<title>${product.productName }</title>
 
 	<link rel="stylesheet" href="/frontstyle/css/etalage.css">
@@ -25,7 +25,7 @@
 	
 </head>
 <body>
-	<jsp:include page="include/header.jsp"></jsp:include>
+	<jsp:include page="../include/header.jsp"></jsp:include>
 	
 	<!-- single -->
 	<div class="single">
@@ -56,7 +56,7 @@
 						<div class="single-left-info">
 							<h3>${product.productName }</h3>
 							<a href="#product-details" class="view">${t.t_view_detail }</a>
-							<p>$ ${product.productPrice }</p>
+							<p>¥ ${product.productPrice }</p>
 							<p><a href="/shop/product?shopId=${shop.id }" class="view">${t.t_shop_name }: ${shop.shopTitle }</a></p>
 						</div>
 						<div class="select-size">
@@ -112,7 +112,7 @@
 									<div class="clearfix"> </div>
 								</div>
 								<div class="col-md-3 related-right">
-									<p>$ ${item.productPrice }</p>
+									<p>¥ ${item.productPrice }</p>
 									<a href="/product/single?productId=${item.id }">${t.t_view_detail }</a>
 								</div>
 								<div class="clearfix"> </div>
@@ -179,6 +179,6 @@
 	</div>
 	<!-- //single -->
 	
-	<jsp:include page="include/footer.jsp"></jsp:include>
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
