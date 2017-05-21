@@ -56,7 +56,7 @@
 				</div>
 				<!--相关按钮-->
 				<div class="info hyh">
-					<a id="getchange" class="changeb wb">换一换</a>
+					<a button v-on:click="change" id="getchange" class="changeb wb">换一换</a>
 				</div>
 			</div>
 			<!--END 精彩推荐-->
@@ -68,14 +68,16 @@
 
 	<!-- //footer -->
 	<script type="text/javascript">
+		var playTableVue = new Vue({
+			el : "#ajaxdata",
+			data : {
+				items : [],
+				loaded : false
+			}
+		});
+		var Totla = 0;
+		var section = new Array();
 		$(document).ready(function() {
-			var playTableVue = new Vue({
-				el : "#ajaxdata",
-				data : {
-					items : [],
-					loaded : false
-				}
-			});
 			$(function() {
 				$.getJSON("threads", {
 					playid : '${sectionId.sectionId}'
@@ -86,54 +88,50 @@
 					playTableVue.loaded = true;
 				});
 			});
-			
-			
-		});
-		
-		
-	</script>
-	<script>
-		$("#getchange").click(function() {
-			console.log('click change begin');
-			var playTableVue2 = new Vue({
-				el : '#ajaxdata',
-				data : {
-					items : [],
-					loaded : false
+
+			$.ajax({
+				url : '/bbs/section/getSecondSection',
+				type : 'get',
+				dataType : 'json',
+				success : function(result) {
+					if (result.page.totalRecords>0) {
+						Totla = result.page.totalRecords;
+						for (var i = 0; i < result.list.length; i++) {
+							section.push(result.list[i].id)
+						}
+					}
+				},
+				error : function() {
+					alert(register_failed);
 				}
+
 			});
-
-			$(function() {
-				$.getJSON("threads", {
-					sectionId : '2'
-				}, function(json) {
-					if (!json)
-						json = [];
-					playTableVue2.items = json.list;
-					playTableVue2.loaded = true;
-				});
-
+			var num = 1;
+			var sectionId;
+			$("#getchange").click(function() {
+				if (num < Totla) {
+					sectionId = section[num];
+					num++;
+				} else {
+					num = 1
+				}
+				
+				$(function() {
+					$.getJSON("threads", {
+						sectionId : sectionId
+					}, function(json) {
+						if (!json)
+							json = [];
+						playTableVue.items = json.list;
+						playTableVue.loaded = true;
+					});
+				})
 			})
 			
-		  console.log('click change end');
-			$(function() {
-				var section2;
-				var list;
-				$.getJSON("section/getSecondSection", {
-					sectionId : '2'
-				}, function(json) {
-					if (!json)
-						json = [];
-					section2 = json.list;
-					console.log('#'+section2);
-				});
-				for(var p in section2){
-				    str = str+obj[p]+',';
-				    console.log('#'+str);
-				}
-
-			}) 
 		});
+	</script>
+	<script>
+		
 	</script>
 
 </body>
