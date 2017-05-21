@@ -146,6 +146,9 @@
    	<if test="parm.shopName != null">
      	and s.shop_title = #{parm.shopName}
    	</if>
+	<if test="parm.nullMessageId">
+   		and message_id is null
+   	</if>
 	
 	<if test="parm.orderby != null">
    		order by ${parm.orderby}
@@ -219,17 +222,26 @@
  	u.username as postName,
 	m.post_id as postId,
 	m.receive_id as receiveId,
-	u1.username as receiveName
+	u1.username as receiveName,
+i.image_path as imagePath,
+u1.user_image as receiveImg
 	from message m
 	LEFT JOIN product p on m.product_id=p.id
 	LEFT JOIN `user` u on m.post_id=u.id
 	LEFT JOIN `user` u1 on m.receive_id=u1.id
+LEFT JOIN image i on i.product_id=m.product_id and i.index_show=1
 	where 1=1
 	<if test="parm.receiveId != null">
    		and m.receive_id = #{parm.receiveId}
    	</if>
+   	<if test="parm.postId != null">
+   		and m.post_id = #{parm.postId}
+   	</if>
    	<if test="parm.messageId != null">
    		and m.message_id = #{parm.messageId}
+   	</if>
+   	<if test="parm.nullMessageId">
+   		and m.message_id is null
    	</if>
 	<if test="parm.orderby != null">
    		order by ${parm.orderby}

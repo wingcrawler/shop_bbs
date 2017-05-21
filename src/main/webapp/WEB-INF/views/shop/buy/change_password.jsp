@@ -50,7 +50,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.menu_list ul li a').eq(5).addClass('active');
+	$('.menu_list ul li a').eq(6).addClass('active');
 });
 </script>
 </body>
