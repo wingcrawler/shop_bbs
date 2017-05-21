@@ -30,7 +30,7 @@
 	<bean id="dataSourceOne" class="com.mchange.v2.c3p0.ComboPooledDataSource"  destroy-method="close">  
 		<property name="minPoolSize" value="${jdbc.minPoolSize}" />
 		<property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
-		<property name="idleConnectionTestPeriod" value="18000" />
+		<property name="idleConnectionTestPeriod" value="180" />
 		<property name="maxIdleTime" value="10000" />
 		<property name="maxStatementsPerConnection" value="10" />
 		<property name="maxStatements" value="400" />
