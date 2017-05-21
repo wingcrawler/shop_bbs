@@ -221,15 +221,20 @@
   u.username as postName ,
 	p.user_id as productUserId,
 	c.user_id as commentUserId,
+	i.image_path as imagePath,
 	u.user_image as userImage
 	from `comment` c
 	LEFT JOIN product p on c.product_id=p.id
 	LEFT JOIN `user` u on c.user_id=u.id
+	LEFT JOIN image i on i.product_id=c.product_id and i.index_show=1
 	where 1=1
 	and comment_id is null
 	and c.product_id is not null
    	<if test="parm.userId != null">
    		and c.user_id=#{parm.userId}
+   	</if>
+   	<if test="parm.productUserId != null">
+   		and p.user_id=#{parm.productUserId}
    	</if>
 	<if test="parm.productId != null">
      	and c.product_id = #{parm.productId}

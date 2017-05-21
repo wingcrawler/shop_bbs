@@ -323,11 +323,18 @@ public class SellerController extends BaseFrontController {
 	public ModelAndView messagePage(ModelAndView model, String type,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		pageSize = 10;
 		PageUtil<Map<String, Object>> page = new PageUtil<Map<String,Object>>();
-		if(type.equals("1")){//产品留言
-			page = getCommentList(this.getCurrentUserId(), pageNo, pageSize);
+		
+		if(type.equals("1")){//产品评论
+			page = getProductCommentList(this.getCurrentUserId(), pageNo, pageSize);
+			model.setViewName("shop/sell/my_product_comment");
 		} else if(type.equals("2")){//私信
 			page = getMessageList(this.getCurrentUserId(), pageNo, pageSize);
+			model.setViewName("shop/sell/my_message");
+		} else if(type.equals("3")){//新闻资讯评论
+			page = getNewsCommentList(this.getCurrentUserId(), pageNo, pageSize);
+			model.setViewName("shop/sell/my_news_comment");
 		} else {
 			model.setViewName("shop/404");
 			return model;
@@ -335,7 +342,6 @@ public class SellerController extends BaseFrontController {
 		
 		model.addObject("type", type);
 		model.addObject("page", page);
-		model.setViewName("shop/sell/leave_message");
 		return model;
 	}
 	/**
@@ -355,23 +361,24 @@ public class SellerController extends BaseFrontController {
 		PageUtil<Map<String, Object>> msgPage = messageService.getSellerMessageListByParm(parmMap, pageNo, pageSize);
 		return msgPage;
 	}
-	/**
-	 * 产品评论列表
-	 * @param comment
-	 * @param pageNo
-	 * @param pageSize
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value="/getCommentList", method = RequestMethod.GET)
-	public PageUtil<Map<String, Object>> getCommentList(Long userId, int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getProductCommentList(Long userId, int pageNo, Integer pageSize) {
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("productUserId", userId);
+		parmMap.put("nullCommentId", true);
+		parmMap.put("orderby", "c.date desc");
+		PageUtil<Map<String, Object>> msgPage = commentService.getProductCommentListByParm(parmMap, pageNo, pageSize);
+		return msgPage;
+	}
+	
+	public PageUtil<Map<String, Object>> getNewsCommentList(Long userId, int pageNo, Integer pageSize) {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
 		parmMap.put("userId", userId);
 		parmMap.put("nullCommentId", true);
 		parmMap.put("orderby", "c.date desc");
-		PageUtil<Map<String, Object>> msgPage = commentService.getSellerProductCommentListByParm(parmMap, pageNo, pageSize);
+		PageUtil<Map<String, Object>> msgPage = commentService.getNewsCommentListByParm(parmMap, pageNo, pageSize);
 		return msgPage;
 	}
+	
 	/**
 	 * 回复私信或者产品留言
 	 * @param msg
@@ -392,6 +399,7 @@ public class SellerController extends BaseFrontController {
 			comment.setUserId(this.getCurrentUserId());
 			comment.setProductId(productId);
 			comment.setStatus(Constants.COMMENT_ON); 
+			comment.setReplyToUserId(replyToId);
 			commentService.insert(comment);
 		} else if(type.equals("2")){//私信
 			Message message = new Message();
