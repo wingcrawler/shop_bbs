@@ -24,68 +24,123 @@
 					</span>
 				</div>
 			</div>
-			<!-- <div class="img"><img src="images/newsdetail.png" alt=""></div> -->
+			<div class="img"><img src="${image.imagePath }" alt=""></div>
 			<div class="text">
 				${news.newsContext}
 			</div>
 			
-			<div class="pl">
-				<textarea class="ir-post-input" bindcursor="true" cols="0" placeholder="${t.tip_comment}"></textarea>
-				<p><input type="submit" value="${t.t_post_comment}"></p>
-			</div>
-			<div class="user">${user.username} <em>/</em> <a href="/logout">${t.sign_out}</a>
-			<div class="allpl">${t.t_all_comment}</div>
+			<!-- 发表评论区域 -->
+			<c:if test="${isLogin }">
+				<div class="pl">
+					<form method="POST" id="commentForm">
+						<input type="hidden" name="newsId" value="${news.id }">
+						<textarea class="ir-post-input" name="context" bindcursor="true" cols="0" placeholder="${t.tip_comment}"></textarea>
+						<p><input type="button" onclick="postComment()" value="${t.t_post_comment}"></p>
+					</form>
+				</div>	
+			</c:if>
+			<%-- <div class="user">${user.username} <em>/</em> <a href="/logout">${t.sign_out}</a></div> --%>
+			<!-- 发表评论区域 -->
+			
+			<!-- 评论列表区域 -->
+			<c:if test="${not empty commentPage.list }">
+				<div class="allpl">${t.t_all_comment}</div>			
+			</c:if>
 			<ul>
-				<c:forEach var="item" items="${commentPage.list }">
+				<c:forEach var="item" items="${commentPage.list }" varStatus="itemStatus">
 					<li class="atl-con-bd clearfix">
-						<div class="bbs-content">${item.postName}</div>
-						<div class="floor">${item.content}</div>
-						<div class="floor_data">${item.date }
-							<span class="reply">回复</span>
-							<div class="news_reply" style="display: block;">
-								<textarea class="editor" placeholder="在这里输入你要发表的内容..."></textarea>
-								<input type="submit" value="发表">
+						<div class="floor">${item.postName} : ${item.content}</div>
+						<%-- <div class="floor">${item.content}</div> --%>
+						<div class="floor_data">${item.date } <span class="reply" style="display:none;" onclick="showReplyForm(this)">${t.t_reply }</span></div>
+						<!-- 回复评论 -->
+						<div class="news_reply" style="display: none;">
+							<form method="POST" class="commentReplyForm${itemStatus.index }">
+								<input type="hidden" name="commentId" value="${item.commentId }">
+								<textarea class="editor" name="context" placeholder="${t.tip_comment_1 }"></textarea>
+								<input type="button" onclick="postReplyComment(this)" value="${t.b_submit }">
+								<input type="button" class="bg-grey" style="background-color:#aaa;" onclick="cancelComment(this)" value="${t.b_cancel }">
+							</form>
+						</div>
+						<!-- 评论的回复列表 -->
+						<c:if test="${not empty item.replyList }">
+							<div class="item-reply-view">
+								<c:forEach var="reply" items="${item.replyList }" varStatus="replyStatus">
+									<div class="ir-list">
+										<div>${reply.postName } ：${reply.content}</div>
+										<%-- <div class="content">${reply.content}</div> --%>
+										<div class="data floor_data">${reply.date } <span class="reply" onclick="showReplyForm(this)" style="display:none;">${t.t_reply }</span></div>
+										<!-- 回复评论 -->
+										<div class="news_reply" style="display: none;">
+											<form method="POST" class="commentReplyForm${itemStatus.index }${replyStatus.index }">
+												<input type="hidden" name="commentId" value="${item.commentId }">
+												<textarea class="editor" name="context" placeholder="${t.tip_comment_1 }"></textarea>
+												<input type="button" onclick="postReplyComment(this)" value="${t.b_submit }">
+												<input type="button" class="bg-grey" style="background-color:#aaa;"  onclick="cancelComment(this)" value="${t.b_cancel }">
+											</form>
+										</div>
+									</div>								
+								</c:forEach>	
 							</div>
-						</div>
-						
-						<div class="item-reply-view">
-							<c:forEach var="reply" items="${item.replyList }">
-								<div class="ir-list">
-									<div>
-										<a class="ir-user" href="###" target="_blank">${reply.postName }</a>
-									</div>
-									<div class="content">${reply.content}</div>
-									<div class="data">${reply.date }</div>
-								</div>								
-							</c:forEach>	
-						</div>
+						</c:if>
 					</li>
 				</c:forEach>
 			</ul>
+			<br><br>
+			<!-- 评论列表区域 -->
 			<!-- <div class="more"><a href="###">查看全部评论&gt&gt</a></div> -->
 			<!-- <div class="ads">
 				<a href="###">
 					<img src="images/ads.png" alt=""></a>
 			</div> -->
 		</div>
-	</div>
 	<!-- 新闻end -->
+	</div>
 
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 	
+<style>
+.bg-grey{background-color:#666;}
+</style>
 <script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$(".scroll").click(function(event){		
-					event.preventDefault();
-					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-				});
-				$('.reply').toggle(function(e) {
-					$(this).parent(".floor_data").find(".news_reply").css('display','block')
-				},function(e){
-					$(this).parent(".floor_data").find(".news_reply").css('display','none')
-				});			
-			});
-
-		</script>
+	$(function(){
+		//评论后的的回复鼠标放上去显示 移开隐藏
+		$('li.atl-con-bd .floor_data').hover(function(){
+			$(this).children('span').show();
+		}, function(){
+			$(this).children('span').hide();
+		});
+		
+		
+		//点击回复显示输框
+		/* $('li.atl-con-bd .floor_data span.reply').click(function(){
+			$(this).parent('.floor_data').next('.news_reply').show();
+		}, function(){
+			$(this).parent('.floor_data').next('.news_reply').hide();
+		}); */
+	});
+	
+	//显示评论表单
+	function showReplyForm(obj){
+		$('.news_reply').hide();
+		$(obj).parent('.floor_data').next('.news_reply').show();
+	}
+	
+	//取消评论
+	function cancelComment(obj){
+		$('.news_reply').hide();
+	}
+	
+	function postComment(){
+		jQuery.common.saveObj("#commentForm","/news/saveComment",true,"");
+	}
+	
+	function postReplyComment(obj){
+		debugger;
+		var elem = $(obj).parents('.news_reply form').attr('class');
+		elem = '.'+elem;
+		jQuery.common.saveObj(elem,"/news/saveComment",true,"");
+	}
+	
+</script>
 </body>
 </html>

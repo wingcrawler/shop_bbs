@@ -9,6 +9,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ibm.db2.jcc.a.c;
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.CommentMapper;
 import com.sqe.shop.model.Comment;
 import com.sqe.shop.model.News;
@@ -28,6 +30,8 @@ public class CommentService extends AdapterService implements BaseService {
     	if(context.length()>1000){
     		comment.setContext(context.substring(0, 1000));
     	}
+    	comment.setDate(new Date());
+    	comment.setStatus(Constants.COMMENT_ON);
 		return commentMapper.insert(comment);
 	}
     

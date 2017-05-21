@@ -57,7 +57,7 @@
 					        </div>
 					        <div class="form-group">
 						        <div class="col-sm-3">
-						        	<span style="color:#f00;">*</span><input type="file" name="attachFile" id="attachFile" />
+						        	<span style="color:#f00;">*</span><input type="file" accept="image/*" name="attachFile" id="attachFile" />
 						        </div>
 					        </div>
 					        <div class="form-group">

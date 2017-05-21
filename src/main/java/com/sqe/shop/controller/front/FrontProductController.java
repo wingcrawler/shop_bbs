@@ -93,6 +93,8 @@ public class FrontProductController extends BaseFrontController {
 		} else if(parentType!=null) {
 			type = productTypeService.getById(parentType);
 		} else {
+			productType.setTypeNameCh("产品列表");
+			productType.setTypeName("Product list");
 			type = productType;
 		}
 		if(cachedService.getLang().equals("zh")){

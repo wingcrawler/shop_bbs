@@ -26,10 +26,10 @@
 									 <h3>${item.productName }</h3>
 									 <p>
 									 	<c:if test="${item.productCount==0 }">
-											<del><span></span> ${item.productPrice } &euro;</del>										 	
+											<del><span></span> $ ${item.productPrice }</del>										 	
 									 	</c:if>
 									 	<c:if test="${item.productCount!=0 }">
-									 		<span></span> ${item.productPrice } &euro;
+									 		<span></span> $ ${item.productPrice } 
 									 	</c:if>
 									 </p>
 								 </div>
