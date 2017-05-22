@@ -27,20 +27,27 @@
 								<div class="company_forms">
 									<form enctype="multipart/form-data" method="POST" id="form">
 										<input type="hidden" value="${shop.id }" name="id">
+										
+										<c:if test="${not empty shop.shopImg }">
+										<div class="logo">
+											<span class="lab"></span>
+											<img alt="" src="${shop.shopImg}" width="60%" height="60%" style="margin-top:-15px;padding:0;">	
+										</div>
+										</c:if>
+										
 										<div class="logo">
 											<span class="lab">${t.t_business_intro }</span>
 											<div class="upload">
-												<c:if test="${empty shop.shopImg }">
-													<input type="file" name="attachFile">
-													<p class="one">${t.t_drag_file }</p>
-													<p class="two">OR</p>
-													<p class="three">${t.t_select }</p>
-												</c:if>
-												<c:if test="${not empty shop.shopImg }">
+												<input type="file" name="attachFile">
+												<%-- <p class="one">${t.t_drag_file }</p>
+												<p class="two">OR</p> --%>
+												<p class="three">${t.t_select }</p>
+												<%-- <c:if test="${not empty shop.shopImg }">
 													<img alt="" src="${shop.shopImg}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
-												</c:if>
+												</c:if> --%>
 											</div>
 										</div>
+										
 										<div class="intro">
 											<span class="lab">${t.t_desc }</span>
 											<textarea class="textarea_intro" name="shopDescription">${shop.shopDescription }</textarea>

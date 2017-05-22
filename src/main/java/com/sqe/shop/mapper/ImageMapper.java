@@ -11,4 +11,6 @@ public interface ImageMapper extends BaseMapper {
 
 	List<Image> getByOtherId(@Param("parm") Map<String, Object> parm);
 
+	int deleteByIdAndProductId(@Param("id")Long id, @Param("productId")Long productId);
+
 }

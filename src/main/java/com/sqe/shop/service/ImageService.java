@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ibm.db2.jcc.a.i;
 import com.sqe.shop.mapper.ImageMapper;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Product;
@@ -86,6 +87,13 @@ public class ImageService extends AdapterService implements BaseService {
 		parm.put("orderBy", "id asc");
 		return imageMapper.getBeanListByParm(parm);
 	}
+	public List<Image> getByProductIndexImg(Long id) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		parm.put("productId", id);
+		parm.put("indexShow", 1);
+		parm.put("orderBy", "id asc");
+		return imageMapper.getBeanListByParm(parm);
+	}
 	
 	private Map<String, Object> queryParm(Image image) {
 		Map<String, Object> parm = new HashMap<String, Object>();
@@ -134,6 +142,29 @@ public class ImageService extends AdapterService implements BaseService {
 	    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
 	    image.setImagePath(uploadPath+fileName);
 	    this.save(image);
+	}
+
+	public void saveProductIndexImg(Product product, String fileName, int indexShow) {
+		String uploadPath = PropertiesUtil.get("upload_path_save"); 
+	    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+	    
+	    List<Image> images = this.getByProductIndexImg(product.getId());
+		if(images!=null && !images.isEmpty()){
+			Image image = images.get(0);
+			image.setImagePath(uploadPath+fileName);
+			this.update(image);
+		} else {
+			Image image = new Image();
+		    image.setProductId(product.getId());
+		    image.setIndexShow(indexShow);
+		    image.setImagePath(uploadPath+fileName);
+		    this.insert(image);
+		}
+	    
+	}
+
+	public int deleteByIdAndProductId(Long id, Long productId) {
+		return imageMapper.deleteByIdAndProductId(id, productId);
 	}
 
 }

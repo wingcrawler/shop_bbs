@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.front;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -141,16 +142,21 @@ public class SellerController extends BaseFrontController {
 		}
 		model.addObject("subtypeList", typeTwoPage.getList());
 		
+		// 查询图片
 		List<Image> images = imageService.getByProductId(entity.getId());
-		model.addObject("img", images.get(0));
-		images.remove(0);
-		model.addObject("imgList", images);
-		
-		model.addObject("imgCount", images.size());
-		model.addObject("inputCount", 6-images.size());
+		List<Image> imgList = new ArrayList<Image>();
+		for(Image img : images){
+			if(img.getIndexShow()==1){
+				model.addObject("img", img);
+			}else {
+				imgList.add(img);
+			}
+		}
+		model.addObject("imgList", imgList);
+		model.addObject("imgCount", images.size());//图片数量
+		model.addObject("inputCount", 6-images.size());//图片输入框数量
 		
 		model.addObject("entity", entity);
-
 		return model;
 	}
 	
@@ -246,20 +252,20 @@ public class SellerController extends BaseFrontController {
 			return responseError(-1, "save_failed");
 		}
 		
-		String indexFileName="";
+		String fileName="";
 		Map<String, Object> resMap = null;
 		if(indexFile!=null){
 		    resMap = imageFileService.uploadImage(indexFile);
-		    indexFileName = resMap.get("errorInfo").toString(); 
-		    if(StringUtils.isNotBlank(indexFileName)){
-				imageService.saveProductImg(product, indexFileName, 1);	
+		    fileName = resMap.get("errorInfo").toString(); 
+		    if(StringUtils.isNotBlank(fileName)){
+				imageService.saveProductIndexImg(product, fileName, 1);	
 			}
 	    }
 		for(MultipartFile file : listFile){
 			resMap = imageFileService.uploadImage(file);
-		    indexFileName = resMap.get("errorInfo").toString(); 
-		    if(StringUtils.isNotBlank(indexFileName)){
-				imageService.saveProductImg(product, indexFileName, 0);	
+			fileName = resMap.get("errorInfo").toString(); 
+		    if(StringUtils.isNotBlank(fileName)){
+				imageService.saveProductImg(product, fileName, 0);	
 			}
 		}
 		
@@ -470,7 +476,7 @@ public class SellerController extends BaseFrontController {
 		    }
 		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
 		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
-		    shop.setShopImg(uploadPath+fileName);
+		    shop.setShopLogoImg(uploadPath+fileName);
 	    }
 		
 		shopService.save(shop);
@@ -618,5 +624,20 @@ public class SellerController extends BaseFrontController {
 		model.setViewName("shop/sell/posted_reply");
 		return model;
 	}
-
+	
+	/**
+	 * 删除图片
+	 * @param imgId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/deleteByParm", method = RequestMethod.GET)
+	public Map<String, Object> deleteByParm(Long productId, Long imgId){
+		if(productId==null || imgId==null){
+			return responseError(-1, "error_unknow");
+		}
+		imageService.deleteByIdAndProductId(imgId,productId);	
+		return responseOK1("");
+	}
+	
 }

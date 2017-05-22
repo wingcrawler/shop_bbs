@@ -181,7 +181,7 @@
 								<div class="img_describe">
 									<div class="heade">${t.t_img_desc }</div>
 									<div class="imgDescribe">
-										<div class="show_img">
+										<%-- <div class="show_img">
 											<span class="labe">${t.t_show_img }: </span>
 											<div class="upimg">
 												<c:if test="${not empty img}">
@@ -192,12 +192,27 @@
 													<span>${t.t_select }</span>
 												</c:if>
 											</div>
+										</div> --%>
+										
+										<div class="photo_album">
+											<span class="labe">${t.t_show_img }:</span>
+											<c:if test="${not empty img}">
+											<div class="upimg">
+												<img alt="" src="${img.imagePath}" width="100%" height="100%" style="padding:0;">
+											</div>
+											</c:if>
+											<div class="upimg">
+												<input type="file" name="indexFile" id="indexFile">
+													<span>${t.t_select }</span>
+											</div>
 										</div>
+										
 										<div class="photo_album">
 											<span class="labe">${t.t_img_list }: </span>
 											<c:forEach var="item" items="${imgList }">
 												<div class="upimg">
 													<img alt="" src="${item.imagePath}" width="100%" height="100%" style="padding:0;">
+													<span class="deleteImg" imgid="${item.id }" style="backgroung:#aaa;z-index:10;position:relative;float:right;width:30px">x</span>
 												</div>
 											</c:forEach>
 											<c:forEach var="i" begin="1" end="${inputCount }" step="1">
@@ -244,8 +259,12 @@
 	
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 
+<style>
+.deleteImg{}
+</style>
 <script type="text/javascript">
 $(function(){
+	var confirmDelTip="${t.t_confirm_delete}";
 	$('.menu_box .menu_list div.module a').eq(0).addClass('active');
 	
 	$('#productTypeId').optionSelect({
@@ -258,6 +277,19 @@ $(function(){
 		compare:'${entity.productSubtypeId}',
 		backFn : function(p) {
 		}
+	});
+	
+	//删除
+	$('.deleteImg').click(function(){
+		 if(confirm(confirmDelTip)){
+			 debugger;
+			 var productId=$('input[name="id"]').val();
+			 var imgId = $(this).attr('imgid');
+			 var parm={};
+			 parm.productId=productId;
+			 parm.imgId=imgId;
+			jQuery.common.deleteByParm(parm,'/front/sell/deleteByParm',true,'')	 
+		 }
 	});
 	
 });

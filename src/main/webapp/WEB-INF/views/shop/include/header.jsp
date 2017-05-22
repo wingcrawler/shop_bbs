@@ -13,7 +13,8 @@
 					<li class="phone">+371 282 20 760</li>
 					<li class="mail"><a href="mailto:example@mail.com">eony321v@gmail.com</a></li>
 					<c:if test="${isSellLogin }">
-						<li class=""><a href="/front/sell/productListPage">${t.t_bussiness_center }</a></li>
+						<%-- <li class=""><a href="/front/sell/productListPage">${t.t_bussiness_center }</a></li> --%>
+						<li class=""><a href="/front/buy/productListPage">${t.t_welcome } ${user.username }</a></li>
 						<li class=""><a href="/user/logout">${t.sign_out }</a></li>
 					</c:if>
 					<c:if test="${isBuyLogin }">

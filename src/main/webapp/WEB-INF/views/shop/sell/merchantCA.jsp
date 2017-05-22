@@ -43,21 +43,27 @@
 								<span class="lab">${t.t_shop_name }: </span>
 								<input type="text" name="shopTitle" value="${shop.shopTitle }">
 							</div>
+							<c:if test="${not empty img }">
+							<div class="logo">
+								<span class="lab"> </span>
+								<div class="upload">
+									<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
+								</div>
+							</div>
+							</c:if>
 							<div class="logo">
 								<span class="lab">${t.t_shop_logo }: </span>
-								<c:if test="${empty img }">
-									<div class="upload">
-										<input type="file" name="attachFile">
-										<p class="one">${t.t_drag_file }</p>
-										<p class="two">OR</p>
-										<p class="three">${t.t_select }</p>
-									</div>
-								</c:if>
-								<c:if test="${not empty img }">
+								<div class="upload">
+									<input type="file" name="attachFile">
+									<%-- <p class="one">${t.t_drag_file }</p>
+									<p class="two">OR</p> --%>
+									<p class="three">${t.t_select }</p>
+								</div>
+								<%-- <c:if test="${not empty img }">
 									<div class="upload">
 										<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
 									</div>
-								</c:if>
+								</c:if> --%>
 							</div>
 							<div class="number">
 								<span class="lab">${t.t_mobile }: </span>

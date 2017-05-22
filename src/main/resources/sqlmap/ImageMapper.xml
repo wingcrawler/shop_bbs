@@ -59,6 +59,12 @@
 	delete from image where id=#{id}
 </delete>
 
+<delete id="deleteByIdAndProductId">
+	delete from image where id=#{id} and product_id=#{productId}
+</delete>
+
+
+
 <select id="getById" resultMap="ImageBaseMapper">
 	SELECT * FROM image WHERE id=#{id} 
 </select>

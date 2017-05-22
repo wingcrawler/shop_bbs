@@ -25,6 +25,29 @@ jQuery.common = {
 		});
 	},
 	
+	/**
+	 * 删除
+	 */
+	deleteByParm: function(_parm, _deleteUrl, _isRefrush, _jumpUrl) {
+		$.ajax({
+			type: "GET",
+			url: _deleteUrl,
+			dataType : "json",
+			data: _parm,
+			success: function(data) {
+				if (data.errorNo != 0) {
+					alert(data.errorInfo);
+				} else {
+					if(_isRefrush){
+						self.location.href=_jumpUrl;
+					} else {
+						alert(data.errorInfo);
+					}
+				}
+			}
+		});
+	},
+	
 	updateObjByParm: function(_obj, _updateUrl, _isRefrush, _jumpUrl) {
 		$.ajax({
 			type: "POST",
