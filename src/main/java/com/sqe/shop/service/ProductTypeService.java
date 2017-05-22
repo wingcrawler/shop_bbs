@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.ProductTypeMapper;
 import com.sqe.shop.model.ProductType;
+import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
 
 @Component  
@@ -20,13 +21,19 @@ public class ProductTypeService extends AdapterService implements BaseService {
 	
 	@Autowired
     ProductTypeMapper productTypeMapper;
+	@Autowired
+	private CachedService cachedService;
     
     public int insert(ProductType productType) {
-		return productTypeMapper.insert(productType);
+		int count = productTypeMapper.insert(productType);
+		cachedService.refreshProductTypeList();
+		return count;
 	}
     
     public int update(ProductType productType) {
-		return productTypeMapper.update(productType);
+    	cachedService.refreshProductTypeList();
+		int count = productTypeMapper.update(productType);
+		return count;
 	}
 	
 	public int delete(Long id) {
@@ -72,9 +79,9 @@ public class ProductTypeService extends AdapterService implements BaseService {
 	
 	public void save(ProductType productType) {
 		if(productType.getId()!=null){
-			productTypeMapper.update(productType);
+			this.update(productType);
 		} else {
-			productTypeMapper.insert(productType);
+			this.insert(productType);
 		}
 	}
 	

@@ -87,13 +87,13 @@ public class ProductService extends AdapterService implements BaseService {
 			product.setProductRank(0);
 		}
 		if(product.getId()!=null){
-			return productMapper.update(product);
+			return this.update(product);
 		} else {
 			product.setCreateTime(new Date());
 			product.setProductStatus(0);
 			product.setProductView(0);
 			product.setProductUrlClick(0);
-			return productMapper.insert(product);
+			return this.insert(product);
 		}
 	}
 	

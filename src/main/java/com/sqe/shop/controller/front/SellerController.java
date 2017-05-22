@@ -240,6 +240,7 @@ public class SellerController extends BaseFrontController {
 			return responseError(-1, "error_illegal");
 		}
 		product.setShopId(shop.getId());
+		product.setProductStatus(Constants.PRODUCT_WAIT);
 		int count = productService.save(product);
 		if(count==0){
 			return responseError(-1, "save_failed");
