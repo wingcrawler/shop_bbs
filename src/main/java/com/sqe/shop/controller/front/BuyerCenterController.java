@@ -98,8 +98,9 @@ public class BuyerCenterController extends BaseFrontController {
 		userService.save(user);
 		
 		Subject subject = SecurityUtils.getSubject();
-		user.setPassword(null);
-		subject.getSession().setAttribute("userInfo", user);
+		User userInfo = (User) subject.getSession().getAttribute("userInfo");
+		userInfo.setUserImage(user.getUserImage());
+		subject.getSession().setAttribute("userInfo", userInfo);
 		
 		return responseOK1("");
 	}

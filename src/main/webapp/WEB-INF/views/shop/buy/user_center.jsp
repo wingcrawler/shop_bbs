@@ -29,20 +29,26 @@
 									<span class="lab">${t.t_username}：</span>     
 									<input type="text" name="username" value="${entity.username }"  class="u-ipt">
 								</div>
+								<c:if test="${not empty img }">
+									<div class="logo input_text">
+										<span class="lab"></span>
+										<div class="upload" style="border:0;">
+											<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;border:0;">
+										</div>
+									</div>
+								</c:if>
 								<div class="logo input_text">
 									<span class="lab">${t.t_change_avatar}：</span>
-									<c:if test="${empty img }">
 										<div class="upload">
 											<input type="file" name="attachFile">
-											<p class="one">${t.t_drag_file }</p>
-											<p class="two">OR</p>
+											<p class="one"><%-- ${t.t_drag_/file } --%></p>
+											<p class="two"><!-- OR --></p>
 											<p class="three">${t.t_select }</p>
 										</div>
-									</c:if>
 									<c:if test="${not empty img }">
-										<div class="upload">
+										<%-- <div class="upload">
 											<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
-										</div>
+										</div> --%>
 									</c:if>
 								</div>
 								<div class="number input_text">

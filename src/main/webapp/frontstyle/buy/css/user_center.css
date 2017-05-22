@@ -238,7 +238,7 @@ input {
 }
 .companyData .product_message .company_forms  .logo .lab{
   position: relative;
-  top:-3.75rem;
+  /* top:-3.75rem; */
 }
 
 .companyData .product_message .company_forms .save{
