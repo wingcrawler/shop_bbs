@@ -7,6 +7,7 @@
 	<title>${product.productName }</title>
 
 	<link rel="stylesheet" href="/frontstyle/css/etalage.css">
+	<link rel="stylesheet" href="/frontstyle/css/single.css">
 	<script src="/frontstyle/js/jquery.etalage.min.js"></script>
 	<script>
 		jQuery(document).ready(function($){
@@ -125,6 +126,15 @@
 					<!-- 产品评论 -->
 					<div class="related">
 						<h3>${t.t_product_comment }</h3>
+						<c:if test="${isLogin }">
+						<div id="answerArea" class="edit">
+							<textarea id="textArea" name="context"></textarea>
+							<div class="edit_btn">
+								<span id="cancel_myLetter_2" class="cancel" onclick="clickCancel(this)">取消</span>
+								<span id="sure_myLetter_2" class="affirm" onclick="clickSure(this)">确认</span>
+							</div>
+						</div>
+						</c:if>
 						<div class="related-grids">
 							<ul>
 								<c:forEach var="item" items="${commentPage.list }">
@@ -184,5 +194,20 @@
 	<!-- //single -->
 	
 	<jsp:include page="../include/footer.jsp"></jsp:include>
+	
+<script type="text/javascript">
+var productId = '${product.id}';
+function clickCancel(event) {
+    $("#textArea").val("");
+}
+
+function clickSure(event) {
+    var context = $("#textArea").val();
+    var parm = {};
+    parm.context = context;
+    parm.productId = productId;
+    jQuery.common.saveObjByParm(parm,'/comment/doComment',true,'');    
+}
+</script>
 </body>
 </html>

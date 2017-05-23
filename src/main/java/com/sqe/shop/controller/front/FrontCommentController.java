@@ -32,7 +32,7 @@ public class FrontCommentController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="doComment", method = RequestMethod.GET)
+	@RequestMapping(value="doComment", method = RequestMethod.POST)
 	public Map<String, Object> doComment(Comment comment) {
 		if(StringUtils.isBlank(comment.getContext())){
 			return responseError(-1, "error_empty_content");

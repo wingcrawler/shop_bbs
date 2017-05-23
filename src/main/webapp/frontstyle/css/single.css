@@ -1,0 +1,39 @@
+.edit{
+	 width: 100%;
+	 margin-top:1rem;
+ }
+ .edit .edit_btn{
+	 width: 100%;
+	 text-align: right;
+	 margin-bottom: 2rem;
+ }
+ .edit textarea{
+  width: 100%;
+  height:6.25rem;
+  resize: none;
+  border:0.0625rem solid #e0e0e0;
+  outline:none;
+  padding:0.625rem;
+  font-size: 0.875rem;
+  color: #333;
+}
+ .edit .edit_btn .affirm{
+	 width: 3.75rem;
+	 height:1.25rem;
+	 line-height: 1.25rem;
+	 background:#f45a40;
+	 display: inline-block;
+	 text-align: center;
+	 font-size: 0.75rem;
+	 color: #fff;
+	 cursor: pointer;
+ }
+ .edit .edit_btn .cancel{
+	 width: 3.75rem;
+	 height:1.25rem;
+	 line-height: 1.25rem;
+	 display: inline-block;
+	 text-align: center;
+	 font-size: 0.75rem;
+	 cursor: pointer;
+ }
