@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ibm.db2.jcc.a.i;
 import com.sqe.shop.mapper.ImageMapper;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Product;
