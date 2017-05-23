@@ -1,4 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<%@ include file="common.jsp"%>
 <!-- header -->
 <div class="header">
 	<!-- container -->
@@ -6,23 +9,23 @@
 		<!-- header-top -->
 		<div class="header-top">
 			<div class="header-logo">
-				<a href="/"><img src="/frontstyle/images/logo.png" alt="" /></a>
+				<a href="/"><img src="${contextPath}/frontstyle/images/logo.png" alt="" /></a>
 			</div>
 			<div class="header-right">
 				<ul>
 					<li class="phone">+371 282 20 760</li>
 					<li class="mail"><a href="mailto:example@mail.com">eony321v@gmail.com</a></li>
 					<c:if test="${isSellLogin }">
-						<li class=""><a href="/front/sell/productListPage">${t.t_bussiness_center }</a></li>
+						<li class=""><a href="${contextPath}/front/sell/productListPage">${t.t_bussiness_center }</a></li>
 					</c:if>
 					<c:if test="${isBuyLogin }">
-						<li class=""><a href="/front/buy/index">${t.t_welcome } ${user.username }</a></li>
+						<li class=""><a href="${contextPath}/front/buy/index">${t.t_welcome } ${user.username }</a></li>
 					</c:if>
 					<c:if test="${!isLogin }">
-						<li class=""><a href="/back/login">${t.sign_in }</a></li>
+						<li class=""><a href="${contextPath}/back/login">${t.sign_in }</a></li>
 					</c:if>
 					<c:if test="${isLogin }">
-						<li class=""><a href="/back/logout">${t.sign_out }</a></li>
+						<li class=""><a href="${contextPath}/back/logout">${t.sign_out }</a></li>
 					</c:if>
 					
 					<!-- <li class="checkout">
@@ -32,7 +35,7 @@
 						</a>
 						<div class="shopping">
 							<h5>Your Shopping Cart is empty.</h5>
-							<p>Give it purpose—fill it with books, movies, mobiles, cameras, toys and fashion jewellery.</p>
+							<p>Give it purposeâfill it with books, movies, mobiles, cameras, toys and fashion jewellery.</p>
 						</div>
 					</li> -->
 				</ul>

@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="include/common.jsp"%>
 <jsp:include page="include/meta.jsp"></jsp:include>
 </head>
 <body>
@@ -15,7 +15,7 @@
 		<div class="container">
 			<!--圈子推荐-->
 			<div id="tj_t" class="h2">
-				<span class="ico ico_qztj txt">圈子推荐</span> <a href="liebiao.html"
+				<span class="ico ico_qztj txt">圈子推荐</span> <a href="${contextPath}/liebiao.html"
 					class="more">更多圈子&gt;</a> <br class="c" />
 			</div>
 			<ul id="tj_m">
@@ -38,7 +38,7 @@
 					<!--10条数据-->
 					<ul class="list">
 						<li v-for="item in items"><em v-if="item.thread_identify==2"
-							class="t">置顶</em> <a v-bind:href='"thread?threadId="+item.id'
+							class="t">置顶</em> <a v-bind:href='"${contextPath}/bbs/thread?threadId="+item.id'
 							class="tx">{{item.threadTitle}}</a><em
 							v-if="item.thread_identify==1" class="jh">精</em> <br />
 							<div class="tR">
@@ -79,7 +79,7 @@
 		var section = new Array();
 		$(document).ready(function() {
 			$(function() {
-				$.getJSON("threads", {
+				$.getJSON("${contextPath}/bbs/threads", {
 					playid : '${sectionId.sectionId}'
 				}, function(json) {
 					if (!json)
@@ -90,7 +90,7 @@
 			});
 
 			$.ajax({
-				url : '/bbs/section/getSecondSection',
+				url : '${contextPath}/bbs/section/getSecondSection',
 				type : 'get',
 				dataType : 'json',
 				success : function(result) {
@@ -117,7 +117,7 @@
 				}
 				
 				$(function() {
-					$.getJSON("threads", {
+					$.getJSON("${contextPath}/bbs/threads", {
 						sectionId : sectionId
 					}, function(json) {
 						if (!json)

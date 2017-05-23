@@ -59,7 +59,7 @@
 			<div id="ajaxList">
 			<ul class="list">
 				<li v-for=" item in items"> <em v-if="item.thread_identify==2"
-					class="t">置顶</em> <a v-bind:href='"thread?threadId="+item.id'
+					class="t">置顶</em> <a v-bind:href='"${contextPath}/bbs/thread?threadId="+item.id'
 					class="tx">{{item.threadTitle}}</a><em
 					v-if="item.thread_identify==1" class="jh">精</em> <br />
 					<div class="tR">

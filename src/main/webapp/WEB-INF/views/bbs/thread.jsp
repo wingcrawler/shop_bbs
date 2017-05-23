@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ include file="include/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -40,52 +41,6 @@
 			</p></span> <br class="c" />
 		<div id="ajaxList">
 			<!--楼层-->
-			<div class="tItem cnt" quotedCommentId="45470767" id="45470767">
-				<a href="../Home/755355.html" class="name">95912180</a> <span
-					class="lv">LV6</span> <em class="isLz"></em>
-				<div class="tmain">
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【发火最狂暴的星座排名】</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">冠军(天蝎座）、亚军(狮子座）、季军(白羊座）、第4名(魔羯座）、第5名(金牛座）、第6名(射手座）、第7名(双鱼座）、第8名(水瓶座）、第9名(处女座）、第10名(巨蟹座）、第11名(天秤座）、第12名(双子座）</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【天秤座的几桩“最”】</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">最可爱星座——天秤座；最聪明星座——天秤座；最善良型星座——天秤座；最好玩星座——天秤座；最严谨星座——天秤座；最无私星座——天秤座；最宅星座——天秤座；最勇敢星座——天秤座；最有才星座——天秤座；最温柔星座——天秤座。</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
-
-				</div>
-				<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
-				<span class="msg">2楼2013-12-08 15:35</span> <br class="c" />
-				<!--楼中楼内容-->
-				<div class="lzl hid">
-					<em class="ico"></em>
-					<!--刷新和收起-->
-					<div class="op">
-						<a href="javascript:;" class="cl">收起回复</a> <a
-							href="javascript:void(0);"
-							data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470767"
-							class="rf">刷新</a> <br class="c" />
-					</div>
-					<!--楼中楼数据-->
-					<ul class="llist">
-						<li>唐伯虎回顧秋香：</li>
-						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-					</ul>
-				</div>
-				<!--END 楼中楼内容-->
-			</div>
-			<!--楼层-->
-
 			<div v-for="item in items" class="tItem cnt"
 				quotedCommentId="45470737" id="45470737">
 				<a href="#" class="name">{{item.name}}</a> <em class="isLz"></em>
@@ -121,67 +76,7 @@
 			<li v-if="loaded==true && items.length==0">
 				<div colspan="3" class="text-center">暂无数据</div>
 			</li>
-			<div class="tItem cnt" quotedCommentId="45470874" id="45470874">
-
-
-				<a href="../Home/755355.html" class="name">95912180</a> <span
-					class="lv">LV6</span> <em class="isLz"></em>
-
-				<div class="tmain">
-					<p></p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【12星座的情人节】</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★感情甜蜜榜—NO.1魔羯座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2处女座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3射手座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★意外惊喜榜—NO.1白羊座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2天秤座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3天蝎座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★迷离暧昧榜—NO.1双鱼座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2巨蟹座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3金牛座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">★心事纠结榜—NO.1狮子座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.2水瓶座</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">NO.3双子座</p>
-
-				</div>
-
-
-				<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
-
-				<span class="msg">4楼2013-12-08 15:35</span> <br class="c" />
-
-				<!--楼中楼内容-->
-				<div class="lzl hid">
-					<em class="ico"></em>
-					<!--刷新和收起-->
-					<div class="op">
-						<a href="javascript:;" class="cl">收起回复</a> <a
-							href="javascript:void(0);"
-							data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470874"
-							class="rf">刷新</a> <br class="c" />
-					</div>
-					<!--楼中楼数据-->
-					<ul class="llist">
-						<li>唐伯虎回顧秋香：</li>
-						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-					</ul>
-				</div>
-				<!--END 楼中楼内容-->
-
-			</div>
+			
 			<!--楼层-->
 			<div class="tItem cnt" quotedCommentId="45470923" id="45470923">
 
@@ -358,7 +253,7 @@
 				}
 			});
 			$(function() {
-				$.getJSON("post/getList", {
+				$.getJSON("${basePath}/bbs/post/getList", {
 					threadId : '${thread.id }'
 				}, function(json) {
 					if (!json)
@@ -379,8 +274,8 @@
 			$('#submit').click(
 					function() {
 						var parm = $.fn.getFormJson('.form');
-						$.fn.doSave(parm, '/bbs/post/doSave',
-								'/bbs/thread?threadId=${thread.id }');
+						$.fn.doSave(parm, '${basePath}/bbs/post/doSave',
+								'${basePath}/bbs/thread?threadId=${thread.id }');
 					});
 		});
 	</script>
