@@ -229,6 +229,7 @@ public class CommentService extends AdapterService implements BaseService {
 		for(Map<String, Object> map : list){
 			replyMap.put("commentId", map.get("commentId"));
 			replyList = commentMapper.getSubCommentListByParm(replyMap);	
+			if(replyList!=null && !replyList.isEmpty() && replyList.get(0)!=null)
 			map.put("replyList", replyList);
 		}
 		
