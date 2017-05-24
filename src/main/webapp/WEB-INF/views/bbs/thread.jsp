@@ -253,7 +253,7 @@
 				}
 			});
 			$(function() {
-				$.getJSON("${basePath}/bbs/post/getList", {
+				$.getJSON("/bbs/post/getList", {
 					threadId : '${thread.id }'
 				}, function(json) {
 					if (!json)
@@ -274,8 +274,8 @@
 			$('#submit').click(
 					function() {
 						var parm = $.fn.getFormJson('.form');
-						$.fn.doSave(parm, '${basePath}/bbs/post/doSave',
-								'${basePath}/bbs/thread?threadId=${thread.id }');
+						$.fn.doSave(parm, '/bbs/post/doSave',
+								'$/bbs/thread?threadId=${thread.id }');
 					});
 		});
 	</script>

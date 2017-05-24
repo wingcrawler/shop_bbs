@@ -38,7 +38,7 @@
 					<!--10条数据-->
 					<ul class="list">
 						<li v-for="item in items"><em v-if="item.thread_identify==2"
-							class="t">置顶</em> <a v-bind:href='"${contextPath}/bbs/thread?threadId="+item.id'
+							class="t">置顶</em> <a v-bind:href='"/bbs/thread?threadId="+item.id'
 							class="tx">{{item.threadTitle}}</a><em
 							v-if="item.thread_identify==1" class="jh">精</em> <br />
 							<div class="tR">
@@ -79,7 +79,7 @@
 		var section = new Array();
 		$(document).ready(function() {
 			$(function() {
-				$.getJSON("${contextPath}/bbs/threads", {
+				$.getJSON("/bbs/threads", {
 					playid : '${sectionId.sectionId}'
 				}, function(json) {
 					if (!json)
@@ -90,7 +90,7 @@
 			});
 
 			$.ajax({
-				url : '${contextPath}/bbs/section/getSecondSection',
+				url : '/bbs/section/getSecondSection',
 				type : 'get',
 				dataType : 'json',
 				success : function(result) {
@@ -117,7 +117,7 @@
 				}
 				
 				$(function() {
-					$.getJSON("${contextPath}/bbs/threads", {
+					$.getJSON("/bbs/threads", {
 						sectionId : sectionId
 					}, function(json) {
 						if (!json)

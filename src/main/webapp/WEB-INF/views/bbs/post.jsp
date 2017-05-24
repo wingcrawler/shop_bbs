@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>bbs 内容页面</title>
+<title> </title>
 </head>
 <body>
 
-<p>帖子的所有内容</p>
-<p>帖子底部回帖框</p>
+<p> </p>
+<p> �</p>
 </body>
 </html>
