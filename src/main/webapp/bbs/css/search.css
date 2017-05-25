@@ -1,0 +1,123 @@
+.red{
+	color: #fd4a50;
+}
+.header-nav{
+	height:4.0rem;
+	border-bottom:0.0625rem solid #e0e0e0;
+}
+.header-nav .top-nav .nav{
+	margin:0;
+}
+@media (max-width: 1200px) {
+	.header-nav .top-nav .nav{
+		padding: .7em .7em .7em 2em;
+	}
+}
+
+.men{
+	background: #fff;
+}
+.item{
+	height:29rem;
+	padding:0;
+	padding: 0 0.9375rem;
+
+}
+.item .img_box {
+	width: 100%;
+    height: 17.25rem;
+    overflow: hidden;
+	position: relative;
+}
+.item .img_box .women_list{
+	width: 100%;
+	display: flex;
+	background: #f0f0f0;
+	position: absolute;
+	left:0;
+	bottom: 0;
+}
+.item .img_box .women_list span{
+	flex: 1;
+	display: inline-block;
+	padding: 0.25rem;
+	position: relative;
+}
+.item .img_box .women_list span img{
+	width: 100%;
+	max-height: 100%;
+	display: block;
+}
+.item .img_box .women_list span.active{
+	border-bottom: 0.125rem solid #636363;
+}
+.line{
+	margin-bottom: 1.25rem;
+}
+.line .bottom{
+	width: 100%;
+	padding:0 0.75rem;
+}
+.line .bottom .info{
+	width: 100%;
+	height:7.5rem;
+	border-bottom: 0.0625rem solid #e0e0e0;
+}
+.line .bottom .info p{
+	margin:0;
+	padding:0;
+	font-size: 0.75rem;
+	color: #636365;
+}
+.line .bottom .money{
+	width: 100%;
+	height:3.125rem;
+	padding:0;
+	padding-top: 0.625rem;
+}
+.line .bottom .money p{
+	margin:0;
+	padding:0;
+}
+.line .bottom .money p.red{
+
+}
+.line .bottom .money p.icons{
+	text-align: right;
+	position: relative;
+	top:-0.75rem;
+}
+.line .bottom .money p.icons span{
+	width: 1.3rem;
+	height:1.3rem;
+	overflow: hidden;
+	display: inline-block;
+	position: relative;
+	margin-left: 0.2rem;
+}
+.line .bottom .money p.icons span:last-child img{
+	position: absolute;
+	top:0;
+	right: 0
+}
+.item a{
+	display: block;
+	width: 100%;
+	height:100%;
+	position: relative;
+	padding-top: 0.875rem;
+	border: 0.0625rem solid #e0e0e0;
+	text-decoration: none;
+}
+.line .bottom .info p.name{
+	color: #696d70;
+	font-size: 1.125rem;
+	line-height: 1.4375rem;
+	margin-top: 0.5rem;
+}
+.line .bottom .info p.explain{
+	line-height: 1.5625rem;
+}
+.item a .img{
+	width: 100%;
+}

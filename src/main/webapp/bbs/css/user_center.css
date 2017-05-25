@@ -1,0 +1,285 @@
+@charset "UTF-8";
+ul, li {
+  list-style: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, p {
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  outline: none;
+  padding: 0.125rem;
+  border: 0.0625rem solid #e0e0e0;
+}
+
+.gray {
+  color: #999;
+}
+
+.red{
+  color: #f45a40;
+}
+
+.f-dn {
+  display: none !important;
+}
+
+.f-fl {
+  float: left !important;
+}
+
+.f-fr {
+  float: right !important;
+}
+/*-- header-nav --*/
+.header-nav{
+  width: 100%;
+  border-bottom: 0.0625rem solid #e0e0e0;
+}
+.header-nav ul{
+  margin:0;
+}
+.header-nav li{
+  display: inline-block;
+  line-height: 2.5rem;
+  padding-right: 1.875rem;
+  color:#666565;
+  cursor: pointer;
+}
+.header-nav li.active{
+  color: #f45a40;
+}
+/*-- main --*/
+.main .container {
+  margin-top: 1.25rem;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+/*-- menu --*/
+.main .container .menu {
+  width: 11.875rem;
+  height: 33.75rem;
+  margin-right: 0.875rem;
+  background: #fff;
+  border: 0.0625rem solid #e0e0e0;
+}
+.main .container .menu  .menu_title{
+  width: 100%;
+  height:10rem;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+.main .container .menu  .title_img{
+  width: 6.25rem;
+  height:6.25rem;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  background: #959595;
+  margin:0 auto;
+  margin-top: 1.125rem;
+}
+.main .container .menu  .title_img img{
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top:0;
+  bottom:0;
+  margin:auto;
+}
+.main .container .menu  .title_text{
+  line-height: 2.25rem;
+  color: #333333;
+  text-align: center;
+}
+
+.main .container .menu  .menu_list{
+  padding:0 1.125rem;
+}
+.main .container .menu  .menu_list li{
+  text-align: center;
+  line-height: 3.125rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  color: #333333;
+}
+@media (min-width: 1200px){
+  .main .container .menu  .menu_list li:hover{
+    color:#f45a40;
+  }
+}
+.main .container .menu  .menu_list li:first-child{
+  text-align: left;
+  border-bottom:0.0625rem solid #e0e0e0;
+  font-weight: 900;
+  margin-bottom: 0.75rem;
+  cursor:inherit;
+}
+
+/*-- companyData --*/
+.companyData {
+  -webkit-box-flex: 1;
+     -moz-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.companyData .header {
+  width: 100%;
+  height: 2.75rem;
+  line-height: 2.625rem;
+  border: 0.0625rem solid #e0e0e0;
+  padding-left: 1.25rem;
+  color: #f45a40;
+  background: #fafafa;
+  margin-bottom: 0.875rem;
+}
+.companyData .product_message{
+  margin-bottom: 1.25rem;
+}
+.companyData .product_message .basic_information{
+  width: 100%;
+  border: 0.0625rem solid #e0e0e0;
+  margin-bottom: 1.25rem;
+}
+.companyData .product_message .basic_information .title{
+  width: 100%;
+  height: 2.6rem;
+  font-weight: 900;
+  line-height: 2.6rem;
+  padding-left: 1.25rem;
+  border-bottom: 0.0625rem solid #e0e0e0;
+  background: #fafafa;
+  margin-bottom: 2.25rem;
+}
+
+.companyData .product_message .basic_information .company_forms{
+  width: 100%;
+}
+.companyData .product_message .company_forms .input_text{
+  font-size: 0; 
+  margin-bottom: 1.25rem;
+}
+.companyData .product_message .company_forms .input_text .lab{
+  width: 7.5rem;
+  font-size: 0.75rem;
+  color: #333;
+  text-align: right;
+  display: inline-block;
+}
+.companyData .product_message .company_forms .input_text .u-ipt{
+  font-size: 0.75rem;
+  width: 19.375rem;
+  height:2.25rem;
+  border:0.0625rem solid #e0e0e0;
+  border-radius: 0.1875rem;
+}
+.companyData .product_message .company_forms .address .u-ipt{
+  margin-left: 7.5rem;
+  margin-top: 0.625rem;
+}
+.companyData .product_message .company_forms .address select{
+  width: 5.0rem;
+  height:1.25rem;
+  line-height:1.25rem;
+  margin-right: 1.25rem;
+  border:0.0625rem solid #e0e0e0;
+  font-size: 0.75rem;
+  background: #fff;
+  outline: none;
+}
+
+.companyData .product_message .company_forms .upload{
+  width:11.625rem;
+  height:7.25rem;
+  display: inline-block;
+  font-size: 0.875rem;
+  background: #fff;
+  border:0.0625rem dashed #e0e0e0;
+  padding:0.75rem 0;
+  cursor: pointer;
+  position: relative;
+}
+.companyData .product_message .company_forms .upload input{
+  width:100%;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0;
+  opacity: 0;
+  cursor: pointer;
+}
+.companyData .product_message .company_forms .upload p{
+  text-align: center;
+  pointer-events: none;
+}
+.companyData .product_message .company_forms .upload p.one{
+  color: #f45a40;
+}
+.companyData .product_message .company_forms .upload p.two{
+  line-height: 2.125rem;
+}
+.companyData .product_message .company_forms .upload p.three{
+  width:6.625rem;
+  height:2.125rem;
+  line-height: 2.125rem;
+  text-align: center;
+  margin:0 auto;
+  background: #f45a40;
+  color: #fff;
+}
+.companyData .product_message .company_forms  .logo .lab{
+  position: relative;
+  top:-3.75rem;
+}
+
+.companyData .product_message .company_forms .save{
+  width: 27.75rem;
+  height: 2.7rem;
+  line-height: 2.7rem;
+  text-align: center;
+  color: #fff;
+  font-size: 1.25rem;
+  border-radius: 0.1875rem;
+  background: url(../images/saveBg.png) repeat-x;
+  position: relative;
+  margin-left: 3.625rem;
+  margin-bottom: 6rem;
+  overflow: hidden;
+}
+.companyData .product_message .company_forms .save input{
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

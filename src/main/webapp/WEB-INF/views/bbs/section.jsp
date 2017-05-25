@@ -194,7 +194,7 @@
 			<!-- 内容区结束 -->
 		</c:if>
 		<c:if test="${!isLogin }">
-			<div>请登录</div>
+			<div>请登录后发帖</div>
 
 		</c:if>
 		<br>
@@ -237,8 +237,8 @@
 								function() {
 									var parm = $.fn.getFormJson('.form');
 									$.fn
-											.doSave(parm, '/bbs/thread/doSave',
-													'/bbs/sectionindex?sectionId=${sectionindex.id }');
+											.doSave(parm, 'bbs/thread/doSave',
+													'bbs/sectionindex?sectionId=${sectionindex.id }');
 								});
 			});
 		</script>

@@ -53,7 +53,7 @@
 				<a href="#" class="name">{{item.name}}</a> <em class="isLz"></em>
 
 				<div class="tmain">
-				<p v-html="item.context"></p>
+					<p v-html="item.context"></p>
 				</div>
 				<!-- <a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a> -->
 				<span class="msg">{{item.floor}}楼{{item.time}}</span> <br class="c" />
@@ -83,7 +83,7 @@
 			<li v-if="loaded==true && items.length==0">
 				<div colspan="3" class="text-center">暂无数据</div>
 			</li>
-			
+
 			<!--楼层-->
 			<div class="tItem cnt" quotedCommentId="45470923" id="45470923">
 
@@ -165,15 +165,14 @@
 					</h3>
 				</div>
 				<form class="form-horizontal form" action="javascript:void(0);">
-				<div class="panel-body">
-				<div class="form-group">
-					<div class="col-sm-12">
-						<input type="hidden" value="${thread.id }" name="threadId" />
-						<input type="hidden" value="${user.id }" name="replyToUserId" />
-						<textarea id="myEditor" name="postContext"> </textarea>
-						<script type="text/javascript">
-							var ue = UE.getEditor('myEditor',
-									{
+					<div class="panel-body">
+						<div class="form-group">
+							<div class="col-sm-12">
+								<input type="hidden" value="${thread.id }" name="threadId" /> <input
+									type="hidden" value="${user.id }" name="replyToUserId" />
+								<textarea id="myEditor" name="postContext"> </textarea>
+								<script type="text/javascript">
+									var ue = UE.getEditor('myEditor', {
 										toolbars : [ [ 'source', 'undo',
 												'redo', 'bold', 'pasteplain',
 												'removeformat', 'link',
@@ -197,14 +196,14 @@
 										autoHeightEnabled : true,
 										autoFloatEnabled : true
 									});
-						</script>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-12">
-						<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
-					</div>
-				</div>
+								</script>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<a id="submit" class="btn btn-info" href="javascript:void(0);">${t.b_submit }</a>
+							</div>
+						</div>
 				</form>
 			</div>
 		</div>
@@ -217,6 +216,10 @@
 </c:if>
 	<br>
 
+
+
+	<div id="page1" style="text-align: center;">
+	</div>
 
 
 	<!--分页-->
@@ -251,25 +254,50 @@
 	<jsp:include page="include/footer.jsp"></jsp:include>
 	<!-- //footer -->
 	<script type="text/javascript">
+		var playTableVue = new Vue({
+			el : "#ajaxList",
+			data : {
+				items : [],
+				loaded : false
+			}
+		});
+
+		function demo(curr){
+			  $.getJSON('/bbs/post/getList', {
+				threadId : '${thread.id }',
+				pageNo: curr || 1 ,
+				pageSize : 2, //向服务端传的参数，此处只是演示
+			  }, function(json) {
+					if (!json)
+						json = [];
+					playTableVue.items = json.list;
+					playTableVue.loaded = true;
+			    //显示分页
+			    laypage({
+			      cont: 'page1', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<code><</code>div id="page1"><code><</code>/div>
+			      pages: json.pageCount, //通过后台拿到的总页数
+			      curr: curr || json.currentPage, //当前页
+			      jump: function(obj, first){ //触发分页后的回调
+			        if(!first){ //点击跳页触发函数自身，并传递当前页：obj.curr
+			          demo(obj.curr);
+			        }
+			      }
+			    });
+			  });
+			};
+		
 		$(document).ready(function() {
-			var playTableVue = new Vue({
-				el : "#ajaxList",
-				data : {
-					items : [],
-					loaded : false
-				}
-			});
 			$(function() {
 				$.getJSON("/bbs/post/getList", {
 					threadId : '${thread.id }'
 				}, function(json) {
 					if (!json)
 						json = [];
-					playTableVue.items = json.list;
-					playTableVue.loaded = true;
+					//playTableVue.items = json.list;
+					//playTableVue.loaded = true;
 				});
 			});
-
+			demo();
 		});
 	</script>
 	<script type="text/javascript">
@@ -282,7 +310,7 @@
 					function() {
 						var parm = $.fn.getFormJson('.form');
 						$.fn.doSave(parm, '/bbs/post/doSave',
-								'$/bbs/thread?threadId=${thread.id }');
+								'/bbs/thread?threadId=${thread.id }');
 					});
 		});
 	</script>

@@ -3,34 +3,12 @@
 		init: function() {
 			var self = this;
 
-			//tab切换
-			self.tab();
-
 			//模拟radio
 			self.radio();
 
 			//模拟checkbox
 			self.checkbox();
 
-		},
-		/**
-		 * tab切换
-		 */
-		tab: function() {
-			$('.g-tabHd').on('click', 'li', function(ev) {
-				var $this = $(this),
-					$tabWrap = $this.closest('.g-tabWrap'),
-					index = $this.index();
-
-				$this.addClass('f-active').siblings('li').removeClass('f-active');
-				$tabWrap.find('.g-tabMn .g-tabMnItem').eq(index).addClass('f-active').siblings('.g-tabMnItem').removeClass('f-active');
-
-				ev.preventDefault();
-			});
-
-			$('.g-tabHd').on('click', 'li a', function(ev) {
-				ev.preventDefault();
-			});
 		},
 		/*
 		 * 模拟radio事件
