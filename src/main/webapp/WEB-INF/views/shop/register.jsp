@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,14 +18,14 @@
 		<form name="form1" method="post" action="" onsubmit="return check()">
 			<img src="../frontstyle/images/register.png" class="reg_bg">
 			<div class="box">
-				<p>用户注册</p>
+				<p>${t.register }</p>
 				<div class="input">
 					<div class="margin">
-						<span>*</span>账号：<input type="text" name="username" class="user"
+						<span>*</span>${t.register_account }：<input type="text" name="username" class="user"
 							id="rename" />
 					</div>
-					<span>*</span>请设置密码：<input type="password" name="password"
-						class="key" / id="key"><br /> <span>*</span>请确认密码：<input
+					<span>*</span>${t.register_password }：<input type="password" name="password"
+						class="key" / id="key"><br /> <span>*</span>${t.register_confirm  }：<input
 						type="password" name="repassword" class="key1" / id="key1"><br />
 					<div class="margin">
 						<span>*</span>邮箱：<input type="text" name="userMail" class="email"
