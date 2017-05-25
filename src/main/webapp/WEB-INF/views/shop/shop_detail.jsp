@@ -74,6 +74,9 @@
 	</div>
 	<!-- //men -->
 	
-	<jsp:include page="include/footer.jsp"></jsp:include>
+	<!-- footer -->
+		<jsp:include page="include/footer.jsp"></jsp:include>
+
+	<!-- //footer -->
 </body>
 </html>

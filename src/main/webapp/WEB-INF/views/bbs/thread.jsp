@@ -5,11 +5,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="include/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html lang="${t.lang} }">
 <head>
 <jsp:include page="include/meta.jsp"></jsp:include>
 <script src="/ue/ueditor.config.js"></script>
 <script src="/ue/ueditor.all.js"></script>
+<c:if test="${t.lang =='en' }">
+	<script type="text/javascript" charset="utf-8" src="/ue/lang/en/en.js"></script>
+</c:if>
+<c:if test="${t.lang =='zh' }">
+	<script type="text/javascript" charset="utf-8"
+		src="/ue/lang/zh-cn/zh-cn.js"></script>
+</c:if>
 <title>${t.m_bbs_list }</title>
 </head>
 <body>

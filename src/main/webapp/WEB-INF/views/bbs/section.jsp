@@ -7,10 +7,10 @@
 <jsp:include page="include/meta.jsp"></jsp:include>
 <script src="/ue/ueditor.config.js"></script>
 <script src="/ue/ueditor.all.js"></script>
-<c:if test="${lang =='en' }">
+<c:if test="${t.lang =='en' }">
 	<script type="text/javascript" charset="utf-8" src="/ue/lang/en/en.js"></script>
 </c:if>
-<c:if test="${lang =='zh' }">
+<c:if test="${t.lang =='zh' }">
 	<script type="text/javascript" charset="utf-8"
 		src="/ue/lang/zh-cn/zh-cn.js"></script>
 </c:if>
@@ -261,7 +261,7 @@
 					}
 				});
 				$(function() {
-					$.getJSON("/thread/getSectionList", {
+					$.getJSON("thread/getSectionList", {
 						sectionId : '${sectionindex.id }',
 						pageNo : '1',
 					}, function(json) {
