@@ -7,6 +7,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="${t.lang} }">
 <head>
+<link rel="stylesheet" href="//res.layui.com/layui/src/css/layui.css" media="all">
+<link rel="stylesheet" href="//res.layui.com/css/global.css" media="all">
+
+<link href="demo.css" type="text/css" rel="stylesheet">
+
+<script src="//res.layui.com/lay/lib/laypage/laypage.js?v=1.3" tips="使用时，只要这一个js即可"></script>
+
 <jsp:include page="include/meta.jsp"></jsp:include>
 <script src="/ue/ueditor.config.js"></script>
 <script src="/ue/ueditor.all.js"></script>
@@ -95,32 +102,7 @@
 					<p></p>
 					<p
 						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【12星座最大的缺点是什么?】</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">白羊座-心太软</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">金牛座-不太现实</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">双子座-不够坚强</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">巨蟹座-脾气不太好</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">狮子座-容易相信他</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">处女座-太依赖别人</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">天秤座-心肠太好</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">天蝎座-太追求完美</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">射手座-有点任性</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">摩羯座-性格刚烈</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">水瓶座-对自己不够好</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">双鱼座-太过于追求时尚</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
+					
 					<p
 						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
 
@@ -218,34 +200,11 @@
 
 
 
-	<div id="page1" style="text-align: center;">
-	</div>
 
 
-	<!--分页-->
-	<div class="page-toolbar">
-		<div class="ajax-page">
-			<ul class="page-pagination">
-				<li class="first-page"><span>首页</span></li>
-				<li class="previous-page"><span>上一页</span></li>
-				<li class="active"><span>1</span></li>
-				<li><span>2</span></li>
-				<li><span>3</span></li>
-				<li><span>4</span></li>
-				<li><span>5</span></li>
-				<li><span>6</span></li>
-				<li><span>7</span></li>
-				<li><span>8</span></li>
-				<li><span>9</span></li>
-				<li><span>10</span></li>
-				<li class="omit"><span><i>...</i>15</span></li>
-				<li class="skip"><input type="text" value="1">/ <span>15</span>页
-				</li>
-				<li class="next-page"><span>下一页</span></li>
-			</ul>
-		</div>
-	</div>
 
+	<!--跟帖分页-->
+	<div id="page3" style="text-align: center;"></div>
 	</section>
 	</div>
 	</div>
@@ -262,30 +221,53 @@
 			}
 		});
 
-		function demo(curr){
-			  $.getJSON('/bbs/post/getList', {
-				threadId : '${thread.id }',
-				pageNo: curr || 1 ,
-				pageSize : 2, //向服务端传的参数，此处只是演示
-			  }, function(json) {
-					if (!json)
-						json = [];
-					playTableVue.items = json.list;
-					playTableVue.loaded = true;
-			    //显示分页
-			    laypage({
-			      cont: 'page1', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<code><</code>div id="page1"><code><</code>/div>
-			      pages: json.pageCount, //通过后台拿到的总页数
-			      curr: curr || json.currentPage, //当前页
-			      jump: function(obj, first){ //触发分页后的回调
-			        if(!first){ //点击跳页触发函数自身，并传递当前页：obj.curr
-			          demo(obj.curr);
-			        }
-			      }
-			    });
-			  });
-			};
+		function  responseHandle(json){
+			
+			if (!json)
+				json = [];
+			playTableVue.items = json.list;
+			playTableVue.loaded = true;
+		}
 		
+		
+		function demo(curr) {
+			$.getJSON('/bbs/post/getList', {
+				threadId : '${thread.id }',
+				pageNo : curr || 1,
+				pageSize : 5, //向服务端传的参数，此处只是演示
+			}, function(json) {
+				//显示分页
+				laypage({
+					cont : 'page3', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>  
+					curr : 1, //初始化当前页  
+					skin : '#429842',//皮肤颜色  
+					groups : 5, //连续显示分页数  
+					skip : true, //是否开启跳页  
+					first : '首页', //若不显示，设置false即可  
+					last : '尾页', //若不显示，设置false即可  
+					prev: '<', //若不显示，设置false即可  
+		            next: '>', //若不显示，设置false即可 
+					pages : json.page.pageCount, //通过后台拿到的总页数
+					jump : function(e) { //触发分页后的回调  
+						$.getJSON('/bbs/post/getList', {
+							threadId : '${thread.id }',
+							pageNo : e.curr,//当前页  
+							pageSize : 5,
+						}, function(json) {
+							e.pages = e.last = json.page.pageCount; //重新获取总页数，一般不用写  
+							console.log(e.pages)
+							//渲染  
+							responseHandle(json);
+							//var view = document.getElementById('page1'); //你也可以直接使用jquery  
+							//解析数据  
+							//var resultHtml = PackagData(json);
+							//view.innerHTML = resultHtml;
+						});
+					}
+				});
+			});
+		};
+
 		$(document).ready(function() {
 			$(function() {
 				$.getJSON("/bbs/post/getList", {
