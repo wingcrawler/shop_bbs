@@ -239,9 +239,14 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select p.id id,p.product_name as productName, p.product_price as productPrice,
+	select p.id id,
+	p.product_name as productNameCh,
+	p.product_en_name as productName, 
+	p.product_price as productPrice,
 	p.product_rank as productRank, p.product_view as productView,p.product_count as productCount,
-	p.product_status as productStatus,s.shop_title as shopName,concat(pt.type_name_ch,'/',pt.type_name) as productTypeName,
+	p.product_status as productStatus,s.shop_title as shopName,
+	pt.type_name_ch as productTypeNameCh,
+	pt.type_name as productTypeName,
  	date_format(p.create_time, '%Y-%m-%d') as createTimeStr,p.product_tag as productTag,
 	i.image_path as imagePath
 	from product p 

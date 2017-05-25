@@ -45,7 +45,7 @@
 								<div class="banner-info">
 									<h2></h2>
 									<p>${item.description }</p>
-									<a href="${item.imageUrl}" target="_blank">SHOP BRASIL</a>
+									<a href="${item.imageUrl}" target="_blank">${t.t_forward }</a>
 								</div>
 							</div>
 						</div>
@@ -88,7 +88,9 @@
 					<div class="col-md-3 product-left-grid">	
 						<div class="product-grid">
 							<div class="product-grid-text">
-								<a href="/product/single?productId=${item.id }" target="_blank"><img src="${item.imagePath }" alt="" /></a>
+								<a href="/product/single?productId=${item.id }" target="_blank">
+									<img src="${item.imagePath }" alt="" style="height:200px;margin-top:-16px;" />
+								</a>
 								<div class="products-grid-info">
 									<h3>${item.productName }</h3>
 									<p>${item.productDesc }</p>
@@ -101,7 +103,9 @@
 									<div class="clearfix"> </div>
 								</div>
 								<div class="plus">
-									<a href="/product/single?productId=${item.id }" target="_blank"><img src="/frontstyle/images/plus.png" alt="" /></a>
+									<a href="/product/single?productId=${item.id }" target="_blank">
+										<img src="/frontstyle/images/plus.png" alt="" style="margin-top:-30px;" />
+									</a>
 								</div>
 							</div>
 						</div>

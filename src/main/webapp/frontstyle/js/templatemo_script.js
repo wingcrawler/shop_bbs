@@ -15,7 +15,7 @@ jQuery(function($) {
     
     $(document).ready( function() {
 
-        loadGoogleMap();
+        /*loadGoogleMap();*/
         
         // backstretch for background image
         var defaultImgSrc = $('img.main-img').attr('src');
