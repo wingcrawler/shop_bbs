@@ -57,115 +57,26 @@
 			</div>
 			<!--数据列表,通过AJAX请求回来-->
 			<div id="ajaxList">
-			<ul class="list">
-				<li v-for=" item in items"> <em v-if="item.thread_identify==2"
-					class="t">置顶</em> <a v-bind:href='"${contextPath}/bbs/thread?threadId="+item.id'
-					class="tx">{{item.threadTitle}}</a><em
-					v-if="item.thread_identify==1" class="jh">精</em> <br />
-					<div class="tR">
-					<span class="qq l">{{item.thread_view}}</span> 
-						<a class="sd"
-							href="../Home/1808520.html">{{item.username}}</a> &nbsp;&nbsp;
+				<ul class="list">
+					<li v-for=" item in items"><em v-if="item.thread_identify==2"
+						class="t">置顶</em> <a v-bind:href='"/bbs/thread?threadId="+item.id'
+						class="tx">{{item.threadTitle}}</a><em
+						v-if="item.thread_identify==1" class="jh">精</em> <br />
+						<div class="tR">
+							<span class="qq l">{{item.thread_view}}</span> <a class="sd"
+								href="#">{{item.username}}</a> &nbsp;&nbsp; <a href="#"></a>
+							&nbsp;|&nbsp; <span class="tm">{{item.timeAgo}}</span>
 
+						</div></li>
+					<li v-if="loaded==false">
+						<div>正在加载数据......</div>
+					</li>
+					<li v-if="loaded==true && items.length==0">
+						<div colspan="3" class="text-center">暂无数据</div>
+					</li>
 
-							<a href="../Home/1686708.html"></a> &nbsp;|&nbsp; <span
-							class="tm">{{item.timeAgo}}</span>
-							
-					</div></li>
-				<li v-if="loaded==false">
-					<div>正在加载数据......</div>
-				</li>
-				<li v-if="loaded==true && items.length==0">
-					<div colspan="3" class="text-center">暂无数据</div>
-				</li>
-
-				<li><em class="t">置顶</em> <a href="zhengwen.html" class="tx">[水泽]新人孩子们不要顾着排名,和我一起了解下家史可好</a>
-
-
-
-					<br />
-					<div class="tR">
-						<span class="qq l">406</span> <a class="sd"
-							href="../Home/1808520.html">水泽</a> &nbsp;|&nbsp; <span class="tm">
-
-
-							<a href="../Home/1686708.html">高端大气上档次</a> &nbsp;&nbsp;1小时前
-						</span>
-					</div></li>
-
-				<li><em class="t">置顶</em> <a href="zhengwen.html" class="tx">【圈务】12月申精&amp;举报贴</a>
-
-
-
-					<br />
-					<div class="tR">
-						<span class="qq l">25</span> <a class="sd"
-							href="../Home/1806745.html">小编燕子</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/2372933.html">smile、夏弥&deg;</a>
-							&nbsp;&nbsp;2小时前
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">十二星座那些事.......</a> <br />
-					<div class="tR">
-						<span class="qq l">4</span> <a class="sd"
-							href="../Home/755355.html">95912180</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/755355.html">95912180</a>
-							&nbsp;&nbsp;刚刚
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">来测测你的动漫形象~~0 0</a> <br />
-					<div class="tR">
-						<span class="qq l">14</span> <a class="sd"
-							href="../Home/29429949.html">迷路、</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/29429949.html">迷路、</a>
-							&nbsp;&nbsp;刚刚
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">【莫子】二次元</a> <br />
-					<div class="tR">
-						<span class="qq l">24</span> <a class="sd"
-							href="../Home/255222.html">嗲妹</a> &nbsp;|&nbsp; <span class="tm">
-
-
-							<a href="../Home/1692542.html">☪我是阿起</a> &nbsp;&nbsp;刚刚
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">趣味测试：手指测试你心中最要的人？</a> <br />
-					<div class="tR">
-						<span class="qq l">83</span> <a class="sd"
-							href="../Home/3040110.html">小编町子</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/8294252.html">229132183</a>
-							&nbsp;&nbsp;刚刚
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">【月弦】你认为你的星座是最顶尖的吗？一戳见分晓。</a>
-
-
-					<em class="jh">精</em> <br />
-					<div class="tR">
-						<span class="qq l">481</span> <a class="sd"
-							href="../Home/1682135.html">Baek Hyun</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/2377431.html">初々『柔』</a>
-							&nbsp;&nbsp;5分钟前
-						</span>
-					</div></li>
-
-				<li><a href="zhengwen.html" class="tx">十二星座专属的物品</a> <br />
-					<div class="tR">
-						<span class="qq l">298</span> <a class="sd"
-							href="../Home/14320118.html">习惯社、冰蓝</a> &nbsp;|&nbsp; <span
-							class="tm"> <a href="../Home/6168949.html">113227002</a>
-							&nbsp;&nbsp;6分钟前
-						</span>
-					</div></li>
-
-			</ul>
-</div>
+				</ul>
+			</div>
 
 		</div>
 
@@ -191,8 +102,7 @@
 										value="${entity.threadTitle}">
 								</div>
 								<div class="col-sm-3">
-									${t.t_select }${t.t_lang }
-									 <select class="form-control select"
+									${t.t_select }${t.t_lang } <select class="form-control select"
 										id="threadType" name="threadType">
 										<option value="1">${t.t_zh}</option>
 										<option value="0">${t.t_en}</option>
@@ -208,8 +118,8 @@
 											</c:forEach>
 										</c:if>
 										<c:if test="${empty section.list }">
-											
-												<option value="${sectionindex.id }">${sectionindex.sectionTitle }</option>
+
+											<option value="${sectionindex.id }">${sectionindex.sectionTitle }</option>
 
 										</c:if>
 
@@ -284,9 +194,9 @@
 			<!-- 内容区结束 -->
 		</c:if>
 		<c:if test="${!isLogin }">
-请登录
+			<div>请登录</div>
 
-</c:if>
+		</c:if>
 		<br>
 		<div class="page-toolbar">
 			<div class="ajax-page">
@@ -320,14 +230,16 @@
 				$('#main-menu li.li').eq(6).addClass('active').addClass(
 						'opened');
 				$('#main-menu li.li').eq(6).find('ul li').eq(0).addClass(
-						'active');						
+						'active');
 
-				$('#submit').click(
-						function() {
-							var parm = $.fn.getFormJson('.form');
-							$.fn.doSave(parm, '/bbs/thread/doSave',
-									'/bbs/sectionindex?sectionId=${sectionindex.id }');
-						});
+				$('#submit')
+						.click(
+								function() {
+									var parm = $.fn.getFormJson('.form');
+									$.fn
+											.doSave(parm, '/bbs/thread/doSave',
+													'/bbs/sectionindex?sectionId=${sectionindex.id }');
+								});
 			});
 		</script>
 
@@ -338,7 +250,7 @@
 		<!-- 新增的圈子和精彩end -->
 		<!-- footer --><jsp:include page="include/footer.jsp"></jsp:include>
 		<!-- //footer -->
-		
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				var playTableVue = new Vue({
@@ -349,7 +261,7 @@
 					}
 				});
 				$(function() {
-					$.getJSON("thread/getSectionList", {
+					$.getJSON("/thread/getSectionList", {
 						sectionId : '${sectionindex.id }',
 						pageNo : '1',
 					}, function(json) {
