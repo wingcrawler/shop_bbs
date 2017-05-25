@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="${t.lang}">
 <head>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="include/common.jsp"%>
 <jsp:include page="include/meta.jsp"></jsp:include>
 </head>
@@ -15,8 +16,9 @@
 		<div class="container">
 			<!--圈子推荐-->
 			<div id="tj_t" class="h2">
-				<span class="ico ico_qztj txt">圈子推荐</span> <a href="${contextPath}/liebiao.html"
-					class="more">更多圈子&gt;</a> <br class="c" />
+				<span class="ico ico_qztj txt">圈子推荐</span> <a
+					href="${contextPath}/liebiao.html" class="more">更多圈子&gt;</a> <br
+					class="c" />
 			</div>
 			<ul id="tj_m">
 
@@ -38,8 +40,8 @@
 					<!--10条数据-->
 					<ul class="list">
 						<li v-for="item in items"><em v-if="item.thread_identify==2"
-							class="t">置顶</em> <a v-bind:href='"/bbs/thread?threadId="+item.id'
-							class="tx">{{item.threadTitle}}</a><em
+							class="t">置顶</em> <a
+							v-bind:href='"/bbs/thread?threadId="+item.id' class="tx">{{item.threadTitle}}</a><em
 							v-if="item.thread_identify==1" class="jh">精</em> <br />
 							<div class="tR">
 								<a href="#" class="qq l">{{item.section_title}}</a> <span
@@ -64,8 +66,12 @@
 	</div>
 	<!-- 新增的圈子和精彩end -->
 	<!-- footer -->
-	<jsp:include page="include/footer.jsp"></jsp:include>
-
+	<c:if test="${t.lang =='en' }">
+		<jsp:include page="include/footer.jsp"></jsp:include>
+	</c:if>
+	<c:if test="${t.lang =='zh' }">
+		<jsp:include page="include/zhfooter.jsp"></jsp:include>
+	</c:if>
 	<!-- //footer -->
 	<script type="text/javascript">
 		var playTableVue = new Vue({
@@ -94,7 +100,7 @@
 				type : 'get',
 				dataType : 'json',
 				success : function(result) {
-					if (result.page.totalRecords>0) {
+					if (result.page.totalRecords > 0) {
 						Totla = result.page.totalRecords;
 						for (var i = 0; i < result.list.length; i++) {
 							section.push(result.list[i].id)
@@ -115,7 +121,7 @@
 				} else {
 					num = 1
 				}
-				
+
 				$(function() {
 					$.getJSON("/bbs/threads", {
 						sectionId : sectionId
@@ -127,7 +133,7 @@
 					});
 				})
 			})
-			
+
 		});
 	</script>
 	<script>
