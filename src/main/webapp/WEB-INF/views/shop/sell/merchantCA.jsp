@@ -71,8 +71,8 @@
 							</div>
 							<div class="work_time">
 								<span class="lab">${t.t_work_time }: </span>
-								<input type="text" class="margin_left_minus" name="workFrom" vlaue="${shop.workFrom }"> - 
-								<input type="text" name="workTo" vlaue="${shop.workTo }">
+								<input type="text" class="margin_left_minus" name="workFrom" value="${shop.workFrom }"> - 
+								<input type="text" name="workTo" value="${shop.workTo }">
 								<span class="gray">7*24h</span>
 							</div>
 							<div class="service">

@@ -13,7 +13,7 @@
         Zoom Template 
         http://www.templatemo.com/tm-414-zoom
         -->
-<title>Zoom HTML5 Template</title>
+<title>${t.t_sqe }</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -29,7 +29,7 @@
 		<div
 			class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center templatemo-logo margin-top-20">
 			<h1 class="templatemo-site-title">
-				<a href="#">赛奇尔</a>
+				<a href="#">${t.t_sqe }</a>
 			</h1>
 			<h3 class="templatemo-site-title">
 				<a href="#"><span class="blue"></span><span class="green"></span></a>
@@ -40,7 +40,8 @@
 			<div class="image-container">
 				<img src="/frontstyle/images/zoom-bg-1.jpg" id="menu-img"
 					class="main-img inactive"
-					alt="Zoom HTML5 Template by templatemo.com"> <img
+					alt="Zoom HTML5 Template by templatemo.com"> 
+					<!-- <img
 					src="/frontstyle/images/zoom-bg-2.jpg" id="products-img"
 					class="inactive" alt="Product"> <img
 					src="/frontstyle/images/zoom-bg-3.jpg" id="services-img"
@@ -52,7 +53,7 @@
 					src="/frontstyle/images/zoom-bg-6.jpg" id="company-intro-img"
 					class="main-img inactive" alt="Company Intro"> <img
 					src="/frontstyle/images/zoom-bg-7.jpg" id="testimonials-img"
-					class="main-img inactive" alt="Testimonials">
+					class="main-img inactive" alt="Testimonials"> -->
 			</div>
 		</div>
 
@@ -67,7 +68,7 @@
 								<a href="/shopIndex" class="change-section">
 									<div class="black-bg btn-menu">
 										<i class="fa fa-cubes"></i>
-										<h2>商城</h2>
+										<h2>${t.t_mall }</h2>
 									</div>
 								</a>
 							</div>
@@ -75,7 +76,7 @@
 								<a href="#contact" class="change-section">
 									<div class="black-bg btn-menu">
 										<i class="fa fa-envelope"></i>
-										<h2>咨询</h2>
+										<h2>${t.t_information }</h2>
 									</div>
 								</a>
 							</div>
@@ -83,7 +84,7 @@
 								<a href="/bbs/index" class="change-section">
 									<div class="black-bg btn-menu">
 										<i class="fa fa-users"></i>
-										<h2>论坛</h2>
+										<h2>${t.t_bbs }</h2>
 									</div>
 								</a>
 							</div>
@@ -105,7 +106,7 @@
 
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer">
-				<p class="footer-text">XXXX版权所有</p>
+				<p class="footer-text">${t.t_sqe }版权所有</p>
 			</div>
 			<!-- /.footer -->
 		</div>

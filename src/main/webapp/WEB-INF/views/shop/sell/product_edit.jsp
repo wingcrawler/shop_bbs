@@ -119,7 +119,7 @@
 												</label>
 												<div class="m-checkboxgroup">
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" name="productTag" value="${t.t_product_tag_new }" id="checkbox1" checked>
+														<input type="checkbox" class="u-ipt-checkbox" name="productTag" value="t_product_tag_new" id="checkbox1" checked>
 														<label for="checkbox1">
 															<div class="i-checkbox z-checked">
 																<i></i>
@@ -128,7 +128,7 @@
 														</label>
 													</div>
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" value="${t.t_product_tag_hot }" name="productTag" id="checkbox2">
+														<input type="checkbox" class="u-ipt-checkbox" value="t_product_tag_hot" name="productTag" id="checkbox2">
 														<label for="checkbox2">
 															<div class="i-checkbox">
 																<i></i>
@@ -137,7 +137,7 @@
 														</label>
 													</div>
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" value="${t.t_product_tag_half }" name="productTag" id="checkbox3">
+														<input type="checkbox" class="u-ipt-checkbox" value="t.t_product_tag_half" name="productTag" id="checkbox3">
 														<label for="checkbox3">
 															<div class="i-checkbox">
 																<i></i>

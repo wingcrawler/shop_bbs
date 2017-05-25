@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.ProductMapper;
 import com.sqe.shop.model.Product;
+import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.RegularUtil;
 
@@ -22,6 +23,8 @@ public class ProductService extends AdapterService implements BaseService {
 	
 	@Autowired
     private ProductMapper productMapper;
+	@Autowired
+    private CachedService cachedService;
     
     public int insert(Product product) {
 		return productMapper.insert(product);
@@ -73,9 +76,24 @@ public class ProductService extends AdapterService implements BaseService {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
 			list = productMapper.getMapListByParm(parm);
+			String lang = cachedService.getLang();
 			for(Map<String, Object> map : list){
 				String statusStr = map.get("productStatus")==null?"0":map.get("productStatus").toString();
-				map.put("productStatusStr", this.getProductStatus(Integer.valueOf(statusStr)));	
+				map.put("productStatusStr", this.getProductStatus(Integer.valueOf(statusStr)));
+				
+				String productTag = map.get("productTag")==null?"":map.get("productTag").toString();
+				if(StringUtils.isNotBlank(productTag)){
+					map.put("productTag", cachedService.getText(productTag));
+				}
+				
+				String productNameCh = map.get("productNameCh")==null?"":map.get("productNameCh").toString();
+				String productName = map.get("productName")==null?"":map.get("productName").toString();
+				String productTypeNameCh = map.get("productTypeNameCh")==null?"":map.get("productTypeNameCh").toString();
+				String productTypeName = map.get("productTypeName")==null?"":map.get("productTypeName").toString();
+				if(lang.equals("zh")){
+					map.put("productName", productNameCh);
+					map.put("productTypeName", productTypeNameCh);
+				}
 			}
 		}
 		pageUtil.setList(list);

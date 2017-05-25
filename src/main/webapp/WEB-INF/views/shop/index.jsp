@@ -45,7 +45,7 @@
 								<div class="banner-info">
 									<h2></h2>
 									<p>${item.description }</p>
-									<a href="${item.imageUrl}" target="_blank">SHOP BRASIL</a>
+									<a href="${item.imageUrl}" target="_blank">${t.t_forward }</a>
 								</div>
 							</div>
 						</div>
@@ -88,7 +88,9 @@
 					<div class="col-md-3 product-left-grid">	
 						<div class="product-grid">
 							<div class="product-grid-text">
-								<a href="/product/single?productId=${item.id }" target="_blank"><img src="${item.imagePath }" alt="" /></a>
+								<a href="/product/single?productId=${item.id }" target="_blank">
+									<img src="${item.imagePath }" alt="" style="height:200px;margin-top:-16px;" />
+								</a>
 								<div class="products-grid-info">
 									<h3>${item.productName }</h3>
 									<p>${item.productDesc }</p>
@@ -101,7 +103,9 @@
 									<div class="clearfix"> </div>
 								</div>
 								<div class="plus">
-									<a href="/product/single?productId=${item.id }" target="_blank"><img src="/frontstyle/images/plus.png" alt="" /></a>
+									<a href="/product/single?productId=${item.id }" target="_blank">
+										<img src="/frontstyle/images/plus.png" alt="" style="margin-top:-30px;" />
+									</a>
 								</div>
 							</div>
 						</div>
@@ -115,8 +119,8 @@
 	<!-- // products -->
 	
 	<!-- products-bottom -->
-	<div class="products-bottom">
-		<!-- container -->
+	<!-- <div class="products-bottom">
+		container
 		<div class="container">
 			<div class="col-md-3 products-bottom-left">
 				<h3>Biruang <span>Free PSD</span></h3>
@@ -161,13 +165,13 @@
 			</div>
 			<div class="clearfix"> </div>
 		</div>
-		<!-- //container-->
-	</div>
+		//container
+	</div> -->
 	<!-- //products-bottom -->
 	
 	<!-- sign-up -->
-	<div class="sign-up">
-		<!-- container -->
+	<!--<div class="sign-up">
+		
 		<div class="container">
 			<div class="sign-up-left">
 				<p><span>Sign up</span> for exclusive sales and product news</p>
@@ -180,8 +184,8 @@
 			</div>
 			<div class="clearfix"> </div>
 		</div>
-		<!-- //container -->
-	</div>
+		
+	</div> -->
 	<!-- //sign-up -->
 	
 	<!-- footer -->
