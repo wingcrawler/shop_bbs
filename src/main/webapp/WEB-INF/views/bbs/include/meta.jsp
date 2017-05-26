@@ -39,8 +39,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="/backendstyle/js/xenon-api.js"></script>
 <script src="/backendstyle/js/xenon-toggles.js"></script>
 <script src="/backendstyle/js/xenon-widgets.js"></script>
-<!-- <script src="/backendstyle/js/devexpress-web-14.1/js/globalize.min.js"></script>
-	<script src="/backendstyle/js/devexpress-web-14.1/js/dx.chartjs.js"></script> -->
 <script src="/backendstyle/js/toastr/toastr.min.js"></script>
 <script src="/backendstyle/js/xenon-custom.js"></script>
 
@@ -51,9 +49,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="/backendstyle/js/jquery.datatable.js"></script>
 <script src="/backendstyle/js/jquery.select.js"></script>
 <!--/js-->
-<script src="/bbs/js/wysihtml5-0.3.0.js"></script>
-<script src="/bbs/js/jquery-1.7.2.min.js"></script>
-<script src="/bbs/js/bootstrap-wysihtml5.js"></script>
 <script src="/bbs/js/easyResponsiveTabs.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {

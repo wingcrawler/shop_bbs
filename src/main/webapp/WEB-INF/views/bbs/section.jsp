@@ -197,29 +197,7 @@
 			<div>请登录后发帖</div>
 
 		</c:if>
-		<br>
-		<div class="page-toolbar">
-			<div class="ajax-page">
-				<ul class="page-pagination">
-					<li class="first-page"><span>首页</span></li>
-					<li class="previous-page"><span>上一页</span></li>
-					<li class="active"><span>1</span></li>
-					<li><span>2</span></li>
-					<li><span>3</span></li>
-					<li><span>4</span></li>
-					<li><span>5</span></li>
-					<li><span>6</span></li>
-					<li><span>7</span></li>
-					<li><span>8</span></li>
-					<li><span>9</span></li>
-					<li><span>10</span></li>
-					<li class="omit"><span><i>...</i>15</span></li>
-					<li class="skip"><input type="text" value="1">/ <span>15</span>页
-					</li>
-					<li class="next-page"><span>下一页</span></li>
-				</ul>
-			</div>
-		</div>
+		<div id="page" style="text-align: center;"></div>
 		<!--END 数据列表-->
 
 
@@ -237,8 +215,8 @@
 								function() {
 									var parm = $.fn.getFormJson('.form');
 									$.fn
-											.doSave(parm, 'bbs/thread/doSave',
-													'bbs/sectionindex?sectionId=${sectionindex.id }');
+											.doSave(parm, '/bbs/thread/doSave',
+													'/bbs/sectionindex?sectionId=${sectionindex.id }');
 								});
 			});
 		</script>
@@ -252,14 +230,59 @@
 		<!-- //footer -->
 
 		<script type="text/javascript">
-			$(document).ready(function() {
-				var playTableVue = new Vue({
-					el : "#ajaxList",
-					data : {
-						items : [],
-						loaded : false
+		var playTableVue = new Vue({
+			el : "#ajaxList",
+			data : {
+				items : [],
+				loaded : false
+			}
+		});
+
+		function  responseHandle(json){		
+			if (!json)
+				json = [];
+			playTableVue.items = json.list;
+			playTableVue.loaded = true;
+		}
+		
+		function demo(curr) {
+			$.getJSON('thread/getSectionList', {
+				sectionId : '${sectionindex.id }',
+				pageNo : curr || 1,
+				pageSize : 2, //向服务端传的参数
+			}, function(json) {
+				//显示分页
+				laypage({
+					cont : 'page', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>  
+					curr : 1, //初始化当前页  
+					skin : '#429842',//皮肤颜色  
+					groups : 5, //连续显示分页数  
+					skip : true, //是否开启跳页  
+					first : '首页', //若不显示，设置false即可  
+					last : '尾页', //若不显示，设置false即可  
+					prev: '<', //若不显示，设置false即可  
+		            next: '>', //若不显示，设置false即可 
+					pages : json.page.pageCount, //通过后台拿到的总页数
+					jump : function(e) { //触发分页后的回调  
+						$.getJSON('thread/getSectionList', {
+							sectionId : '${sectionindex.id }',
+							pageNo : e.curr,//当前页  
+							pageSize : 2,
+						}, function(json) {
+							e.pages = e.last = json.page.pageCount; //重新获取总页数，一般不用写  
+							console.log(e.pages);
+							//渲染  
+							responseHandle(json);
+							//var view = document.getElementById('page1'); //你也可以直接使用jquery  
+							//解析数据  
+							//var resultHtml = PackagData(json);
+							//view.innerHTML = resultHtml;
+						});
 					}
 				});
+			});
+		};
+			$(document).ready(function() {
 				$(function() {
 					$.getJSON("thread/getSectionList", {
 						sectionId : '${sectionindex.id }',
@@ -271,7 +294,7 @@
 						playTableVue.loaded = true;
 					});
 				});
-
+				demo();
 			});
 		</script>
 </body>
