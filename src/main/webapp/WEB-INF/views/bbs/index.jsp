@@ -16,8 +16,8 @@
 		<div class="container">
 			<!--圈子推荐-->
 			<div id="tj_t" class="h2">
-				<span class="ico ico_qztj txt">圈子推荐</span> <a
-					href="${contextPath}/liebiao.html" class="more">更多圈子&gt;</a> <br
+				<span class="ico ico_qztj txt">${t.t_bbs_circle }</span> <a
+					href="${contextPath}/liebiao.html" class="more">${t.t_bbs_circle }&gt;</a> <br
 					class="c" />
 			</div>
 			<ul id="tj_m">
@@ -33,16 +33,16 @@
 			<!--END 圈子推荐-->
 			<!--精彩推荐-->
 			<div class="h2">
-				<span class="ico ico_jctj txt">精彩推荐</span> <br class="c" />
+				<span class="ico ico_jctj txt">${t.t_bbs_Wonderful_recommendation }</span> <br class="c" />
 			</div>
 			<div id="jc_l">
 				<div id="ajaxdata">
 					<!--10条数据-->
 					<ul class="list">
 						<li v-for="item in items"><em v-if="item.thread_identify==2"
-							class="t">置顶</em> <a
+							class="t">${t.t_bbs_top }</em> <a
 							v-bind:href='"/bbs/thread?threadId="+item.id' class="tx">{{item.threadTitle}}</a><em
-							v-if="item.thread_identify==1" class="jh">精</em> <br />
+							v-if="item.thread_identify==1" class="jh">${t.t_bbs_recommendation }</em> <br />
 							<div class="tR">
 								<a href="#" class="qq l">{{item.section_title}}</a> <span
 									class="rp">{{item.thread_view}}</span> &nbsp;|&nbsp; <span
@@ -58,7 +58,7 @@
 				</div>
 				<!--相关按钮-->
 				<div class="info hyh">
-					<a button v-on:click="change" id="getchange" class="changeb wb">换一换</a>
+					<a button v-on:click="change" id="getchange" class="changeb wb">${t.t_bbs_change }</a>
 				</div>
 			</div>
 			<!--END 精彩推荐-->

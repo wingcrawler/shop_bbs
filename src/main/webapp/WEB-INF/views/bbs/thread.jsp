@@ -47,14 +47,14 @@
 		<p>${thread.threadContext }</p>
 		<!--1楼的顶-->
 		<div class="dwp">
-			<a href="#ajax#" class="dbt bb"><span class="num">0</span>顶</a>
+			<a href="#ajax#" class="dbt bb"><span class="num">0</span>${t.t_bbs_up }</a>
 		</div>
 
 		<span class="msg">1楼<fmt:formatDate
 				value="${thread.threadTime }" pattern="yyyy-MM-dd HH:mm" />
 			</p></span> <br class="c" />
 		<div id="ajaxList">
-			<!--楼层-->
+			<!--楼层-->t
 			<div v-for="item in items" class="tItem cnt"
 				quotedCommentId="45470737" id="45470737">
 				<a href="#" class="name">{{item.name}}</a> <em class="isLz"></em>
@@ -63,7 +63,7 @@
 					<p v-html="item.context"></p>
 				</div>
 				<!-- <a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a> -->
-				<span class="msg">{{item.floor}}楼{{item.time}}</span> <br class="c" />
+				<span class="msg">{{item.floor}}${t.t_bbs_floor }{{item.time}}</span> <br class="c" />
 				<!--楼中楼内容-->
 				<div class="lzl hid">
 					<em class="ico"></em>
@@ -193,7 +193,7 @@
 		<!-- 内容区结束 -->
 	</c:if>
 	<c:if test="${!isLogin }">
-请登录
+${t.t_bbs_login_re }
 
 </c:if>
 	<br>

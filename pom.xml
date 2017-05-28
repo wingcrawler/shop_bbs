@@ -1,44 +1,44 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
- 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.sqe</groupId>
-  <artifactId>shopping</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>商城</name>
-  <description>基于Spring框架实现</description>
-  <url>http://maven.apache.org</url>
-  
-  <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.1.RELEASE</version>
-    </parent>
-    
-    <properties>
-        <mysql.version>5.1.38</mysql.version>
-        <druid.version>1.0.17</druid.version>
-        <tomcat.version>7.0.59</tomcat.version>
-        <guava.version>19.0</guava.version>
-        <!-- <spring.version>3.1.2.RELEASE</spring.version> -->
-        <spring.version>4.3.6.RELEASE</spring.version>
-    </properties>
- 
-  <dependencies>
-  		<dependency>
-      		<groupId>junit</groupId>
-      		<artifactId>junit</artifactId>
-      		<version>3.8.1</version>
-     		<scope>test</scope>
-  		 </dependency>
-  		 <dependency>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sqe</groupId>
+	<artifactId>shopping</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>商城</name>
+	<description>基于Spring框架实现</description>
+	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.1.RELEASE</version>
+	</parent>
+
+	<properties>
+		<mysql.version>5.1.38</mysql.version>
+		<druid.version>1.0.17</druid.version>
+		<tomcat.version>7.0.59</tomcat.version>
+		<guava.version>19.0</guava.version>
+		<!-- <spring.version>3.1.2.RELEASE</spring.version> -->
+		<spring.version>4.3.6.RELEASE</spring.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
-		 <!-- start spring -->
+
+		<!-- start spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -50,7 +50,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 			<scope>compile</scope>
-		</dependency> 
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
@@ -63,12 +63,8 @@
 			<version>${spring.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-asm</artifactId>
-			<version>${spring.version}</version>
-			<scope>compile</scope>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-asm</artifactId> 
+			<version>${spring.version}</version> <scope>compile</scope> </dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
@@ -97,31 +93,27 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<!-- end spring -->
-   		
-   		<!-- start log4j -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.9</version>
-		</dependency>
+
+		<!-- start log4j -->
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.2</version>
+			<version>1.7.25</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>jcl-over-slf4j</artifactId>
-		    <version>1.7.12</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.12</version>
 		</dependency>
 		<!-- end log4j -->
-   		
-   		<!-- mysql -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
+
+		<!-- mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
 
 		<!-- common start -->
 		<dependency>
@@ -151,86 +143,83 @@
 		</dependency>
 		<!-- common end -->
 
-        <!-- mybatis -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.3.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>1.2.3</version>
-            <scope>compile</scope>
-        </dependency>
-        
-        <!-- c3p0 -->
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.3.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.3</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- c3p0 -->
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
 		</dependency>
-		
+
 		<!-- json -->
 		<dependency>
-		    <groupId>org.json</groupId>
-		    <artifactId>json</artifactId>
-		    <version>20160810</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.10</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.codehaus.jackson</groupId> <artifactId>jackson-mapper-asl</artifactId> 
+			<version>1.9.10</version> </dependency> -->
 		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.7.4</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.7.4</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-core</artifactId>
-		    <version>2.7.4</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.7.4</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-annotations</artifactId>
-		    <version>2.7.4</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.7.4</version>
 		</dependency>
-		
+
 		<!-- ueditor -->
 		<dependency>
-		    <groupId>cn.songxinqiang</groupId>
-		    <artifactId>com.baidu.ueditor</artifactId>
-		    <version>1.1.2-offical</version>
+			<groupId>cn.songxinqiang</groupId>
+			<artifactId>com.baidu.ueditor</artifactId>
+			<version>1.1.2-offical</version>
 		</dependency>
-		
+
 		<!-- poi for excel -->
 		<dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi</artifactId>
-		    <version>3.15</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.15</version>
 		</dependency>
-		
-		<!--Apache Shiro所需的jar包-->      
-	    <dependency>      
-	      <groupId>org.apache.shiro</groupId>      
-	      <artifactId>shiro-core</artifactId>      
-	      <version>1.2.2</version>      
-	    </dependency>      
-	    <dependency>      
-	      <groupId>org.apache.shiro</groupId>      
-	      <artifactId>shiro-web</artifactId>      
-	      <version>1.2.2</version>      
-	    </dependency>      
-	    <dependency>      
-	      <groupId>org.apache.shiro</groupId>      
-	      <artifactId>shiro-spring</artifactId>      
-	      <version>1.2.2</version>      
-	    </dependency>
-	    
-	    <!-- servlet -->
+
+		<!--Apache Shiro所需的jar包 -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+		<!-- servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -242,7 +231,7 @@
 			<version>2.5</version>
 		</dependency>
 		<!-- end servlet -->
-		
+
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
@@ -268,38 +257,26 @@
 			<artifactId>cglib</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-  </dependencies>
- 
-  <build>
-    <finalName>shopping</finalName>
-    <plugins>
-    	<plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <configuration>
-				<mainClass>com.sqe.shop.application.Application</mainClass>
-				<compilerArguments>
-	                <extdirs>${project.basedir}/lib</extdirs>
-	            </compilerArguments>
-			</configuration>
-        </plugin>
-    </plugins>
-    <!-- <resources>
-            <resource>
-                <directory>src/main/webapp</directory>
-                <targetPath>BOOT-INF/resources</targetPath>
-                <includes>
-                    <include>**/**</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/**</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-    </resources> -->
-  </build>
-  
+	</dependencies>
+
+	<build>
+		<finalName>shopping</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.sqe.shop.application.Application</mainClass>
+					<compilerArguments>
+						<extdirs>${project.basedir}/lib</extdirs>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+		</plugins>
+		<!-- <resources> <resource> <directory>src/main/webapp</directory> <targetPath>BOOT-INF/resources</targetPath> 
+			<includes> <include>**/**</include> </includes> </resource> <resource> <directory>src/main/resources</directory> 
+			<includes> <include>**/**</include> </includes> <filtering>false</filtering> 
+			</resource> </resources> -->
+	</build>
+
 </project>

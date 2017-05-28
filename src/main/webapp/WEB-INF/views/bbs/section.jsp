@@ -59,9 +59,9 @@
 			<div id="ajaxList">
 				<ul class="list">
 					<li v-for=" item in items"><em v-if="item.thread_identify==2"
-						class="t">置顶</em> <a v-bind:href='"/bbs/thread?threadId="+item.id'
+						class="t">${t.t_bbs_top }</em> <a v-bind:href='"/bbs/thread?threadId="+item.id'
 						class="tx">{{item.threadTitle}}</a><em
-						v-if="item.thread_identify==1" class="jh">精</em> <br />
+						v-if="item.thread_identify==1" class="jh">${t.t_bbs_recommendation }</em> <br />
 						<div class="tR">
 							<span class="qq l">{{item.thread_view}}</span> <a class="sd"
 								href="#">{{item.username}}</a> &nbsp;&nbsp; <a href="#"></a>
