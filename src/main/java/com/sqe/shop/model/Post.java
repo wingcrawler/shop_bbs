@@ -13,6 +13,7 @@ public class Post implements Serializable {
 	private Long replyToUserId;
 	private Integer postStatus;
 	private Date postDate;
+	private Long postId;
 	private Long id;
 	private Long floor;
 	private Long userId;
@@ -52,6 +53,12 @@ public class Post implements Serializable {
 	}
 	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
+	}
+	public Long getPostId() {
+		return postId;
+	}
+	public void setPostId(Long postId) {
+		this.postId = postId;
 	}
 	public Long getId() {
 		return id;

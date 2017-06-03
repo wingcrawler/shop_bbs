@@ -9,6 +9,7 @@
 	<id property="replyToUserId" column="reply_to_user_id" />
 	<id property="postStatus" column="post_status" />
 	<id property="postDate" column="post_date" />
+	<id property="postId" column="post_id" />
 	<id property="id" column="id" />
 	<id property="floor" column="floor" />
 	<id property="userId" column="user_id" />
@@ -19,9 +20,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into post
-	(reply_to_floor,thread_id,post_context,reply_to_user_id,post_status,post_date,floor,user_id)
+	(reply_to_floor,thread_id,post_context,reply_to_user_id,post_status,post_date,post_id,floor,user_id)
 	values
-	(#{replyToFloor},#{threadId},#{postContext},#{replyToUserId},#{postStatus},#{postDate},#{floor},#{userId})
+	(#{replyToFloor},#{threadId},#{postContext},#{replyToUserId},#{postStatus},#{postDate},#{postId},#{floor},#{userId})
 </insert>
 
 <update id="update">
@@ -44,6 +45,9 @@
 	    	</if>
 			<if test="postDate != null">  
 	        	post_date=#{postDate},
+	    	</if>
+			<if test="postId != null">  
+	        	post_id=#{postId},
 	    	</if>
 			<if test="floor != null">  
 	        	floor=#{floor},
@@ -89,6 +93,9 @@
 			<if test="parm.userId != null">
 		     	and user_id = #{parm.userId}
 		   	</if>
+		   	<if test="parm.postId != null">
+		     	and post_id = #{parm.postId}
+		   	</if>
 </select>
 
 <select id="getBeanListByParm" resultMap="PostBaseMapper">
@@ -116,6 +123,9 @@
 		   	</if>
 			<if test="parm.userId != null">
 		     	and user_id = #{parm.userId}
+		   	</if>
+		   	<if test="parm.postId != null">
+		     	and post_id = #{parm.postId}
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
@@ -174,6 +184,9 @@
 		   	</if>
 			<if test="parm.userId != null">
 		     	and p.user_id = #{parm.userId}
+		   	</if>
+		   	<if test="parm.postId != null">
+		     	and p.post_id = #{parm.postId}
 		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
