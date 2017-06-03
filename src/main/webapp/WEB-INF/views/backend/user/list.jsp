@@ -51,7 +51,7 @@
 			<div class="row">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">${t.t_list }</h3>
+						<h3 class="panel-title">${t.t_list } (${t.t_all}:${countAll}; ${t.t_buy}:${countBuyer}; ${t.t_sell}:${countSeller})</h3>
 						<div class="panel-options">
 							<button class="btn btn-purple btn-icon btn-icon-standalone btn-xs" style="margin-bottom:0;" id="export">
 								<i class="fa-download"></i>

@@ -95,11 +95,21 @@ public class UserService extends AdapterService implements BaseService {
 					e.printStackTrace();
 				}	
 			}
+			
 			if(StringUtils.isNotBlank(user.getUserPhone())){
 				parm.put("userPhone", user.getUserPhone());	
 			}
-			parm.put("orderby", "id desc" );
+			
+			if(user.getUserRole()!=null){
+				parm.put("userRole", user.getUserRole());
+			}
+			
+			if(user.getUserStatus()!=null){
+				parm.put("userStatus", user.getUserStatus());
+			}
+			
 		}
+		parm.put("orderby", "id desc" );
 		return parm;
 	}
 

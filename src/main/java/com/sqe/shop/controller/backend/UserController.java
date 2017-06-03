@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.UserService;
@@ -41,6 +42,20 @@ public class UserController extends BaseBackendController {
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("backend/user/list");
+		
+		User user = new User();
+		
+		user.setUserRole(Constants.ROLE_BUY);
+		int countBuyer = userService.countByParm(user);
+		model.addObject("countBuyer", countBuyer);
+		
+		user.setUserRole(Constants.ROLE_SELL);
+		int countSeller = userService.countByParm(user);
+		model.addObject("countSeller", countSeller);
+		
+		int countAll = countBuyer + countSeller;
+		model.addObject("countAll", countAll);
+		
 		return model;
 	}
 	
