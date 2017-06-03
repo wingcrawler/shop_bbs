@@ -82,6 +82,19 @@ public class PostService extends AdapterService implements BaseService {
 			}
 		}
 		pageUtil.setList(list);
+		
+		//查询是否有回复
+				List<Map<String, Object>> replyList = new ArrayList<Map<String,Object>>();
+				Map<String, Object> replyMap = new HashMap<String, Object>();
+				replyMap.put("orderby", "c.date asc");
+				parm.put("nullCommentId", false);
+				for(Map<String, Object> map : list){
+					replyMap.put("commentId", map.get("commentId"));
+					replyList = postMapper.getSubPostListByParm(replyMap);	
+					if(replyList!=null && !replyList.isEmpty() && replyList.get(0)!=null){
+						map.put("replyList", replyList);	
+					}
+				}
 		return pageUtil;
 	}
 	

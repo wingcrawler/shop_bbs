@@ -87,8 +87,13 @@ public class BBSPostController extends BaseBackendController{
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		PageUtil<Map<String, Object>> page = postService.getMapListByParm(post, pageNo, pageSize);
+        
+		
+		
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
+		
+		
 		return resMap;
 	}
 	
