@@ -44,7 +44,7 @@
 			
 			<!-- 评论列表区域 -->
 			<c:if test="${not empty commentPage.list }">
-				<div class="allpl">${t.t_all_comment}</div>			
+				<div class="allpl"><a name="commentArea">${t.t_all_comment}</a></div>		
 			</c:if>
 			<ul>
 				<c:forEach var="item" items="${commentPage.list }" varStatus="itemStatus">
@@ -105,6 +105,9 @@
 </style>
 <script type="text/javascript">
 	$(function(){
+		
+		setTimeout("locationCommentArea();",400);
+		
 		//评论后的的回复鼠标放上去显示 移开隐藏
 		/* $('li.atl-con-bd .floor_data').hover(function(){
 			$(this).children('span').show();
@@ -121,6 +124,16 @@
 		}); */
 	});
 	
+	function locationCommentArea(){
+		//定位到评论区
+		var hash = window.location.hash; 
+		if(hash=="#commentArea"){
+			var t = $("a[name='commentArea']").offset().top;
+		    $(window).scrollTop(t);//滚动到锚点位置
+		}  
+		//window.location.hash = hash; 
+	}; 
+	
 	//显示评论表单
 	function showReplyForm(obj){
 		$('.news_reply').hide();
@@ -133,7 +146,7 @@
 	}
 	
 	function postComment(){
-		jQuery.common.saveObj("#commentForm","/news/saveComment",true,"");
+		jQuery.common.saveObj("#commentForm","/news/saveComment",true,"/news/detail?newsId="+${news.id}+"&#commentArea");
 	}
 	
 	function postReplyComment(obj){
