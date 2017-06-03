@@ -27,8 +27,8 @@
 								<div class="tR">
 									${item.dateStr}&nbsp;|&nbsp;
 									<span class="tm">
-										<a class="zan" href="###"> ${item.newsUp }</a>
-										<a class="mass" href="###"></a>
+										<a class="zan" href="###"> ${item.newsRead }</a>
+										<a class="mass" href="###"> </a>
 									</span>
 								</div>	
 							</c:if>
@@ -38,8 +38,8 @@
 								<div class="tR">
 									${item.dateStr}&nbsp;|&nbsp;
 									<span class="tm">dfsdfsrrfw
-										<a class="zan" href="###"> ${item.newsUp }</a>
-										<a class="mass" href="###"></a>
+										<a class="zan" href="###"> ${item.newsRead }</a>
+										<a class="mass" href="###"> </a>
 									</span>
 								</div>
 							</c:if>

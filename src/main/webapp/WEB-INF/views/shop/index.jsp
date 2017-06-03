@@ -69,6 +69,8 @@
 					</div>
 				</c:forEach>
 				<div class="clearfix"> </div>
+				<br>
+				<p><a href="/news/list" target="_blank">${t.t_view_more }</a></p>
 			</div>
 		</div>
 	</div>
@@ -92,7 +94,7 @@
 									<img src="${item.imagePath }" alt="" style="height:200px;margin-top:-16px;" />
 								</a>
 								<div class="products-grid-info">
-									<h3>${item.productName }</h3>
+									<h3><a href="/product/single?productId=${item.id }" target="_blank">${item.productName }</a></h3>
 									<p>${item.productDesc }</p>
 									<div class="price">
 										<p>¥ ${item.productPrice }</p>
@@ -112,6 +114,8 @@
 					</div>
 				</c:forEach>
 				<div class="clearfix"> </div>
+				<br>
+				<p><a href="/product/list" target="_blank">${t.t_view_more }</a></p>
 			</div>
 		</div>
 		<!-- //container -->

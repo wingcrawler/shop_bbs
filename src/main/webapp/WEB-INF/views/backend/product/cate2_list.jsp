@@ -27,13 +27,17 @@
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
 								<div class="col-sm-3">
-									${t.t_select_type }
+									${t.t_select_type_one_name }
 									<select class="form-control select" name="parentId" id="parentId">
 										<option value="-1">-- ${t.t_select } --</option>
 										<c:forEach items="${typeList}" var="item">
 										<option value="${item.id}">${item.typeNameCh}/${item.typeName}</option>
 										</c:forEach>
 									</select>
+								</div>
+								<div class="col-sm-3">
+									${t.t_input_type_two_name }
+									<input type="text" class="form-control input" name="typeName" value="">
 								</div>
 								<div class="col-sm-2">
 									<br>

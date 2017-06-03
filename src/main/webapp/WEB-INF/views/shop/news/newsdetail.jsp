@@ -19,7 +19,7 @@
 				<div class="tR">
 					<span class="qq">${news.createTimeStr}</span>
 					<span class="tm">
-						<a class="zan" href="###">${news.newsUp }</a>
+						<a class="zan" href="###"> ${news.newsReaded }</a>
 						<a class="mass" href="###"></a>
 					</span>
 				</div>
@@ -106,11 +106,11 @@
 <script type="text/javascript">
 	$(function(){
 		//评论后的的回复鼠标放上去显示 移开隐藏
-		$('li.atl-con-bd .floor_data').hover(function(){
+		/* $('li.atl-con-bd .floor_data').hover(function(){
 			$(this).children('span').show();
 		}, function(){
 			$(this).children('span').hide();
-		});
+		}); */
 		
 		
 		//点击回复显示输框
