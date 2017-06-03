@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.Topic;
@@ -125,4 +124,25 @@ public class BBSThreadController extends BaseFrontController {
 		return responseOK("op_success");
 	}
 
+	/**
+	 * 查询一级section分类下的thread
+	 * @param thread
+	 * @param sectionId
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/thread/getSectionOneThreadList", method = RequestMethod.GET)
+	public Map<String, Object> getSectionOneThreadList(Long sectionId,
+			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+		Map<String, Object> resMap = new HashMap<String, Object>();
+		PageUtil<Map<String, Object>> page = threadService.getSectionOneThreadList(pageNo, pageSize,sectionId);
+		resMap.put("list", page.getList());
+		resMap.put("page", page);	
+		return resMap;
+	}
+	
+	
 }

@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.PostMapper;
 import com.sqe.shop.mapper.ThreadMapper;
 import com.sqe.shop.mapper.TopicMapper;
@@ -294,6 +295,33 @@ public class ThreadService extends AdapterService implements BaseService {
 		}
 		pageUtil.setList(list);
 
+		return pageUtil;
+	}
+
+	public PageUtil<Map<String, Object>> getSectionOneThreadList(int pageNo, int pageSize, Long sectionId) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = new HashMap<String, Object>();
+		
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		parm.put("orderby", "t.id desc");
+		parm.put("sectionParentId", sectionId);
+		parm.put("threadStatus", Constants.THREAD_ON);
+		
+		int count = threadMapper.countByParm(parm);
+		pageUtil.setTotalRecords(count);
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		if(count>0){
+			list = threadMapper.getSectionOneThreadList(parm);
+			for(Map<String, Object> map: list){
+				// 时间转换
+				Date time = (Date) map.get("date");
+				map.put("time", DateUtil.dateToString(time, DateUtil.DATETIME_FORMATE_2));
+			}
+		}
+		pageUtil.setList(list);
+		
 		return pageUtil;
 	}
 

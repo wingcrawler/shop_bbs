@@ -233,7 +233,7 @@
 			and t.section_id = #{parm.sectionId}
 		</if>
 		<if test="parm.userId != null">
-			and user_id = #{parm.userId}
+			and t.user_id = #{parm.userId}
 		</if>
 		<if test="parm.orderby != null">
 			order by ${parm.orderby}
@@ -242,5 +242,52 @@
 			limit #{parm.start},#{parm.limit}
 		</if>
 	</select>
+
+<select id="getSectionOneThreadList" parameterType="HashMap" resultType="HashMap">
+	select 
+	s.section_title as sectionTitle,
+	s.section_parent_id as sectionParentId,
+	t.section_id as sectionId,
+	t.id as threadId,
+	t.thread_context as content,
+	t.thread_time as date,
+	t.user_id as userId,
+	u.username as username
+	
+	from section s
+	LEFT JOIN thread t on t.section_id=s.id
+	LEFT JOIN `user` u on u.id = t.user_id
+	
+	where 1=1 
+	<if test="parm.sectionParentId != null">
+		and s.section_parent_id = #{parm.sectionParentId}
+	</if>
+	<if test="parm.threadStatus != null">
+		and t.thread_status = #{parm.threadStatus}
+	</if>
+	<if test="parm.topicId != null">
+		and t.topic_id = #{parm.topicId}
+	</if>
+	<if test="parm.threadType != null">
+		and t.thread_type = #{parm.threadType}
+	</if>
+	<if test="parm.threadTitle != null">
+		and t.thread_title like "%"#{parm.threadTitle}"%"
+	</if>
+	<if test="parm.sectionId != null">
+		and t.section_id = #{parm.sectionId}
+	</if>
+	<if test="parm.userId != null">
+		and t.user_id = #{parm.userId}
+	</if>
+	
+	<if test="parm.orderby != null">
+		order by ${parm.orderby}
+	</if>
+	<if test="parm.start != null">
+		limit #{parm.start},#{parm.limit}
+	</if>
+</select>
+
 
 </mapper>
