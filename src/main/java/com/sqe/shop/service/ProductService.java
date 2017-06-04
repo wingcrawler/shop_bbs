@@ -83,7 +83,17 @@ public class ProductService extends AdapterService implements BaseService {
 				
 				String productTag = map.get("productTag")==null?"":map.get("productTag").toString();
 				if(StringUtils.isNotBlank(productTag)){
-					map.put("productTag", cachedService.getText(productTag));
+					String[] tags = productTag.split(",");
+					String tagStr = "";
+					if(tags!=null && tags.length>0){
+						for(String str : tags){
+							if(StringUtils.isBlank(str)){
+								continue;
+							}
+							tagStr += cachedService.getText(str) + " ";
+						}
+					}
+					map.put("productTag", tagStr);
 				}
 				
 				String productNameCh = map.get("productNameCh")==null?"":map.get("productNameCh").toString();
@@ -118,7 +128,7 @@ public class ProductService extends AdapterService implements BaseService {
 	private Map<String, Object> queryParm(Product product) {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(product!=null){
-			if(product.getProductStatus()!=null && product.getProductStatus()>=0){
+			if(product.getProductStatus()!=null && product.getProductStatus()>0){
 				parm.put("productStatus", product.getProductStatus());	
 			}
 			if(product.getProductTypeId()!=null && product.getProductTypeId()>=0){

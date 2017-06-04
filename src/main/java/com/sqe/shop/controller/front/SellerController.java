@@ -245,6 +245,7 @@ public class SellerController extends BaseFrontController {
 		if(shop==null){
 			return responseError(-1, "error_illegal");
 		}
+		
 		product.setShopId(shop.getId());
 		product.setProductStatus(Constants.PRODUCT_WAIT);
 		int count = productService.save(product);

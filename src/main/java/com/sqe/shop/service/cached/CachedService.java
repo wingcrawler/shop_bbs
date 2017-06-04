@@ -83,10 +83,15 @@ public class CachedService extends BaseCached {
     	return bundle;
 	}
 	public String getText(String key) {
-    	if(bundle==null){
-    		return Constants.UNKNOW_INFO;
-    	}
-    	return bundle.getString(key);
+		try {
+			if(bundle==null){
+	    		return Constants.UNKNOW_INFO;
+	    	}
+	    	return bundle.getString(key);	
+		} catch (Exception e) {
+			return "";
+		}
+    	
 	}
 	
 	/**
