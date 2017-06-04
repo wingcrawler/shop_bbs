@@ -61,7 +61,10 @@ jQuery.common = {
 					if(_isRefrush){
 						self.location.href=_jumpUrl;
 					} else {
-						alert(data.errorInfo);
+						debugger;
+						if(data.errorInfo!='' && data.errorInfo!=undefined){
+							alert(data.errorInfo);	
+						}
 					}
 				}
 			}

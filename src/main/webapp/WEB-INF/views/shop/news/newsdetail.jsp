@@ -19,7 +19,8 @@
 				<div class="tR">
 					<span class="qq">${news.createTimeStr}</span>
 					<span class="tm">
-						<a class="zan" href="###"> ${news.newsReaded }</a>
+						阅读:${news.newsReaded } &nbsp;|&nbsp;
+						<a class="zan" href="javascript:;" id="newsUp"> ${news.newsUp  }</a>
 						<a class="mass" href="###"></a>
 					</span>
 				</div>
@@ -105,7 +106,8 @@
 </style>
 <script type="text/javascript">
 	$(function(){
-		
+		var newsId = '${news.id}';
+		var isThumb=false;
 		setTimeout("locationCommentArea();",400);
 		
 		//评论后的的回复鼠标放上去显示 移开隐藏
@@ -122,6 +124,21 @@
 		}, function(){
 			$(this).parent('.floor_data').next('.news_reply').hide();
 		}); */
+		
+		//点赞
+		$('#newsUp').click(function(){
+			if(!isThumb){
+				var currentNewsUp = $(this).text();
+				currentNewsUp = parseInt(currentNewsUp) + 1;
+				$(this).text(currentNewsUp);
+				
+				var parm = {};
+				parm.newsId=newsId;
+				jQuery.common.updateObjByParm(parm,'/news/doNewsUp',false,null);	
+				
+				isThumb = true;
+			}
+		});
 	});
 	
 	function locationCommentArea(){

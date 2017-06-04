@@ -153,12 +153,14 @@ public class NewsService extends AdapterService implements BaseService {
 
 	public void updateThumb(Integer newsUpCount, Long newsId) {
 		News news = new News();
-		news.setNewsUp(news.getNewsUp()+1);
+		news.setId(newsId);
+		news.setNewsUp(newsUpCount+1);
 		this.update(news);
 		
 		UserThumb thumb = new UserThumb();
 		thumb.setNewsId(newsId);
 		thumb.setUserId(this.getCurrentUserId());
+		thumb.setCreateTime(new Date());
 		userThumbMapper.insert(thumb);
 	}
 

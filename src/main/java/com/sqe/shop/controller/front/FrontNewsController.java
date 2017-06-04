@@ -156,7 +156,7 @@ public class FrontNewsController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="thumb", method = RequestMethod.GET)
+	@RequestMapping(value="doNewsUp", method = RequestMethod.POST)
 	public Map<String, Object> thumb(Long newsId) {
 		News news = newsService.getById(newsId);
 		if(news==null){
@@ -164,7 +164,8 @@ public class FrontNewsController extends BaseFrontController {
 		}
 		//点赞
 		newsService.updateThumb(news.getNewsUp(), newsId);
-		return responseOK("success_thumb");
+		/*return responseOK("success_thumb");*/
+		return responseOK1("");
 	}
 	
 }

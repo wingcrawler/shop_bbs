@@ -27,8 +27,10 @@
 								<div class="tR">
 									${item.dateStr}&nbsp;|&nbsp;
 									<span class="tm">
-										<a class="zan" href="###"> ${item.newsRead }</a>
-										<a class="mass" href="###"> </a>
+										阅读:${item.newsRead } &nbsp;|&nbsp;
+										点赞:${item.newsUp }
+										<%-- <a class="zan" href="###"> ${item.newsRead }</a>
+										<a class="mass" href="###"> </a> --%>
 									</span>
 								</div>	
 							</c:if>
@@ -37,9 +39,11 @@
 								<p>${item.newsShotDesc}</p>
 								<div class="tR">
 									${item.dateStr}&nbsp;|&nbsp;
-									<span class="tm">dfsdfsrrfw
-										<a class="zan" href="###"> ${item.newsRead }</a>
-										<a class="mass" href="###"> </a>
+									<span class="tm">
+										阅读:${item.newsRead } &nbsp;|&nbsp;
+										点赞:${item.newsUp }
+										<%-- <a class="zan" href="###"> ${item.newsRead }</a>
+										<a class="mass" href="###"> </a> --%>
 									</span>
 								</div>
 							</c:if>
