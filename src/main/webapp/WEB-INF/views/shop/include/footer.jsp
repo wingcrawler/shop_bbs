@@ -6,17 +6,12 @@
 		<div class="container">
 			<div class="col-md-3 stores-grid">
 				<div class="stores">
-					<h3>Our Stores</h3>
+					<h3>Tell us what you think!</h3>
 					<ul>
-						<li>Feel free to visit our stores or contact us.</li>
-						<li>1401 South Grand Avenue</li>
-						<li>Los Angeles, CA 90015</li>
-						<li>(213) 748-2411</li>
-
 						<span>
-							<li class="drive">100 Fairview Drive</li>
-							<li>Franklin, VA 23851</li>
-							<li>(757) 569-6100</li>
+							<li class="drive">2300-666 Burrard St</li>
+							<li>Vancouver BC Canada</li>
+							<li>604-974-877</li>
 						</span>
 					</ul>
 				</div>
@@ -105,17 +100,12 @@
 		<div class="container">
 			<div class="col-md-3 stores-grid">
 				<div class="stores">
-					<h3>我们的商店</h3>
+					<h3>Tell us what you think!</h3>
 					<ul>
-						<li>随时访问我们的商店或与我们联系</li>
-						<li>南大街1401号</li>
-						<li>洛杉矶, CA 90015</li>
-						<li>(213) 748-2411</li>
-
 						<span>
-							<li class="drive">100 Fairview Drive</li>
-							<li>Franklin, VA 23851</li>
-							<li>(757) 569-6100</li>
+							<li class="drive">2300-666 Burrard St</li>
+							<li>Vancouver BC Canada</li>
+							<li>604-974-877</li>
 						</span>
 					</ul>
 				</div>
@@ -130,13 +120,11 @@
 				</div>
 			</div>
 			<div class="col-md-3 blog">
-				<h3>博客帖子</h3>
-				<a href="#">贾斯汀·比伯确认他是同性恋。</a>
-				<p>乱数假文悲哀坐特，乱数假文悲哀坐特精英。据说SED卖主 精英.</p>
-				<a href="#">新的性感的运动衣服在这里!</a>
-				<p>乱数假文悲哀坐特，乱数假文悲哀坐特精英。据说SED卖主 精英.</p>
-				<a href="#">夏季销售来了!</a>
-				<p>乱数假文悲哀坐特，乱数假文悲哀坐特精英。据说SED卖主 精英.</p>
+				<h3>新闻资讯</h3>
+				<a href="http://47.52.77.232/news/detail?newsId=2">加拿大 | 全球食品安全第一！</a>
+				<p>在2014年和2015年世界食品安全操作评估中，加拿大连续两年荣获食品安全第一位。</p>
+				<a href="http://47.52.77.232/news/detail?newsId=1">加拿大：沧海遗珠、人间天堂</a>
+				<p>过去一直觉得，说一个国家富有实力，无外乎描述这个国家如何的物资丰富、国土广阔。</p>
 			</div>
 			<div class="col-md-3 support">
 				<h3>支持</h3>
@@ -173,7 +161,7 @@
 			</div>
 			<div class="clearfix"></div>
 			<div class="copyright">
-				<p>版权所有 © 2015公司名称版权所有。</p>
+				<p>版权所有 © 2017 Sachiel connect 版权所有。</p>
 				<p></p>
 			</div>
 			<!-- // container -->
