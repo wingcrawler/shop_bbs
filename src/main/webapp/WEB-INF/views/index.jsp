@@ -34,7 +34,7 @@
 			<h1 class="templatemo-site-title">
 				<a href="#">${t.t_sqe }</a>
 			</h1>
-            <div class="eg_zh"><a href="###">中文</a><a href="###">English</a></div>
+            <div class="eg_zh"><a href="http://www.sachielconnect.com/">中文</a><a href="http://en.sachielconnect.com/">English</a></div>
         </div>
 		<div class="image-section">
 			<div class="image-container">
