@@ -19,7 +19,7 @@
 				<div class="tR">
 					<span class="qq">${news.createTimeStr}</span>
 					<span class="tm">
-						阅读:${news.newsReaded } &nbsp;|&nbsp;
+						${t.t_readed }:${news.newsReaded } &nbsp;|&nbsp;
 						<a class="zan" href="javascript:;" id="newsUp"> ${news.newsUp  }</a>
 						<a class="mass" href="###"></a>
 					</span>

@@ -27,8 +27,8 @@
 								<div class="tR">
 									${item.dateStr}&nbsp;|&nbsp;
 									<span class="tm">
-										阅读:${item.newsRead } &nbsp;|&nbsp;
-										点赞:${item.newsUp }
+										${t.t_readed }:${item.newsRead } &nbsp;|&nbsp;
+										${t.t_praise }:${item.newsUp }
 										<%-- <a class="zan" href="###"> ${item.newsRead }</a>
 										<a class="mass" href="###"> </a> --%>
 									</span>
