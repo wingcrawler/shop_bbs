@@ -15,7 +15,21 @@
 		src="/ue/lang/zh-cn/zh-cn.js"></script>
 </c:if>
 <link href="/ue/themes/default/css/ueditor.css" rel="stylesheet">
+
+<!-- css -->
+<link rel="stylesheet" href="bbs/css/common.css" type="text/css" media="all" />
+<link rel="stylesheet" href="bbs/css/style.css" type="text/css" media="all" />
+<!--// css -->
+<script src="bbs/js/jquery.min.js"></script>
+<!--fonts-->
+<!--/fonts-->
+<!-- dropdown -->
+<script src="bbs/js/jquery.easydropdown.js"></script>
+<link href="bbs/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
+<script src="bbs/js/scripts.js" type="text/javascript"></script>
 </head>
+<script src="/bbs/js/jquery.datatable.js"></script>
+<script src="/backendstyle/js/common-util.js"></script>
 <body>
 	<!-- header -->
 	<jsp:include page="include/header.jsp"></jsp:include>
@@ -47,11 +61,12 @@
 				<div class="h2">
 					<c:if test="${not empty section.list }">
 						<c:forEach var="item" items="${section.list }">
-							<li><a href="sectionindex?sectionId=${item.id }"
-								class="qb wb">${item.sectionTitle }</a></li>
+							<a href="sectionindex?sectionId=${item.id }"
+								class="tab">${item.sectionTitle }</a>
 						</c:forEach>
+						<br class="c" />
 					</c:if>
-					<br class="c" />
+					
 				</div>
 				<!--END 展开的内容-->
 			</div>
@@ -84,7 +99,7 @@
 
 		<!-- 内容区 -->
 		<c:if test="${isLogin }">
-			<div v-if="${isLogin }==true" class="row">
+			<div v-if="${isLogin }==true" class="container" style="margin-top: 1em;">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
@@ -175,7 +190,7 @@
 																	'fontfamily',
 																	'fontsize' ] ],
 															initialFrameHeight : 340,
-															initialFrameWidth : 1150,
+															initialFrameWidth : 1060,
 															autoHeightEnabled : true,
 															autoFloatEnabled : true
 														});
@@ -249,7 +264,7 @@
 			$.getJSON('thread/getSectionList', {
 				sectionId : '${sectionindex.id }',
 				pageNo : curr || 1,
-				pageSize : 2, //向服务端传的参数
+				pageSize : 10, //向服务端传的参数
 			}, function(json) {
 				//显示分页
 				laypage({
@@ -267,7 +282,7 @@
 						$.getJSON('thread/getSectionList', {
 							sectionId : '${sectionindex.id }',
 							pageNo : e.curr,//当前页  
-							pageSize : 2,
+							pageSize : 10,
 						}, function(json) {
 							e.pages = e.last = json.page.pageCount; //重新获取总页数，一般不用写  
 							console.log(e.pages);

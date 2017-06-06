@@ -585,7 +585,6 @@ input {
     bottom: 0;
     margin: auto auto;
 }
-
 .popup img{
   width: 100%;
   max-height: 100%;
@@ -594,7 +593,6 @@ input {
   bottom: 0;
   margin: auto;
 }
-
 .alertToggle {
     display:none;
 }

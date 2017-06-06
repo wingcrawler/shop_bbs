@@ -7,13 +7,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="${t.lang} }">
 <head>
-<link rel="stylesheet" href="//res.layui.com/layui/src/css/layui.css" media="all">
-<link rel="stylesheet" href="//res.layui.com/css/global.css" media="all">
-
-<link href="demo.css" type="text/css" rel="stylesheet">
-
-<script src="//res.layui.com/lay/lib/laypage/laypage.js?v=1.3" tips="使用时，只要这一个js即可"></script>
-
 <jsp:include page="include/meta.jsp"></jsp:include>
 <script src="/ue/ueditor.config.js"></script>
 <script src="/ue/ueditor.all.js"></script>
@@ -25,6 +18,50 @@
 		src="/ue/lang/zh-cn/zh-cn.js"></script>
 </c:if>
 <title>${t.m_bbs_list }</title>
+<!-- bootstarp-css -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css"
+	media="all" />
+<!--// bootstarp-css -->
+<!-- css -->
+<link rel="stylesheet" href="css/common.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/topic.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<!--// css -->
+<script src="js/jquery.min.js"></script>
+<!--fonts-->
+<!--/fonts-->
+<!-- dropdown -->
+<script src="js/jquery.easydropdown.js"></script>
+<link href="css/nav.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/scripts.js" type="text/javascript"></script>
+<!--js-->
+<!--/js-->
+<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#horizontalTab').easyResponsiveTabs({
+			type : 'default', //Types: default, vertical, accordion           
+			width : 'auto', //auto or any width like 600px
+			fit : true
+		// 100% fit in a container
+		});
+	});
+</script>
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop : $(this.hash).offset().top
+			}, 1000);
+		});
+	});
+</script>
+<script src="/bbs/js/jquery.datatable.js"></script>
+<script src="/backendstyle/js/common-util.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -32,57 +69,31 @@
 	<!-- //header -->
 	<!-- 新增的樓層-->
 	<div class="container">
-		<section class="m" id="content"> <!--楼层--> <!--楼层--> <c:if
+		<section class="m" id="content"> <!--楼层--> 
+		
+		<!--楼层-->
+		<c:if
 			test="${not empty user }">
-			<div class="tItem cnt" quotedCommentId="45470309" id="45470309">
-				<a href="#" class="name">${user.username }</a> <em class="isLz"></em>
-				<div class="tmain">
-					<p>
-						<img src="${user.userImage }" />
-					</p>
+	<div class="tItem cnt" quotedCommentId="45470309" id="45470309">
+		<a href="#" class="name">${user.username }</a>		
+		<span class="lv">LV6</span>
+		<em class="isLz"></em>		
+		<div class="tmain">
+			<p> <img src=${user.userImage }  height="100" width="100" /></p>							
+			
+			<h3>${thread.threadTitle }</h3>
+			<p>${thread.threadContext }</p>
+			<!--1楼的顶-->
+			<div class="dwp">
+				<a href="#" class="dbt bb"><span class="num">0</span>${t.t_bbs_up }</a>
+			</div>			
+		</div>		
+		<a href="#bReply" class="rbt wb first">回复</a>		
+		<span class="msg">1楼 <fmt:formatDate	value="${thread.threadTime }" pattern="yyyy-MM-dd HH:mm" /></span>
+		<br class="c"/>		
+	</div>	
 		</c:if>
-
-		<p>${thread.threadTitle }</p>
-
-		<p>${thread.threadContext }</p>
-		<!--1楼的顶-->
-		<div class="dwp">
-			<a href="#ajax#" class="dbt bb"><span class="num">0</span>${t.t_bbs_up }</a>
-		</div>
-
-		<span class="msg">1楼<fmt:formatDate
-				value="${thread.threadTime }" pattern="yyyy-MM-dd HH:mm" />
-			</p></span> <br class="c" />
 		<div id="ajaxList">
-			<!--楼层-->t
-			<div v-for="item in items" class="tItem cnt"
-				quotedCommentId="45470737" id="45470737">
-				<a href="#" class="name">{{item.name}}</a> <em class="isLz"></em>
-
-				<div class="tmain">
-					<p v-html="item.context"></p>
-				</div>
-				<!-- <a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a> -->
-				<span class="msg">{{item.floor}}${t.t_bbs_floor }{{item.time}}</span> <br class="c" />
-				<!--楼中楼内容-->
-				<div class="lzl hid">
-					<em class="ico"></em>
-					<!--刷新和收起-->
-					<div class="op">
-						<a href="javascript:;" class="cl">收起回复</a> <a
-							href="javascript:void(0);"
-							data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470737"
-							class="rf">刷新</a> <br class="c" />
-					</div>
-					<!--楼中楼数据-->
-					<ul class="llist">
-						<li>唐伯虎回顧秋香：</li>
-						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-					</ul>
-				</div>
-				<!--END 楼中楼内容-->
-
-			</div>
 			<!--楼层-->
 			<li v-if="loaded==false">
 				<div>正在加载数据......</div>
@@ -90,56 +101,122 @@
 			<li v-if="loaded==true && items.length==0">
 				<div colspan="3" class="text-center">暂无数据</div>
 			</li>
-
 			<!--楼层-->
-			<div class="tItem cnt" quotedCommentId="45470923" id="45470923">
+			<div v-for="item in items" class="tItem cnt"
+				quotedCommentId="45470767" id="45470767">
+				<a href="#" class="name">{{item.name}}</a> <span class="lv">LV6</span>
+				<em class="isLz"></em>
+				<div class="tmain">
+					<p v-html="item.context"></p>
+					
+					<!--楼中楼数据-->
+					<ul class="llist">
+						<li>唐伯虎回顧秋香：</li>
+						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+					</ul>
+				</div>
+				<div class="rbt wb" @click="show($index)">回复(0)</div>
 
+				<span class="msg">{{item.floor}}${t.t_bbs_floor }{{item.time}}</span>
+				<br class="c" />
+				<!--楼中楼内容-->
+				<div class="lzl" v-show="willShow">
+					<div class="reply1">
+						<textarea class="editor" placeholder="在这里输入你要发表的内容..."></textarea>
+						<input type="submit" value="发表">
+					</div>
+				</div>
+				<!--END 楼中楼内容-->
+			</div>
+			<!--楼层-->
+			<div class="tItem cnt" quotedCommentId="45470767" id="45470767">
+				<a href="../Home/755355.html" class="name">95912180</a> <span
+					class="lv">LV6</span> <em class="isLz"></em>
+				<div class="tmain">
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【发火最狂暴的星座排名】</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">冠军(天蝎座）、亚军(狮子座）、季军(白羊座）、第4名(魔羯座）、第5名(金牛座）、第6名(射手座）、第7名(双鱼座）、第8名(水瓶座）、第9名(处女座）、第10名(巨蟹座）、第11名(天秤座）、第12名(双子座）</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【天秤座的几桩“最”】</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">最可爱星座——天秤座；最聪明星座——天秤座；最善良型星座——天秤座；最好玩星座——天秤座；最严谨星座——天秤座；最无私星座——天秤座；最宅星座——天秤座；最勇敢星座——天秤座；最有才星座——天秤座；最温柔星座——天秤座。</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
+					<!--楼中楼数据-->
+					<ul class="llist">
+						<li>唐伯虎回顧秋香：</li>
+						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+					</ul>
 
+				</div>
+				<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
+				<span class="msg">2楼2013-12-08 15:35</span> <br class="c" />
+				<!--楼中楼内容-->
+				<div class="lzl hid">
+					<div class="reply1">
+						<textarea class="editor" placeholder="在这里输入你要发表的内容..."></textarea>
+						<input type="submit" value="发表">
+					</div>
+				</div>
+				<!--END 楼中楼内容-->
+			</div>
+			<!--楼层-->
+			<div class="tItem cnt" quotedCommentId="45470737" id="45470737">
 				<a href="../Home/755355.html" class="name">95912180</a> <span
 					class="lv">LV6</span> <em class="isLz"></em>
 
 				<div class="tmain">
-					<p></p>
 					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【12星座最大的缺点是什么?】</p>
-					
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【十二星座女生叛逆排行】</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">冠军（天蝎座）、亚军（双子座）、季军（水瓶座）、第四名（射手座）、第五名（天秤座）、第六名（狮子座）、第七名（白羊座）、第八名（双鱼座）、第九名（处女座）、第十名（魔羯座）、第十一名（巨蟹座）、第十二名（金牛座）</p>
+					<p
+						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
 					<p
 						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
-
+					<p></p>
+					<ul class="llist">
+						<li>唐伯虎回顧秋香：</li>
+						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+					</ul>
+					<ul class="llist">
+						<li>唐伯虎回顧秋香：</li>
+						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+					</ul>
+					<ul class="llist">
+						<li>唐伯虎回顧秋香：</li>
+						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+					</ul>
 				</div>
-				<!--  <a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>-->
+				<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
+				<span class="msg">3楼2013-12-08 15:35</span> <br class="c" />
 
-				<span class="msg">5楼2013-12-08 15:35</span> <br class="c" />
-
-				<!--楼中楼内容  隐藏掉-->
-				<!--  <div class="lzl hid">
-			<em class="ico"></em>-->
-				<!--刷新和收起-->
-				<!-- <div class="op">
-			<a href="javascript:;" class="cl">收起回复</a> <a
-				href="javascript:void(0);"
-				data-url="http://m.100bt.com/zn/LoadReply.html?topicId=10899981&commentId=45470923"
-				class="rf">刷新</a> <br class="c" />
-		</div>-->
-				<!--楼中楼数据-->
-				<!--<ul class="llist">
-			<li>唐伯虎回顧秋香：</li>
-			<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-		</ul>
-	</div>
-	-->
+				<!--楼中楼内容-->
+				<div class="lzl hid">
+					<div class="reply1">
+						<textarea class="editor" placeholder="在这里输入你要发表的内容..."></textarea>
+						<input type="submit" value="发表">
+					</div>
+				</div>
 				<!--END 楼中楼内容-->
 
-				<!--</div> -->
 			</div>
-
-
 		</div>
+	</div>
 	</div>
 	<!-- 回帖框 -->
 
 	<c:if test="${isLogin }">
-		<div v-if="${isLogin }==true" class="row">
+		<div v-if="${isLogin }==true" class="container" style="margin-top:1em">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -217,24 +294,34 @@ ${t.t_bbs_login_re }
 			el : "#ajaxList",
 			data : {
 				items : [],
-				loaded : false
-			}
+				loaded : false,
+				willShow:false
+				
+			},
+			methods :{
+				show(index){
+		          if(this.willShow==true){
+		            this.willShow=false;
+		          }else{
+		            this.willShow=true
+		          }
+				}
+			}		
 		});
 
-		function  responseHandle(json){
-			
+		function responseHandle(json) {
+
 			if (!json)
 				json = [];
 			playTableVue.items = json.list;
 			playTableVue.loaded = true;
 		}
-		
-		
+
 		function demo(curr) {
 			$.getJSON('/bbs/post/getList', {
 				threadId : '${thread.id }',
 				pageNo : curr || 1,
-				pageSize : 5, //向服务端传的参数，此处只是演示
+				pageSize : 10, //向服务端传的参数，此处只是演示
 			}, function(json) {
 				//显示分页
 				laypage({
@@ -245,14 +332,14 @@ ${t.t_bbs_login_re }
 					skip : true, //是否开启跳页  
 					first : '首页', //若不显示，设置false即可  
 					last : '尾页', //若不显示，设置false即可  
-					prev: '<', //若不显示，设置false即可  
+					prev : '<', //若不显示，设置false即可  
 		            next: '>', //若不显示，设置false即可 
 					pages : json.page.pageCount, //通过后台拿到的总页数
 					jump : function(e) { //触发分页后的回调  
 						$.getJSON('/bbs/post/getList', {
 							threadId : '${thread.id }',
 							pageNo : e.curr,//当前页  
-							pageSize : 5,
+							pageSize : 10,
 						}, function(json) {
 							e.pages = e.last = json.page.pageCount; //重新获取总页数，一般不用写  
 							console.log(e.pages)
@@ -290,10 +377,16 @@ ${t.t_bbs_login_re }
 
 			$('#submit').click(
 					function() {
-						var parm = $.fn.getFormJson('.form');
+						var parm =  $.fn.getFormJson('.form');
 						$.fn.doSave(parm, '/bbs/post/doSave',
 								'/bbs/thread?threadId=${thread.id }');
 					});
+
+			$('.rbt').toggle(function(e) {
+				$(this).parent(".tItem").find(".hid").css('display', 'block')
+			}, function(e) {
+				$(this).parent(".tItem").find(".hid").css('display', 'none')
+			});
 		});
 	</script>
 </body>

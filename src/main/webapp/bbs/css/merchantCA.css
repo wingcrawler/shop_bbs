@@ -262,17 +262,16 @@ input{
 	color: #fff;
 	font-size: 1.25rem;
 	border-radius: 0.1875rem;
+	cursor: pointer;
 	background: url(../images/saveBg.png) repeat-x;
 	position: relative;
 	margin-left:3.625rem;
 	margin-bottom: 6.875rem;
-	overflow: hidden;
 }
 .company_data_edit .company_forms .save input{
 	width:100%;
 	height:100%;
 	opacity: 0;
-	cursor: pointer;
 	position: absolute;
 	top:0;
 	left:0;
@@ -280,3 +279,20 @@ input{
 .margin_left_minus {
 	margin-left: -0.3rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,7 +17,7 @@
 			<!--圈子推荐-->
 			<div id="tj_t" class="h2">
 				<span class="ico ico_qztj txt">${t.t_bbs_circle }</span> <a
-					href="${contextPath}/liebiao.html" class="more">${t.t_bbs_circle }&gt;</a> <br
+					href="#" class="more">${t.t_bbs_more_circle }&gt;</a> <br
 					class="c" />
 			</div>
 			<ul id="tj_m">
