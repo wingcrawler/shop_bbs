@@ -40,7 +40,7 @@
 			<ul class="rslides" id="slider3">
 				<c:forEach var="item" items="${adList }">
 					<li>
-						<div class="banner-bg" style="background:url(${item.imagePath}) no-repeat 0px 0px;background-size:cover;">
+						<div class="banner-bg" style="background:url(${item.imagePath}) no-repeat 0px 0px;background-size:100% 100%;">
 							<div class="container">
 								<div class="banner-info">
 									<h2></h2>
@@ -59,6 +59,10 @@
 	<div class="banner-bottom">
 		<div class="container">
 			<div class="banner-bottom-grids">
+				<div class="products-heading information_head">
+					<h3>${t.t_hot_news }</h3>
+				</div>
+				<div class="lookmore"><a href="/news/list">${t.t_view_more }</a></div>				
 				<c:forEach var="item" items="${newsList }">
 					<div class="col-md-4 bottom-grid">
 						<a href="/news/detail?newsId=${item.id }" target="_blank"><img src="${item.imagePath }" alt="" /></a>
@@ -70,7 +74,6 @@
 				</c:forEach>
 				<div class="clearfix"> </div>
 				<br>
-				<p><a href="/news/list" target="_blank">${t.t_view_more }</a></p>
 			</div>
 		</div>
 	</div>
@@ -85,13 +88,14 @@
 			<div class="products-heading">
 				<h3>${t.t_hot_product }</h3>
 			</div>
+			<div class="lookmore"><a href="/product/list">${t.t_view_more }</a></div>			
 			<div class="products-grids">
 				<c:forEach var="item" items="${hotProductList }">
 					<div class="col-md-3 product-left-grid">	
 						<div class="product-grid">
 							<div class="product-grid-text">
 								<a href="/product/single?productId=${item.id }" target="_blank">
-									<img src="${item.imagePath }" alt="" style="height:200px;margin-top:-16px;" />
+									<img src="${item.imagePath }" alt="" style="height:235px;margin-top:-16px;" />
 								</a>
 								<div class="products-grid-info">
 									<h3><a href="/product/single?productId=${item.id }" target="_blank">${item.productName }</a></h3>
@@ -115,7 +119,6 @@
 				</c:forEach>
 				<div class="clearfix"> </div>
 				<br>
-				<p><a href="/product/list" target="_blank">${t.t_view_more }</a></p>
 			</div>
 		</div>
 		<!-- //container -->

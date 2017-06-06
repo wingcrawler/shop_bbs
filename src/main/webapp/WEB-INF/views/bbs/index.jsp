@@ -16,9 +16,8 @@
 		<div class="container">
 			<!--圈子推荐-->
 			<div id="tj_t" class="h2">
-				<span class="ico ico_qztj txt">${t.t_bbs_circle }</span> <a
-					href="#" class="more">${t.t_bbs_more_circle }&gt;</a> <br
-					class="c" />
+				<span class="ico ico_qztj txt">${t.t_bbs_circle }</span> <a href="#"
+					class="more">${t.t_bbs_more_circle }&gt;</a> <br class="c" />
 			</div>
 			<ul id="tj_m">
 
@@ -33,7 +32,8 @@
 			<!--END 圈子推荐-->
 			<!--精彩推荐-->
 			<div class="h2">
-				<span class="ico ico_jctj txt">${t.t_bbs_Wonderful_recommendation }</span> <br class="c" />
+				<span class="ico ico_jctj txt">${t.t_bbs_Wonderful_recommendation }</span>
+				<br class="c" />
 			</div>
 			<div id="jc_l">
 				<div id="ajaxdata">
@@ -42,7 +42,8 @@
 						<li v-for="item in items"><em v-if="item.thread_identify==2"
 							class="t">${t.t_bbs_top }</em> <a
 							v-bind:href='"/bbs/thread?threadId="+item.id' class="tx">{{item.threadTitle}}</a><em
-							v-if="item.thread_identify==1" class="jh">${t.t_bbs_recommendation }</em> <br />
+							v-if="item.thread_identify==1" class="jh">${t.t_bbs_recommendation }</em>
+							<br />
 							<div class="tR">
 								<a href="#" class="qq l">{{item.section_title}}</a> <span
 									class="rp">{{item.thread_view}}</span> &nbsp;|&nbsp; <span
@@ -66,12 +67,7 @@
 	</div>
 	<!-- 新增的圈子和精彩end -->
 	<!-- footer -->
-	<c:if test="${t.lang =='en' }">
-		<jsp:include page="include/footer.jsp"></jsp:include>
-	</c:if>
-	<c:if test="${t.lang =='zh' }">
-		<jsp:include page="include/zhfooter.jsp"></jsp:include>
-	</c:if>
+	<jsp:include page="include/footer.jsp"></jsp:include>
 	<!-- //footer -->
 	<script type="text/javascript">
 		var playTableVue = new Vue({

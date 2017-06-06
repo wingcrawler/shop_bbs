@@ -28,7 +28,7 @@
 						class="key" / id="key"><br /> <span>*</span>${t.register_confirm  }：<input
 						type="password" name="repassword" class="key1" / id="key1"><br />
 					<div class="margin">
-						<span>*</span>邮箱：<input type="text" name="userMail" class="email"
+						<span>*</span>${t.register_email }：<input type="text" name="userMail" class="email"
 							id="email" />
 					</div>
 				</div>
