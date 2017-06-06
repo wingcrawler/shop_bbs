@@ -27,15 +27,7 @@
 			</div>
 			<div class="col-md-3 blog">
 				<h3>Blog posts</h3>
-				<a href="#">Justin Bieber confirmed that he is gay.</a>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Donec sed auctor elit.</p>
-				<a href="#">New sexy sport clothes are here!</a>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Donec sed auctor elit.</p>
-				<a href="#">Summer sales are coming!</a>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Donec sed auctor elit.</p>
+				
 			</div>
 			<div class="col-md-3 support">
 				<h3>Support</h3>

@@ -28,14 +28,14 @@
 
 		<div
 			class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center templatemo-logo margin-top-20">
+            <div class="templatemo-site-title">
+                <a href="#"><img src="/frontstyle/images/wel_logo.png" alt=""></a>
+            </div>  			
 			<h1 class="templatemo-site-title">
 				<a href="#">${t.t_sqe }</a>
 			</h1>
-			<h3 class="templatemo-site-title">
-				<a href="#"><span class="blue"></span><span class="green"></span></a>
-			</h3>
-		</div>
-
+            <div class="eg_zh"><a href="###">中文</a><a href="###">English</a></div>
+        </div>
 		<div class="image-section">
 			<div class="image-container">
 				<img src="/frontstyle/images/zoom-bg-1.jpg" id="menu-img"
@@ -73,7 +73,7 @@
 								</a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 margin-bottom-20">
-								<a href="#contact" class="change-section">
+								<a href="/news/list" class="change-section">
 									<div class="black-bg btn-menu">
 										<i class="fa fa-envelope"></i>
 										<h2>${t.t_information }</h2>
