@@ -76,7 +76,7 @@
 			</div>
 			<div class="clearfix"></div>
 			<div class="copyright">
-				<p>Copyright &copy; 2015.Company name All rights reserved.</p>
+				<p>Copyright &copy; 2017@Sachiel connect All rights reserved.</p>
 			</div>
 			<!-- // container -->
 		</div>
