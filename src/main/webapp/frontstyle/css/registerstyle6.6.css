@@ -16,13 +16,13 @@ a:hover{text-decoration:none;/*color:#b90101;*/}
 .register1 .box .pload{padding:5px 0;background:#45a8e7;display: block;width:40%;margin: 0 auto;color:#fff;font-size:18px;margin-top:20px;text-align: center;}
 .register1 .box .input input{width:50%;height: 40px;border:1px solid #ccc;margin-top:3%;}
 .register1 .box .input{margin-left:17%;width: 100%;overflow: hidden;}
-.register1 .box .margin span{margin-left:41px;width:13%;display: inline-block;}
-.register1 .box .margin span b{color:red;}
+.register1 .box span{color:red;}
+.register1 .box .margin span{margin-left:41px;}
 .register1 .box span:nth-of-type(4){margin-left:41px;}
 .register1 .margin{overflow: hidden;}
 .register1 .box .check{width:14px;height:14px;border:1px solid #ccc;text-align: center;margin-left:30%;margin-top: 40px;}
 a.ftp{color:#45a8e7;}
-.register_label{width:100%;}
+
 
 .register1 .box .user{background:url(../images/user.png) no-repeat 310px center;}
 .register1 .box .key{background:url(../images/key.png) no-repeat 310px center;}

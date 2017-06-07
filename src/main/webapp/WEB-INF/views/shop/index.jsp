@@ -98,8 +98,8 @@
 									<img src="${item.imagePath }" alt="" style="height:235px;margin-top:-16px;" />
 								</a>
 								<div class="products-grid-info">
-									<h3><a href="/product/single?productId=${item.id }" target="_blank">${item.productName }</a></h3>
-									<p>${item.productDesc }</p>
+									<h3><a href="/product/single?productId=${item.id }" target="_blank">${fn:substring(item.productName, 0, 10) }</a></h3>
+									<p>${fn:substring(item.productDesc, 0, 15)}</p>
 									<div class="price">
 										<p>¥ ${item.productPrice }</p>
 									</div>

@@ -83,29 +83,6 @@ img {
 
 .templatemo-logo {
 	z-index: 1;
-    position: relative;
-}
-.eg_zh{
-    position: absolute;
-    top:30%;
-    left:4%;
-}
-.eg_zh a{
-    width:120px;
-    height:44px;
-    font-size:16px;
-    margin:0 10px;
-    display: block;
-    float: left;
-    font-family: "微软雅黑";
-    border:1px solid #fff;
-    line-height: 44px;
-    text-align: center;
-    color:#fff;
-    text-decoration: none;
-}
-.eg_zh a:hover{
-    background: rgba(255, 255, 255, .4);
 }
 .templatemo-site-title { 
     color: #fff !important; 
@@ -152,13 +129,12 @@ img.slide {
 .templatemo-content {
     position: static;
     overflow: hidden; 
-    margin-top: 16%;
-    margin-left:3%;
+    margin-top: 20%;
     padding-bottom: 6%;
 }
 
 .black-bg {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0.8);
 }
 .black-bg:before, .black-bg:after {
     content: "";
@@ -173,7 +149,7 @@ img.slide {
     font-family: 'Raleway', sans-serif;
     position: relative; 
     overflow: hidden;
-    top: 0;
+    top: 0; 
     padding-bottom: 20px;
 }
 
