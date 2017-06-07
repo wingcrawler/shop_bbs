@@ -11,3 +11,12 @@
 <script type="text/javascript">
     var ctx = '<%=request.getContextPath() %>';
 </script>
+
+
+<%
+	String contextPath = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ contextPath;
+%>
+<c:set var="contextPath" value="<%=contextPath%>" />
+<c:set var="basePath" value="<%=basePath%>" />

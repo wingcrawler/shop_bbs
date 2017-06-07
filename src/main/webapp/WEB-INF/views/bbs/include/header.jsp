@@ -10,8 +10,9 @@
 			</div>
 			<div class="header-right">
 				<ul>
-					<li class="phone">+371 282 20 760</li>
-					<li class="mail"><a href="mailto:example@mail.com">eony321v@gmail.com</a></li>
+					<li class="phone">604-974-8777</li>
+					<li class="mail"><a href="mailto:example@mail.com">info@sachielconnectinc.com</a></li>
+					<li class="water"><a href="http://www.sachielwaterinc.com/">Sachiel</a></li>
 					<c:if test="${isSellLogin }">
 						<%-- <li class=""><a href="/front/sell/productListPage">${t.t_bussiness_center }</a></li> --%>
 						<li class=""><a href="/front/sell/productListPage">${t.t_welcome } ${user.username }</a></li>
@@ -85,17 +86,17 @@
 				
 				<li><a href="/news/list"  target="_blank">${t.t_news }</a></li>            
 				<li><a href="/bbs/index"  target="_blank">${t.t_bbs }</a></li>
-				<li><a href="/about"  target="_blank">${t.t_aboutus }</a></li>            
-				<li><a href="/help"  target="_blank">${t.t_help }</a></li>
+			        <li><a href="https://www.sachielconnect.net/who-we-are/"  target="_blank">${t.t_aboutus }</a></li>            
+				<%--<li><a href="/help"  target="_blank">${t.t_help }</a></li> --%>
 			</ul>
 		</div>
 		
-		<div class="search">
+		<%--<div class="search">
 			<form method="post" action="/product/search">
 				<input type="text" placeHolder="${t.b_search }..." name="productName" >
 				<%-- <input type="text" value="${t.b_search }..." name="productName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '${t.b_search }...';}" required=""> --%>
-			</form>
-		</div>
+			<%--</form>
+		</div >--%>
 		<div class="clearfix"></div>
 		<!-- script-for-menu -->
 	 
