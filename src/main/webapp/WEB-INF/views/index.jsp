@@ -106,7 +106,7 @@
 
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer">
-				<p class="footer-text">${t.t_sqe }版权所有</p>
+				<p class="footer-text">${t.t_sqe_copy_right }</p>
 			</div>
 			<!-- /.footer -->
 		</div>
