@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*"
+	contentType="text/html; charset=utf-8"%><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -16,11 +15,11 @@
         -->
 <title>${t.t_sqe }</title>
 <meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Google Web Font Embed -->
 
-<link  rel="stylesheet" href="/frontstyle/css/bootstrap.css"/>
+<link rel="stylesheet" href="/frontstyle/css/bootstrap.min.css">
 <link rel="stylesheet" href="/frontstyle/css/font-awesome.min.css">
 <link rel="stylesheet" href="/frontstyle/css/templatemo_main.css">
 </head>
@@ -35,13 +34,26 @@
 			<h1 class="templatemo-site-title">
 				<a href="#">${t.t_sqe }</a>
 			</h1>
-             <div class="eg_zh"><a href="http://www.sachielconnect.com/">中文</a><a href="http://en.sachielconnect.com/">English</a></div>
+            <div class="eg_zh"><a href="http://www.sachielconnect.com/">中文</a><a href="http://en.sachielconnect.com/">English</a></div>
         </div>
 		<div class="image-section">
 			<div class="image-container">
 				<img src="/frontstyle/images/zoom-bg-1.jpg" id="menu-img"
 					class="main-img inactive"
 					alt="Zoom HTML5 Template by templatemo.com"> 
+					<!-- <img
+					src="/frontstyle/images/zoom-bg-2.jpg" id="products-img"
+					class="inactive" alt="Product"> <img
+					src="/frontstyle/images/zoom-bg-3.jpg" id="services-img"
+					class="inactive" alt="Services"> <img
+					src="/frontstyle/images/zoom-bg-4.jpg" id="about-img"
+					class="inactive" alt="About"> <img
+					src="/frontstyle/images/zoom-bg-5.jpg" id="contact-img"
+					class="inactive" alt="Contact"> <img
+					src="/frontstyle/images/zoom-bg-6.jpg" id="company-intro-img"
+					class="main-img inactive" alt="Company Intro"> <img
+					src="/frontstyle/images/zoom-bg-7.jpg" id="testimonials-img"
+					class="main-img inactive" alt="Testimonials"> -->
 			</div>
 		</div>
 
@@ -52,7 +64,7 @@
 
 					<section id="menu-section" class="active">
 						<div class="row">
-							<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 margin-bottom-20">
+							<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 margin-bottom-20">
 								<a href="/shopIndex" class="change-section">
 									<div class="black-bg btn-menu">
 										<i class="fa fa-cubes"></i>
@@ -60,7 +72,7 @@
 									</div>
 								</a>
 							</div>
-							<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 margin-bottom-20">
+							<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 margin-bottom-20">
 								<a href="/news/list" class="change-section">
 									<div class="black-bg btn-menu">
 										<i class="fa fa-envelope"></i>
@@ -68,7 +80,7 @@
 									</div>
 								</a>
 							</div>
-							<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 margin-bottom-20">
+							<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 margin-bottom-20">
 								<a href="/bbs/index" class="change-section">
 									<div class="black-bg btn-menu">
 										<i class="fa fa-users"></i>
@@ -114,22 +126,5 @@
 
 		});
 	</script>
-	<style type="text/css">
-		@media (min-width: 300px) {
-		  .eg_zh{
-				top:100%;
-				left:50%;
-				margin-left: -140px;
-			}
-		}
-		@media (min-width: 768px) {
-		  .eg_zh{
-				top:30%;
-				left:4%;
-				margin:0;
-				
-			}
-		}
-	</style>
 </body>
 </html>

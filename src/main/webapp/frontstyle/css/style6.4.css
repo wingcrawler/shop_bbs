@@ -39,16 +39,7 @@ html,body {
 	padding-left: 1.5em;
 	background: url(/frontstyle/images/msg.png) no-repeat 0px 4px;
 }
-.header-right ul li.water{
-	padding-left: 1.5em;
-	background: url(/frontstyle/images/water.png) no-repeat 0px 3px;
-}
 .header-right ul li.mail a{
-	color:#7e7f84;
-	text-decoration:none;
-	text-transform: uppercase;
-}
-.header-right ul li.water a{
 	color:#7e7f84;
 	text-decoration:none;
 	text-transform: uppercase;
@@ -186,13 +177,10 @@ ul.navig li a:after{
   padding: .7em .7em .7em 2em;
 }
 /*-- banner --*/
-.banner{
-	overflow: hidden;
-}
 .banner-bg{
 	background:url(/frontstyle/images/6.jpg) no-repeat 0px 0px;
 	background-size:cover;
-	min-height: 480px;
+	min-height: 716px;
 }
 .banner-img{
 	background:url(/frontstyle/images/1.jpg) no-repeat 0px 0px;
@@ -477,23 +465,8 @@ ul.social-slide li i.mac{
 	background: #FFF;
 }
 /*-- banner-bottom --*/
-
 .banner-bottom-grids {
-	padding: 2em 0 4em 0;
-}
-.information_head{
-	margin-bottom:1em;
-}
-.lookmore{
-	color: #67686d;
-    font-size: 20px;
-    font-family: 'Roboto Condensed', sans-serif;
-    text-align: right;
-    margin:0 2em 1em 0;
-}
-.lookmore a{
-	color: inherit; 
-	text-decoration: none; 
+	padding: 6em 0 4em 0;
 }
 .bottom-grid img{
 	width:100%;
@@ -539,7 +512,7 @@ ul.social-slide li i.mac{
   background: #e3e3e3;
 }
 .products-grids {
-    padding: 1em 0 3em 0;
+  padding: 3em 0;
 }
 /*----*/
 /******** SAP ************/
@@ -1782,7 +1755,7 @@ ul.navig li:nth-of-type(3) {
 	  margin: 5em 0 0 0;
 	}
 	.banner-bg {
-	  min-height:300px;
+	  min-height: 400px;
 	}
 	.callbacks_tabs {
 		left: 36%;
@@ -2239,7 +2212,7 @@ ul.navig li:nth-of-type(3) {
 .newsdetail .ads{margin-bottom:20rem;}
 .newsdetail .ads img{width:100%;display:block;}
 .newsdetail .title{padding-bottom:10px;border-bottom:1px solid #ededed}
-.newsdetail .title h1{font-weight:bold!important;font-size:22px;}
+.newsdetail .title h1{font-weight:bold!important;font-size:1em;}
 .newsdetail .img{text-align: center;padding:10px 0}
 .text{color:#4b4b4b;font-size:14px;line-height:0px;}
 .text p{text-indent: 2em;line-height:2em;}
@@ -2502,20 +2475,3 @@ ul.navig li:nth-of-type(3) {
 }
 
 
-.banner-bottom-grids {
-	padding: 2em 0 4em 0;
-}
-.information_head{
-	margin-bottom:1em;
-}
-.lookmore{
-	color: #67686d;
-    font-size: 20px;
-    font-family: 'Roboto Condensed', sans-serif;
-    text-align: right;
-    margin:0 2em 1em 0;
-}
-.lookmore a{
-	color: inherit; 
-	text-decoration: none; 
-}

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*"
+	contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -10,17 +10,13 @@
 <head>
 <meta charset="utf-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
-<!--
-        Zoom Template 
-        http://www.templatemo.com/tm-414-zoom
-        -->
 <title>${t.t_sqe }</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Google Web Font Embed -->
 
-<link  rel="stylesheet" href="/frontstyle/css/bootstrap.css"/>
+<link rel="stylesheet" href="/frontstyle/css/bootstrap.min.css">
 <link rel="stylesheet" href="/frontstyle/css/font-awesome.min.css">
 <link rel="stylesheet" href="/frontstyle/css/templatemo_main.css">
 </head>
@@ -94,7 +90,7 @@
 
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer">
-				<p class="footer-text">${t.t_sqe_copy_right }</p>
+				<p class="footer-text">${t.t_sqe }</p>
 			</div>
 			<!-- /.footer -->
 		</div>
