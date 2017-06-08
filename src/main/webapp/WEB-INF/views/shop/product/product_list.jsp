@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="col-md-9 fashions">
 				<div class="title">
-					<h3>${title }</h3>
+					<h3>${t.m_product_list }</h3>
 				</div>
 				<div class="fashion-section">
 					<div class="fashion-grid1">
