@@ -46,9 +46,8 @@
 		</li>
 		<li class="menu_list">
 			<p>
-				<i class="bgImg bgImg4"></i> <span class="menu_list_title"><p>
-						<a href="/front/sell/postReply">${t.t_post_reply }</a>
-					</p></span>
+				<i class="bgImg bgImg4"></i> <span class="menu_list_title">
+						${t.t_post_reply }</span>
 			</p>
 			<div class="module">
 				<p>
