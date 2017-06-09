@@ -129,7 +129,6 @@ public class ThreadService extends AdapterService implements BaseService {
 			for (Map<String, Object> map : list) {
 				Date date = (Date) map.get("date");
 				map.put("timeAgo", relativeDateFormat.format(date));
-				map.put("identify", "精"); // 精 和顶 进一步解决
 				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
 				String type = map.get("threadType").toString();
 				map.put("typeName", this.getThreadType(Integer.valueOf(type)));
@@ -317,7 +316,10 @@ public class ThreadService extends AdapterService implements BaseService {
 			for(Map<String, Object> map: list){
 				// 时间转换
 				Date time = (Date) map.get("date");
+				map.put("timeAgo", relativeDateFormat.format(time));
 				map.put("time", DateUtil.dateToString(time, DateUtil.DATETIME_FORMATE_2));
+				String type = map.get("threadType").toString();
+				map.put("typeName", this.getThreadType(Integer.valueOf(type)));
 			}
 		}
 		pageUtil.setList(list);
