@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.controller.base.BaseFrontController;
+import com.sqe.shop.model.Section;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.Topic;
+import com.sqe.shop.service.SectionService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.TopicService;
 import com.sqe.shop.util.PageUtil;
@@ -33,6 +35,9 @@ public class BBSThreadController extends BaseFrontController {
 	private ThreadService threadService;
 	@Autowired
 	private TopicService topicService;
+
+	@Autowired
+	private SectionService sectionService;
 
 	@RequestMapping(value = "/thread/list", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -65,12 +70,13 @@ public class BBSThreadController extends BaseFrontController {
 	public Map<String, Object> getList(Thread thread, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
+
 		PageUtil<Map<String, Object>> page = threadService.getMapListByParm(thread, pageNo, pageSize);
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
 		return resMap;
 	}
-	
+
 	/**
 	 * 根据版块id 返回列表
 	 * 
@@ -81,16 +87,26 @@ public class BBSThreadController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/thread/getSectionList", method = RequestMethod.GET)
-	public Map<String, Object> getSectionList(Thread thread, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+	public Map<String, Object> getSectionList(Thread thread,
+			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
-		if(thread.getSectionId()==null){
+		if (thread.getSectionId() == null) {
 			return resMap;
 		}
-		PageUtil<Map<String, Object>> page = threadService.getSectionMapListByParm(thread, pageNo, pageSize);
-		resMap.put("list", page.getList());
-		resMap.put("page", page);
-		return resMap;
+		Section section = sectionService.getById(thread.getSectionId());
+		if (section.getSectionType() == 0) {
+			PageUtil<Map<String, Object>> page = threadService.getSectionOneThreadList(pageNo, pageSize, thread.getSectionId());
+			resMap.put("list", page.getList());
+			resMap.put("page", page);
+			return resMap;
+		} else {
+			PageUtil<Map<String, Object>> page = threadService.getSectionMapListByParm(thread, pageNo, pageSize);
+			resMap.put("list", page.getList());
+			resMap.put("page", page);
+			return resMap;
+		}
+
 	}
 
 	@ResponseBody
@@ -126,6 +142,7 @@ public class BBSThreadController extends BaseFrontController {
 
 	/**
 	 * 查询一级section分类下的thread
+	 * 
 	 * @param thread
 	 * @param sectionId
 	 * @param pageNo
@@ -138,11 +155,10 @@ public class BBSThreadController extends BaseFrontController {
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
-		PageUtil<Map<String, Object>> page = threadService.getSectionOneThreadList(pageNo, pageSize,sectionId);
+		PageUtil<Map<String, Object>> page = threadService.getSectionOneThreadList(pageNo, pageSize, sectionId);
 		resMap.put("list", page.getList());
-		resMap.put("page", page);	
+		resMap.put("page", page);
 		return resMap;
 	}
-	
-	
+
 }
