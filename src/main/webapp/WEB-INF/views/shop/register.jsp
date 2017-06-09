@@ -42,8 +42,8 @@
 
 
 	<script type="text/javascript">
-	var error_user_empty='${t.error_empty_username}';
-	var error_password_empty='${t.error_empty_pwd}';
+	var error_item_empty='${t.register_empty_item}';
+	var error_patterm_username='${t.register_usernmae_pattern}';
 	var register_sucess='${t.register_succee}';
 	var register_failed='${t.register_failed}';
 		$(function() {
@@ -52,8 +52,8 @@
 				$pass = $("#key").val();
 				$pass2 = $("#key1").val();
 				$mail = $("#email").val();
-				if ($username == '' || $pass == '') {
-					alert(error_user_empty);
+				if ($username == '' || $pass == ''||$pass2 == ''||$mail == '') {
+					alert(error_item_empty);
 					return false;
 				} else {
 					var datas = {
@@ -72,7 +72,7 @@
 								alert(result.errorInfo);
 							} else {
 								alert(register_sucess);
-								window.location.href = '/user/login';//登录成功跳转
+								//window.location.href = '/user/login';//登录成功跳转
 							}
 						},
 						error : function() {

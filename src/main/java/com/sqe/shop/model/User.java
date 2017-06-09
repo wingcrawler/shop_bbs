@@ -3,6 +3,11 @@ package com.sqe.shop.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.sqe.shop.common.BaseModel;
 
 public class User extends BaseModel implements Serializable {
@@ -10,7 +15,9 @@ public class User extends BaseModel implements Serializable {
 	private static final long serialVersionUID = 1L;
     
 	private String userAddress;
+	@NotEmpty(message="{items.password.isNull}")
 	private String password;
+	@NotEmpty(message="{items.password.isNull}")
 	private String repassword;
 	private Integer userStatus;
 	private String userImage;
@@ -20,6 +27,9 @@ public class User extends BaseModel implements Serializable {
 	private Long id;
 	private Long userRole;
 	private String userIntroduce;
+	@NotEmpty(message="{items.username.length}")
+    @Size(min=5,max=20,message="{items.username.length}")
+	@Pattern(regexp = "[0-9a-zA-Z\u4E00-\u9FA5]+",message="{items.username.pattern}")
 	private String username;
 	private String userQq;
 	
