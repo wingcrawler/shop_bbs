@@ -248,12 +248,14 @@
 	s.section_title as sectionTitle,
 	s.section_parent_id as sectionParentId,
 	t.section_id as sectionId,
-	t.id as threadId,
-	t.thread_context as content,
-	t.thread_time as date,
+	t.id as id,
+	t.thread_title as threadTitle, 
+	t.thread_time as date, 
+	t.thread_view,
+	t.thread_up,
+	t.thread_type as threadType,
 	t.user_id as userId,
-	u.username as username
-	
+	u.username as username	
 	from section s
 	LEFT JOIN thread t on t.section_id=s.id
 	LEFT JOIN `user` u on u.id = t.user_id
