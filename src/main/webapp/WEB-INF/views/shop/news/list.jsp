@@ -75,6 +75,8 @@ $(function(){
 
 function nextPage(pageNo){
 	var args = '?pageNo='+pageNo;
+	var searchText = $('input[name="searchText"]').val();
+	args += '&searchText='+encodeURIComponent(searchText);
 	self.location="/news/list"+args;
 }
 </script>

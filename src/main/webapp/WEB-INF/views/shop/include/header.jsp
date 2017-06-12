@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!-- header -->
 <div class="header">
 	<!-- container -->
@@ -91,12 +92,20 @@
 			</ul>
 		</div>
 		
-		<%--<div class="search">
-			<form method="post" action="/product/search">
-				<input type="text" placeHolder="${t.b_search }..." name="productName" >
-				<%-- <input type="text" value="${t.b_search }..." name="productName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '${t.b_search }...';}" required=""> --%>
-			<%--</form>
-		</div >--%>
+		<div class="search">
+			<c:if test="${fn:contains(uri, 'news')}">
+				<form method="POST" action="/news/list">
+					<input type="text" placeHolder="${t.b_search }..." name="searchText" value="${searchText }">
+					<%-- <input type="text" value="${t.b_search }..." name="productName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '${t.b_search }...';}" required=""> --%>
+				</form>
+			</c:if>
+			<c:if test="${!fn:contains(uri, 'news')}">
+				<form method="post" action="/product/list">
+					<input type="text" placeHolder="${t.b_search }..." name="searchText" value="${searchText }">
+				</form>
+			</c:if>
+			
+		</div >
 		<div class="clearfix"></div>
 		<!-- script-for-menu -->
 	 

@@ -306,7 +306,8 @@
 	     	and p.product_price = #{parm.productPrice}
 	   	</if>
 		<if test="parm.productName != null">
-	     	and p.product_name like  "%"#{parm.productName}"%"
+	     	and (p.product_name like  "%"#{parm.productName}"%"
+	     	or p.product_en_name like  "%"#{parm.productName}"%")
 	   	</if>
 	   	<if test="parm.productSubtypeId != null">
 	     	and p.product_subtype_id = #{parm.productSubtypeId}

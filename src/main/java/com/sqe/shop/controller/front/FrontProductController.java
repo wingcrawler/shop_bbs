@@ -1,6 +1,7 @@
 package com.sqe.shop.controller.front;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
+import com.sqe.shop.model.News;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.model.Shop;
@@ -63,11 +65,12 @@ public class FrontProductController extends BaseFrontController {
 	 * @param pageNo
 	 * @param pageSize
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-	@RequestMapping(value="list", method = RequestMethod.GET)
-	public ModelAndView list(ModelAndView model, Long parentType, Long childType,String typeName,
+	@RequestMapping(value="list")
+	public ModelAndView list(ModelAndView model, Long parentType, Long childType,String typeName,String searchText,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
-			@RequestParam(name="pageSize", defaultValue="12") int pageSize) {
+			@RequestParam(name="pageSize", defaultValue="12") int pageSize) throws UnsupportedEncodingException {
 		pageSize=12;
 		model.addObject("parentType", parentType);
 		
@@ -95,6 +98,10 @@ public class FrontProductController extends BaseFrontController {
 			product.setProductSubtypeId(childType);
 		}
 		product.setProductStatus(Constants.PRODUCT_ON);
+		if(StringUtils.isNotBlank(searchText)){
+			searchText = URLDecoder.decode(searchText, UTF8);
+			product.setProductName(searchText);
+		}
 		//查询
 		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
 		model.addObject("page", page);
@@ -180,23 +187,24 @@ public class FrontProductController extends BaseFrontController {
 	}
 	
 	@RequestMapping(value="search", method = RequestMethod.POST)
-	public ModelAndView search(ModelAndView model, String productName,
+	public ModelAndView search(ModelAndView model, String searchText,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="12") int pageSize) {
-		if(StringUtils.isBlank(productName)){
+		if(StringUtils.isBlank(searchText)){
 			model.setViewName("redirect:/shopIndex");
 			return model;	
 		}
-		pageSize=2;
+		pageSize=12;
 		try {
-			model.addObject("productName", URLEncoder.encode(productName, UTF8));
+			model.addObject("searchText", URLDecoder.decode(searchText, UTF8));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		//搜索产品
 		Product product = new Product();
-		product.setProductName(productName);
+		product.setProductName(searchText);
 		PageUtil<Map<String, Object>> productPage = productService.getMapListByParm(product, pageNo, pageSize);
 		model.addObject("page", productPage);
 		

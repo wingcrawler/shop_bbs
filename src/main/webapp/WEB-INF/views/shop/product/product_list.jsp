@@ -92,8 +92,11 @@ $(function(){
 function nextPage(pageNo){
 	var args = '?pageNo='+pageNo;
 	if(parentType!=''){
-		args = args+'&parentType='+parentType;
+		args += '&parentType='+parentType;
 	}
+	var searchText = $('input[name="searchText"]').val();
+	args += '&searchText='+encodeURIComponent(searchText);
+	
 	self.location="/product/list"+args;
 }
 </script>

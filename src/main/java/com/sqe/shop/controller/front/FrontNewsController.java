@@ -1,5 +1,8 @@
 package com.sqe.shop.controller.front;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,14 +46,20 @@ public class FrontNewsController extends BaseFrontController {
 	 * 新闻列表页
 	 * @param model
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-	@RequestMapping(value="list", method = RequestMethod.GET)
-	public ModelAndView list(ModelAndView model,
+	@RequestMapping(value="list")
+	public ModelAndView list(ModelAndView model,String searchText,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
-			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) throws UnsupportedEncodingException {
 		pageSize=10;
 		
+		
 		News news = new News();
+		if(StringUtils.isNotBlank(searchText)){
+			searchText = URLDecoder.decode(searchText, UTF8);
+			news.setNewsTitle(searchText);
+		}
 		PageUtil<Map<String, Object>> newsPage = newsService.getMapListByParm(news, pageNo, pageSize);
 		if(newsPage.getList()!=null && !newsPage.getList().isEmpty()){
 			String newsContent = "";
@@ -68,6 +77,8 @@ public class FrontNewsController extends BaseFrontController {
 		}
 		model.addObject("list", newsPage.getList());
 		model.addObject("page", newsPage);
+		
+		model.addObject("searchText", searchText);
 		
 		model.setViewName("shop/news/list");
 		return model;
@@ -166,6 +177,46 @@ public class FrontNewsController extends BaseFrontController {
 		newsService.updateThumb(news.getNewsUp(), newsId);
 		/*return responseOK("success_thumb");*/
 		return responseOK1("");
+	}
+	
+	@RequestMapping(value="search", method = RequestMethod.POST)
+	public ModelAndView search(ModelAndView model, String newsTitle,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		if(StringUtils.isBlank(newsTitle)){
+			model.setViewName("redirect:/shopIndex");
+			return model;	
+		}
+		pageSize=10;
+		try {
+			model.addObject("newsTitle", URLEncoder.encode(newsTitle, UTF8));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//搜索新闻资讯
+		News news = new News();
+		news.setNewsTitle(newsTitle);
+		PageUtil<Map<String, Object>> newsPage = newsService.getMapListByParm(news, pageNo, pageSize);
+		if(newsPage.getList()!=null && !newsPage.getList().isEmpty()){
+			String newsContent = "";
+			for(Map<String, Object> map : newsPage.getList()){
+				newsContent = map.get("newsContent").toString();
+				newsContent = RegularUtil.Html2Text(newsContent);
+				if(newsContent.length()>100){
+					newsContent = newsContent.substring(0,100) + "...";
+					map.put("newsContent", newsContent);
+				} else {
+					map.put("newsContent", newsContent);
+				}
+			}
+		}
+		model.addObject("list", newsPage.getList());
+		model.addObject("page", newsPage);
+		
+		model.setViewName("shop/news/list");
+		return model;
 	}
 	
 }

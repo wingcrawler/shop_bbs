@@ -1,6 +1,7 @@
 package com.sqe.shop.controller.base;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,14 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.mysql.jdbc.log.Log;
 import com.sqe.shop.common.BaseCommon;
 import com.sqe.shop.common.Constants;
+import com.sqe.shop.model.News;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.LoginService;
 import com.sqe.shop.service.MessageService;
+import com.sqe.shop.service.NewsService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.cached.CachedService;
+import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.RegularUtil;
 
 public class BaseFrontController extends BaseCommon {
 	
@@ -30,6 +34,8 @@ public class BaseFrontController extends BaseCommon {
     private CachedService cachedService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+	private NewsService newsService;
     
 	@ModelAttribute
     public void setReqAndRes(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{  
@@ -41,8 +47,35 @@ public class BaseFrontController extends BaseCommon {
         
         //国际化内容
         request.setAttribute("t", cachedService.getBundle());
+        
         //获取产品类别列表
         request.setAttribute("productTypeList", cachedService.getProductTypeList());
+        
+        //footer 2个新闻资讯
+		PageUtil<Map<String, Object>> newPage = newsService.getMapListByParm(new News(), 1, 2);
+		if(newPage.getList()!=null && !newPage.getList().isEmpty()){
+			String newsTitle = "";
+			String newsContent = "";
+			for(Map<String, Object> map : newPage.getList()){
+				newsTitle = map.get("newsTitle").toString();
+				if(newsTitle.length()>10){
+					map.put("newsShortTitle", newsTitle.substring(0, 14)+"...");
+				} else {
+					map.put("newsShortTitle", newsTitle);
+				}
+				
+				newsContent = map.get("newsContent").toString();
+				newsContent = RegularUtil.Html2Text(newsContent);
+				if(newsContent.length()>100){
+					newsContent = newsContent.substring(0,80) + "...";
+					map.put("newsContent", newsContent);
+				} else {
+					map.put("newsContent", newsContent);
+				}
+			}
+		}
+		request.setAttribute("newsFooterList", newPage.getList());
+        
         //是否登陆
         User user = this.getCurrentUser();
         if(user==null){
@@ -64,6 +97,9 @@ public class BaseFrontController extends BaseCommon {
         	request.setAttribute("isLogin", true);
         	request.setAttribute("user", user);
         }
+        
+        String uri = request.getRequestURI();
+        request.setAttribute("uri", uri);
     }
 	
 }

@@ -113,10 +113,10 @@
 			</div>
 			<div class="col-md-3 blog">
 				<h3>新闻资讯</h3>
-				<a href="http://47.52.77.232/news/detail?newsId=2">加拿大 | 全球食品安全第一！</a>
-				<p>在2014年和2015年世界食品安全操作评估中，加拿大连续两年荣获食品安全第一位。</p>
-				<a href="http://47.52.77.232/news/detail?newsId=1">加拿大：沧海遗珠、人间天堂</a>
-				<p>过去一直觉得，说一个国家富有实力，无外乎描述这个国家如何的物资丰富、国土广阔。</p>
+				<c:forEach var="item" items="${newsFooterList }">
+					<a href="/news/detail?newsId=${item.id }" target="_blank">${item.newsTitle }</a>
+					<p>${item.newsContent }</p>	
+				</c:forEach>
 			</div>
 			<div class="col-md-3 support">
 				<h3>支持</h3>
