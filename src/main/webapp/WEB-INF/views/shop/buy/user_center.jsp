@@ -31,26 +31,26 @@
 								</div>
 								<c:if test="${not empty img }">
 									<div class="logo input_text">
-										<span class="lab"></span>
-										<div class="upload" style="border:0;">
-											<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;border:0;">
+										<span class="lab" style="margin-right:20px;">${t.t_change_avatar }: </span>
+										<div class="upload" id="showImg" style="border:0px;">
+											<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
+											<span class="deleteImg" onclick="deleteImg('${entity.id}')" style="">x</span>
 										</div>
 									</div>
 								</c:if>
-								<div class="logo input_text">
-									<span class="lab">${t.t_change_avatar}：</span>
-										<div class="upload">
-											<input type="file" name="attachFile">
-											<p class="one"><%-- ${t.t_drag_/file } --%></p>
-											<p class="two"><!-- OR --></p>
-											<p class="three">${t.t_select }</p>
+								<c:if test="${empty img }">
+									<div class="logo input_text" style="height:220px;">
+										<span class="lab" style="margin-right:20px;">${t.t_change_avatar }: </span>
+										<div class="upload" id="upload">
+											<span style="position:relative;left:50%;top:40px;">+</span>
+											<div style="margin:10px; width:200px;">
+												<input type="file"  name="file" id="doc" multiple="multiple" onchange="javascript:setImagePreviews();" accept="image/*" />
+												<div id="dd" style="height:200px;margin-top:-60px;margin-left:-15px;z-index:99999"></div>
+											</div>
 										</div>
-									<c:if test="${not empty img }">
-										<%-- <div class="upload">
-											<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
-										</div> --%>
-									</c:if>
-								</div>
+									</div>
+								</c:if>
+								
 								<div class="number input_text">
 									<span class="lab">${t.t_email}：</span>
 									<input type="text" name="userMail" value="${entity.userMail}" class="u-ipt">
@@ -112,7 +112,32 @@
 <script type="text/javascript">
 $(function(){
 	$('.menu_list ul li a').eq(1).addClass('active');
-});
-</script>
+	
+	$('#upload').click(function(){
+		$('input[name="file"]').trigger('click');
+	});
+	$('#dd').click(function(){
+		$('input[name="file"]').trigger('click');
+	});
+	
+	$('#showImg').hover(function(){
+		$('.deleteImg').show();	
+	},function(){
+		$('.deleteImg').hide();
+	});
+})
+function deleteImg(id){
+	if(confirm('${t.t_confirm_delete}')){
+		debugger;
+		var parm = {};
+		parm.id=id;
+		parm.type="avatar";
+		jQuery.common.updateObjByParm(parm,'/front/buy/deleteImg',true,'');
+	}
+}
+</script>	
+<style>
+.deleteImg{display:none; background:#ff0000;color:#fff;padding:10px;z-index:10;position:relative;float:right;width:30px;top:-70%;}
+</style>
 </body>
 </html>

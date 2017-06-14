@@ -459,7 +459,7 @@ public class SellerController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value="/doSaveMerchant", method = RequestMethod.POST)
 	public Map<String, Object> doSaveMerchant(Shop shop,
-			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile){
+			@RequestParam(name = "file",value="file", required = false) MultipartFile attachFile){
 		if(StringUtils.isBlank(shop.getShopTitle())){
 			return responseError(-1, "error_empty_shop_name");
 		}
@@ -506,7 +506,7 @@ public class SellerController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value="/saveBusinessLicense", method = RequestMethod.POST)
 	public Map<String, Object> saveBusinessLicense(Shop shop,
-			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile){
+			@RequestParam(name = "file",value="file", required = false) MultipartFile attachFile){
 		boolean exitShop = shopService.exitShop(shop.getId());
 		if(!exitShop){
 			return responseError(-1, "error_illegal");
@@ -547,7 +547,7 @@ public class SellerController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value="/saveMerchantIntroduce", method = RequestMethod.POST)
 	public Map<String, Object> saveMerchantIntroduce(Shop shop,
-			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile){
+			@RequestParam(name = "file",value="file", required = false) MultipartFile attachFile){
 		boolean exitShop = shopService.exitShop(shop.getId());
 		if(!exitShop){
 			return responseError(-1, "error_illegal");
@@ -588,7 +588,7 @@ public class SellerController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value="/saveShelfQualification", method = RequestMethod.POST)
 	public Map<String, Object> saveShelfQualification(Shop shop,
-			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile){
+			@RequestParam(name = "file",value="file", required = false) MultipartFile attachFile){
 		boolean exitShop = shopService.exitShop(shop.getId());
 		if(!exitShop){
 			return responseError(-1, "error_illegal");
@@ -627,7 +627,7 @@ public class SellerController extends BaseFrontController {
 	}
 	
 	/**
-	 * 删除图片
+	 * 删除产品图片
 	 * @param imgId
 	 * @return
 	 */
@@ -638,6 +638,27 @@ public class SellerController extends BaseFrontController {
 			return responseError(-1, "error_unknow");
 		}
 		imageService.deleteByIdAndProductId(imgId,productId);	
+		return responseOK1("");
+	}
+	@ResponseBody
+	@RequestMapping(value="/deleteImg", method = RequestMethod.GET)
+	public Map<String, Object> deleteImg(Long id, String type){
+		if(id==null || StringUtils.isBlank(type)){
+			return responseError(-1, "error_unknow");
+		}
+
+		Shop shop = new Shop();
+		shop.setId(id);
+		if(type.equals("logo")){
+			shop.setShopLogoImg("");
+		} else if(type.equals("license")){
+			shop.setShopLicenesImg("");
+		} else if(type.equals("shopimg")){
+			shop.setShopImg("");
+		} else if(type.equals("shelfQualificationImg")){
+			shop.setShelfQualificationImg("");
+		}
+		shopService.update(shop);
 		return responseOK1("");
 	}
 	

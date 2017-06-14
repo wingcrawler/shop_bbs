@@ -50,7 +50,7 @@ jQuery.common = {
 	
 	updateObjByParm: function(_obj, _updateUrl, _isRefrush, _jumpUrl) {
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			url: _updateUrl,
 			dataType : "json",
 			data: _obj,
