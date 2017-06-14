@@ -206,11 +206,11 @@
 	 u.username as name ,
 	 u.user_role as role  
 	 from post p  
-	LEFT JOIN `post` rp on rp.post_id = p.id
-	LEFT JOIN  `user` u on
+	 LEFT JOIN `post` rp on rp.post_id = p.id
+	 LEFT JOIN  `user` u on
 	 rp.user_id = u.id
-	where 1=1
-	and p.post_id is null
+	 where 1=1
+	 and rp.post_id is null
 	  <if test="parm.replyToFloor != null">
 		     	and p.reply_to_floor = #{parm.replyToFloor}
 		   	</if>
@@ -231,6 +231,9 @@
 		   	</if>
 			<if test="parm.postDate != null">
 		     	and p.post_date = #{parm.postDate}
+		   	</if>
+		   	<if test="parm.postId != null">
+		     	and rp.post_id = #{parm.postId}
 		   	</if>
 			<if test="parm.floor != null">
 		     	and p.floor = #{parm.floor}
