@@ -22,7 +22,9 @@
 				
 				<c:if test="${not empty shop}">
 					<div class="company_data">
-						<div class="img" style="background: #fff url(${img})no-repeat ;"></div>
+						<div class="img">
+							<img  alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
+						</div>
 						<div>
 							<p>${t.t_shop_name }: <span class="cyan">${shop.shopTitle }</span></p>
 							<p>${t.t_star }: <span>${shop.shopLevel }</span></p>
@@ -44,27 +46,27 @@
 								<input type="text" name="shopTitle" value="${shop.shopTitle }">
 							</div>
 							<c:if test="${not empty img }">
-							<div class="logo">
-								<span class="lab"> </span>
-								<div class="upload">
-									<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
-								</div>
-							</div>
-							</c:if>
-							<div class="logo">
-								<span class="lab">${t.t_shop_logo }: </span>
-								<div class="upload">
-									<input type="file" name="attachFile">
-									<%-- <p class="one">${t.t_drag_file }</p>
-									<p class="two">OR</p> --%>
-									<p class="three">${t.t_select }</p>
-								</div>
-								<%-- <c:if test="${not empty img }">
-									<div class="upload">
+								<div class="logo">
+									<span class="lab" style="margin-right:20px;">${t.t_shop_logo }: </span>
+									<div class="upload" id="showImg" >
 										<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
+										<span class="deleteImg" onclick="deleteImg('${shop.id}')" imgid="${shop.id }" style="">x</span>
 									</div>
-								</c:if> --%>
-							</div>
+								</div>
+							</c:if>
+							<c:if test="${empty img }">
+								<div class="logo" style="height:220px;">
+									<span class="lab" style="margin-right:20px;">${t.t_shop_logo }: </span>
+									<div class="upload" id="upload">
+										<span style="position:relative;left:50%;top:40px;">+</span>
+										<div style="margin:10px; width:200px;">
+											<input type="file"  name="file" id="doc" multiple="multiple" onchange="javascript:setImagePreviews();" accept="image/*" />
+											<div id="dd" style="height:200px;margin-top:-60px;margin-left:-15px;z-index:99999"></div>
+										</div>
+									</div>
+								</div>
+							</c:if>
+							
 							<div class="number">
 								<span class="lab">${t.t_mobile }: </span>
 								<input type="text" name="shopPhone" value="${shop.shopPhone }" >
@@ -126,7 +128,29 @@
 <script type="text/javascript">
 $(function(){
 	$('.menu_box .menu_list div.module a').eq(4).addClass('active');
+	
+	$('#upload').click(function(){
+		$('input[name="file"]').trigger('click');
+	});
+	
+	$('#showImg').hover(function(){
+		$('.deleteImg').show();	
+	},function(){
+		$('.deleteImg').hide();
+	});
 })
+function deleteImg(id){
+	if(confirm('${t.t_confirm_delete}')){
+		debugger;
+		var parm = {};
+		parm.id=id;
+		parm.type="logo";
+		jQuery.common.updateObjByParm(parm,'/front/sell/deleteImg',true,'');
+	}
+}
 </script>	
+<style>
+.deleteImg{display:none; background:#ff0000;color:#fff;padding:10px;z-index:10;position:relative;float:right;width:30px;top:-70%;}
+</style>
 </body>
 </html>

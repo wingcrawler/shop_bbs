@@ -73,7 +73,7 @@ public class BuyerCenterController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value="/doSaveBasicInfo", method = RequestMethod.POST)
 	public Map<String, Object> doSaveBasicInfo(User user,
-			@RequestParam(name = "attachFile",value="attachFile", required = false) MultipartFile attachFile){
+			@RequestParam(name = "file",value="file", required = false) MultipartFile attachFile){
 		if(StringUtils.isBlank(user.getUsername())){
 			return responseError(-1, "error_empty_username");
 		}
@@ -265,6 +265,22 @@ public class BuyerCenterController extends BaseFrontController {
 		} else {
 			responseError(-1, "error_illegal");
 		}
+		return responseOK1("");
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteImg", method = RequestMethod.GET)
+	public Map<String, Object> deleteImg(Long id, String type){
+		if(id==null || StringUtils.isBlank(type)){
+			return responseError(-1, "error_unknow");
+		}
+
+		User user = new User();
+		user.setId(id);
+		if(type.equals("avatar")){
+			user.setUserImage("");
+		}
+		userService.update(user);
 		return responseOK1("");
 	}
 }

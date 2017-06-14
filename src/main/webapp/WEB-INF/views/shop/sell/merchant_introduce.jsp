@@ -25,31 +25,31 @@
 							<div class="img_describe">
 								<div class="heade">${t.t_business_intro }</div>
 								<div class="company_forms">
-									<form enctype="multipart/form-data" method="POST" id="form">
+									<form enctype="multipart/form-data" method="POST" id="form" action="/front/sell/saveMerchantIntroduce">
 										<input type="hidden" value="${shop.id }" name="id">
 										
 										<c:if test="${not empty shop.shopImg }">
-										<div class="logo">
-											<span class="lab"></span>
-											<img alt="" src="${shop.shopImg}" width="60%" height="60%" style="margin-top:-15px;padding:0;">	
+											<div class="upload" id="showImg" style="text-align:center;margin-bottom:20px;">
+												<span class="lab"></span>
+												<img alt="" src="${shop.shopImg}" width="60%" height="60%" style="margin-top:-15px;padding:0;">
+												<span class="deleteImg" onclick="deleteImg('${shop.id}')" imgid="${shop.id }">x</span>
+											</div>
+										</c:if>
+										<c:if test="${empty shop.shopImg }">
+										<div class="logo" style="height:200px;">
+											<span class="lab" style="margin-right:20px;">${t.t_business_intro }: </span>
+											<div class="upload" id="upload">
+												<span style="position:relative;left:50%;top:40px;">+</span>
+												<div style="margin:10px; width:200px;">
+													<input type="file"  name="file" id="doc" multiple="multiple" onchange="javascript:setImagePreviews();" accept="image/*" />
+													<div id="dd" style="height:200px;margin-top:-60px;margin-left:-15px;z-index:99999"></div>
+												</div>
+											</div>
 										</div>
 										</c:if>
 										
-										<div class="logo">
-											<span class="lab">${t.t_business_intro }</span>
-											<div class="upload">
-												<input type="file" name="attachFile">
-												<%-- <p class="one">${t.t_drag_file }</p>
-												<p class="two">OR</p> --%>
-												<p class="three">${t.t_select }</p>
-												<%-- <c:if test="${not empty shop.shopImg }">
-													<img alt="" src="${shop.shopImg}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
-												</c:if> --%>
-											</div>
-										</div>
-										
 										<div class="intro">
-											<span class="lab">${t.t_desc }</span>
+											<span class="lab">${t.t_desc }: </span>
 											<textarea class="textarea_intro" name="shopDescription">${shop.shopDescription }</textarea>
 										</div>
 										<div class="save">
@@ -74,7 +74,30 @@
 <script type="text/javascript">
 $(function(){
 	$('.menu_box .menu_list div.module a').eq(3).addClass('active');
+	
+	$('#upload').click(function(){
+		$('input[name="file"]').trigger('click');
+	});
+	
+	$('#showImg').hover(function(){
+		$('.deleteImg').show();
+	},function(){
+		$('.deleteImg').hide();
+	});
+	
 })
+function deleteImg(id){
+	if(confirm('${t.t_confirm_delete}')){
+		debugger;
+		var parm = {};
+		parm.id=id;
+		parm.type="shopimg";
+		jQuery.common.updateObjByParm(parm,'/front/sell/deleteImg',true,'');
+	}
+}
 </script>	
+<style>
+.deleteImg{ background:#ff0000;color:#fff;padding:10px;position:relative;left:-30px;}
+</style>	
 </body>
 </html>
