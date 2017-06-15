@@ -57,3 +57,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- img upload -->
 <script type="text/javascript" src="/frontstyle/imgupload/imgUp.js"></script>
+<script type="text/javascript" src="/frontstyle/imgupload/imgUp2.js"></script>

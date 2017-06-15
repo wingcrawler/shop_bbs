@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,27 +120,33 @@
 												</label>
 												<div class="m-checkboxgroup">
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" value="t_product_tag_new" name="productTag" id="checkbox1" checked>
+														<input type="checkbox" class="u-ipt-checkbox"
+														<c:if test="${fn:contains(entity.productTag, 't_product_tag_new')}">checked</c:if>
+														 value="t_product_tag_new" name="productTag" id="checkbox1" >
 														<label for="checkbox1">
-															<div class="i-checkbox z-checked">
+															<div class="i-checkbox <c:if test="${fn:contains(entity.productTag, 't_product_tag_new')}">z-checked</c:if>">
 																<i></i>
 															</div>
 															<span class="i-checkboxtxt">${t.t_product_tag_new }</span>
 														</label>
 													</div>
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" value="t_product_tag_hot" name="productTag" id="checkbox2">
+														<input type="checkbox" class="u-ipt-checkbox"
+														<c:if test="${fn:contains(entity.productTag, 't_product_tag_hot')}">checked</c:if>
+														 value="t_product_tag_hot" name="productTag" id="checkbox1" >
 														<label for="checkbox2">
-															<div class="i-checkbox">
+															<div class="i-checkbox <c:if test="${fn:contains(entity.productTag, 't_product_tag_hot')}">z-checked</c:if>" >
 																<i></i>
 															</div>
 															<span class="i-checkboxtxt">${t.t_product_tag_hot }</span>
 														</label>
 													</div>
 													<div class="u-checkboxitem">
-														<input type="checkbox" class="u-ipt-checkbox" value="t_product_tag_half" name="productTag" id="checkbox3">
+														<input type="checkbox" class="u-ipt-checkbox"
+														<c:if test="${fn:contains(entity.productTag, 't_product_tag_half')}">checked</c:if>
+														 value="t_product_tag_half" name="productTag" id="checkbox3">
 														<label for="checkbox3">
-															<div class="i-checkbox">
+															<div class="i-checkbox <c:if test="${fn:contains(entity.productTag, 't_product_tag_half')}">z-checked</c:if>">
 																<i></i>
 															</div>
 															<span class="i-checkboxtxt">${t.t_product_tag_half }</span>
@@ -194,19 +201,26 @@
 											</div>
 										</div> --%>
 										
+										<!-- 单张图片 -->
 										<div class="photo_album">
 											<span class="labe">${t.t_show_img }:</span>
 											<c:if test="${not empty img}">
-											<div class="upimg">
-												<img alt="" src="${img.imagePath}" width="100%" height="100%" style="padding:0;">
-											</div>
+												<div class="upimg">
+													<img alt="" src="${img.imagePath}" width="100%" height="100%" style="padding:0;">
+													<span class="deleteImg" imgid="${img.id }" style="backgroung:#aaa;z-index:10;position:relative;float:right;width:30px">x</span>
+												</div>
 											</c:if>
-											<div class="upimg">
-												<input type="file" name="indexFile" id="indexFile">
+											<c:if test="${empty img}">
+												<div class="upimg">
+													<input type="file" name="indexFile" accept="image/*"
+													onchange="javascript:setImagePreviews2('doc','dd');" id="doc"  id="indexFile">
+													<div id="dd" onclick="triggerSelect('#doc')"></div>
 													<span>${t.t_select }</span>
-											</div>
+												</div>
+											</c:if>
 										</div>
 										
+										<!-- 图片列表 -->
 										<div class="photo_album">
 											<span class="labe">${t.t_img_list }: </span>
 											<c:forEach var="item" items="${imgList }">
@@ -217,11 +231,15 @@
 											</c:forEach>
 											<c:forEach var="i" begin="1" end="${inputCount }" step="1">
 												<div class="upimg">
-													<input type="file" name="listFile" id="listFile">
+													<input type="file" name="listFile"
+													accept="image/*"
+													onchange="javascript:setImagePreviews2('doc${i }','dd${i }');" id="doc${i }">
+													<div id="dd${i }" onclick="triggerSelect('#doc${i }')"></div>
 													<span>${t.t_select }</span>
 												</div>
 											</c:forEach>
 										</div>
+										
 										<div class="product_description">
 											<span class="labe">${t.t_desc }(${t.t_zh }): </span>
 											<div class="text_editing">
@@ -293,6 +311,9 @@ $(function(){
 	});
 	
 });
+function triggerSelect(elem){
+	$(elem).trigger('click');
+}
 
 </script>
 </body>
