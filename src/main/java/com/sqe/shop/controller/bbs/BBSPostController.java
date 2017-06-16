@@ -89,7 +89,6 @@ public class BBSPostController extends BaseBackendController{
 		PageUtil<Map<String, Object>> page = postService.getMapListByParm(post, pageNo, pageSize);
         
 		
-		
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
 		

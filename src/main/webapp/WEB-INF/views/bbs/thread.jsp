@@ -69,29 +69,28 @@
 	<!-- //header -->
 	<!-- 新增的樓層-->
 	<div class="container">
-		<section class="m" id="content"> <!--楼层--> 
-		
-		<!--楼层-->
-		<c:if
+		<section class="m" id="content"> <!--楼层--> <!--楼层--> <c:if
 			test="${not empty user }">
-	<div class="tItem cnt" quotedCommentId="45470309" id="45470309">
-		<a href="#" class="name">${user.username }</a>		
-		<span class="lv">LV6</span>
-		<em class="isLz"></em>		
-		<div class="tmain">
-			<p> <img src=${user.userImage }  height="100" width="100" /></p>							
-			
-			<h3>${thread.threadTitle }</h3>
-			<p>${thread.threadContext }</p>
-			<!--1楼的顶-->
-			<div class="dwp">
-				<a href="#" class="dbt bb"><span class="num">0</span>${t.t_bbs_up }</a>
-			</div>			
-		</div>		
-		<a href="#bReply" class="rbt wb first">回复</a>		
-		<span class="msg">1楼 <fmt:formatDate	value="${thread.threadTime }" pattern="yyyy-MM-dd HH:mm" /></span>
-		<br class="c"/>		
-	</div>	
+			<div class="tItem cnt" quotedCommentId="45470309" id="45470309">
+				<a href="#" class="name">${user.username }</a> <span class="lv">LV6</span>
+				<em class="isLz"></em>
+				<div class="tmain">
+					<p>
+						<img src=${user.userImage } height="100" width="100" />
+					</p>
+
+					<h3>${thread.threadTitle }</h3>
+					<p>${thread.threadContext }</p>
+					<!--1楼的顶-->
+					<div class="dwp">
+						<a href="#" class="dbt bb"><span class="num">0</span>${t.t_bbs_up }</a>
+					</div>
+				</div>
+				<a href="#bReply" class="rbt wb first">回复</a> <span class="msg">1楼
+					<fmt:formatDate value="${thread.threadTime }"
+						pattern="yyyy-MM-dd HH:mm" />
+				</span> <br class="c" />
+			</div>
 		</c:if>
 		<div id="ajaxList">
 			<!--楼层-->
@@ -103,24 +102,27 @@
 			</li>
 			<!--楼层-->
 			<div v-for="item in items" class="tItem cnt"
-				quotedCommentId="45470767" id="45470767">
+				quotedCommentId="45470767" id="">
 				<a href="#" class="name">{{item.name}}</a> <span class="lv">LV6</span>
 				<em class="isLz"></em>
 				<div class="tmain">
 					<p v-html="item.context"></p>
-					
+					<span class="msg">{{item.floor}}${t.t_bbs_floor }{{item.time}}</span>
 					<!--楼中楼数据-->
-					<ul class="llist">
-						<li>唐伯虎回顧秋香：</li>
-						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+					<ul v-if="item.replyList!=''" class="llist">
+						<span v-for="item in item.replyList"> <br />
+							<li>{{item.name}}:</li> <span class="msg">{{item.post_date|formatDate('dateTime')}}</span>
+							<br />
+							<p v-html="item.context"></p>
+						</span>
 					</ul>
 				</div>
-				<div class="rbt wb" @click="show($index)">回复(0)</div>
+				<div class="rbt wb"  v-on:click="fn()">回复(0)</div>
 
-				<span class="msg">{{item.floor}}${t.t_bbs_floor }{{item.time}}</span>
+
 				<br class="c" />
 				<!--楼中楼内容-->
-				<div class="lzl" v-show="willShow">
+				<div class="lzl"  v-show="isShow">
 					<div class="reply1">
 						<textarea class="editor" placeholder="在这里输入你要发表的内容..."></textarea>
 						<input type="submit" value="发表">
@@ -152,6 +154,10 @@
 					<p
 						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
 					<!--楼中楼数据-->
+					<ul class="llist">
+						<li>唐伯虎回顧秋香：</li>
+						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
+					</ul>
 					<ul class="llist">
 						<li>唐伯虎回顧秋香：</li>
 						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
@@ -216,7 +222,8 @@
 	<!-- 回帖框 -->
 
 	<c:if test="${isLogin }">
-		<div v-if="${isLogin }==true" class="container" style="margin-top:1em">
+		<div v-if="${isLogin }==true" class="container"
+			style="margin-top: 1em">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -295,18 +302,16 @@ ${t.t_bbs_login_re }
 			data : {
 				items : [],
 				loaded : false,
-				willShow:false
+				isShow:false
 				
 			},
-			methods :{
-				show(index){
-		          if(this.willShow==true){
-		            this.willShow=false;
-		          }else{
-		            this.willShow=true
-		          }
-				}
-			}		
+			 methods:{
+                 fn:function(e){
+                	 console(e);
+                     e.isShow = !e.isShow;
+                 }
+             }
+			
 		});
 
 		function responseHandle(json) {
@@ -367,6 +372,28 @@ ${t.t_bbs_login_re }
 				});
 			});
 			demo();
+		});
+		function formatNumber(n) {
+		    //n为整数
+		    n = n.toString();
+		    return n[1] ? n : '0' + n
+		}
+
+		//注册全局过滤器
+		Vue.filter("formatDate",function(value,formatType){
+		    //value：时间毫秒值
+		    var date=new Date(value);
+		    var year=date.getFullYear(),
+		        month=formatNumber(date.getMonth()+1),
+		        day=formatNumber(date.getDate());
+		    var dateStr=year+'-'+month+'-'+day;
+		    if(formatType=='dateTime'){
+		        var hour=date.getHours(),
+		            minute=date.getMinutes(),
+		            second=date.getSeconds();
+		        dateStr+=' '+[hour, minute, second].map(formatNumber).join(':');
+		    }
+		    return dateStr;
 		});
 	</script>
 	<script type="text/javascript">
