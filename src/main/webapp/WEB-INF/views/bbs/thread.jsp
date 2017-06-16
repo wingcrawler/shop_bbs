@@ -117,12 +117,12 @@
 						</span>
 					</ul>
 				</div>
-				<div class="rbt wb"  v-on:click="fn()">回复(0)</div>
+				<div class="rbt wb" @click="toggle(item)" >回复(0)</div>
 
 
 				<br class="c" />
 				<!--楼中楼内容-->
-				<div class="lzl"  v-show="isShow">
+				<div class="lzl" v-show="item.show">
 					<div class="reply1">
 						<textarea class="editor" placeholder="在这里输入你要发表的内容..."></textarea>
 						<input type="submit" value="发表">
@@ -300,24 +300,24 @@ ${t.t_bbs_login_re }
 		var playTableVue = new Vue({
 			el : "#ajaxList",
 			data : {
-				items : [],
+				items: [],
 				loaded : false,
-				isShow:false
-				
+
 			},
-			 methods:{
-                 fn:function(e){
-                	 console(e);
-                     e.isShow = !e.isShow;
-                 }
-             }
-			
+			methods : {
+				toggle:function(item) {
+					item.show = !item.show;
+				}
+			}
+
 		});
 
 		function responseHandle(json) {
-
 			if (!json)
 				json = [];
+			json.list.map(function(item){
+				  item.show = false;
+			});
 			playTableVue.items = json.list;
 			playTableVue.loaded = true;
 		}
@@ -328,6 +328,7 @@ ${t.t_bbs_login_re }
 				pageNo : curr || 1,
 				pageSize : 10, //向服务端传的参数，此处只是演示
 			}, function(json) {
+
 				//显示分页
 				laypage({
 					cont : 'page3', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>  
@@ -374,27 +375,32 @@ ${t.t_bbs_login_re }
 			demo();
 		});
 		function formatNumber(n) {
-		    //n为整数
-		    n = n.toString();
-		    return n[1] ? n : '0' + n
+			//n为整数
+			n = n.toString();
+			return n[1] ? n : '0' + n
 		}
 
 		//注册全局过滤器
-		Vue.filter("formatDate",function(value,formatType){
-		    //value：时间毫秒值
-		    var date=new Date(value);
-		    var year=date.getFullYear(),
-		        month=formatNumber(date.getMonth()+1),
-		        day=formatNumber(date.getDate());
-		    var dateStr=year+'-'+month+'-'+day;
-		    if(formatType=='dateTime'){
-		        var hour=date.getHours(),
-		            minute=date.getMinutes(),
-		            second=date.getSeconds();
-		        dateStr+=' '+[hour, minute, second].map(formatNumber).join(':');
-		    }
-		    return dateStr;
-		});
+		Vue
+				.filter(
+						"formatDate",
+						function(value, formatType) {
+							//value：时间毫秒值
+							var date = new Date(value);
+							var year = date.getFullYear(), month = formatNumber(date
+									.getMonth() + 1), day = formatNumber(date
+									.getDate());
+							var dateStr = year + '-' + month + '-' + day;
+							if (formatType == 'dateTime') {
+								var hour = date.getHours(), minute = date
+										.getMinutes(), second = date
+										.getSeconds();
+								dateStr += ' '
+										+ [ hour, minute, second ].map(
+												formatNumber).join(':');
+							}
+							return dateStr;
+						});
 	</script>
 	<script type="text/javascript">
 		$(function() {
@@ -404,7 +410,7 @@ ${t.t_bbs_login_re }
 
 			$('#submit').click(
 					function() {
-						var parm =  $.fn.getFormJson('.form');
+						var parm = $.fn.getFormJson('.form');
 						$.fn.doSave(parm, '/bbs/post/doSave',
 								'/bbs/thread?threadId=${thread.id }');
 					});
