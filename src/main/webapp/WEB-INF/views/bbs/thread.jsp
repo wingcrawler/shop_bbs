@@ -127,7 +127,7 @@
 							<form @submit.prevent="submit">
 							<textarea class="editor" placeholder="......"
 								v-model="post.postContext"></textarea>
-							<input type="hidden" v-bind:value="item.id" v-model="post.postId"> 
+							<input type="hidden" value="" v-model="post.postId"> 
 							<input type="submit" value="${t.b_submit }">
 							</form>
 						</div>
@@ -211,6 +211,7 @@ ${t.t_bbs_login_re }
 	<jsp:include page="include/footer.jsp"></jsp:include>
 	<!-- footer -->
 	<script type="text/javascript">
+		var isLogin = ${isLogin};
 		var playTableVue = new Vue({
 			el : "#ajaxList",
 			data : {
@@ -225,13 +226,19 @@ ${t.t_bbs_login_re }
 			},
 			methods : {
 				toggle : function(item) {
-					item.show = !item.show;
+					let inner=this.post
+					inner.postId=item.id
+					if (isLogin) {
+						item.show = !item.show;
+					}else{
+						alert("${t.t_bbs_login_re}");
+					}
 				},
 				submit : function() {
 					console.log(this.post)
-					//var formData = this.subpost; // 这里才是你的表单数
-					//$.fn.doSave(formData, '/bbs/post/doSave',
-						//	'/bbs/thread?threadId=${thread.id }');
+					var formData = this.post; // 这里才是你的表单数
+					$.fn.doSave(formData, '/bbs/post/doSave',
+							'/bbs/thread?threadId=${thread.id }');
 				}
 			}
 

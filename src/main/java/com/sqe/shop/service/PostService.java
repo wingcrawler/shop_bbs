@@ -87,7 +87,7 @@ public class PostService extends AdapterService implements BaseService {
 				List<Map<String, Object>> replyList = new ArrayList<Map<String,Object>>();
 				Map<String, Object> replyMap = new HashMap<String, Object>();
 				replyMap.put("orderby", "rp.post_date desc");
-				parm.put("nullCommentId", false);
+				parm.put("nullID", false);
 				for(Map<String, Object> map : list){
 					replyMap.put("postId", map.get("id"));
 					replyList = postMapper.getSubPostListByParm(replyMap);	

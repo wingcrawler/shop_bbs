@@ -30,7 +30,7 @@
 
 			</ul>
 			<!--END 圈子推荐-->
-			<!--精彩推荐-->
+			<!--热门帖子-->
 			<div class="h2">
 				<span class="ico ico_jctj txt">${t.t_bbs_Wonderful_recommendation }</span>
 				<br class="c" />

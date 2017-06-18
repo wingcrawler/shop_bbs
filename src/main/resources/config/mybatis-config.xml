@@ -52,7 +52,7 @@
 	
 	<!-- 将数据源映射到sqlSessionFactory中 -->  
     <bean id="sqlSessionFactory_" class="org.mybatis.spring.SqlSessionFactoryBean">  
-        <!-- <property name="configLocation" value="classpath*:mybatis/mybatis-config.xml" /> -->  
+        <!-- <property name="configLocation" value="classpath*:my-config.xml" />  -->
         <property name="dataSource" ref="dataSourceOne" />  
         <property name="mapperLocations" value="classpath*:sqlmap/*.xml" />  
     </bean> 
