@@ -117,104 +117,23 @@
 						</span>
 					</ul>
 				</div>
-				<div class="rbt wb" @click="toggle(item)" >回复(0)</div>
-
+				<div class="rbt wb" @click="toggle(item)">回复</div>
 
 				<br class="c" />
 				<!--楼中楼内容-->
 				<div class="lzl" v-show="item.show">
-					<div class="reply1">
-						<textarea class="editor" placeholder="在这里输入你要发表的内容..."></textarea>
-						<input type="submit" value="发表">
-					</div>
+					
+						<div class="reply1">
+							<form @submit.prevent="submit">
+							<textarea class="editor" placeholder="......"
+								v-model="post.postContext"></textarea>
+							<input type="hidden" v-bind:value="item.id" v-model="post.postId"> 
+							<input type="submit" value="${t.b_submit }">
+							</form>
+						</div>
+					
 				</div>
 				<!--END 楼中楼内容-->
-			</div>
-			<!--楼层-->
-			<div class="tItem cnt" quotedCommentId="45470767" id="45470767">
-				<a href="../Home/755355.html" class="name">95912180</a> <span
-					class="lv">LV6</span> <em class="isLz"></em>
-				<div class="tmain">
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【发火最狂暴的星座排名】</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">冠军(天蝎座）、亚军(狮子座）、季军(白羊座）、第4名(魔羯座）、第5名(金牛座）、第6名(射手座）、第7名(双鱼座）、第8名(水瓶座）、第9名(处女座）、第10名(巨蟹座）、第11名(天秤座）、第12名(双子座）</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【天秤座的几桩“最”】</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">最可爱星座——天秤座；最聪明星座——天秤座；最善良型星座——天秤座；最好玩星座——天秤座；最严谨星座——天秤座；最无私星座——天秤座；最宅星座——天秤座；最勇敢星座——天秤座；最有才星座——天秤座；最温柔星座——天秤座。</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
-					<!--楼中楼数据-->
-					<ul class="llist">
-						<li>唐伯虎回顧秋香：</li>
-						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-					</ul>
-					<ul class="llist">
-						<li>唐伯虎回顧秋香：</li>
-						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-					</ul>
-
-				</div>
-				<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
-				<span class="msg">2楼2013-12-08 15:35</span> <br class="c" />
-				<!--楼中楼内容-->
-				<div class="lzl hid">
-					<div class="reply1">
-						<textarea class="editor" placeholder="在这里输入你要发表的内容..."></textarea>
-						<input type="submit" value="发表">
-					</div>
-				</div>
-				<!--END 楼中楼内容-->
-			</div>
-			<!--楼层-->
-			<div class="tItem cnt" quotedCommentId="45470737" id="45470737">
-				<a href="../Home/755355.html" class="name">95912180</a> <span
-					class="lv">LV6</span> <em class="isLz"></em>
-
-				<div class="tmain">
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">【十二星座女生叛逆排行】</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">冠军（天蝎座）、亚军（双子座）、季军（水瓶座）、第四名（射手座）、第五名（天秤座）、第六名（狮子座）、第七名（白羊座）、第八名（双鱼座）、第九名（处女座）、第十名（魔羯座）、第十一名（巨蟹座）、第十二名（金牛座）</p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;"></p>
-					<p
-						style="font-family: 宋体, tahoma, helvetica, arial, sans-serif; line-height: 21px; background-color: #ffffff;">~(≥◇≤)~</p>
-					<p></p>
-					<ul class="llist">
-						<li>唐伯虎回顧秋香：</li>
-						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-					</ul>
-					<ul class="llist">
-						<li>唐伯虎回顧秋香：</li>
-						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-					</ul>
-					<ul class="llist">
-						<li>唐伯虎回顧秋香：</li>
-						<li>這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香這是什麽a唐伯虎回顧秋香</li>
-					</ul>
-				</div>
-				<a href="javascript:void(0);" class="rbt wb" notClick="true">回复(0)</a>
-				<span class="msg">3楼2013-12-08 15:35</span> <br class="c" />
-
-				<!--楼中楼内容-->
-				<div class="lzl hid">
-					<div class="reply1">
-						<textarea class="editor" placeholder="在这里输入你要发表的内容..."></textarea>
-						<input type="submit" value="发表">
-					</div>
-				</div>
-				<!--END 楼中楼内容-->
-
 			</div>
 		</div>
 	</div>
@@ -282,11 +201,6 @@ ${t.t_bbs_login_re }
 </c:if>
 	<br>
 
-
-
-
-
-
 	<!--跟帖分页-->
 	<div id="page3" style="text-align: center;"></div>
 	</section>
@@ -295,18 +209,29 @@ ${t.t_bbs_login_re }
 	<!-- 新增的圈子和精彩end -->
 	<!-- footer -->
 	<jsp:include page="include/footer.jsp"></jsp:include>
-	<!-- //footer -->
+	<!-- footer -->
 	<script type="text/javascript">
 		var playTableVue = new Vue({
 			el : "#ajaxList",
 			data : {
-				items: [],
+				items : [],
 				loaded : false,
+				post : {
+					threadId:'${thread.id }',
+					postContext:'',
+					postId:'',
+				},
 
 			},
 			methods : {
-				toggle:function(item) {
+				toggle : function(item) {
 					item.show = !item.show;
+				},
+				submit : function() {
+					console.log(this.post)
+					//var formData = this.subpost; // 这里才是你的表单数
+					//$.fn.doSave(formData, '/bbs/post/doSave',
+						//	'/bbs/thread?threadId=${thread.id }');
 				}
 			}
 
@@ -315,8 +240,8 @@ ${t.t_bbs_login_re }
 		function responseHandle(json) {
 			if (!json)
 				json = [];
-			json.list.map(function(item){
-				  item.show = false;
+			json.list.map(function(item) {
+				item.show = false;
 			});
 			playTableVue.items = json.list;
 			playTableVue.loaded = true;
