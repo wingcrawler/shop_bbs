@@ -12,7 +12,7 @@
 			<div class="header-right">
 				<ul>
 					<li class="phone">604-974-8777</li>
-					<li class="mail"><a href="mailto:example@mail.com">info@sachielconnectinc.com</a></li>
+					<li class="mail"><a href="mailto:info@sachielconnectinc.com">info@sachielconnectinc.com</a></li>
 					<li class="water"><a href="http://www.sachielwaterinc.com/">Sachiel</a></li>
 					<c:if test="${isSellLogin }">
 						<%-- <li class=""><a href="/front/sell/productListPage">${t.t_bussiness_center }</a></li> --%>
