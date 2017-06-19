@@ -81,12 +81,12 @@
 
 					<h3>${thread.threadTitle }</h3>
 					<p>${thread.threadContext }</p>
-					<!--1楼的顶-->
+					<!--1楼的顶
 					<div class="dwp">
 						<a href="#" class="dbt bb"><span class="num">0</span>${t.t_bbs_up }</a>
-					</div>
+					</div>-->
 				</div>
-				<a href="#bReply" class="rbt wb first">回复</a> <span class="msg">1楼
+				<a href="#bReply" class="rbt wb first">回复</a> <span class="msg">
 					<fmt:formatDate value="${thread.threadTime }"
 						pattern="yyyy-MM-dd HH:mm" />
 				</span> <br class="c" />
