@@ -81,12 +81,12 @@
 
 					<h3>${thread.threadTitle }</h3>
 					<p>${thread.threadContext }</p>
-					<!--1楼的顶-->
+					<!--1楼的顶
 					<div class="dwp">
 						<a href="#" class="dbt bb"><span class="num">0</span>${t.t_bbs_up }</a>
-					</div>
+					</div>-->
 				</div>
-				<a href="#bReply" class="rbt wb first">回复</a> <span class="msg">1楼
+				<a href="#bReply" class="rbt wb first">回复</a> <span class="msg">
 					<fmt:formatDate value="${thread.threadTime }"
 						pattern="yyyy-MM-dd HH:mm" />
 				</span> <br class="c" />
@@ -122,16 +122,17 @@
 				<br class="c" />
 				<!--楼中楼内容-->
 				<div class="lzl" v-show="item.show">
-					
-						<div class="reply1">
-							<form @submit.prevent="submit">
+
+					<div class="reply1">
+						<form @submit.prevent="submit">
 							<textarea class="editor" placeholder="......"
 								v-model="post.postContext"></textarea>
 							<input type="hidden" value="" v-model="post.postId"> 
+							<input type="hidden" v-bind:value="item.id" v-model="post.postId">
 							<input type="submit" value="${t.b_submit }">
-							</form>
-						</div>
-					
+						</form>
+					</div>
+
 				</div>
 				<!--END 楼中楼内容-->
 			</div>
@@ -218,9 +219,9 @@ ${t.t_bbs_login_re }
 				items : [],
 				loaded : false,
 				post : {
-					threadId:'${thread.id }',
-					postContext:'',
-					postId:'',
+					threadId : '${thread.id }',
+					postContext : '',
+					postId : '',
 				},
 
 			},
@@ -228,6 +229,7 @@ ${t.t_bbs_login_re }
 				toggle : function(item) {
 					let inner=this.post
 					inner.postId=item.id
+
 					if (isLogin) {
 						item.show = !item.show;
 					}else{
@@ -236,6 +238,7 @@ ${t.t_bbs_login_re }
 				},
 				submit : function() {
 					console.log(this.post)
+
 					var formData = this.post; // 这里才是你的表单数
 					$.fn.doSave(formData, '/bbs/post/doSave',
 							'/bbs/thread?threadId=${thread.id }');
