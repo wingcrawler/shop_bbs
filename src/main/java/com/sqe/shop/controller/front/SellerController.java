@@ -184,7 +184,9 @@ public class SellerController extends BaseFrontController {
 		ProductType typeOne = productTypeService.getById(entity.getProductTypeId());
 		resMap.put("typeOne", typeOne.getTypeName());
 		ProductType typeTwo = productTypeService.getById(entity.getProductSubtypeId());
-		resMap.put("typeTwo", typeTwo.getTypeName());
+		if(typeTwo!=null){
+			resMap.put("typeTwo", typeTwo.getTypeName());	
+		}
 		
 		List<Image> images = imageService.getByProductId(entity.getId());
 		resMap.put("showImg", images.get(0));
