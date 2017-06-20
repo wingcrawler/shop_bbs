@@ -73,8 +73,12 @@
         <session-timeout>86400</session-timeout>  
 	</session-config>
     
-    <error-page>
+    <!-- <error-page>
 	    <error-code>404</error-code>
-	    <location>/WEB-INF/views/account/login.jsp</location>
+	    <location>/shop/404.jsp</location>
 	</error-page>
+	<error-page>
+         <error-code>500</error-code>
+         <location>/shop/500.jsp</location>
+     </error-page> -->
 </web-app>  

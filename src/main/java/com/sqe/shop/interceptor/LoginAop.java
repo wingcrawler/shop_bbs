@@ -22,7 +22,7 @@ public class LoginAop {
 	@Autowired 
 	private LoginService loginService;
 	
-	@Pointcut("execution(* com.sqe.shop.controller.*.LoginController.login(..))")  
+	@Pointcut("execution(* com.sqe.shop.controller.*.*.login(..))")  
     private void before() {} 
 	
 	@Before("before()")  

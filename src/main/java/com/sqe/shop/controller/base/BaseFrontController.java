@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.sqe.shop.common.BaseCommon;
@@ -101,5 +102,16 @@ public class BaseFrontController extends BaseCommon {
         String uri = request.getRequestURI();
         request.setAttribute("uri", uri);
     }
+	
+	/** 
+     * 如果执行此Controller里面的方法出现异常,则会执行该方法 
+     * @param e 
+     * @return 
+     */  
+    @ExceptionHandler({Exception.class})  
+    public String exceptionHandle(Exception e){  
+        System.out.println("Exception"+e);  
+        return "shop/500";  
+    }  
 	
 }

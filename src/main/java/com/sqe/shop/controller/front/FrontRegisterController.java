@@ -1,15 +1,14 @@
 package com.sqe.shop.controller.front;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,6 +56,21 @@ public class FrontRegisterController extends BaseFrontController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
+		
+		if(isLogin()){
+			String url = getSavedRequestUrl();
+			if(StringUtils.isBlank(url)){
+				modelAndView.setViewName("shop/login");
+				return modelAndView;
+			}
+			if(url.indexOf("login")<=0){
+				return new ModelAndView("redirect:"+url);
+			} else {
+				modelAndView.setViewName("shop/login");
+				return modelAndView;
+			}
+		}
+		
 		modelAndView.setViewName("shop/login");
 		return modelAndView;
 	}
