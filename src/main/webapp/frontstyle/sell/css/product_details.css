@@ -299,18 +299,7 @@ input {
   font-size: 0.75rem;
   cursor: pointer;
 }
-.main .menu_box .menu_list .module {
-  overflow: hidden;
-  padding-top: 0.5rem;
-}
 
-.main .menu_box .menu_list .module p {
-  width: 50%;
-  line-height: 1.25rem;
-  float: left;
-  font-size: 0.75rem;
-  cursor: pointer;
-}
 
 /*-- companyData --*/
 .companyData {
