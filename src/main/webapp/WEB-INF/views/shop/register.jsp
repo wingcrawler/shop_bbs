@@ -21,20 +21,25 @@
 				<p>${t.register }</p>
 				<div class="input">
 					<div class="margin">
-						<span>*</span>${t.register_account }：<input type="text" name="username" class="user"
+						<span><b>*</b>${t.register_account }：</span><input type="text" name="username" class="user"
 							id="rename" />
 					</div>
-					<span>*</span>${t.register_password }：<input type="password" name="password"
-						class="key" / id="key"><br /> <span>*</span>${t.register_confirm  }：<input
-						type="password" name="repassword" class="key1" / id="key1"><br />
 					<div class="margin">
-						<span>*</span>${t.register_email }：<input type="text" name="userMail" class="email"
+						<span><b>*</b>${t.register_password }：</span><input type="password" name="password"
+						class="key" / id="key">
+					</div>
+					<div class="margin">
+						<span><b>*</b>${t.register_confirm  }：</span><input
+						type="password" name="repassword" class="key1" / id="key1">
+					</div>
+					<div class="margin">
+						<span><b>*</b>${t.register_email }：</span><input type="text" name="userMail" class="email"
 							id="email" />
 					</div>
 				</div>
-				<label><input type="checkbox" name="checked" class="check"
-					checked="checked">我已阅读并同意<a href="###" class="ftp">《赛奇尔服务协议》</a></label>
-				<input id="onsubmit" type="submit" class="pload" value="立即注册" />
+				<label class="register_label"><input type="checkbox" name="checked" class="check"
+					checked="checked">${t.register_agree}<a href="###" class="ftp">《${t.register_item}》</a></label>
+				<input id="onsubmit" type="submit" class="pload" value="${t.register_now}" />
 
 			</div>
 		</form>
@@ -42,8 +47,8 @@
 
 
 	<script type="text/javascript">
-	var error_item_empty='${t.register_empty_item}';
-	var error_patterm_username='${t.register_usernmae_pattern}';
+	var error_user_empty='${t.error_empty_username}';
+	var error_password_empty='${t.error_empty_pwd}';
 	var register_sucess='${t.register_succee}';
 	var register_failed='${t.register_failed}';
 		$(function() {
@@ -52,8 +57,8 @@
 				$pass = $("#key").val();
 				$pass2 = $("#key1").val();
 				$mail = $("#email").val();
-				if ($username == '' || $pass == ''||$pass2 == ''||$mail == '') {
-					alert(error_item_empty);
+				if ($username == '' || $pass == '') {
+					alert(error_user_empty);
 					return false;
 				} else {
 					var datas = {
@@ -72,7 +77,7 @@
 								alert(result.errorInfo);
 							} else {
 								alert(register_sucess);
-								//window.location.href = '/user/login';//登录成功跳转
+								window.location.href = '/user/login';//登录成功跳转
 							}
 						},
 						error : function() {
