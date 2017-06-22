@@ -152,10 +152,11 @@ public class FrontNewsController extends BaseFrontController {
 	 * @param pageNo
 	 * @param pageSize
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
 	@ResponseBody
 	@RequestMapping(value="getCommentList", method = RequestMethod.GET)
-	public PageUtil<Map<String, Object>> getCommentList(Long newsId, int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getCommentList(Long newsId, int pageNo, Integer pageSize) throws UnsupportedEncodingException {
 		News news = new News();
 		news.setId(newsId);
 		return commentService.getNewsMapListByParm(news, pageNo, pageSize);
