@@ -32,14 +32,14 @@
 									<input type="text" class="form-control input" name="shopName" value="">
 								</div>
 								<c:if test="${pageflag==2 }">
-								<div class="col-sm-2">
+								<%-- <div class="col-sm-2">
 									${t.t_select }${t.t_status }
 									<select class="form-control select" name="messageStatus" id="messageStatus">
 										<option value="-1">-- ${t.t_select } --</option>
 										<option value="0">${t.t_unreaded }</option>
 										<option value="1">${t.t_readed }</option>
 									</select>				
-								</div>				
+								</div>	 --%>			
 								</c:if>
 								<div class="col-sm-2">
 									<br>

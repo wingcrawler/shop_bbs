@@ -25,13 +25,13 @@
 					<div class="panel-body">
 						<form class="form-horizontal form" id="form" action="javascript:void(0);">
 							<div class="form-group">
-								<div class="col-sm-3">
-									${t.t_title }
+								<div class="col-sm-6">
+									${t.t_news }
 									<input type="text" class="form-control input" name="newsTitle" value="${news.newsTitle}">
 								</div>
 								<div class="col-sm-2">
 									<br>
-									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
+									<button class="btn btn-info btn-icon newsSearch" onclick="$.fn.doAutoSearch()">
 										<i class="fa-search"></i>
 										<span>${t.t_search }</span>
 									</button>
@@ -57,7 +57,7 @@
 							<thead>
 								<tr>
 									<th width="60" field="index">${t.t_no }</th>
-									<th field="newsTitle">${t.t_title }</th>
+									<th field="newsTitle">${t.t_news }</th>
 									<th field="statusStr">${t.t_status }</th>
 									<th field="username">${t.t_username }</th>
 									<th field="context">${t.t_comment }</th>
@@ -91,11 +91,17 @@ $(function(){
 		}
 	}); 
 	
-	var newsId = '${news.id}';
-	if(newsId!=''){
-		var parm = {id:newsId};
-		$.fn.doSearch(parm);	
+	debugger;
+	var newsTitle = $('input[name="newsTitle"]').val();
+	if(newsTitle!=''){
+		$('.newsSearch').trigger('click');
 	}
+	/* var newsId = '${news.id}';
+	if(newsId!=''){
+		var parm = {};
+		parm.id=newsId;
+		$.fn.doSearch(parm);	
+	} */
 });
 </script>
 </body>

@@ -31,7 +31,7 @@
 					        <div class="form-group">
 					          	<div class="col-sm-3">
 					          		<input type="hidden" value="${entity.id}" name="id" />
-					          		<p>${t.t_title }<span style="color:#f00">*</span></p>
+					          		<p>${t.m_bbs_topic }<span style="color:#f00">*</span></p>
 					            	<input class="form-control" type="text" name="topicTitle" value="${entity.topicTitle}">
 					          	</div>
 					        	<div class="col-sm-3">

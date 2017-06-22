@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.backend;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,7 +60,8 @@ public class CommentController extends BaseBackendController {
 				entity.setUserName(user.getUsername());
 				entity.setTitle(news.getTitle());
 				model.addObject("entity", entity);	
-			}
+				model.addObject("news", news);	
+			}  
 		}
 		return model;
 	}
@@ -67,7 +69,7 @@ public class CommentController extends BaseBackendController {
 	@ResponseBody
 	@RequestMapping(value="/getList", method = RequestMethod.GET)
 	public Map<String, Object> getList(News news,
-			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) throws UnsupportedEncodingException {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		
 		PageUtil<Map<String, Object>> page = commentService.getNewsMapListByParm(news, pageNo, pageSize);
