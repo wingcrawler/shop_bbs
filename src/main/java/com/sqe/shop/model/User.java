@@ -16,7 +16,9 @@ public class User extends BaseModel implements Serializable {
     
 	private String userAddress;
 	@NotEmpty(message="{items.password.isNull}")
+	@Size(min=6,max=20,message="{items.password.length}")
 	private String password;
+	@Size(min=3,max=20,message="{items.password.length}")
 	@NotEmpty(message="{items.password.isNull}")
 	private String repassword;
 	private Integer userStatus;

@@ -95,10 +95,10 @@
 		<div id="ajaxList">
 			<!--楼层-->
 			<li v-if="loaded==false">
-				<div>正在加载数据......</div>
+				<div>${t_bba_data_load }......</div>
 			</li>
 			<li v-if="loaded==true && items.length==0">
-				<div colspan="3" class="text-center">暂无数据</div>
+				<div colspan="3" class="text-center">${t.t_bbs_DataNotFound }</div>
 			</li>
 			<!--楼层-->
 			<div v-for="item in items" class="tItem cnt"
@@ -117,7 +117,7 @@
 						</span>
 					</ul>
 				</div>
-				<div class="rbt wb" @click="toggle(item)">回复</div>
+				<div class="rbt wb" @click="toggle(item)">${t.t_bbs_reploy }</div>
 
 				<br class="c" />
 				<!--楼中楼内容-->
@@ -127,8 +127,8 @@
 						<form @submit.prevent="submit">
 							<textarea class="editor" placeholder="......"
 								v-model="post.postContext"></textarea>
-							<input type="hidden" value="" v-model="post.postId"> 
-							<input type="hidden" v-bind:value="item.id" v-model="post.postId">
+							<input type="hidden" value="" v-model="post.postId"> <input
+								type="hidden" v-bind:value="item.id" v-model="post.postId">
 							<input type="submit" value="${t.b_submit }">
 						</form>
 					</div>
@@ -147,7 +147,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<a><i class="fa-location-arrow"> 跟帖</i></a>
+						<a><i class="fa-location-arrow"> ${t.t_bbs_reploy }</i></a>
 					</h3>
 				</div>
 				<form class="form-horizontal form" action="javascript:void(0);">
@@ -193,13 +193,16 @@
 				</form>
 			</div>
 		</div>
-		</div>
+
 		<!-- 内容区结束 -->
 	</c:if>
 	<c:if test="${!isLogin }">
-${t.t_bbs_login_re }
-
-</c:if>
+		<div class="panel panel-default">
+			<p class="navbar-text navbar-right">
+				${t.sign_in } <a href="/user/login" class="navbar-link">${t.t_bbs_login_re }</a>
+			</p>
+		</div>
+	</c:if>
 	<br>
 
 	<!--跟帖分页-->
@@ -212,7 +215,7 @@ ${t.t_bbs_login_re }
 	<jsp:include page="include/footer.jsp"></jsp:include>
 	<!-- footer -->
 	<script type="text/javascript">
-		var isLogin = ${isLogin};
+		var isLogin = ${isLogin	};
 		var playTableVue = new Vue({
 			el : "#ajaxList",
 			data : {
@@ -227,12 +230,13 @@ ${t.t_bbs_login_re }
 			},
 			methods : {
 				toggle : function(item) {
-					let inner=this.post
-					inner.postId=item.id
+					let
+					inner = this.post
+					inner.postId = item.id
 
 					if (isLogin) {
 						item.show = !item.show;
-					}else{
+					} else {
 						alert("${t.t_bbs_login_re}");
 					}
 				},
