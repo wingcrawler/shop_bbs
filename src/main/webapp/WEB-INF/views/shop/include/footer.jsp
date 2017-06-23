@@ -4,7 +4,7 @@
 	<div class="footer">
 		<!-- container -->
 		<div class="container">
-			<div class="col-md-3 stores-grid">
+			<div class="col-md-4 stores-grid">
 				<div class="stores">
 					<h3>Tell us what you think!</h3>
 					<ul>
@@ -29,7 +29,7 @@
 				<h3>Blog posts</h3>
 				
 			</div>
-			<div class="col-md-3 support">
+			<div class="col-md-2 support">
 				<h3>Support</h3>
 				<div class="support-grids">
 					<div class="support-left">
@@ -76,7 +76,7 @@
 			</div>
 			<div class="clearfix"></div>
 			<div class="copyright">
-				<p>Copyright &copy; 2017@Sachiel connect All rights reserved.</p>
+				<p>Copyright &copy; 2017@Sachiel Connect All Rights Reserved.</p>
 			</div>
 			<!-- // container -->
 		</div>
@@ -90,7 +90,7 @@
 	<div class="footer">
 		<!-- container -->
 		<div class="container">
-			<div class="col-md-3 stores-grid">
+			<div class="col-md-4 stores-grid">
 				<div class="stores">
 					<h3>Tell us what you think!</h3>
 					<ul>
@@ -118,7 +118,7 @@
 					<p>${item.newsContent }</p>	
 				</c:forEach>
 			</div>
-			<div class="col-md-3 support">
+			<div class="col-md-2 support">
 				<h3>支持</h3>
 				<div class="support-grids">
 					<div class="support-left">
@@ -153,7 +153,7 @@
 			</div>
 			<div class="clearfix"></div>
 			<div class="copyright">
-				<p>版权所有 © 2017 Sachiel connect 版权所有。</p>
+				<p>版权所有 © 2017 Sachiel Connect 版权所有。</p>
 				<p></p>
 			</div>
 			<!-- // container -->

@@ -26,8 +26,7 @@ public class RegisterService extends BaseCommon {
 			return responseError(-1, "error_empty_username");
 		} else  if (user.getUsername().length() < 5 || user.getUsername().length() > 20) {
 			return responseError(-1, "error_length_username");
-		}
-		
+		}	
 		User u=userMapper.findByName(user.getUsername());
 		if (u != null) {
 			return responseError(-1, "error_username_used");

@@ -25,10 +25,10 @@
 		      		<!-- <input type="text" placeholder="验证码"  class="code" id="code" /> -->
 		      		<input type="button" class="pload" value="${t.sign_in}" onclick="jQuery.common.login('.form','/user/doLogin')" />
 		      		<label class="span">
-		      			<%-- <input type="checkbox" class="check1" />${t.t_auto_login} --%>
+		      		<input type="checkbox" class="check1" />${t.t_auto_login}
 		      		</label> 
 		      		<p class="forget">
-			      		<!-- <a href="###">忘记密码</a> | --> <a href="/user/register">${t.register}</a>
+			      		<a href="/user/forget">${t.t_user_forget_passwd}</a> | <a href="/user/register">${t.register}</a>
 		      		</p>
 	      </div>
 	  </div>
