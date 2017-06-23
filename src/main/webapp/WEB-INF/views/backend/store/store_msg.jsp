@@ -11,7 +11,7 @@
 				<thead>
 				<tr>
 					<th width="60" field="index">${t.t_no }</th>
-					<th field="username">${t.t_msg }</th>
+					<th field="username">${t.t_username }</th>
 					<th field="shopTitle">${t.t_shop_name }</th>
 					<th field="messageContext">${t.t_content }</th>
 					<th field="statusName">${t.t_status }</th>

@@ -1,11 +1,14 @@
 package com.sqe.shop.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -72,22 +75,17 @@ public class CommentService extends AdapterService implements BaseService {
 		return pageUtil;
 	}
 	
-	public PageUtil<Map<String, Object>> getNewsMapListByParm(News news,int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getNewsMapListByParm(News news,int pageNo, Integer pageSize) throws UnsupportedEncodingException {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		
-		if(news==null){
-			pageUtil.setList(list);
-			pageUtil.setTotalRecords(0);
-			return pageUtil;
-		}
 		
 		if(news.getId()!=null){
 			news = newsService.getById(news.getId());		
+		} else if(StringUtils.isNotBlank(news.getNewsTitle())) {
+			String newsTitle = URLDecoder.decode(news.getNewsTitle(),"utf-8");
+			news = newsService.getByTitle(newsTitle);	
 		} else {
-			news = newsService.getByTitle(news.getNewsTitle());	
-		}
-		if(news==null){
 			pageUtil.setList(list);
 			pageUtil.setTotalRecords(0);
 			return pageUtil;

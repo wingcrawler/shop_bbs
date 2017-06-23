@@ -70,7 +70,7 @@
 							<thead>
 								<tr>
 									<th width="60" field="index">${t.t_no }</th>
-									<th field="shopTitle" url="/backend/shop/product?shopId=" parm="id">${t.t_title }</th>
+									<th field="shopTitle" url="/backend/shop/product?shopId=" parm="id">${t.t_store_name }</th>
 									<th field="shopDescription">${t.t_desc }</th>
 									<th field="shopRank">${t.t_weight }</th>
 									<th field="statusName">${t.t_status }</th>
