@@ -120,9 +120,6 @@
 		<if test="parm.productDescripton != null">
 	     	and product_descripton = #{parm.productDescripton}
 	   	</if>
-		<if test="parm.productEnName != null">
-	     	and product_en_name = #{parm.productEnName}
-	   	</if>
 		<if test="parm.productDim != null">
 	     	and product_dim = #{parm.productDim}
 	   	</if>
@@ -166,7 +163,7 @@
 	     	and product_price = #{parm.productPrice}
 	   	</if>
 		<if test="parm.productName != null">
-	     	and product_name like  "%"#{parm.productName}"%"
+	     	and (product_name like  "%"#{parm.productName}"%"  or  product_en_name like  "%"#{parm.productName}"%")
 	   	</if>
 	   	<if test="parm.productSubtypeId != null">
 	     	and product_subtype_id = #{parm.productSubtypeId}
@@ -178,9 +175,6 @@
 			<if test="parm.productDescripton != null">
 	     	and product_descripton = #{parm.productDescripton}
 	   	</if>
-		<if test="parm.productEnName != null">
-	     	and product_en_name = #{parm.productEnName}
-	   	</if>
 		<if test="parm.productDim != null">
 	     	and product_dim = #{parm.productDim}
 	   	</if>
@@ -224,7 +218,7 @@
 	     	and product_price = #{parm.productPrice}
 	   	</if>
 		<if test="parm.productName != null">
-	     	and product_name like  "%"#{parm.productName}"%"
+	     	and (product_name like  "%"#{parm.productName}"%"  or  product_en_name like  "%"#{parm.productName}"%")
 	   	</if>
 	   	<if test="parm.productSubtypeId != null">
 	     	and product_subtype_id = #{parm.productSubtypeId}

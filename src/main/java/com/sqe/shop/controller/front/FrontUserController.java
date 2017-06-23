@@ -43,8 +43,6 @@ public class FrontUserController extends BaseBackendController {
 	private TxtService txtService;
 	@Autowired
 	private FileUploadService fileUploadService;
-	@Autowired
-	private MD5Util md5;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -184,6 +182,7 @@ public class FrontUserController extends BaseBackendController {
 			user.setUpDateTime(outDate);
 			userService.update(user); // 保存到数据库
 			String key = user.getUserName() + "$" + date + "$" + secretKey;
+			MD5Util md5 = new MD5Util(MD5Util.SALT, "MD5");
 			String digitalSignature = md5.encode(key); // 数字签名
 
 			String emailTitle = "密码找回";
