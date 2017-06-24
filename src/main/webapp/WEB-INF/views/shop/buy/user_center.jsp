@@ -60,12 +60,12 @@
 									<input type="text" name="userPhone" value="${entity.userPhone }"  class="u-ipt">
 								</div>
 								<div class="myqq input_text">
-									<span class="lab">${t.t_qq }: </span>
+									<span class="lab">${t.t_qq }：</span>
 								<input type="text" name="userQq" value="${entity.userQq }"  class="u-ipt">
 								</div>
 								<div class="address input_text">
 									<div>
-										<span  class="lab">${t.t_address}: </span>
+										<span class="lab">${t.t_address}：</span>
 										<input type="text" name="userAddress" value="${entity.userAddress }"  class="u-ipt">
 										<!-- <select class="margin_left_minus">
 											<option>广东</option>
