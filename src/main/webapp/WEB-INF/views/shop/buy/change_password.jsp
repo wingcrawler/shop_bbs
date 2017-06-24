@@ -27,7 +27,7 @@
 								<input type="password" name="oldPwd">
 							</div>
 							<div class="new_password password">
-								<span>${t.t_new_pwd }: </span>
+								<span>${t.t_new_pwd }: </span>
 								<input type="password" name="newPwd">
 							</div>
 							<div class="affirm_password password">
