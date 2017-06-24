@@ -71,13 +71,10 @@
 					
 					<div class="col-sm-9">
 						<!-- 基本信息 -->
-						<section class="user-timeline-stories">
+						<%-- <section class="user-timeline-stories">
 							<article class="timeline-story">
 								<i class="fa-paper-plane-empty block-icon"></i>
 								<header>
-									<!-- <a href="#" class="user-img">
-										<img src="assets/images/user-4.png" alt="user-img" class="img-responsive img-circle">
-									</a> -->
 									<div class="user-details">
 										${t.t_user_role }:
 									</div>
@@ -89,7 +86,7 @@
 									</select>
 								</div>
 							</article>
-						</section>
+						</section> --%>
 						
 						<!-- 商家介绍 -->
 						<section class="user-timeline-stories">
@@ -115,7 +112,7 @@
 						</section>
 						
 						<!-- 提交 -->
-						<section class="user-timeline-stories">
+						<%-- <section class="user-timeline-stories">
 							<article class="timeline-story">
 								<i class="fa-paper-plane-empty block-icon"></i>
 								<header>
@@ -126,7 +123,7 @@
 									</div>
 								</header>
 							</article>
-						</section>
+						</section> --%>
 					</div>
 					
 					</form>

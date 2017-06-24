@@ -16,7 +16,7 @@
 					<li class="water"><a href="http://www.sachielwaterinc.com/">Sachiel Water</a></li>
 					<c:if test="${isSellLogin }">
 						<%-- <li class=""><a href="/front/sell/productListPage">${t.t_bussiness_center }</a></li> --%>
-						<li class=""><a href="/front/sell/productListPage">${t.t_welcome } ${user.username }</a></li>
+						<li class=""><a href="/front/buy/basicInfo">${t.t_welcome } ${user.username }</a></li>
 						<li class=""><a href="/user/logout">${t.sign_out }</a></li>
 					</c:if>
 					<c:if test="${isBuyLogin }">
