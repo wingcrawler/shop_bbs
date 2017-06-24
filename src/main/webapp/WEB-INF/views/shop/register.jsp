@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,25 +21,26 @@
 				<p>${t.register }</p>
 				<div class="input">
 					<div class="margin">
-						<span><b>*</b>${t.register_account }：</span><input type="text" name="username" class="user"
-							id="rename" />
+						<span><b>*</b>${t.register_account }：</span><input type="text"
+							name="username" class="user" id="rename" />
 					</div>
 					<div class="margin">
-						<span><b>*</b>${t.register_password }：</span><input type="password" name="password"
-						class="key" / id="key">
+						<span><b>*</b>${t.register_password }：</span><input
+							type="password" name="password" class="key" / id="key">
 					</div>
 					<div class="margin">
 						<span><b>*</b>${t.register_confirm  }：</span><input
-						type="password" name="repassword" class="key1" / id="key1">
+							type="password" name="repassword" class="key1" / id="key1">
 					</div>
 					<div class="margin">
-						<span><b>*</b>${t.register_email }：</span><input type="text" name="userMail" class="email"
-							id="email" />
+						<span><b>*</b>${t.register_email }：</span><input type="text"
+							name="userMail" class="email" id="email" />
 					</div>
 				</div>
-				<label class="register_label"><input type="checkbox" name="checked" class="check"
-					checked="checked">${t.register_agree}<a href="###" class="ftp">《${t.register_item}》</a></label>
-				<input id="onsubmit" type="submit" class="pload" value="${t.register_now}" />
+				<label class="register_label"><input type="checkbox"
+					name="checked" class="check" checked="checked">${t.register_agree}<a
+					href="###" class="ftp">《${t.register_item}》</a></label> <input
+					id="onsubmit" type="submit" class="pload" value="${t.register_now}" />
 
 			</div>
 		</form>
@@ -47,43 +48,50 @@
 
 
 	<script type="text/javascript">
-	var error_user_empty='${t.error_empty_username}';
-	var error_password_empty='${t.error_empty_pwd}';
-	var register_sucess='${t.register_succee}';
-	var register_failed='${t.register_failed}';
+		var error_user_empty = '${t.error_empty_username}';
+		var error_password_empty = '${t.error_empty_pwd}';
+		var register_sucess = '${t.register_succee}';
+		var register_failed = '${t.register_failed}';
+		var register_need_readed = '${t.register_read}';
+		var register_item = '${t.register_item}'
 		$(function() {
 			$(" #onsubmit").on('click', function() {
-				var $username = $("#rename").val(), 
-				$pass = $("#key").val();
+				var $username = $("#rename").val(), $pass = $("#key").val();
 				$pass2 = $("#key1").val();
 				$mail = $("#email").val();
-				if ($username == '' || $pass == '') {
-					alert(error_user_empty);
-					return false;
-				} else {
-					var datas = {
-						username : $username,
-						password : $pass,
-						repassword : $pass2,
-						userMail : $mail,
-					};
-					$.ajax({
-						url : '/user/doRegister',
-						type : 'post',
-						dataType : 'json',
-						data : datas,
-						success : function(result) {
-							if (result.errorNo == -1) {
-								alert(result.errorInfo);
-							} else {
-								alert(register_sucess);
-								window.location.href = '/user/login';//登录成功跳转
+				$check = $("input[type='checkbox']").is(':checked')
+				if ($check) {
+					if ($username == '') {
+						alert(error_user_empty);
+						return false;
+					} else {
+						var datas = {
+							username : $username,
+							password : $pass,
+							repassword : $pass2,
+							userMail : $mail,
+						};
+						$.ajax({
+							url : '/user/doRegister',
+							type : 'post',
+							dataType : 'json',
+							data : datas,
+							success : function(result) {
+								if (result.errorNo == -1) {
+									alert(result.errorInfo);
+								} else {
+									alert(register_sucess);
+									window.location.href = '/user/login';//登录成功跳转
+								}
+							},
+							error : function() {
+								alert(register_failed);
 							}
-						},
-						error : function() {
-							alert(register_failed);
-						}
-					})
+						})
+					}
+				} else {	
+					alert(register_need_readed+'\n'+register_item);
+					return false;
 				}
 				return false;
 			})
