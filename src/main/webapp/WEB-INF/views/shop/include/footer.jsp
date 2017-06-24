@@ -27,7 +27,10 @@
 			</div>
 			<div class="col-md-3 blog">
 				<h3>Blog posts</h3>
-				
+				<c:forEach var="item" items="${newsFooterList }">
+					<a href="/news/detail?newsId=${item.id }" target="_blank">${item.newsTitle }</a>
+					<p>${item.newsContent }</p>	
+				</c:forEach>
 			</div>
 			<div class="col-md-2 support">
 				<h3>Support</h3>
