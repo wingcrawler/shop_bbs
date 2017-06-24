@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- menu -->
 <div class="menu">
 	<div class="menu_title">
@@ -14,6 +15,12 @@
 			<li><a href="/front/buy/messagePage?type=2">${t.t_my_message }</a></li>
 			<li><a href="/front/buy/messagePage?type=3">${t.t_my_news_comment }</a></li>
 			<li><a href="/front/buy/changePwd">${t.t_change_pwd }</a></li>
+			<c:if test="${isSellLogin }">
+				<li><a href="/front/sell/productListPage">${t.t_my_shop }</a></li>
+			</c:if>
+			<c:if test="${isBuyLogin }">
+				<li><a href="#">${t.t_goto_open_shop }</a></li>	
+			</c:if>
 			<%-- <li><a href="#">${t.t_want_report }</a></li>       --%>
 		</ul>
 	</div>
