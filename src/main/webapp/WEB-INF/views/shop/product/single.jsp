@@ -130,8 +130,9 @@
 						<div id="answerArea" class="edit">
 							<textarea id="textArea" name="context"></textarea>
 							<div class="edit_btn">
-								<span id="cancel_myLetter_2" class="cancel" onclick="clickCancel(this)">取消</span>
-								<span id="sure_myLetter_2" class="affirm" onclick="clickSure(this)">确认</span>
+								<span id="cancel_myLetter_2"><input id="letter" type="checkbox" name="letterCheck" value="1" >${t.t_private_letter }</span>
+								<span id="cancel_myLetter_2" class="cancel" onclick="clickCancel(this)">${t.b_cancel }</span>
+								<span id="sure_myLetter_2" class="affirm" onclick="clickSure(this)">${t.b_confirm }</span>
 							</div>
 						</div>
 						</c:if>
@@ -202,11 +203,18 @@ function clickCancel(event) {
 }
 
 function clickSure(event) {
+	var letterCheck = $('input[name="letterCheck"]:checked').val();
     var context = $("#textArea").val();
     var parm = {};
     parm.context = context;
     parm.productId = productId;
-    jQuery.common.saveObjByParm(parm,'/comment/doComment',true,'');    
+	if(letterCheck==1){
+		parm.messageContext=context;
+		$("#textArea").val('');
+		jQuery.common.saveObjByParm(parm,'/product/postMessage',false,'');
+	} else {
+		jQuery.common.saveObjByParm(parm,'/comment/doComment',true,'');	
+	}
 }
 </script>
 </body>

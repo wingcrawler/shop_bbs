@@ -134,6 +134,10 @@ jQuery.common = {
 	        	if(data.errorNo==0){
 	        		if(_isRefrush){
 	        			self.location= _jumpUrl;
+	        		} else {
+	        			if(data.errorInfo!=''){
+	        				alert(data.errorInfo);
+	        			}
 	        		}
 				} else {
 					alert(data.errorInfo);

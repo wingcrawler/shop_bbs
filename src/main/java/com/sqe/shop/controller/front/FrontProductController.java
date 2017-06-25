@@ -176,9 +176,19 @@ public class FrontProductController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="postMessage", method = RequestMethod.POST)
+	@RequestMapping(value="postMessage")
 	public Map<String, Object> postMessage(ModelAndView model, Message message) {
-		message.setMessageStatus(Constants.MSG_OFF);
+		if(message.getProductId()==null){
+			return responseError(-1, "error_unknow");
+		}
+		
+		Product product = productService.getById(message.getProductId());
+		if(product==null){
+			return responseError(-1, "error_unknow");
+		}
+		
+		message.setReceiveId(product.getUserId());
+		message.setMessageStatus(Constants.MSG_ON);
 		message.setPostId(this.getCurrentUserId());
 		message.setCreateTime(new Date());
 		messageService.insert(message);
