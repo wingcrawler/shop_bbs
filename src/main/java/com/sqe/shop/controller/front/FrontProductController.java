@@ -153,6 +153,7 @@ public class FrontProductController extends BaseFrontController {
 		//相关产品
 		product = new Product();
 		product.setProductTypeId(product.getProductTypeId());
+		product.setProductStatus(Constants.PRODUCT_ON);
 		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, 1, 3);
 		model.addObject("relateList", page.getList());
 		

@@ -133,7 +133,7 @@
 													<div class="u-checkboxitem">
 														<input type="checkbox" class="u-ipt-checkbox"
 														<c:if test="${fn:contains(entity.productTag, 't_product_tag_hot')}">checked</c:if>
-														 value="t_product_tag_hot" name="productTag" id="checkbox1" >
+														 value="t_product_tag_hot" name="productTag" id="checkbox2" >
 														<label for="checkbox2">
 															<div class="i-checkbox <c:if test="${fn:contains(entity.productTag, 't_product_tag_hot')}">z-checked</c:if>" >
 																<i></i>

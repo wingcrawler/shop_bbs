@@ -396,7 +396,7 @@ public class SellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/messageReply", method = RequestMethod.POST)
+	@RequestMapping(value="/messageReply")
 	public Map<String, Object> messageReply(String msgContent, String type,Long productId, Long messageId, Long commentId, Long replyToId) {
 		if(StringUtils.isBlank(msgContent)){
 			return responseError(-1, "error_empty_content");
