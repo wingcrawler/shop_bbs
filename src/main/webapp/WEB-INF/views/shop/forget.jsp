@@ -19,21 +19,22 @@
 		<img src="/frontstyle/images/register.png" class="reg_bg">
 	  	<div class="onload1">
 	    	<div class="load1">
-	      		<p class="userload">${t.t_user_forget}</p>
+	      		<p class="userload">${t.t_user_forget_passwd}</p>
 		      		<input type="text" placeholder="${t.t_username}"  class="user1" name="username" />
+		      		<div class="margin">
+						<input type="text"
+							name="userMail" placeholder="${t.register_email }" class="email" id="email" />
+					</div>
 		      		<!--<input type="password" placeholder="${t.t_pwd}"  class="key1" name="password" />-->
-		      		<!-- <input type="text" placeholder="验证码"  class="code" id="code" /> -->
-		      		<input type="button" class="pload" value="${t.t_user_forget}" onclick="jQuery.common.login('.form','/user/doLogin')" />
+		      		<input type="text" placeholder="验证码"  class="code" id="code" />
+		      		<input type="button" class="pload" value="${t.t_user_forget_passwd}" onclick="jQuery.common.login('.form','/user/forget_password')" />
 		      		<label class="span">
 		      		</label> 
-		      		<p class="forget">
-			      		<a href="/user/forget">${t.t_user_forget_passwd}</a> | <a href="/user/register">${t.register}</a>
-		      		</p>
+		      		
 	      </div>
 	  </div>
 	</form>
 </div>
-
 
 </body>
 </html>

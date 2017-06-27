@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,30 +144,37 @@ public class FrontUserController extends BaseBackendController {
 	@RequestMapping(value = "/forget", method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
-		
-		if(isLogin()){
+
+		if (isLogin()) {
 			String url = getSavedRequestUrl();
-			if(StringUtils.isBlank(url)){
+			if (StringUtils.isBlank(url)) {
 				modelAndView.setViewName("shop/forget");
 				return modelAndView;
 			}
-			if(url.indexOf("login")<=0){
-				return new ModelAndView("redirect:"+url);
+			if (url.indexOf("login") <= 0) {
+				return new ModelAndView("redirect:" + url);
 			} else {
 				modelAndView.setViewName("shop/forget");
 				return modelAndView;
 			}
 		}
-		
+
 		modelAndView.setViewName("shop/forget");
 		return modelAndView;
 	}
 
-	
+	@RequestMapping(value = "/reset_password", method = RequestMethod.GET)
+	public ModelAndView reSetPasswd() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("shop/reset");
+		return modelAndView;
+
+	}
+
 	@RequestMapping(value = "/forget_password")
 	@ResponseBody
-	public Map forgetPass(HttpServletRequest request, String userName) {
-		User user = userService.findByName(userName);
+	public Map forgetPass(HttpServletRequest request, String username) {
+		User user = userService.findByName(username);
 		Map map = new HashMap<String, String>();
 		String msg = "";
 		if (user == null) { // 用户名不存在
@@ -181,7 +189,7 @@ public class FrontUserController extends BaseBackendController {
 			user.setValidataCode(secretKey);
 			user.setUpDateTime(outDate);
 			userService.update(user); // 保存到数据库
-			String key = user.getUserName() + "$" + date + "$" + secretKey;
+			String key = user.getUsername() + "$" + date + "$" + secretKey;
 			MD5Util md5 = new MD5Util(MD5Util.SALT, "MD5");
 			String digitalSignature = md5.encode(key); // 数字签名
 
@@ -190,13 +198,13 @@ public class FrontUserController extends BaseBackendController {
 			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 					+ path + "/";
 			String resetPassHref = basePath + "user/reset_password?sid=" + digitalSignature + "&userName="
-					+ user.getUserName();
+					+ user.getUsername();
 			String emailContent = "请勿回复本邮件.点击下面的链接,重设密码<br/><a href=" + resetPassHref + " target='_BLANK'>点击我重新设置密码</a>"
 					+ "<br/>tips:本邮件超过30分钟,链接将会失效，需要重新申请'找回密码'" + key + "\t" + digitalSignature;
 			System.out.print(resetPassHref);
 			SendMail.sendHtmlMail(emailTitle, emailContent, user.getUserMail());
 			msg = "操作成功,已经发送找回密码链接到您邮箱。请在30分钟内重置密码";
-			logger.info(request + userName, "申请找回密码");
+			logger.info(request + username, "申请找回密码");
 		} catch (Exception e) {
 			e.printStackTrace();
 			msg = "邮箱不存在？未知错误,联系管理员吧。";
