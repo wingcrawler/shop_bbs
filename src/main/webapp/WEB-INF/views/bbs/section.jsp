@@ -17,15 +17,18 @@
 <link href="/ue/themes/default/css/ueditor.css" rel="stylesheet">
 
 <!-- css -->
-<link rel="stylesheet" href="bbs/css/common.css" type="text/css" media="all" />
-<link rel="stylesheet" href="bbs/css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="bbs/css/common.css" type="text/css"
+	media="all" />
+<link rel="stylesheet" href="bbs/css/style.css" type="text/css"
+	media="all" />
 <!--// css -->
 <script src="bbs/js/jquery.min.js"></script>
 <!--fonts-->
 <!--/fonts-->
 <!-- dropdown -->
 <script src="bbs/js/jquery.easydropdown.js"></script>
-<link href="bbs/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="bbs/css/nav.css" rel="stylesheet" type="text/css"
+	media="all" />
 <script src="bbs/js/scripts.js" type="text/javascript"></script>
 </head>
 <script src="/bbs/js/jquery.datatable.js"></script>
@@ -61,12 +64,11 @@
 				<div class="h2">
 					<c:if test="${not empty section.list }">
 						<c:forEach var="item" items="${section.list }">
-							<a href="sectionindex?sectionId=${item.id }"
-								class="tab">${item.sectionTitle }</a>
+							<a href="sectionindex?sectionId=${item.id }" class="tab">${item.sectionTitle }</a>
 						</c:forEach>
 						<br class="c" />
 					</c:if>
-					
+
 				</div>
 				<!--END 展开的内容-->
 			</div>
@@ -74,9 +76,10 @@
 			<div id="ajaxList">
 				<ul class="list">
 					<li v-for=" item in items"><em v-if="item.thread_identify==2"
-						class="t">${t.t_bbs_top }</em> <a v-bind:href='"/bbs/thread?threadId="+item.id'
-						class="tx">{{item.threadTitle}}</a><em
-						v-if="item.thread_identify==1" class="jh">${t.t_bbs_recommendation }</em> <br />
+						class="t">${t.t_bbs_top }</em> <a
+						v-bind:href='"/bbs/thread?threadId="+item.id' class="tx">{{item.threadTitle}}</a><em
+						v-if="item.thread_identify==1" class="jh">${t.t_bbs_recommendation }</em>
+						<br />
 						<div class="tR">
 							<span class="qq l">{{item.thread_view}}</span> <a class="sd"
 								href="#">{{item.username}}</a> &nbsp;&nbsp; <a href="#"></a>
@@ -84,10 +87,23 @@
 
 						</div></li>
 					<li v-if="loaded==false">
-						<div>正在加载数据......</div>
+						<div class="sk-circle">
+							<div class="sk-circle1 sk-child"></div>
+							<div class="sk-circle2 sk-child"></div>
+							<div class="sk-circle3 sk-child"></div>
+							<div class="sk-circle4 sk-child"></div>
+							<div class="sk-circle5 sk-child"></div>
+							<div class="sk-circle6 sk-child"></div>
+							<div class="sk-circle7 sk-child"></div>
+							<div class="sk-circle8 sk-child"></div>
+							<div class="sk-circle9 sk-child"></div>
+							<div class="sk-circle10 sk-child"></div>
+							<div class="sk-circle11 sk-child"></div>
+							<div class="sk-circle12 sk-child"></div>
+						</div>
 					</li>
 					<li v-if="loaded==true && items.length==0">
-						<div colspan="3" class="text-center">暂无数据</div>
+						<div colspan="3" class="text-center">${t.t_bbs_DataNotFound }</div>
 					</li>
 
 				</ul>
@@ -99,7 +115,8 @@
 
 		<!-- 内容区 -->
 		<c:if test="${isLogin }">
-			<div v-if="${isLogin }==true" class="container" style="margin-top: 1em;">
+			<div v-if="${isLogin }==true" class="container"
+				style="margin-top: 1em;">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
@@ -124,7 +141,7 @@
 									</select>
 								</div>
 								<div class="col-sm-3">
-									${t.t_select } 板块 <select class="form-control select"
+									${t.t_select_section } <select class="form-control select"
 										id="threadType" name="sectionId">
 										<c:if test="${not empty section.list }">
 											<c:forEach var="item" items="${section.list }">
@@ -209,7 +226,9 @@
 			<!-- 内容区结束 -->
 		</c:if>
 		<c:if test="${!isLogin }">
-			<div>请登录后发帖</div>
+			<p class="">
+			<a href="/user/login" class="navbar-link">${t.t_bbs_login_re }</a>
+			</p>
 
 		</c:if>
 		<div id="page" style="text-align: center;"></div>
@@ -245,58 +264,67 @@
 		<!-- //footer -->
 
 		<script type="text/javascript">
-		var playTableVue = new Vue({
-			el : "#ajaxList",
-			data : {
-				items : [],
-				loaded : false
-			}
-		});
-
-		function  responseHandle(json){		
-			if (!json)
-				json = [];
-			playTableVue.items = json.list;
-			playTableVue.loaded = true;
-		}
-		
-		function demo(curr) {
-			$.getJSON('thread/getSectionList', {
-				sectionId : '${sectionindex.id }',
-				pageNo : curr || 1,
-				pageSize : 10, //向服务端传的参数
-			}, function(json) {
-				//显示分页
-				laypage({
-					cont : 'page', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>  
-					curr : 1, //初始化当前页  
-					skin : '#429842',//皮肤颜色  
-					groups : 5, //连续显示分页数  
-					skip : true, //是否开启跳页  
-					first : '首页', //若不显示，设置false即可  
-					last : '尾页', //若不显示，设置false即可  
-					prev: '<', //若不显示，设置false即可  
-		            next: '>', //若不显示，设置false即可 
-					pages : json.page.pageCount, //通过后台拿到的总页数
-					jump : function(e) { //触发分页后的回调  
-						$.getJSON('thread/getSectionList', {
-							sectionId : '${sectionindex.id }',
-							pageNo : e.curr,//当前页  
-							pageSize : 10,
-						}, function(json) {
-							e.pages = e.last = json.page.pageCount; //重新获取总页数，一般不用写  
-							console.log(e.pages);
-							//渲染  
-							responseHandle(json);
-							//var view = document.getElementById('page1'); //你也可以直接使用jquery  
-							//解析数据  
-							//var resultHtml = PackagData(json);
-							//view.innerHTML = resultHtml;
-						});
-					}
-				});
+			var playTableVue = new Vue({
+				el : "#ajaxList",
+				data : {
+					items : [],
+					loaded : false
+				}
 			});
-		};
+
+			function responseHandle(json) {
+				if (!json)
+					json = [];
+				playTableVue.items = json.list;
+				playTableVue.loaded = true;
+			}
+
+			function demo(curr) {
+				$
+						.getJSON(
+								'thread/getSectionList',
+								{
+									sectionId : '${sectionindex.id }',
+									pageNo : curr || 1,
+									pageSize : 10, //向服务端传的参数
+								},
+								function(json) {
+									//显示分页
+									laypage({
+										cont : 'page', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>  
+										curr : 1, //初始化当前页  
+										skin : '#429842',//皮肤颜色  
+										groups : 5, //连续显示分页数  
+										skip : true, //是否开启跳页  
+										first : '首页', //若不显示，设置false即可  
+										last : '尾页', //若不显示，设置false即可  
+										prev : '<', //若不显示，设置false即可  
+		            next: '>', //若不显示，设置false即可 
+										pages : json.page.pageCount, //通过后台拿到的总页数
+										jump : function(e) { //触发分页后的回调  
+											$
+													.getJSON(
+															'thread/getSectionList',
+															{
+																sectionId : '${sectionindex.id }',
+																pageNo : e.curr,//当前页  
+																pageSize : 10,
+															},
+															function(json) {
+																e.pages = e.last = json.page.pageCount; //重新获取总页数，一般不用写  
+																console
+																		.log(e.pages);
+																//渲染  
+																responseHandle(json);
+																//var view = document.getElementById('page1'); //你也可以直接使用jquery  
+																//解析数据  
+																//var resultHtml = PackagData(json);
+																//view.innerHTML = resultHtml;
+															});
+										}
+									});
+								});
+			};
 			$(document).ready(function() {
 				$(function() {
 					$.getJSON("thread/getSectionList", {
