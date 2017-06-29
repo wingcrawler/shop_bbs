@@ -33,7 +33,7 @@ $(function(){
 	
 	$('#datatable').datatable({
 		url_load : '/backend/shop/getMsgList',
-		url_remove : '/backend/shop/doDeleteMsg',
+		url_remove : '/backend/shop/doMsgDelete',
 		backFn : function(p) {
 			// console.log(p);
 		}

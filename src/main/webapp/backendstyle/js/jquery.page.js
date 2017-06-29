@@ -44,7 +44,7 @@
 					obj.append('<span>...</span>');
 				}
 				if(args.current != args.pageCount && args.current < args.pageCount -2  && args.pageCount != 4){
-					obj.append('<a href="javascript:;" class="tcdNumber" onClick="'+args.fnName+'('+args.ageCount+')">'+args.pageCount+'</a>');
+					obj.append('<a href="javascript:;" class="tcdNumber" onClick="'+args.fnName+'('+args.pageCount+')">'+args.pageCount+'</a>');
 				}
 				if(args.current < args.pageCount){
 					obj.append('<a href="javascript:;" class="nextPage" onClick="'+args.fnName+'('+(parseInt(args.current)+parseInt(1))+')">'+args.nextPage+'</a>');

@@ -27,7 +27,7 @@
 			url_load : '', //加载
 			parm : {
 				pageNo : 1,
-				pageSize : 10
+				pageSize : 2
 			},
 			cache : false,
 			type : 'get',
@@ -121,8 +121,7 @@
 	}
 	
 	/* 保存并提示 */
-	$.fn.doSaveAndTip = function(_submitUrl) {
-		debugger;
+	$.fn.doSaveAndTip = function(_submitUrl) {	
 		var _parm = $.fn.getFormJson('.form');
 		$.ajax({
 			type: "POST",
@@ -141,7 +140,6 @@
 	
 	/* 保存 */
 	$.fn.doSaveAndJump = function(_submitUrl, _jumpUrl) {
-		debugger;
 		var _parm = $.fn.getFormJson('.form');
 		$.ajax({
 			type: "POST",
