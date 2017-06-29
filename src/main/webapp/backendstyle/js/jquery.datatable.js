@@ -27,7 +27,7 @@
 			url_load : '', //加载
 			parm : {
 				pageNo : 1,
-				pageSize : 2
+				pageSize : 10
 			},
 			cache : false,
 			type : 'get',
