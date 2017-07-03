@@ -193,7 +193,7 @@ public class ShopController extends BaseBackendController {
 		if(i==0){
 			return responseError(-1, "error_del_failed");
 		}
-		return responseOK("op_success");
+		return responseOK("");
 	}
 	
 	@ResponseBody

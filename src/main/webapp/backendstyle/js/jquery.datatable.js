@@ -95,7 +95,9 @@
 				if (data.errorNo != 0) {
 					$.commonUtil.showTip(data.errorInfo);
 				} else {
-					$.commonUtil.showTip(data.errorInfo);
+					if(data.errorInfo!=""){
+						$.commonUtil.showTip(data.errorInfo);	
+					}
 					action.load(_obj, _args);
 				}
 			}
