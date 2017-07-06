@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html style="background:url(../frontstyle/images/register.png) no-repeat;background-size:100%!important">
 <head>
 <jsp:include page="include/meta.jsp"></jsp:include>
 <link rel="stylesheet" href="../frontstyle/css/base.css" type="text/css" />
@@ -14,9 +14,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="register1">
+	
 		<form name="form1" method="post" action="" onsubmit="return check()">
-			<img src="../frontstyle/images/register.png" class="reg_bg">
+<!-- 			<img src="../frontstyle/images/register.png" class="reg_bg"> -->
+		<div class="register1">
 			<div class="box">
 				<p>${t.register }</p>
 				<div class="input">
@@ -43,8 +44,9 @@
 					id="onsubmit" type="submit" class="pload" value="${t.register_now}" />
 
 			</div>
+		</div>
 		</form>
-	</div>
+	
 
 
 	<script type="text/javascript">

@@ -13,10 +13,10 @@
   	<script src="/backendstyle/js/jquery.form.js"></script>
 <script src="/frontstyle/js/jq.common.js"></script>
 </head>
-<body>
-<div class="register1">
+<body style="background:url(/frontstyle/images/register.png) no-repeat;">
+<!-- <div class="register1"> -->
 	<form name="form1" method="post" class="form">
-		<img src="/frontstyle/images/register.png" class="reg_bg">
+		<!-- <img src="/frontstyle/images/register.png" class="reg_bg"> -->
 	  	<div class="onload1">
 	    	<div class="load1">
 	      		<p class="userload">${t.t_user_login}</p>
@@ -28,12 +28,12 @@
 		      		<input type="checkbox" class="check1" />${t.t_auto_login}
 		      		</label> 
 		      		<p class="forget">
-			      		<a href="/user/forget">${t.t_user_forget_passwd}</a> | <a href="/user/register">${t.register}</a>
+			      		<!--  <a href="/user/forget">${t.t_user_forget_passwd}</a> |--> <a href="/user/register">${t.register}</a>
 		      		</p>
 	      </div>
 	  </div>
 	</form>
-</div>
+<!-- </div> -->
 
 
 </body>

@@ -1,6 +1,6 @@
 body,div,a,span,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,input,textarea,img{padding:0; margin:0; border:0; list-style:none;}
 input{outline:none;}
-body{font-size:12px; font-family:"微软雅黑"; color:#646464;}
+body{font-size:12px; font-family:"微软雅黑"; color:#646464;background-size:100%!important;}
 a{text-decoration:none; color:#646464;}
 a:hover{text-decoration:none;/*color:#b90101;*/}
 
@@ -9,8 +9,8 @@ a:hover{text-decoration:none;/*color:#b90101;*/}
 .register{padding-top:70px;overflow: hidden;float:right;}
 .register a{color:#008aff;}
 
-.register1{position: relative; width:100%;height: 721px;margin-top: 10px}
-.register1 img.reg_bg{ width:100%;height: 721px;}
+.register1{}
+.register1 img.reg_bg{ width:100%;height:100%;}
 .register1 .box{overflow: hidden; font-size:14px; position: absolute;left:50%;margin-left:-347px;top: 50%;margin-top: -270px; width:694px;height:500px;background:url(../images/box.png);background-size:cover;}
 .register1 .box p:nth-of-type(1){text-align: center;font-size: 28px;font-weight:bold;color:#000;}
 .register1 .box .pload{padding:5px 0;background:#45a8e7;display: block;width:40%;margin: 0 auto;color:#fff;font-size:18px;margin-top:20px;text-align: center;}
