@@ -146,7 +146,6 @@ public class TxtService extends BaseService {
 				BufferedReader bufferedReader = new BufferedReader(read);
 				String lineTxt = null;
 				int totalCount = -1;
-				User user = new User();
 				String username;
 				String role;
 				String phone;
@@ -172,6 +171,7 @@ public class TxtService extends BaseService {
 					if(StringUtils.isBlank(username)||StringUtils.isBlank(role)||StringUtils.isBlank(phone)){
 						continue;
 					}
+					User user = new User();
 					user.setUsername(username);
 					user.setUserRole(Long.valueOf(role));
 					user.setUserMail(mail);
