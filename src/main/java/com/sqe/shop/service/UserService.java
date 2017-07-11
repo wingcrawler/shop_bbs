@@ -164,4 +164,8 @@ public class UserService extends AdapterService implements BaseService {
 	public User findOwnerUser(String ownerName) {
 		return  userMapper.findOwnerUser(ownerName);
 	}
+
+	public List<User> findOnlyByName(String username) {
+		return  userMapper.findOnlyByName(username);
+	}
 }

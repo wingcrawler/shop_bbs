@@ -179,7 +179,13 @@ public class TxtService extends BaseService {
 					user.setUserStatus(1);
 					user.setUserPhone(phone);
 					user.setCreateTime(new Date());
-					list.add(user);
+					
+					//是否已存在用户名
+					List<User> existUsers = userService.findOnlyByName(username);
+					if(existUsers==null || existUsers.isEmpty()){
+						list.add(user);	
+					}
+					
 				}
 				read.close();
 				
