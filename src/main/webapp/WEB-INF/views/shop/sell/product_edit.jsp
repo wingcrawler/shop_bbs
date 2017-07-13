@@ -21,7 +21,7 @@
 			
 			<!-- companyData -->
 			<div class="companyData">
-				<div class="header"><span>${t.m_product } > ${t.t_product_upload} </span></div>
+				<div class="header"><span>${t.m_product } > ${t.t_product_upload} </span></div>
 				<div class="product_message">
 					<div class="g-tabWrap">
 						<div class="g-tabHdWrap">
@@ -85,7 +85,7 @@
 											  	<div class="m-form-item">
 													<label class="m-form-hd">
 														<span class="u-hd-require">*</span>
-														<span class="u-hd-txt">${t.t_product_count }:</span>
+														<span class="u-hd-txt">${t.t_product_count }:</span>
 													</label>
 													<input type="number" class="u-ipt-text" name="productCount" value="${entity.productCount }">
 												</div>
@@ -105,7 +105,7 @@
 											  	<div class="m-form-item">
 													<label class="m-form-hd">
 														<span class="u-hd-require">*</span>
-														<span class="u-hd-txt">${t.t_product_url }:</span>
+														<span class="u-hd-txt">${t.t_product_url}:</span>
 													</label>
 													<input type="text" class="u-ipt-text" name="productUrl" value="${entity.productUrl }">
 												</div>
@@ -126,8 +126,7 @@
 														<label for="checkbox1">
 															<div class="i-checkbox <c:if test="${fn:contains(entity.productTag, 't_product_tag_new')}">z-checked</c:if>">
 																<i></i>
-															</div>
-															<span class="i-checkboxtxt">${t.t_product_tag_new }</span>
+															</div><span class="i-checkboxtxt">${t.t_product_tag_new }</span>
 														</label>
 													</div>
 													<div class="u-checkboxitem">
@@ -138,8 +137,7 @@
 															<div class="i-checkbox <c:if test="${fn:contains(entity.productTag, 't_product_tag_hot')}">z-checked</c:if>" >
 																<i></i>
 															</div>
-															<span class="i-checkboxtxt">${t.t_product_tag_hot }</span>
-														</label>
+															<span class="i-checkboxtxt">${t.t_product_tag_hot }</span>
 													</div>
 													<div class="u-checkboxitem">
 														<input type="checkbox" class="u-ipt-checkbox"
@@ -149,7 +147,7 @@
 															<div class="i-checkbox <c:if test="${fn:contains(entity.productTag, 't_product_tag_half')}">z-checked</c:if>">
 																<i></i>
 															</div>
-															<span class="i-checkboxtxt">${t.t_product_tag_half }</span>
+															<span class="i-checkboxtxt">${t.t_product_tag_half }</span>
 														</label>
 													</div>
 												</div>
@@ -241,13 +239,13 @@
 										</div>
 										
 										<div class="product_description">
-											<span class="labe">${t.t_desc }(${t.t_zh }): </span>
+											<span class="labe">${t.t_desc }(${t.t_zh }):  </span>
 											<div class="text_editing">
 												<textarea rows="15" cols="83" name="productDescripton" style="padding:0;margin:0;border:0">${entity.productDescripton }</textarea>
 											</div>
 										</div>
 										<div class="product_description">
-											<span class="labe">${t.t_desc }(${t.t_en }): </span>
+											<span class="labe">${t.t_desc }(${t.t_en }):</span>
 											<div class="text_editing">
 												<textarea rows="15" cols="83" name="productEnDescription" style="padding:0;margin:0;border:0">${entity.productEnDescription }</textarea>
 											</div>

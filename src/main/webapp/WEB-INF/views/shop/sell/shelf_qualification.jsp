@@ -55,8 +55,8 @@
 										</div>
 										<div class="save">
 											<input type="button" onclick="jQuery.common.ajaxFileSubmit('#form','/front/sell/saveShelfQualification',true,'')">
-											${t.b_submit }
-										</div>
+											${t.b_submit }
+											</div>
 									</form>
 								</div>
 							</div>
