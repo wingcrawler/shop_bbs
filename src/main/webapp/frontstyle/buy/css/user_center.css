@@ -198,11 +198,11 @@ input {
 }
 
 .companyData .product_message .company_forms .upload{
-  width:11.625rem;
-  height:7.25rem;
+  width: 220px;
+  height:220px;
   display: inline-block;
   font-size: 0.875rem;
-  background: #fff;
+  background: #d2d0d0;
   border:0.0625rem dashed #e0e0e0;
   padding:0.75rem 0;
   cursor: pointer;
