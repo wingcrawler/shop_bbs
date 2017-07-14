@@ -14,7 +14,7 @@ function nextPage(pageNo){
  */
 function deleteOne(id){
 	 if(confirm("确定删除/Confirm to delete?")) {
-		 jQuery.common.deleteById(id, "/front/sell/deleteProductById", true, "");
+		 jQuery.common.deleteById(id, "/front/sell/deleteProductById", true, "/front/sell/productListPage");
 	 }
 }
 
@@ -25,7 +25,7 @@ function deleteAll(){
 	if(confirm("确定删除/Confirm to delete?")) {
 		var id = getSelectedItem();
 		if(id!=''){
-			jQuery.common.deleteById(id, "/front/sell/deleteProductById", true, "");	
+			jQuery.common.deleteById(id, "/front/sell/deleteProductById", true, "/front/sell/productListPage");	
 		}
 	}
 }
@@ -37,7 +37,7 @@ function deleteAll(){
 function productOff(id){
 	var obj = {};
 	obj["idList"]=id;
-	jQuery.common.updateObj(obj, "/front/sell/offProductById", true, "");
+	jQuery.common.updateObj(obj, "/front/sell/offProductById", true, "/front/sell/productListPage");
 }
 
 /**
@@ -48,7 +48,7 @@ function productOffAll(){
 	var id = getSelectedItem();
 	var obj = {};
 	obj["idList"]=id;
-	jQuery.common.updateObj(obj, "/front/sell/offProductById", true, "");
+	jQuery.common.updateObj(obj, "/front/sell/offProductById", true, "/front/sell/productListPage");
 }
 
 /**
@@ -58,7 +58,7 @@ function productOffAll(){
 function productOn(id){
 	var obj = {};
 	obj["idList"]=id;
-	jQuery.common.updateObj(obj, "/front/sell/onProductById", true, "");
+	jQuery.common.updateObj(obj, "/front/sell/onProductById", true, "/front/sell/productListPage");
 }
 
 /**
@@ -69,7 +69,7 @@ function productOnAll(){
 	var id = getSelectedItem();
 	var obj = {};
 	obj["idList"]=id;
-	jQuery.common.updateObj(obj, "/front/sell/onProductById", true, "");
+	jQuery.common.updateObj(obj, "/front/sell/onProductById", true, "/front/sell/productListPage");
 }
 
 

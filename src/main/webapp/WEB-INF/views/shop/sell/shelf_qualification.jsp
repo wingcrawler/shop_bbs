@@ -54,7 +54,7 @@
 											<textarea class="textarea_intro" name="shelfQualificationDesc">${shop.shelfQualificationDesc }</textarea>
 										</div>
 										<div class="save">
-											<input type="button" onclick="jQuery.common.ajaxFileSubmit('#form','/front/sell/saveShelfQualification',true,'')">
+											<input type="button" onclick="jQuery.common.ajaxFileSubmit('#form','/front/sell/saveShelfQualification',true,'/front/sell/businessQualif')">
 											${t.b_submit }
 											</div>
 									</form>
@@ -93,7 +93,7 @@ function deleteImg(id){
 		var parm = {};
 		parm.id=id;
 		parm.type="shelfQualificationImg";
-		jQuery.common.updateObjByParm(parm,'/front/sell/deleteImg',true,'');
+		jQuery.common.updateObjByParm(parm,'/front/sell/deleteImg',true,'/front/sell/businessQualif');
 	}
 }
 </script>	

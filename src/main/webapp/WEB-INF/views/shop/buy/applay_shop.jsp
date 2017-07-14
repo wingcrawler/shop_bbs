@@ -23,17 +23,17 @@
 				
 				<div class="company_data_edit">
 					<c:if test="${shop.shopStatus==2 }">
-						<h2 class="companyTitle">${t.t_pending }</h2>
+					<div class="alert alert-warning" role="alert">${t.t_pending }</div>
 					</c:if>
 					<c:if test="${shop.shopStatus==3 }">
-						<h2 class="companyTitle">${t.t_not_pass }：${shop.failedReason }</h2>
+					<div class="alert alert-danger" role="alert">{t.t_not_pass }<em>:</em>${shop.failedReason }</div>
 					</c:if>
 					
 					<div class="company_forms">
 						<form enctype="multipart/form-data" method="POST" id="form">
 							<div class="name">
 								<input type="hidden" value="${shop.id }" name="id">
-								<span class="lab">${t.t_shop_name }: </span>
+								<span class="lab">${t.t_shop_name }<em>:</em></span>
 								<input type="text" name="shopTitle" value="${shop.shopTitle }">
 							</div>
 							<c:if test="${not empty img }">
@@ -47,7 +47,7 @@
 							</c:if>
 							<c:if test="${empty img }">
 								<div class="logo" style="height:220px;">
-									<span class="lab" style="margin-right:20px;">${t.t_shop_logo }: </span>
+									<span class="lab" style="margin-right:20px;">${t.t_shop_logo }<em>:</em></span>
 									<div class="upload" id="upload">
 										<span style="position:relative;left:50%;top:40px;">+</span>
 										<div style="margin:10px; width:200px;">
@@ -59,22 +59,22 @@
 							</c:if>
 							
 							<div class="number">
-								<span class="lab">${t.t_mobile }: </span>
+								<span class="lab">${t.t_mobile }<em>:</em></span>
 								<input type="text" name="shopPhone" value="${shop.shopPhone }" >
 							</div>
 							<div class="work_time">
-								<span class="lab">${t.t_work_time }: </span>
+								<span class="lab">${t.t_work_time }<em>:</em></span>
 								<input type="text" class="margin_left_minus" name="workFrom" value="${shop.workFrom }"> - 
 								<input type="text" name="workTo" value="${shop.workTo }">
 								<span class="gray">7*24h</span>
 							</div>
 							<div class="service">
-								<span class="lab">${t.t_qq }: </span>
+								<span class="lab">${t.t_qq }<em>:</em></span>
 								<input type="text" name="shopQq" value="${shop.shopQq }">
 							</div>
 							<div class="address">
 								<div>
-									<span  class="lab">${t.t_address}: </span>
+									<span  class="lab">${t.t_address }<em>:</em></span>
 									<input type="text" name="shopAddress" value="${shop.shopAddress }">
 									<!-- <select class="margin_left_minus">
 										<option>xxxx</option>
@@ -102,8 +102,8 @@
 
 							<div  class="save">
 								<input type="button" onclick="jQuery.common.ajaxFileSubmit('#form','/front/buy/doApplayShop',true,'/front/buy/applayShop')">
-								${t.b_submit }
-							</div>
+								${t.b_submit }
+								</div>
 						</form>
 					</div>
 				</div>

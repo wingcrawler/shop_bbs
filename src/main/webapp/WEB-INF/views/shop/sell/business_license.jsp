@@ -55,7 +55,7 @@
 											<textarea class="textarea_intro" name="shopLicenesDesc">${shop.shopLicenesDesc }</textarea>
 										</div>
 										<div class="save">
-											<input type="button" onclick="jQuery.common.ajaxFileSubmit('#form','/front/sell/saveBusinessLicense',true,'')">
+											<input type="button" onclick="jQuery.common.ajaxFileSubmit('#form','/front/sell/saveBusinessLicense',true,'/front/sell/businessLicense')">
 											${t.b_submit }
 											</div>
 									</form>
@@ -94,7 +94,7 @@ function deleteImg(id){
 		var parm = {};
 		parm.id=id;
 		parm.type="license";
-		jQuery.common.updateObjByParm(parm,'/front/sell/deleteImg',true,'');
+		jQuery.common.updateObjByParm(parm,'/front/sell/deleteImg',true,'/front/sell/businessLicense');
 	}
 }
 </script>	
