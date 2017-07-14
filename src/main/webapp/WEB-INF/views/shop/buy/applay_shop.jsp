@@ -23,10 +23,10 @@
 				
 				<div class="company_data_edit">
 					<c:if test="${shop.shopStatus==2 }">
-					<div class="alert alert-warning" role="alert">${t.t_pending }</div>
+					<div class="alert alert-warning" role="alert">${t.t_pend_shop }<em>:</em>${t.t_pend_shop_msg }</div>
 					</c:if>
 					<c:if test="${shop.shopStatus==3 }">
-					<div class="alert alert-danger" role="alert">{t.t_not_pass }<em>:</em>${shop.failedReason }</div>
+					<div class="alert alert-danger" role="alert">${t.t_not_pass }<em>:</em>${shop.failedReason }</div>
 					</c:if>
 					
 					<div class="company_forms">
