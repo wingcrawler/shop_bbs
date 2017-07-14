@@ -22,10 +22,12 @@ import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Comment;
 import com.sqe.shop.model.Message;
+import com.sqe.shop.model.Shop;
 import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.MessageService;
+import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.service.file.ImageFileService;
@@ -50,6 +52,8 @@ public class BuyerCenterController extends BaseFrontController {
 	private CommentService commentService;
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private ShopService shopService;
 	
 	/**
 	 * 进入用户基本信息页面
@@ -283,4 +287,57 @@ public class BuyerCenterController extends BaseFrontController {
 		userService.update(user);
 		return responseOK1("");
 	}
+	
+	/**
+	 * 申请开店页面
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/applayShop", method = RequestMethod.GET)
+	public ModelAndView applayShop(ModelAndView model){
+		Long userId = this.getCurrentUserId();
+		Shop shop = shopService.getByUserId(userId);
+		if(shop!=null){
+			model.addObject("shop", shop);
+			model.addObject("user", this.getCurrentUser());
+			model.addObject("img", shop.getShopLogoImg());
+		} else {
+			model.addObject("shop", new Shop());
+			model.addObject("user", this.getCurrentUser());
+		}
+		
+		model.setViewName("shop/buy/applay_shop");
+		return model;
+	}
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/doApplayShop", method = RequestMethod.POST)
+	public Map<String, Object> doApplayShop(Shop shop,
+			@RequestParam(name = "file",value="file", required = false) MultipartFile attachFile){
+		if(StringUtils.isBlank(shop.getShopTitle())){
+			return responseError(-1, "error_empty_shop_name");
+		}
+		
+		if(attachFile!=null){
+		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+		    String fileName = resMap.get("errorInfo").toString(); 
+		    if(!resMap.get("errorNo").equals(0)){
+		    	return resMap;
+		    }
+		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
+		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
+		    shop.setShopLogoImg(uploadPath+fileName);
+	    }
+		
+		shop.setShopStatus(Constants.STORE_PEND);
+		shop.setUserId(this.getCurrentUserId());
+		shopService.save(shop);
+		
+		return responseOK1("");
+	}
+	
 }

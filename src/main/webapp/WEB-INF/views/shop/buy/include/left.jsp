@@ -19,7 +19,7 @@
 				<li><a href="/front/sell/productListPage">${t.t_my_shop }</a></li>
 			</c:if>
 			<c:if test="${isBuyLogin }">
-				<li><a href="#">${t.t_goto_open_shop }</a></li>	
+				<li><a href="/front/buy/applayShop">${t.t_goto_open_shop }</a></li>	
 			</c:if>
 			<%-- <li><a href="#">${t.t_want_report }</a></li>       --%>
 		</ul>

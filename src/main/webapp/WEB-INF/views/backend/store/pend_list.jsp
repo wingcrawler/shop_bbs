@@ -29,16 +29,6 @@
 									${t.t_store_name }
 									<input type="text" class="form-control input" name="shopTitle" value="">
 								</div>
-								<div class="col-sm-3">
-									${t.t_status }
-									<select class="form-control select" name="shopStatus">
-										<option value="-1">-- ${t.t_select } --</option>
-										<option value="0">${t.t_close }</option>
-										<option value="1">${t.t_on }</option>
-										<option value="2">${t.t_pending }</option>
-										<option value="3">${t.t_not_pass }</option>
-									</select>
-								</div>
 								<div class="col-sm-2">
 									<br>
 									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
@@ -59,10 +49,6 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">${t.t_list }</h3>
 						<div class="panel-options">
-							<button class="btn btn-purple btn-icon btn-icon-standalone btn-xs" style="margin-bottom:0;" id="export">
-								<i class="fa-download"></i>
-								<span>${t.t_export }</span>
-							</button>
 							<!-- <a href="/backend/shop/edit" target="_blank"><i class="fa-plus"></i></a> -->
 							<a href="#" data-toggle="reload" onclick="$.fn.reload()"><i class="fa-rotate-right"></i></a>
 						</div>
@@ -72,7 +58,7 @@
 							<thead>
 								<tr>
 									<th width="60" field="index">${t.t_no }</th>
-									<th field="shopTitle" url="/backend/shop/product?shopId=" parm="id">${t.t_store_name }</th>
+									<th field="shopTitle">${t.t_store_name }</th>
 									<th field="shopDescription">${t.t_desc }</th>
 									<th field="shopRank">${t.t_weight }</th>
 									<th field="statusName">${t.t_status }</th>
@@ -96,10 +82,10 @@
 $(function(){
 	$('#main-menu li.li').removeClass('active').removeClass('opened');
 	$('#main-menu li.li').eq(4).addClass('active').addClass('opened');
-	$('#main-menu li.li').eq(4).find('ul li').eq(0).addClass('active');
+	$('#main-menu li.li').eq(4).find('ul li').eq(3).addClass('active');
 	
 	$('#datatable').datatable({
-		url_load : '/backend/shop/getList',
+		url_load : '/backend/shop/getPendingList',
 		url_edit : '/backend/shop/edit',
 		url_remove : '/backend/shop/doDelete',
 		backFn : function(p) {
@@ -107,12 +93,6 @@ $(function(){
 		}
 	}); 
 	
-	$('#export').click(function(){
-		debugger;
-		var shopTitle=$('input[name="shopTitle"]').val();
-		var shopStatus=$('select[name="shopStatus"]').val();
-		self.location = '/backend/shop/export?shopTitle='+shopTitle+'&shopStatus='+shopStatus+'&date='+new Date().getTime();
-	});
 });
 </script>
 </body>

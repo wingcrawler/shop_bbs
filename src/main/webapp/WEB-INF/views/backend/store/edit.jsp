@@ -40,8 +40,10 @@
 					        	<div class="col-sm-3">
 					          		<p>${t.t_status }</p>
 					          		<select class="form-control select" id="shopStatus" name="shopStatus">
-										<option value="0">${t.t_pending }</option>
+										<option value="0">${t.t_close }</option>
 										<option value="1">${t.t_on }</option>
+										<option value="2">${t.t_pending }</option>
+										<option value="3">${t.t_not_pass }</option>
 									</select>
 					          	</div>
 					          	<div class="col-sm-3">
@@ -66,7 +68,7 @@
 					        	<div class="col-sm-3">
 					          		<p>${t.t_username }<span style="color:#f00">*</span></p>
 					          		<c:if test="${not empty entity.id }">
-						        		<input class="form-control" type="text" disabled value="${ownerName}">
+						        		<input class="form-control" type="text" name="ownerName" readonly value="${ownerName}">
 						        	</c:if>
 						        	<c:if test="${empty entity.id }">
 						        		<input class="form-control" type="text" name="ownerName" value="${ownerName}">
@@ -125,6 +127,15 @@
 					    		</div>
 					        </div>
 					        <!-- 商家环境 -->
+					        
+					        <!-- 上架资质 -->
+					        <div class="form-group">
+					        	<div class="col-sm-12">
+					        		<p>${t.t_not_pass_reason }</p>
+					        		<textarea name="failedReason" cols="80" rows="6">${entity.failedReason }</textarea>
+					    		</div>
+					        </div>
+					        <!-- 上架资质 -->
 					        
 					        <div class="form-group">
 					        	<div class="col-sm-12">

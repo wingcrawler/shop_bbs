@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
@@ -85,7 +86,7 @@ public class ShopController extends BaseBackendController {
 	public ModelAndView product(Long shopId) {
 		ModelAndView model = new ModelAndView("backend/store/store_detail");
 		model.addObject("pageflag", 1);
-		model.addObject("shopList", getShopList().getList());
+		model.addObject("shop", shopService.getById(shopId));
 		if(shopId==null){
 			return model;
 		}
@@ -97,6 +98,7 @@ public class ShopController extends BaseBackendController {
 	public ModelAndView msg(Long shopId) {
 		ModelAndView model = new ModelAndView("backend/store/store_detail");
 		model.addObject("pageflag", 2);
+		model.addObject("shop", shopService.getById(shopId));
 		if(shopId==null){
 			return model;
 		}
@@ -117,7 +119,7 @@ public class ShopController extends BaseBackendController {
 	
 	@ResponseBody
 	@RequestMapping(value="/getMsgList", method = RequestMethod.GET)
-	public Map<String, Object> getMsgList(Message message,String shopName,
+	public Map<String, Object> getMsgList(Message message,String shopName,Long shopId,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		if(StringUtils.isNotBlank(shopName)){
@@ -125,6 +127,11 @@ public class ShopController extends BaseBackendController {
 				shopName = URLDecoder.decode(shopName, "utf8");
 			} catch (UnsupportedEncodingException e) {
 				shopName = "";
+			}
+		} else {
+			if(shopId!=null){
+				Shop shop = shopService.getById(shopId);
+				shopName = shop.getShopTitle();
 			}
 		}
 		
@@ -144,12 +151,21 @@ public class ShopController extends BaseBackendController {
 			return responseError(-1, "error_empty_title");
 		}
 		
-		if(shop.getId()==null && StringUtils.isBlank(ownerName)){
+		if(shop.getShopStatus().equals(Constants.STORE_FAILED) && StringUtils.isBlank(shop.getFailedReason())){
+			return responseError(-1, "error_empty_not_pass_resaon");
+		}
+		
+		User user = null;
+		if(StringUtils.isBlank(ownerName)){
 			return responseError(-1, "error_empty_onwername");
-		} else if(shop.getId()==null && StringUtils.isNotBlank(ownerName)){
-			User user = userService.findOwnerUser(ownerName);
+		} else if(StringUtils.isNotBlank(ownerName)){
+			if(shop.getId()==null){
+				user = userService.findOwnerUser(ownerName);
+			} else {
+				user = userService.findByName(ownerName);
+			}
 			if(user==null){
-				return responseError(-1, "error_empty_onwername");	
+				return responseError(-1, "error_onwername_not_exist");	
 			} 
 			shop.setUserId(user.getId());
 		}
@@ -166,6 +182,12 @@ public class ShopController extends BaseBackendController {
 	    }
 		
 		shopService.save(shop);
+		
+		if(user!=null && !user.getUserRole().equals(Constants.ROLE_SELL)){
+			user.setUserRole(Constants.ROLE_SELL);
+			userService.update(user);
+		}
+		
 		
 	    return responseOK("save_success");
 	}
@@ -208,6 +230,27 @@ public class ShopController extends BaseBackendController {
 		shop.setShopStatus(1);
 		PageUtil<Shop> shops = shopService.getBeanListByParm(shop, 0, -1);
 		return shops;
+	}
+	
+	/**
+	 * 审核中的
+	 * @return
+	 */
+	@RequestMapping(value="/pendingList", method = RequestMethod.GET)
+	public ModelAndView notPassList() {
+		ModelAndView model = new ModelAndView("backend/store/pend_list");
+		return model;
+	}
+	@ResponseBody
+	@RequestMapping(value="/getPendingList", method = RequestMethod.GET)
+	public Map<String, Object> getNotpassList(Shop shop,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		Map<String, Object> resMap = new HashMap<String, Object>();
+		shop.setShopStatus(Constants.STORE_PEND);
+		PageUtil<Shop> page = shopService.getBeanListByParm(shop, pageNo, pageSize);
+		resMap.put("list", page.getList());
+		resMap.put("page", page);
+		return resMap;
 	}
 
 }

@@ -29,7 +29,7 @@
 							<div class="form-group">
 								<div class="col-sm-4">
 									${t.t_shop_name }
-									<input type="text" class="form-control input" name="shopName" value="">
+									<input type="text" class="form-control input" name="shopName" value="${shop.shopTitle }">
 								</div>
 								<c:if test="${pageflag==2 }">
 								<%-- <div class="col-sm-2">
@@ -61,12 +61,12 @@
 				<div class="col-sm-12">
 					<ul class="nav nav-tabs">
 						<li class="<c:if test="${pageflag==1 }">active</c:if>">
-							<a href="/backend/shop/product?id=${shopId }">
+							<a href="/backend/shop/product?shopId=${shopId }">
 								<span class="hidden-xs">${t.t_store_product }</span>
 							</a>
 						</li>
 						<li class="<c:if test="${pageflag==2 }">active</c:if>">
-							<a href="/backend/shop/msg?id=${shopId }">
+							<a href="/backend/shop/msg?shopId=${shopId }">
 								<span class="hidden-xs">${t.t_store_msg }</span>
 							</a>
 						</li>

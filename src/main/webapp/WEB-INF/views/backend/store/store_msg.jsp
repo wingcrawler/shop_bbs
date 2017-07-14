@@ -32,7 +32,7 @@ $(function(){
 	$('#main-menu li.li').eq(4).find('ul li').eq(2).addClass('active');
 	
 	$('#datatable').datatable({
-		url_load : '/backend/shop/getMsgList',
+		url_load : '/backend/shop/getMsgList?shopId=${shopId}',
 		url_remove : '/backend/shop/doMsgDelete',
 		backFn : function(p) {
 			// console.log(p);

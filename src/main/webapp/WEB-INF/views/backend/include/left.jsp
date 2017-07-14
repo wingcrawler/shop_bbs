@@ -70,6 +70,7 @@
 							</c:if>
 						</a>
 					</li>
+					<li><a href="/backend/shop/pendingList"><span class="title">${t.t_pend_shop }</span></a></li>
 				</ul>
 			</li>
 			<!-- 订单管理 -->

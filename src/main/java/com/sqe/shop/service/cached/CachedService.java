@@ -118,8 +118,10 @@ public class CachedService extends BaseCached {
 		map.put("inform_status_0", getText("t_undone"));
 		map.put("inform_status_1", getText("t_done"));
 		//店家状态
-		map.put("shop_status_0", getText("t_pending"));
+		map.put("shop_status_0", getText("t_close"));
 		map.put("shop_status_1", getText("t_on"));
+		map.put("shop_status_2", getText("t_pending"));
+		map.put("shop_status_3", getText("t_not_pass"));
 		//留言状态
 		map.put("msg_status_0", getText("t_unreaded"));
 		map.put("msg_status_1", getText("t_readed"));

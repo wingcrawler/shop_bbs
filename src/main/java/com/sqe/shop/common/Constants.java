@@ -96,8 +96,10 @@ public class Constants{
 	}
     
     //店家状态
-    public static final int STORE_OFF = 0; //待审核
-    public static final int STORE_ON = 1; //正常
+    public static final Integer STORE_OFF = 0; //关闭
+    public static final Integer STORE_ON = 1; //正常
+    public static final Integer STORE_PEND = 2; //待审核
+    public static final Integer STORE_FAILED = 3; //不通过
     public String  getStoreStatus(Integer value) {
     	return cachedService.getString("shop_status_"+value);
 	}

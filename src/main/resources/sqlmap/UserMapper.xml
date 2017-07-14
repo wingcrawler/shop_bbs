@@ -172,7 +172,7 @@
 </select>
 
 <select id="findOwnerUser" resultMap="UserBaseMapper">
-	SELECT * FROM user WHERE username=#{username}  and user_status=1 and user_role=2  
+	SELECT * FROM user WHERE username=#{username}  and user_status=1  
 	and id not in (select user_id from shop)
 </select>
 

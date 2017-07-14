@@ -24,6 +24,7 @@
 	<id property="shopPhone" column="shop_phone" />
 	<id property="id" column="id" />
 	<id property="shopQq" column="shop_qq" />
+	<id property="failedReason" column="failed_reason" />
 </resultMap>  
 
 <insert id="insert">
@@ -31,9 +32,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into shop
-	(shelf_qualification_img,shop_logo_img,shop_level,shop_rank,shop_licenes,shop_address,user_id,work_to,shop_licenes_img,shelf_qualification_desc,shop_status,create_time,work_from,shop_qualifies,shop_description,shop_licenes_desc,shop_img,shop_title,shop_phone,shop_qq)
+	(shelf_qualification_img,shop_logo_img,shop_level,shop_rank,shop_licenes,shop_address,user_id,work_to,shop_licenes_img,shelf_qualification_desc,shop_status,create_time,work_from,shop_qualifies,shop_description,shop_licenes_desc,shop_img,shop_title,shop_phone,shop_qq,failed_reason)
 	values
-	(#{shelfQualificationImg},#{shopLogoImg},#{shopLevel},#{shopRank},#{shopLicenes},#{shopAddress},#{userId},#{workTo},#{shopLicenesImg},#{shelfQualificationDesc},#{shopStatus},#{createTime},#{workFrom},#{shopQualifies},#{shopDescription},#{shopLicenesDesc},#{shopImg},#{shopTitle},#{shopPhone},#{shopQq})
+	(#{shelfQualificationImg},#{shopLogoImg},#{shopLevel},#{shopRank},#{shopLicenes},#{shopAddress},#{userId},#{workTo},#{shopLicenesImg},#{shelfQualificationDesc},#{shopStatus},#{createTime},#{workFrom},#{shopQualifies},#{shopDescription},#{shopLicenesDesc},#{shopImg},#{shopTitle},#{shopPhone},#{shopQq},#{failedReason})
 </insert>
 
 <update id="update">
@@ -99,6 +100,9 @@
 			<if test="shopQq != null">  
 	        	shop_qq=#{shopQq},
 	    	</if>
+	    	<if test="failedReason != null">  
+	        	failed_reason=#{failedReason},
+	    	</if>
 	</set>   
     WHERE id=#{id}
 </update>
@@ -159,6 +163,9 @@
 		   	<if test="parm.shopTitle != null">
 		     	and shop_title = #{parm.shopTitle}
 		   	</if>
+		   	<if test="parm.failedReason != null">  
+	        	and failed_reason=#{parm.failedReason}
+	    	</if>
 </select>
 
 <select id="getBeanListByParm" resultMap="ShopBaseMapper">
@@ -205,6 +212,9 @@
 		   	<if test="parm.shopTitle != null">
 		     	and shop_title = #{parm.shopTitle}
 		   	</if>
+		   	<if test="parm.failedReason != null">  
+	        	and failed_reason=#{parm.failedReason}
+	    	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
 	   	</if>
@@ -262,6 +272,9 @@
 		   	<if test="parm.shopTitle != null">
 		     	and shop_title = #{parm.shopTitle}
 		   	</if>
+		   	<if test="failedReason != null">  
+	        	and failed_reason=#{failedReason}
+	    	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
 	   	</if>

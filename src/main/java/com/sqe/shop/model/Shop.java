@@ -30,6 +30,7 @@ public class Shop extends BaseModel implements Serializable {
 	private String shopLicenesDesc;
 	private String shelfQualificationDesc;
 	private String shelfQualificationImg;
+	private String failedReason;
 	
 	public Integer getShopLevel() {
 		return shopLevel;
@@ -156,6 +157,12 @@ public class Shop extends BaseModel implements Serializable {
 	}
 	public void setShelfQualificationImg(String shelfQualificationImg) {
 		this.shelfQualificationImg = shelfQualificationImg;
+	}
+	public String getFailedReason() {
+		return failedReason;
+	}
+	public void setFailedReason(String failedReason) {
+		this.failedReason = failedReason;
 	}
 	
 	
