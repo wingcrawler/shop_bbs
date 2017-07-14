@@ -107,7 +107,7 @@
 
 								<div class="save">
 									<input type="button"
-										onclick="jQuery.common.ajaxFileSubmit('#form','/front/buy/doSaveBasicInfo',true,'')">
+										onclick="jQuery.common.ajaxFileSubmit('#form','/front/buy/doSaveBasicInfo',true,window.location.href)">
 									${t.b_submit}
 								</div>
 							</form>
@@ -145,7 +145,7 @@
 				parm.id = id;
 				parm.type = "avatar";
 				jQuery.common.updateObjByParm(parm, '/front/buy/deleteImg',
-						true, '');
+						true, window.location.href);
 			}
 		}
 	</script>

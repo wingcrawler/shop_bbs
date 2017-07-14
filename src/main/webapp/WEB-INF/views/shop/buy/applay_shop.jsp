@@ -136,7 +136,7 @@ function deleteImg(id){
 		var parm = {};
 		parm.id=id;
 		parm.type="logo";
-		jQuery.common.updateObjByParm(parm,'/front/sell/deleteImg',true,'');
+		jQuery.common.updateObjByParm(parm,'/front/sell/deleteImg',true,window.location.href);
 	}
 }
 </script>	
