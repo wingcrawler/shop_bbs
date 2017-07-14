@@ -25,7 +25,7 @@ public class NotFoundInterceptor extends HandlerInterceptorAdapter {
     		int status = httpServletResponse.getStatus();
     		if(status==404){  
             	httpServletResponse.sendRedirect("/404");
-            } else if(status==500||status==400){
+            }else if(status==500||status==400){
             	httpServletResponse.sendRedirect("/500");
             }
     	}
