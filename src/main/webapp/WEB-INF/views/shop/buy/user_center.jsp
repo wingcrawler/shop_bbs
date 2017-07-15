@@ -31,7 +31,7 @@
 								<div class="name input_text">
 									<input type="hidden" value="${entity.id }" name="id"> <span
 										class="lab">${t.t_username}：</span> <input type="text"
-										name="username" value="${entity.username }" class="u-ipt">
+										name="username" value="${entity.username }" class="u-ipt" readonly>
 								</div>
 								<c:if test="${not empty img }">
 									<div class="logo input_text">
@@ -145,7 +145,7 @@
 				parm.type = "avatar";
 				jQuery.common.updateObjByParm(parm, '/front/buy/deleteUserImg',
 						true, window.location.href);
-			}
+			} 
 		}
 	</script>
 	<style>
