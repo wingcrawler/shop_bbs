@@ -140,7 +140,6 @@
 		})
 		function deleteImg(id) {
 			if (confirm('${t.t_confirm_delete}')) {
-				debugger;
 				var parm = {};
 				parm.id = id;
 				parm.type = "avatar";

@@ -22,8 +22,13 @@
 				<div class="header"><span>${t.t_user_center } > ${t.t_applay_shop }</span></div>
 				
 				<div class="company_data_edit">
+				<c:if test="${shop.shopStatus==1 }">
+					<div class="alert alert-success" role="alert">${t.t_applay_shop_success }<em>:</em>${t.t_bbs_re_login }</div>
+					
+					</c:if>
 					<c:if test="${shop.shopStatus==2 }">
 					<div class="alert alert-warning" role="alert">${t.t_pend_shop }<em>:</em>${t.t_pend_shop_msg }</div>
+					
 					</c:if>
 					<c:if test="${shop.shopStatus==3 }">
 					<div class="alert alert-danger" role="alert">${t.t_not_pass }<em>:</em>${shop.failedReason }</div>
@@ -100,7 +105,7 @@
 								</div>	
 							</div>
 
-							<div  class="save">
+							<div class="save" style="">
 								<input type="button" onclick="jQuery.common.ajaxFileSubmit('#form','/front/buy/doApplayShop',true,'/front/buy/applayShop')">
 								${t.b_submit }
 								</div>
@@ -138,6 +143,11 @@ function deleteImg(id){
 		parm.type="logo";
 		jQuery.common.updateObjByParm(parm,'/front/sell/deleteImg',true,window.location.href);
 	}
+}
+
+var stats=${shop.shopStatus };
+if(stats==2|stats==1){
+	$('.save').attr("style", "display:none;");
 }
 </script>	
 <style>

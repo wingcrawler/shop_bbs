@@ -13,7 +13,7 @@
 		jQuery(document).ready(function($){
 			$('#etalage').etalage({
 				thumb_image_width: 300,
-				thumb_image_height: 400,
+				thumb_image_height: 300,
 				source_image_width: 800,
 				source_image_height: 1000,
 				show_hint: true,
@@ -39,13 +39,13 @@
 							<c:forEach var="item" items="${imgList }" varStatus="index">
 								<c:if test="${index.count==1 }">
 									<li class="etalage_thumb thumb_${index.count } etalage_thumb_active" style="display: list-item; opacity: 1; background-image: none;">
-										<img class="etalage_thumb_image" src="${item.imagePath }" style="display: inline; width: 300px; height: 400px; opacity: 1;">
+										<img class="etalage_thumb_image" src="${item.imagePath }" style="display: inline; width: 300px; height: 300px; opacity: 1;">
 										<img class="etalage_source_image" src="${item.imagePath }" title="">
 									</li>
 								</c:if>
 								<c:if test="${index.count>1 }">
 									<li class="etalage_thumb thumb_${index.count } etalage_thumb_active" style="display: none; opacity: 0; background-image: none;">
-										<img class="etalage_thumb_image" src="${item.imagePath }" style="display: inline; width: 300px; height: 400px; opacity: 1;">
+										<img class="etalage_thumb_image" src="${item.imagePath }" style="display: inline; width: 300px; height: 300px; opacity: 1;">
 										<img class="etalage_source_image" src="${item.imagePath }" title="">
 									</li>
 								</c:if>
