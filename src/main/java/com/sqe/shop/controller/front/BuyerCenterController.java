@@ -102,8 +102,7 @@ public class BuyerCenterController extends BaseFrontController {
 		userService.save(user);
 		
 		Subject subject = SecurityUtils.getSubject();
-		User userInfo = (User) subject.getSession().getAttribute("userInfo");
-		userInfo.setUserImage(user.getUserImage());
+		User userInfo = userService.getById(user.getId());
 		subject.getSession().setAttribute("userInfo", userInfo);
 		
 		return responseOK1("");
@@ -242,7 +241,7 @@ public class BuyerCenterController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/messageReply", method = RequestMethod.POST)
+	@RequestMapping(value="/messageReply")
 	public Map<String, Object> messageReply(String msgContent, String type,Long productId, Long messageId, Long commentId, Long replyToId) {
 		if(StringUtils.isBlank(msgContent)){
 			return responseError(-1, "error_empty_content");
@@ -285,6 +284,27 @@ public class BuyerCenterController extends BaseFrontController {
 			user.setUserImage("");
 		}
 		userService.update(user);
+		return responseOK1("");
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteUserImg", method = RequestMethod.GET)
+	public Map<String, Object> deleteUserImg(Long id, String type){
+		if(id==null || StringUtils.isBlank(type)){
+			return responseError(-1, "error_unknow");
+		}
+
+		User user = new User();
+		user.setId(id);
+		if(type.equals("avatar")){
+			user.setUserImage("");
+		}
+		userService.update(user);
+		
+		Subject subject = SecurityUtils.getSubject();
+		User userInfo = userService.getById(id);
+		subject.getSession().setAttribute("userInfo", userInfo);
+		
 		return responseOK1("");
 	}
 	
