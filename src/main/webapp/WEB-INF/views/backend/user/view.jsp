@@ -154,7 +154,7 @@ $(function(){
 						self.location=window.location.href;
 					}
 				}
-			});
+			}); 
 		}
 	});
 	$('#onUser').click(function(){

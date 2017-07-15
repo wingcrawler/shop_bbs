@@ -145,7 +145,7 @@
 				parm.type = "avatar";
 				jQuery.common.updateObjByParm(parm, '/front/buy/deleteUserImg',
 						true, window.location.href);
-			}
+			} 
 		}
 	</script>
 	<style>
