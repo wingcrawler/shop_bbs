@@ -32,7 +32,7 @@
 						</div>
 						<div>
 							<p>${t.t_shop_name }:
-								<span class="cyan">${shop.shopTitle }</span>
+								<span class="cyan">${shop.shopTitle }</span>
 							</p>
 							<p>${t.t_star }:<span>${shop.shopLevel }</span>
 							</p>
