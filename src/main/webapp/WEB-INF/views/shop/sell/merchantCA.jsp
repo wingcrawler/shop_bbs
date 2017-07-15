@@ -53,7 +53,7 @@
 							<div class="name">
 								<input type="hidden" value="${shop.id }" name="id"> <span
 									class="lab">${t.t_shop_name }:</span> <input type="text"
-									name="shopTitle" value="${shop.shopTitle }">
+									name="shopTitle" value="${shop.shopTitle }" readonly>
 							</div>
 							<c:if test="${not empty img }">
 								<div class="logo">
