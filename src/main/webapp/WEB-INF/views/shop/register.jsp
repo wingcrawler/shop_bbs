@@ -40,7 +40,7 @@
 				</div>
 				<label class="register_label"><input type="checkbox"
 					name="checked" class="check" checked="checked">${t.register_agree}<a
-					href="###" class="ftp">《${t.register_item}》</a></label> <input
+					href="/bbs/provisions.html" class="ftp">《${t.register_item}》</a></label> <input
 					id="onsubmit" type="submit" class="pload" value="${t.register_now}" />
 
 			</div>
