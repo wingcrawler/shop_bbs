@@ -2243,6 +2243,7 @@ ul.navig li:nth-of-type(3) {
 .newsdetail .img{text-align: center;padding:10px 0}
 .text{color:#4b4b4b;font-size:14px;line-height:0px;}
 .text p{text-indent: 2em;line-height:2em;}
+.text p img{width:100%;margin-left:-2em;}
 
 .atl-con-bd {
 

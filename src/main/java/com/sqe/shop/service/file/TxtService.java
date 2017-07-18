@@ -38,6 +38,7 @@ import com.sqe.shop.util.RegularUtil;
 @Component
 public class TxtService extends BaseService {
 	
+	
 	@Autowired
 	private UserService userService;
 	
@@ -168,7 +169,7 @@ public class TxtService extends BaseService {
 					}
 					phone = arr[2].trim();
 					mail = arr[3].trim();
-					if(StringUtils.isBlank(username)||StringUtils.isBlank(role)||StringUtils.isBlank(phone)){
+					if(StringUtils.isBlank(username)||StringUtils.isBlank(role)||StringUtils.isBlank(mail)){
 						continue;
 					}
 					User user = new User();
@@ -184,6 +185,7 @@ public class TxtService extends BaseService {
 					List<User> existUsers = userService.findOnlyByName(username);
 					if(existUsers==null || existUsers.isEmpty()){
 						list.add(user);	
+						logger.info("{}",username);	
 					}
 					
 				}

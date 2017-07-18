@@ -13,8 +13,8 @@ function nextPage(pageNo){
  * 删除单个产品
  */
 function deleteOne(id){
-	 if(confirm("确定删除/Confirm to delete?")) {
-		 jQuery.common.deleteById(id, "/front/sell/deleteProductById", true, "/front/sell/productListPage");
+	 if(confirm("Confirm to delete?")) {
+		 jQuery.common.deleteById(id, "/front/sell/deleteProductById", true, window.location.href);
 	 }
 }
 
@@ -22,10 +22,10 @@ function deleteOne(id){
  * 删除勾选的产品
  */
 function deleteAll(){
-	if(confirm("确定删除/Confirm to delete?")) {
+	if(confirm("Confirm to delete?")) {
 		var id = getSelectedItem();
 		if(id!=''){
-			jQuery.common.deleteById(id, "/front/sell/deleteProductById", true, "/front/sell/productListPage");	
+			jQuery.common.deleteById(id, "/front/sell/deleteProductById", true, window.location.href);	
 		}
 	}
 }
@@ -37,7 +37,7 @@ function deleteAll(){
 function productOff(id){
 	var obj = {};
 	obj["idList"]=id;
-	jQuery.common.updateObj(obj, "/front/sell/offProductById", true, "/front/sell/productListPage");
+	jQuery.common.updateObjByParm(obj, "/front/sell/offProductById", true, window.location.href);
 }
 
 /**
@@ -48,7 +48,7 @@ function productOffAll(){
 	var id = getSelectedItem();
 	var obj = {};
 	obj["idList"]=id;
-	jQuery.common.updateObj(obj, "/front/sell/offProductById", true, "/front/sell/productListPage");
+	jQuery.common.updateObjByParm (obj, "/front/sell/offProductById", true, window.location.href);
 }
 
 /**
@@ -58,7 +58,7 @@ function productOffAll(){
 function productOn(id){
 	var obj = {};
 	obj["idList"]=id;
-	jQuery.common.updateObj(obj, "/front/sell/onProductById", true, "/front/sell/productListPage");
+	jQuery.common.updateObjByParm(obj, "/front/sell/onProductById", true, window.location.href);
 }
 
 /**
@@ -69,7 +69,7 @@ function productOnAll(){
 	var id = getSelectedItem();
 	var obj = {};
 	obj["idList"]=id;
-	jQuery.common.updateObj(obj, "/front/sell/onProductById", true, "/front/sell/productListPage");
+	jQuery.common.updateObjByParm(obj, "/front/sell/onProductById", true,window.location.href);
 }
 
 
@@ -85,7 +85,7 @@ function getSelectedItem(){
 		}
 	} 
 	if(idList==''){
-		alert("请勾选产品/Please select product");
+		alert("Please select product");
 	} else {
 		return idList;	
 	}

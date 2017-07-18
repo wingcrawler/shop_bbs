@@ -281,7 +281,7 @@ public class SellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/deleteProductById", method = RequestMethod.GET)
+	@RequestMapping(value="/deleteProductById")
 	public Map<String, Object> deleteProductById(String idList) {
 		if(StringUtils.isBlank(idList)){
 			return responseOK1("");	
@@ -301,7 +301,7 @@ public class SellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/offProductById", method = RequestMethod.POST)
+	@RequestMapping(value="/offProductById")
 	public Map<String, Object> offProductById(String idList) {
 		return productService.updateProductStatus(idList, Constants.PRODUCT_OFF);
 	}
@@ -312,7 +312,7 @@ public class SellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/onProductById", method = RequestMethod.POST)
+	@RequestMapping(value="/onProductById")
 	public Map<String, Object> onProductById(String idList) {
 		return productService.updateProductStatus(idList, Constants.PRODUCT_ON);
 	}

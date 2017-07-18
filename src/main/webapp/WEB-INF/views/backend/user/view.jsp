@@ -151,10 +151,10 @@ $(function(){
 					if (data.errorNo != 0) {
 						$.commonUtil.showTip(data.errorInfo);
 					} else {
-						self.location='';
+						self.location=window.location.href;
 					}
 				}
-			});
+			}); 
 		}
 	});
 	$('#onUser').click(function(){
@@ -168,7 +168,7 @@ $(function(){
 					if (data.errorNo != 0) {
 						$.commonUtil.showTip(data.errorInfo);
 					} else {
-						self.location='';
+						self.location=window.location.href;
 					}
 				}
 			});

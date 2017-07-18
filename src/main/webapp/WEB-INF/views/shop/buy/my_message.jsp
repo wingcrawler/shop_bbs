@@ -140,7 +140,7 @@ $(function(){
 		parm.replyToId=replyToId;
 		parm.messageId=messageId;
 		parm.type=2;
-		jQuery.common.updateObjByParm(parm,'/front/buy/messageReply',true,'');
+		jQuery.common.updateObjByParm(parm,'/front/buy/messageReply',true,window.location.href);
 	});
 	//取消回复
 	$('.cancel').click(function(){
