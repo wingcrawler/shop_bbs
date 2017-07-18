@@ -36,7 +36,7 @@
 							</div>
 							<div class="commit">
 								<span>${t.b_submit }</span>
-								<input type="button" onclick="jQuery.common.saveObj('#form','/front/buy/doChangePwd',true,'')">
+								<input type="button" onclick="jQuery.common.saveObj('#form','/front/buy/doChangePwd',true,window.location.href)">
 							</div>
 						</form>
 					</div>

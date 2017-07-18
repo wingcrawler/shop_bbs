@@ -141,7 +141,7 @@ $(function(){
 		parm.msgContent=$(this).parent().prev().val();
 		parm.messageId=messageId;
 		parm.replyToId=replyToId;
-		jQuery.common.updateObjByParm(parm,'/front/sell/messageReply',true,'');
+		jQuery.common.updateObjByParm(parm,'/front/sell/messageReply',true,window.location.href);
 	});
 	//取消回复
 	$('.cancel').click(function(){

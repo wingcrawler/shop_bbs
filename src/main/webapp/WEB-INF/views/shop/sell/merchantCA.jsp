@@ -32,7 +32,7 @@
 						</div>
 						<div>
 							<p>${t.t_shop_name }:
-								<span class="cyan">${shop.shopTitle }</span>
+								<span class="cyan">${shop.shopTitle }</span>
 							</p>
 							<p>${t.t_star }:<span>${shop.shopLevel }</span>
 							</p>
@@ -53,7 +53,7 @@
 							<div class="name">
 								<input type="hidden" value="${shop.id }" name="id"> <span
 									class="lab">${t.t_shop_name }:</span> <input type="text"
-									name="shopTitle" value="${shop.shopTitle }">
+									name="shopTitle" value="${shop.shopTitle }" readonly>
 							</div>
 							<c:if test="${not empty img }">
 								<div class="logo">

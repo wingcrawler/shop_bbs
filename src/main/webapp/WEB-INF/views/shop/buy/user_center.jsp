@@ -31,7 +31,7 @@
 								<div class="name input_text">
 									<input type="hidden" value="${entity.id }" name="id"> <span
 										class="lab">${t.t_username}：</span> <input type="text"
-										name="username" value="${entity.username }" class="u-ipt">
+										name="username" value="${entity.username }" class="u-ipt" readonly>
 								</div>
 								<c:if test="${not empty img }">
 									<div class="logo input_text">
@@ -107,7 +107,7 @@
 
 								<div class="save">
 									<input type="button"
-										onclick="jQuery.common.ajaxFileSubmit('#form','/front/buy/doSaveBasicInfo',true,'')">
+										onclick="jQuery.common.ajaxFileSubmit('#form','/front/buy/doSaveBasicInfo',true,window.location.href)">
 									${t.b_submit}
 								</div>
 							</form>
@@ -140,13 +140,12 @@
 		})
 		function deleteImg(id) {
 			if (confirm('${t.t_confirm_delete}')) {
-				debugger;
 				var parm = {};
 				parm.id = id;
 				parm.type = "avatar";
-				jQuery.common.updateObjByParm(parm, '/front/buy/deleteImg',
-						true, '');
-			}
+				jQuery.common.updateObjByParm(parm, '/front/buy/deleteUserImg',
+						true, window.location.href);
+			} 
 		}
 	</script>
 	<style>

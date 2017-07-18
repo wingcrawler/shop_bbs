@@ -3,7 +3,7 @@
 <!-- menu -->
 <div class="menu">
 	<div class="menu_title">
-		<p class="title_img"><img src="${user.userImage}" alt=""></p>
+		<p class="title_img"><img src="${img}" alt=""></p>
 		<p class="title_text">${user.username}</p>
 	</div>
 	<div class="menu_list">

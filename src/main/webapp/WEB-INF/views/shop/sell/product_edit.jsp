@@ -304,7 +304,7 @@ $(function(){
 			 var parm={};
 			 parm.productId=productId;
 			 parm.imgId=imgId;
-			jQuery.common.deleteByParm(parm,'/front/sell/deleteByParm',true,'')	 
+			jQuery.common.deleteByParm(parm,'/front/sell/deleteByParm',true,window.location.href)	 
 		 }
 	});
 	

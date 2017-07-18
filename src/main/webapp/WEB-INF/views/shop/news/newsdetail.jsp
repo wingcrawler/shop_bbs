@@ -170,7 +170,7 @@
 		debugger;
 		var elem = $(obj).parents('.news_reply form').attr('class');
 		elem = '.'+elem;
-		jQuery.common.saveObj(elem,"/news/saveComment",true,"");
+		jQuery.common.saveObj(elem,"/news/saveComment",true,window.location.href);
 	}
 	
 </script>
