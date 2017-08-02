@@ -4,7 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html style="background:url(../frontstyle/images/register.png) no-repeat;background-size:100%!important">
+<html
+	style="background:url(../frontstyle/images/register.png) no-repeat;background-size:100%!important">
 <head>
 <jsp:include page="include/meta.jsp"></jsp:include>
 <link rel="stylesheet" href="../frontstyle/css/base.css" type="text/css" />
@@ -14,12 +15,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-		<form name="form1" method="post" action="" onsubmit="return check()">
-<!-- 			<img src="../frontstyle/images/register.png" class="reg_bg"> -->
+
+	<form name="form1" method="post" action="" onsubmit="return check()">
+		<!-- 			<img src="../frontstyle/images/register.png" class="reg_bg"> -->
 		<div class="register1">
 			<div class="box">
-				<p>${t.register }  <a href="/user/sellregister">${t.t_i_am }${t.seller }</a></p>
+				<p>${t.seller } ${t.register }</p>
 				<div class="input">
 					<div class="margin">
 						<span><b>*</b>${t.register_account }：</span><input type="text"
@@ -37,15 +38,18 @@
 						<span><b>*</b>${t.register_email }：</span><input type="text"
 							name="userMail" class="email" id="email" />
 					</div>
+					<input hidden type="text" name="userRole" class="key1"
+						id="role" vaule="2"/>
 				</div>
 				<label class="register_label"><input type="checkbox"
 					name="checked" class="check" checked="checked">${t.register_agree}<a
 					href="/bbs/provisions.html" class="ftp">《${t.register_item}》</a></label> <input
-					id="onsubmit" type="submit" class="pload" value="${t.register_now}" /> 
+					id="onsubmit" type="submit" class="pload" value="下一步" />
+
 			</div>
 		</div>
-		</form>
-	
+	</form>
+
 
 
 	<script type="text/javascript">
@@ -82,7 +86,7 @@
 									alert(result.errorInfo);
 								} else {
 									alert(register_sucess);
-									window.location.href = '/user/login';//登录成功跳转
+									window.location.href = '/user/applyshop?name='+$username;//登录成功跳转
 								}
 							},
 							error : function() {

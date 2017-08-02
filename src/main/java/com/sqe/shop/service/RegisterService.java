@@ -47,12 +47,12 @@ public class RegisterService extends BaseCommon {
 			user.setPassword(md5.encode(user.getPassword()));
 		}
         user.setCreateTime(new Date());
-        user.setUserStatus(1);
-        user.setUserRole(ROLE_BUY);
+        user.setUserStatus(1);       
 		int r = userMapper.insert(user);
 
 		if (r == 0) {
 			resMap.put("result",true);
+			resMap.put("user",user);
 			resMap.put("url", "/login");
 		} else {
 			resMap.put("result",false);

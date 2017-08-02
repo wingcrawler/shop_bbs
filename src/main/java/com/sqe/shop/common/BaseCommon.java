@@ -35,6 +35,7 @@ public class BaseCommon extends Constants{
 	
 	public HashMap<String, Object> responseError1(Integer errorNo, String errorInfo){
 		HashMap<String, Object> resMap = new HashMap<String, Object>();
+		resMap.put("result", false);
 		resMap.put(Constants.ERROR_NO, errorNo);
 		resMap.put(Constants.ERROR_INFO, errorInfo);
 		return resMap;
