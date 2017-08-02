@@ -19,7 +19,7 @@
 <!-- 			<img src="../frontstyle/images/register.png" class="reg_bg"> -->
 		<div class="register1">
 			<div class="box">
-				<p>${t.register }  <a href="/user/sellregister">${t.t_i_am }${t.seller }</a></p>
+				<p>${t.register }  <a href="/user/sellregister">${t.t_i_am }${t.t_sell }</a></p>
 				<div class="input">
 					<div class="margin">
 						<span><b>*</b>${t.register_account }：</span><input type="text"

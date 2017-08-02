@@ -20,7 +20,7 @@
 		<!-- 			<img src="../frontstyle/images/register.png" class="reg_bg"> -->
 		<div class="register1">
 			<div class="box">
-				<p>${t.seller } ${t.register }</p>
+				<p>${t.t_sell } ${t.register }</p>
 				<div class="input">
 					<div class="margin">
 						<span><b>*</b>${t.register_account }：</span><input type="text"
@@ -44,7 +44,7 @@
 				<label class="register_label"><input type="checkbox"
 					name="checked" class="check" checked="checked">${t.register_agree}<a
 					href="/bbs/provisions.html" class="ftp">《${t.register_item}》</a></label> <input
-					id="onsubmit" type="submit" class="pload" value="下一步" />
+					id="onsubmit" type="submit" class="pload" value="${t.t_next} }" />
 
 			</div>
 		</div>
