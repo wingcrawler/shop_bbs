@@ -42,6 +42,9 @@ public class UserService extends AdapterService implements BaseService {
 		Map<String, Object> parm = queryParm(user);
 		return userMapper.countByParm(parm);
 	}
+	public int batchInsert(List<User> userList) {
+		return userMapper.insertUserBatch(userList);
+	}
 	
 	public PageUtil<User> getBeanListByParm(User user, int pageNo, Integer pageSize) {
 		PageUtil<User> pageUtil = new PageUtil<User>(pageNo, pageSize);
@@ -136,21 +139,6 @@ public class UserService extends AdapterService implements BaseService {
 			list.addAll(page.getList());
 		}
 		return list;
-	}
-
-	public int batchInsert(List<User> list) {
-		int count = 0;
-		User u = new User();
-		for(User user : list){
-			u.setUsername(user.getUsername());
-			u.setUserPhone(user.getUserPhone());
-			if(this.countByParm(user)>0){
-				continue;
-			}
-			this.insert(user);
-			count++;
-		}
-		return count;
 	}
 
 	public User findByName(String loginName) {

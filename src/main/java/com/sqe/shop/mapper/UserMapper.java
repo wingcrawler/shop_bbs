@@ -15,5 +15,7 @@ public interface UserMapper extends BaseMapper {
 	User findOwnerUser(@Param("username")String ownerName);
 
 	List<User> findOnlyByName(@Param("username") String username);
+	
+	int insertUserBatch(List<User> userList);
 
 }

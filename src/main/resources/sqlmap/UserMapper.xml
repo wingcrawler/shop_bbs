@@ -1,184 +1,207 @@
 <?xml version="1.0" encoding="UTF-8" ?>   
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sqe.shop.mapper.UserMapper">
 
-<resultMap type="com.sqe.shop.model.User" id="UserBaseMapper">
-	<id property="userQq" column="user_qq" />
-	<id property="userStatus" column="user_status" />
-	<id property="userPhone" column="user_phone" />
-	<id property="userAddress" column="user_address" />
-	<id property="password" column="password" />
-	<id property="userImage" column="user_image" />
-	<id property="createTime" column="create_time" />
-	<id property="userMail" column="user_mail" />
-	<id property="id" column="id" />
-	<id property="userRole" column="user_role" />
-	<id property="userIntroduce" column="user_introduce" />
-	<id property="username" column="username" />
-</resultMap>  
+	<resultMap type="com.sqe.shop.model.User" id="UserBaseMapper">
+		<id property="userQq" column="user_qq" />
+		<id property="userStatus" column="user_status" />
+		<id property="userPhone" column="user_phone" />
+		<id property="userAddress" column="user_address" />
+		<id property="password" column="password" />
+		<id property="userImage" column="user_image" />
+		<id property="createTime" column="create_time" />
+		<id property="userMail" column="user_mail" />
+		<id property="id" column="id" />
+		<id property="userRole" column="user_role" />
+		<id property="userIntroduce" column="user_introduce" />
+		<id property="username" column="username" />
+	</resultMap>
 
-<insert id="insert">
-	<selectKey resultType="long" keyProperty="id">  
-   		select LAST_INSERT_ID()
-   	</selectKey>
-	insert into user
-	(user_qq,user_status,user_phone,user_address,password,user_image,create_time,user_mail,user_role,user_introduce,username)
-	values
-	(#{userQq},#{userStatus},#{userPhone},#{userAddress},#{password},#{userImage},#{createTime},#{userMail},#{userRole},#{userIntroduce},#{username})
-</insert>
+	<insert id="insert">
+		<selectKey resultType="long" keyProperty="id">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into user
+		(user_qq,user_status,user_phone,user_address,password,user_image,create_time,user_mail,user_role,user_introduce,username)
+		values
+		(#{userQq},#{userStatus},#{userPhone},#{userAddress},#{password},#{userImage},#{createTime},#{userMail},#{userRole},#{userIntroduce},#{username})
+	</insert>
 
-<update id="update">
-	UPDATE user 
-	<set>
-			<if test="userQq != null">  
-	        	user_qq=#{userQq},
-	    	</if>
-			<if test="userStatus != null">  
-	        	user_status=#{userStatus},
-	    	</if>
-			<if test="userPhone != null">  
-	        	user_phone=#{userPhone},
-	    	</if>
-			<if test="userAddress != null">  
-	        	user_address=#{userAddress},
-	    	</if>
-			<if test="password != null">  
-	        	password=#{password},
-	    	</if>
-			<if test="userImage != null">  
-	        	user_image=#{userImage},
-	    	</if>
-			<if test="createTime != null">  
-	        	create_time=#{createTime},
-	    	</if>
-			<if test="userMail != null">  
-	        	user_mail=#{userMail},
-	    	</if>
-			<if test="userRole != null">  
-	        	user_role=#{userRole},
-	    	</if>
-			<if test="userIntroduce != null">  
-	        	user_introduce=#{userIntroduce},
-	    	</if>
-			<if test="username != null">  
-	        	username=#{username},
-	    	</if>
-	</set>   
-    WHERE id=#{id}
-</update>
+	<update id="update">
+		UPDATE user
+		<set>
+			<if test="userQq != null">
+				user_qq=#{userQq},
+			</if>
+			<if test="userStatus != null">
+				user_status=#{userStatus},
+			</if>
+			<if test="userPhone != null">
+				user_phone=#{userPhone},
+			</if>
+			<if test="userAddress != null">
+				user_address=#{userAddress},
+			</if>
+			<if test="password != null">
+				password=#{password},
+			</if>
+			<if test="userImage != null">
+				user_image=#{userImage},
+			</if>
+			<if test="createTime != null">
+				create_time=#{createTime},
+			</if>
+			<if test="userMail != null">
+				user_mail=#{userMail},
+			</if>
+			<if test="userRole != null">
+				user_role=#{userRole},
+			</if>
+			<if test="userIntroduce != null">
+				user_introduce=#{userIntroduce},
+			</if>
+			<if test="username != null">
+				username=#{username},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
 
-<delete id="delete">
-	delete from user where id=#{id}
-</delete>
+	<delete id="delete">
+		delete from user where id=#{id}
+	</delete>
 
-<select id="getById" resultMap="UserBaseMapper">
-	SELECT * FROM user WHERE id=#{id} 
-</select>
+	<select id="getById" resultMap="UserBaseMapper">
+		SELECT * FROM user WHERE id=#{id}
+	</select>
 
-<select id="countByParm" resultType="integer">
-	select count(*) from user  where 1=1 
-	and user_role != 3
-			<if test="parm.userAddress != null">
-		     	and user_address = #{parm.userAddress}
-		   	</if>
-			<if test="parm.password != null">
-		     	and password = #{parm.password}
-		   	</if>
-			<if test="parm.userStatus != null">
-		     	and user_status = #{parm.userStatus}
-		   	</if>
-			<if test="parm.userImage != null">
-		     	and user_image = #{parm.userImage}
-		   	</if>
-			<if test="parm.createTime != null">
-		     	and create_time = #{parm.createTime}
-		   	</if>
-			<if test="parm.userPhone != null">
-		     	and user_phone = #{parm.userPhone}
-		   	</if>
-			<if test="parm.userMail != null">
-		     	and user_mail = #{parm.userMail}
-		   	</if>
-			<if test="parm.userRole != null">
-		     	and user_role = #{parm.userRole}
-		   	</if>
-			<if test="parm.userIntroduce != null">
-		     	and user_introduce = #{parm.userIntroduce}
-		   	</if>
-			<if test="parm.username != null">
-		     	and username like "%"#{parm.username}"%"
-		   	</if>
-</select>
+	<select id="countByParm" resultType="integer">
+		select count(*) from user where 1=1
+		and user_role != 3
+		<if test="parm.userAddress != null">
+			and user_address = #{parm.userAddress}
+		</if>
+		<if test="parm.password != null">
+			and password = #{parm.password}
+		</if>
+		<if test="parm.userStatus != null">
+			and user_status = #{parm.userStatus}
+		</if>
+		<if test="parm.userImage != null">
+			and user_image = #{parm.userImage}
+		</if>
+		<if test="parm.createTime != null">
+			and create_time = #{parm.createTime}
+		</if>
+		<if test="parm.userPhone != null">
+			and user_phone = #{parm.userPhone}
+		</if>
+		<if test="parm.userMail != null">
+			and user_mail = #{parm.userMail}
+		</if>
+		<if test="parm.userRole != null">
+			and user_role = #{parm.userRole}
+		</if>
+		<if test="parm.userIntroduce != null">
+			and user_introduce = #{parm.userIntroduce}
+		</if>
+		<if test="parm.username != null">
+			and username like "%"#{parm.username}"%"
+		</if>
+	</select>
 
-<select id="getBeanListByParm" resultMap="UserBaseMapper">
-	select * from user where 1=1 
-	and user_role != 3
-			<if test="parm.userAddress != null">
-		     	and user_address = #{parm.userAddress}
-		   	</if>
-			<if test="parm.password != null">
-		     	and password = #{parm.password}
-		   	</if>
-			<if test="parm.userStatus != null">
-		     	and user_status = #{parm.userStatus}
-		   	</if>
-			<if test="parm.userImage != null">
-		     	and user_image = #{parm.userImage}
-		   	</if>
-			<if test="parm.createTime != null">
-		     	and create_time = #{parm.createTime}
-		   	</if>
-			<if test="parm.userPhone != null">
-		     	and user_phone = #{parm.userPhone}
-		   	</if>
-			<if test="parm.userMail != null">
-		     	and user_mail = #{parm.userMail}
-		   	</if>
-			<if test="parm.userRole != null">
-		     	and user_role = #{parm.userRole}
-		   	</if>
-			<if test="parm.userIntroduce != null">
-		     	and user_introduce = #{parm.userIntroduce}
-		   	</if>
-			<if test="parm.username != null">
-		     	and username like "%"#{parm.username}"%"
-		   	</if>
+	<select id="getBeanListByParm" resultMap="UserBaseMapper">
+		select * from user where 1=1
+		and user_role != 3
+		<if test="parm.userAddress != null">
+			and user_address = #{parm.userAddress}
+		</if>
+		<if test="parm.password != null">
+			and password = #{parm.password}
+		</if>
+		<if test="parm.userStatus != null">
+			and user_status = #{parm.userStatus}
+		</if>
+		<if test="parm.userImage != null">
+			and user_image = #{parm.userImage}
+		</if>
+		<if test="parm.createTime != null">
+			and create_time = #{parm.createTime}
+		</if>
+		<if test="parm.userPhone != null">
+			and user_phone = #{parm.userPhone}
+		</if>
+		<if test="parm.userMail != null">
+			and user_mail = #{parm.userMail}
+		</if>
+		<if test="parm.userRole != null">
+			and user_role = #{parm.userRole}
+		</if>
+		<if test="parm.userIntroduce != null">
+			and user_introduce = #{parm.userIntroduce}
+		</if>
+		<if test="parm.username != null">
+			and username like "%"#{parm.username}"%"
+		</if>
 		<if test="parm.orderby != null">
-	   		order by ${parm.orderby}
-	   	</if>
+			order by ${parm.orderby}
+		</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
 		</if>
-</select>
+	</select>
 
 
-<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select * from user where 1=1
-	and user_role != 3
+	<select id="getMapListByParm" parameterType="HashMap"
+		resultType="HashMap">
+		select * from user where 1=1
+		and user_role != 3
 		<if test="parm.orderby != null">
-	   		order by ${parm.orderby}
-	   	</if>
+			order by ${parm.orderby}
+		</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
 		</if>
-</select>
+	</select>
 
-<select id="findByName" resultMap="UserBaseMapper">
-	SELECT * FROM user WHERE username=#{username}  and user_status=1
-</select>
+	<select id="findByName" resultMap="UserBaseMapper">
+		SELECT * FROM user WHERE
+		username=#{username} and user_status=1
+	</select>
 
-<select id="findOnlyByName" resultMap="UserBaseMapper">
-	SELECT * FROM user WHERE username=#{username}
-</select>
+	<select id="findOnlyByName" resultMap="UserBaseMapper">
+		SELECT * FROM user WHERE
+		username=#{username}
+	</select>
 
-<select id="findOwnerUser" resultMap="UserBaseMapper">
-	SELECT * FROM user WHERE username=#{username}  and user_status=1  
-	and id not in (select user_id from shop)
-</select>
+	<select id="findOwnerUser" resultMap="UserBaseMapper">
+		SELECT * FROM user WHERE
+		username=#{username} and user_status=1
+		and id not in (select user_id
+		from shop)
+	</select>
 
-<select id="findUserByUsernameAndPassword" resultMap="UserBaseMapper">
-	SELECT * FROM user WHERE username=#{username} and password=#{password} and user_status=1
-</select>
+	<select id="findUserByUsernameAndPassword" resultMap="UserBaseMapper">
+		SELECT *
+		FROM user WHERE username=#{username} and password=#{password} and
+		user_status=1
+	</select>
 
+
+	<!-- 批量插入生成的兑换码 -->
+	<insert id="insertUserBatch" parameterType="java.util.List">
+		<selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into user
+		(user_status,password,create_time,user_mail,user_role,user_introduce,username)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.userStatus},#{item.password},#{item.createTime},#{item.userMail},#{item.userRole},#{item.userIntroduce},#{item.username})
+		</foreach>
+	</insert>
 
 </mapper>

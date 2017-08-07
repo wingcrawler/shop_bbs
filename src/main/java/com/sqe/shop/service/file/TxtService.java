@@ -151,6 +151,7 @@ public class TxtService extends BaseService {
 				String role;
 				String phone;
 				String mail;
+				String passwd;
 				MD5Util encoderMd5 = new MD5Util(MD5Util.SALT, "MD5");
 				String encode = encoderMd5.encode("123456");
 				while((lineTxt = bufferedReader.readLine()) != null){
@@ -169,6 +170,7 @@ public class TxtService extends BaseService {
 					}
 					phone = arr[2].trim();
 					mail = arr[3].trim();
+					passwd=arr[4].trim();
 					if(StringUtils.isBlank(username)||StringUtils.isBlank(role)||StringUtils.isBlank(mail)){
 						continue;
 					}
@@ -176,7 +178,7 @@ public class TxtService extends BaseService {
 					user.setUsername(username);
 					user.setUserRole(Long.valueOf(role));
 					user.setUserMail(mail);
-					user.setPassword(encode);
+					user.setPassword(encoderMd5.encode(passwd));
 					user.setUserStatus(1);
 					user.setUserPhone(phone);
 					user.setCreateTime(new Date());
