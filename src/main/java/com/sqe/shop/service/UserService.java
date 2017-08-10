@@ -51,12 +51,12 @@ public class UserService extends AdapterService implements BaseService {
 			List<User> sub = userList.subList(count, count + 50);
 			int r = userMapper.insertUserBatch(sub);
 			k = k + r;
+
 		}
 		List<User> sublast = userList.subList(count - 50, size);
 		int o = userMapper.insertUserBatch(sublast);
 		k = k + o;
 		return k;
-
 	}
 
 	public PageUtil<User> getBeanListByParm(User user, int pageNo, Integer pageSize) {
