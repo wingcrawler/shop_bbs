@@ -55,7 +55,7 @@ public class UserService extends AdapterService implements BaseService {
 		}
 		List<User> sublast = userList.subList(count - 50, size);
 		int o = userMapper.insertUserBatch(sublast);
-		k = k + o;
+		k = k + o -50;
 		return k;
 	}
 

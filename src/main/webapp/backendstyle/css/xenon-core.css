@@ -707,7 +707,6 @@ body {
   padding: 30px;
   padding-bottom: 0;
   vertical-align: top;
-  word-break: break-word;
 }
 .boxed-container .page-container .main-content {
   background-color: #eeeeee;
@@ -4689,7 +4688,7 @@ label.cbr-inline + .cbr-inline {
 .panel-group .panel .panel-heading a[data-toggle="collapse"]:before {
   float: right;
   display: block;
-  content: '–';
+  content: '鈥�';
   font-size: 18px;
   width: 25px;
   text-align: right;
@@ -5551,7 +5550,7 @@ blockquote small {
   width: 10%;
 }
 .dataTables_wrapper tr .yadcf-filter-wrapper .yadcf-filter-wrapper-inner .yadcf-filter-range-number-seperator:after {
-  content: '–';
+  content: '鈥�';
   color: #979898;
   font-size: 11px;
   font-weight: normal;

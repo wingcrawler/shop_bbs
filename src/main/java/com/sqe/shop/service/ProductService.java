@@ -128,7 +128,7 @@ public class ProductService extends AdapterService implements BaseService {
 	private Map<String, Object> queryParm(Product product) {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if(product!=null){
-			if(product.getProductStatus()!=null && product.getProductStatus()>0){
+			if(product.getProductStatus()!=null && product.getProductStatus()>=0){
 				parm.put("productStatus", product.getProductStatus());	
 			}
 			if(product.getProductTypeId()!=null && product.getProductTypeId()>=0){
