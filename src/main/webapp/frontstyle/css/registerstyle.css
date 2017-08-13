@@ -29,7 +29,43 @@ a.ftp{color:#45a8e7;}
 .register1 .box .key1{background:url(../images/key.png) no-repeat 310px center;}
 .register1 .box .email{background:url(../images/email.png) no-repeat 310px center;}
 .plast{text-align: center;line-height: 40px;}
+/*2017/8/8*/
 
+
+
+.register1 .box .dianhua{background:url(../images/dianhua.png) no-repeat 310px center;}
+.register1 .box .qq{background:url(../images/QQ.png) no-repeat 310px center;}
+.register1 .box .dizhi{background:url(../images/dizhi.png) no-repeat 310px center;}
+.margin .upload {
+    width: 11.625rem;
+    height: 5.25rem;
+    display: inline-block;
+    font-size: 0.875rem;
+    background: #fff;
+    border: 0.0625rem dashed #e0e0e0;
+    padding: 0.75rem 0;
+    cursor: pointer;
+    position: relative;
+}
+.register1 .box .input .upload input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.register1 .box .input  .work_time{
+	width:18%;
+}
+.register1 .box .input  .gray{
+	margin-left:0px;
+    width:100px;
+    display: inline-block;
+    text-align: left;
+}
+.register1 .box .seller_pload{padding:5px 0;background:#45a8e7;display: block;width:40%;margin: 0 auto;color:#fff;font-size:18px;margin-top:10px;text-align: center;}
 
 
 /*onloadpage*/
