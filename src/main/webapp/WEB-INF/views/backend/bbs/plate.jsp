@@ -74,7 +74,8 @@ $(function(){
 	$('#main-menu li.li').eq(6).addClass('active').addClass('opened');
 	$('#main-menu li.li').eq(6).find('ul li').eq(1).addClass('active');	
 	
-	loadFirstSection();	loadSecondSection();
+	loadFirstSection();	
+	/* loadSecondSection(); */
 });
 
 //一级版块
