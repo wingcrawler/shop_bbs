@@ -1,126 +1,123 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-	<jsp:include page="../shop/include/meta.jsp"></jsp:include>
-	<title>${t.t_applay_shop }</title>
-	<link href="/frontstyle/buy/css/user_center.css" rel="stylesheet" type="text/css">
-	<link href="/frontstyle/sell/css/merchantCA.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0046)http://en.sachielconnect.com/user/sellregister -->
+<html style="background-image: url(/frontstyle/images/register.png); background-position: initial; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-size: 100% !important; font-size: 18.6803px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="keywords" content="Biruang Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design">
+
+<script type="application/x-javascript"> 
+	addEventListener("load", function() { 
+		setTimeout(hideURLbar, 0); 
+	}, false); 
+	function hideURLbar(){ 
+		window.scrollTo(0,1); 
+	} 
+</script>
+
+<link href="/frontstyle/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/frontstyle/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/frontstyle/css/nav.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="/frontstyle/css/common.css" rel="stylesheet" type="text/css" media="all"/>
+<link rel="stylesheet" href="/backendstyle/css/jquery.page.css">
+
+<script src="/frontstyle/js/jquery.min.js"></script>
+<script src="/frontstyle/js/jquery.easydropdown.js"></script>
+<script src="/frontstyle/js/scripts.js" type="text/javascript"></script>
+<script src="/frontstyle/js/easyResponsiveTabs.js" type="text/javascript"></script>
+<script type="text/javascript">
+ $(document).ready(function () {
+     $('#horizontalTab').easyResponsiveTabs({
+         type: 'default', //Types: default, vertical, accordion           
+         width: 'auto', //auto or any width like 600px
+         fit: true   // 100% fit in a container
+     });
+ });
+</script>	
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="/frontstyle/js/move-top.js"></script>
+<script type="text/javascript" src="/frontstyle/js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+
+<!-- pop-up-box -->
+<script type="text/javascript" src="/frontstyle/js/modernizr.custom.min.js"></script>    
+<link href="/frontstyle/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+<script src="/frontstyle/js/jquery.magnific-popup.js" type="text/javascript"></script>
+<!--//pop-up-box -->
+
+<script src="/backendstyle/js/jquery.form.js"></script>
+<script src="/frontstyle/js/common.js"></script>
+<script src="/backendstyle/js/jquery.page.js"></script>
+<script src="/backendstyle/js/jquery.select.js"></script>
+<script src="/frontstyle/js/jq.common.js"></script>
+
+<!-- img upload -->
+<script type="text/javascript" src="/frontstyle/imgupload/imgUp.js"></script>
+<script type="text/javascript" src="/frontstyle/imgupload/imgUp2.js"></script>
+<link rel="stylesheet" href="/frontstyle/css/base.css" type="text/css" />
+<link rel="stylesheet" href="/frontstyle/css/registerstyle.css"
+	type="text/css" />
+
+<title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../shop/include/header.jsp"></jsp:include>
-	
-	<!-- main -->
-	<div class="main">
-		<!-- container -->
-		<div class="container">
-			<p></p>
-			<!-- companyData -->
-			<div class="companyData">
-				                                                                                  
-				<div class="company_data_edit">
-				<c:if test="${shop.shopStatus==1 }">
-					<div class="alert alert-success" role="alert">${t.t_applay_shop_success }<em>:</em>${t.t_bbs_re_login }</div>
-					
-					</c:if>
-					<c:if test="${shop.shopStatus==2 }">
-					<div class="alert alert-warning" role="alert">${t.t_pend_shop }<em>:</em>${t.t_pend_shop_msg }</div>
-					
-					</c:if>
-					<c:if test="${shop.shopStatus==3 }">
-					<div class="alert alert-danger" role="alert">${t.t_not_pass }<em>:</em>${shop.failedReason }</div>
-					</c:if>
-					
-					<div class="company_forms">
-						<form enctype="multipart/form-data" method="POST" id="form">
-							<div class="name">
-								<input type="hidden" value="${shop.id }" name="id">
-								<input type="hidden" value="${param.name}" name="name">
-								<span class="lab">${t.t_shop_name }<em>:</em></span>
-								<input type="text" name="shopTitle" value="${shop.shopTitle }">
-							</div>
-							<c:if test="${not empty img }">
-								<div class="logo">
-									<span class="lab" style="margin-right:20px;">${t.t_shop_logo }: </span>
-									<div class="upload" id="showImg" >
-										<img alt="" src="${img}" width="100%" height="100%" style="margin-top:-15px;padding:0;">
-										<span class="deleteImg" onclick="deleteImg('${shop.id}')" imgid="${shop.id }" style="">x</span>
-									</div>
-								</div>
-							</c:if>
-							<c:if test="${empty img }">
-								<div class="logo" style="height:220px;">
-									<span class="lab" style="margin-right:20px;">${t.t_shop_logo }<em>:</em></span>
-									<div class="upload" id="upload">
-										<span style="position:relative;left:50%;top:40px;">+</span>
-										<div style="margin:10px; width:200px;">
-											<input type="file"  name="file" id="doc" multiple="multiple" onchange="javascript:setImagePreviews();" accept="image/*" />
-											<div id="dd" style="height:200px;margin-top:-60px;margin-left:-15px;z-index:99999"></div>
-										</div>
-									</div>
-								</div>
-							</c:if>
-							
-							<div class="number">
-								<span class="lab">${t.t_mobile }<em>:</em></span>
-								<input type="text" name="shopPhone" value="${shop.shopPhone }" >
-							</div>
-							<div class="work_time">
-								<span class="lab">${t.t_work_time }<em>:</em></span>
-								<input type="text" class="margin_left_minus" name="workFrom" value="${shop.workFrom }"> - 
-								<input type="text" name="workTo" value="${shop.workTo }">
-								<span class="gray">7*24h</span>
-							</div>
-							<div class="service">
-								<span class="lab">${t.t_qq }<em>:</em></span>
-								<input type="text" name="shopQq" value="${shop.shopQq }">
-							</div>
-							<div class="address">
-								<div>
-									<span  class="lab">${t.t_address }<em>:</em></span>
-									<input type="text" name="shopAddress" value="${shop.shopAddress }">
-									<!-- <select class="margin_left_minus">
-										<option>xxxx</option>
-										<option>xxxx</option>
-										<option>xxxx</option>
-										<option>xxxx</option>
-										<option>xxxx</option>
-									</select>
-									<select>
-										<option>xxxx</option>
-										<option>xxxx</option>
-										<option>xxxx</option>
-										<option>xxxx</option>
-										<option>xxxx</option>
-									</select>
-									<select>
-										<option>xxxx</option>
-										<option>xxxx</option>
-										<option>xxxx</option>
-										<option>xxxx</option>
-										<option>xxxx</option>
-									</select> -->
-								</div>	
-							</div>
 
-							<div class="save" style="">
-								<input type="button" onclick="jQuery.common.ajaxFileSubmit('#form','/user/doApplayShop',true,'/user/applayShop')">
-								${t.b_submit }
-								</div>
-						</form>
+	<form name="form1" id="form" method="post">
+		<!-- 			<img src="/frontstyle/images/register.png" class="reg_bg"> -->
+		<div class="register1">
+			<div class="box">
+<!-- 				<p>Seller Register</p> -->
+				<div class="input">
+					<div class="margin">
+					<input type="hidden" value="${param.name}" name="name">
+						<span><b>*</b>${t.t_shop_name }：</span><input type="text" name="shopTitle" class="user" id="rename">
 					</div>
+					<div class="margin" style="margin-top:20px;">
+						<span><b>*</b>${t.t_shop_logo }:</span>							
+						<div class="upload" id="upload">
+							<span style="position:relative;left:0%;top:10px;margin-left: 0;width:100%; display:block;text-align: center;">+选择图片</span>
+							<div style="margin:10px; width:100px;">
+								<input type="file"  name="file" id="doc" multiple="multiple" onchange="javascript:setImagePreviews();" accept="image/*" />
+								<div id="dd" style="height:60px;margin-top:-46px;margin-left:-15px;z-index:99999"></div>
+							</div>
+						</div>
+
+					</div>
+					<div class="margin">
+						<span><b>*</b>${t.t_mobile }<em>:</em></span><input type="text" name="shopPhone" class="dianhua" id="key1">
+					</div>
+					<div class="margin">
+						<span><b>*</b>${t.t_work_time }<em>:</em></span><input type="text" class="work_time" name="workFrom" value=""> - 
+						<input type="text" name="workTo" value="" class="work_time">
+						<span class="gray">7*24h</span>
+					</div>					
+					<div class="margin">
+						<span><b>*</b>${t.t_qq }<em>:</em></span><input type="text" name="shopQq" class="qq" id="email">
+					</div>
+					<div class="margin">
+						<span><b>*</b>${t.t_address }<em>:</em></span><input type="text" name="shopAddress" class="dizhi" id="email">
+					</div>
+					<input hidden="" type="text" name="userRole" class="key1" id="role" vaule="2">
 				</div>
+				<input type="button" class="seller_pload" value="${t.b_submit }" onclick="jQuery.common.ajaxFileSubmit('#form','/user/doApplayShop',true,'/user/applayShopSubmit')">
+								
+								</div>
 			</div>
-			<!-- //companyData -->
 		</div>
-		<!-- //container -->
-	</div>
-	<!-- //main -->
-	
-	<jsp:include page="../shop/include/footer.jsp"></jsp:include>
-	
-<script type="text/javascript">
+	</form>
+
+
+
+	<script type="text/javascript">
 $(function(){
 	$('.menu_box .menu_list div.module a').eq(4).addClass('active');
 	
@@ -149,8 +146,5 @@ if(stats==2|stats==1){
 	$('.save').attr("style", "display:none;");
 }
 </script>	
-<style>
-.deleteImg{display:none; background:#ff0000;color:#fff;padding:10px;z-index:10;position:relative;float:right;width:30px;top:-70%;}
-</style>
-</body>
-</html>
+
+</body></html>

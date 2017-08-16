@@ -141,18 +141,13 @@ public class FrontRegisterController extends BaseFrontController {
 
 	
 	@RequestMapping(value = "/applyshop", method = RequestMethod.GET)
-	public ModelAndView applyshop() {
+	public ModelAndView applyshop(User user) {
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("shop/applay_shop");
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/applyshop2", method = RequestMethod.GET)
-	public ModelAndView applyshop2() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("shop/applay_shop2");
-		return modelAndView;
-	}
 	@RequestMapping(value = "/applayShopSubmit", method = RequestMethod.GET)
 	public ModelAndView applyshopresult() {
 		ModelAndView modelAndView = new ModelAndView();

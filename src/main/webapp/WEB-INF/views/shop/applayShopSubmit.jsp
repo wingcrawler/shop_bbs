@@ -95,9 +95,9 @@ center {color:red}
 
 					</span> -->
 					 <p class="margin:-2rem ">
-					 恭喜您申请成功，我们将尽快审核！
-					</p>
-				<input id="onsubmit" type="submit" class="seller_pload" value="submit">
+					${t.shop_applay_return }
+					</p>				
+					<input id="onsubmit" type="botton" class="seller_pload" value="${t.t_user_login}" onclick=window.open('/user/login')>
 			</div>
 		</div>
 	</form>
