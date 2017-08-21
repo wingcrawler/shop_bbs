@@ -2,6 +2,8 @@ package com.sqe.shop.service.biz;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,15 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.common.BaseCommon;
-import com.sqe.shop.model.Advertisement;
+import com.sqe.shop.model.Image;
 import com.sqe.shop.model.News;
-import com.sqe.shop.model.Product;
-import com.sqe.shop.service.AdvertisementService;
+import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.NewsService;
-import com.sqe.shop.service.ProductService;
-import com.sqe.shop.service.ProductTypeService;
-import com.sqe.shop.service.cached.CachedService;
+import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.RegularUtil;
 
@@ -25,62 +24,20 @@ import com.sqe.shop.util.RegularUtil;
 public class BizNewsService extends BaseCommon {
 	
 	@Autowired
-	private ProductService productService;
+	private NewsService newsService;
 	@Autowired
-	private ProductTypeService productTypeService;
-	@Autowired
-	private AdvertisementService advertisementService;
+	private CommentService commentService;
 	@Autowired
 	private ImageService imageService;
-	@Autowired
-	private CachedService cachedService;
-	@Autowired
-	private NewsService newsService;
 
-	public Map<String, Object> getHomeIndexData(){
-		Map<String, Object> resMap = this.responseOK1("");
-		
-		//轮播图
-		Advertisement advertisement = new Advertisement();
-		advertisement.setType(0);
-		PageUtil<Advertisement> adPage = advertisementService.getBeanListByParm(advertisement, 1, -1);
-		resMap.put("adList", adPage.getList());
-		
-		//8个商品
-		Product product = new Product();
-		product.setProductStatus(1);
-		PageUtil<Map<String, Object>> hotProductPage = productService.getHotProductList(product, 1, 8); 
-		resMap.put("hotProductList", hotProductPage.getList());
-		
-		//3个新闻资讯
-		PageUtil<Map<String, Object>> newPage = newsService.getMapListByParm(new News(), 1, 3);
-		if(newPage.getList()!=null && !newPage.getList().isEmpty()){
-			String newsTitle = "";
-			String newsContent = "";
-			for(Map<String, Object> map : newPage.getList()){
-				newsTitle = map.get("newsTitle").toString();
-				if(newsTitle.length()>10){
-					map.put("newsShortTitle", newsTitle.substring(0, 9)+"...");
-				} else {
-					map.put("newsShortTitle", newsTitle);
-				}
-				
-				newsContent = map.get("newsContent").toString();
-				newsContent = RegularUtil.Html2Text(newsContent);
-				if(newsContent.length()>100){
-					newsContent = newsContent.substring(0,100) + "...";
-					map.put("newsContent", newsContent);
-				} else {
-					map.put("newsContent", newsContent);
-				}
-				
-			}
-		}
-		resMap.put("newsList", newPage.getList());
-		
-		return resMap;
-	}
-
+	/**
+	 * 新闻资讯列表
+	 * @param searchText
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public Map<String, Object> getNewsData(String searchText, int pageNo, int pageSize) throws UnsupportedEncodingException {
 		Map<String, Object> resMap = this.responseOK1("");
 		
@@ -111,5 +68,36 @@ public class BizNewsService extends BaseCommon {
 		
 		return resMap;
 	}
+
+	public Map<String, Object> getDetail(Long newsId, News news) {
+		Map<String, Object> resMap = this.responseOK1("");
+				
+		resMap.put("news", news);
+		
+		//查询配图
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("newsId", newsId);
+		List<Image> images = imageService.getBeanListByParm("ImageMapper", parmMap);
+		if(images != null && !images.isEmpty()){
+			resMap.put("image", images.get(0));	
+		}
+		
+		//阅读数+1
+		news.setCreateTimeStr(DateUtil.dateToString(news.getNewsDate(), DateUtil.DATETIME_FORMATE_2));
+		news.setNewsReaded(news.getNewsReaded()+1);
+		newsService.update(news);
+		
+		//评论列表
+		parmMap = new HashMap<String, Object>();
+		parmMap.put("newsId", newsId);
+		parmMap.put("nullCommentId", true);
+		parmMap.put("orderby", "c.date desc");
+		PageUtil<Map<String, Object>> commentPage = commentService.getNewsCommentListByParm(parmMap, 1, -1);
+		resMap.put("commentPage", commentPage);
+		resMap.put("commentCount", commentPage.getTotalRecords());
+		
+		return resMap;
+	}
+	
 	
 }

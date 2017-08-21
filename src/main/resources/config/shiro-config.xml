@@ -38,7 +38,8 @@
                 /bbs/post/doSave=authc 
                 /product/single=authc  
                 /front/sell/**=authc   
-                /front/buy/**=authc    
+                /front/buy/**=authc
+                /news/saveComment=authc
                 <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login-->      
                 <!-- /backend/** = authc -->
                 

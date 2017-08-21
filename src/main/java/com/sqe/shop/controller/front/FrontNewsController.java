@@ -1,7 +1,6 @@
 package com.sqe.shop.controller.front;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -84,29 +83,8 @@ public class FrontNewsController extends BaseFrontController {
 			model.setViewName("shop/404");
 			return model;
 		}
-		model.addObject("news", news);
 		
-		//查询配图
-		Map<String, Object> parmMap = new HashMap<String, Object>();
-		parmMap.put("newsId", newsId);
-		List<Image> images = imageService.getBeanListByParm("ImageMapper", parmMap);
-		if(images != null && !images.isEmpty()){
-			model.addObject("image", images.get(0));	
-		}
-		
-		//阅读数+1
-		news.setCreateTimeStr(DateUtil.dateToString(news.getNewsDate(), DateUtil.DATETIME_FORMATE_2));
-		news.setNewsReaded(news.getNewsReaded()+1);
-		newsService.update(news);
-		
-		//评论列表
-		parmMap = new HashMap<String, Object>();
-		parmMap.put("newsId", newsId);
-		parmMap.put("nullCommentId", true);
-		parmMap.put("orderby", "c.date desc");
-		PageUtil<Map<String, Object>> commentPage = commentService.getNewsCommentListByParm(parmMap, 1, -1);
-		model.addObject("commentPage", commentPage);
-		
+		model.addAllObjects(bizNewsService.getDetail(newsId, news));
 		model.setViewName("shop/news/newsdetail");
 		return model;
 	}

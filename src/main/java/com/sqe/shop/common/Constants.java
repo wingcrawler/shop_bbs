@@ -51,6 +51,7 @@ public class Constants{
     public static final String ERROR_INFO = "errorInfo";
     public static final int ERRORCODE_SUCCESS = 0; //成功
     public static final int ERRORCODE_FAILED = -1; //失败
+    public static final int ERRORCODE_NOLOGIN = 2; //未登录
     
     //广告类型
     public static final int AD_TYPE_LB = 0; //轮播图
