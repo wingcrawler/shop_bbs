@@ -25,6 +25,7 @@ import com.sqe.shop.model.News;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.NewsService;
+import com.sqe.shop.service.biz.BizNewsService;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.RegularUtil;
@@ -42,6 +43,9 @@ public class FrontNewsController extends BaseFrontController {
 	@Autowired
 	private ImageService imageService;
 	
+	@Autowired
+	private BizNewsService bizNewsService;
+	
 	/**
 	 * 新闻列表页
 	 * @param model
@@ -54,32 +58,9 @@ public class FrontNewsController extends BaseFrontController {
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize) throws UnsupportedEncodingException {
 		pageSize=10;
 		
+		Map<String, Object> resMap = bizNewsService.getNewsData(searchText,pageNo,pageSize);
 		
-		News news = new News();
-		if(StringUtils.isNotBlank(searchText)){
-			searchText = URLDecoder.decode(searchText, UTF8);
-			news.setNewsTitle(searchText);
-		}
-		PageUtil<Map<String, Object>> newsPage = newsService.getMapListByParm(news, pageNo, pageSize);
-		if(newsPage.getList()!=null && !newsPage.getList().isEmpty()){
-			String newsContent = "";
-			for(Map<String, Object> map : newsPage.getList()){
-				newsContent = map.get("newsContent").toString();
-				newsContent = RegularUtil.Html2Text(newsContent);
-				if(newsContent.length()>100){
-					newsContent = newsContent.substring(0,100) + "...";
-					map.put("newsContent", newsContent);
-				} else {
-					map.put("newsContent", newsContent);
-				}
-				
-			}
-		}
-		model.addObject("list", newsPage.getList());
-		model.addObject("page", newsPage);
-		
-		model.addObject("searchText", searchText);
-		
+		model.addAllObjects(resMap);
 		model.setViewName("shop/news/list");
 		return model;
 	}
