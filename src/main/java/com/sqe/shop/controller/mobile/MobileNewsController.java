@@ -78,7 +78,7 @@ public class MobileNewsController extends BaseFrontController {
 		return resMap;
 	}
 	
-	/**
+	/** 
 	 * 保存评论
 	 * @param comment
 	 * @return
