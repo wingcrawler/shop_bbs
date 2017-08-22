@@ -30,6 +30,7 @@ import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.UserService;
+import com.sqe.shop.service.biz.BizUserCenterService;
 import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.MD5Util;
@@ -54,6 +55,8 @@ public class BuyerCenterController extends BaseFrontController {
 	private MessageService messageService;
 	@Autowired
 	private ShopService shopService;
+	@Autowired
+	private BizUserCenterService bizUserCenterService;
 	
 	/**
 	 * 进入用户基本信息页面
@@ -63,9 +66,10 @@ public class BuyerCenterController extends BaseFrontController {
 	@RequestMapping(value="/basicInfo", method = RequestMethod.GET)
 	public ModelAndView basicInfo(ModelAndView model){
 		model.setViewName("shop/buy/user_center");
-		User entity = userService.getById(this.getCurrentUserId());
+		/*User entity = userService.getById(this.getCurrentUserId());
 		model.addObject("entity", entity);
-		model.addObject("img", entity.getUserImage());
+		model.addObject("img", entity.getUserImage());*/
+		model.addAllObjects(bizUserCenterService.getUserInfo());
 		return model;
 	}
 	/**
