@@ -3,7 +3,6 @@ package com.sqe.shop.controller.front;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,17 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
-import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
-import com.sqe.shop.model.Shop;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
 import com.sqe.shop.service.ProductService;
 import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.ShopService;
+import com.sqe.shop.service.biz.BizProductService;
 import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
 
@@ -53,6 +51,9 @@ public class FrontProductController extends BaseFrontController {
 	private CachedService cachedService;
 	@Autowired
 	private ShopService shopService;
+	
+	@Autowired
+	private BizProductService bizProductService;
 	
 	/**
 	 * 产品列表页
@@ -138,32 +139,7 @@ public class FrontProductController extends BaseFrontController {
 			model.setViewName("shop/404");
 			return model;
 		}
-		model.addObject("product", product);
-		
-		//产品对应的商家
-		Shop shop =  shopService.getById(product.getShopId());
-		model.addObject("shop", shop);
-		
-		//查询商品图片
-		Image image = new Image();
-		image.setProductId(productId);
-		PageUtil<Image> imgPage = imageService.getBeanListByParm(image, 0, -1);
-		model.addObject("imgList", imgPage.getList());
-		
-		//相关产品
-		product = new Product();
-		product.setProductTypeId(product.getProductTypeId());
-		product.setProductStatus(Constants.PRODUCT_ON);
-		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, 1, 3);
-		model.addObject("relateList", page.getList());
-		
-		//产品评论列表
-		Map<String, Object> parmMap = new HashMap<String, Object>();
-		parmMap.put("productId", productId);
-		parmMap.put("nullCommentId", true);
-		parmMap.put("orderby", "c.date desc");
-		PageUtil<Map<String, Object>> commentPage = commentService.getProductCommentListByParm(parmMap, 1, 10);
-		model.addObject("commentPage", commentPage);
+		model.addAllObjects(bizProductService.getProductDetail(productId, product));
 		
 		model.setViewName("shop/product/single");
 		return model;
