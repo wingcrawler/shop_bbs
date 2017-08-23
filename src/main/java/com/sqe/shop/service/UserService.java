@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ibm.db2.jcc.b.li;
 import com.sqe.shop.mapper.UserMapper;
 import com.sqe.shop.model.User;
 import com.sqe.shop.util.DateUtil;
@@ -168,5 +169,13 @@ public class UserService extends AdapterService implements BaseService {
 
 	public List<User> findOnlyByName(String username) {
 		return userMapper.findOnlyByName(username);
+	}
+	
+	public User findOneOnlyByName(String username) {
+		List<User> list = userMapper.findOnlyByName(username);
+		if(list==null || list.isEmpty()){
+			return null;
+		}
+		return list.get(0);
 	}
 }
