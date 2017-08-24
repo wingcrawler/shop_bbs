@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ibm.db2.jcc.b.li;
 import com.sqe.shop.mapper.UserMapper;
 import com.sqe.shop.model.User;
 import com.sqe.shop.util.DateUtil;
