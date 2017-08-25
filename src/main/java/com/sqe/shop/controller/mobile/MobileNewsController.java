@@ -1,8 +1,6 @@
 package com.sqe.shop.controller.mobile;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,14 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Comment;
-import com.sqe.shop.model.Image;
 import com.sqe.shop.model.News;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.NewsService;
 import com.sqe.shop.service.biz.BizNewsService;
-import com.sqe.shop.util.DateUtil;
-import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/h5/news")

@@ -1,7 +1,6 @@
 package com.sqe.shop.controller.front;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -32,10 +31,7 @@ import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.UserService;
 import com.sqe.shop.service.biz.BizUserCenterService;
 import com.sqe.shop.service.file.ImageFileService;
-import com.sqe.shop.util.DateUtil;
-import com.sqe.shop.util.MD5Util;
 import com.sqe.shop.util.PageUtil;
-import com.sqe.shop.util.PropertiesUtil;
 
 @Controller
 @RequestMapping("/front/buy")
@@ -82,34 +78,7 @@ public class BuyerCenterController extends BaseFrontController {
 	@RequestMapping(value="/doSaveBasicInfo", method = RequestMethod.POST)
 	public Map<String, Object> doSaveBasicInfo(User user,
 			@RequestParam(name = "file",value="file", required = false) MultipartFile attachFile){
-		if(StringUtils.isBlank(user.getUsername())){
-			return responseError(-1, "error_empty_username");
-		}
-		if(user.getId()==null){
-			return responseError(-1, "error_illegal");
-		}
-		if(!user.getId().equals(this.getCurrentUserId())){
-			return responseError(-1, "error_illegal");
-		}
-		
-		if(attachFile!=null){
-		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
-		    String fileName = resMap.get("errorInfo").toString(); 
-		    if(!resMap.get("errorNo").equals(0)){
-		    	return resMap;
-		    }
-		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
-		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
-		    user.setUserImage(uploadPath+fileName);
-	    }
-
-		userService.save(user);
-		
-		Subject subject = SecurityUtils.getSubject();
-		User userInfo = userService.getById(user.getId());
-		subject.getSession().setAttribute("userInfo", userInfo);
-		 
-		return responseOK1("");
+		return bizUserCenterService.doSaveBasicInfo(user, attachFile);
 	}
 	
 	/**
@@ -132,27 +101,7 @@ public class BuyerCenterController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value="/doChangePwd", method = RequestMethod.POST)
 	public Map<String, Object> doChangePwd(String oldPwd, String newPwd, String confirmPwd){
-		if(StringUtils.isBlank(oldPwd)){
-			return responseError(-1, "error_empty_oldpwd");
-		} else if(StringUtils.isBlank(newPwd)){
-			return responseError(-1, "error_empty_newpwd");
-		} else if(StringUtils.isBlank(confirmPwd)){
-			return responseError(-1, "error_empty_confirmpwd");
-		} else if(!newPwd.equals(confirmPwd)){
-			return responseError(-1, "error_twopwd_not_match");
-		}
-		
-		MD5Util md5 = new MD5Util(MD5Util.SALT, "MD5");
-		String oldPwdMd5 = md5.encode(oldPwd);
-		User user = userService.getById(this.getCurrentUserId());
-		if(!user.getPassword().equals(oldPwdMd5)){
-			return responseError(-1, "error_oldpwd");
-		}
-		
-		String newPwdMd5 = md5.encode(newPwd);
-		user.setPassword(newPwdMd5);
-		userService.update(user);
-		return responseOK1("");
+		return bizUserCenterService.doChangePwd(oldPwd, newPwd, confirmPwd);
 	}
 	
 	/**
@@ -187,13 +136,13 @@ public class BuyerCenterController extends BaseFrontController {
 		pageSize = 10;
 		PageUtil<Map<String, Object>> page = new PageUtil<Map<String,Object>>();
 		if(type.equals("1")){//产品评论
-			page = getProductCommentList(this.getCurrentUserId(), pageNo, pageSize);
+			page = bizUserCenterService.getProductCommentList(this.getCurrentUserId(), pageNo, pageSize);
 			model.setViewName("shop/buy/my_product_comment");
 		} else if(type.equals("2")){//私信
-			page = getMessageList(this.getCurrentUserId(), pageNo, pageSize);
+			page = bizUserCenterService.getMessageList(this.getCurrentUserId(), pageNo, pageSize);
 			model.setViewName("shop/buy/my_message");
 		} else if(type.equals("3")){//新闻资讯评论
-			page = getNewsCommentList(this.getCurrentUserId(), pageNo, pageSize);
+			page = bizUserCenterService.getNewsCommentList(this.getCurrentUserId(), pageNo, pageSize);
 			model.setViewName("shop/buy/my_news_comment");
 		} else {
 			model.setViewName("shop/404");
@@ -203,39 +152,6 @@ public class BuyerCenterController extends BaseFrontController {
 		model.addObject("type", type);
 		model.addObject("page", page);
 		return model;
-	}
-	
-	public PageUtil<Map<String, Object>> getProductCommentList(Long userId, int pageNo, Integer pageSize) {
-		Map<String, Object> parmMap = new HashMap<String, Object>();
-		parmMap.put("userId", userId);
-		parmMap.put("nullCommentId", true);
-		parmMap.put("orderby", "c.date desc");
-		PageUtil<Map<String, Object>> msgPage = commentService.getProductCommentListByParm(parmMap, pageNo, pageSize);
-		return msgPage;
-	}
-	
-	public PageUtil<Map<String, Object>> getNewsCommentList(Long userId, int pageNo, Integer pageSize) {
-		Map<String, Object> parmMap = new HashMap<String, Object>();
-		parmMap.put("userId", userId);
-		parmMap.put("nullCommentId", true);
-		parmMap.put("orderby", "c.date desc");
-		PageUtil<Map<String, Object>> msgPage = commentService.getNewsCommentListByParm(parmMap, pageNo, pageSize);
-		return msgPage;
-	}
-	/**
-	 * 私信列表
-	 * @param message
-	 * @param pageNo
-	 * @param pageSize
-	 * @return
-	 */
-	public PageUtil<Map<String, Object>> getMessageList(Long userId, int pageNo, Integer pageSize) {
-		Map<String, Object> parmMap = new HashMap<String, Object>();
-		parmMap.put("postId", userId);
-		parmMap.put("nullMessageId", true);
-		parmMap.put("orderby", "m.create_time desc");
-		PageUtil<Map<String, Object>> msgPage = messageService.getSellerMessageListByParm(parmMap, pageNo, pageSize);
-		return msgPage;
 	}
 	
 	/**
@@ -320,48 +236,20 @@ public class BuyerCenterController extends BaseFrontController {
 	@RequestMapping(value="/applayShop", method = RequestMethod.GET)
 	public ModelAndView applayShop(ModelAndView model){
 		Long userId = this.getCurrentUserId();
-		Shop shop = shopService.getByUserId(userId);
-		if(shop!=null){
-			model.addObject("shop", shop);
-			model.addObject("user", this.getCurrentUser());
-			model.addObject("img", shop.getShopLogoImg());
-		} else {
-			model.addObject("shop", new Shop());
-			model.addObject("user", this.getCurrentUser());
-		}
-		
+		model.addAllObjects(bizUserCenterService.shopInfo(userId));
 		model.setViewName("shop/buy/applay_shop");
 		return model;
 	}
 	/**
-	 * 
+	 * 用户开店
 	 * @param model
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value="/doApplayShop", method = RequestMethod.POST)
 	public Map<String, Object> doApplayShop(Shop shop,
-			@RequestParam(name = "file",value="file", required = false) MultipartFile attachFile){
-		if(StringUtils.isBlank(shop.getShopTitle())){
-			return responseError(-1, "error_empty_shop_name");
-		}
-		
-		if(attachFile!=null){
-		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
-		    String fileName = resMap.get("errorInfo").toString(); 
-		    if(!resMap.get("errorNo").equals(0)){
-		    	return resMap;
-		    }
-		    String uploadPath = PropertiesUtil.get("upload_path_save"); 
-		    uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"/";
-		    shop.setShopLogoImg(uploadPath+fileName);
-	    }
-		
-		shop.setShopStatus(Constants.STORE_PEND);
-		shop.setUserId(this.getCurrentUserId());
-		shopService.save(shop);
-		
-		return responseOK1("");
+			@RequestParam(name = "file", required = false) MultipartFile attachFile){
+		return bizUserCenterService.doApplayShop(shop, attachFile);
 	}
 	
 }

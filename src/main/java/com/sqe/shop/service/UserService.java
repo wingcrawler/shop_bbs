@@ -169,4 +169,12 @@ public class UserService extends AdapterService implements BaseService {
 	public List<User> findOnlyByName(String username) {
 		return userMapper.findOnlyByName(username);
 	}
+	
+	public User findOneOnlyByName(String username) {
+		List<User> list = userMapper.findOnlyByName(username);
+		if(list==null || list.isEmpty()){
+			return null;
+		}
+		return list.get(0);
+	}
 }
