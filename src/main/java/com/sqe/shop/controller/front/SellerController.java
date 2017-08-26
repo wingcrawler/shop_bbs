@@ -260,15 +260,19 @@ public class SellerController extends BaseFrontController {
 		if(indexFile!=null){
 		    resMap = imageFileService.uploadImage(indexFile);
 		    fileName = resMap.get("errorInfo").toString(); 
-		    if(StringUtils.isNotBlank(fileName)){
+		    if(resMap.get("errorNo").equals(0)){
 				imageService.saveProductIndexImg(product, fileName, 1);	
+			} else {
+				return resMap;
 			}
 	    }
 		for(MultipartFile file : listFile){
 			resMap = imageFileService.uploadImage(file);
 			fileName = resMap.get("errorInfo").toString(); 
-		    if(StringUtils.isNotBlank(fileName)){
+		    if(resMap.get("errorNo").equals(0)){
 				imageService.saveProductImg(product, fileName, 0);	
+			} else {
+				return resMap;
 			}
 		}
 		

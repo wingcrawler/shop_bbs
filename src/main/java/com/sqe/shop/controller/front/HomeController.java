@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.controller.base.BaseFrontController;
-import com.sqe.shop.model.Advertisement;
-import com.sqe.shop.model.News;
-import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.AdvertisementService;
 import com.sqe.shop.service.ImageService;
@@ -24,7 +21,6 @@ import com.sqe.shop.service.ProductTypeService;
 import com.sqe.shop.service.biz.BizHomeService;
 import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
-import com.sqe.shop.util.RegularUtil;
 
 @Controller
 @RequestMapping("/")

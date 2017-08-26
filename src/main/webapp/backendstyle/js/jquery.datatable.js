@@ -322,6 +322,8 @@
 							pageCount : data.page.pageCount,
 							current : data.page.currentPage,
 							fnName : '$.fn.nextPage',
+							prevPage:'<',
+							nextPage:'>',
 							backFn : function(p) {
 								// console.log(p);
 							}

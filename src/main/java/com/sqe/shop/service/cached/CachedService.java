@@ -1,9 +1,8 @@
 package com.sqe.shop.service.cached;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +29,9 @@ public class CachedService extends BaseCached {
 	 * 获取产品类别列表
 	 * @return
 	 */
-	public Map<ProductType, List<ProductType>> getProductTypeList(){
+	public List<ProductType> getProductTypeList(){
 		if(productTypeList==null){
-			productTypeList = new HashMap<ProductType, List<ProductType>>();
+			productTypeList = new ArrayList<ProductType>();
 		}
 		if(productTypeList.isEmpty()){
 			//一级分类
@@ -49,20 +48,9 @@ public class CachedService extends BaseCached {
 	        		type.setTypeName(type.getTypeNameCh());
 	        	}
 	        }
+	        
+	        productTypeList = page.getList();
 			
-			//二级分类
-			productType.setTypeLevel(2);
-			PageUtil<ProductType> page2 = null;
-			for(ProductType type : page.getList()){
-				productType.setParentId(type.getId());
-				page2 = productTypeService.getBeanListByParm(productType, 1, -1);
-				if(lang.equals("zh")){
-		        	for(ProductType type2 : page2.getList()){
-		        		type2.setTypeName(type2.getTypeNameCh());
-		        	}
-		        }
-				productTypeList.put(type, page2.getList());
-        	}
 		}
 		return productTypeList;
 	}
