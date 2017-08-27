@@ -18,6 +18,7 @@ import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseBackendController;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.ProductTypeService;
+import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
 
 /**
@@ -33,6 +34,8 @@ public class CategoryController extends BaseBackendController {
 	
 	@Autowired
 	private ProductTypeService productTypeService;
+	@Autowired
+	private CachedService cachedService;
 	
 	/**
 	 * 列表页
@@ -94,6 +97,7 @@ public class CategoryController extends BaseBackendController {
 		productType.setParentId(0L);
 		productType.setTypeLevel(Constants.PRODUCT_LEVEL_ONE);
 		productTypeService.save(productType);
+		cachedService.refreshProductTypeList();
 		return responseOK("op_success");
 	}
 	

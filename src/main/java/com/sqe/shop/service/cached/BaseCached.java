@@ -12,7 +12,8 @@ import com.sqe.shop.util.PropertiesUtil;
 
 public class BaseCached {
 
-	protected Map<ProductType, List<ProductType>> productTypeList = null;//产品类别： 一级类别为key，二级类别列表为value
+	protected Map<ProductType, List<ProductType>> productTypeList_notuse = null;//产品类别： 一级类别为key，二级类别列表为value
+	protected Map<ProductType, List<ProductType>> productTypeList = null;
 	protected ResourceBundle bundle = null; //国际化内容
 	protected String lang = StringUtils.EMPTY; //国际化语言
 	protected Map<String, Object> map = new HashMap<String, Object>();//存放简单的key-value数据

@@ -59,7 +59,7 @@
 					<ul>
 						<c:forEach var="item" items="${productTypeList }">
 							<li>
-							<a href="/product/list?parentType=${item.key.id }"  target="_blank">${item.key.typeName }</a>
+							<a href="/product/list?parentType=${item.id }"  target="_blank">${item.typeName }</a>
 							</li>
 						</c:forEach>
 					</ul>
