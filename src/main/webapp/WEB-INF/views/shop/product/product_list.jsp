@@ -20,7 +20,7 @@
 				<div class="fashion-section">
 					<div class="fashion-grid1">
 					<c:forEach var="item" items="${page.list }" varStatus="status">
-						 <div class="col-md-3 fashion-grid">
+						 <div class="col-md-3 fashion-grid" style="height: 225px;>
 							 <a href="single.html"><img src="${item.imagePath }" width="190" height="235" alt=""/>
 								 <div class="product <c:if test="${item.productCount==0 }">not-avaliable</c:if>">
 									 <h3>${item.productName }</h3>

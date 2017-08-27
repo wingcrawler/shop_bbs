@@ -1,6 +1,7 @@
 package com.sqe.shop.service.cached;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class CachedService extends BaseCached {
 	 */
 	public Map<ProductType, List<ProductType>> getProductTypeList(){
 		if(productTypeList==null){
-			productTypeList = new HashMap<ProductType, List<ProductType>>();
+			productTypeList = new LinkedHashMap<ProductType, List<ProductType>>();
 		}
 		if(productTypeList.isEmpty()){
 			//一级分类

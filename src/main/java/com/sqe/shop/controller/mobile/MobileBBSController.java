@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import com.sqe.shop.service.SectionService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.biz.BizBBSService;
 
+@Controller
 @RequestMapping("/h5")
 public class MobileBBSController extends BaseFrontController {
 
@@ -53,7 +55,7 @@ public class MobileBBSController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/bbs/post", method = RequestMethod.POST)
+	@RequestMapping(value = "/bbs/thread", method = RequestMethod.POST)
 	public Map<String, Object> thread(Thread thread) {
 		Long userId = this.getCurrentUserId();
 		if (userId == null) {
