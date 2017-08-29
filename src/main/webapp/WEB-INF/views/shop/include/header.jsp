@@ -11,7 +11,7 @@
 			</div>
 			<div class="header-right">
 				<ul>
-					<li class="phone">604-974-8777</li>
+					<li class="phone">604-620-2092</li>
 					<li class="mail"><a href="mailto:info@sachielconnectinc.com">info@sachielconnectinc.com</a></li>
 					<li class="water"><a href="http://www.sachielwaterinc.com/">Sachiel Water</a></li>
 					<c:if test="${isSellLogin }">
