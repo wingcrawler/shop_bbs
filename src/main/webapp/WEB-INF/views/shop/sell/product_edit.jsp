@@ -257,7 +257,7 @@
 
 									
 								<div class="button">
-									<div class="submit" onclick="jQuery.common.ajaxFileSubmit('#form','/front/sell/doSaveProduct',true,'/front/sell/productListPage')">${t.b_submit }</div>
+									<div class="submit" onclick="jQuery.common.ajaxFileSubmit('#form','/front/sell/doSaveProduct1',true,'/front/sell/productListPage')">${t.b_submit }</div>
 									<%-- <div class="cancel">${t.b_cancel }</div> --%>
 								</div>
 							</div>
