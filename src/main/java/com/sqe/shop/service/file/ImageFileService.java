@@ -4,10 +4,15 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.lang3.StringUtils;
@@ -24,23 +29,23 @@ import com.sqe.shop.util.PropertiesUtil;
 public class ImageFileService extends BaseService {
 
 	private static final Logger logger = LoggerFactory.getLogger(ImageFileService.class);
-	
+
 	public Map<String, Object> uploadImage(MultipartFile attachFile, String uploadPath) {
-		if(attachFile==null){
+		if (attachFile == null) {
 			return responseError(-1, "error_no_file");
 		}
 		File dir = new File(uploadPath);
 		checkDir(dir);
-		
+
 		try {
-			if(attachFile!=null){
+			if (attachFile != null) {
 				String fileName = attachFile.getOriginalFilename();
 				if (StringUtils.isNotBlank(fileName)) {
-					
-					if(attachFile.getSize()>IMG_MAXI_SIZE){
+
+					if (attachFile.getSize() > IMG_MAXI_SIZE) {
 						return responseError(-1, "error_img_out_of_rang");
 					}
-					
+
 					Pattern reg = Pattern.compile("[.]jpg|JPG|png|PNG|jpeg|JPEG|gif|GIF$");
 					Matcher matcher = reg.matcher(fileName);
 					if (!matcher.find()) {
@@ -57,16 +62,43 @@ public class ImageFileService extends BaseService {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("upload image exception："+e.getMessage());
+			logger.error("upload image exception：" + e.getMessage());
 			return responseError1(-1, e.getMessage());
 		}
 		return responseError(-1, "error_unknow");
 	}
 
 	public Map<String, Object> uploadImage(MultipartFile attachFile) {
-		String uploadPath = PropertiesUtil.get("upload_path"); 
-    	uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1)+"//";
+		String uploadPath = PropertiesUtil.get("upload_path");
+		uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1) + "//";
 		return this.uploadImage(attachFile, uploadPath);
 	}
-	
+
+	public Map<String, Object> uploadBase64Image(String base64ImgData) {
+		String uploadPath = PropertiesUtil.get("upload_path");
+		uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1) + "//";
+
+		try {
+			if (base64ImgData == null) {
+				return responseError(-1, "error_no_file");
+			}
+			File dir = new File(uploadPath);
+			checkDir(dir);
+			String fileName = new Date().getTime() + ".png";
+			uploadPath = uploadPath + fileName;
+
+			BASE64Decoder d = new BASE64Decoder();
+			byte[] bs = d.decodeBuffer(base64ImgData);
+			FileOutputStream os = new FileOutputStream(uploadPath);
+			os.write(bs);
+			os.close();
+			return responseOK1(fileName);
+		} catch (
+
+		Exception e) {
+			logger.error("upload image exception：" + e.getMessage());
+			return responseError1(-1, e.getMessage());
+		}
+	}
+
 }
