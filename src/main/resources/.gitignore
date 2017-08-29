@@ -1,2 +1,8 @@
 /application.properties
 /log4j.properties
+/ValidationMessages_en_US.properties
+/ValidationMessages_zh_CN.properties
+/i18n_en_US.properties
+/i18n_zh_CN.properties
+/spring-context.xml
+/user_import.txt
