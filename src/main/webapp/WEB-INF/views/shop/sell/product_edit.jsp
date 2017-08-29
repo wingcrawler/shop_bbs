@@ -7,8 +7,11 @@
 	<jsp:include page="../include/meta.jsp"></jsp:include>
 	<title>${t.t_product_upload}</title>
 	<link href="/frontstyle/sell/css/upload_product.css" rel="stylesheet" type="text/css">
+	<link href="/frontstyle/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="/frontstyle/css/layer.css" rel="stylesheet" type="text/css">
 	<script src="/frontstyle/sell/js/upload_product.js"></script>
-
+	<script src="/frontstyle/js/bootstrap.min.js"></script>
+	<script src="/frontstyle/js/layer.js"></script>
 </head>
 <body>
 	<jsp:include page="../include/header.jsp"></jsp:include>
@@ -185,7 +188,10 @@
 								</div>
 								<div class="img_describe">
 									<div class="heade">${t.t_img_desc }</div>
-									<div class="imgDescribe">
+									<div class="imgDescribe" style="display:none;padding-left: 1rem;" id="frame_div">
+										<iframe src="/front/sell/goCutPicture" width="650px" height="500px"></iframe>
+									</div>
+									<div class="imgDescribe" id="form_div">
 										<%-- <div class="show_img">
 											<span class="labe">${t.t_show_img }: </span>
 											<div class="upimg">
@@ -204,16 +210,14 @@
 											<span class="labe">${t.t_show_img }:</span>
 											<c:if test="${not empty img}">
 												<div class="upimg">
-													<img alt="" src="${img.imagePath}" width="100%" height="100%" style="padding:0;">
+													<img id="targetImg" alt="" src="${img.imagePath}" width="100%" height="100%" style="padding:0;">
 													<span class="deleteImg" imgid="${img.id }" style="backgroung:#aaa;z-index:10;position:relative;float:right;width:30px">x</span>
 												</div>
 											</c:if>
 											<c:if test="${empty img}">
 												<div class="upimg">
-													<input type="file" name="indexFile" accept="image/*"
-													onchange="javascript:setImagePreviews2('doc','dd');" id="doc"  id="indexFile">
-													<div id="dd" onclick="triggerSelect('#doc')"></div>
-													<span>${t.t_select }</span>
+													<img id="targetImg" alt="" src="${img.imagePath}" width="100%" height="100%" style="padding:0;">
+													<span onclick="getImage('targetImg');"   style="backgroung:#aaa;z-index:10;position:relative;float:right;width:50px">选择</span>
 												</div>
 											</c:if>
 										</div>
@@ -223,17 +227,15 @@
 											<span class="labe">${t.t_img_list }: </span>
 											<c:forEach var="item" items="${imgList }">
 												<div class="upimg">
-													<img alt="" src="${item.imagePath}" width="100%" height="100%" style="padding:0;">
+													<img alt="" id="targetImg${i }" src="${item.imagePath}" width="100%" height="100%" style="padding:0;">
 													<span class="deleteImg" imgid="${item.id }" style="backgroung:#aaa;z-index:10;position:relative;float:right;width:30px">x</span>
 												</div>
 											</c:forEach>
 											<c:forEach var="i" begin="1" end="${inputCount }" step="1">
 												<div class="upimg">
-													<input type="file" name="listFile"
-													accept="image/*"
-													onchange="javascript:setImagePreviews2('doc${i }','dd${i }');" id="doc${i }">
-													<div id="dd${i }" onclick="triggerSelect('#doc${i }')"></div>
-													<span>${t.t_select }</span>
+													
+													<img alt="" id="targetImg${i }" src="${item.imagePath}" width="100%" height="100%" style="padding:0;">
+													<span class="deleteImg" onclick="getImage('targetImg'+${i });"  style="backgroung:#aaa;z-index:10;position:relative;float:right;width:50px">选择</span>
 												</div>
 											</c:forEach>
 										</div>
@@ -263,6 +265,7 @@
 							<!-- <div class="g-tabMnItem">
 								选择属性
 							</div> -->
+							<input type="hidden" id="curtImg">
 						</div>
 					</div>
 				</div>
@@ -296,7 +299,7 @@ $(function(){
 	});
 	
 	//删除
-	$('.deleteImg').click(function(){
+	/*$('.deleteImg').click(function(){
 		 if(confirm(confirmDelTip)){
 			 debugger;
 			 var productId=$('input[name="id"]').val();
@@ -306,13 +309,19 @@ $(function(){
 			 parm.imgId=imgId;
 			jQuery.common.deleteByParm(parm,'/front/sell/deleteByParm',true,window.location.href)	 
 		 }
-	});
+	});*/
 	
 });
 function triggerSelect(elem){
 	$(elem).trigger('click');
+	
 }
-
+//<div style="float:left"> <img id="img0doc" style="display: block; width: 145px; height: 145px;" src=""> </div>
+function getImage(_id){
+	$("#curtImg").val(_id);
+	$("#form_div").hide();
+	$("#frame_div").show();
+}
 </script>
 </body>
 </html>
