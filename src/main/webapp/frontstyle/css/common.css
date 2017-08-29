@@ -30,8 +30,8 @@ b, i, em {
 
 img {
 	border: none;
-	width: 90%;
-	height: 90%;
+	max-height:90%;
+	max-width:90%;
 }
 
 ul, ol, li {
