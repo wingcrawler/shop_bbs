@@ -667,5 +667,8 @@ public class SellerController extends BaseFrontController {
 		shopService.update(shop);
 		return responseOK1("");
 	}
-	
+	@RequestMapping(value="/goCutPicture", method = RequestMethod.GET)
+	public ModelAndView goCutPicture(){
+		return new ModelAndView("shop/sell/cutPicture");
+	}
 }
