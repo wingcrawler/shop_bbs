@@ -287,8 +287,13 @@ public class SellerController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value="/doSaveProduct1", method = RequestMethod.POST)
 	public Map<String, Object> doSaveProduct1(Product product,
-			@RequestParam(name = "indexFile",value="indexFile", required = false) String indexFile,
-			@RequestParam(name = "listFile",value="listFile", required = false) MultipartFile[] listFile) {
+			@RequestParam(name = "targetImgVal",value="targetImgVal", required = false) String targetImgVal,
+			@RequestParam(name = "targetImg0Val",value="targetImg0Val", required = false) String targetImg0Val,
+			@RequestParam(name = "targetImg1Val",value="targetImg1Val", required = false) String targetImg1Val,
+			@RequestParam(name = "targetImg2Val",value="targetImg2Val", required = false) String targetImg2Val,
+			@RequestParam(name = "targetImg3Val",value="targetImg3Val", required = false) String targetImg3Val,
+			@RequestParam(name = "targetImg4Val",value="targetImg4Val", required = false) String targetImg4Val) {
+	
 		if(product.getId()!=null){
 			Product p = productService.getByIdAndUserId(product.getId());
 			if(p==null){
@@ -327,8 +332,8 @@ public class SellerController extends BaseFrontController {
 		
 		String fileName="";
 		Map<String, Object> resMap = null;
-		if(indexFile!=null){
-		    resMap = imageFileService.uploadBase64Image(indexFile);
+		if(targetImgVal!=null){
+		    resMap = imageFileService.uploadBase64Image(targetImgVal);
 		    fileName = resMap.get("errorInfo").toString(); 
 		    if(resMap.get("errorNo").equals(0)){
 				imageService.saveProductIndexImg(product, fileName, 1);	
@@ -336,19 +341,116 @@ public class SellerController extends BaseFrontController {
 				return resMap;
 			}
 	    }
-		for(MultipartFile file : listFile){
-			resMap = imageFileService.uploadImage(file);
-			fileName = resMap.get("errorInfo").toString(); 
+		if(targetImg0Val!=null){
+		    resMap = imageFileService.uploadBase64Image(targetImg0Val);
+		    fileName = resMap.get("errorInfo").toString(); 
 		    if(resMap.get("errorNo").equals(0)){
-				imageService.saveProductImg(product, fileName, 0);	
+				imageService.saveProductIndexImg(product, fileName, 1);	
 			} else {
 				return resMap;
 			}
-		}
+	    }if(targetImg1Val!=null){
+		    resMap = imageFileService.uploadBase64Image(targetImg1Val);
+		    fileName = resMap.get("errorInfo").toString(); 
+		    if(resMap.get("errorNo").equals(0)){
+				imageService.saveProductIndexImg(product, fileName, 1);	
+			} else {
+				return resMap;
+			}
+	    }if(targetImg2Val!=null){
+		    resMap = imageFileService.uploadBase64Image(targetImg2Val);
+		    fileName = resMap.get("errorInfo").toString(); 
+		    if(resMap.get("errorNo").equals(0)){
+				imageService.saveProductIndexImg(product, fileName, 1);	
+			} else {
+				return resMap;
+			}
+	    }if(targetImg3Val!=null){
+		    resMap = imageFileService.uploadBase64Image(targetImg3Val);
+		    fileName = resMap.get("errorInfo").toString(); 
+		    if(resMap.get("errorNo").equals(0)){
+				imageService.saveProductIndexImg(product, fileName, 1);	
+			} else {
+				return resMap;
+			}
+	    }
+	    if(targetImg4Val!=null){
+		    resMap = imageFileService.uploadBase64Image(targetImg4Val);
+		    fileName = resMap.get("errorInfo").toString(); 
+		    if(resMap.get("errorNo").equals(0)){
+				imageService.saveProductIndexImg(product, fileName, 1);	
+			} else {
+				return resMap;
+			}
+	    }
 		
 		return responseOK("save_success");
 	}
-	
+//	@ResponseBody
+//	@RequestMapping(value="/doSaveProduct1", method = RequestMethod.POST)
+//	public Map<String, Object> doSaveProduct1(Product product,
+//			@RequestParam(name = "indexFile",value="indexFile", required = false) String indexFile,
+//			@RequestParam(name = "listFile",value="listFile", required = false) MultipartFile[] listFile) {
+//	
+//		if(product.getId()!=null){
+//			Product p = productService.getByIdAndUserId(product.getId());
+//			if(p==null){
+//				return responseError(-1, "save_failed");
+//			}
+//		}
+//		
+//		if(StringUtils.isBlank(product.getProductName())){
+//			return responseError(-1, "error_empty_product_name");
+//		}
+//		if(StringUtils.isBlank(product.getProductDescripton())){
+//			return responseError(-1, "error_empty_description");
+//		}
+//		if(product.getProductTypeId()==null || product.getProductTypeId()<0){
+//			return responseError(-1, "error_no_type");
+//		}
+//		if(product.getProductPrice()==null || product.getProductPrice()<0){
+//			return responseError(-1, "error_empty_product_price");
+//		}
+//		if(product.getProductCount()==null || product.getProductCount()<0){
+//			return responseError(-1, "error_empty_product_count");
+//		}
+//		
+//		product.setUserId(this.getCurrentUserId());
+//		Shop shop = shopService.getByUserId(this.getCurrentUserId());
+//		if(shop==null){
+//			return responseError(-1, "error_illegal");
+//		}
+//		
+//		product.setShopId(shop.getId());
+//		product.setProductStatus(Constants.PRODUCT_WAIT);
+//		int count = productService.save(product);
+//		if(count==0){
+//			return responseError(-1, "save_failed");
+//		}
+//		
+//		String fileName="";
+//		Map<String, Object> resMap = null;
+//		if(indexFile!=null){
+//		    resMap = imageFileService.uploadBase64Image(indexFile);
+//		    fileName = resMap.get("errorInfo").toString(); 
+//		    if(resMap.get("errorNo").equals(0)){
+//				imageService.saveProductIndexImg(product, fileName, 1);	
+//			} else {
+//				return resMap;
+//			}
+//	    }
+//		for(MultipartFile file : listFile){
+//			resMap = imageFileService.uploadImage(file);
+//			fileName = resMap.get("errorInfo").toString(); 
+//		    if(resMap.get("errorNo").equals(0)){
+//				imageService.saveProductImg(product, fileName, 0);	
+//			} else {
+//				return resMap;
+//			}
+//		}
+//		
+//		return responseOK("save_success");
+//	}
 	/**
 	 * 删除商品
 	 * @param id
