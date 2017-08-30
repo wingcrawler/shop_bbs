@@ -139,6 +139,7 @@ $(function () {
            // $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
         	  var imgId=$(window.parent.document.getElementById("curtImg")).val();
         	  $(window.parent.document.getElementById(imgId)).attr("src",result.toDataURL());
+        	  $(window.parent.document.getElementById(imgId+"Val")).val(result.toDataURL());
         	  $(window.parent.document.getElementById("form_div")).show();
         	  $(window.parent.document.getElementById("frame_div")).hide();
           
