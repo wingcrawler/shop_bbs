@@ -88,7 +88,7 @@ jQuery.common = {
 				}
 	        },  
 	        error : function(data, status, e) {  
-	        	alert(data.errorInfo); 
+	        	alert("unknow exception"); 
 	        }   
         });
 	},
