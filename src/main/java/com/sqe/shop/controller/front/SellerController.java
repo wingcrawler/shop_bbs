@@ -294,86 +294,91 @@ public class SellerController extends BaseFrontController {
 			@RequestParam(name = "targetImg3Val",value="targetImg3Val", required = false) String targetImg3Val,
 			@RequestParam(name = "targetImg4Val",value="targetImg4Val", required = false) String targetImg4Val) {
 	
-		if(product.getId()!=null){
-			Product p = productService.getByIdAndUserId(product.getId());
-			if(p==null){
+		try {
+			if(product.getId()!=null){
+				Product p = productService.getByIdAndUserId(product.getId());
+				if(p==null){
+					return responseError(-1, "save_failed");
+				}
+			}
+			
+			Map<String, Object> checkMap = checkProduct(product);
+			if(!checkMap.get(ERROR_NO).equals(ERRORCODE_SUCCESS)){
+				return checkMap;
+			}
+			
+			product.setUserId(this.getCurrentUserId());
+			Shop shop = shopService.getByUserId(this.getCurrentUserId());
+			if(shop==null){
+				return responseError(-1, "error_illegal");
+			}
+			
+			product.setShopId(shop.getId());
+			product.setProductStatus(Constants.PRODUCT_WAIT);
+			int count = productService.save(product);
+			if(count==0){
 				return responseError(-1, "save_failed");
 			}
+			
+			String fileName="";
+			Map<String, Object> resMap = null;
+			if(targetImgVal!=null){
+			    resMap = imageFileService.uploadBase64Image(targetImgVal);
+			    fileName = resMap.get("errorInfo").toString(); 
+			    if(resMap.get("errorNo").equals(0)){
+					imageService.saveProductIndexImg(product, fileName, 1);	
+				} else {
+					return resMap;
+				}
+		    }
+			if(targetImg0Val!=null){
+			    resMap = imageFileService.uploadBase64Image(targetImg0Val);
+			    fileName = resMap.get("errorInfo").toString(); 
+			    if(resMap.get("errorNo").equals(0)){
+					imageService.saveProductIndexImg(product, fileName, 1);	
+				} else {
+					return resMap;
+				}
+		    }if(targetImg1Val!=null){
+			    resMap = imageFileService.uploadBase64Image(targetImg1Val);
+			    fileName = resMap.get("errorInfo").toString(); 
+			    if(resMap.get("errorNo").equals(0)){
+					imageService.saveProductIndexImg(product, fileName, 1);	
+				} else {
+					return resMap;
+				}
+		    }if(targetImg2Val!=null){
+			    resMap = imageFileService.uploadBase64Image(targetImg2Val);
+			    fileName = resMap.get("errorInfo").toString(); 
+			    if(resMap.get("errorNo").equals(0)){
+					imageService.saveProductIndexImg(product, fileName, 1);	
+				} else {
+					return resMap;
+				}
+		    }if(targetImg3Val!=null){
+			    resMap = imageFileService.uploadBase64Image(targetImg3Val);
+			    fileName = resMap.get("errorInfo").toString(); 
+			    if(resMap.get("errorNo").equals(0)){
+					imageService.saveProductIndexImg(product, fileName, 1);	
+				} else {
+					return resMap;
+				}
+		    }
+		    if(targetImg4Val!=null){
+			    resMap = imageFileService.uploadBase64Image(targetImg4Val);
+			    fileName = resMap.get("errorInfo").toString(); 
+			    if(resMap.get("errorNo").equals(0)){
+					imageService.saveProductIndexImg(product, fileName, 1);	
+				} else {
+					return resMap;
+				}
+		    }
+			
+			return responseOK("save_success");
+		} catch (Exception e) {
+			return responseError(-1, "error_unknow");
 		}
 		
-		Map<String, Object> checkMap = checkProduct(product);
-		if(!checkMap.get(ERROR_NO).equals(ERRORCODE_SUCCESS)){
-			return checkMap;
-		}
-		
-		product.setUserId(this.getCurrentUserId());
-		Shop shop = shopService.getByUserId(this.getCurrentUserId());
-		if(shop==null){
-			return responseError(-1, "error_illegal");
-		}
-		
-		product.setShopId(shop.getId());
-		product.setProductStatus(Constants.PRODUCT_WAIT);
-		int count = productService.save(product);
-		if(count==0){
-			return responseError(-1, "save_failed");
-		}
-		
-		String fileName="";
-		Map<String, Object> resMap = null;
-		if(targetImgVal!=null){
-		    resMap = imageFileService.uploadBase64Image(targetImgVal);
-		    fileName = resMap.get("errorInfo").toString(); 
-		    if(resMap.get("errorNo").equals(0)){
-				imageService.saveProductIndexImg(product, fileName, 1);	
-			} else {
-				return resMap;
-			}
-	    }
-		if(targetImg0Val!=null){
-		    resMap = imageFileService.uploadBase64Image(targetImg0Val);
-		    fileName = resMap.get("errorInfo").toString(); 
-		    if(resMap.get("errorNo").equals(0)){
-				imageService.saveProductIndexImg(product, fileName, 1);	
-			} else {
-				return resMap;
-			}
-	    }if(targetImg1Val!=null){
-		    resMap = imageFileService.uploadBase64Image(targetImg1Val);
-		    fileName = resMap.get("errorInfo").toString(); 
-		    if(resMap.get("errorNo").equals(0)){
-				imageService.saveProductIndexImg(product, fileName, 1);	
-			} else {
-				return resMap;
-			}
-	    }if(targetImg2Val!=null){
-		    resMap = imageFileService.uploadBase64Image(targetImg2Val);
-		    fileName = resMap.get("errorInfo").toString(); 
-		    if(resMap.get("errorNo").equals(0)){
-				imageService.saveProductIndexImg(product, fileName, 1);	
-			} else {
-				return resMap;
-			}
-	    }if(targetImg3Val!=null){
-		    resMap = imageFileService.uploadBase64Image(targetImg3Val);
-		    fileName = resMap.get("errorInfo").toString(); 
-		    if(resMap.get("errorNo").equals(0)){
-				imageService.saveProductIndexImg(product, fileName, 1);	
-			} else {
-				return resMap;
-			}
-	    }
-	    if(targetImg4Val!=null){
-		    resMap = imageFileService.uploadBase64Image(targetImg4Val);
-		    fileName = resMap.get("errorInfo").toString(); 
-		    if(resMap.get("errorNo").equals(0)){
-				imageService.saveProductIndexImg(product, fileName, 1);	
-			} else {
-				return resMap;
-			}
-	    }
-		
-		return responseOK("save_success");
 	}
 	
 	private Map<String, Object> checkProduct(Product product) {
