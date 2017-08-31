@@ -16,7 +16,11 @@
 					if(args.prevPage==undefined){
 						obj.append('<a href="javascript:;" class="prevPage" onClick="'+args.fnName+'('+(args.current-1)+')"><</a>');
 					} else {
-						obj.append('<a href="javascript:;" class="prevPage" onClick="'+args.fnName+'('+(args.current-1)+')">'+args.prevPage+'</a>');
+						if(args.prevPage==undefined){
+							obj.append('<a href="javascript:;" class="prevPage" onClick="'+args.fnName+'('+(args.current-1)+')"><</a>');
+						} else {
+							obj.append('<a href="javascript:;" class="prevPage" onClick="'+args.fnName+'('+(args.current-1)+')">'+args.prevPage+'</a>');	
+						}
 					}
 				}else{
 					obj.remove('.prevPage');
@@ -58,7 +62,11 @@
 					if(args.nextPage==undefined){
 						obj.append('<a href="javascript:;" class="nextPage" onClick="'+args.fnName+'('+(parseInt(args.current)+parseInt(1))+')">></a>');
 					} else {
-						obj.append('<a href="javascript:;" class="nextPage" onClick="'+args.fnName+'('+(parseInt(args.current)+parseInt(1))+')">'+args.nextPage+'</a>');
+						if(args.nextPage==undefined){
+							obj.append('<a href="javascript:;" class="nextPage" onClick="'+args.fnName+'('+(parseInt(args.current)+parseInt(1))+')">></a>');
+						}else{
+							obj.append('<a href="javascript:;" class="nextPage" onClick="'+args.fnName+'('+(parseInt(args.current)+parseInt(1))+')">'+args.nextPage+'</a>');	
+						}
 					}
 				}else{
 					obj.remove('.nextPage');
