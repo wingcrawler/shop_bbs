@@ -301,20 +301,9 @@ public class SellerController extends BaseFrontController {
 			}
 		}
 		
-		if(StringUtils.isBlank(product.getProductName())){
-			return responseError(-1, "error_empty_product_name");
-		}
-		if(StringUtils.isBlank(product.getProductDescripton())){
-			return responseError(-1, "error_empty_description");
-		}
-		if(product.getProductTypeId()==null || product.getProductTypeId()<0){
-			return responseError(-1, "error_no_type");
-		}
-		if(product.getProductPrice()==null || product.getProductPrice()<0){
-			return responseError(-1, "error_empty_product_price");
-		}
-		if(product.getProductCount()==null || product.getProductCount()<0){
-			return responseError(-1, "error_empty_product_count");
+		Map<String, Object> checkMap = checkProduct(product);
+		if(!checkMap.get(ERROR_NO).equals(ERRORCODE_SUCCESS)){
+			return checkMap;
 		}
 		
 		product.setUserId(this.getCurrentUserId());
@@ -386,6 +375,67 @@ public class SellerController extends BaseFrontController {
 		
 		return responseOK("save_success");
 	}
+	
+	private Map<String, Object> checkProduct(Product product) {
+		//产品名称
+		if(StringUtils.isBlank(product.getProductName())){
+			return responseError(-1, "error_empty_product_name");
+		}
+		if(product.getProductName().length()>80){
+			return responseError(-1, "product_name_too_long");
+		}
+		if(StringUtils.isBlank(product.getProductEnName())){
+			return responseError(-1, "error_empty_product_name_en");
+		}
+		if(product.getProductEnName().length()>80){
+			return responseError(-1, "product_name_too_long_en");
+		}
+		
+		//产品描述
+		if(StringUtils.isBlank(product.getProductDescripton())){
+			return responseError(-1, "error_empty_description");
+		}
+		if(product.getProductDescripton().length()>1000){
+			return responseError(-1, "description_too_long");
+		}
+		if(StringUtils.isBlank(product.getProductEnDescription())){
+			return responseError(-1, "error_empty_description_en");
+		}
+		if(product.getProductEnDescription().length()>1000){
+			return responseError(-1, "description_too_long_en");
+		}
+		
+		//产品数量
+		if(product.getProductCount()==null || product.getProductCount()<0){
+			return responseError(-1, "error_empty_product_count");
+		}
+		if(String.valueOf(product.getProductCount()).length()>9){
+			return responseError(-1, "product_count_too_long");
+		}
+		
+		//产品类别
+		if(product.getProductTypeId()==null || product.getProductTypeId()<0){
+			return responseError(-1, "error_no_type");
+		}
+		
+		//产品价格		
+		if(product.getProductPrice()==null || product.getProductPrice()<0){
+			return responseError(-1, "error_empty_product_price");
+		}
+		if(String.valueOf(product.getProductPrice()).length()>9){
+			return responseError(-1, "product_price_too_long");
+		}
+		
+		//产品外链
+		if(StringUtils.isNotBlank(product.getProductUrl()) && product.getProductUrl().length()>180){
+			return responseError(-1, "product_url_too_long");
+		}
+
+		
+		
+		return this.responseOK1("");
+	}
+
 //	@ResponseBody
 //	@RequestMapping(value="/doSaveProduct1", method = RequestMethod.POST)
 //	public Map<String, Object> doSaveProduct1(Product product,

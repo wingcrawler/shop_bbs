@@ -90,7 +90,9 @@
 														<span class="u-hd-require">*</span>
 														<span class="u-hd-txt">${t.t_product_count }:</span>
 													</label>
-													<input type="number" class="u-ipt-text" name="productCount" value="${entity.productCount }">
+													<input type="number" 
+													oninput="if(value.length>9)value=value.slice(0,9)"
+													 class="u-ipt-text" name="productCount" value="${entity.productCount }">
 												</div>
 											  </div>
 											  <div class="col-xs-6 col-md-6">
@@ -99,7 +101,9 @@
 															<span class="u-hd-require">*</span>
 															<span class="u-hd-txt">${t.t_price }:</span>
 														</label>
-														<input type="number" class="u-ipt-text" name="productPrice" value="${entity.productPrice }">
+														<input
+														oninput="if(value.length>9)value=value.slice(0,9)" 
+														type="number" class="u-ipt-text" name="productPrice" value="${entity.productPrice }">
 													</div>
 											  </div>
 										</div>
