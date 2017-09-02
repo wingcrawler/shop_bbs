@@ -442,33 +442,33 @@ public class SellerController extends BaseFrontController {
 	
 	private Map<String, Object> checkProduct(Product product) {
 		//产品名称
-		if(StringUtils.isBlank(product.getProductName())){
-			return responseError(-1, "error_empty_product_name");
+		if(StringUtils.isBlank(product.getProductName()) || StringUtils.isBlank(product.getProductEnName())){
+			return responseError(-1, "error_empty_product_name_or_en_name");
 		}
-		if(product.getProductName().length()>80){
+		/*if(StringUtils.isBlank(product.getProductName())){
+			return responseError(-1, "error_empty_product_name");
+		}*/
+		if(product.getProductName().length()>20){
 			return responseError(-1, "product_name_too_long");
 		}
-		if(StringUtils.isBlank(product.getProductEnName())){
+		/*if(StringUtils.isBlank(product.getProductEnName())){
 			return responseError(-1, "error_empty_product_name_en");
-		}
-		if(product.getProductEnName().length()>80){
+		}*/
+		if(product.getProductEnName().length()>20){
 			return responseError(-1, "product_name_too_long_en");
 		}
 		
 		//产品描述
-		if(StringUtils.isBlank(product.getProductDescripton())){
+		/*if(StringUtils.isBlank(product.getProductDescripton())){
 			return responseError(-1, "error_empty_description");
-		}
-		/**3000字
-		 * 
-		 */
-		if(product.getProductDescripton().length()>1000){
+		}*/
+		if(StringUtils.isNotBlank(product.getProductDescripton()) && product.getProductDescripton().length()>3000){
 			return responseError(-1, "description_too_long");
 		}
-		if(StringUtils.isBlank(product.getProductEnDescription())){
+		/*if(StringUtils.isBlank(product.getProductEnDescription())){
 			return responseError(-1, "error_empty_description_en");
-		}
-		if(product.getProductEnDescription().length()>1000){
+		}*/
+		if(StringUtils.isNotBlank(product.getProductEnDescription()) && product.getProductEnDescription().length()>3000){
 			return responseError(-1, "description_too_long_en");
 		}
 		
@@ -498,8 +498,6 @@ public class SellerController extends BaseFrontController {
 			return responseError(-1, "product_url_too_long");
 		}
 
-		
-		
 		return this.responseOK1("");
 	}
 
