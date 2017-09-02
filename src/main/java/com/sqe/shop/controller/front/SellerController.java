@@ -355,6 +355,10 @@ public class SellerController extends BaseFrontController {
 				if(p==null){
 					return responseError(-1, "save_failed");
 				}
+				//首次上传 需要上传默认图片
+				if(StringUtils.isBlank(targetImgVal)){
+					return responseError(-1, "error_no_default_img");
+				}
 			}
 			
 			Map<String, Object> checkMap = checkProduct(product);
@@ -442,19 +446,16 @@ public class SellerController extends BaseFrontController {
 	
 	private Map<String, Object> checkProduct(Product product) {
 		//产品名称
-		if(StringUtils.isBlank(product.getProductName()) || StringUtils.isBlank(product.getProductEnName())){
-			return responseError(-1, "error_empty_product_name_or_en_name");
-		}
-		/*if(StringUtils.isBlank(product.getProductName())){
+		if(StringUtils.isBlank(product.getProductName())){
 			return responseError(-1, "error_empty_product_name");
-		}*/
-		if(product.getProductName().length()>20){
+		}
+		if(product.getProductName().length()>80){
 			return responseError(-1, "product_name_too_long");
 		}
-		/*if(StringUtils.isBlank(product.getProductEnName())){
+		if(StringUtils.isBlank(product.getProductEnName())){
 			return responseError(-1, "error_empty_product_name_en");
-		}*/
-		if(product.getProductEnName().length()>20){
+		}
+		if(product.getProductEnName().length()>80){
 			return responseError(-1, "product_name_too_long_en");
 		}
 		
@@ -479,6 +480,9 @@ public class SellerController extends BaseFrontController {
 		if(String.valueOf(product.getProductCount()).length()>9){
 			return responseError(-1, "product_count_too_long");
 		}
+		if(!RegularUtil.isPositiveInt(product.getProductCount())){
+			return responseError(-1, "error_product_count_formate");
+		}
 		
 		//产品类别
 		if(product.getProductTypeId()==null || product.getProductTypeId()<0){
@@ -491,6 +495,9 @@ public class SellerController extends BaseFrontController {
 		}
 		if(String.valueOf(product.getProductPrice()).length()>9){
 			return responseError(-1, "product_price_too_long");
+		}
+		if(!RegularUtil.isFloat(product.getProductPrice()+"")){
+			return responseError(-1, "error_product_price_formate");
 		}
 		
 		//产品外链

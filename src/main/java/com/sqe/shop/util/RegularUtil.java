@@ -20,15 +20,6 @@ public class RegularUtil {
 		return result;
 	}
 
-	public static void main3(String[] args) {
-
-		String test = "<img height='231' alt='װ��ģʽ��ͼ1' width='528' src='http://dl.iteye.com/upload/picture/pic/44707/d591f98f-6ebd-39a2-8450-0fc94a0ef4e1.jpg' style='border:0px;font-family:helvetica, tahoma, arial, sans-serif;font-size:14px;line-height:25.2px;background-color:#ffffff;' />";
-		String reg = "(?<=src=\")[\\S\\s]+?(?=\")";
-		String b = cutContent(reg, test);
-
-		System.out.println(b);
-	}
-
 	/**
 	 * ����html��ǩ��style��script ���ش��ı�
 	 * 
@@ -69,12 +60,42 @@ public class RegularUtil {
 	}
 
 	public static boolean isNumeric(String str) {
-		Pattern pattern = Pattern.compile("[0-9]*");
+		Pattern pattern = Pattern.compile("^\\d*(\\.\\d*)?");
 		Matcher isNum = pattern.matcher(str);
 		if (!isNum.matches()) {
 			return false;
 		}
 		return true;
 	}
+	
+	public static boolean isFloat(String str) {
+		Pattern pattern = Pattern.compile("^\\d{1,9}(\\.\\d{0,2})?");
+		Matcher isNum = pattern.matcher(str);
+		if (!isNum.matches()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean isPositiveInt(Integer str) {
+		Pattern pattern = Pattern.compile("^\\d{1,9}$");
+		Matcher isNum = pattern.matcher(str+"");
+		if (!isNum.matches()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static void main(String[] args) {
+
+		System.out.println(isPositiveInt(12345678));
+		System.out.println(isFloat("12345678912"));	
+		
+		/*String test = "<img height='231' alt='װ��ģʽ��ͼ1' width='528' src='http://dl.iteye.com/upload/picture/pic/44707/d591f98f-6ebd-39a2-8450-0fc94a0ef4e1.jpg' style='border:0px;font-family:helvetica, tahoma, arial, sans-serif;font-size:14px;line-height:25.2px;background-color:#ffffff;' />";
+		String reg = "(?<=src=\")[\\S\\s]+?(?=\")";
+		String b = cutContent(reg, test);
+		System.out.println(b);*/
+	}
+	
 
 }
