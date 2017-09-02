@@ -91,7 +91,7 @@
 														<span class="u-hd-txt">${t.t_product_count }:</span>
 													</label>
 													<input type="number" 
-													oninput="if(value.length>9)value=value.slice(0,9)"
+													
 													 class="u-ipt-text" name="productCount" value="${entity.productCount }">
 												</div>
 											  </div>
