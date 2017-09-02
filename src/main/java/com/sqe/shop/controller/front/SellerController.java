@@ -349,7 +349,6 @@ public class SellerController extends BaseFrontController {
 			@RequestParam(name = "targetImg2Val",value="targetImg2Val", required = false) String targetImg2Val,
 			@RequestParam(name = "targetImg3Val",value="targetImg3Val", required = false) String targetImg3Val,
 			@RequestParam(name = "targetImg4Val",value="targetImg4Val", required = false) String targetImg4Val) {
-	
 		try {
 			if(product.getId()!=null){
 				Product p = productService.getByIdAndUserId(product.getId());
@@ -435,7 +434,8 @@ public class SellerController extends BaseFrontController {
 
 			return responseOK("save_success");
 		} catch (Exception e) {
-			return responseError(-1, "error_unknow");
+			logger.error("doSaveProduct1 ex"+e.getCause());
+			return responseError(-1, "error_sys");
 		}
 		
 	}
