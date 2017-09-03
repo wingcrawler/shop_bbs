@@ -197,7 +197,7 @@ public class SellerController extends BaseFrontController {
 		}
 		response.put("subtypeList", typeTwoPage.getList());
 
-		// 查询图片
+		// 查询图片 
 		List<Image> images = imageService.getByProductId(product.getId());
 		List<Image> imgList = new ArrayList<Image>();
 

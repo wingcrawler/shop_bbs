@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sqe.shop.dto.ImageDto;
 import com.sqe.shop.mapper.ImageMapper;
 import com.sqe.shop.model.Image;
 import com.sqe.shop.model.Product;
@@ -86,6 +87,30 @@ public class ImageService extends AdapterService implements BaseService {
 		parm.put("orderBy", "id asc");
 		return imageMapper.getBeanListByParm(parm);
 	}
+	
+	
+	public List<ImageDto> getImagetoListByProductId(Long id) {
+		Map<String, Object> parm = new HashMap<String, Object>();
+		parm.put("productId", id);
+		parm.put("orderBy", "id asc");
+		
+		List<Image> result=imageMapper.getBeanListByParm(parm);
+		List<ImageDto> dtoResult=new ArrayList<ImageDto>();
+		
+		for(Image image:result){
+			ImageDto temp=new ImageDto();
+			String base64Data=com.sqe.shop.util.Image.GetImageStrFromPath(image.getImagePath());
+			temp.setBase64data(base64Data);
+			temp.setIndexShow(image.getIndexShow());			
+			dtoResult.add(temp);		
+		}
+		return dtoResult;
+		
+		
+		
+	}
+	
+	
 	public List<Image> getByProductIndexImg(Long id) {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		parm.put("productId", id);

@@ -134,14 +134,14 @@ $(function () {
 
         case 'getCroppedCanvas':
           if (result) {
-
             // Bootstrap's Modal
            // $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+        	  $(window.parent.document.getElementById("form_div")).show();
+        	  $(window.parent.document.getElementById("frame_div")).hide();
         	  var imgId=$(window.parent.document.getElementById("curtImg")).val();
         	  $(window.parent.document.getElementById(imgId)).attr("src",result.toDataURL());
         	  $(window.parent.document.getElementById(imgId+"Val")).val(result.toDataURL());
-        	  $(window.parent.document.getElementById("form_div")).show();
-        	  $(window.parent.document.getElementById("frame_div")).hide();
+        	 
           
           }
 
