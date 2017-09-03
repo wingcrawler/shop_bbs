@@ -355,6 +355,8 @@ public class SellerController extends BaseFrontController {
 				if(p==null){
 					return responseError(-1, "save_failed");
 				}
+				
+			} else {
 				//首次上传 需要上传默认图片
 				if(StringUtils.isBlank(targetImgVal)){
 					return responseError(-1, "error_no_default_img");
@@ -493,12 +495,12 @@ public class SellerController extends BaseFrontController {
 		if(product.getProductPrice()==null || product.getProductPrice()<0){
 			return responseError(-1, "error_empty_product_price");
 		}
-		if(String.valueOf(product.getProductPrice()).length()>9){
+		/*if(String.valueOf(product.getProductPrice()).length()>9){
 			return responseError(-1, "product_price_too_long");
-		}
-		if(!RegularUtil.isFloat(product.getProductPrice()+"")){
+		}*/
+		/*if(!RegularUtil.isFloat(product.getProductPrice()+"")){
 			return responseError(-1, "error_product_price_formate");
-		}
+		}*/
 		
 		//产品外链
 		if(StringUtils.isNotBlank(product.getProductUrl()) && product.getProductUrl().length()>180){
