@@ -34,18 +34,17 @@ String ctx = request.getContextPath();
       </div>
     </div>
     <div class="col-md-3 docs-buttons">
-    	<div class="btn-group btn-group-crop">
-       		<button type="button" class="btn btn-primary" data-method="getCroppedCanvas" style="z-index: 100">
-	          <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;)">
-	            	确&nbsp&nbsp&nbsp认
-	          </span>
+    	<div class="btn-group btn-group-crop" style="boder:0px">
+       		<button type="button" class="btn btn-primary" data-method="getCroppedCanvas" style="z-index: 100;boder:0px;height:40px;width:86px;margin-bottom: 5px;background:#00b7ee">
+	          <span class="docs-tooltip" data-toggle="tooltip">
+	            	${t.b_confirm }</span>
 	        </button>
        </div>
-       <div id="uploader" class="btn-group btn-group-crop" >
+       <div id="uploader" class="btn-group btn-group-crop">
 		    <!--用来存放文件信息-->
 		    <div id="thelist" class="uploader-list"></div>
 		    <div class="btns">
-		        <div id="picker">选择文件</div>
+		        <div id="picker">${t.t_select }</div>
 		    </div>
 		</div>
   </div>

@@ -34,8 +34,8 @@
 							</ul>
 						</div>
 						<div class="g-tabMn">
-							<form enctype="multipart/form-data" method="POST" id="form">
-							<input type="hidden" value="${entity.id }" name="id">
+							<form enctype="multipart/form-data" method="POST" id="form" onsubmit="checkProductData();">
+							<input type="hidden" id="id" value="${entity.id }" name="id">
 							<div class="g-tabMnItem f-active">
 								<div class="basic">
 									<div class="classify">
@@ -70,7 +70,7 @@
 													<span class="u-hd-require">*</span>
 													<span class="u-hd-txt">${t.t_product_name }(${t.t_zh }):</span>
 												</label>
-												<input type="text" class="u-ipt-text" name="productName" value="${entity.productName }">
+												<input type="text" class="u-ipt-text" id="productName" name="productName" value="${entity.productName }">
 											</div>
 										  </div>
 										  <div class="col-xs-6 col-md-6">
@@ -79,7 +79,7 @@
 													<span class="u-hd-require">*</span>
 													<span class="u-hd-txt">${t.t_product_name }(${t.t_en }):</span>
 												</label>
-												<input type="text" class="u-ipt-text" name="productEnName" value="${entity.productEnName }">
+												<input type="text" class="u-ipt-text" id="productEnName" name="productEnName" value="${entity.productEnName }">
 											</div>
 										  </div>
 										</div>
@@ -92,7 +92,7 @@
 													</label>
 													<input type="number" 
 													oninput="if(value.length>9)value=value.slice(0,9)"
-													 class="u-ipt-text" name="productCount" value="${entity.productCount }">
+													 class="u-ipt-text" name="productCount" id="productCount" value="${entity.productCount }">
 												</div>
 											  </div>
 											  <div class="col-xs-6 col-md-6">
@@ -103,7 +103,7 @@
 														</label>
 														<input
 														oninput="if(value.length>9)value=value.slice(0,9)" 
-														type="number" class="u-ipt-text" name="productPrice" value="${entity.productPrice }">
+														type="number" class="u-ipt-text" id="productPrice" name="productPrice" value="${entity.productPrice }">
 													</div>
 											  </div>
 										</div>
@@ -212,49 +212,54 @@
 										<!-- 单张图片 -->
 										<div class="photo_album">
 											<span class="labe">${t.t_show_img }:</span>
-											<c:if test="${not empty img}">
+											<div class="upimg">
+													<input type="hidden" id="targetImgVal" name="targetImgVal">
+													<img id="targetImg" alt="" src="${img.imagePath}" width="100%" height="100%" style="padding:0;">
+													<span onclick="getImage('targetImg');"   style="backgroung:#aaa;z-index:10;position:relative;float:right;width:50px">选择</span>
+											</div>
+											<!--<c:if test="${not empty img}">
 												<div class="upimg">
 													<img id="targetImg" alt="" src="${img.imagePath}" width="100%" height="100%" style="padding:0;">
 													<span class="deleteImg" imgid="${img.id }" style="backgroung:#aaa;z-index:10;position:relative;float:right;width:30px">x</span>
 												</div>
-											</c:if>
-											<c:if test="${empty img}">
+											</c:if>-->
+											<!--<c:if test="${empty img}">
 												<div class="upimg">
 													<input type="hidden" id="targetImgVal" name="targetImgVal">
 													<img id="targetImg" alt="" src="${img.imagePath}" width="100%" height="100%" style="padding:0;">
 													<span onclick="getImage('targetImg');"   style="backgroung:#aaa;z-index:10;position:relative;float:right;width:50px">选择</span>
 												</div>
-											</c:if>
+											</c:if>-->
 										</div>
 										
 										<!-- 图片列表 -->
 										<div class="photo_album">
 											<span class="labe">${t.t_img_list }: </span>
-											<c:forEach var="item" items="${imgList }">
+											<!--<c:forEach var="item" items="${imgList }">
 												<div class="upimg">
 													<img alt="" id="targetImg${i }" src="${item.imagePath}" width="100%" height="100%" style="padding:0;">
 													<span class="deleteImg" imgid="${item.id }" style="backgroung:#aaa;z-index:10;position:relative;float:right;width:30px">x</span>
 												</div>
-											</c:forEach>
-											<c:forEach var="i" begin="1" end="${inputCount }" step="1">
+											</c:forEach>-->
+											<!--<c:forEach var="i" begin="1" end="5" step="1"> ${inputCount } -->
 												<div class="upimg">
 													<input type="hidden" id="targetImg${i }Val" name="targetImg${i }Val">
 													<img alt="" id="targetImg${i }" src="${item.imagePath}" width="100%" height="100%" style="padding:0;">
 													<span class="deleteImg" onclick="getImage('targetImg'+${i });"  style="backgroung:#aaa;z-index:10;position:relative;float:right;width:50px">选择</span>
 												</div>
-											</c:forEach>
+											<!--</c:forEach>-->
 										</div>
 										
 										<div class="product_description">
 											<span class="labe">${t.t_desc }(${t.t_zh }):  </span>
 											<div class="text_editing">
-												<textarea rows="15" cols="83" name="productDescripton" style="padding:0;margin:0;border:0">${entity.productDescripton }</textarea>
+												<textarea rows="15" cols="83" id="productDescripton" name="productDescripton" style="padding:0;margin:0;border:0">${entity.productDescripton }</textarea>
 											</div>
 										</div>
 										<div class="product_description">
 											<span class="labe">${t.t_desc }(${t.t_en }):</span>
 											<div class="text_editing">
-												<textarea rows="15" cols="83" name="productEnDescription" style="padding:0;margin:0;border:0">${entity.productEnDescription }</textarea>
+												<textarea rows="15" cols="83" id="productEnDescription" name="productEnDescription" style="padding:0;margin:0;border:0">${entity.productEnDescription }</textarea>
 											</div>
 										</div>
 									</div>
@@ -315,8 +320,84 @@ $(function(){
 			jQuery.common.deleteByParm(parm,'/front/sell/deleteByParm',true,window.location.href)	 
 		 }
 	});*/
+	//初始化图片信息
+	var curId=$("#id").val();
+	$.ajax({
+		type:"get",
+		dateType:"json",
+		url:"/front/sell/doEditProduct?id="+curId,
+		data:{},
+		success:function(ret){
+			console.log(ret);
+				$("#targetImg").attr('src',ret.imgCover.imagePath);
+				$("#targetImgVal").val(ret.imgCover.imagePath);
+				var picList=ret.imgList;
+				for(var i=0;i<picList.length;i++){
+					console.log(picList[i].indexShow);
+					var _ind=picList[i].indexShow-1;
+					$("#targetImg"+_ind).attr('src',picList[i].imagePath);
+					$("#targetImg"+_ind+"Val").val(picList[i].imagePath);
+				}
+			}
+   });
 	
 });
+function checkProductData(){
+	var productType=$("#productTypeId").val();
+	if(productType==-1){
+		alert('${t.error_productType_empty}');
+		return false;
+	}
+	var productName=$("#productName").val();
+	if(productName==""){
+		alert('${t.error_productNameCH_empty}');
+		return false;
+	}
+	var productEnName=$("#productEnName").val();
+	if(productEnName==""){
+		alert('${t.error_productNameUS_empty}');
+		return false;
+	}
+	if(productName.length>80){
+		alert('${t.error_productNameCH_length}');
+		return false;
+	}
+	if(productEnName.length>80){
+		alert('${t.error_productNameUS_length}');
+		return false;
+	}
+	var targetImgSrc=$("#targetImg").attr("src");
+	if(targetImgSrc==""){
+		alert('${t.error_productCover_empty}');
+		return false;
+	}
+	//error_productPrice
+	//
+	//
+	//
+	var productCount=$("#productCount").val();
+	var productCountPar=/^\d+$/;
+	if(!productCountPar.test(productCount)){
+		alert('${t.error_productNum}');
+		return false;
+	}
+	var productPrice=$("#productPrice").val();
+	var pricePar=/^-?\d+\.\d+$/;
+	if(!pricePar.test(productPrice)){
+		alert('${t.error_productPrice}');
+		return false;
+	}
+	var productDescripton=$("#productDescripton").val();
+	if(productDescripton.length>3000){
+		alert('${t.error_productCH_des}');
+		return false;
+	}
+	var productEnDescription=$("#productEnDescription").val();
+	if(productEnDescription.length>3000){
+		alert('${t.error_productUS_des}');
+		return false;
+	}
+}
 function triggerSelect(elem){
 	$(elem).trigger('click');
 	

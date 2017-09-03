@@ -81,7 +81,8 @@ public class ImageFileService extends BaseService {
 			if (base64ImgData == null) {
 				return responseError(-1, "error_no_file");
 			}
-			base64ImgData=base64ImgData.replaceFirst("data:image.*base64,", "");
+
+			base64ImgData = base64ImgData.replaceFirst("data:image.*base64,", "");
 			File dir = new File(uploadPath);
 			checkDir(dir);
 			String fileName = new Date().getTime() + ".png";
@@ -93,6 +94,7 @@ public class ImageFileService extends BaseService {
 			os.write(bs);
 			os.close();
 			return responseOK1(fileName);
+
 		} catch (
 
 		Exception e) {

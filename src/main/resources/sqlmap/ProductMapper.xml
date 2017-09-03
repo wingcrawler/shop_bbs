@@ -246,7 +246,7 @@
 	from product p 
 	LEFT JOIN product_type pt on p.product_type_id=pt.id
 	LEFT JOIN shop s on p.shop_id=s.id
-	LEFT JOIN image i on p.id=i.product_id and i.index_show=1
+	LEFT JOIN image i on p.id=i.product_id and i.index_show=0
 	where 1=1
 	<if test="parm.productDescripton != null">
 	     	and p.product_descripton = #{parm.productDescripton}
