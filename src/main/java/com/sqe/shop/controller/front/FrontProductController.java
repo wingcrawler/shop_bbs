@@ -70,7 +70,7 @@ public class FrontProductController extends BaseFrontController {
 	public ModelAndView list(ModelAndView model, Long parentType, Long childType,String typeName,String searchText,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="12") int pageSize) throws UnsupportedEncodingException {
-		pageSize=12;
+		/*pageSize=12;*/
 		model.addObject("parentType", parentType);
 		
 		Product product = new Product();

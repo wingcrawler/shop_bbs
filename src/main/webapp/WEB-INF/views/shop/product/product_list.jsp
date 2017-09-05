@@ -97,6 +97,7 @@ function nextPage(pageNo){
 	}
 	var searchText = $('input[name="searchText"]').val();
 	args += '&searchText='+encodeURIComponent(searchText);
+	/* args += '&pageSize=3'; */
 	
 	self.location="/product/list"+args;
 }
