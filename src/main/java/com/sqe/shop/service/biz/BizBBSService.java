@@ -36,10 +36,11 @@ public class BizBBSService extends BaseCommon {
 		PageUtil<Map<String, Object>> sectionList = sectionService.getMapListByParm(section, 1, -1);
 		resMap.put("sections", sectionList);
 
-		// 热门帖子  
+		// 热门帖子   最近浏览量大于20
 		com.sqe.shop.model.Thread hotThread=new com.sqe.shop.model.Thread();
 		hotThread.setThreadStatus(1);
-		PageUtil<Map<String, Object>> hotsThreadList=threadService.getMapListByParm(hotThread, 1, -1);	
+		hotThread.setThreadView(20L);
+		PageUtil<Map<String, Object>> hotsThreadList=threadService.getHot(hotThread, 1, -1);	
 		resMap.put("hotThreads", hotsThreadList);
 
 		return resMap;

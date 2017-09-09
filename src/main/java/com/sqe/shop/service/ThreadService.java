@@ -115,6 +115,36 @@ public class ThreadService extends AdapterService implements BaseService {
 	 * @param pageSize
 	 * @return
 	 */
+	public PageUtil<Map<String, Object>> getHot(Thread thread, int pageNo, Integer pageSize) {
+		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
+		Map<String, Object> parm = queryParm(thread);
+		parm.put("start", pageUtil.getStartRow());
+		parm.put("limit", pageUtil.getPageSize());
+		parm.put("view", thread.getThreadView());
+		parm.put("orderby", "t.id desc");
+		int count = threadMapper.countByParm(parm);
+		pageUtil.setTotalRecords(count);
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		if (count != 0) {
+			list = threadMapper.getHotThread(parm);
+			for (Map<String, Object> map : list) {
+				Date date = (Date) map.get("date");
+				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
+				String type = map.get("threadType").toString();
+				map.put("typeName", this.getThreadType(Integer.valueOf(type)));
+			}
+		}
+		pageUtil.setList(list);
+		return pageUtil;
+	}
+
+	/**
+	 * 
+	 * @param thread
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
 	public PageUtil<Map<String, Object>> getSectionMapListByParm(Thread thread, int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(thread);
@@ -179,11 +209,9 @@ public class ThreadService extends AdapterService implements BaseService {
 	 * @param pageSize
 	 * @return
 	 */
-	public PageUtil<Map<String, Object>> getThreadsMapListByParm(Thread thread, int pageNo,
-			Integer pageSize) {
+	public PageUtil<Map<String, Object>> getThreadsMapListByParm(Thread thread, int pageNo, Integer pageSize) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = queryParm(thread);
-		parm.put("threadStatus", 1);
 		parm.put("orderby", "t.thread_identify desc , t.id desc ");
 		parm.put("start", 0);
 		parm.put("limit", 10);
@@ -235,7 +263,10 @@ public class ThreadService extends AdapterService implements BaseService {
 			if (thread.getSectionId() != null) {
 				parm.put("sectionId", thread.getSectionId());
 			}
-			
+			if (thread.getThreadStatus() != null) {
+				parm.put("threadStatus", thread.getThreadStatus());
+			}
+
 		}
 		return parm;
 	}
@@ -257,6 +288,9 @@ public class ThreadService extends AdapterService implements BaseService {
 			}
 			if (thread.getUserId() != null && thread.getUserId() >= 0) {
 				parm.put("userId", thread.getUserId());
+			}
+			if (thread.getThreadStatus() != null) {
+				parm.put("threadStatus", thread.getThreadStatus());
 			}
 		}
 		return parm;
@@ -300,20 +334,19 @@ public class ThreadService extends AdapterService implements BaseService {
 	public PageUtil<Map<String, Object>> getSectionOneThreadList(int pageNo, int pageSize, Long sectionId) {
 		PageUtil<Map<String, Object>> pageUtil = new PageUtil<Map<String, Object>>(pageNo, pageSize);
 		Map<String, Object> parm = new HashMap<String, Object>();
-		
+
 		parm.put("start", pageUtil.getStartRow());
 		parm.put("limit", pageUtil.getPageSize());
 		parm.put("orderby", "t.id desc");
 		parm.put("sectionParentId", sectionId);
-		parm.put("threadStatus", Constants.THREAD_ON);
-		
+
 		int count = threadMapper.countByParm(parm);
 		pageUtil.setTotalRecords(count);
-		
+
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		if(count>0){
+		if (count > 0) {
 			list = threadMapper.getSectionOneThreadList(parm);
-			for(Map<String, Object> map: list){
+			for (Map<String, Object> map : list) {
 				// 时间转换
 				Date time = (Date) map.get("date");
 				map.put("timeAgo", relativeDateFormat.format(time));
@@ -323,7 +356,7 @@ public class ThreadService extends AdapterService implements BaseService {
 			}
 		}
 		pageUtil.setList(list);
-		
+
 		return pageUtil;
 	}
 

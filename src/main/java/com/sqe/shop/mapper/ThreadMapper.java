@@ -12,5 +12,10 @@ public interface ThreadMapper extends BaseMapper {
 	List<Map<String, Object>> getSectionMapListByParm(@Param("parm") Map<String, Object> paramMap);
 
 	List<Map<String, Object>> getSectionOneThreadList(@Param("parm")  Map<String, Object> parm);
+	
+	List<Map<String, Object>> getHotThread(@Param("parm")  Map<String, Object> parm);
+	
+	
+	
 
 }
