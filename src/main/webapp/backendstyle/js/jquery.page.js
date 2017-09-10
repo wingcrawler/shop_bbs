@@ -31,7 +31,10 @@
 					}
 				}
 				
-				if(args.current != 1 && args.current >= 5 && args.pageCount != 5){
+				if(args.current != 1 && args.current >= 5 && args.pageCount <= 5){
+					obj.append('<a href="javascript:;" class="tcdNumber" onClick="'+args.fnName+'(1)">'+1+'</a>');
+				}
+				if(args.current != 1 && args.current >= 5 && args.pageCount > 5){
 					obj.append('<a href="javascript:;" class="tcdNumber" onClick="'+args.fnName+'(1)">'+1+'</a>');
 					obj.append('<span>...</span>');
 				}

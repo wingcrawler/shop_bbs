@@ -17,4 +17,6 @@ public interface CommentMapper extends BaseMapper {
 
 	List<Map<String, Object>> getProductCommentListByParm(@Param("parm") Map<String, Object> parmMap);
 
+	int getMapListByParm_count(@Param("parm") Map<String, Object> paramMap);
+	
 }
