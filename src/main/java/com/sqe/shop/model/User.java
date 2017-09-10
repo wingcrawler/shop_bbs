@@ -31,7 +31,7 @@ public class User extends BaseModel implements Serializable {
 	private String userIntroduce;
 	@Size(min = 5, max = 20, message = "{items.username.length}")
 	@Pattern(regexp = "[0-9a-zA-Z\u4E00-\u9FA5]+", message = "{items.username.pattern}")
-	private String username;
+	private String userName;
 	private String userQq;
 
 	private String validataCode;
@@ -127,11 +127,11 @@ public class User extends BaseModel implements Serializable {
 	}
 
 	public String getUsername() {
-		return username;
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String userName) {
+		this.userName = userName;
 	}
 
 	public String getUserQq() {
