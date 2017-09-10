@@ -86,8 +86,17 @@ public class CommentService extends AdapterService implements BaseService {
 			String newsTitle = URLDecoder.decode(news.getNewsTitle(),"utf-8");
 			news = newsService.getByTitle(newsTitle);	
 		} else {
+			int count = newsService.getByParm("CommentMapper","getMapListByParm_count", null);
+			pageUtil.setTotalRecords(count);
 			pageUtil.setList(list);
-			pageUtil.setTotalRecords(0);
+			if(count!=0){
+				Map<String, Object> newsMap = new HashMap<String, Object>();
+				newsMap.put("start", pageUtil.getStartRow());
+				newsMap.put("limit", pageUtil.getPageSize());
+				newsMap.put("orderby", "id desc");
+				list = commentMapper.getMapListByParm(newsMap);
+				pageUtil.setList(list);	
+			}
 			return pageUtil;
 		}
 			
@@ -95,11 +104,9 @@ public class CommentService extends AdapterService implements BaseService {
 		parm.put("start", pageUtil.getStartRow());
 		parm.put("limit", pageUtil.getPageSize());
 		parm.put("newsId", news.getId());
-		parm.put("orderby", "id desc");
-		
-		int count = commentMapper.countByParm(parm);
+		parm.put("orderby", "n.id desc");
+		int count = newsService.getByParm("CommentMapper","getMapListByParm_count", parm);
 		pageUtil.setTotalRecords(count);
-		
 		if(count!=0){
 			list = commentMapper.getMapListByParm(parm);
 			for (Map<String, Object> map : list) {
@@ -114,6 +121,7 @@ public class CommentService extends AdapterService implements BaseService {
 			}
 			pageUtil.setList(list);
 		}
+		
 		return pageUtil;
 	}
 	

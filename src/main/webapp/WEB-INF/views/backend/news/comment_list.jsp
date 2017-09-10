@@ -86,22 +86,16 @@ $(function(){
 		url_load : '/backend/comment/getList',
 		url_edit : '/backend/comment/edit',
 		url_remove : '/backend/comment/doDelete',
+		parm:{
+			pageNo : 1,
+			pageSize : 5,
+			newsTitle: encodeURIComponent($('input[name="newsTitle"]').val())
+		},
 		backFn : function(p) {
 			// console.log(p);
 		}
 	}); 
 	
-	debugger;
-	var newsTitle = $('input[name="newsTitle"]').val();
-	if(newsTitle!=''){
-		$('.newsSearch').trigger('click');
-	}
-	/* var newsId = '${news.id}';
-	if(newsId!=''){
-		var parm = {};
-		parm.id=newsId;
-		$.fn.doSearch(parm);	
-	} */
 });
 </script>
 </body>
