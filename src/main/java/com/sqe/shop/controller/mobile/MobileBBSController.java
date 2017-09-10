@@ -1,5 +1,6 @@
 package com.sqe.shop.controller.mobile;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -62,13 +63,20 @@ public class MobileBBSController extends BaseFrontController {
 			return responseError1(ERRORCODE_NOLOGIN, "未登录");
 		}
 		if (StringUtils.isBlank(thread.getThreadContext())) {
-			return responseError(-1, "error_empty_content");
+			return responseError1(-1, "内容不能为空");
 		}
-		if (StringUtils.isBlank(thread.getTitle())) {
-			return responseError(-1, "error_empty_title");
+		if (StringUtils.isBlank(thread.getThreadTitle())) {
+			return responseError1(-1, "标题不能为空");
+		}
+		if (thread.getSectionId()==null) {
+			return responseError1(-1, "请选择板块");
 		}
 		Map<String, Object> resMap = this.responseOK1("");
 		thread.setUserId(userId);
+		thread.setThreadStatus(1);
+		thread.setThreadTime(new Date());
+		thread.setThreadView(1L);
+		thread.setThreadUp(1L);
 		int result = threadService.insert(thread);
 		resMap.put("result", result);
 		return resMap;
@@ -89,10 +97,15 @@ public class MobileBBSController extends BaseFrontController {
 			return responseError1(ERRORCODE_NOLOGIN, "未登录");
 		}
 		if (StringUtils.isBlank(post.getPostContext())) {
-			return responseError(-1, "error_empty_content");
+			return responseError1(-1, "评论内容为空");
+		}
+		if (post.getThreadId()==null) {
+			return responseError1(-1, "error_empty_threadID");
 		}
 		Map<String, Object> resMap = this.responseOK1("");
 		post.setUserId(userId);
+		post.setPostDate(new Date());
+		post.setPostStatus(1);
 		int result = postService.insert(post);
 		resMap.put("result", result);
 		return resMap;
@@ -112,7 +125,11 @@ public class MobileBBSController extends BaseFrontController {
 		Thread threaddetil = new Thread();
 		threaddetil.setThreadStatus(1);
 		threaddetil.setId(id);
-		resMap.put("thred", threadService.getById(id));
+		threaddetil=threadService.getById(id);
+		if(threaddetil==null){
+			return responseError1(404, "error_empty_thread");
+		}
+		resMap.put("thred", threaddetil);
 		return resMap;
 	}
 
@@ -128,6 +145,7 @@ public class MobileBBSController extends BaseFrontController {
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		Map<String, Object> resMap = this.responseOK1("");
+		section.setSectionStatus(1);
 		resMap.put("sectionList", sectionService.getBeanListByParm(section, pageNo, pageSize));
 		return resMap;
 	}
