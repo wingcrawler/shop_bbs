@@ -75,7 +75,7 @@ $(function(){
 	$('#main-menu li.li').eq(6).find('ul li').eq(1).addClass('active');	
 	
 	loadFirstSection();	
-	/* loadSecondSection(); */
+	loadSecondSection(); 
 });
 
 //一级版块
@@ -167,7 +167,7 @@ function loadSecondSection(obj) {
 			sectionParentId : fatherId
 		},
 		backFn : function(p) {
-			// console.log(p);
+			console.log(p);
 		}
 	}); 
 }
@@ -222,7 +222,7 @@ function saveSubMenu(){
 		};
 	var url = '/backend/section/doSave';
 	$.fn.doSaveAndReload(parm, url);
-	//$('#secondReload').trigger('click');
+	$('#secondReload').trigger('click');
 }
 
 </script>

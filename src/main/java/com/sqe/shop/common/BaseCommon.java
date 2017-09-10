@@ -78,7 +78,7 @@ public class BaseCommon extends Constants {
 		if (user != null) {
 			return user.getId();
 		}
-		return 3L;
+		return null;
 	}
 
 	public boolean isLogin() {
