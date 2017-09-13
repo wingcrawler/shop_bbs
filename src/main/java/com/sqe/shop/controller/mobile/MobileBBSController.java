@@ -160,7 +160,7 @@ public class MobileBBSController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/bbs/threadList", method = RequestMethod.POST)
-	public Map<String, Object> getThreadsBySection(@RequestParam(name = "secionId", defaultValue = "1") Long sectionId,
+	public Map<String, Object> getThreadsBySection(@RequestParam(name = "sectionId", defaultValue = "1") Long sectionId,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		Map<String, Object> resMap = this.responseOK1("");
