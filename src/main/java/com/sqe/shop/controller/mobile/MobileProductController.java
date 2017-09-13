@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sqe.shop.controller.base.BaseFrontController;
+import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
+import com.sqe.shop.service.AdvertisementService;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
 import com.sqe.shop.service.MessageService;
@@ -45,6 +47,8 @@ public class MobileProductController extends BaseFrontController {
 	private CachedService cachedService;
 	@Autowired
 	private ShopService shopService;
+	@Autowired
+	private AdvertisementService advertisementService;
 	
 	/**
 	 * 产品分类
@@ -60,6 +64,12 @@ public class MobileProductController extends BaseFrontController {
 			@RequestParam(name="pageSize", defaultValue="12") int pageSize) {
 		Map<String, Object> resMap = this.responseOK1("");
 		pageSize=12;
+		
+		//轮播图
+		Advertisement advertisement = new Advertisement();
+		advertisement.setType(0);
+		PageUtil<Advertisement> adPage = advertisementService.getBeanListByParm(advertisement, 1, -1);
+		resMap.put("adList", adPage.getList());
 		
 		resMap.put("productTypeId", productTypeId);
 		
