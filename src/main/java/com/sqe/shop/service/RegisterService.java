@@ -50,9 +50,9 @@ public class RegisterService extends BaseCommon {
         user.setUserStatus(1);       
 		int r = userMapper.insert(user);
 
-		if (r == 0) {
+		if (r == 1) {
 			resMap.put("result",true);
-			resMap.put("user",user);
+			resMap.put("userName",user.getUsername());
 			resMap.put("url", "/login");
 		} else {
 			resMap.put("result",false);

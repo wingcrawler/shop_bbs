@@ -1,20 +1,27 @@
 package com.sqe.shop.controller.mobile;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Shop;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.MessageService;
+import com.sqe.shop.service.RegisterService;
 import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.UserService;
@@ -28,6 +35,9 @@ public class MobileUserController extends BaseFrontController {
 	
 	@Autowired
 	private BizUserCenterService bizUserCenterService;
+	
+	@Autowired
+	private RegisterService registerservice;
 	
 	@Autowired
 	private UserService userService;
@@ -54,6 +64,28 @@ public class MobileUserController extends BaseFrontController {
 			return this.responseError1(ERRORCODE_NOLOGIN, "no login");
 		}
 		return bizUserCenterService.getUserInfo();
+	}
+	
+	
+	/**
+	 * 获取用户基本信息
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/userRegister",method=RequestMethod.POST)
+		public Map<String, Object> doRegister(HttpServletRequest request, @Validated User user,
+				BindingResult bindingResult) {
+			// 获取校验错误信息
+			if (bindingResult.hasErrors()) {
+				final Map<String, Object> resMap = new HashMap<String, Object>();
+				resMap.put(Constants.ERROR_NO, -1);
+				resMap.put(Constants.ERROR_INFO, bindingResult.getFieldErrors().get(0).getDefaultMessage());
+				return resMap;
+			} else {
+				user.setUserRole(ROLE_BUY);
+				Map<String, Object> resMap = registerservice.register(user);
+				return resMap;
+			}
 	}
 	
 	/**
