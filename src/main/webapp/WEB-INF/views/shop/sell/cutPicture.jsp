@@ -103,7 +103,7 @@ String ctx = request.getContextPath();
 			      };
 			       $img.cropper('destroy').cropper(options1);
 		    uploader.reset();
-		    },0.8,0.8);
+		    },1,1);
 		   
 		});
   </script>
