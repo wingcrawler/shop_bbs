@@ -62,9 +62,9 @@ public class BuyerCenterController extends BaseFrontController {
 	@RequestMapping(value="/basicInfo", method = RequestMethod.GET)
 	public ModelAndView basicInfo(ModelAndView model){
 		model.setViewName("shop/buy/user_center");
-		/*User entity = userService.getById(this.getCurrentUserId());
+		User entity = userService.getById(this.getCurrentUserId());
 		model.addObject("entity", entity);
-		model.addObject("img", entity.getUserImage());*/
+		model.addObject("img", entity.getUserImage());
 		model.addAllObjects(bizUserCenterService.getUserInfo());
 		return model;
 	}
