@@ -193,7 +193,7 @@
 								<div class="img_describe">
 									<div class="heade">${t.t_img_desc }</div>
 									<div class="imgDescribe" style="display:none;padding-left: 1rem;" id="frame_div">
-										<iframe src="/front/sell/goCutPicture" width="650px" height="500px"></iframe>
+										<iframe src="/front/sell/goCutPicture" width="650px" height="600px"></iframe>
 									</div>
 									<div class="imgDescribe" id="form_div">
 										<%-- <div class="show_img">
