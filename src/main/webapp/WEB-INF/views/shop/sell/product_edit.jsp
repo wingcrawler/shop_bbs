@@ -322,24 +322,27 @@ $(function(){
 	});*/
 	//初始化图片信息
 	var curId=$("#id").val();
-	$.ajax({
-		type:"get",
-		dateType:"json",
-		url:"/front/sell/doEditProduct?id="+curId,
-		data:{},
-		success:function(ret){
-			console.log(ret);
-				$("#targetImg").attr('src',ret.imgCover.imagePath);
-				$("#targetImgVal").val(ret.imgCover.imagePath);
-				var picList=ret.imgList;
-				for(var i=0;i<picList.length;i++){
-					console.log(picList[i].indexShow);
-					var _ind=picList[i].indexShow;
-					$("#targetImg"+_ind).attr('src',picList[i].imagePath);
-					$("#targetImg"+_ind+"Val").val(picList[i].imagePath);
+	if(curId){
+		$.ajax({
+			type:"get",
+			dateType:"json",
+			url:"/front/sell/doEditProduct?id="+curId,
+			data:{},
+			success:function(ret){
+				console.log(ret);
+					$("#targetImg").attr('src',ret.imgCover.imagePath);
+					$("#targetImgVal").val(ret.imgCover.imagePath);
+					var picList=ret.imgList;
+					for(var i=0;i<picList.length;i++){
+						console.log(picList[i].indexShow);
+						var _ind=picList[i].indexShow-1;
+						$("#targetImg"+_ind).attr('src',picList[i].imagePath);
+						$("#targetImg"+_ind+"Val").val(picList[i].imagePath);
+					}
 				}
-			}
-   });
+	   });
+	}
+	
 	
 });
 function checkProductData(){
