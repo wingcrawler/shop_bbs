@@ -206,7 +206,7 @@ public class SellerController extends BaseFrontController {
 		List<Image> imgList = new ArrayList<Image>();
 
 		for (Image img : images) {
-			if (img.getIndexShow() == 0) {
+			if (img.getIndexShow() == 1) {
 				response.put("imgCover", img);
 			} else {
 				imgList.add(img);
