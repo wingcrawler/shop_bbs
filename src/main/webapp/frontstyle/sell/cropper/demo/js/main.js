@@ -15,6 +15,8 @@ $(function () {
         aspectRatio:1/1,
         resizable:true,
         preview: '.img-preview',
+        minContainerWidth:600,
+        minContainerHeight:550,
         crop: function (e) {
           $dataX.val(Math.round(e.x));
           $dataY.val(Math.round(e.y));

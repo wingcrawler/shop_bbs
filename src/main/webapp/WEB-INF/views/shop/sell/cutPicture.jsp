@@ -40,13 +40,19 @@ String ctx = request.getContextPath();
 	            	${t.b_confirm }</span>
 	        </button>
        </div>
+       <div  class="btn-group btn-group-crop" >
+		    <div class="btns" onclick="changePicker();">
+		        <div id="changeBtn" style="width:86px;">切换</div>
+		    </div>
+		</div>
        <div id="uploader" class="btn-group btn-group-crop">
 		    <!--用来存放文件信息-->
 		    <div id="thelist" class="uploader-list"></div>
 		    <div class="btns">
-		        <div id="picker">${t.t_select }</div>
+		        <div id="picker" style="width:86px;">${t.t_select }</div>
 		    </div>
 		</div>
+		
   </div>
           
   <!-- Scripts -->
@@ -82,15 +88,17 @@ String ctx = request.getContextPath();
 		    // 如果为非图片文件，可以不用调用此方法。
 		    // thumbnailWidth x thumbnailHeight 为 100 x 100
 		    uploader.makeThumb( file, function( error, src ) {
-		    	var $img=$("#image");
+		    	 $img=$("#image");
 		        if ( error ) {
 		            $img.replaceWith('<span>不能预览</span>');
 		            return;
 		        }
 		         $img.attr( 'src', src );
-		         var options1 = {
+		          options1 = {
 			        aspectRatio:1/1,
 			        resizable:true,
+			        minContainerWidth:600,
+			        minContainerHeight:520,
 			        crop: function (e) {
 			          $dataX.val(Math.round(e.x));
 			          $dataY.val(Math.round(e.y));
@@ -106,6 +114,19 @@ String ctx = request.getContextPath();
 		    },1,1);
 		   
 		});
+		var $img;
+		var options1;
+		var flag=true;
+		function changePicker(){
+			if(flag){
+				options1.aspectRatio=1.5/1;
+				flag=false;
+			}else{
+				options1.aspectRatio=1/1;
+				flag=true;
+			}
+			 $img.cropper('destroy').cropper(options1);
+		}
   </script>
 </body>
 </html>
