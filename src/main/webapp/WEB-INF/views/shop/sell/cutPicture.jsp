@@ -42,7 +42,7 @@ String ctx = request.getContextPath();
        </div>
        <div  class="btn-group btn-group-crop" >
 		    <div class="btns" onclick="changePicker();">
-		        <div id="changeBtn" style="width:86px;">切换</div>
+		        <div id="changeBtn" style="width:86px;">${t.t_bbs_change }</div>
 		    </div>
 		</div>
        <div id="uploader" class="btn-group btn-group-crop">
