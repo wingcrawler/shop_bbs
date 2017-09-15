@@ -86,15 +86,21 @@ public class CommentService extends AdapterService implements BaseService {
 			String newsTitle = URLDecoder.decode(news.getNewsTitle(),"utf-8");
 			news = newsService.getByTitle(newsTitle);	
 		} else {
-			int count = newsService.getByParm("CommentMapper","getMapListByParm_count", null);
+			Map<String, Object> newsMap = new HashMap<String, Object>();
+			newsMap.put("notNullNewsId", "1");
+			int count = newsService.getByParm("CommentMapper","getMapListByParm_count", newsMap);
 			pageUtil.setTotalRecords(count);
 			pageUtil.setList(list);
 			if(count!=0){
-				Map<String, Object> newsMap = new HashMap<String, Object>();
+				newsMap = new HashMap<String, Object>();
 				newsMap.put("start", pageUtil.getStartRow());
 				newsMap.put("limit", pageUtil.getPageSize());
+				newsMap.put("notNullNewsId", "1");
 				newsMap.put("orderby", "id desc");
 				list = commentMapper.getMapListByParm(newsMap);
+				for(Map<String, Object> m : list){
+					m.put("statusStr", this.getCommentStatus(Integer.valueOf(m.get("status")+"")));
+				}
 				pageUtil.setList(list);	
 			}
 			return pageUtil;

@@ -61,7 +61,7 @@
 									<th field="statusStr">${t.t_status }</th>
 									<th field="username">${t.t_username }</th>
 									<th field="context">${t.t_comment }</th>
-									<th field="dateStr">${t.t_createtime }</th>
+									<th field="date">${t.t_createtime }</th>
 									<th field="op" field-role="2,0"></th>
 								</tr>
 							</thead>
@@ -88,7 +88,7 @@ $(function(){
 		url_remove : '/backend/comment/doDelete',
 		parm:{
 			pageNo : 1,
-			pageSize : 5,
+			pageSize : 10,
 			newsTitle: encodeURIComponent($('input[name="newsTitle"]').val())
 		},
 		backFn : function(p) {
