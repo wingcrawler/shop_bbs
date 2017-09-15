@@ -134,12 +134,17 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select c.context,c.id,n.news_title as newsTitle,c.date,c.user_id as userId, c.`status`,u.username from comment c 
+	select c.context,c.id,n.news_title as newsTitle,
+	DATE_FORMAT(c.date,'%Y-%m-%d %h:%m:%i') as date,
+	c.user_id as userId, c.`status`,u.username from comment c 
 	LEFT JOIN news n on c.news_id=n.id
 	LEFT JOIN `user` u on c.user_id=u.id
 	where 1=1
 	<if test="parm.newsId != null">
      	and n.id = #{parm.newsId}
+   	</if>
+   	<if test="parm.notNullNewsId != null">
+     	and c.news_id is not null
    	</if>
 	<if test="parm.orderby != null">
    		order by ${parm.orderby}
@@ -156,12 +161,9 @@
 	<if test="parm.newsId != null">
      	and n.id = #{parm.newsId}
    	</if>
-	<if test="parm.orderby != null">
-   		order by ${parm.orderby}
+   	<if test="parm.notNullNewsId != null">
+     	and c.news_id is not null
    	</if>
-	<if test="parm.start != null">
-		limit #{parm.start},#{parm.limit}
-	</if>
 </select>
 
 

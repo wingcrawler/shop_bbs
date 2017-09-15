@@ -206,7 +206,7 @@ public class SellerController extends BaseFrontController {
 		List<Image> imgList = new ArrayList<Image>();
 
 		for (Image img : images) {
-			if (img.getIndexShow() == 0) {
+			if (img.getIndexShow() == 1) {
 				response.put("imgCover", img);
 			} else {
 				imgList.add(img);
@@ -396,7 +396,7 @@ public class SellerController extends BaseFrontController {
 					resMap = imageFileService.uploadBase64Image(targetImgVal);
 					fileName = resMap.get("errorInfo").toString();
 					if (resMap.get("errorNo").equals(0)) {
-						imageService.saveProductIndexImg(product, fileName, 0);
+						imageService.saveProductIndexImg(product, fileName, 1);
 					} else {
 						return resMap;
 					}
@@ -408,7 +408,7 @@ public class SellerController extends BaseFrontController {
 					resMap = imageFileService.uploadBase64Image(targetImg1Val);
 					fileName = resMap.get("errorInfo").toString();
 					if (resMap.get("errorNo").equals(0)) {
-						imageService.saveProductIndexImg(product, fileName, 1);
+						imageService.saveProductIndexImg(product, fileName, 2);
 					} else {
 						return resMap;
 					}
@@ -419,7 +419,7 @@ public class SellerController extends BaseFrontController {
 					resMap = imageFileService.uploadBase64Image(targetImg2Val);
 					fileName = resMap.get("errorInfo").toString();
 					if (resMap.get("errorNo").equals(0)) {
-						imageService.saveProductIndexImg(product, fileName, 2);
+						imageService.saveProductIndexImg(product, fileName, 3);
 					} else {
 						return resMap;
 					}
@@ -430,7 +430,7 @@ public class SellerController extends BaseFrontController {
 					resMap = imageFileService.uploadBase64Image(targetImg3Val);
 					fileName = resMap.get("errorInfo").toString();
 					if (resMap.get("errorNo").equals(0)) {
-						imageService.saveProductIndexImg(product, fileName, 3);
+						imageService.saveProductIndexImg(product, fileName, 4);
 					} else {
 						return resMap;
 					}
@@ -441,7 +441,7 @@ public class SellerController extends BaseFrontController {
 					resMap = imageFileService.uploadBase64Image(targetImg5Val);
 					fileName = resMap.get("errorInfo").toString();
 					if (resMap.get("errorNo").equals(0)) {
-						imageService.saveProductIndexImg(product, fileName, 4);
+						imageService.saveProductIndexImg(product, fileName, 5);
 					} else {
 						return resMap;
 					}
@@ -452,7 +452,7 @@ public class SellerController extends BaseFrontController {
 					resMap = imageFileService.uploadBase64Image(targetImg4Val);
 					fileName = resMap.get("errorInfo").toString();
 					if (resMap.get("errorNo").equals(0)) {
-						imageService.saveProductIndexImg(product, fileName, 5);
+						imageService.saveProductIndexImg(product, fileName, 6);
 					} else {
 						return resMap;
 					}
