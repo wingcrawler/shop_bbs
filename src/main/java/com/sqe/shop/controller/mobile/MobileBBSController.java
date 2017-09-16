@@ -68,7 +68,7 @@ public class MobileBBSController extends BaseFrontController {
 		if (StringUtils.isBlank(thread.getThreadTitle())) {
 			return responseError1(-1, "标题不能为空");
 		}
-		if (thread.getSectionId()==null) {
+		if (thread.getSectionId() == null) {
 			return responseError1(-1, "请选择板块");
 		}
 		Map<String, Object> resMap = this.responseOK1("");
@@ -99,7 +99,7 @@ public class MobileBBSController extends BaseFrontController {
 		if (StringUtils.isBlank(post.getPostContext())) {
 			return responseError1(-1, "评论内容为空");
 		}
-		if (post.getThreadId()==null) {
+		if (post.getThreadId() == null) {
 			return responseError1(-1, "error_empty_threadID");
 		}
 		Map<String, Object> resMap = this.responseOK1("");
@@ -125,8 +125,8 @@ public class MobileBBSController extends BaseFrontController {
 		Thread threaddetil = new Thread();
 		threaddetil.setThreadStatus(1);
 		threaddetil.setId(id);
-		threaddetil=threadService.getById(id);
-		if(threaddetil==null){
+		threaddetil = threadService.getById(id);
+		if (threaddetil == null) {
 			return responseError1(404, "error_empty_thread");
 		}
 		resMap.put("thred", threaddetil);
@@ -173,6 +173,7 @@ public class MobileBBSController extends BaseFrontController {
 
 	/**
 	 * 根据threadID 获取Post 列表
+	 * 
 	 * @param threadId
 	 * @param pageNo
 	 * @param pageSize
@@ -188,6 +189,23 @@ public class MobileBBSController extends BaseFrontController {
 		postList.setThreadId(threadId);
 		postList.setPostStatus(1);
 		resMap.put("sectionList", postService.getBeanListByParm(postList, pageNo, pageSize));
+		return resMap;
+	}
+
+	/**
+	 * 根据ID 获取Section 信息
+	 * 
+	 * @param threadId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/bbs/section/{id}", method = RequestMethod.GET)
+	public Map<String, Object> getSecById(@PathVariable("id") Long id) {
+		Map<String, Object> resMap = this.responseOK1("");
+		Section section = new Section();
+		section.setId(id);
+		section.setSectionStatus(1);
+		resMap.put("section", sectionService.getById(id));
 		return resMap;
 	}
 
