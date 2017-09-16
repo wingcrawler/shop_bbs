@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.sqe.shop.common.BaseModel;
 
-public class Section extends BaseModel implements Serializable {
+public class Section implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

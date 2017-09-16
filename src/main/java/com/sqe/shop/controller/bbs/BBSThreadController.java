@@ -97,7 +97,7 @@ public class BBSThreadController extends BaseFrontController {
 		Section section = sectionService.getById(thread.getSectionId());
 		if (section.getSectionType() == 0) {
 			PageUtil<Map<String, Object>> page = threadService.getSectionOneThreadList(pageNo, pageSize,
-					thread.getSectionId());
+					section.getId());
 			resMap.put("list", page.getList());
 			resMap.put("page", page);
 			return resMap;

@@ -200,7 +200,7 @@ public class MobileBBSController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/bbs/section/{id}", method = RequestMethod.GET)
-	public Map<String, Object> getSecById(@PathVariable("id") Long id) {
+	public Map<String, Object> getSectionById(@PathVariable("id") Long id) {
 		Map<String, Object> resMap = this.responseOK1("");
 		Section section = new Section();
 		section.setId(id);
