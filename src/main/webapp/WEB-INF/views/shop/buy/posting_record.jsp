@@ -35,7 +35,7 @@
 											<span>${t.t_at}</span>
 											<span class="red">${item.topicTitle}</span>
 											<span>${t.t_post}</span>
-											<span class="red">${item.threadTitle}</span>
+											<span class="red"><a href="/bbs/thread?threadId=${item.id}">${item.threadTitle}</a></span>
 											<span>${t.t_reply}(${item.count})</span>
 										</div>
 										<div class="time">
