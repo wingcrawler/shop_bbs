@@ -139,6 +139,11 @@ public class FrontProductController extends BaseFrontController {
 			model.setViewName("shop/404");
 			return model;
 		}
+		if(!product.getProductStatus().equals(Constants.PRODUCT_ON)){
+			model.setViewName("shop/404");
+			return model;
+		}
+		
 		model.addAllObjects(bizProductService.getProductDetail(productId, product));
 		
 		model.setViewName("shop/product/single");
