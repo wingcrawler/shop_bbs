@@ -58,7 +58,8 @@ public class MobileBBSController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/bbs/thread", method = RequestMethod.POST)
 	public Map<String, Object> thread(Thread thread) {
-		Long userId = this.getCurrentUserId();
+		/*Long userId = this.getCurrentUserId();*/
+		Long userId=2L;
 		if (userId == null) {
 			return responseError1(ERRORCODE_NOLOGIN, "未登录");
 		}
@@ -188,7 +189,7 @@ public class MobileBBSController extends BaseFrontController {
 		Post postList = new Post();
 		postList.setThreadId(threadId);
 		postList.setPostStatus(1);
-		resMap.put("sectionList", postService.getBeanListByParm(postList, pageNo, pageSize));
+		resMap.put("sectionList", postService.getMapListByParm(postList, pageNo, pageSize));
 		return resMap;
 	}
 
