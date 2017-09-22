@@ -45,7 +45,7 @@ public class BaseService extends BaseCommon {
 	public boolean checkFile(MultipartFile file, String targetFileFormate) {
 		String fileName = file.getOriginalFilename();
 		try {
-			String[] arr = fileName.split(".");
+			String[] arr = fileName.split("."); //验证文件名称更好的方法
 			if (arr.length < 2) {
 				return false;
 			}

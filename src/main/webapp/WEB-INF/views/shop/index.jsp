@@ -7,6 +7,7 @@
 <head>
 	<jsp:include page="include/meta.jsp"></jsp:include>
 	<title>${t.t_sqe_mall } -- ${t.t_home }</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
