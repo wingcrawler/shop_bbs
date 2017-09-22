@@ -2153,13 +2153,13 @@ ul.navig li:nth-of-type(3) {
 	}
 }
 
-// 新增的样式
+// 鏂板鐨勬牱寮�
 #tj_m{width:96%;margin:0 auto;}
 #tj_t, .info{margin-top:0.5rem;}
 #tj_m{overflow: hidden;padding: 10px 0;width:100%;}
 #tj_m .more{color:#369;}
 .hyh{margin-bottom:0.5rem;}
-/*广告*/
+/*骞垮憡*/
 #ad{position:relative;width:96%;margin: 10px auto 0 auto;}
 #ad .adwp{width:100%;height:120px;overflow:hidden;}
 .swipe-wrap{position:relative;overflow:hidden;width:100%;height:100%;}
@@ -2187,7 +2187,7 @@ ul.navig li:nth-of-type(3) {
     height: 30px;
     line-height: 30px;
 }
-// 新闻资讯
+// 鏂伴椈璧勮
 .news{width:100%;}
 .news .hot_news{width:100%;border-bottom:1px solid #f5705a;border-top: solid 1px #e3e3e3;padding-top:2em;}
 .news .hot_news span{width:6rem;height:2rem;line-height:2rem;background:#f5705a;display:block;text-align:center;font-size:14px;color:#fff}
@@ -2218,11 +2218,11 @@ ul.navig li:nth-of-type(3) {
 .news .ads img{width:100%;display:block;}
 
 
-// 新闻资讯详情
+// 鏂伴椈璧勮璇︽儏
 .newsdetail{width:100%;}
 .newsdetail .hot_news{width:100%;border-top: solid 1px #e3e3e3;padding-top:2em;}
 .newsdetail .tR{color: #999;line-height: 22px;margin-top:2em;text-align: right;}
-.newsdetail .tR .qq{float:left;font-family:"微软雅黑"}
+.newsdetail .tR .qq{float:left;font-family:"寰蒋闆呴粦"}
 .newsdetail .tm a{
 	display: inline-block;
 	padding-left: 16px;
@@ -2243,7 +2243,7 @@ ul.navig li:nth-of-type(3) {
 .newsdetail .img{text-align: center;padding:10px 0}
 .text{color:#4b4b4b;font-size:14px;line-height:0px;}
 .text p{text-indent: 2em;line-height:2em;}
-.text p img{width:100%;margin-left:-2em;}
+.text p img{margin-left:-2em;}
 
 .atl-con-bd {
 
@@ -2427,7 +2427,7 @@ ul.navig li:nth-of-type(3) {
 	display: block;
 }
 
-// single页面增加的留言样式
+// single椤甸潰澧炲姞鐨勭暀瑷�鏍峰紡
 .related .list .item{
   padding:1.25rem;
   padding-top: 1.125rem;
