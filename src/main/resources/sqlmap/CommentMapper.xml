@@ -135,7 +135,8 @@
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select c.context,c.id,n.news_title as newsTitle,
-	DATE_FORMAT(c.date,'%Y-%m-%d %h:%m:%i') as date,
+	c.date as date,
+	DATE_FORMAT(c.date,'%Y-%m-%d %h:%m:%i') as dateStr,
 	c.user_id as userId, c.`status`,u.username from comment c 
 	LEFT JOIN news n on c.news_id=n.id
 	LEFT JOIN `user` u on c.user_id=u.id

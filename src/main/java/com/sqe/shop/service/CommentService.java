@@ -116,8 +116,8 @@ public class CommentService extends AdapterService implements BaseService {
 		if(count!=0){
 			list = commentMapper.getMapListByParm(parm);
 			for (Map<String, Object> map : list) {
-				Date date = (Date) map.get("date");
-				map.put("dateStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
+				/*Date date = (Date) map.get("date");*/
+				map.put("dateStr", map.get("dateStr"));
 				String statusStr = map.get("status").toString();
 				map.put("statusStr", this.getCommentStatus(Integer.valueOf(statusStr)));
 				String userIdStr = map.get("userId").toString();
