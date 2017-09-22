@@ -34,7 +34,7 @@
 							</ul>
 						</div>
 						<div class="g-tabMn">
-							<form enctype="multipart/form-data" method="POST" id="form" onsubmit="checkProductData();">
+							<form enctype="multipart/form-data" method="POST" id="form" >
 							<input type="hidden" id="id" value="${entity.id }" name="id">
 							<div class="g-tabMnItem f-active">
 								<div class="basic">
@@ -264,14 +264,11 @@
 										</div>
 									</div>
 								</div>
-
-									
-								<div class="button">
-									<div class="submit" onclick="jQuery.common.ajaxFileSubmit('#form','/front/sell/doSaveProduct1',true,'/front/sell/productListPage')">${t.b_submit }</div>
-									<%-- <div class="cancel">${t.b_cancel }</div> --%>
-								</div>
 							</div>
 							</form>
+							<div class="button">
+									<button onclick="submitPoduct('#form','/front/sell/doSaveProduct1',true,'/front/sell/productListPage')" type="button" class="btn btn-danger btn-lg">${t.b_submit }</button>
+							</div>
 							<!-- <div class="g-tabMnItem">
 								选择属性
 							</div> -->
@@ -345,6 +342,63 @@ $(function(){
 	
 	
 });
+function submitPoduct(elem ,_submitUrl,_isRefrush, _jumpUrl) {
+	var flag=checkProductData();
+	if(!flag){
+		return;
+	}
+	var maxImg=1024*1024*2;
+	var imgStr=$("#targetImgVal").val();
+	if(imgStr.length>maxImg){
+		alert(1+"${t.product_img_large}");
+		return;
+	}
+	imgStr=$("#targetImg1Val").val();
+	if(imgStr.length>maxImg){
+		alert(2+"${t.product_img_large}");
+		return;
+	}
+	 imgStr=$("#targetImg2Val").val();
+	if(imgStr.length>maxImg){
+		alert(3+"${t.product_img_large}");
+		return;
+	}
+	 imgStr=$("#targetImg3Val").val();
+	if(imgStr.length>maxImg){
+		alert(4+"${t.product_img_large}");
+		return;
+	}
+	 imgStr=$("#targetImg4Val").val();
+	if(imgStr.length>maxImg){
+		alert(5+"${t.product_img_large}");
+		return;
+	}
+	 imgStr=$("#targetImg5Val").val();
+	if(imgStr.length>maxImg){
+		alert(6+"${t.product_img_large}");
+		return;
+	}
+	$(elem).ajaxSubmit({  
+        type:'post',  
+        cache: false,  
+        url: _submitUrl, 
+        dataType : 'json', //返回值类型 一般设置为json  
+        success : function(data, status) {
+        	console.log(data);
+        	console.log(status);
+        	if(data.errorNo==0){
+        		if(_isRefrush){
+        			self.location= _jumpUrl;
+        		}
+			} else {
+				alert("System error");
+			}
+        },  
+        error : function(data, status, e) {  
+        	alert("System exception"); 
+        }   
+    });
+}
 function checkProductData(){
 	var productType=$("#productTypeId").val();
 	if(productType==-1){
@@ -374,10 +428,6 @@ function checkProductData(){
 		alert('${t.error_productCover_empty}');
 		return false;
 	}
-	//error_productPrice
-	//
-	//
-	//
 	var productCount=$("#productCount").val();
 	var productCountPar=/^\d+$/;
 	if(!productCountPar.test(productCount)){
@@ -385,7 +435,7 @@ function checkProductData(){
 		return false;
 	}
 	var productPrice=$("#productPrice").val();
-	var pricePar=/^-?\d+\.\d+$/;
+	var pricePar=/^-?\d+\.?\d+$/;
 	if(!pricePar.test(productPrice)){
 		alert('${t.error_productPrice}');
 		return false;
@@ -400,6 +450,7 @@ function checkProductData(){
 		alert('${t.error_productUS_des}');
 		return false;
 	}
+	return true;
 }
 function triggerSelect(elem){
 	$(elem).trigger('click');

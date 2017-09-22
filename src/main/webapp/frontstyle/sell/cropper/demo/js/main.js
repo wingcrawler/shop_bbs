@@ -138,6 +138,7 @@ $(function () {
           if (result) {
             // Bootstrap's Modal
            // $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+        	  console.log(result);
         	  $(window.parent.document.getElementById("form_div")).show();
         	  $(window.parent.document.getElementById("frame_div")).hide();
         	  var imgId=$(window.parent.document.getElementById("curtImg")).val();
