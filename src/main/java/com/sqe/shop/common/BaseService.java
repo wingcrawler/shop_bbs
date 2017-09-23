@@ -43,13 +43,14 @@ public class BaseService extends BaseCommon {
 	}
 
 	public boolean checkFile(MultipartFile file, String targetFileFormate) {
-		String fileName = file.getOriginalFilename();
+
+		Boolean result = false;
 		try {
-			String[] arr = fileName.split("."); //验证文件名称更好的方法
-			if (arr.length < 2) {
-				return false;
-			}
-			if (!arr[1].toLowerCase().equals(targetFileFormate)) {
+			String fileName = file.getOriginalFilename();
+			String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
+			result = fileName.endsWith(".txt"); // 验证文件名称更好的方法
+
+			if (!prefix.equals(targetFileFormate)) {
 				return false;
 			}
 		} catch (Exception e) {
@@ -57,7 +58,7 @@ public class BaseService extends BaseCommon {
 			return false;
 		}
 
-		return true;
+		return result;
 	}
 
 	/**
