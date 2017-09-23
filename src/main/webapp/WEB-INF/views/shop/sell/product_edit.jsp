@@ -7,7 +7,7 @@
 	<jsp:include page="../include/meta.jsp"></jsp:include>
 	<title>${t.t_product_upload}</title>
 	<link href="/frontstyle/sell/css/upload_product.css" rel="stylesheet" type="text/css">
-	<link href="/frontstyle/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="/frontstyle/css/bootstrap.css" rel="stylesheet" type="text/css">
 	<link href="/frontstyle/css/layer.css" rel="stylesheet" type="text/css">
 	<script src="/frontstyle/sell/js/upload_product.js"></script>
 	<script src="/frontstyle/js/bootstrap.min.js"></script>
@@ -291,7 +291,7 @@
 <script type="text/javascript">
 $(function(){
 	var confirmDelTip="${t.t_confirm_delete}";
-	$('.menu_box .menu_list div.module a').eq(0).addClass('active');
+	$('.menu_box .menu_list div.module a').eq(2).addClass('active');
 	
 	$('#productTypeId').optionSelect({
 		compare:'${entity.productTypeId}',
