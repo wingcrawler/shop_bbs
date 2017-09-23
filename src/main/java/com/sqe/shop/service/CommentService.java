@@ -197,8 +197,8 @@ public class CommentService extends AdapterService implements BaseService {
 		parmMap.put("start", pageUtil.getStartRow());
 		parmMap.put("limit", pageUtil.getPageSize());
 		
+		pageUtil.setTotalRecords(commentMapper.getNewsCommentListByParm_count(parmMap));
 		List<Map<String, Object>> list = commentMapper.getNewsCommentListByParm(parmMap);
-		pageUtil.setTotalRecords(list.size());
 		pageUtil.setList(list);
 		
 		//查询是否有回复
