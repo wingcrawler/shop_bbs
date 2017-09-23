@@ -9,9 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSON;
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.PostMapper;
 import com.sqe.shop.mapper.ThreadMapper;
@@ -24,6 +27,8 @@ import com.sqe.shop.util.RelativeDateFormat;
 
 @Component
 public class ThreadService extends AdapterService implements BaseService {
+
+	private Logger logger = LoggerFactory.getLogger(ThreadService.class);
 
 	@Autowired
 	private ThreadMapper threadMapper;
@@ -346,6 +351,7 @@ public class ThreadService extends AdapterService implements BaseService {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		if (count > 0) {
 			list = threadMapper.getSectionOneThreadList(parm);
+			logger.info("getSectionOneThreadList->List={}", JSON.toJSON(list));
 			for (Map<String, Object> map : list) {
 				// 时间转换
 				Date time = (Date) map.get("date");

@@ -70,7 +70,7 @@
 													<span class="u-hd-require">*</span>
 													<span class="u-hd-txt">${t.t_product_name }(${t.t_zh }):</span>
 												</label>
-												<input type="text" class="u-ipt-text" id="productName" name="productName" value="${entity.productName }">
+												<input type="text" class="u-ipt-text" id="productName" placeholder="产品名称不为空字数少于30字" name="productName" value="${entity.productName }">
 											</div>
 										  </div>
 										  <div class="col-xs-6 col-md-6">
@@ -79,7 +79,7 @@
 													<span class="u-hd-require">*</span>
 													<span class="u-hd-txt">${t.t_product_name }(${t.t_en }):</span>
 												</label>
-												<input type="text" class="u-ipt-text" id="productEnName" name="productEnName" value="${entity.productEnName }">
+												<input type="text" class="u-ipt-text" id="productEnName" name="productEnName" placeholder="${t.p_product_name }" value="${entity.productEnName }">
 											</div>
 										  </div>
 										</div>
@@ -192,10 +192,13 @@
 								</div>
 								<div class="img_describe">
 									<div class="heade">${t.t_img_desc }</div>
+									<div><span class="u-hd-txt">${t.p_image }</span></div>
 									<div class="imgDescribe" style="display:none;padding-left: 1rem;" id="frame_div">
 										<iframe src="/front/sell/goCutPicture" width="650px" height="600px"></iframe>
 									</div>
+									
 									<div class="imgDescribe" id="form_div">
+									
 										<%-- <div class="show_img">
 											<span class="labe">${t.t_show_img }: </span>
 											<div class="upimg">
@@ -253,13 +256,13 @@
 										<div class="product_description">
 											<span class="labe">${t.t_desc }(${t.t_zh }):  </span>
 											<div class="text_editing">
-												<textarea rows="15" cols="83" id="productDescripton" name="productDescripton" style="padding:0;margin:0;border:0">${entity.productDescripton }</textarea>
+												<textarea rows="15" cols="83" id="productDescripton" name="productDescripton" placeholder="${t.p_description}" style="padding:0;margin:0;border:0">${entity.productDescripton }</textarea>
 											</div>
 										</div>
 										<div class="product_description">
 											<span class="labe">${t.t_desc }(${t.t_en }):</span>
 											<div class="text_editing">
-												<textarea rows="15" cols="83" id="productEnDescription" name="productEnDescription" style="padding:0;margin:0;border:0">${entity.productEnDescription }</textarea>
+												<textarea rows="15" cols="83" id="productEnDescription" name="productEnDescription" placeholder="${t.p_description}" style="padding:0;margin:0;border:0">${entity.productEnDescription }</textarea>
 											</div>
 										</div>
 									</div>
