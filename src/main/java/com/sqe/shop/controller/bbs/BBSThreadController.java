@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.model.Thread;
@@ -95,6 +96,7 @@ public class BBSThreadController extends BaseFrontController {
 			return resMap;
 		}
 		Section section = sectionService.getById(thread.getSectionId());
+		logger.info("section={}",JSON.toJSON(section));
 		if (section.getSectionType() == 0) {
 			PageUtil<Map<String, Object>> page = threadService.getSectionOneThreadList(pageNo, pageSize,
 					section.getId());
