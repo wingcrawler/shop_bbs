@@ -118,6 +118,9 @@
 					$.commonUtil.showTip(data.errorInfo);
 					self.location= _jumpUrl;
 				}
+			},
+			error:function(date){
+				alert('System error, or please check the input')
 			}
 		});
 	}

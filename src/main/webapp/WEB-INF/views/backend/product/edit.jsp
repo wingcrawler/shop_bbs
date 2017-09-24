@@ -31,26 +31,32 @@
 					          	<div class="col-sm-3">
 					          		<input type="hidden" value="${entity.id}" name="id" />
 					          		<p>${t.t_product_name }(${t.t_zh })</p>
-					            	<input class="form-control" type="text" name="productName" value="${entity.productName}">
+					            	<input class="form-control" type="text" name="productName"
+					            	oninput="if(value.length>90)value=value.slice(0,90)" value="${entity.productName}">
 					          	</div>
 					          	<div class="col-sm-3">
 					          		<p>${t.t_product_name }(${t.t_en })</p>
-					            	<input class="form-control" type="text" name="productEnName" value="${entity.productEnName}">
+					            	<input class="form-control" type="text" name="productEnName" 
+					            	oninput="if(value.length>90)value=value.slice(0,90)" value="${entity.productEnName}">
 					          	</div>
 					          	<div class="col-sm-3">
 					          		<p>${t.t_price }</p>
-					            	<input class="form-control" type="text" readonly="readonly" value="${entity.productPrice}">
+					            	<input class="form-control" type="text" name="productPrice" oninput="if(value.length>9)value=value.slice(0,9)"
+					            	 value="${entity.productPrice}">
 					          	</div>
 					          	<div class="col-sm-3">
 					          		<p>${t.t_weight }</p>
-					            	<input class="form-control" type="text" name="productRank" value="${entity.productRank}">
+					            	<input class="form-control" type="text" name="productRank" oninput="if(value.length>9)value=value.slice(0,9)"
+					            	 value="${entity.productRank}">
 					          	</div>
 					          	
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-3">
 					          		<p>${t.t_product_view }</p>
-					            	<input class="form-control" type="text" readonly="readonly" value="${entity.productView}">
+					            	<input class="form-control" type="text" name="productView"
+					            		oninput="if(value.length>9)value=value.slice(0,9)"
+					            	 value="${entity.productView}">
 					          	</div>
 					        	<div class="col-sm-3">
 					          		<p>${t.t_product_status }</p>
@@ -62,29 +68,45 @@
 					          	</div>
 					          	<div class="col-sm-3">
 					          		<p>${t.t_product_count }</p>
-					            	<input class="form-control" type="text" readonly="readonly" value="${entity.productCount}">
+					            	<input class="form-control" type="text" oninput="if(value.length>9)value=value.slice(0,9)"  
+					            	name="productCount" value="${entity.productCount}">
 					          	</div>
-					          	<div class="col-sm-3">
-					          		<p>${t.t_product_type }</p>
-					            	<input class="form-control" type="text" readonly="readonly" value="${entity.typeName}">
-					          	</div>
-					        </div>
-					        <div class="form-group">
 					          	<div class="col-sm-3">
 					          		<p>${t.t_shop_name }</p>
 					            	<input class="form-control" type="text" readonly="readonly" value="${entity.shopName}">
 					          	</div>
+					          	
+					        </div>
+					        <div class="form-group">
+					          	<div class="col-sm-6">
+					          		<p>${t.t_product_type }</p>
+					            	<%-- <input class="form-control" type="text" readonly="readonly" value="${entity.typeName}"> --%>
+						          	<select class="" style="width:150px;height:30px;" name="productTypeId" id="productTypeId" onchange="jQuery.common.refreshSelect('#productTypeId','#productSubtypeId','/getProductTypeTwoLevel')">
+						          		<%-- <option value="-1">-- ${t.t_select } --</option> --%>
+										<c:forEach items="${typeList}" var="item">
+										<option value="${item.id}">${item.typeName}</option>
+										</c:forEach>
+									</select>
+									<select class="" style="width:150px;height:30px;" name="productSubtypeId" id="productSubtypeId">
+										<option value="-1">-- ${t.t_select } --</option>
+										<c:forEach items="${subtypeList}" var="item">
+										<option value="${item.id}">${item.typeName}</option>
+										</c:forEach>
+									</select>
+								</div>
 					        </div>
 					        <div class="form-group">
 					        	<div class="col-sm-6">
 					          		<p>${t.t_desc }(${t.t_zh })</p>
-					          		<textarea rows="6" cols="80" name="productDescripton">${entity.productDescripton}</textarea>
+					          		<textarea rows="6" cols="80" oninput="if(value.length>1000)value=value.slice(0,1000)"
+					          		 name="productDescripton">${entity.productDescripton}</textarea>
 					          	</div>
 					        </div>
 					        <div class="form-group">
 					          	<div class="col-sm-6">
 					          		<p>${t.t_desc }(${t.t_en })</p>
-					          		<textarea rows="6" cols="80" name="productEnDescription">${entity.productEnDescription}</textarea>
+					          		<textarea rows="6" cols="80" oninput="if(value.length>1000)value=value.slice(0,1000)" 
+					          		name="productEnDescription">${entity.productEnDescription}</textarea>
 					          	</div>
 					        </div>
 					        <div class="form-group">
@@ -140,7 +162,19 @@ $(function(){
 	
 	$('#submit').click(function(){
         var parm = $.fn.getFormJson('.form');
-		$.fn.doSave(parm,'/backend/product/doSave','/backend/product/list');
+		$.fn.doSave(parm,'/backend/product/doSave','/backend/product/edit?id=${entity.id}');
+	});
+	
+	$('#productTypeId').optionSelect({
+		compare:'${entity.productTypeId}',
+		backFn : function(p) {
+		}
+	});
+	
+	$('#productSubtypeId').optionSelect({
+		compare:'${entity.productSubtypeId}',
+		backFn : function(p) {
+		}
 	});
 });
 </script>

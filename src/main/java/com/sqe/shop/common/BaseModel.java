@@ -4,6 +4,7 @@ public class BaseModel {
 	
 	private String typeName;
 	private String statusName;
+	private String roleName;
 	private String shopName;
 	private String createTimeStr;
 	private String userName;
@@ -74,6 +75,14 @@ public class BaseModel {
 
 	public void setShowImage(String showImage) {
 		this.showImage = showImage;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 }

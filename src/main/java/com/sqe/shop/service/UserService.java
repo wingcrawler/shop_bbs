@@ -73,6 +73,7 @@ public class UserService extends AdapterService implements BaseService {
 			for (User u : list) {
 				u.setStatusName(this.getUserStatus(u.getUserStatus()));
 				u.setCreateTimeStr(DateUtil.dateToString(u.getCreateTime(), DateUtil.DATETIME_FORMATE_2));
+				u.setRoleName(this.getUserRoleStr(Integer.valueOf(u.getUserRole()+"")));
 			}
 		}
 		pageUtil.setList(list);

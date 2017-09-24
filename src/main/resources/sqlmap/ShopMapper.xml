@@ -225,8 +225,17 @@
 
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select s.shop_title as shopTitle, s.shop_description as description,s.shop_rank as shopRank,
-	s.shop_level as shopLevel, s.shop_status as shopStatus, u.username as shopOnwer 
+	select
+	s.id as id,  
+	s.shop_title as shopTitle, 
+	s.shop_description as description,
+	s.user_id as userId,
+	s.shop_rank as shopRank,
+	s.shop_level as shopLevel, 
+	s.shop_status as shopStatus,
+	DATE_FORMAT(s.create_time,'%Y-%m-%d %h:%m:%i') as createTimeStr, 
+	u.username as shopOnwer,
+	u.username as userName 
 	from shop s 
 	LEFT JOIN `user` u on s.user_id=u.id
 	where 1=1
@@ -272,8 +281,8 @@
 		   	<if test="parm.shopTitle != null">
 		     	and shop_title = #{parm.shopTitle}
 		   	</if>
-		   	<if test="failedReason != null">  
-	        	and failed_reason=#{failedReason}
+		   	<if test="parm.failedReason != null">  
+	        	and failed_reason=#{parm.failedReason}
 	    	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
@@ -281,6 +290,57 @@
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
 		</if>
+</select>
+<select id="getMapListByParm_count" parameterType="HashMap" resultType="Integer">
+	select count(*) 
+	from shop s 
+	LEFT JOIN `user` u on s.user_id=u.id
+	where 1=1
+		<if test="parm.shopLevel != null">
+		     	and shop_level = #{parm.shopLevel}
+		   	</if>
+			<if test="parm.shopRank != null">
+		     	and shop_rank = #{parm.shopRank}
+		   	</if>
+			<if test="parm.shopLicenes != null">
+		     	and shop_licenes = #{parm.shopLicenes}
+		   	</if>
+			<if test="parm.shopAddress != null">
+		     	and shop_address = #{parm.shopAddress}
+		   	</if>
+			<if test="parm.userId != null">
+		     	and user_id = #{parm.userId}
+		   	</if>
+			<if test="parm.workTo != null">
+		     	and work_to = #{parm.workTo}
+		   	</if>
+			<if test="parm.shopStatus != null">
+		     	and shop_status = #{parm.shopStatus}
+		   	</if>
+			<if test="parm.createTime != null">
+		     	and create_time = #{parm.createTime}
+		   	</if>
+			<if test="parm.workFrom != null">
+		     	and work_from = #{parm.workFrom}
+		   	</if>
+			<if test="parm.shopQualifies != null">
+		     	and shop_qualifies = #{parm.shopQualifies}
+		   	</if>
+			<if test="parm.shopDescription != null">
+		     	and shop_description = #{parm.shopDescription}
+		   	</if>
+			<if test="parm.shopPhone != null">
+		     	and shop_phone = #{parm.shopPhone}
+		   	</if>
+			<if test="parm.shopQq != null">
+		     	and shop_qq = #{parm.shopQq}
+		   	</if>
+		   	<if test="parm.shopTitle != null">
+		     	and shop_title = #{parm.shopTitle}
+		   	</if>
+		   	<if test="parm.failedReason != null">  
+	        	and failed_reason=#{parm.failedReason}
+	    	</if>
 </select>
 
 

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Shop;
+import com.sqe.shop.model.Thread;
 import com.sqe.shop.model.User;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.MessageService;
@@ -219,4 +220,25 @@ public class MobileUserController extends BaseFrontController {
 		return resMap;
 	}
 	
+	/**
+	 * 发帖纪录
+	 * @param thread
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/postRecord")
+	public Map<String, Object> getProductCommentList(Thread thread,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize){
+		thread.setUserId(this.getCurrentUserId());
+		PageUtil<Map<String, Object>> page = threadService.getSellThreadList(thread, pageNo, pageSize);
+		
+		Map<String, Object> resMap = this.responseOK1("");
+		resMap.put("page", page);
+		
+		return resMap;
+	}
+
 }

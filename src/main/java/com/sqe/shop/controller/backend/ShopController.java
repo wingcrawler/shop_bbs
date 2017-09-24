@@ -111,7 +111,7 @@ public class ShopController extends BaseBackendController {
 	public Map<String, Object> getList(Shop shop,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
-		PageUtil<Shop> page = shopService.getBeanListByParm(shop, pageNo, pageSize);
+		PageUtil<Map<String, Object>> page = shopService.getMapListByParm(shop, pageNo, pageSize);
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
 		return resMap;
@@ -247,7 +247,7 @@ public class ShopController extends BaseBackendController {
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  @RequestParam(name="pageSize", defaultValue="10") int pageSize) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		shop.setShopStatus(Constants.STORE_PEND);
-		PageUtil<Shop> page = shopService.getBeanListByParm(shop, pageNo, pageSize);
+		PageUtil<Map<String, Object>> page = shopService.getMapListByParm(shop, pageNo, pageSize);
 		resMap.put("list", page.getList());
 		resMap.put("page", page);
 		return resMap;

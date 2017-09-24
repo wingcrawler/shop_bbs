@@ -129,6 +129,10 @@ public class CachedService extends BaseCached {
 		//用户状态
 		map.put("user_status_0", getText("t_off"));
 		map.put("user_status_1", getText("t_on"));
+		//用户角色
+		map.put("user_role_1", getText("t_buy"));
+		map.put("user_role_2", getText("t_sell"));
+		map.put("user_role_3", getText("t_admin"));
 		//版块状态
 		map.put("section_status_0", getText("t_off"));
 		map.put("section_status_1", getText("t_on"));

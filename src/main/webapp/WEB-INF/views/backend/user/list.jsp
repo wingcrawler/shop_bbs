@@ -33,6 +33,15 @@
 									${t.t_mobile }
 									<input type="text" class="form-control input" name="userPhone" value="">
 								</div>
+								<div class="col-sm-3">
+									${t.t_user_role }
+									<select class="form-control select" name="userRole" id="userRole">
+										<option value="">-- ${t.t_all } --</option>
+										<option value="1">${t.t_buy }</option>
+										<option value="2">${t.t_sell }</option>
+										<%-- <option value="3">${t.t_admin }</option> --%>
+									</select>
+								</div>
 								<div class="col-sm-2">
 									<br>
 									<button class="btn btn-info btn-icon" onclick="$.fn.doAutoSearch()">
@@ -67,8 +76,8 @@
 									<th width="60" field="index">${t.t_no }</th>
 									<th field="username" url="/backend/user/detail?id=" parm="id">${t.t_username }</th>
 									<th field="userPhone">${t.t_mobile }</th>
-									<th field="userRole">${t.t_user_role }</th>
-									<th field="userEmail">${t.t_email }</th>
+									<th field="roleName">${t.t_user_role }</th>
+									<th field="userMail">${t.t_email }</th>
 									<th field="statusName">${t.t_status }</th>
 									<th field="createTimeStr">${t.t_createtime }</th>
 									<th field="op" field-role="0" width="80"></th>
@@ -103,7 +112,8 @@ $(function(){
 	$('#export').click(function(){
 		var username=$('input[name="username"]').val();
 		var userPhone=$('input[name="userPhone"]').val();
-		self.location='/backend/user/export?username='+username+'&userPhone='+userPhone+'&time='+new Date().getTime();
+		var userRole=$('input[name="userRole"]').val();
+		self.location='/backend/user/export?userRole='+userRole+'&username='+username+'&userPhone='+userPhone+'&time='+new Date().getTime();
 	});
 });
 </script>

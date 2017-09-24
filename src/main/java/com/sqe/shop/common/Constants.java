@@ -45,6 +45,9 @@ public class Constants{
     public static final Long ROLE_BUY = 1L; //买家
     public static final Long ROLE_SELL = 2L; //卖家
     public static final Long ROLE_ADMIN = 3L; //管理员
+    public String getUserRoleStr(Integer value) {
+    	return cachedService.getString("user_role_"+value);
+	}
     
     //错误号
     public static final String ERROR_NO = "errorNo";

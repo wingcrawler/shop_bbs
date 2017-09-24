@@ -12,13 +12,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
-
-
-
-import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.ShopMapper;
+import com.sqe.shop.mapper.UserMapper;
 import com.sqe.shop.model.Shop;
+import com.sqe.shop.model.User;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 
@@ -27,6 +24,8 @@ public class ShopService extends AdapterService implements BaseService {
 	
 	@Autowired
     private ShopMapper shopMapper;
+	@Autowired
+    private UserMapper userMapper;
     
     public int insert(Shop shop) {
 		return shopMapper.insert(shop);
@@ -69,9 +68,15 @@ public class ShopService extends AdapterService implements BaseService {
 		List<Shop> list = new ArrayList<Shop>();
 		if(count!=0){
 			list = shopMapper.getBeanListByParm(parm);
+			User user = null;
 			for(Shop s : list){
-				s.setCreateTimeStr(DateUtil.dateToString(s.getCreateTime(), DateUtil.DATETIME_FORMATE_2)); 
-
+				s.setCreateTimeStr(DateUtil.dateToString(s.getCreateTime(), DateUtil.DATETIME_FORMATE_2));
+				user = userMapper.getById(s.getUserId());
+				if(user!=null){
+					s.setUserName(user.getUsername());	
+				} else {
+					s.setUserName("");
+				}
 				s.setStatusName(this.getStoreStatus(s.getShopStatus()));
 			}
 		}
@@ -86,11 +91,15 @@ public class ShopService extends AdapterService implements BaseService {
 		parm.put("limit", pageUtil.getPageSize());
 		parm.put("orderby", "s.id desc");
 		
-		int count = shopMapper.countByParm(parm);
+		int count = shopMapper.getMapListByParm_count(parm);
 		pageUtil.setTotalRecords(count);
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
 			list = shopMapper.getMapListByParm(parm);
+			for(Map<String, Object> s : list){
+				Integer shopStatus = Integer.valueOf(s.get("shopStatus").toString());
+				s.put("statusName", this.getStoreStatus(shopStatus));
+			}
 		}
 		pageUtil.setList(list);		
 		return pageUtil;

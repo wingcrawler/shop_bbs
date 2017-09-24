@@ -59,7 +59,8 @@
 								<tr>
 									<th width="60" field="index">${t.t_no }</th>
 									<th field="shopTitle">${t.t_store_name }</th>
-									<th field="shopDescription">${t.t_desc }</th>
+									<th field="userName" url="/backend/user/detail?id=" parm="userId">${t.t_sell }</th>
+									<th field="description">${t.t_desc }</th>
 									<th field="shopRank">${t.t_weight }</th>
 									<th field="statusName">${t.t_status }</th>
 									<th field="createTimeStr">${t.t_createtime }</th>
