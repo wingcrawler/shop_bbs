@@ -144,7 +144,20 @@ public class MobileProductController extends BaseFrontController {
 		}
 		Product product = productService.getById(productId);
 		
+		//产品详情
 		Map<String, Object> resMap = bizProductService.getProductDetail(productId, product);
+		
+		//产品分类列表
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("typeLevel", 1);
+		List<ProductType> productTypes = productTypeService.getBeanListByParm("ProductTypeMapper", paramMap);
+		if(cachedService.getLang().equals("zh")){
+			for(ProductType p : productTypes){
+				p.setTypeName(p.getTypeNameCh());
+			}
+		}
+		resMap.put("productTypeList", productTypes);
+		
 		return resMap;
 	}
 	
