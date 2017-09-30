@@ -40,7 +40,7 @@ public class RegisterService extends BaseCommon {
 		if (StringUtils.isBlank(user.getUserMail())) {
 			return responseError(-1, "error_empty_email");
 		}
-		if (!user.getUserMail().matches("\\w+(\\.\\w)*@\\w+(\\.\\w{2,3}){1,9}")) {
+		if (!user.getUserMail().matches("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$")) {
 			return responseError(-1, "error_email_form");
 		} else {
 			MD5Util md5 = new MD5Util(MD5Util.SALT, "MD5");
