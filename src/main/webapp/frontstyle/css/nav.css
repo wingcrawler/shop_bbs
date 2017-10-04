@@ -94,7 +94,6 @@ ul.nav{
   display: block;
   background-color: #FFF;
   padding: 4px 10px;
-  text-transform: uppercase;
   position: relative;
   -moz-transition: all 0.2s linear;
   -webkit-transition: all 0.2s linear;
