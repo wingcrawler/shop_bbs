@@ -33,6 +33,8 @@ public class User extends BaseModel implements Serializable {
 	@Pattern(regexp = "[0-9a-zA-Z\u4E00-\u9FA5]+", message = "{items.username.pattern}")
 	private String username;
 	private String userQq;
+	
+	private Date loginTime;
 
 	private String validataCode;
 
@@ -157,5 +159,15 @@ public class User extends BaseModel implements Serializable {
 	public void setUpDateTime(Date upDateTime) {
 		this.upDateTime = upDateTime;
 	}
+
+	public Date getLoginTime() {
+		return loginTime;
+	}
+
+	public void setLoginTime(Date loginTime) {
+		this.loginTime = loginTime;
+	}
+	
+	
 
 }

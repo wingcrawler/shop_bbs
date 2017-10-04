@@ -3,6 +3,7 @@
 <mapper namespace="com.sqe.shop.mapper.UserMapper">
 
 	<resultMap type="com.sqe.shop.model.User" id="UserBaseMapper">
+		<id property="loginTime" column="login_time" />
 		<id property="userQq" column="user_qq" />
 		<id property="userStatus" column="user_status" />
 		<id property="userPhone" column="user_phone" />
@@ -23,14 +24,18 @@
 			LAST_INSERT_ID()
 		</selectKey>
 		insert into user
-		(user_qq,user_status,user_phone,user_address,password,user_image,create_time,user_mail,user_role,user_introduce,username)
+		(login_time,user_qq,user_status,user_phone,user_address,password,user_image,create_time,user_mail,user_role,user_introduce,username)
 		values
-		(#{userQq},#{userStatus},#{userPhone},#{userAddress},#{password},#{userImage},#{createTime},#{userMail},#{userRole},#{userIntroduce},#{username})
+		(#{loginTime},#{userQq},#{userStatus},#{userPhone},#{userAddress},#{password},#{userImage},#{createTime},#{userMail},#{userRole},#{userIntroduce},#{username})
 	</insert>
 
 	<update id="update">
 		UPDATE user
 		<set>
+			<if test="loginTime != null">
+				login_time=#{loginTime},
+			</if>
+
 			<if test="userQq != null">
 				user_qq=#{userQq},
 			</if>

@@ -1,5 +1,6 @@
 package com.sqe.shop.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,30 +18,30 @@ import com.sqe.shop.model.User;
 import com.sqe.shop.util.MD5Util;
 
 @Component
-public class LoginService extends BaseCommon{
-	
+public class LoginService extends BaseCommon {
+
 	@Autowired
 	private UserMapper userMapper;
 
 	public Map<String, Object> login(User user) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
-		
-		if(StringUtils.isBlank(user.getUsername())){
+
+		if (StringUtils.isBlank(user.getUsername())) {
 			return responseError(-1, "error_empty_username");
-		} 
-		if(StringUtils.isBlank(user.getPassword())){
+		}
+		if (StringUtils.isBlank(user.getPassword())) {
 			return responseError(-1, "error_empty_pwd");
 		} else {
 			MD5Util md5 = new MD5Util(MD5Util.SALT, "MD5");
 			user.setPassword(md5.encode(user.getPassword()));
 		}
-		
+
 		User u = userMapper.findUserByUsernameAndPassword(user);
 		if (u != null) {
 			u.setPassword(null);
 			Subject currentUser = SecurityUtils.getSubject();
 			UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
-			token.setRememberMe(true);	
+			token.setRememberMe(true);
 			try {
 				currentUser.login(token);
 			} catch (AuthenticationException e) {
@@ -54,10 +55,10 @@ public class LoginService extends BaseCommon{
 		} else {
 			return responseError(-1, "error_username_pwd");
 		}
-		
+
 		resMap = responseOK1("");
-		if(u.getUserRole().equals(3L)){
-			resMap.put("url", "/backend/index");	
+		if (u.getUserRole().equals(3L)) {
+			resMap.put("url", "/backend/index");
 		} else {
 			resMap.put("url", "/shopIndex");
 		}
@@ -66,17 +67,23 @@ public class LoginService extends BaseCommon{
 
 	public void autoLogin() {
 		Subject subject = SecurityUtils.getSubject();
-		 if(!subject.isAuthenticated() && subject.isRemembered()){
+		if (!subject.isAuthenticated() && subject.isRemembered()) {
 			String username = subject.getPrincipal().toString();
 			User user = userMapper.findByName(username);
-			if(user==null){
+			if (user == null) {
 				return;
 			}
 			UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
-			token.setRememberMe(true);	
+			token.setRememberMe(true);
 			subject.login(token);
 			subject.getSession().setAttribute("userInfo", user);
-		 }
+		}
 	}
-	
+
+	public void updateLoginTime(User user) {
+		user.setLoginTime(new Date(System.currentTimeMillis()));
+		userMapper.update(user);
+
+	}
+
 }

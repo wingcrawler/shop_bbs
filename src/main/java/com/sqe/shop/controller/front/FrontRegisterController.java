@@ -123,6 +123,8 @@ public class FrontRegisterController extends BaseFrontController {
 		Map<String, Object> resMap = loginService.login(user);
 		if (resMap.get(Constants.ERROR_NO).equals(0)) {
 			User userInfo = this.getCurrentUser();
+			//记录登录时间
+			loginService.updateLoginTime(userInfo);
 			if (userInfo.getUserRole().equals(Constants.ROLE_ADMIN)) {
 				this.logout();
 				return responseError(-1, "error_twopwd_not_match");
