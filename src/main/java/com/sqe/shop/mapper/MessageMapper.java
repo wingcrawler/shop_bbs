@@ -13,4 +13,10 @@ public interface MessageMapper extends BaseMapper {
 
 	int countAdminMessageListByParm(@Param("parm") Map<String, Object> parm);
 
+	// 获取用户的message列表 最新的一条消息
+	List<Map<String, Object>> getUserMessageListByParm(@Param("parm") Map<String, Object> parmMap);
+
+	// 获取用户的dialogueId message列表 根据对话message_id
+	List<Map<String, Object>> getMessageDialogueIdListByParm(@Param("parm") Map<String, Object> parmMap);
+
 }

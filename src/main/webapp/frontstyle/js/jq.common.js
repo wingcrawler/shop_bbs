@@ -88,7 +88,7 @@ jQuery.common = {
 				}
 	        },  
 	        error : function(data, status, e) {  
-	        	alert("System exception"); 
+	        	alert(data.errorInfo); 
 	        }   
         });
 	},

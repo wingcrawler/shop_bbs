@@ -184,6 +184,9 @@ public class BuyerCenterController extends BaseFrontController {
 			message.setReceiveId(replyToId);
 			message.setMessageStatus(Constants.MSG_ON);
 			message.setMessageId(messageId);
+			message.setReadFlag(false); //常亮优化
+			message.setReceiveDelFlag(false);
+			message.setPostDelFlag(false);
 			messageService.insert(message);
 		} else {
 			responseError(-1, "error_illegal");

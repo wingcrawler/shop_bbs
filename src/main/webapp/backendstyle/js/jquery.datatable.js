@@ -118,9 +118,6 @@
 					$.commonUtil.showTip(data.errorInfo);
 					self.location= _jumpUrl;
 				}
-			},
-			error:function(date){
-				alert('System error, or please check the input')
 			}
 		});
 	}
@@ -325,8 +322,6 @@
 							pageCount : data.page.pageCount,
 							current : data.page.currentPage,
 							fnName : '$.fn.nextPage',
-							prevPage:'<',
-							nextPage:'>',
 							backFn : function(p) {
 								// console.log(p);
 							}

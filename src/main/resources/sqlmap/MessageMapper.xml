@@ -1,251 +1,403 @@
 <?xml version="1.0" encoding="UTF-8" ?>   
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sqe.shop.mapper.MessageMapper">
 
-<resultMap type="com.sqe.shop.model.Message" id="MessageBaseMapper">
-	<id property="messageStatus" column="message_status" />
-	<id property="productId" column="product_id" />
-	<id property="createTime" column="create_time" />
-	<id property="messageContext" column="message_context" />
-	<id property="messageId" column="message_id" />
-	<id property="postId" column="post_id" />
-	<id property="id" column="id" />
-	<id property="receiveId" column="receive_id" />
-</resultMap>  
+	<resultMap type="com.sqe.shop.model.Message" id="MessageBaseMapper">
+		<id property="messageStatus" column="message_status" />
+		<id property="productId" column="product_id" />
+		<id property="createTime" column="create_time" />
+		<id property="messageContext" column="message_context" />
+		<id property="messageId" column="message_id" />
+		<id property="postId" column="post_id" />
+		<id property="id" column="id" />
+		<id property="receiveId" column="receive_id" />
+		<id column="read_flag" property="readFlag" />
+		<id column="receive_del_flag" property="receiveDelFlag" />
+		<id column="post_del_flag" property="postDelFlag" />
+	</resultMap>
 
-<insert id="insert">
-	<selectKey resultType="long" keyProperty="id">  
-   		select LAST_INSERT_ID()
-   	</selectKey>
-	insert into message
-	(message_status,product_id,create_time,message_context,message_id,post_id,receive_id)
-	values
-	(#{messageStatus},#{productId},#{createTime},#{messageContext},#{messageId},#{postId},#{receiveId})
-</insert>
+	<insert id="insert">
+		<selectKey resultType="long" keyProperty="id">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into message
+		(message_status,product_id,create_time,message_context,message_id,post_id,receive_id,read_flag,
+		receive_del_flag, post_del_flag)
+		values
+		(#{messageStatus},#{productId},#{createTime},#{messageContext},#{messageId},#{postId},#{receiveId},
+		#{readFlag,jdbcType=CHAR},
+		#{receiveDelFlag,jdbcType=CHAR},
+		#{postDelFlag,jdbcType=CHAR})
+	</insert>
 
-<update id="update">
-	UPDATE message 
-	<set>
-			<if test="messageStatus != null">  
-	        	message_status=#{messageStatus},
-	    	</if>
-			<if test="productId != null">  
-	        	product_id=#{productId},
-	    	</if>
-			<if test="createTime != null">  
-	        	create_time=#{createTime},
-	    	</if>
-			<if test="messageContext != null">  
-	        	message_context=#{messageContext},
-	    	</if>
-			<if test="messageId != null">  
-	        	message_id=#{messageId},
-	    	</if>
-			<if test="postId != null">  
-	        	post_id=#{postId},
-	    	</if>
-			<if test="receiveId != null">  
-	        	receive_id=#{receiveId},
-	    	</if>
-	</set>   
-    WHERE id=#{id}
-</update>
+	<update id="update">
+		UPDATE message
+		<set>
+			<if test="messageStatus != null">
+				message_status=#{messageStatus},
+			</if>
+			<if test="productId != null">
+				product_id=#{productId},
+			</if>
+			<if test="createTime != null">
+				create_time=#{createTime},
+			</if>
+			<if test="messageContext != null">
+				message_context=#{messageContext},
+			</if>
+			<if test="messageId != null">
+				message_id=#{messageId},
+			</if>
+			<if test="postId != null">
+				post_id=#{postId},
+			</if>
+			<if test="receiveId != null">
+				receive_id=#{receiveId},
+			</if>
+			<if test="readFlag != null">
+				#{readFlag,jdbcType=CHAR},
+			</if>
+			<if test="receiveDelFlag != null">
+				#{receiveDelFlag,jdbcType=CHAR},
+			</if>
+			<if test="postDelFlag != null">
+				#{postDelFlag,jdbcType=CHAR},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
 
-<delete id="delete">
-	delete from message where id=#{id}
-</delete>
+	<delete id="delete">
+		delete from message where id=#{id}
+	</delete>
 
-<select id="getById" resultMap="MessageBaseMapper">
-	SELECT * FROM message WHERE id=#{id} 
-</select>
+	<select id="getById" resultMap="MessageBaseMapper">
+		SELECT * FROM message WHERE
+		id=#{id}
+	</select>
 
-<select id="countByParm" resultType="integer">
-	select count(*) from message  where 1=1 
-			<if test="parm.messageStatus != null">
-		     	and message_status = #{parm.messageStatus}
-		   	</if>
-		   	<if test="parm.productId != null">
-		     	and product_id = #{parm.productId}
-		   	</if>
-			<if test="parm.createTime != null">
-		     	and create_time = #{parm.createTime}
-		   	</if>
-		   	<if test="parm.messageId != null">
-		     	and message_id = #{parm.messageId}
-		   	</if>
-			<if test="parm.postId != null">
-		     	and post_id = #{parm.postId}
-		   	</if>
-			<if test="parm.messageContext != null">
-		     	and message_context = #{parm.messageContext}
-		   	</if>
-			<if test="parm.receiveId != null">
-		     	and receive_id = #{parm.receiveId}
-		   	</if>
-</select>
+	<select id="countByParm" resultType="integer">
+		select count(*) from message where 1=1
+		<if test="parm.messageStatus != null">
+			and message_status = #{parm.messageStatus}
+		</if>
+		<if test="parm.productId != null">
+			and product_id = #{parm.productId}
+		</if>
+		<if test="parm.createTime != null">
+			and create_time = #{parm.createTime}
+		</if>
+		<if test="parm.messageId != null">
+			and message_id = #{parm.messageId}
+		</if>
+		<if test="parm.postId != null">
+			and post_id = #{parm.postId}
+		</if>
+		<if test="parm.messageContext != null">
+			and message_context = #{parm.messageContext}
+		</if>
+		<if test="parm.receiveId != null">
+			and receive_id = #{parm.receiveId}
+		</if>
+		<if test="readFlag != null">
+			#{readFlag,jdbcType=CHAR},
+		</if>
+		<if test="receiveDelFlag != null">
+			#{receiveDelFlag,jdbcType=CHAR},
+		</if>
+		<if test="postDelFlag != null">
+			#{postDelFlag,jdbcType=CHAR},
+		</if>
+	</select>
 
-<select id="getBeanListByParm" resultMap="MessageBaseMapper">
-	select * from message where 1=1 
-			<if test="parm.messageStatus != null">
-		     	and message_status = #{parm.messageStatus}
-		   	</if>
-		   	<if test="parm.productId != null">
-		     	and product_id = #{parm.productId}
-		   	</if>
-			<if test="parm.createTime != null">
-		     	and create_time = #{parm.createTime}
-		   	</if>
-			<if test="parm.postId != null">
-		     	and post_id = #{parm.postId}
-		   	</if>
-			<if test="parm.messageContext != null">
-		     	and message_context = #{parm.messageContext}
-		   	</if>
-			<if test="parm.receiveId != null">
-		     	and receive_id = #{parm.receiveId}
-		   	</if>
-		   	<if test="parm.messageId != null">
-		     	and message_id = #{parm.messageId}
-		   	</if>
+	<select id="getBeanListByParm" resultMap="MessageBaseMapper">
+		select * from message where 1=1
+		<if test="parm.messageStatus != null">
+			and message_status = #{parm.messageStatus}
+		</if>
+		<if test="parm.productId != null">
+			and product_id = #{parm.productId}
+		</if>
+		<if test="parm.createTime != null">
+			and create_time = #{parm.createTime}
+		</if>
+		<if test="parm.postId != null">
+			and post_id = #{parm.postId}
+		</if>
+		<if test="parm.messageContext != null">
+			and message_context = #{parm.messageContext}
+		</if>
+		<if test="parm.receiveId != null">
+			and receive_id = #{parm.receiveId}
+		</if>
+		<if test="parm.messageId != null">
+			and message_id = #{parm.messageId}
+		</if>
+		<if test="readFlag != null">
+			#{readFlag,jdbcType=CHAR},
+		</if>
+		<if test="receiveDelFlag != null">
+			#{receiveDelFlag,jdbcType=CHAR},
+		</if>
+		<if test="postDelFlag != null">
+			#{postDelFlag,jdbcType=CHAR},
+		</if>
 		<if test="parm.orderby != null">
-	   		order by ${parm.orderby}
-	   	</if>
+			order by ${parm.orderby}
+		</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
 		</if>
-</select>
+	</select>
 
 
-<select id="countAdminMessageListByParm" parameterType="HashMap" resultType="integer">
-	select count(*)
-	from  message m
-	LEFT JOIN `user` u on m.post_id=u.id
-	LEFT JOIN shop s on s.user_id = u.id
-	where 1=1
-	<if test="parm.messageStatus != null">
-     	and m.message_status = #{parm.messageStatus}
-   	</if>
-   	<if test="parm.productId != null">
-     	and m.product_id = #{parm.productId}
-   	</if>
-	<if test="parm.createTime != null">
-     	and m.create_time = #{parm.createTime}
-   	</if>
-   	<if test="parm.messageId != null">
-     	and m.message_id = #{parm.messageId}
-   	</if>
-	<if test="parm.postId != null">
-     	and m.post_id = #{parm.postId}
-   	</if>
-	<if test="parm.messageContext != null">
-     	and m.message_context = #{parm.messageContext}
-   	</if>
-	<if test="parm.receiveId != null">
-     	and m.receive_id = #{parm.receiveId}
-   	</if>
-   	<if test="parm.shopName != null">
-     	and s.shop_title = #{parm.shopName}
-   	</if>
-	<if test="parm.nullMessageId">
-   		and message_id is null
-   	</if>
-	
-	<if test="parm.orderby != null">
-   		order by ${parm.orderby}
-   	</if>
-</select>
-<select id="getAdminMessageListByParm" parameterType="HashMap" resultType="HashMap">
-	select m.id as id, m.post_id as postId, m.message_status as `status`, m.message_context as messageContext ,
-	m.id, u.username, DATE_FORMAT(m.create_time,'%Y-%m-%d %H:%i:%s')  as createTimeStr,
-	s.shop_title as shopTitle
-	from  message m
-	LEFT JOIN `user` u on m.post_id=u.id
-	LEFT JOIN shop s on s.user_id = u.id
-	where 1=1
-	<if test="parm.messageStatus != null">
-     	and m.message_status = #{parm.messageStatus}
-   	</if>
-   	<if test="parm.productId != null">
-     	and m.product_id = #{parm.productId}
-   	</if>
-	<if test="parm.createTime != null">
-     	and m.create_time = #{parm.createTime}
-   	</if>
-   	<if test="parm.messageId != null">
-     	and m.message_id = #{parm.messageId}
-   	</if>
-	<if test="parm.postId != null">
-     	and m.post_id = #{parm.postId}
-   	</if>
-	<if test="parm.messageContext != null">
-     	and m.message_context = #{parm.messageContext}
-   	</if>
-	<if test="parm.receiveId != null">
-     	and m.receive_id = #{parm.receiveId}
-   	</if>
-   	<if test="parm.shopName != null">
-     	and s.shop_title = #{parm.shopName}
-   	</if>
-	
-	<if test="parm.orderby != null">
-   		order by ${parm.orderby}
-   	</if>
-	<if test="parm.start != null">
-		limit #{parm.start},#{parm.limit}
-	</if>
-</select>
+	<select id="countAdminMessageListByParm" parameterType="HashMap"
+		resultType="integer">
+		select count(*)
+		from message m
+		LEFT JOIN `user` u on m.post_id=u.id
+		LEFT
+		JOIN shop s on s.user_id = u.id
+		where 1=1
+		<if test="parm.messageStatus != null">
+			and m.message_status = #{parm.messageStatus}
+		</if>
+		<if test="parm.productId != null">
+			and m.product_id = #{parm.productId}
+		</if>
+		<if test="parm.createTime != null">
+			and m.create_time = #{parm.createTime}
+		</if>
+		<if test="parm.messageId != null">
+			and m.message_id = #{parm.messageId}
+		</if>
+		<if test="parm.postId != null">
+			and m.post_id = #{parm.postId}
+		</if>
+		<if test="parm.messageContext != null">
+			and m.message_context = #{parm.messageContext}
+		</if>
+		<if test="parm.receiveId != null">
+			and m.receive_id = #{parm.receiveId}
+		</if>
+		<if test="parm.shopName != null">
+			and s.shop_title = #{parm.shopName}
+		</if>
+		<if test="parm.nullMessageId">
+			and message_id is null
+		</if>
 
-<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select m.post_id as postId, m.message_status as `status`, m.message_context as messageContext ,
-	m.id, u.username, DATE_FORMAT(m.create_time,'%Y-%m-%d %H:%i:%s')  as createTimeStr
-	from  message m
-	LEFT JOIN `user` u on m.post_id=u.id
-	<if test="parm.orderby != null">
-   		order by ${parm.orderby}
-   	</if>
-	<if test="parm.start != null">
-		limit #{parm.start},#{parm.limit}
-	</if>
-</select>
+		<if test="parm.orderby != null">
+			order by ${parm.orderby}
+		</if>
+	</select>
+	<select id="getAdminMessageListByParm" parameterType="HashMap"
+		resultType="HashMap">
+		select m.id as id, m.post_id as postId, m.message_status as `status`,
+		m.message_context as messageContext ,
+		m.id, u.username,
+		DATE_FORMAT(m.create_time,'%Y-%m-%d %H:%i:%s') as
+		createTimeStr,
+		s.shop_title as shopTitle
+		from message m
+		LEFT JOIN `user` u on
+		m.post_id=u.id
+		LEFT JOIN shop s on s.user_id = u.id
+		where 1=1
+		<if test="parm.messageStatus != null">
+			and m.message_status = #{parm.messageStatus}
+		</if>
+		<if test="parm.productId != null">
+			and m.product_id = #{parm.productId}
+		</if>
+		<if test="parm.createTime != null">
+			and m.create_time = #{parm.createTime}
+		</if>
+		<if test="parm.messageId != null">
+			and m.message_id = #{parm.messageId}
+		</if>
+		<if test="parm.postId != null">
+			and m.post_id = #{parm.postId}
+		</if>
+		<if test="parm.messageContext != null">
+			and m.message_context = #{parm.messageContext}
+		</if>
+		<if test="parm.receiveId != null">
+			and m.receive_id = #{parm.receiveId}
+		</if>
+		<if test="parm.shopName != null">
+			and s.shop_title = #{parm.shopName}
+		</if>
 
-<select id="getSellerMessageListByParm" parameterType="HashMap" resultType="HashMap">
-	select 
-	p.product_name as productName, 
-	p.id as productId, 
-	p.product_price as price,
- 	m.id as messageId, 
- 	m.message_context as content, 
- 	DATE_FORMAT(m.create_time,'%Y-%c-%d %h:%i') as date,
- 	u.username as postName,
-	m.post_id as postId,
-	m.receive_id as receiveId,
-	u1.username as receiveName,
-i.image_path as imagePath,
-u1.user_image as receiveImg
-	from message m
-	LEFT JOIN product p on m.product_id=p.id
-	LEFT JOIN `user` u on m.post_id=u.id
-	LEFT JOIN `user` u1 on m.receive_id=u1.id
-LEFT JOIN image i on i.product_id=m.product_id and i.index_show=1
-	where 1=1
-	<if test="parm.receiveId != null">
-   		and m.receive_id = #{parm.receiveId}
-   	</if>
-   	<if test="parm.postId != null">
-   		and m.post_id = #{parm.postId}
-   	</if>
-   	<if test="parm.messageId != null">
-   		and m.message_id = #{parm.messageId}
-   	</if>
-   	<if test="parm.nullMessageId">
-   		and m.message_id is null
-   	</if>
-	<if test="parm.orderby != null">
-   		order by ${parm.orderby}
-   	</if>
-	<if test="parm.start != null">
-		limit #{parm.start},#{parm.limit}
-	</if>
-</select>
+		<if test="parm.orderby != null">
+			order by ${parm.orderby}
+		</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+	</select>
+
+	<select id="getMapListByParm" parameterType="HashMap"
+		resultType="HashMap">
+		select m.post_id as postId, m.message_status as `status`,
+		m.message_context as messageContext ,
+		m.id, u.username,
+		DATE_FORMAT(m.create_time,'%Y-%m-%d %H:%i:%s') as
+		createTimeStr
+		from
+		message m
+		LEFT JOIN `user` u on m.post_id=u.id
+		<if test="parm.orderby != null">
+			order by ${parm.orderby}
+		</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+	</select>
+
+	<select id="getSellerMessageListByParm" parameterType="HashMap"
+		resultType="HashMap">
+		select
+		p.product_name as productName,
+		p.id as productId,
+		p.product_price
+		as price,
+		m.id as messageId,
+		m.message_context as content,
+		DATE_FORMAT(m.create_time,'%Y-%c-%d %h:%i') as date,
+		u.username as
+		postName,
+		m.post_id as postId,
+		m.receive_id as receiveId,
+		u1.username as
+		receiveName,
+		i.image_path as imagePath,
+		u1.user_image as receiveImg
+		from
+		message m
+		LEFT JOIN product p on m.product_id=p.id
+		LEFT JOIN `user` u on
+		m.post_id=u.id
+		LEFT JOIN `user` u1 on m.receive_id=u1.id
+		LEFT JOIN image
+		i on i.product_id=m.product_id and i.index_show=1
+		where 1=1
+		<if test="parm.receiveId != null">
+			and m.receive_id = #{parm.receiveId}
+		</if>
+		<if test="parm.postId != null">
+			and m.post_id = #{parm.postId}
+		</if>
+		<if test="parm.messageId != null">
+			and m.message_id = #{parm.messageId}
+		</if>
+		<if test="parm.nullMessageId">
+			and m.message_id is null
+		</if>
+		<if test="parm.orderby != null">
+			order by ${parm.orderby}
+		</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+	</select>
+
+
+	<select id="getUserMessageListByParm" parameterType="HashMap"
+		resultType="HashMap">
+		SELECT
+		m.id AS messageId,
+		m.message_id AS dialogueId,
+		m.message_context
+		AS content,
+		DATE_FORMAT(
+		m.create_time,
+		'%Y-%c-%d %h:%i'
+		) AS date,
+		u.username AS postName,
+		m.post_id AS postId,
+		m.receive_id AS receiveId,
+		count(*) as count,
+		u1.username AS receiveName,
+		i.image_path AS
+		imagePath,
+		u1.user_image AS receiveImg
+		FROM
+		message m
+		LEFT JOIN `user` u
+		ON m.post_id = u.id
+		LEFT JOIN `user` u1 ON m.receive_id = u1.id
+		LEFT
+		JOIN image i ON i.product_id = m.product_id
+		AND i.index_show = 1
+		WHERE
+		1
+		= 1
+		<if test="parm.receiveId != null">
+			and m.receive_id = #{parm.receiveId}
+		</if>
+		<if test="parm.postId != null">
+			and m.post_id = #{parm.postId}
+		</if>
+		<if test="parm.messageId != null">
+			and m.message_id = #{parm.messageId}
+		</if>
+		<if test="parm.nullMessageId">
+			and m.message_id is null
+		</if>
+		group BY dialogueId
+		<if test="parm.orderby != null">
+			order by ${parm.orderby}
+		</if>
+
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+	</select>
+
+
+	<select id="getMessageDialogueIdListByParm" parameterType="HashMap"
+		resultType="HashMap">
+		SELECT
+		m.id AS messageId,
+		m.message_id AS dialogueId,
+		m.message_context AS content,
+		DATE_FORMAT(
+		m.create_time,
+		'%Y-%c-%d %h:%i'
+		) AS date,
+		u.username AS postName,
+		m.post_id AS postId,
+		m.receive_id AS receiveId,
+		u1.username AS receiveName,
+		i.image_path AS imagePath,
+		u1.user_image AS receiveImg
+		FROM
+		message m
+		LEFT JOIN `user` u ON m.post_id = u.id
+		LEFT JOIN `user` u1 ON m.receive_id = u1.id
+		LEFT JOIN image i ON i.product_id = m.product_id
+		AND i.index_show = 1
+		WHERE
+		1 = 1
+		<if test="parm.receiveId != null">
+			and m.receive_id = #{parm.receiveId}
+		</if>
+		<if test="parm.postId != null">
+			and m.post_id = #{parm.postId}
+		</if>
+		<if test="parm.messageId != null">
+			and m.message_id = #{parm.messageId}  or  m.id=#{parm.messageId}
+			
+		</if>
+		<if test="parm.orderby != null">
+			order by ${parm.orderby}
+		</if>
+
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+	</select>
 
 </mapper>
