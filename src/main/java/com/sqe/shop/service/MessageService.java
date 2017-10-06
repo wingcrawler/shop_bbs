@@ -233,7 +233,6 @@ public class MessageService extends AdapterService implements BaseService {
 		message.setReceiveDelFlag(false);
 		message.setMessageId(selectdialogueId(message));
 
-
 		return messageMapper.insert(message);
 	}
 
@@ -245,8 +244,8 @@ public class MessageService extends AdapterService implements BaseService {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
 		parmMap.put("receiveId", message.getReceiveId());
 		parmMap.put("postId", message.getPostId());
-		Long  rs=messageMapper.getdialogueIdByParm(parmMap);
-		if(rs==null){
+		Long rs = messageMapper.getdialogueIdByParm(parmMap);
+		if (rs == null) {
 			return 0L;
 		}
 		return rs;

@@ -77,8 +77,8 @@ public class FrontMessageController extends BaseFrontController {
 
 	@RequestMapping(value = "/sentMessage", method = RequestMethod.POST)
 	public Map<String, Object> sentMessage(Message message) {
-//		Long userId = this.getCurrentUserId();
-		Long userId=2L;
+		Long userId = this.getCurrentUserId();
+		// Long userId=2L;
 		message.setPostId(userId);
 		if (message.getMessageContext() == null) {
 			return responseError(-1, "content_empty");
