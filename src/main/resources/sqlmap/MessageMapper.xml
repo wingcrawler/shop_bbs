@@ -56,13 +56,13 @@
 				receive_id=#{receiveId},
 			</if>
 			<if test="readFlag != null">
-				#{readFlag,jdbcType=CHAR},
+				read_flag=#{readFlag},
 			</if>
 			<if test="receiveDelFlag != null">
-				#{receiveDelFlag,jdbcType=CHAR},
+				receive_del_flag=#{receiveDelFlag},
 			</if>
 			<if test="postDelFlag != null">
-				#{postDelFlag,jdbcType=CHAR},
+				post_del_flag=#{postDelFlag},
 			</if>
 		</set>
 		WHERE id=#{id}
@@ -101,13 +101,13 @@
 			and receive_id = #{parm.receiveId}
 		</if>
 		<if test="readFlag != null">
-			#{readFlag,jdbcType=CHAR},
+			and read_flag=#{readFlag},
 		</if>
 		<if test="receiveDelFlag != null">
-			#{receiveDelFlag,jdbcType=CHAR},
+			and receive_del_flag=#{receiveDelFlag},
 		</if>
 		<if test="postDelFlag != null">
-			#{postDelFlag,jdbcType=CHAR},
+			and post_del_flag=#{postDelFlag},
 		</if>
 	</select>
 
@@ -135,13 +135,13 @@
 			and message_id = #{parm.messageId}
 		</if>
 		<if test="readFlag != null">
-			#{readFlag,jdbcType=CHAR},
+			and read_flag=#{readFlag},
 		</if>
 		<if test="receiveDelFlag != null">
-			#{receiveDelFlag,jdbcType=CHAR},
+			and receive_del_flag=#{receiveDelFlag},
 		</if>
 		<if test="postDelFlag != null">
-			#{postDelFlag,jdbcType=CHAR},
+			and post_del_flag=#{postDelFlag},
 		</if>
 		<if test="parm.orderby != null">
 			order by ${parm.orderby}
@@ -346,6 +346,15 @@
 		<if test="parm.nullMessageId">
 			and m.message_id is null
 		</if>
+		<if test="readFlag != null">
+			and read_flag=#{readFlag},
+		</if>
+		<if test="receiveDelFlag != null">
+			and receive_del_flag=#{receiveDelFlag},
+		</if>
+		<if test="postDelFlag != null">
+			and post_del_flag=#{postDelFlag},
+		</if>
 		group BY dialogueId
 		<if test="parm.orderby != null">
 			order by ${parm.orderby}
@@ -362,7 +371,8 @@
 		SELECT
 		m.id AS messageId,
 		m.message_id AS dialogueId,
-		m.message_context AS content,
+		m.message_context
+		AS content,
 		DATE_FORMAT(
 		m.create_time,
 		'%Y-%c-%d %h:%i'
@@ -372,12 +382,15 @@
 		m.receive_id AS receiveId,
 		u1.username AS receiveName,
 		i.image_path AS imagePath,
-		u1.user_image AS receiveImg
+		u1.user_image AS
+		receiveImg
 		FROM
 		message m
 		LEFT JOIN `user` u ON m.post_id = u.id
-		LEFT JOIN `user` u1 ON m.receive_id = u1.id
-		LEFT JOIN image i ON i.product_id = m.product_id
+		LEFT JOIN
+		`user` u1 ON m.receive_id = u1.id
+		LEFT JOIN image i ON i.product_id =
+		m.product_id
 		AND i.index_show = 1
 		WHERE
 		1 = 1
@@ -387,9 +400,19 @@
 		<if test="parm.postId != null">
 			and m.post_id = #{parm.postId}
 		</if>
+		<if test="readFlag != null">
+			and read_flag=#{readFlag},
+		</if>
+		<if test="receiveDelFlag != null">
+			and receive_del_flag=#{receiveDelFlag},
+		</if>
+		<if test="postDelFlag != null">
+			and post_del_flag=#{postDelFlag},
+		</if>
 		<if test="parm.messageId != null">
-			and m.message_id = #{parm.messageId}  or  m.id=#{parm.messageId}
-			
+			and m.message_id = #{parm.messageId} or
+			m.id=#{parm.messageId}
+
 		</if>
 		<if test="parm.orderby != null">
 			order by ${parm.orderby}
@@ -398,6 +421,24 @@
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
 		</if>
+	</select>
+
+	<select id="getdialogueIdByParm" parameterType="HashMap"
+		resultType="java.lang.Long">
+		SELECT
+		id
+		FROM
+		message
+		WHERE
+		1=1
+		<if test="parm.receiveId != null">
+			and (post_id = #{parm.postId} and receive_id =
+			#{parm.receiveId}) OR
+			(post_id =
+			#{parm.receiveId} AND receive_id =
+			#{parm.postId})
+		</if>
+		LIMIT 1
 	</select>
 
 </mapper>

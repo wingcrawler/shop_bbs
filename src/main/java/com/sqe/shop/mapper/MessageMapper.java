@@ -18,5 +18,8 @@ public interface MessageMapper extends BaseMapper {
 
 	// 获取用户的dialogueId message列表 根据对话message_id
 	List<Map<String, Object>> getMessageDialogueIdListByParm(@Param("parm") Map<String, Object> parmMap);
+	
+	//查询两个用户之间的对话id
+	Long getdialogueIdByParm(@Param("parm") Map<String, Object> parm);
 
 }

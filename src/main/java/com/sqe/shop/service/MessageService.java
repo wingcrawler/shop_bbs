@@ -2,19 +2,21 @@ package com.sqe.shop.service;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sqe.shop.mapper.MessageMapper;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.util.PageUtil;
 
-@Component
+@Service
 public class MessageService extends AdapterService implements BaseService {
 
 	@Autowired
@@ -172,12 +174,13 @@ public class MessageService extends AdapterService implements BaseService {
 		parmMap.put("limit", pageSize);
 		parmMap.put("orderby", "m.create_time desc");
 		parmMap.put("postId", userId);
+		parmMap.put("postDelFlag", 0);
 		List<Map<String, Object>> list = messageMapper.getUserMessageListByParm(parmMap);
 		pageUtil.setTotalRecords(list.size());
 		pageUtil.setList(list);
 		return pageUtil;
 	}
-	
+
 	/**
 	 * 
 	 * 
@@ -188,12 +191,65 @@ public class MessageService extends AdapterService implements BaseService {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
 		parmMap.put("start", pageNo);
 		parmMap.put("limit", pageSize);
+		parmMap.put("receiveDelFlag", 0);
+		parmMap.put("postDelFlag", 0);
 		parmMap.put("orderby", "m.create_time desc");
 		parmMap.put("messageId", DialogueId);
-		
+
 		List<Map<String, Object>> list = messageMapper.getMessageDialogueIdListByParm(parmMap);
 		pageUtil.setTotalRecords(list.size());
 		pageUtil.setList(list);
 		return pageUtil;
 	}
+
+	/**
+	 * 删除消息
+	 * 
+	 * @param message
+	 * @param userId
+	 * @return
+	 */
+	public int deleteMessage(Message message, Long userId) {
+		if (userId.equals(message.getPostId())) {
+			message.setPostDelFlag(true);
+		} else if (userId.equals(message.getReceiveId())) {
+			message.setReceiveDelFlag(true);
+		}
+		return messageMapper.update(message);
+	}
+
+	/**
+	 * 发送消息
+	 * 
+	 * @param message
+	 * @param userId
+	 * @return
+	 */
+	public int sentMessage(Message message) {
+		message.setMessageStatus(0);
+		message.setCreateTime(new Date(System.currentTimeMillis()));
+		message.setReadFlag(false);
+		message.setPostDelFlag(false);
+		message.setReceiveDelFlag(false);
+		message.setMessageId(selectdialogueId(message));
+
+
+		return messageMapper.insert(message);
+	}
+
+	/**
+	 * 查询两个用户的对话id
+	 */
+
+	public long selectdialogueId(Message message) {
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("receiveId", message.getReceiveId());
+		parmMap.put("postId", message.getPostId());
+		Long  rs=messageMapper.getdialogueIdByParm(parmMap);
+		if(rs==null){
+			return 0L;
+		}
+		return rs;
+	}
+
 }
