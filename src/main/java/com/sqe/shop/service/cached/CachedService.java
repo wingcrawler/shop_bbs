@@ -102,6 +102,9 @@ public class CachedService extends BaseCached {
 		//广告类型
 		map.put("ad_type_0", getText("t_ad_lb"));
 		map.put("ad_type_1", getText("t_ad_ggw"));
+		//广告类型
+		map.put("ad_device_0", getText("t_device_pc"));
+		map.put("ad_device_1", getText("t_device_app"));
 		//产品状态
 		map.put("product_status_0", getText("t_pending"));
 		map.put("product_status_1", getText("t_product_on"));

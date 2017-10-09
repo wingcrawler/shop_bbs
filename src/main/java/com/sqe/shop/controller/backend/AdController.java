@@ -100,6 +100,9 @@ public class AdController extends BaseBackendController {
 		if(ad.getType()<0){
 			return responseError(-1, "error_no_type");
 		}
+		if(ad.getDevice()<0){
+			return responseError(-1, "error_no_device");
+		}
 		if(ad.getId()==null && attachFile==null){
 			return responseError(-1, "error_empty_img");
 		}

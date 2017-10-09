@@ -29,17 +29,25 @@
 					<div class="panel-body">
 						<form class="form-horizontal form" method="post" action="/backend/ad/doEdit" enctype="multipart/form-data">
 					        <div class="form-group">
-					          	<div class="col-sm-6">
+					          	<div class="col-sm-3">
 					          		<input type="hidden" value="${entity.id}" name="id" />
 					          		<p>${t.t_weight }</p>
 					            	<input class="form-control" type="number" name="sort" value="${entity.sort}">
 					          	</div>
-					          	<div class="col-sm-6">
+					          	<div class="col-sm-3">
 					          		<p>${t.t_select_type }<span style="color:#f00">*</span></p>
 									<select class="form-control select" name="type" id="typeSelect">
 										<option value="-1">-- ${t.t_select } --</option>
 										<option value="0">${t.t_ad_lb }</option>
 										<option value="1">${t.t_ad_ggw }</option>
+									</select>
+					          	</div>
+					          	<div class="col-sm-3">
+					          		<p>${t.t_select_device }<span style="color:#f00">*</span></p>
+									<select class="form-control select" name="device" id="deviceSelect">
+										<option value="-1">-- ${t.t_select } --</option>
+										<option value="0">${t.t_device_pc }</option>
+										<option value="1">${t.t_device_app }</option>
 									</select>
 					          	</div>
 					        </div>
@@ -87,6 +95,11 @@ $(function(){
 	
 	$('#typeSelect').optionSelect({
 		compare:'${entity.type}',
+		backFn : function(p) {
+		}
+	});
+	$('#deviceSelect').optionSelect({
+		compare:'${entity.device}',
 		backFn : function(p) {
 		}
 	});

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.service.biz.BizHomeService;
 
@@ -22,7 +23,7 @@ public class MobileHomeController extends BaseFrontController {
 	@RequestMapping("/index")
 	public Map<String, Object> index(ModelAndView model) {
 		
-		return bizHomeService.getHomeIndexData();
+		return bizHomeService.getHomeIndexData(Constants.AD_DEVICE_APP);
 	}
 	
 }

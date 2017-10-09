@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.ProductType;
 import com.sqe.shop.service.AdvertisementService;
@@ -57,7 +58,7 @@ public class HomeController extends BaseFrontController {
 	 */
 	@RequestMapping(value="shopIndex", method = RequestMethod.GET)
 	public ModelAndView shopIndex(ModelAndView model) {
-		model.addAllObjects(bizHomeService.getHomeIndexData());
+		model.addAllObjects(bizHomeService.getHomeIndexData(Constants.AD_DEVICE_PC));
 		model.setViewName("shop/index");
 		return model;
 	}
@@ -118,6 +119,35 @@ public class HomeController extends BaseFrontController {
 		Map<String, Object> resMap = this.responseOK1("");
 		resMap.put("list", page.getList());
 		return resMap;
+	}
+	
+	/**
+	 * 刷新缓存
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="cacheInit")
+	public Map<String, Object> cacheInit(){
+		cachedService.init();
+		return this.responseOK1("Refresh finished");
+	}
+	@ResponseBody
+	@RequestMapping(value="refreshProductTypeList")
+	public Map<String, Object> refreshProductTypeList(){
+		cachedService.refreshProductTypeList();
+		return this.responseOK1("Refresh finished");
+	}
+	@ResponseBody
+	@RequestMapping(value="refreshBundle")
+	public Map<String, Object> refreshBundle(){
+		cachedService.refreshBundle();
+		return this.responseOK1("Refresh finished");
+	}
+	@ResponseBody
+	@RequestMapping(value="refreshMap")
+	public Map<String, Object> refreshMap(){
+		cachedService.refreshBundle();
+		return this.responseOK1("Refresh finished");
 	}
 
 }

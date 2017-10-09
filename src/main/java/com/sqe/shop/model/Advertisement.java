@@ -14,6 +14,7 @@ public class Advertisement extends BaseModel implements Serializable {
 	private String description;
 	private Integer sort;
 	private Integer type;
+	private Integer device;
 	
 	public String getImagePath() {
 		return imagePath;
@@ -50,6 +51,12 @@ public class Advertisement extends BaseModel implements Serializable {
 	}
 	public void setType(Integer type) {
 		this.type = type;
+	}
+	public Integer getDevice() {
+		return device;
+	}
+	public void setDevice(Integer device) {
+		this.device = device;
 	}
 	
 	

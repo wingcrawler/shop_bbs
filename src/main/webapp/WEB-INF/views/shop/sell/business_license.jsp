@@ -75,7 +75,7 @@
 	
 <script type="text/javascript">
 $(function(){
-	$('.menu_box .menu_list div.module a').eq(5).addClass('active');
+	$('.menu_box .menu_list div.module a').eq(4).addClass('active');
 	
 	$('#upload').click(function(){
 		$('input[name="file"]').trigger('click');

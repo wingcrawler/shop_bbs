@@ -118,7 +118,7 @@
 	
 <script type="text/javascript">
 $(function(){
-	$('.menu_box .menu_list div.module a').eq(2).addClass('active');
+	$('.menu_box .menu_list div.module a').eq(7).addClass('active');
 	
 	$(".pagebar").createPage({
 		pageCount : '${page.pageCount}',

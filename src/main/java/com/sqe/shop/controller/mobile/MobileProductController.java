@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.model.Product;
@@ -67,7 +68,8 @@ public class MobileProductController extends BaseFrontController {
 		
 		//轮播图
 		Advertisement advertisement = new Advertisement();
-		advertisement.setType(0);
+		advertisement.setType(Constants.AD_TYPE_LB);
+		advertisement.setDevice(Constants.AD_DEVICE_APP);
 		PageUtil<Advertisement> adPage = advertisementService.getBeanListByParm(advertisement, 1, -1);
 		resMap.put("adList", adPage.getList());
 		

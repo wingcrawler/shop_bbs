@@ -117,6 +117,13 @@ public class BizUserCenterService extends BaseCommon {
 				return responseError(-1, "error_username_noexist");
 			}
 		}
+		
+		/**
+		 * 用户签名现在200字
+		 */
+		if(StringUtils.isNotBlank(user.getUserIntroduce()) && user.getUserIntroduce().length()>200){
+			user.setUserIntroduce(user.getUserIntroduce().substring(0, 200));
+		}
 
 		if (attachFile != null) {
 			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);

@@ -59,9 +59,24 @@
 				<div class="categories">
 					<h3>${t.t_product_type }</h3>
 					<ul>
+						<li><a href="/product/list">
+								<c:if test="${empty parentType  }">
+									<b>${t.t_all }</b>
+								</c:if>
+								<c:if test="${not empty parentType  }">
+									${t.t_all }
+								</c:if>
+							</a></li>
 						<c:forEach var="item" items="${productTypeList }">
 							<li>
-							<a href="/product/list?parentType=${item.key.id }"  target="_blank">${item.key.typeName }</a>
+							<a href="/product/list?parentType=${item.key.id }">
+								<c:if test="${parentType==item.key.id  }">
+									<b>${item.key.typeName }</b>
+								</c:if>
+								<c:if test="${parentType!=item.key.id  }">
+									${item.key.typeName }
+								</c:if>
+							</a>
 							</li>
 						</c:forEach>
 					</ul>

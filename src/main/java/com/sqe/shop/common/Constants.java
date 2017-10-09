@@ -63,6 +63,13 @@ public class Constants{
     	return cachedService.getString("ad_type_"+value);
 	}
     
+    //广告类型
+    public static final int AD_DEVICE_PC = 0; // 电脑版
+    public static final int AD_DEVICE_APP = 1; // 手机版
+    public String getADDevice(Integer value) {
+    	return cachedService.getString("ad_device_"+value);
+	}
+    
     //产品状态
     public static final int PRODUCT_ON = 1; //上架
     public static final int PRODUCT_OFF = 2; //下架

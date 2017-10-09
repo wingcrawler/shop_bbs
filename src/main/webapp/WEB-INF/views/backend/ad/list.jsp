@@ -65,6 +65,7 @@
 									<th field="imageUrl" url-field="imageUrl">${t.t_img_link }</th>
 									<th field="typeName">${t.t_type }</th>
 									<th field="sort">${t.t_weight }</th>
+									<th field="deviceName">${t.t_device }</th>
 									<th field="description">${t.t_desc }</th>
 									<th field="op" field-role="2,0" width="110"></th>
 								</tr>

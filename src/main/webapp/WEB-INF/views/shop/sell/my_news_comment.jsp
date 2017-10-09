@@ -125,6 +125,8 @@
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 	
 <script type="text/javascript">
+$('.menu_box .menu_list div.module a').eq(7).addClass('active');
+
 /* $(function(){
 	$('.menu_box .menu_list div.module a').eq(2).addClass('active');
 	

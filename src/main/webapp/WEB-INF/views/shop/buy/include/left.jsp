@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- menu -->
-<div class="menu">
+<div class="menu" style="margin-bottom:30px;">
 	<div class="menu_title">
 		<p class="title_img"><img src="${img}" alt=""></p>
 		<p class="title_text">${user.username}</p>

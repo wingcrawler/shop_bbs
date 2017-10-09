@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.common.BaseCommon;
+import com.sqe.shop.common.Constants;
 import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.model.News;
 import com.sqe.shop.model.Product;
@@ -34,12 +35,13 @@ public class BizHomeService extends BaseCommon {
 	@Autowired
 	private NewsService newsService;
 
-	public Map<String, Object> getHomeIndexData(){
+	public Map<String, Object> getHomeIndexData(Integer adDeviceType){
 		Map<String, Object> resMap = this.responseOK1("");
 		
 		//轮播图
 		Advertisement advertisement = new Advertisement();
-		advertisement.setType(0);
+		advertisement.setType(Constants.AD_TYPE_LB);
+		advertisement.setDevice(adDeviceType);
 		PageUtil<Advertisement> adPage = advertisementService.getBeanListByParm(advertisement, 1, -1);
 		resMap.put("adList", adPage.getList());
 		

@@ -53,6 +53,7 @@ public class AdvertisementService extends AdapterService implements BaseService 
 			list = advertisementMapper.getBeanListByParm(parm);
 			for(Advertisement ad : list){
 				ad.setTypeName(this.getADType(ad.getType()));
+				ad.setDeviceName(this.getADDevice(ad.getDevice()));
 			}
 		}
 		pageUtil.setList(list);

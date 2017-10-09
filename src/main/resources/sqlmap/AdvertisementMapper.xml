@@ -9,6 +9,7 @@
 	<id property="id" column="id" />
 	<id property="sort" column="sort" />
 	<id property="type" column="type" />
+	<id property="device" column="device" />
 </resultMap>  
 
 <insert id="insert">
@@ -16,9 +17,9 @@
    		select LAST_INSERT_ID()
    	</selectKey>
 	insert into advertisement
-	(image_path,image_url,description,sort,type)
+	(image_path,image_url,description,sort,type,device)
 	values
-	(#{imagePath},#{imageUrl},#{description},#{sort},#{type})
+	(#{imagePath},#{imageUrl},#{description},#{sort},#{type},#{device})
 </insert>
 
 <update id="update">
@@ -38,6 +39,9 @@
 	    	</if>
 			<if test="type != null">  
 	        	type=#{type},
+	    	</if>
+	    	<if test="device != null and device!=''">  
+	        	device=#{device},
 	    	</if>
 	</set>   
     WHERE id=#{id}
@@ -68,6 +72,9 @@
 			<if test="parm.type != null">
 		     	and type = #{parm.type}
 		   	</if>
+		   	<if test="parm.device != null and parm.device!=''">
+		     	and device = #{parm.device}
+		   	</if>
 </select>
 
 <select id="getBeanListByParm" resultMap="AdvertisementBaseMapper">
@@ -87,6 +94,10 @@
 			<if test="parm.type != null">
 		     	and type = #{parm.type}
 		   	</if>
+		   	<if test="parm.device != null and parm.device!=''">
+		     	and device = #{parm.device}
+		   	</if>
+		   	
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
 	   	</if>

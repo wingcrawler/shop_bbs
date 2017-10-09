@@ -3,6 +3,7 @@ package com.sqe.shop.common;
 public class BaseModel {
 	
 	private String typeName;
+	private String deviceName;
 	private String statusName;
 	private String roleName;
 	private String shopName;
@@ -83,6 +84,14 @@ public class BaseModel {
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public String getDeviceName() {
+		return deviceName;
+	}
+
+	public void setDeviceName(String deviceName) {
+		this.deviceName = deviceName;
 	}
 
 }
