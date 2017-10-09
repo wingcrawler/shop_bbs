@@ -40,6 +40,7 @@ public class MessageService extends AdapterService implements BaseService {
 
 	public int countByParm(Message message) {
 		Map<String, Object> parm = queryParm(message);
+		parm.put("readFlag", 0);
 		return messageMapper.countByParm(parm);
 	}
 

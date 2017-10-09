@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.MessageMapper">
+  <resultMap id="BaseResultMap" type="test.Message">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="receive_id" jdbcType="BIGINT" property="receiveId" />
+    <result column="post_id" jdbcType="BIGINT" property="postId" />
+    <result column="message_context" jdbcType="VARCHAR" property="messageContext" />
+    <result column="message_status" jdbcType="INTEGER" property="messageStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="message_id" jdbcType="BIGINT" property="messageId" />
+    <result column="read_flag" jdbcType="CHAR" property="readFlag" />
+    <result column="receive_del_flag" jdbcType="CHAR" property="receiveDelFlag" />
+    <result column="post_del_flag" jdbcType="CHAR" property="postDelFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, receive_id, post_id, message_context, message_status, create_time, product_id, 
+    message_id, read_flag, receive_del_flag, post_del_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from message
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="test.MessageExample">
+    delete from message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="test.Message">
+    insert into message (id, receive_id, post_id, 
+      message_context, message_status, create_time, 
+      product_id, message_id, read_flag, 
+      receive_del_flag, post_del_flag)
+    values (#{id,jdbcType=BIGINT}, #{receiveId,jdbcType=BIGINT}, #{postId,jdbcType=BIGINT}, 
+      #{messageContext,jdbcType=VARCHAR}, #{messageStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{productId,jdbcType=BIGINT}, #{messageId,jdbcType=BIGINT}, #{readFlag,jdbcType=CHAR}, 
+      #{receiveDelFlag,jdbcType=CHAR}, #{postDelFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="test.Message">
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="receiveId != null">
+        receive_id,
+      </if>
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="messageContext != null">
+        message_context,
+      </if>
+      <if test="messageStatus != null">
+        message_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="readFlag != null">
+        read_flag,
+      </if>
+      <if test="receiveDelFlag != null">
+        receive_del_flag,
+      </if>
+      <if test="postDelFlag != null">
+        post_del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="receiveId != null">
+        #{receiveId,jdbcType=BIGINT},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=BIGINT},
+      </if>
+      <if test="messageContext != null">
+        #{messageContext,jdbcType=VARCHAR},
+      </if>
+      <if test="messageStatus != null">
+        #{messageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="messageId != null">
+        #{messageId,jdbcType=BIGINT},
+      </if>
+      <if test="readFlag != null">
+        #{readFlag,jdbcType=CHAR},
+      </if>
+      <if test="receiveDelFlag != null">
+        #{receiveDelFlag,jdbcType=CHAR},
+      </if>
+      <if test="postDelFlag != null">
+        #{postDelFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="test.MessageExample" resultType="java.lang.Long">
+    select count(*) from message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update message
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.receiveId != null">
+        receive_id = #{record.receiveId,jdbcType=BIGINT},
+      </if>
+      <if test="record.postId != null">
+        post_id = #{record.postId,jdbcType=BIGINT},
+      </if>
+      <if test="record.messageContext != null">
+        message_context = #{record.messageContext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageStatus != null">
+        message_status = #{record.messageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=BIGINT},
+      </if>
+      <if test="record.messageId != null">
+        message_id = #{record.messageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.readFlag != null">
+        read_flag = #{record.readFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.receiveDelFlag != null">
+        receive_del_flag = #{record.receiveDelFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.postDelFlag != null">
+        post_del_flag = #{record.postDelFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update message
+    set id = #{record.id,jdbcType=BIGINT},
+      receive_id = #{record.receiveId,jdbcType=BIGINT},
+      post_id = #{record.postId,jdbcType=BIGINT},
+      message_context = #{record.messageContext,jdbcType=VARCHAR},
+      message_status = #{record.messageStatus,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      product_id = #{record.productId,jdbcType=BIGINT},
+      message_id = #{record.messageId,jdbcType=BIGINT},
+      read_flag = #{record.readFlag,jdbcType=CHAR},
+      receive_del_flag = #{record.receiveDelFlag,jdbcType=CHAR},
+      post_del_flag = #{record.postDelFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="test.Message">
+    update message
+    <set>
+      <if test="receiveId != null">
+        receive_id = #{receiveId,jdbcType=BIGINT},
+      </if>
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=BIGINT},
+      </if>
+      <if test="messageContext != null">
+        message_context = #{messageContext,jdbcType=VARCHAR},
+      </if>
+      <if test="messageStatus != null">
+        message_status = #{messageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="messageId != null">
+        message_id = #{messageId,jdbcType=BIGINT},
+      </if>
+      <if test="readFlag != null">
+        read_flag = #{readFlag,jdbcType=CHAR},
+      </if>
+      <if test="receiveDelFlag != null">
+        receive_del_flag = #{receiveDelFlag,jdbcType=CHAR},
+      </if>
+      <if test="postDelFlag != null">
+        post_del_flag = #{postDelFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="test.Message">
+    update message
+    set receive_id = #{receiveId,jdbcType=BIGINT},
+      post_id = #{postId,jdbcType=BIGINT},
+      message_context = #{messageContext,jdbcType=VARCHAR},
+      message_status = #{messageStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      product_id = #{productId,jdbcType=BIGINT},
+      message_id = #{messageId,jdbcType=BIGINT},
+      read_flag = #{readFlag,jdbcType=CHAR},
+      receive_del_flag = #{receiveDelFlag,jdbcType=CHAR},
+      post_del_flag = #{postDelFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

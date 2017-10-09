@@ -77,7 +77,7 @@
 		id=#{id}
 	</select>
 
-	<select id="countByParm" resultType="integer">
+	<select id="countByParm" parameterType="HashMap"  resultType="integer">
 		select count(*) from message where 1=1
 		<if test="parm.messageStatus != null">
 			and message_status = #{parm.messageStatus}
@@ -100,14 +100,14 @@
 		<if test="parm.receiveId != null">
 			and receive_id = #{parm.receiveId}
 		</if>
-		<if test="readFlag != null">
-			and read_flag=#{readFlag},
+		<if test="parm.readFlag != null">
+			and read_flag = #{parm.readFlag}
 		</if>
-		<if test="receiveDelFlag != null">
-			and receive_del_flag=#{receiveDelFlag},
+		<if test="parm.receiveDelFlag != null">
+			and receive_del_flag=#{parm.receiveDelFlag}
 		</if>
-		<if test="postDelFlag != null">
-			and post_del_flag=#{postDelFlag},
+		<if test="parm.postDelFlag != null">
+			and post_del_flag=#{parm.postDelFlag}
 		</if>
 	</select>
 
