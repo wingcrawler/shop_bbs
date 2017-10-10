@@ -34,12 +34,20 @@ public class BBSSectionController extends BaseFrontController {
 		return model;
 	}
 
+	/**
+	 * 前端返回一级列表
+	 * @param section
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/getFirstSection", method = RequestMethod.GET)
 	public Map<String, Object> getFirstList(Section section,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		section.setSectionType(0);
+		section.setSectionStatus(1);
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		PageUtil<Section> page = sectionService.getBeanListByParm(section, 0, -1);
 		resMap.put("list", page.getList());

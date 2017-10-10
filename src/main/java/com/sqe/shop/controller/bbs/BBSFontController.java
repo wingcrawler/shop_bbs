@@ -47,6 +47,7 @@ public class BBSFontController extends BaseFrontController {
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		ModelAndView model = new ModelAndView("bbs/index");
 		section.setSectionType(0);
+		section.setSectionStatus(1);
 		PageUtil<Section> page = sectionService.getBeanListByParm(section, 0, -1);
 		model.addObject("section", page);
 //		section.setSectionType(1);
