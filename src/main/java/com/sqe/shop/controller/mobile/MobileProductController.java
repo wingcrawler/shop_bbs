@@ -52,7 +52,7 @@ public class MobileProductController extends BaseFrontController {
 	private AdvertisementService advertisementService;
 	
 	/**
-	 * 产品分类
+	 * 产品查询
 	 * @param productTypeId
 	 * @param pageNo
 	 * @param pageSize
@@ -60,7 +60,7 @@ public class MobileProductController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping("/list")
-	public Map<String, Object> index(String productTypeId,
+	public Map<String, Object> index(String productTypeId,String productName,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="12") int pageSize) {
 		Map<String, Object> resMap = this.responseOK1("");
@@ -87,6 +87,9 @@ public class MobileProductController extends BaseFrontController {
 		resMap.put("productTypeList", productTypes);
 		
 		Product product = new Product();
+		if(StringUtils.isNotBlank(productName)){
+			product.setProductName(productName);
+		}
 		product.setProductStatus(1);
 		if(StringUtils.isBlank(productTypeId)){
 			//热门商品

@@ -51,6 +51,9 @@ public class SectionService extends AdapterService implements BaseService {
 		List<Section> list = new ArrayList<Section>();
 		if (count != 0) {
 			list = sectionMapper.getBeanListByParm(parm);
+			for(Section s : list){
+				s.setStatusName(this.getSectionStatus(s.getSectionStatus()));
+			}
 		}
 
 		pageUtil.setList(list);

@@ -273,6 +273,7 @@
   c.context as content, 
   DATE_FORMAT(c.date,'%Y-%c-%d %h:%i') as date,
   u.username as postName ,
+  u.user_image as userImage,
 	c.user_id as commentUserId,
 n.id as newsId,
 n.news_title as newsTitle,
@@ -323,7 +324,9 @@ rc.user_id as postId,
 rc.reply_to_user_id as reciveId,
 rc.context as content,
 u1.username as postName,
-u2.username as reciveName
+u1.user_image as postUserImage,
+u2.username as reciveName,
+u2.user_image as receiveUserImage
 from `comment` c
 LEFT JOIN `comment` rc on rc.comment_id = c.id
 LEFT JOIN `user` u1 on u1.id = rc.user_id
