@@ -68,7 +68,7 @@
 					<div class="col-md-4 bottom-grid">
 						<a href="/news/detail?newsId=${item.id }" target="_blank"><img src="${item.imagePath }" alt="" /></a>
 						<div class="bottom-grid-info">
-							<a href="/news/detail?newsId=${item.id }" target="_blank" title="${item.newsTitle }">${item.newsShortTitle }</a>
+							<a href="/news/detail?newsId=${item.id }" target="_blank" title="${item.newsTitle }"><p style="color: #f45a40;font-family: 'Roboto Condensed', sans-serif;font-size: 26px;width:100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">${item.newsTitle }</p></a>
 							<p>${item.newsContent }</p>
 						</div>
 					</div>
