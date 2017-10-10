@@ -1155,7 +1155,7 @@ a.detail1{
 .product{
 	position:absolute;
 	bottom:0;
-	border-top:2px solid #00f406;
+	/*border-top:2px solid #00f406;*/
 	background:#dedede;
 	width: 92.5%;
 	padding:0.5em;
