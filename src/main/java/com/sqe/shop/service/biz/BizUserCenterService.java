@@ -125,7 +125,7 @@ public class BizUserCenterService extends BaseCommon {
 			user.setUserIntroduce(user.getUserIntroduce().substring(0, 200));
 		}
 
-		if (attachFile != null) {
+		if (attachFile != null && attachFile.getSize()>0) {
 			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
 			String fileName = resMap.get("errorInfo").toString();
 			if (!resMap.get("errorNo").equals(0)) {
