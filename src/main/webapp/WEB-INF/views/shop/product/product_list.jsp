@@ -23,7 +23,9 @@
 						 <div class="col-md-3 fashion-grid" style="height: 225px;">
 							 <a href="single.html"><img src="${item.imagePath }" alt=""/>
 								 <div class="product <c:if test="${item.productCount==0 }">not-avaliable</c:if>">
-									 <h3>${item.productName }</h3>
+									 <h3  style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+									 	${item.productName }
+									 </h3>
 									 <p>
 									 	<c:if test="${item.productCount==0 }">
 											<del><span></span> ¥ ${item.productPrice }</del>										 	
@@ -35,13 +37,13 @@
 								 </div>
 							 </a>
 							 
-							 <div class="fashion-view"><span></span>
+							 <div title="${item.productName}" class="fashion-view"><span></span>
 								<div class="clearfix"></div>
 								<c:if test="${item.productCount==0 }">
 									<h4 class="sold-out"><a href="/product/single?productId=${item.id }" target="_blank"><del>Sold Out</del></a></h4>									 	
 							 	</c:if>
 							 	<c:if test="${item.productCount!=0 }">
-							 		<h4><a href="/product/single?productId=${item.id }" target="_blank">Quick View</a></h4>
+							 		<h4 ><a href="/product/single?productId=${item.id }" target="_blank">Quick View</a></h4>
 							 	</c:if>
 							 </div>
 						 </div>
