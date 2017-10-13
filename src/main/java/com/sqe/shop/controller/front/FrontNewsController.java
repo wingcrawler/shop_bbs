@@ -2,6 +2,7 @@ package com.sqe.shop.controller.front;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sqe.shop.controller.base.BaseFrontController;
 import com.sqe.shop.model.Comment;
 import com.sqe.shop.model.Image;
+import com.sqe.shop.model.Likes;
 import com.sqe.shop.model.News;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
+import com.sqe.shop.service.LikesService;
 import com.sqe.shop.service.NewsService;
 import com.sqe.shop.service.biz.BizNewsService;
 import com.sqe.shop.util.DateUtil;
@@ -44,6 +47,9 @@ public class FrontNewsController extends BaseFrontController {
 	
 	@Autowired
 	private BizNewsService bizNewsService;
+	
+	@Autowired
+	private LikesService likeService;
 	
 	/**
 	 * 新闻列表页
@@ -127,16 +133,30 @@ public class FrontNewsController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="doNewsUp", method = RequestMethod.POST)
+	@RequestMapping(value="doNewsUp")
 	public Map<String, Object> thumb(Long newsId) {
 		News news = newsService.getById(newsId);
 		if(news==null){
 			return responseError(-1, "error_thumb");
 		}
 		//点赞
-		newsService.updateThumb(news.getNewsUp(), newsId);
-		/*return responseOK("success_thumb");*/
-		return responseOK1("");
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("newsId", newsId);
+		parmMap.put("userId", getCurrentUserId());	
+		int thumbCount1 = likeService.countByParm(parmMap);
+		if(thumbCount1>0){
+			return responseOK1("您已经点赞");
+		}else{
+			Likes likes=new Likes();
+			likes.setNewsId(newsId);
+			likes.setUserId(getCurrentUserId());
+			likes.setCreateTime(new Date(System.currentTimeMillis()));	
+			likeService.insert(likes);
+			newsService.updateThumb(news.getNewsUp(), newsId);
+			/*return responseOK("success_thumb");*/
+			return responseOK1("");
+		}
+		
 	}
 	
 	@RequestMapping(value="search", method = RequestMethod.POST)

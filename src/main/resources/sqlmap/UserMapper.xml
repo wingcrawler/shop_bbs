@@ -35,7 +35,6 @@
 			<if test="loginTime != null">
 				login_time=#{loginTime},
 			</if>
-
 			<if test="userQq != null">
 				user_qq=#{userQq},
 			</if>
