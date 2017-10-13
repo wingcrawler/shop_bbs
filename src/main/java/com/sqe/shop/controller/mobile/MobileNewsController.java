@@ -1,6 +1,7 @@
 package com.sqe.shop.controller.mobile;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,7 @@ import com.sqe.shop.model.Comment;
 import com.sqe.shop.model.News;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
+import com.sqe.shop.service.LikesService;
 import com.sqe.shop.service.NewsService;
 import com.sqe.shop.service.biz.BizNewsService;
 
@@ -30,6 +32,8 @@ public class MobileNewsController extends BaseFrontController {
 	private CommentService commentService;
 	@Autowired
 	private ImageService imageService;
+	@Autowired
+	private LikesService likesService;
 	
 	@Autowired
 	private BizNewsService bizNewsService;
@@ -69,6 +73,22 @@ public class MobileNewsController extends BaseFrontController {
 		}
 				
 		Map<String, Object> resMap = bizNewsService.getDetail(newsId, news);
+		
+		//点赞数量
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("newsId", newsId);
+		int thumbCount = likesService.countByParm(parmMap);
+		resMap.put("thumbCount", thumbCount);
+		//是否已点赞
+		resMap.put("isliked", false);
+		Long userId = this.getCurrentUserId();
+		if(userId!=null){
+			parmMap.put("userId", newsId);	
+			int thumbCount1 = likesService.countByParm(parmMap);
+			if(thumbCount1>0){
+				resMap.put("isliked", true);		
+			}
+		}
 		
 		return resMap;
 	}

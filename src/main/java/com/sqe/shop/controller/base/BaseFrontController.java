@@ -1,6 +1,9 @@
 package com.sqe.shop.controller.base;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -119,6 +122,26 @@ public class BaseFrontController extends BaseCommon {
 		System.out.println("Exception" + e.getStackTrace());
 		logger.error("", e);
 		return "shop/500";
+	}
+	
+	public Map<String, Object> getParmMap() {
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		Enumeration paramNames = request.getParameterNames();  
+		while (paramNames.hasMoreElements()) {
+			String paramName = (String) paramNames.nextElement();  
+			String[] paramValues = request.getParameterValues(paramName);  
+			if (paramValues.length == 1) {  
+				String paramValue = paramValues[0];  
+				if (paramValue.length() != 0) {  
+					try {
+						parmMap.put(paramName, URLDecoder.decode(paramValue, "utf-8"));	
+					} catch (Exception e) {
+						parmMap.put(paramName, "");
+					}
+				}  
+			}  
+		}
+		return parmMap;
 	}
 
 }

@@ -15,6 +15,7 @@ import com.sqe.shop.model.Image;
 import com.sqe.shop.model.News;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
+import com.sqe.shop.service.LikesService;
 import com.sqe.shop.service.NewsService;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
@@ -29,6 +30,8 @@ public class BizNewsService extends BaseCommon {
 	private CommentService commentService;
 	@Autowired
 	private ImageService imageService;
+	@Autowired
+	private LikesService likesService;
 
 	/**
 	 * 新闻资讯列表
@@ -49,6 +52,7 @@ public class BizNewsService extends BaseCommon {
 		PageUtil<Map<String, Object>> newsPage = newsService.getMapListByParm(news, pageNo, pageSize);
 		if(newsPage.getList()!=null && !newsPage.getList().isEmpty()){
 			String newsContent = "";
+			Long userId = this.getCurrentUserId();
 			for(Map<String, Object> map : newsPage.getList()){
 				newsContent = map.get("newsContent").toString();
 				newsContent = RegularUtil.Html2Text(newsContent);
@@ -57,6 +61,21 @@ public class BizNewsService extends BaseCommon {
 					map.put("newsContent", newsContent);
 				} else {
 					map.put("newsContent", newsContent);
+				}
+				
+				//点赞数量
+				Map<String, Object> parmMap = new HashMap<String, Object>();
+				parmMap.put("newsId", map.get("id"));
+				int thumbCount = likesService.countByParm(parmMap);
+				map.put("thumbCount", thumbCount);
+				//是否已点赞
+				map.put("isliked", false);
+				if(userId!=null){
+					parmMap.put("userId", map.get("id"));	
+					int thumbCount1 = likesService.countByParm(parmMap);
+					if(thumbCount1>0){
+						map.put("isliked", true);		
+					}
 				}
 				
 			}
