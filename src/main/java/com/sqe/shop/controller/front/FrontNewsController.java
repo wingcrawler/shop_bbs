@@ -30,6 +30,7 @@ import com.sqe.shop.service.NewsService;
 import com.sqe.shop.service.biz.BizNewsService;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.PropertiesUtil;
 import com.sqe.shop.util.RegularUtil;
 
 @Controller
@@ -145,7 +146,12 @@ public class FrontNewsController extends BaseFrontController {
 		parmMap.put("userId", getCurrentUserId());	
 		int thumbCount1 = likeService.countByParm(parmMap);
 		if(thumbCount1>0){
-			return responseOK1("您已经点赞");
+			 String lang = PropertiesUtil.get("lang");
+			if(lang.equals("zh")){
+			return responseOK1("您已经点赞");}
+			else{
+				return responseOK1("You're already thumb up");
+			}
 		}else{
 			Likes likes=new Likes();
 			likes.setNewsId(newsId);

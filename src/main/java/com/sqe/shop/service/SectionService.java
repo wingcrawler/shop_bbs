@@ -69,7 +69,7 @@ public class SectionService extends AdapterService implements BaseService {
 
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		if (count != 0) {
-			list = sectionMapper.getMapListByParm(parm);
+			list = sectionMapper.getBeanListByParm(parm);
 		}
 		pageUtil.setList(list);
 		return pageUtil;

@@ -33,6 +33,7 @@ public class BizBBSService extends BaseCommon {
 		// 一级板块
 		Section section = new Section();
 		section.setSectionType(0);
+		section.setSectionStatus(1);
 		PageUtil<Map<String, Object>> sectionList = sectionService.getMapListByParm(section, 1, -1);
 		resMap.put("sections", sectionList);
 
