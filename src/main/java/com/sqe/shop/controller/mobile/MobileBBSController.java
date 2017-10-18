@@ -21,6 +21,7 @@ import com.sqe.shop.service.PostService;
 import com.sqe.shop.service.SectionService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.biz.BizBBSService;
+import com.sqe.shop.util.PageUtil;
 
 @Controller
 @RequestMapping("/h5")
@@ -161,15 +162,15 @@ public class MobileBBSController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/bbs/threadList", method = RequestMethod.POST)
-	public Map<String, Object> getThreadsBySection(@RequestParam(name = "sectionId", defaultValue = "1") Long sectionId,
+	public PageUtil<Map<String, Object>> getThreadsBySection(@RequestParam(name = "sectionId", defaultValue = "1") Long sectionId,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		Map<String, Object> resMap = this.responseOK1("");
 		Thread threadList = new Thread();
 		threadList.setSectionId(sectionId);
 		threadList.setThreadStatus(1);
-		resMap.put("sectionList", threadService.getBeanListByParm(threadList, pageNo, pageSize));
-		return resMap;
+		return threadService.getMapListByParm(threadList, pageNo, pageSize);
+		
 	}
 
 	/**

@@ -100,6 +100,7 @@ public class ThreadService extends AdapterService implements BaseService {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		if (count != 0) {
 			list = threadMapper.getMapListByParm(parm);
+			parm.clear();
 			for (Map<String, Object> map : list) {
 				Date date = (Date) map.get("date");
 				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
@@ -107,6 +108,9 @@ public class ThreadService extends AdapterService implements BaseService {
 				map.put("typeName", this.getThreadType(Integer.valueOf(type)));
 				String status = map.get("threadStatus").toString();
 				map.put("statusName", this.getThreadStatus(Integer.valueOf(status)));
+				parm.put("threadId", map.get("id"));
+				parm.put("postStatus",1);
+				map.put("threadPostNum", postMapper.countByParm(parm));
 			}
 		}
 		pageUtil.setList(list);
@@ -132,11 +136,16 @@ public class ThreadService extends AdapterService implements BaseService {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		if (count != 0) {
 			list = threadMapper.getHotThread(parm);
+			parm.clear();
 			for (Map<String, Object> map : list) {
 				Date date = (Date) map.get("date");
 				map.put("createTimeStr", DateUtil.dateToString(date, DateUtil.DATETIME_FORMATE_2));
 				String type = map.get("threadType").toString();
 				map.put("typeName", this.getThreadType(Integer.valueOf(type)));
+				parm.put("threadId", map.get("id"));
+				parm.put("postStatus",1);
+				map.put("threadPostNum", postMapper.countByParm(parm));
+				map.put("relativeDate",RelativeDateFormat.format((Date)map.get("date")));
 			}
 		}
 		pageUtil.setList(list);
