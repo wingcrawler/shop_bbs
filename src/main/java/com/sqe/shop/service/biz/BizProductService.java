@@ -79,6 +79,13 @@ public class BizProductService extends BaseCommon {
 		parmMap.put("orderby", "c.date desc");
 		PageUtil<Map<String, Object>> commentPage = commentService.getProductCommentListByParm(parmMap, pageNo, pageSize);
 		resMap.put("commentPage", commentPage);
+		Product product = productService.getById(productId);
+		if(product==null){
+			product = new Product();
+			product.setId(productId);
+			product.setProductName("");
+		}
+		resMap.put("product", product);
 		return resMap;
 	}
 	
