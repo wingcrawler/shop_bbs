@@ -204,11 +204,13 @@
 	 rp.user_id,
 	 rp.post_date, 
 	 u.username as name ,
-	 u.user_role as role  
+	 u.user_role as role ,
+	 u.user_image as accountPicture
 	 from post p  
 	 LEFT JOIN `post` rp on rp.post_id = p.id
 	 LEFT JOIN  `user` u on
 	 rp.user_id = u.id
+	 
 	 where 1=1
 	 and rp.post_id is Not null
 	  <if test="parm.replyToFloor != null">

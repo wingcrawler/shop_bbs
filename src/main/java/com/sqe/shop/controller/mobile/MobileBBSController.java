@@ -131,7 +131,10 @@ public class MobileBBSController extends BaseFrontController {
 		if (threaddetil == null) {
 			return responseError1(404, "error_empty_thread");
 		}
-		resMap.put("thred", threaddetil);
+		resMap.put("thread", threaddetil);
+		Post post=new Post();
+		post.setThreadId(id);
+		resMap.put("threadPostNum", postService.countByParm(post));
 		return resMap;
 	}
 

@@ -1,6 +1,7 @@
 package com.sqe.shop.service;
 
 import java.util.HashMap;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.PostMapper;
 import com.sqe.shop.model.Post;
-import com.sqe.shop.model.Thread;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 
@@ -20,6 +20,9 @@ public class PostService extends AdapterService implements BaseService {
 	
 	@Autowired
     PostMapper postMapper;
+	
+	@Autowired
+	UserService userService;
     
     public int insert(Post post) {
 		return postMapper.insert(post);
@@ -78,6 +81,8 @@ public class PostService extends AdapterService implements BaseService {
 			for (Map<String, Object> p : list) {
 				Date time = (Date) p.get("post_date");
 				p.put("time",(DateUtil.dateToString(time, DateUtil.DATETIME_FORMATE_4)));
+				Long id=((BigInteger)p.get("user_id")).longValue();
+				p.put("accountPicture",userService.getById(id).getUserImage());
 
 			}
 		}
