@@ -30,7 +30,7 @@ public class BizLikesService extends BaseCommon {
 		parmMap.put("newsId", likes.getNewsId());
 		int count = likesService.countByParm(parmMap);
 		if(count>0){
-			return responseOK("success_thumb");
+			return responseOK("you had success_thumb");
 		}
 		
 		likes.setUserId(userId);

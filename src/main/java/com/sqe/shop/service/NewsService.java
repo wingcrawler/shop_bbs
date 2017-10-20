@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sqe.shop.mapper.ImageMapper;
+import com.sqe.shop.mapper.LikesMapper;
 import com.sqe.shop.mapper.NewsMapper;
 import com.sqe.shop.mapper.UserThumbMapper;
 import com.sqe.shop.model.Image;
@@ -30,6 +31,9 @@ public class NewsService extends AdapterService implements BaseService {
 	private UserThumbMapper userThumbMapper;
 	@Autowired
 	private ImageMapper imageMapper;
+	
+	@Autowired
+	private LikesMapper likesMapper;
     
     public int insert(News news) {
 		return newsMapper.insert(news);
@@ -87,6 +91,12 @@ public class NewsService extends AdapterService implements BaseService {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		if(count!=0){
 			list = newsMapper.getMapListByParm(parm);
+			parm.clear();
+			for(Map<String, Object> m:list){
+				parm.put("newsId", m.get("id"));
+				m.put("thumbCount", likesMapper.countByParm(parm));
+			}
+			
 		}
 		pageUtil.setList(list);
 		return pageUtil;
