@@ -72,7 +72,7 @@
 			<if test="parm.type != null">
 		     	and type = #{parm.type}
 		   	</if>
-		   	<if test="parm.device != null and parm.device!=''">
+		   	<if test="parm.device != null">
 		     	and device = #{parm.device}
 		   	</if>
 </select>
@@ -94,7 +94,7 @@
 			<if test="parm.type != null">
 		     	and type = #{parm.type}
 		   	</if>
-		   	<if test="parm.device != null and parm.device!=''">
+		   	<if test="parm.device != null">
 		     	and device = #{parm.device}
 		   	</if>
 		   	

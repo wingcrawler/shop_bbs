@@ -92,6 +92,9 @@ public class AdvertisementService extends AdapterService implements BaseService 
 			if(ad.getType()!=null && ad.getType()>=0){
 				parm.put("type", ad.getType());
 			}
+			if(ad.getDevice()!=null){
+				parm.put("device", ad.getDevice());
+			}
 		}
 		return parm;
 	}
