@@ -93,7 +93,7 @@ public class MobileProductController extends BaseFrontController {
 		product.setProductStatus(1);
 		if(StringUtils.isBlank(productTypeId)){
 			//热门商品
-			PageUtil<Map<String, Object>> hotProductPage = productService.getHotProductList(product, 1, 9); 
+			PageUtil<Map<String, Object>> hotProductPage = productService.getHotProductList(product, pageNo, pageSize); 
 			resMap.put("page", hotProductPage);
 		} else {
 			//根据一级分类查询商品
