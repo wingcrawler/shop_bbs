@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -163,5 +164,53 @@ public class BBSThreadController extends BaseFrontController {
 		resMap.put("page", page);
 		return resMap;
 	}
+	
+	/**
+	 * 获取最新的帖子
+	 * 
+	 * @param thread
+	 * @param sectionId
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/hotThread", method = RequestMethod.GET)
+	public Map<String, Object> getHotThreadList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+			@RequestParam(name = "pageSize", defaultValue = "5") int pageSize) {
+		Map<String, Object> resMap = new HashMap<String, Object>();
+		Thread temp=new Thread();
+		temp.setThreadStatus(THREAD_ON);
+		PageUtil<Map<String, Object>> page = threadService.getHot(temp,pageNo, pageSize);
+		resMap.put("list", page.getList());
+		resMap.put("page", page);
+		return resMap;
+	}
+	
+	
+	/**
+	 * 获取管理员推荐的帖子(最新发现)
+	 * 
+	 * @param thread
+	 * @param sectionId
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/recommendThread", method = RequestMethod.GET)
+	public Map<String, Object> getRecommendThreadList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+			@RequestParam(name = "pageSize", defaultValue = "3") int pageSize) {
+		Map<String, Object> resMap = new HashMap<String, Object>();
+		Thread temp=new Thread();
+		temp.setThreadStatus(THREAD_RECOMMEND);
+		PageUtil<Map<String, Object>> page = threadService.getHot(temp,pageNo, pageSize);
+		resMap.put("list", page.getList());
+		resMap.put("page", page);
+		return resMap;
+	}
+	
+	
+	
 
 }

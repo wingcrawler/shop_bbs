@@ -153,6 +153,7 @@ public class Constants{
     //帖子状态
     public static final int THREAD_OFF = 0; //关闭
     public static final int THREAD_ON = 1; //正常
+    public static final int THREAD_RECOMMEND = 2; //管理员推荐
 	public String getThreadStatus(Integer value) {
 		return cachedService.getString("thread_status_"+value);
 	}
