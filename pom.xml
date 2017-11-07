@@ -187,11 +187,14 @@
 		</dependency>
 
 		<!-- ueditor -->
-		<dependency>
-			<groupId>cn.songxinqiang</groupId>
-			<artifactId>com.baidu.ueditor</artifactId>
-			<version>1.1.2-offical</version>
-		</dependency>
+<!-- https://mvnrepository.com/artifact/cn.songxinqiang/com.baidu.ueditor -->
+<dependency>
+    <groupId>cn.songxinqiang</groupId>
+    <artifactId>com.baidu.ueditor</artifactId>
+    <version>1.1.2-offical</version>
+    <scope>system</scope>  
+    <systemPath>${project.basedir}/lib/ue-0.0.1-SNAPSHOT.jar</systemPath>  
+</dependency>
 
 		<!-- poi for excel -->
 		<dependency>
