@@ -112,6 +112,24 @@
 
 <select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
 	select * from product_type where 1=1
+	<if test="parm.typeName != null">
+		     	and  (type_name = #{parm.typeName} or type_name_ch = #{parm.typeName})
+		   	</if>
+			<if test="parm.typeRank != null">
+		     	and type_rank = #{parm.typeRank}
+		   	</if>
+			<if test="parm.typeDescriptionCh != null">
+		     	and type_description_ch = #{parm.typeDescriptionCh}
+		   	</if>
+			<if test="parm.typeDescription != null">
+		     	and type_description = #{parm.typeDescription}
+		   	</if>
+		   	<if test="parm.typeLevel != null">
+		     	and type_level = #{parm.typeLevel}
+		   	</if>
+		   	<if test="parm.parentId != null">
+		     	and parent_id = #{parm.parentId}
+		   	</if>
 		<if test="parm.orderby != null">
 	   		order by ${parm.orderby}
 	   	</if>
