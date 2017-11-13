@@ -1,6 +1,7 @@
 package com.sqe.shop.controller.front;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,6 +71,22 @@ public class BuyerCenterController extends BaseFrontController {
 		return model;
 	}
 	/**
+	 * 获取用户基本信息
+	 * @param user
+	 * @param attachFile
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/userBasicInfo", method = RequestMethod.GET)
+	public Map<String, Object> userBasicInfo(Long userId){
+		User entity = userService.getById(userId);
+		HashMap<String, Object> resMap = new HashMap<String, Object>();
+		resMap.put(Constants.ERROR_NO, Constants.ERRORCODE_SUCCESS);
+		resMap.put("userInfo", entity);
+		return resMap;
+	}
+	
+	/**
 	 * 修改用户基本信息
 	 * @param user
 	 * @param attachFile
@@ -78,8 +96,11 @@ public class BuyerCenterController extends BaseFrontController {
 	@RequestMapping(value="/doSaveBasicInfo", method = RequestMethod.POST)
 	public Map<String, Object> doSaveBasicInfo(User user,
 			@RequestParam(name = "file",value="file", required = false) MultipartFile attachFile){
+		user.setId(getCurrentUserId());
 		return bizUserCenterService.doSaveBasicInfo(user, attachFile);
 	}
+	
+
 	
 	/**
 	 * 进入修改密码页面
@@ -124,6 +145,22 @@ public class BuyerCenterController extends BaseFrontController {
 	}
 	
 	/**
+	 * 发帖回复列表
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/postRecords", method = RequestMethod.GET)
+	@ResponseBody
+	public PageUtil<Map<String, Object>> postReplys(Thread thread,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize){
+		pageSize = 10;	
+		thread.setUserId(this.getCurrentUserId());
+		PageUtil<Map<String, Object>> page = threadService.getSellThreadList(thread, pageNo, pageSize);
+		return page;
+	}
+	
+	/**
 	 * 商品留言页面 
 	 * @param model
 	 * @param type 1:留言 2：私信
@@ -152,6 +189,33 @@ public class BuyerCenterController extends BaseFrontController {
 		model.addObject("type", type);
 		model.addObject("page", page);
 		return model;
+	}
+	
+
+	/**
+	 * 商品留言页面 
+	 * @param model
+	 * @param type 1:留言 2：私信
+	 * @return
+	 */
+	@RequestMapping(value="/messagePages", method = RequestMethod.GET)
+	@ResponseBody
+	public PageUtil<Map<String, Object>>  messagePages(String type,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) {
+		pageSize = 10;
+		PageUtil<Map<String, Object>> page = new PageUtil<Map<String,Object>>();
+		if(type.equals("1")){//产品评论
+			page = bizUserCenterService.getProductCommentList(this.getCurrentUserId(), pageNo, pageSize);
+			
+		} else if(type.equals("2")){//私信
+			page = bizUserCenterService.getMessageList(this.getCurrentUserId(), pageNo, pageSize);
+			
+		} else if(type.equals("3")){//新闻资讯评论
+			page = bizUserCenterService.getNewsCommentList(this.getCurrentUserId(), pageNo, pageSize);
+		
+		} 
+		return page;
 	}
 	
 	/**
@@ -253,6 +317,24 @@ public class BuyerCenterController extends BaseFrontController {
 	public Map<String, Object> doApplayShop(Shop shop,
 			@RequestParam(name = "file", required = false) MultipartFile attachFile){
 		return bizUserCenterService.doApplayShop(shop, attachFile);
+	}
+	/**
+	 * 用户开店
+	 * @param model
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/doApplayShops", method = RequestMethod.POST)
+	public Map<String, Object> doApplayShops(Shop shop,
+			@RequestParam(name = "file", required = false) MultipartFile attachFile){
+		
+		Long userId = this.getCurrentUserId();
+		Map<String, Object> resMap=bizUserCenterService.shopInfo(userId);
+		if(resMap.get("shopflag").equals("1")){
+			resMap.put(Constants.ERROR_NO, -1);
+			return resMap;
+		}else{
+		return bizUserCenterService.doApplayShop(shop, attachFile);}
 	}
 	
 }

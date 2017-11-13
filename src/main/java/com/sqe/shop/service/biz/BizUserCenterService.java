@@ -172,10 +172,12 @@ public class BizUserCenterService extends BaseCommon {
 		Map<String, Object> resMap = this.responseOK1("");
 		Shop shop = shopService.getByUserId(userId);
 		if (shop != null) {
+			resMap.put("shopfalg", "1");
 			resMap.put("shop", shop);
 			resMap.put("user", this.getCurrentUser());
 			resMap.put("img", shop.getShopLogoImg());
 		} else {
+			resMap.put("shopfalg", "0");
 			resMap.put("shop", new Shop());
 			resMap.put("user", this.getCurrentUser());
 		}

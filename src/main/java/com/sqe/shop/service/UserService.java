@@ -101,7 +101,7 @@ public class UserService extends AdapterService implements BaseService {
 		}
 	}
 
-	private Map<String, Object> queryParm(User user) {
+       private Map<String, Object> queryParm(User user) {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		if (user != null) {
 			if (StringUtils.isNotBlank(user.getUsername())) {
