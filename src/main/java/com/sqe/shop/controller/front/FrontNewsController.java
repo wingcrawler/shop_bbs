@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,6 +70,22 @@ public class FrontNewsController extends BaseFrontController {
 		model.addAllObjects(resMap);
 		model.setViewName("shop/news/list");
 		return model;
+	}
+	/**
+	 * 新闻列表页
+	 * @param model
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	@PostMapping("list")
+	@ResponseBody
+	public Map<String, Object> list(String searchText,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="10") int pageSize) throws UnsupportedEncodingException {
+		pageSize=10;
+		
+		Map<String, Object> resMap = bizNewsService.getNewsData(searchText,pageNo,pageSize);
+		return resMap;
 	}
 	
 	/**
