@@ -201,6 +201,24 @@ public class FrontProductController extends BaseFrontController {
 		model.setViewName("shop/product/product_search");
 		return model;
 	}
+	
+	@RequestMapping(value="searchs", method = RequestMethod.POST)
+	@ResponseBody
+	public PageUtil<Map<String, Object>>  searchs(String searchText,
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="12") int pageSize) {
+		PageUtil<Map<String, Object>> productPage=new PageUtil<Map<String, Object>>();
+		if(StringUtils.isBlank(searchText)){
+			return null;	
+		}
+		pageSize=12;	
+		//搜索产品
+		Product product = new Product();
+		product.setProductName(searchText);
+		productPage = productService.getMapListByParm(product, pageNo, pageSize);
+		
+		return productPage;
+	}
 	@RequestMapping(value="searchGet", method = RequestMethod.GET)
 	public ModelAndView searchGet(ModelAndView model, String productName,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  

@@ -140,6 +140,15 @@ public class FrontRegisterController extends BaseFrontController {
 		this.logout();
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/dologout", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> dologout(HttpServletRequest request, User user) {
+		Map<String, Object> map=new HashMap<String, Object>();
+		this.logout();
+		map.put("result", "true");
+		return map;
+	}
 
 	
 	@RequestMapping(value = "/applyshop", method = RequestMethod.GET)
