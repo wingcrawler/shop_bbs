@@ -315,8 +315,12 @@
 </select>
 
 <select id="getHotProductList" parameterType="HashMap" resultType="HashMap">
-	select p.id id,p.product_name as productName, p.product_price as productPrice,
-	p.product_descripton as productDesc,
+	p.id id,
+	p.product_name AS productName,
+	p.product_price AS productPrice,
+	p.product_descripton AS productDesc,
+    p.product_type_id,
+    p.product_status,
 	i.image_path as imagePath
 	from product p 
 	LEFT JOIN image i on p.id=i.product_id
@@ -330,6 +334,9 @@
    	<if test="parm.shopId != null">
     	and p.shop_id = #{parm.shopId}
   	</if>
+  	<if test="parm.productTypeId != null">
+	     	and p.product_type_id = #{parm.productTypeId}
+	</if>
   	GROUP BY p.id
 	<if test="parm.orderby != null">
    		order by ${parm.orderby}

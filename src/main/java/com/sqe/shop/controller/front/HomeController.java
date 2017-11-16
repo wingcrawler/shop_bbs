@@ -3,6 +3,8 @@ package com.sqe.shop.controller.front;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,7 +135,7 @@ public class HomeController extends BaseFrontController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/h5/category", method = RequestMethod.GET)
+	@RequestMapping(value="/h5/product/category", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> category() {
         Map<String, Object> resMap = this.responseOK1("");	
@@ -153,7 +155,7 @@ public class HomeController extends BaseFrontController {
 	 */
 	@RequestMapping(value="/h5/products", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> ProductsByType(@RequestParam(name="typeId") Long typeId) {
+	public Map<String, Object> ProductsByType(@NotNull @RequestParam(name="typeId",required = true) Long typeId) {
         Map<String, Object> resMap = this.responseOK1("");	
         Product product=new Product();
         product.setProductTypeId(typeId);

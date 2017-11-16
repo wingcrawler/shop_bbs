@@ -182,7 +182,6 @@ public class BBSThreadController extends BaseFrontController {
 		Thread temp=new Thread();
 		temp.setThreadStatus(THREAD_ON);
 		PageUtil<Map<String, Object>> page = threadService.getHot(temp,pageNo, pageSize);
-		resMap.put("list", page.getList());
 		resMap.put("page", page);
 		return resMap;
 	}
@@ -204,8 +203,7 @@ public class BBSThreadController extends BaseFrontController {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		Thread temp=new Thread();
 		temp.setThreadStatus(THREAD_RECOMMEND);
-		PageUtil<Map<String, Object>> page = threadService.getHot(temp,pageNo, pageSize);
-		resMap.put("list", page.getList());
+		PageUtil<Map<String, Object>> page = threadService.getMapListByParm(temp,pageNo, pageSize);
 		resMap.put("page", page);
 		return resMap;
 	}
