@@ -3,6 +3,8 @@ package com.sqe.shop.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Message implements Serializable {
 
 	/**

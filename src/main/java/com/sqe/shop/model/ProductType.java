@@ -2,6 +2,8 @@ package com.sqe.shop.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class ProductType implements Serializable {
 
 	private static final long serialVersionUID = 1L;

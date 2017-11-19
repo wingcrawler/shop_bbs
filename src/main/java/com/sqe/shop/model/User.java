@@ -8,8 +8,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sqe.shop.common.BaseModel;
-
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class User extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -3,8 +3,9 @@ package com.sqe.shop.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sqe.shop.common.BaseModel;
-
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Thread extends BaseModel implements Serializable {
 
 	private static  final long serialVersionUID = 1L;

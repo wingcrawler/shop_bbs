@@ -151,11 +151,11 @@ public class CommentService extends AdapterService implements BaseService {
 			if(comment.getShopId()!=null && comment.getShopId()>0){
 				parm.put("shopId", comment.getShopId());
 			}
-			if(comment.getUserId()!=null && comment.getNewsId()>0){
+			if(comment.getUserId()!=null && comment.getUserId()>0){
 				parm.put("userId", comment.getUserId());
 			}
 		}
-		parm.put("orderby", "order by id desc");
+		/*parm.put("orderby", "order by id desc");*/
 		return parm;
 	}
 

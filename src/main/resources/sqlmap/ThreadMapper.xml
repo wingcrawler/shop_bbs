@@ -306,6 +306,7 @@
 		t.thread_title as threadTitle,
 		t.thread_time as date,
 		t.thread_view,
+		t.thread_context,
 		t.thread_up,
 		t.thread_type as threadType,
 		t.user_id as userId,
@@ -333,6 +334,7 @@
 			limit #{parm.start},#{parm.limit}
 		</if>
 	</select>
+
 
 
 

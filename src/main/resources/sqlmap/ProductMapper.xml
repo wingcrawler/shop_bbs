@@ -315,7 +315,7 @@
 </select>
 
 <select id="getHotProductList" parameterType="HashMap" resultType="HashMap">
-	p.id id,
+	select p.id id,
 	p.product_name AS productName,
 	p.product_price AS productPrice,
 	p.product_descripton AS productDesc,

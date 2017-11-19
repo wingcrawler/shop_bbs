@@ -42,8 +42,7 @@ public class HomeController extends BaseFrontController {
 	private ProductService productService;
 	@Autowired
 	private ProductTypeService productTypeService;
-	@Autowired
-	private AdvertisementService advertisementService;
+
 	@Autowired
 	private ImageService imageService;
 	@Autowired
@@ -72,97 +71,12 @@ public class HomeController extends BaseFrontController {
 		return model;
 	}
 	
-	/**
-	 * 商城首页轮播图
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="/h5/advertisement", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> advertisement() {
-        Map<String, Object> resMap = this.responseOK1("");		
-		//轮播图
-		Advertisement advertisement = new Advertisement();
-		advertisement.setType(Constants.AD_TYPE_LB);
-		advertisement.setDevice(Constants.AD_DEVICE_PC);
-		PageUtil<Advertisement> adPage = advertisementService.getBeanListByParm(advertisement, 1, -1);
-		resMap.put("adList", adPage.getList());		
-		return resMap;
-	}
-	
-	/**
-	 * 商城首页热门资讯
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="/h5/news", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> hotNews() {
-        Map<String, Object> resMap = this.responseOK1("");		
-		//热门资讯
-        //3个新闻资讯
-      		PageUtil<Map<String, Object>> newPage = newsService.getMapListByParm(new News(), 1, 3);
-      		if(newPage.getList()!=null && !newPage.getList().isEmpty()){
-      			String newsTitle = "";
-      			String newsContent = "";
-      			for(Map<String, Object> map : newPage.getList()){
-      				newsTitle = map.get("newsTitle").toString();
-      				if(newsTitle.length()>10){
-      					map.put("newsShortTitle", newsTitle.substring(0, 9)+"...");
-      				} else {
-      					map.put("newsShortTitle", newsTitle);
-      				}
-      				
-      				newsContent = map.get("newsContent").toString();
-      				newsContent = RegularUtil.Html2Text(newsContent);
-      				if(newsContent.length()>100){
-      					newsContent = newsContent.substring(0,100) + "...";
-      					map.put("newsContent", newsContent);
-      				} else {
-      					map.put("newsContent", newsContent);
-      				}
-      				
-      			}
-      		}
-      		resMap.put("newsList", newPage.getList());
-      		
-      		return resMap;
-	}
+
 	
 	
-	/**
-	 * 商城首页产品分类
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="/h5/product/category", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> category() {
-        Map<String, Object> resMap = this.responseOK1("");	
-        Map<String, Object> parm = new HashMap<String, Object>();
-        parm.put("orderby", "type_rank asc");
-		parm.put("typeLevel", "1");
-		PageUtil<Map<String, Object>> pageUtil = productTypeService.getMapListByParm(parm,1,6);
-		resMap.put("category", pageUtil.getList());		
-		return resMap;
-	}
 	
 	
-	/**
-	 * 商城首页根据产品分类回去产品列表（10个）
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="/h5/products", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> ProductsByType(@NotNull @RequestParam(name="typeId",required = true) Long typeId) {
-        Map<String, Object> resMap = this.responseOK1("");	
-        Product product=new Product();
-        product.setProductTypeId(typeId);
-		PageUtil<Map<String, Object>> pageUtil = productService.getHotProductList(product, 1, 10);
-		resMap.put("hotproducts", pageUtil.getList());		
-		return resMap;
-	}
+
 	
 	/**
 	 * 关于我们

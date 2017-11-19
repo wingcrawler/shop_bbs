@@ -10,7 +10,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
-
 	<mvc:annotation-driven />
 	<!-- 如果有context:component-scan可以不用context:annotation-config -->
 	<context:annotation-config />
@@ -32,7 +31,6 @@
 	<mvc:resources mapping="/ue/**" location="/ue/" />
 	<mvc:resources mapping="/upload/**" location="/upload/" />
 	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
-
 	<!-- open aop -->
 	<aop:aspectj-autoproxy />
 
@@ -83,5 +81,11 @@
 		<!-- 对资源文件内容缓存时间，单位秒 -->
 		<property name="cacheSeconds" value="120" />
 	</bean>
-	
+	<!--Swagger -->
+	<bean class="com.sqe.shop.dto.SwaggerConfig " />
+
+	<mvc:resources location="classpath:/META-INF/resources/"
+		mapping="swagger-ui.html" />
+	<mvc:resources location="classpath:/META-INF/resources/webjars/"
+		mapping="/webjars/**" />
 </beans>
