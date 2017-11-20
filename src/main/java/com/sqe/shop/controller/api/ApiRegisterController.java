@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,9 @@ import com.sqe.shop.service.UserService;
 import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PropertiesUtil;
+import com.sqe.shop.util.Resp;
+
+import io.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping("api/user")
@@ -56,18 +60,16 @@ public class ApiRegisterController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/doRegister", method = RequestMethod.POST)
-	public Map<String, Object> doRegister(HttpServletRequest request, @Validated User user,
+	@ApiOperation(value = "买家注册", notes = "买家注册")
+	public Resp<?> doRegister(HttpServletRequest request, @Validated @RequestBody User user,
 			BindingResult bindingResult) {
 		// 获取校验错误信息
-		if (bindingResult.hasErrors()) {
-			final Map<String, Object> resMap = new HashMap<String, Object>();
-			resMap.put(Constants.ERROR_NO, -1);
-			resMap.put(Constants.ERROR_INFO, bindingResult.getFieldErrors().get(0).getDefaultMessage());
-			return resMap;
+		if (bindingResult.hasErrors()) {		
+			return Resp.customFail("-1", bindingResult.getFieldErrors().get(0).getDefaultMessage());
 		} else {
 			user.setUserRole(ROLE_BUY);
 			Map<String, Object> resMap = registerservice.register(user);
-			return resMap;
+			return Resp.success(resMap);
 		}
 	}
 
@@ -79,19 +81,17 @@ public class ApiRegisterController extends BaseFrontController {
 	 * @return
 	 */
 	@RequestMapping(value = "/sellDoRegister", method = RequestMethod.POST)
-	public Map<String, Object> sellDoRegister(HttpServletRequest request, @Validated User user,
+	@ApiOperation(value = "卖家注册", notes = "卖家注册")
+	public Resp<?> sellDoRegister(HttpServletRequest request, @RequestBody @Validated User user,
 			BindingResult bindingResult) {
 
 		// 获取校验错误信息
 		if (bindingResult.hasErrors()) {
-			final Map<String, Object> resMap = new HashMap<String, Object>();
-			resMap.put(Constants.ERROR_NO, -1);
-			resMap.put(Constants.ERROR_INFO, bindingResult.getFieldErrors().get(0).getDefaultMessage());
-			return resMap;
+			return Resp.customFail("-1", bindingResult.getFieldErrors().get(0).getDefaultMessage());
 		} else {
 			user.setUserRole(ROLE_SELL);
 			Map<String, Object> resMap = registerservice.register(user);
-			return resMap;
+			return Resp.success(resMap);
 		}
 
 	}
@@ -104,8 +104,9 @@ public class ApiRegisterController extends BaseFrontController {
 	 */
 
 	@ResponseBody
-	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-	public Map<String, Object> doLogin(HttpServletRequest request, User user) {
+	@RequestMapping(value = "/doLogin", method = RequestMethod.PUT)
+	@ApiOperation(value = "登录", notes = "")
+	public Resp<?>  doLogin(HttpServletRequest request, @RequestBody User user) {
 		Map<String, Object> resMap = loginService.login(user);
 		if (resMap.get(Constants.ERROR_NO).equals(0)) {
 			User userInfo = this.getCurrentUser();
@@ -113,10 +114,10 @@ public class ApiRegisterController extends BaseFrontController {
 			loginService.updateLoginTime(userInfo);
 			if (userInfo.getUserRole().equals(Constants.ROLE_ADMIN)) {
 				this.logout();
-				return responseError(-1, "error_twopwd_not_match");
+				return Resp.customFail("-1", "error_twopwd_not_match");
 			}
 		}
-		return resMap;
+		return Resp.success(resMap);
 	}
 
 	/**
@@ -127,11 +128,12 @@ public class ApiRegisterController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "/dologout", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> dologout(HttpServletRequest request, User user) {
+	@ApiOperation(value = "登出", notes = "")
+	public Resp<?> dologout(HttpServletRequest request, User user) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		this.logout();
 		map.put("result", "true");
-		return map;
+		return Resp.success(map);
 	}
 
 	/**
@@ -141,19 +143,20 @@ public class ApiRegisterController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/doApplayShop", method = RequestMethod.POST)
-	public Map<String, Object> doApplayShop(Shop shop, @RequestParam(name = "name") String loginName,
+	@ApiOperation(value = "申请开店", notes = "")
+	public Resp<?> doApplayShop(@RequestBody Shop shop, @RequestParam(name = "name") String loginName,
 			@RequestParam(name = "file", value = "file", required = false) MultipartFile attachFile) {
 		if (StringUtils.isBlank(shop.getShopTitle())) {
-			return responseError(-1, "error_empty_shop_name");
+			return  Resp.customFail("-1", "error_empty_shop_name");
 		}
 		if (StringUtils.isBlank(loginName)) {
-			return responseError(-1, "error_empty_shop_name2");
+			return  Resp.customFail("-1", "error_empty_loginName");
 		}
 		if (attachFile != null) {
 			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
 			String fileName = resMap.get("errorInfo").toString();
 			if (!resMap.get("errorNo").equals(0)) {
-				return resMap;
+				return Resp.success(resMap);
 			}
 			String uploadPath = PropertiesUtil.get("upload_path_save");
 			uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1) + "/";
@@ -164,7 +167,7 @@ public class ApiRegisterController extends BaseFrontController {
 		shop.setUserId(user.getId());
 		shopService.save(shop);
 
-		return responseOK1("");
+		return Resp.success("");
 	}
 
 }

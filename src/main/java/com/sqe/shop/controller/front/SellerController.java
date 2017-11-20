@@ -641,7 +641,7 @@ public class SellerController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/offProductById")
 	public Map<String, Object> offProductById(String idList) {
-		return productService.updateProductStatus(idList, Constants.PRODUCT_OFF);
+		return productService.updateProductStatusold(idList, Constants.PRODUCT_OFF);
 	}
 
 	/**
@@ -653,7 +653,7 @@ public class SellerController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/onProductById")
 	public Map<String, Object> onProductById(String idList) {
-		return productService.updateProductStatus(idList, Constants.PRODUCT_ON);
+		return productService.updateProductStatusold(idList, Constants.PRODUCT_ON);
 	}
 
 	/*

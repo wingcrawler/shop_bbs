@@ -88,7 +88,6 @@ public class ApiSellerController extends BaseFrontController {
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		product.setUserId(this.getCurrentUserId());
 		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
-
 		return page;
 	}
 
@@ -473,7 +472,7 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/offProductById")
-	public Map<String, Object> offProductById(String idList) {
+	public Map<String, Object> offProductById(List<String> idList) {
 		return productService.updateProductStatus(idList, Constants.PRODUCT_OFF);
 	}
 
@@ -485,7 +484,7 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/onProductById")
-	public Map<String, Object> onProductById(String idList) {
+	public Map<String, Object> onProductById(List<String> idList) {
 		return productService.updateProductStatus(idList, Constants.PRODUCT_ON);
 	}
 

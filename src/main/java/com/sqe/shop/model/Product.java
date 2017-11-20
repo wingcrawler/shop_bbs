@@ -13,13 +13,28 @@ public class Product extends BaseModel implements Serializable {
 	private String productDescripton;
 	private String productEnName;
 	private String productDim;
+	/**
+	 * 产品状态
+	 */
 	private Integer productStatus;
+	/**
+	 * 产品数量
+	 */
 	private Integer productCount;
 	private Integer productView;
 	private Integer productRank;
+	/**
+	 * 用户ID
+	 */
 	private Long userId;
+	/**
+	 * 父分类
+	 */
 	private Long productTypeId;
 	private String productName;
+	/**
+	 * 子分类
+	 */
 	private Long productSubtypeId;
 	private Date createTime;
 	private Integer productUrlClick;

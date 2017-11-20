@@ -35,6 +35,8 @@ import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.Resp;
 
+import io.swagger.annotations.ApiOperation;
+
 @Controller
 @RequestMapping("api/shop")
 public class ApiShopController extends BaseFrontController {
@@ -66,10 +68,10 @@ public class ApiShopController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "/product/list", method = RequestMethod.POST)
 	@ResponseBody
+	@ApiOperation(value = "店铺产品列表", notes = "")
 	public Resp<?> productList(Product product,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
-		PageUtil<Map<String, Object>> result = new PageUtil<Map<String, Object>>();
 		PageUtil<Map<String, Object>> productPage = new PageUtil<Map<String, Object>>();
 		Long shopId = product.getShopId();
 		// 查询shop
@@ -90,6 +92,7 @@ public class ApiShopController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "shopdetail", method = RequestMethod.GET)
 	@ResponseBody
+	@ApiOperation(value = "店铺信息", notes = "")
 	public Resp<?> details(@NotNull Long shopId) {
 		shopDto result = new shopDto();
 		if (shopId == null) {

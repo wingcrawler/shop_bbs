@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +38,8 @@ import com.sqe.shop.service.biz.BizUserCenterService;
 import com.sqe.shop.service.file.ImageFileService;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.Resp;
+
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/buy")
@@ -68,17 +71,15 @@ public class ApiCenterController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/userBasicInfo", method = RequestMethod.GET)
+	@ApiOperation(value = " 获取用户基本信息", notes = "获取用户基本信息")
 	public Resp<?> userBasicInfo(@RequestParam Long userId) {
 		User entity = userService.getById(userId);
-		if(entity==null){
+		if (entity == null) {
 			return Resp.notFound("user not found");
 		}
 		entity.setRepassword(null);
-		HashMap<String, Object> resMap = new HashMap<String, Object>();
-		resMap.put(Constants.ERROR_NO, Constants.ERRORCODE_SUCCESS);
-		resMap.put("userInfo", entity);
-		logger.info(JSON.toJSONString(resMap));
-		return Resp.success(resMap);
+		logger.info(JSON.toJSONString(entity));
+		return Resp.success(entity);
 	}
 
 	/**
@@ -90,7 +91,8 @@ public class ApiCenterController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/doSaveBasicInfo", method = RequestMethod.POST)
-	public Resp<Map<String, Object>> doSaveBasicInfo( User user,
+	@ApiOperation(value = " 修改用户基本信息", notes = "需登录")
+	public Resp<Map<String, Object>> doSaveBasicInfo(@RequestBody User user,
 			@RequestParam(name = "file", value = "file", required = false) MultipartFile attachFile) {
 		user.setId(getCurrentUserId());
 		return Resp.success(bizUserCenterService.doSaveBasicInfo(user, attachFile));
@@ -106,7 +108,13 @@ public class ApiCenterController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/doChangePwd", method = RequestMethod.POST)
-	public Resp<Map<String, Object>> doChangePwd(@RequestParam String oldPwd, @RequestParam String newPwd,@RequestParam  String confirmPwd) {
+	@ApiOperation(value = "  修改密码", notes = "需登录")
+	public Resp<Map<String, Object>> doChangePwd(@RequestParam String oldPwd, @RequestParam String newPwd,
+			@RequestParam String confirmPwd) {
+		User user = this.getCurrentUser();
+		if (null == user) {
+			return Resp.badRequest("need login in");
+		}
 		return Resp.success(bizUserCenterService.doChangePwd(oldPwd, newPwd, confirmPwd));
 	}
 
@@ -116,15 +124,16 @@ public class ApiCenterController extends BaseFrontController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/postRecords", method = RequestMethod.GET)
+	@PostMapping(value = "/postRecords")
 	@ResponseBody
-	public Resp<PageUtil<Map<String, Object>>> postReplys( Thread thread,
+	@ApiOperation(value = "发帖回复列表", notes = "需登录")
+	public Resp<?> postReplys(@RequestBody Thread thread,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		pageSize = 10;
 		Long userId = this.getCurrentUserId();
 		if (userId == null) {
-			throw new Error("not login");
+			return Resp.badRequest("need login in");
 		}
 		thread.setUserId(this.getCurrentUserId());
 		PageUtil<Map<String, Object>> page = threadService.getSellThreadList(thread, pageNo, pageSize);
@@ -141,7 +150,8 @@ public class ApiCenterController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "/messagePages", method = RequestMethod.GET)
 	@ResponseBody
-	public PageUtil<Map<String, Object>> messagePages(@RequestParam String type,
+	@ApiOperation(value = "商品留言页面", notes = "type 1:留言 2：私信")
+	public Resp<PageUtil<Map<String, Object>>> messagePages(@RequestParam String type,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		pageSize = 10;
@@ -156,7 +166,7 @@ public class ApiCenterController extends BaseFrontController {
 			page = bizUserCenterService.getNewsCommentList(this.getCurrentUserId(), pageNo, pageSize);
 
 		}
-		return page;
+		return Resp.success(page);
 	}
 
 	/**
@@ -167,11 +177,12 @@ public class ApiCenterController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/messageReply")
-	public Map<String, Object> messageReply(String msgContent, String type, Long productId, Long messageId,
-			Long commentId, Long replyToId) {
+	@PostMapping(value = "/messageReply")
+	@ApiOperation(value = "回复私信或者产品留言", notes = "回复私信或者产品留言")
+	public Resp<?> messageReply(@RequestParam String msgContent, @RequestParam String type, @RequestParam Long productId,@RequestParam Long messageId,
+			@RequestParam Long commentId,@RequestParam  Long replyToId) {
 		if (StringUtils.isBlank(msgContent)) {
-			return responseError(-1, "error_empty_content");
+			return Resp.customFail("-1", "error_empty_content");
 		}
 		if (type.equals("1")) {// 产品留言
 			Comment comment = new Comment();
@@ -196,16 +207,22 @@ public class ApiCenterController extends BaseFrontController {
 			message.setPostDelFlag(false);
 			messageService.insert(message);
 		} else {
-			responseError(-1, "error_illegal");
+			Resp.customFail("-1",  "error_illegal");
 		}
-		return responseOK1("");
+		return Resp.success("");
 	}
-
+/**
+ * 
+ * @param id
+ * @param type
+ * @return
+ */
 	@ResponseBody
-	@RequestMapping(value = "/deleteImg", method = RequestMethod.GET)
-	public Map<String, Object> deleteImg(Long id, String type) {
+	@RequestMapping(value = "/deleteImg", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除图像", notes = "")
+	public Resp<?> deleteImg(Long id, String type) {
 		if (id == null || StringUtils.isBlank(type)) {
-			return responseError(-1, "error_unknow");
+			return Resp.customFail("-1",  "error_unknow");
 		}
 
 		User user = new User();
@@ -214,14 +231,15 @@ public class ApiCenterController extends BaseFrontController {
 			user.setUserImage("");
 		}
 		userService.update(user);
-		return responseOK1("");
+		return Resp.success("");
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/deleteUserImg", method = RequestMethod.GET)
-	public Map<String, Object> deleteUserImg(Long id, String type) {
+	@RequestMapping(value = "/deleteUserImg", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除用户头像", notes = "")
+	public Resp<?> deleteUserImg(Long id, String type) {
 		if (id == null || StringUtils.isBlank(type)) {
-			return responseError(-1, "error_unknow");
+			return Resp.customFail("-1", "error_unknow");
 		}
 
 		User user = new User();
@@ -235,7 +253,7 @@ public class ApiCenterController extends BaseFrontController {
 		User userInfo = userService.getById(id);
 		subject.getSession().setAttribute("userInfo", userInfo);
 
-		return responseOK1("");
+		return Resp.success("");
 	}
 
 	/**
@@ -246,16 +264,16 @@ public class ApiCenterController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/doApplayShop", method = RequestMethod.POST)
-	public Map<String, Object> doApplayShops( Shop shop,
+	public Resp<?> doApplayShops(Shop shop,
 			@RequestParam(name = "file", required = false) MultipartFile attachFile) {
 
 		Long userId = this.getCurrentUserId();
 		Map<String, Object> resMap = bizUserCenterService.shopInfo(userId);
 		if (resMap.get("shopflag").equals("1")) {
 			resMap.put(Constants.ERROR_NO, -1);
-			return resMap;
+			return Resp.customFail("-1", "shopflag=1");
 		} else {
-			return bizUserCenterService.doApplayShop(shop, attachFile);
+			return Resp.success(bizUserCenterService.doApplayShop(shop, attachFile));
 		}
 	}
 

@@ -29,6 +29,7 @@ import com.sqe.shop.model.Advertisement;
 import com.sqe.shop.model.Message;
 import com.sqe.shop.model.Product;
 import com.sqe.shop.model.ProductType;
+import com.sqe.shop.model.User;
 import com.sqe.shop.service.AdvertisementService;
 import com.sqe.shop.service.CommentService;
 import com.sqe.shop.service.ImageService;
@@ -40,6 +41,9 @@ import com.sqe.shop.service.biz.BizProductService;
 import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.Resp;
+
+import io.swagger.annotations.ApiOperation;
+import sun.rmi.server.UnicastServerRef;
 
 @Controller
 @RequestMapping("/api/product")
@@ -76,6 +80,7 @@ public class ApiProductController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getList", method = RequestMethod.GET)
+	@ApiOperation(value = "店铺商品列表", notes = "需用户登录  userId 为登录用户 ")
 	public Resp<?> getProductList(Product product,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
@@ -85,26 +90,24 @@ public class ApiProductController extends BaseFrontController {
 	}
 
 	/**
-	 * 产品列表页
+	 * 获取产品列表
 	 * 
-	 * @param model
-	 * @param parentType
-	 * @param childType
-	 * @param typeName
+	 * @param product
 	 * @param pageNo
 	 * @param pageSize
 	 * @return
-	 * @throws UnsupportedEncodingException
+	 * @throws UnsupportedEncodingException 
 	 */
-	@RequestMapping(value = "list")
-	public PageUtil<Map<String, Object>> list(Long parentType, Long childType, String typeName, String searchText,
+	@ResponseBody
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@ApiOperation(value = "商品列表", notes = "无需登录  参数都可为空")
+	public Resp<?> ProductList(@RequestParam(name="shopId") Long shopId,@RequestParam(name="userId") Long userId,@RequestParam(name="parentType") Long parentType, @RequestParam Long childType, @RequestParam String searchText,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
-			@RequestParam(name = "pageSize", defaultValue = "12") int pageSize) throws UnsupportedEncodingException {
-		/* pageSize=12; */
-
-		Product product = new Product();
-		ProductType productType = new ProductType();
-
+			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) throws UnsupportedEncodingException {
+		Product product=new Product();
+		product.setShopId(shopId);
+		product.setUserId(userId);
+	
 		// 查询条件里拼接是一级分类还是二级分类
 		if (parentType != null) {
 			product.setProductTypeId(parentType);
@@ -117,10 +120,11 @@ public class ApiProductController extends BaseFrontController {
 			searchText = URLDecoder.decode(searchText, UTF8);
 			product.setProductName(searchText);
 		}
-		// 查询
 		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
-		return page;
+		return Resp.success(page);
 	}
+	
+
 
 	/**
 	 * // 查询单个商品商品详情
@@ -129,7 +133,12 @@ public class ApiProductController extends BaseFrontController {
 	 * @return
 	 */
 	@RequestMapping(value = "single", method = RequestMethod.GET)
-	public Resp<?> single(Long productId) {
+	@ApiOperation(value = "查询单个商品商品详情", notes = "需要登录")
+	public Resp<?> single(@RequestParam Long productId) {
+		User user=this.getCurrentUser();
+		if(null==user){
+			return Resp.forbidden("need login in");
+		}
 		// 查询单个商品
 		Product product = productService.getById(productId);
 		if (product == null) {
@@ -150,8 +159,13 @@ public class ApiProductController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "postMessage")
-	public Resp<?> postMessage(Message message) {
+	@PostMapping(value = "postMessage")
+	@ApiOperation(value = "发表产品私信", notes = "需要登录")
+	public Resp<?> postMessage(@RequestBody Message message) {
+		User user=this.getCurrentUser();
+		if(null==user){
+			return Resp.forbidden("need login in");
+		}
 		if (message.getProductId() == null) {
 			return Resp.customFail("-1", "getProductId null");
 		}
@@ -162,7 +176,7 @@ public class ApiProductController extends BaseFrontController {
 		}
 
 		message.setReceiveId(product.getUserId());
-		message.setMessageStatus(Constants.USER_OFF);
+		message.setMessageStatus(Constants.MSG_OFF);
 		message.setPostId(this.getCurrentUserId());
 		message.setCreateTime(new Date());
 		messageService.insert(message);
@@ -179,7 +193,8 @@ public class ApiProductController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "searchs", method = RequestMethod.POST)
 	@ResponseBody
-	public Resp<?>  searchs(String searchText,
+	@ApiOperation(value = "产品搜索接口", notes = "默认 pageSize =12")
+	public Resp<?>  searchs(@RequestParam String searchText,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "12") int pageSize) {
 		PageUtil<Map<String, Object>> productPage = new PageUtil<Map<String, Object>>();
@@ -203,6 +218,7 @@ public class ApiProductController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
 	@ResponseBody
+	@ApiOperation(value = "商城首页产品分类", notes = "")
 	public Resp<?> category() {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		parm.put("orderby", "type_rank asc");
@@ -219,6 +235,7 @@ public class ApiProductController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "/category/products", method = RequestMethod.POST)
 	@ResponseBody
+	@ApiOperation(value = "商城首页根据产品分类回去产品列表（10个）", notes = "商城首页根据产品分类回去产品列表（10个）")
 	public Resp<?> ProductsByType(@NotNull @RequestParam(name = "typeId", required = true) Long typeId) {
 		Map<String, Object> resMap = this.responseOK1("");
 		Product product = new Product();
@@ -236,6 +253,7 @@ public class ApiProductController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "/advertisement", method = RequestMethod.GET)
 	@ResponseBody
+	@ApiOperation(value = "Pc商城首页轮播图", notes = "Pc商城首页轮播图")
 	public Resp<?> advertisement() {
 		// 轮播图
 		Advertisement advertisement = new Advertisement();
@@ -255,6 +273,7 @@ public class ApiProductController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@GetMapping("/getProductComment")
+	@ApiOperation(value = "产品评论", notes = "获取产品评论")
 	public Resp<?> getProductComment(@RequestParam Long productId, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		if (productId == null) {
@@ -273,6 +292,7 @@ public class ApiProductController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@GetMapping("/getProductType")
+	@ApiOperation(value = "产品评论列表", notes = "获取产品分类列表")
 	public Resp<?> getProductType(ProductType productType, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		if (productType == null) {
