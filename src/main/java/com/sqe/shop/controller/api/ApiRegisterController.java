@@ -64,7 +64,7 @@ public class ApiRegisterController extends BaseFrontController {
 	public Resp<?> doRegister(HttpServletRequest request, @Validated @RequestBody User user,
 			BindingResult bindingResult) {
 		// 获取校验错误信息
-		if (bindingResult.hasErrors()) {		
+		if (bindingResult.hasErrors()) {
 			return Resp.customFail("-1", bindingResult.getFieldErrors().get(0).getDefaultMessage());
 		} else {
 			user.setUserRole(ROLE_BUY);
@@ -106,7 +106,7 @@ public class ApiRegisterController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/doLogin", method = RequestMethod.PUT)
 	@ApiOperation(value = "登录", notes = "")
-	public Resp<?>  doLogin(HttpServletRequest request, @RequestBody User user) {
+	public Resp<?> doLogin(HttpServletRequest request, @RequestBody User user) {
 		Map<String, Object> resMap = loginService.login(user);
 		if (resMap.get(Constants.ERROR_NO).equals(0)) {
 			User userInfo = this.getCurrentUser();
@@ -144,13 +144,14 @@ public class ApiRegisterController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/doApplayShop", method = RequestMethod.POST)
 	@ApiOperation(value = "申请开店", notes = "")
-	public Resp<?> doApplayShop(@RequestBody Shop shop, @RequestParam(name = "name") String loginName,
+	public Resp<?> doApplayShop(@RequestBody Shop shop,
 			@RequestParam(name = "file", value = "file", required = false) MultipartFile attachFile) {
 		if (StringUtils.isBlank(shop.getShopTitle())) {
-			return  Resp.customFail("-1", "error_empty_shop_name");
+			return Resp.customFail("-1", "error_empty_shop_name");
 		}
-		if (StringUtils.isBlank(loginName)) {
-			return  Resp.customFail("-1", "error_empty_loginName");
+		User user = userService.getById(shop.getUserId());
+		if (null == user) {
+			return Resp.customFail("-1", "error_empty_user");
 		}
 		if (attachFile != null) {
 			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
@@ -162,12 +163,16 @@ public class ApiRegisterController extends BaseFrontController {
 			uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1) + "/";
 			shop.setShopLogoImg(uploadPath + fileName);
 		}
-		User user = userService.findByName(loginName);
-		shop.setShopStatus(Constants.STORE_PEND);
-		shop.setUserId(user.getId());
-		shopService.save(shop);
 
-		return Resp.success("");
+		if (shopService.userExitShop(shop.getUserId())) {
+			shop.setShopStatus(Constants.STORE_PEND);
+			shopService.save(shop);
+			return Resp.success("");
+
+		} else {
+			return Resp.customFail("-1", "user had a shop");
+		}
+
 	}
 
 }

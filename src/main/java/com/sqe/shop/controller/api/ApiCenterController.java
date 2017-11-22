@@ -78,6 +78,7 @@ public class ApiCenterController extends BaseFrontController {
 			return Resp.notFound("user not found");
 		}
 		entity.setRepassword(null);
+		entity.setPassword(null);
 		logger.info(JSON.toJSONString(entity));
 		return Resp.success(entity);
 	}

@@ -36,6 +36,8 @@ import com.sqe.shop.util.PropertiesUtil;
 import com.sqe.shop.util.RegularUtil;
 import com.sqe.shop.util.Resp;
 
+import io.swagger.annotations.ApiOperation;
+
 @Controller
 @RequestMapping("api/news")
 public class ApiNewsController extends BaseFrontController {
@@ -64,6 +66,7 @@ public class ApiNewsController extends BaseFrontController {
 	 */
 	@PostMapping("list")
 	@ResponseBody
+	@ApiOperation(value = "新闻资讯列表、搜索新闻资讯", notes = "新闻资讯列表 (searchText为空) 、搜索新闻资讯接口")
 	public Resp<?> list(String searchText, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) throws UnsupportedEncodingException {
 		pageSize = 10;
@@ -80,7 +83,12 @@ public class ApiNewsController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "saveComment", method = RequestMethod.POST)
+	@ApiOperation(value = "新闻资讯发表评论", notes = "需要登录")
 	public Resp<?> saveComment( Comment comment) {
+		Long userId=this.getCurrentUserId();
+		if(null==userId){
+			return Resp.badRequest("need login in");
+		}
 		if (StringUtils.isBlank(comment.getContext())) {
 			return Resp.customFail("-1", "error_empty_content");
 		}
@@ -100,6 +108,7 @@ public class ApiNewsController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "getCommentList", method = RequestMethod.GET)
+	@ApiOperation(value = "获取新闻资讯的评论列表", notes = "分页接口")
 	public Resp<?> getCommentList(@RequestParam Long newsId, @RequestParam int pageNo, @RequestParam Integer pageSize)
 			throws UnsupportedEncodingException {
 		News news = new News();
@@ -115,6 +124,7 @@ public class ApiNewsController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "doNewsUp")
+	@ApiOperation(value = "新闻资讯点赞", notes = "后台控制 防止重复  前台效果点击加1")
 	public Resp<?> thumb(@RequestParam Long newsId) {
 		News news = newsService.getById(newsId);
 		if (news == null) {
@@ -155,7 +165,8 @@ public class ApiNewsController extends BaseFrontController {
 	 * @return
 	 */
 	@RequestMapping(value = "search", method = RequestMethod.POST)
-	public Resp<?> search(String newsTitle,
+	@ApiOperation(value = "新闻搜索", notes = "分页 默认10篇 内容默认前100字")
+	public Resp<?> search(@RequestParam String newsTitle,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		if (StringUtils.isBlank(newsTitle)) {
@@ -191,6 +202,7 @@ public class ApiNewsController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "/hot", method = RequestMethod.GET)
 	@ResponseBody
+	@ApiOperation(value = "商城首页热门新闻资讯", notes = "分页 默认三篇 内容默认前100字")
 	public Resp<?> hotNews() {
 		// 热门资讯
 		// 3个新闻资讯

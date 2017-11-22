@@ -19,6 +19,8 @@ import com.sqe.shop.service.MessageService;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.Resp;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 
  * @author Andy
@@ -39,6 +41,7 @@ public class ApiMessageController extends BaseFrontController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getUserDialogueList", method = RequestMethod.GET)
+	@ApiOperation(value = " 获取用户会话", notes = "根据用户ID 会话")
 	public Resp<PageUtil<Map<String, Object>>> getMessageList(@RequestParam Long userId,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
@@ -48,6 +51,7 @@ public class ApiMessageController extends BaseFrontController {
 	}
 
 	@RequestMapping(value = "/getUserMessageList", method = RequestMethod.GET)
+	@ApiOperation(value = " 获取会话id 获取消息列表", notes = "获取一个会话的消息列表")
 	public Resp<?> getMessage(@RequestParam Long dialogueId, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		Long userId = this.getCurrentUserId();
@@ -59,6 +63,7 @@ public class ApiMessageController extends BaseFrontController {
 	}
 
 	@RequestMapping(value = "/deleteMessage", method = RequestMethod.GET)
+	@ApiOperation(value = " 获取会话id 获取消息列表", notes = "用户删除消息receiveId (接受者id) 、postId(发送者Id)")
 	public Resp<?> deleteMessage(@RequestParam @NotNull Long messageId, @RequestParam @NotNull Long receiveId, @RequestParam @NotNull Long postId) {
 		Long userId = this.getCurrentUserId();
 		Message message = new Message();
@@ -75,8 +80,12 @@ public class ApiMessageController extends BaseFrontController {
 	}
 
 	@RequestMapping(value = "/sentMessage", method = RequestMethod.POST)
+	@ApiOperation(value = " 发送消息", notes = "需要登录")
 	public Resp<?> sentMessage( Message message) {
 		Long userId = this.getCurrentUserId();
+		if(null==userId){
+			return Resp.forbidden("need login");
+		}
 		// Long userId=2L;
 		message.setPostId(userId);
 		if (message.getMessageContext() == null) {

@@ -7,10 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.constraints.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +46,8 @@ import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.PropertiesUtil;
 import com.sqe.shop.util.RegularUtil;
 import com.sqe.shop.util.Resp;
+
+import io.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping("/api/sell")
@@ -83,15 +90,18 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getProductList", method = RequestMethod.GET)
-	public PageUtil<Map<String, Object>> getProductList(Product product,
-			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+	@ApiOperation(value = "获取当前登录用户商品列表", notes = "商家登录 获取 商家的产品列表  需要登录")
+	public Resp<?> getProductList(Product product, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
-		product.setUserId(this.getCurrentUserId());
-		PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
-		return page;
+
+		if (this.isLogin()) {
+			product.setUserId(this.getCurrentUserId());
+			PageUtil<Map<String, Object>> page = productService.getMapListByParm(product, pageNo, pageSize);
+			return Resp.success(page);
+		} else {
+			return Resp.forbidden("need login in");
+		}
 	}
-
-
 
 	/**
 	 * 产品编辑页接口
@@ -101,12 +111,13 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/doEditProduct", method = RequestMethod.GET)
-	public Map<String, Object> doEditProduct(Long id) {
+	@ApiOperation(value = "商家编辑列表中的产品", notes = "传入商品ID 需要商家登录")
+	public Resp<?> doEditProduct(Long productId) {
 		Map<String, Object> response = new HashMap<String, Object>();
-		Product product = productService.getByIdAndUserId(id);
+		Product product = productService.getByIdAndUserId(productId);
 
 		if (product == null) {
-			return responseError(404, "product_nofund");
+			return Resp.notFound("not found");
 		}
 
 		// 产品一级分类
@@ -147,7 +158,7 @@ public class ApiSellerController extends BaseFrontController {
 		response.put("inputCount", 6 - images.size());// 图片输入框数量
 
 		response.put("entity", product);
-		return response;
+		return Resp.success(response);
 	}
 
 	/**
@@ -158,16 +169,14 @@ public class ApiSellerController extends BaseFrontController {
 	 * @return
 	 */
 	@RequestMapping(value = "/productDetail", method = RequestMethod.GET)
-	public Product productDetail(ModelAndView model, Long id) {
-		if (id == null) {
-			return new Product();
-		}
+	@ApiOperation(value = "商家查看商品详情", notes = "传入商品ID 需要商家登录")
+	public Resp<?> productDetail(Long id) {
 
 		Product entity = productService.getByIdAndUserId(id);
 		if (entity == null) {
-			return new Product();
+			return Resp.notFound("not found");
 		}
-		return entity;
+		return Resp.success(entity);
 	}
 
 	/**
@@ -178,7 +187,8 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/doSaveProduct", method = RequestMethod.POST)
-	public Map<String, Object> doSaveProduct(Product product,
+	@ApiOperation(value = "保存商品", notes = "废弃")
+	public Map<String, Object> doSaveProduct(@RequestBody Product product,
 			@RequestParam(name = "indexFile", value = "indexFile", required = false) MultipartFile indexFile,
 			@RequestParam(name = "listFile", value = "listFile", required = false) MultipartFile[] listFile) {
 		if (product.getId() != null) {
@@ -249,7 +259,8 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/doSaveProduct1", method = RequestMethod.POST)
-	public Map<String, Object> doSaveProduct1(Product product,
+	@ApiOperation(value = "商家查看商品详情", notes = "保存商品new 接口   base64 图片")
+	public Resp<?> doSaveProduct1(Product product,
 			@RequestParam(name = "targetImgVal", value = "targetImgVal", required = false) String targetImgVal,
 			@RequestParam(name = "targetImg5Val", value = "targetImg5Val", required = false) String targetImg5Val,
 			@RequestParam(name = "targetImg1Val", value = "targetImg1Val", required = false) String targetImg1Val,
@@ -260,32 +271,32 @@ public class ApiSellerController extends BaseFrontController {
 			if (product.getId() != null) {
 				Product p = productService.getByIdAndUserId(product.getId());
 				if (p == null) {
-					return responseError(-1, "save_failed");
+					return Resp.customFail("-1", "save_failed");
 				}
 
 			} else {
 				// 首次上传 需要上传默认图片
 				if (StringUtils.isBlank(targetImgVal)) {
-					return responseError(-1, "error_no_default_img");
+					return Resp.customFail("-1", "error_no_default_img");
 				}
 			}
 
 			Map<String, Object> checkMap = checkProduct(product);
 			if (!checkMap.get(ERROR_NO).equals(ERRORCODE_SUCCESS)) {
-				return checkMap;
+				return Resp.success(checkMap);
 			}
 
 			product.setUserId(this.getCurrentUserId());
 			Shop shop = shopService.getByUserId(this.getCurrentUserId());
 			if (shop == null) {
-				return responseError(-1, "error_illegal");
+				return Resp.customFail("-1", "error_illegal");
 			}
 
 			product.setShopId(shop.getId());
 			product.setProductStatus(Constants.PRODUCT_WAIT);
 			int count = productService.save(product);
 			if (count == 0) {
-				return responseError(-1, "save_failed");
+				return Resp.customFail("-1", "save_failed");
 			}
 
 			String fileName = "";
@@ -298,7 +309,7 @@ public class ApiSellerController extends BaseFrontController {
 					if (resMap.get("errorNo").equals(0)) {
 						imageService.saveProductIndexImg(product, fileName, 1);
 					} else {
-						return resMap;
+						return Resp.success(resMap);
 					}
 				}
 
@@ -310,7 +321,7 @@ public class ApiSellerController extends BaseFrontController {
 					if (resMap.get("errorNo").equals(0)) {
 						imageService.saveProductIndexImg(product, fileName, 2);
 					} else {
-						return resMap;
+						return Resp.success(resMap);
 					}
 				}
 			}
@@ -321,7 +332,7 @@ public class ApiSellerController extends BaseFrontController {
 					if (resMap.get("errorNo").equals(0)) {
 						imageService.saveProductIndexImg(product, fileName, 3);
 					} else {
-						return resMap;
+						return Resp.success(resMap);
 					}
 				}
 			}
@@ -332,7 +343,7 @@ public class ApiSellerController extends BaseFrontController {
 					if (resMap.get("errorNo").equals(0)) {
 						imageService.saveProductIndexImg(product, fileName, 4);
 					} else {
-						return resMap;
+						return Resp.success(resMap);
 					}
 				}
 			}
@@ -343,7 +354,7 @@ public class ApiSellerController extends BaseFrontController {
 					if (resMap.get("errorNo").equals(0)) {
 						imageService.saveProductIndexImg(product, fileName, 5);
 					} else {
-						return resMap;
+						return Resp.success(resMap);
 					}
 				}
 			}
@@ -354,15 +365,15 @@ public class ApiSellerController extends BaseFrontController {
 					if (resMap.get("errorNo").equals(0)) {
 						imageService.saveProductIndexImg(product, fileName, 6);
 					} else {
-						return resMap;
+						return Resp.success(resMap);
 					}
 				}
 			}
 
-			return responseOK("save_success");
+			return Resp.success("success");
 		} catch (Exception e) {
 			logger.error("doSaveProduct1 ex" + e.getCause());
-			return responseError(-1, "error_sys");
+			return Resp.customFail("-1", "error_sys");
 		}
 
 	}
@@ -442,6 +453,7 @@ public class ApiSellerController extends BaseFrontController {
 
 		return this.responseOK1("");
 	}
+
 	/**
 	 * 删除商品
 	 * 
@@ -449,19 +461,19 @@ public class ApiSellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/deleteProductById")
-	public Map<String, Object> deleteProductById(String idList) {
-		if (StringUtils.isBlank(idList)) {
-			return responseOK1("");
+	@DeleteMapping(value = "/deleteProductById")
+	@ApiOperation(value = "商家编辑列表中的产品", notes = "传入商品ID 需要商家登录")
+	public Resp<?> deleteProductById(List<String> idList) {
+		if (idList.isEmpty()) {
+			return Resp.customFail("-1", "List null");
 		}
-		String arr[] = idList.split(",");
-		for (String str : arr) {
+		for (String str : idList) {
 			if (StringUtils.isNotBlank(str.trim()) && RegularUtil.isNumeric(str.trim())) {
 				Long productId = Long.valueOf(str.trim());
 				productService.deleteByIdAndUserId(productId);
 			}
 		}
-		return responseOK1("");
+		return Resp.success("success");
 	}
 
 	/**
@@ -471,9 +483,10 @@ public class ApiSellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/offProductById")
-	public Map<String, Object> offProductById(List<String> idList) {
-		return productService.updateProductStatus(idList, Constants.PRODUCT_OFF);
+	@PutMapping(value = "/offProductById")
+	@ApiOperation(value = "下架商品", notes = "批量下架商品")
+	public Resp<?> offProductById(@RequestBody List<String> idList) {
+		return Resp.success(productService.updateProductStatus(idList, Constants.PRODUCT_OFF));
 	}
 
 	/**
@@ -483,9 +496,10 @@ public class ApiSellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/onProductById")
-	public Map<String, Object> onProductById(List<String> idList) {
-		return productService.updateProductStatus(idList, Constants.PRODUCT_ON);
+	@PutMapping(value = "/onProductById")
+	@ApiOperation(value = "上架商品", notes = "批量上架商品")
+	public Resp<?> onProductById(@RequestBody List<String> idList) {
+		return Resp.success(productService.updateProductStatus(idList, Constants.PRODUCT_ON));
 	}
 
 	/*
@@ -503,7 +517,8 @@ public class ApiSellerController extends BaseFrontController {
 	 * @return
 	 */
 	@RequestMapping(value = "/messagePage", method = RequestMethod.GET)
-	public PageUtil<Map<String, Object>> messagePage(ModelAndView model, String type,
+	@ApiOperation(value = " 商品留言页面", notes = "type 1:留言 2：私信")
+	public Resp<?> messagePage(@RequestParam String type,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		pageSize = 10;
@@ -511,18 +526,15 @@ public class ApiSellerController extends BaseFrontController {
 
 		if (type.equals("1")) {// 产品评论
 			page = getProductCommentList(this.getCurrentUserId(), pageNo, pageSize);
-			
+
 		} else if (type.equals("2")) {// 私信
 			page = getMessageList(this.getCurrentUserId(), pageNo, pageSize);
-			
+
 		} else if (type.equals("3")) {// 新闻资讯评论
 			page = getNewsCommentList(this.getCurrentUserId(), pageNo, pageSize);
-		
-		} else {
-		
-			return null;
-		}
-		return page;
+
+		} 
+		return Resp.success(page);
 	}
 
 	/**
@@ -535,7 +547,7 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getMessageList", method = RequestMethod.GET)
-	public PageUtil<Map<String, Object>> getMessageList(Long userId, int pageNo, Integer pageSize) {
+	public PageUtil<Map<String, Object>> getMessageList(@RequestParam Long userId, @RequestParam int pageNo, @RequestParam Integer pageSize) {
 		Map<String, Object> parmMap = new HashMap<String, Object>();
 		parmMap.put("receiveId", userId);
 		parmMap.put("orderby", "m.create_time desc");
@@ -570,9 +582,10 @@ public class ApiSellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/messageReply")
-	public Resp<?> messageReply(String msgContent, String type, Long productId, Long messageId,
-			Long commentId, Long replyToId) {
+	@GetMapping(value = "/messageReply")
+	@ApiOperation(value = " 回复私信或者产品留言", notes = "回复私信或者产品留言")
+	public Resp<?> messageReply(@RequestParam String msgContent, @RequestParam String type, @RequestParam Long productId, @RequestParam Long messageId,@RequestParam  Long commentId,
+			@RequestParam Long replyToId) {
 		if (StringUtils.isBlank(msgContent)) {
 			return Resp.customFail("-1", "error_empty_content");
 		}
@@ -610,7 +623,6 @@ public class ApiSellerController extends BaseFrontController {
 	 * **************************************************
 	 */
 
-
 	/**
 	 * 保存商家基本信息
 	 * 
@@ -621,15 +633,15 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/doSaveMerchant", method = RequestMethod.POST)
-	public Resp<?> doSaveMerchant(Shop shop,
+	public Resp<?> doSaveMerchant(@RequestBody Shop shop,
 			@RequestParam(name = "file", value = "file", required = false) MultipartFile attachFile) {
 		if (StringUtils.isBlank(shop.getShopTitle())) {
-			 return Resp.customFail("-1", "error_empty_shop_name");
+			return Resp.customFail("-1", "error_empty_shop_name");
 		}
 
 		boolean exitShop = shopService.exitShop(shop.getId());
 		if (!exitShop) {
-			 return Resp.customFail("-1", "error_illegal");
+			return Resp.customFail("-1", "error_illegal");
 		}
 
 		if (attachFile != null) {
@@ -649,13 +661,13 @@ public class ApiSellerController extends BaseFrontController {
 	}
 
 	/**
-	 * 营业执照页面  店铺详细信息   商家介绍  资质
+	 * 营业执照页面 店铺详细信息 商家介绍 资质
 	 * 
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/businessLicense", method = RequestMethod.GET)
-	public Resp<Shop> businessLicense() {	
+	public Resp<Shop> businessLicense() {
 		Shop shop = shopService.getCurrentUserShop();
 		return Resp.success(shop);
 	}
@@ -670,7 +682,7 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/saveBusinessLicense", method = RequestMethod.POST)
-	public Resp<?>  saveBusinessLicense(Shop shop,
+	public Resp<?> saveBusinessLicense(@RequestBody Shop shop,
 			@RequestParam(name = "file", value = "file", required = false) MultipartFile attachFile) {
 		boolean exitShop = shopService.exitShop(shop.getId());
 		if (!exitShop) {
@@ -691,7 +703,6 @@ public class ApiSellerController extends BaseFrontController {
 		return Resp.success("success");
 	}
 
-
 	/**
 	 * 保存商家介绍
 	 * 
@@ -702,7 +713,8 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/saveMerchantIntroduce", method = RequestMethod.POST)
-	public Resp<?> saveMerchantIntroduce(Shop shop,
+	@ApiOperation(value = "保存商家介绍", notes = "保存商家介绍  资质")
+	public Resp<?> saveMerchantIntroduce(@RequestBody Shop shop,
 			@RequestParam(name = "file", value = "file", required = false) MultipartFile attachFile) {
 		boolean exitShop = shopService.exitShop(shop.getId());
 		if (!exitShop) {
@@ -723,18 +735,17 @@ public class ApiSellerController extends BaseFrontController {
 		return Resp.success("success");
 	}
 
-
-
 	/**
-	 * 保存上架资质
+	 * 保存商家信息 资质
 	 * 
 	 * @param model
 	 * @param shop
 	 * @param attachFile
 	 * @return
 	 */
-	@ResponseBody
+/*	@ResponseBody
 	@RequestMapping(value = "/saveShelfQualification", method = RequestMethod.POST)
+	@ApiOperation(value = "保存商家介绍", notes = "保存商家信息 资质")
 	public Resp<?> saveShelfQualification(Shop shop,
 			@RequestParam(name = "file", value = "file", required = false) MultipartFile attachFile) {
 		boolean exitShop = shopService.exitShop(shop.getId());
@@ -754,7 +765,7 @@ public class ApiSellerController extends BaseFrontController {
 		}
 		shopService.save(shop);
 		return Resp.success("success");
-	}
+	}*/
 
 	// 论坛
 	/**
@@ -764,7 +775,8 @@ public class ApiSellerController extends BaseFrontController {
 	 * @return
 	 */
 	@RequestMapping(value = "/postReply", method = RequestMethod.GET)
-	public Resp<?> postReply(ModelAndView model, Thread thread,
+	@ApiOperation(value = "发帖回复页面", notes = "发帖回复页面")
+	public Resp<?> postReply(@RequestBody Thread thread,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		thread.setUserId(this.getCurrentUserId());
@@ -779,20 +791,22 @@ public class ApiSellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/deleteByParm", method = RequestMethod.GET)
-	public Resp<?> deleteByParm(Long productId, Long imgId) {
+	@RequestMapping(value = "/deleteByParm", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除产品图片", notes = "删除产品图片")
+	public Resp<?> deleteByParm(@RequestParam Long productId, @RequestParam Long imgId) {
 		if (productId == null || imgId == null) {
-			return Resp.customFail("-1","productId or imgId is null");
+			return Resp.customFail("-1", "productId or imgId is null");
 		}
 		imageService.deleteByIdAndProductId(imgId, productId);
 		return Resp.success("success");
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/deleteImg", method = RequestMethod.GET)
-	public Resp<?> deleteImg(Long id, String type) {
+	@RequestMapping(value = "/deleteImg", method = RequestMethod.DELETE)
+	@ApiOperation(value = "删除商家资质图片", notes = "删除商家资质图片")
+	public Resp<?> deleteImg(@RequestParam Long id, @RequestParam String type) {
 		if (id == null || StringUtils.isBlank(type)) {
-			return Resp.customFail("-1","id or type is null");
+			return Resp.customFail("-1", "id or type is null");
 		}
 
 		Shop shop = new Shop();

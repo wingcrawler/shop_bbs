@@ -185,6 +185,15 @@ public class ImageService extends AdapterService implements BaseService {
 
 	}
 
+	/**
+	 * <P>
+	 * 删除商家产品图片
+	 * </P>
+	 * 
+	 * @param id
+	 * @param productId
+	 * @return
+	 */
 	public int deleteByIdAndProductId(Long id, Long productId) {
 		return imageMapper.deleteByIdAndProductId(id, productId);
 	}

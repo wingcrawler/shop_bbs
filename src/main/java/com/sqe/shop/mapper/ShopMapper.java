@@ -9,6 +9,8 @@ import com.sqe.shop.model.Shop;
 public interface ShopMapper extends BaseMapper {
 
 	Shop getShopByIdAndUserId(@Param("id") Long id, @Param("userId")Long userId);
+	
+	int getShopByUserId(@Param("userId")Long userId);
 
 	int getMapListByParm_count(@Param("parm") Map<String, Object> paramMap);
 

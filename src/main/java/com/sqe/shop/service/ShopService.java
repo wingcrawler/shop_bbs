@@ -195,6 +195,14 @@ public class ShopService extends AdapterService implements BaseService {
 		}
 		return false;
 	}
+	
+	public boolean userExitShop(Long userId) {
+		int shop = shopMapper.getShopByUserId(userId);
+		if(shop==0){
+			return true;
+		}
+		return false;
+	}
 
 	public Shop getByUserId(Long currentUserId) { 
 		Map<String, Object> parm = new HashMap<String, Object>();

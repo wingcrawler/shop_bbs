@@ -119,6 +119,10 @@
 	SELECT * FROM shop WHERE id=#{id} and user_id=#{userId}
 </select>
 
+<select id="getShopByUserId" resultType="integer">
+	SELECT count(*) FROM shop WHERE user_id=#{userId}
+</select>
+
 <select id="countByParm" resultType="integer">
 	select count(*) from shop  where 1=1 
 			<if test="parm.shopLevel != null">

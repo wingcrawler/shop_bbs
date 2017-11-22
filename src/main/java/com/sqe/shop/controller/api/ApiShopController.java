@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,7 +70,7 @@ public class ApiShopController extends BaseFrontController {
 	@RequestMapping(value = "/product/list", method = RequestMethod.POST)
 	@ResponseBody
 	@ApiOperation(value = "店铺产品列表", notes = "")
-	public Resp<?> productList(Product product,
+	public Resp<?> productList(@RequestBody Product product,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		PageUtil<Map<String, Object>> productPage = new PageUtil<Map<String, Object>>();
@@ -93,16 +94,16 @@ public class ApiShopController extends BaseFrontController {
 	@RequestMapping(value = "shopdetail", method = RequestMethod.GET)
 	@ResponseBody
 	@ApiOperation(value = "店铺信息", notes = "")
-	public Resp<?> details(@NotNull Long shopId) {
+	public Resp<?> details(@NotNull @RequestParam Long shopId) {
 		shopDto result = new shopDto();
 		if (shopId == null) {
-			return Resp.locked("not found shop");
+			return Resp.customFail("-1","not found shop");
 		}
 
 		// 查询shop
 		Shop shop = shopService.getById(shopId);
 		if (shop == null) {
-			return Resp.locked("not found shop");
+			return Resp.customFail("-1","not found shop");
 		}
 		result.setShop(shop);
 
