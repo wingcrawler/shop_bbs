@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.sqe.shop.controller.base.BaseFrontController;
+import com.sqe.shop.model.Post;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.model.Thread;
+import com.sqe.shop.service.PostService;
 import com.sqe.shop.service.SectionService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.util.PageUtil;
@@ -36,6 +39,10 @@ public class ApiBBSThreadController extends BaseFrontController {
 
 	@Autowired
 	private SectionService sectionService;
+
+	@Autowired
+	private PostService postService;
+
 
 	/**
 	 *
@@ -221,6 +228,32 @@ public class ApiBBSThreadController extends BaseFrontController {
 		thread.setThreadUp(1L);
 		int result = threadService.insert(thread);
 		return Resp.success(result);
+	}
+
+	/**
+	 * 根据id 获取帖子详情
+	 * 
+	 * @param id
+	 * @return
+	 */
+
+	@ResponseBody
+	@RequestMapping(value = "/bbs/thread/{id}", method = RequestMethod.GET)
+	@ApiOperation(value = "根据id 获取帖子详情", notes = "根据id 获取帖子详情 /bbs/thread/{id}")
+	public Resp<?> postById(@PathVariable("id") Long id) {
+		Map<String, Object> resMap = this.responseOK1("");
+		Thread threaddetil = new Thread();
+		threaddetil.setThreadStatus(1);
+		threaddetil.setId(id);
+		threaddetil = threadService.getById(id);
+		if (threaddetil == null) {
+			return Resp.notFound( "error_empty_thread");
+		}
+		resMap.put("thread", threaddetil);
+		Post post=new Post();
+		post.setThreadId(id);
+		resMap.put("threadPostNum", postService.countByParm(post));
+		return Resp.success(resMap);
 	}
 
 	/**

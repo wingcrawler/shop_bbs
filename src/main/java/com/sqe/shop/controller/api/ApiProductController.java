@@ -134,6 +134,7 @@ public class ApiProductController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "single", method = RequestMethod.GET)
 	@ApiOperation(value = "查询单个商品商品详情", notes = "需要登录")
+	@ResponseBody
 	public Resp<?> single(@RequestParam Long productId) {
 		User user=this.getCurrentUser();
 		if(null==user){

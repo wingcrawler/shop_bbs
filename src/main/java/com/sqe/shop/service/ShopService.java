@@ -178,9 +178,9 @@ public class ShopService extends AdapterService implements BaseService {
 	}
 	
 	// 获取当前用户shop
-	public Shop getCurrentUserShop() {
+	public Shop getCurrentUserShop(Long userId) {
 		Shop shop = new Shop();
-		shop.setUserId(this.getCurrentUserId());
+		shop.setUserId(userId);
 		PageUtil<Shop> shopPage = this.getBeanListByParm(shop, 0, -1);
 		if(shopPage.getTotalRecords()==0){
 			return null;

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,10 +47,11 @@ import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.PropertiesUtil;
 import com.sqe.shop.util.RegularUtil;
 import com.sqe.shop.util.Resp;
+import com.sun.org.apache.bcel.internal.generic.ReturnaddressType;
 
 import io.swagger.annotations.ApiOperation;
 
-@Controller
+@RestController
 @RequestMapping("/api/sell")
 public class ApiSellerController extends BaseFrontController {
 
@@ -633,6 +635,7 @@ public class ApiSellerController extends BaseFrontController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/doSaveMerchant", method = RequestMethod.POST)
+	@ApiOperation(value = " 保存商家基本信息", notes = " 保存商家基本信息")
 	public Resp<?> doSaveMerchant(@RequestBody Shop shop,
 			@RequestParam(name = "file", value = "file", required = false) MultipartFile attachFile) {
 		if (StringUtils.isBlank(shop.getShopTitle())) {
@@ -661,14 +664,19 @@ public class ApiSellerController extends BaseFrontController {
 	}
 
 	/**
-	 * 营业执照页面 店铺详细信息 商家介绍 资质
+	 * 营业执照页面 店铺详细信息 商家介绍 资质   获取店铺申请信息
 	 * 
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/businessLicense", method = RequestMethod.GET)
+	@ApiOperation(value = "  营业执照页面 店铺详细信息 商家介绍 资质   获取店铺申请信息", notes = "  营业执照页面、 店铺详细信息、 商家介绍 资质 、  获取店铺申请信息 四合一接口")
 	public Resp<Shop> businessLicense() {
-		Shop shop = shopService.getCurrentUserShop();
+		Long UserId=this.getCurrentUserId();
+		if(null==UserId){
+		 return Resp.customFail("-1", "need login in");
+		}
+		Shop shop = shopService.getCurrentUserShop(UserId);
 		return Resp.success(shop);
 	}
 

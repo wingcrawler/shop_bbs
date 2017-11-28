@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +27,8 @@ import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.biz.BizProductService;
 import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.util.PageUtil;
+
+import io.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping("/h5/product")
@@ -93,7 +96,7 @@ public class MobileProductController extends BaseFrontController {
 		product.setProductStatus(1);
 		if(StringUtils.isBlank(productTypeId)){
 			//热门商品
-			PageUtil<Map<String, Object>> hotProductPage = productService.getHotProductList(product, 1, 9); 
+			PageUtil<Map<String, Object>> hotProductPage = productService.getHotProductList(product, pageNo, pageSize); 
 			resMap.put("page", hotProductPage);
 		} else {
 			//根据一级分类查询商品
@@ -174,7 +177,7 @@ public class MobileProductController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("/getProductComment")
+	@GetMapping("/getProductComment")
 	public Map<String, Object> getProductComment(Long productId,
 			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
 			@RequestParam(name="pageSize", defaultValue="10") int pageSize){
@@ -182,6 +185,28 @@ public class MobileProductController extends BaseFrontController {
 			return this.responseError1(-1, "product id is blank");
 		}
 		return bizProductService.getProductComment(productId, pageNo, pageSize);
+	}
+	
+	/**
+	 * 产品评论
+	 * @param productId
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping("/hot")
+	@ApiOperation(value = "手机版首页热门商品", notes = "手机版热门商品")
+	public Map<String, Object> getHotProduct(
+			@RequestParam(name="pageNo", defaultValue="1") int pageNo,  
+			@RequestParam(name="pageSize", defaultValue="12") int pageSize){
+		Product product = new Product();
+		product.setProductStatus(PRODUCT_ON);
+		Map<String, Object> resMap = this.responseOK1("");
+		//热门商品
+		PageUtil<Map<String, Object>> hotProductPage = productService.getHotProductList(product, pageNo, pageSize); 
+		resMap.put("page", hotProductPage);
+		return resMap;
 	}
 	
 }

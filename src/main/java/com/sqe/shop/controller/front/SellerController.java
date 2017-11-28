@@ -790,7 +790,7 @@ public class SellerController extends BaseFrontController {
 	public ModelAndView merchantPage(ModelAndView model) {
 		model.setViewName("shop/sell/merchantCA");
 
-		Shop shop = shopService.getCurrentUserShop();
+		Shop shop = shopService.getCurrentUserShop(this.getCurrentUserId());
 
 		model.addObject("shop", shop);
 		model.addObject("user", this.getCurrentUser());
@@ -844,7 +844,7 @@ public class SellerController extends BaseFrontController {
 	@RequestMapping(value = "/businessLicense", method = RequestMethod.GET)
 	public ModelAndView businessLicense(ModelAndView model) {
 		model.setViewName("shop/sell/business_license");
-		Shop shop = shopService.getCurrentUserShop();
+		Shop shop = shopService.getCurrentUserShop(this.getCurrentUserId());
 		model.addObject("shop", shop);
 		return model;
 	}
@@ -889,7 +889,7 @@ public class SellerController extends BaseFrontController {
 	@RequestMapping(value = "/merchantIntroduce", method = RequestMethod.GET)
 	public ModelAndView merchantIntroduce(ModelAndView model) {
 		model.setViewName("shop/sell/merchant_introduce");
-		Shop shop = shopService.getCurrentUserShop();
+		Shop shop = shopService.getCurrentUserShop(this.getCurrentUserId());
 		model.addObject("shop", shop);
 		return model;
 	}
@@ -934,7 +934,7 @@ public class SellerController extends BaseFrontController {
 	@RequestMapping(value = "/businessQualif", method = RequestMethod.GET)
 	public ModelAndView businessQualif(ModelAndView model) {
 		model.setViewName("shop/sell/shelf_qualification");
-		Shop shop = shopService.getCurrentUserShop();
+		Shop shop = shopService.getCurrentUserShop(this.getCurrentUserId());
 		model.addObject("shop", shop);
 		return model;
 	}
