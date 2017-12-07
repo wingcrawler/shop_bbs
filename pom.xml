@@ -338,10 +338,22 @@
 				</dependencies>
 			</plugin>
 		</plugins>
-		<!-- <resources> <resource> <directory>src/main/webapp</directory> <targetPath>BOOT-INF/resources</targetPath> 
-			<includes> <include>**/**</include> </includes> </resource> <resource> <directory>src/main/resources</directory> 
-			<includes> <include>**/**</include> </includes> <filtering>false</filtering> 
-			</resource> </resources> -->
+		<resources>
+			<resource>
+				<directory>src/main/webapp</directory>
+				<targetPath>BOOT-INF/resources</targetPath>
+				<includes>
+					<include>**/**</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/**</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 		<pluginManagement>
 			<plugins>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
