@@ -1,343 +1,401 @@
 <?xml version="1.0" encoding="UTF-8" ?>   
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sqe.shop.mapper.ProductMapper">
 
-<resultMap type="com.sqe.shop.model.Product" id="ProductBaseMapper">
-	<id property="productDescripton" column="product_descripton" />
-	<id property="productEnName" column="product_en_name" />
-	<id property="productDim" column="product_dim" />
-	<id property="productStatus" column="product_status" />
-	<id property="productCount" column="product_count" />
-	<id property="productView" column="product_view" />
-	<id property="productRank" column="product_rank" />
-	<id property="userId" column="user_id" />
-	<id property="productTypeId" column="product_type_id" />
-	<id property="productName" column="product_name" />
-	<id property="productSubtypeId" column="product_subtype_id" />
-	<id property="createTime" column="create_time" />
-	<id property="productUrlClick" column="product_url_click" />
-	<id property="productEnDescription" column="product_en_description" />
-	<id property="productEnDim" column="product_en_dim" />
-	<id property="productTag" column="product_tag" />
-	<id property="shopId" column="shop_id" />
-	<id property="id" column="id" />
-	<id property="productUrl" column="product_url" />
-	<id property="productPrice" column="product_price" />
-</resultMap>  
+	<resultMap type="com.sqe.shop.model.Product" id="ProductBaseMapper">
+		<id property="productDescripton" column="product_descripton" />
+		<id property="productEnName" column="product_en_name" />
+		<id property="productDim" column="product_dim" />
+		<id property="productStatus" column="product_status" />
+		<id property="productCount" column="product_count" />
+		<id property="productView" column="product_view" />
+		<id property="productRank" column="product_rank" />
+		<id property="userId" column="user_id" />
+		<id property="productTypeId" column="product_type_id" />
+		<id property="productName" column="product_name" />
+		<id property="productSubtypeId" column="product_subtype_id" />
+		<id property="createTime" column="create_time" />
+		<id property="productUrlClick" column="product_url_click" />
+		<id property="productEnDescription" column="product_en_description" />
+		<id property="productEnDim" column="product_en_dim" />
+		<id property="productTag" column="product_tag" />
+		<id property="shopId" column="shop_id" />
+		<id property="id" column="id" />
+		<id property="productUrl" column="product_url" />
+		<id property="productPrice" column="product_price" />
+		<id property="currenciesType" column="currencies_type" />
+		<id property="readFlag" column="read_flag"/>
+		<id property="delFlag" column="del_flag"/>
+	</resultMap>
 
-<insert id="insert">
-	<selectKey resultType="long" keyProperty="id">  
-   		select LAST_INSERT_ID()
-   	</selectKey>
-	insert into product
-	(product_descripton,product_en_name,product_dim,product_status,product_count,product_view,product_rank,user_id,product_type_id,product_name,product_subtype_id,create_time,product_url_click,product_en_description,product_en_dim,product_tag,shop_id,product_url,product_price)
-	values
-	(#{productDescripton},#{productEnName},#{productDim},#{productStatus},#{productCount},#{productView},#{productRank},#{userId},#{productTypeId},#{productName},#{productSubtypeId},#{createTime},#{productUrlClick},#{productEnDescription},#{productEnDim},#{productTag},#{shopId},#{productUrl},#{productPrice})
-</insert>
+	<insert id="insert">
+		<selectKey resultType="long" keyProperty="id">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into product (id, product_name, product_descripton,
+		product_dim, product_view, product_rank,
+		product_status, product_count,
+		product_url,
+		product_url_click, product_type_id, shop_id,
+		product_price, currencies_type, product_en_name,
+		product_en_description, product_en_dim, user_id,
+		create_time,
+		product_subtype_id, product_tag,
+		read_flag, del_flag)
+		values
+		(#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR},
+		#{productDescripton,jdbcType=VARCHAR},
+		#{productDim,jdbcType=VARCHAR},
+		#{productView,jdbcType=INTEGER}, #{productRank,jdbcType=INTEGER},
+		#{productStatus,jdbcType=INTEGER}, #{productCount,jdbcType=INTEGER},
+		#{productUrl,jdbcType=VARCHAR},
+		#{productUrlClick,jdbcType=INTEGER},
+		#{productTypeId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT},
+		#{productPrice,jdbcType=DECIMAL}, #{currenciesType,jdbcType=CHAR},
+		#{productEnName,jdbcType=VARCHAR},
+		#{productEnDescription,jdbcType=VARCHAR},
+		#{productEnDim,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT},
+		#{createTime,jdbcType=TIMESTAMP}, #{productSubtypeId,jdbcType=BIGINT},
+		#{productTag,jdbcType=VARCHAR},
+		#{readFlag,jdbcType=CHAR},
+		#{delFlag,jdbcType=CHAR})
+	</insert>
 
-<update id="update">
-	UPDATE product 
-	<set>
-			<if test="productDescripton != null">  
-	        	product_descripton=#{productDescripton},
-	    	</if>
-			<if test="productEnName != null">  
-	        	product_en_name=#{productEnName},
-	    	</if>
-			<if test="productDim != null">  
-	        	product_dim=#{productDim},
-	    	</if>
-			<if test="productStatus != null">  
-	        	product_status=#{productStatus},
-	    	</if>
-			<if test="productCount != null">  
-	        	product_count=#{productCount},
-	    	</if>
-			<if test="productView != null">  
-	        	product_view=#{productView},
-	    	</if>
-			<if test="productRank != null">  
-	        	product_rank=#{productRank},
-	    	</if>
-			<if test="userId != null">  
-	        	user_id=#{userId},
-	    	</if>
-			<if test="productTypeId != null">  
-	        	product_type_id=#{productTypeId},
-	    	</if>
-			<if test="productName != null">  
-	        	product_name=#{productName},
-	    	</if>
-			<if test="productSubtypeId != null">  
-	        	product_subtype_id=#{productSubtypeId},
-	    	</if>
-			<if test="createTime != null">  
-	        	create_time=#{createTime},
-	    	</if>
-			<if test="productUrlClick != null">  
-	        	product_url_click=#{productUrlClick},
-	    	</if>
-			<if test="productEnDescription != null">  
-	        	product_en_description=#{productEnDescription},
-	    	</if>
-			<if test="productEnDim != null">  
-	        	product_en_dim=#{productEnDim},
-	    	</if>
-			<if test="productTag != null">  
-	        	product_tag=#{productTag},
-	    	</if>
-			<if test="shopId != null">  
-	        	shop_id=#{shopId},
-	    	</if>
-			<if test="productUrl != null">  
-	        	product_url=#{productUrl},
-	    	</if>
-			<if test="productPrice != null">  
-	        	product_price=#{productPrice},
-	    	</if>
-	</set>   
-    WHERE id=#{id}
-</update>
+	<update id="update">
+		UPDATE product
+		<set>
+			<if test="productDescripton != null">
+				product_descripton=#{productDescripton},
+			</if>
+			<if test="productEnName != null">
+				product_en_name=#{productEnName},
+			</if>
+			<if test="productDim != null">
+				product_dim=#{productDim},
+			</if>
+			<if test="productStatus != null">
+				product_status=#{productStatus},
+			</if>
+			<if test="productCount != null">
+				product_count=#{productCount},
+			</if>
+			<if test="productView != null">
+				product_view=#{productView},
+			</if>
+			<if test="productRank != null">
+				product_rank=#{productRank},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="productTypeId != null">
+				product_type_id=#{productTypeId},
+			</if>
+			<if test="productName != null">
+				product_name=#{productName},
+			</if>
+			<if test="productSubtypeId != null">
+				product_subtype_id=#{productSubtypeId},
+			</if>
+			<if test="createTime != null">
+				create_time=#{createTime},
+			</if>
+			<if test="productUrlClick != null">
+				product_url_click=#{productUrlClick},
+			</if>
+			<if test="productEnDescription != null">
+				product_en_description=#{productEnDescription},
+			</if>
+			<if test="productEnDim != null">
+				product_en_dim=#{productEnDim},
+			</if>
+			<if test="productTag != null">
+				product_tag=#{productTag},
+			</if>
+			<if test="shopId != null">
+				shop_id=#{shopId},
+			</if>
+			<if test="productUrl != null">
+				product_url=#{productUrl},
+			</if>
+			<if test="productPrice != null">
+				product_price=#{productPrice},
+			</if>
+			<if test="currenciesType != null">
+				currencies_type=#{currenciesType}
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
 
-<delete id="delete">
-	delete from product where id=#{id}
-</delete>
+	<delete id="delete">
+		delete from product where id=#{id}
+	</delete>
 
-<delete id="deleteByIdAndUserId">
-	delete from product where id=#{id} and user_id=#{userId}
-</delete>
+	<delete id="deleteByIdAndUserId">
+		delete from product where id=#{id} and
+		user_id=#{userId}
+	</delete>
 
-<select id="getById" resultMap="ProductBaseMapper">
-	SELECT * FROM product WHERE id=#{id} 
-</select>
+	<select id="getById" resultMap="ProductBaseMapper">
+		SELECT * FROM product WHERE
+		id=#{id}
+	</select>
 
-<select id="getByIdAndUserId" resultMap="ProductBaseMapper">
-	SELECT * FROM product WHERE id=#{id} and user_id=#{userId}
-</select>
+	<select id="getByIdAndUserId" resultMap="ProductBaseMapper">
+		SELECT * FROM product
+		WHERE id=#{id} and user_id=#{userId}
+	</select>
 
-<select id="countByParm" resultType="integer">
-	select count(*) from product  where 1=1 
+	<select id="countByParm" resultType="integer">
+		select count(*) from product where 1=1
 		<if test="parm.productDescripton != null">
-	     	and product_descripton = #{parm.productDescripton}
-	   	</if>
+			and product_descripton = #{parm.productDescripton}
+		</if>
 		<if test="parm.productDim != null">
-	     	and product_dim = #{parm.productDim}
-	   	</if>
+			and product_dim = #{parm.productDim}
+		</if>
 		<if test="parm.productStatus != null">
-	     	and product_status = #{parm.productStatus}
-	   	</if>
+			and product_status = #{parm.productStatus}
+		</if>
 		<if test="parm.productCount != null">
-	     	and product_count = #{parm.productCount}
-	   	</if>
+			and product_count = #{parm.productCount}
+		</if>
 		<if test="parm.productView != null">
-	     	and product_view = #{parm.productView}
-	   	</if>
+			and product_view = #{parm.productView}
+		</if>
 		<if test="parm.productRank != null">
-	     	and product_rank = #{parm.productRank}
-	   	</if>
+			and product_rank = #{parm.productRank}
+		</if>
 		<if test="parm.userId != null">
-	     	and user_id = #{parm.userId}
-	   	</if>
+			and user_id = #{parm.userId}
+		</if>
 		<if test="parm.productTypeId != null">
-	     	and product_type_id = #{parm.productTypeId}
-	   	</if>
+			and product_type_id = #{parm.productTypeId}
+		</if>
 		<if test="parm.createTime != null">
-	     	and create_time = #{parm.createTime}
-	   	</if>
+			and create_time = #{parm.createTime}
+		</if>
 		<if test="parm.productUrlClick != null">
-	     	and product_url_click = #{parm.productUrlClick}
-	   	</if>
+			and product_url_click = #{parm.productUrlClick}
+		</if>
 		<if test="parm.productEnDescription != null">
-	     	and product_en_description = #{parm.productEnDescription}
-	   	</if>
+			and product_en_description = #{parm.productEnDescription}
+		</if>
 		<if test="parm.productEnDim != null">
-	     	and product_en_dim = #{parm.productEnDim}
-	   	</if>
+			and product_en_dim = #{parm.productEnDim}
+		</if>
 		<if test="parm.shopId != null">
-	     	and shop_id = #{parm.shopId}
-	   	</if>
+			and shop_id = #{parm.shopId}
+		</if>
 		<if test="parm.productUrl != null">
-	     	and product_url = #{parm.productUrl}
-	   	</if>
+			and product_url = #{parm.productUrl}
+		</if>
 		<if test="parm.productPrice != null">
-	     	and product_price = #{parm.productPrice}
-	   	</if>
+			and product_price = #{parm.productPrice}
+		</if>
+		<if test="parm.currenciesType != null">
+			and currenciesType =  #{parm.currenciesType}
+			</if>
 		<if test="parm.productName != null">
-	     	and (product_name like  "%"#{parm.productName}"%"  or  product_en_name like  "%"#{parm.productName}"%")
-	   	</if>
-	   	<if test="parm.productSubtypeId != null">
-	     	and product_subtype_id = #{parm.productSubtypeId}
-	   	</if>
-</select>
+			and (product_name like "%"#{parm.productName}"%" or
+			product_en_name like
+			"%"#{parm.productName}"%")
+		</if>
+		<if test="parm.productSubtypeId != null">
+			and product_subtype_id = #{parm.productSubtypeId}
+		</if>
+	</select>
 
-<select id="getBeanListByParm" resultMap="ProductBaseMapper">
-	select * from product where 1=1 
-			<if test="parm.productDescripton != null">
-	     	and product_descripton = #{parm.productDescripton}
-	   	</if>
+	<select id="getBeanListByParm" resultMap="ProductBaseMapper">
+		select * from product where 1=1
+		<if test="parm.productDescripton != null">
+			and product_descripton = #{parm.productDescripton}
+		</if>
 		<if test="parm.productDim != null">
-	     	and product_dim = #{parm.productDim}
-	   	</if>
+			and product_dim = #{parm.productDim}
+		</if>
 		<if test="parm.productStatus != null">
-	     	and product_status = #{parm.productStatus}
-	   	</if>
+			and product_status = #{parm.productStatus}
+		</if>
 		<if test="parm.productCount != null">
-	     	and product_count = #{parm.productCount}
-	   	</if>
+			and product_count = #{parm.productCount}
+		</if>
 		<if test="parm.productView != null">
-	     	and product_view = #{parm.productView}
-	   	</if>
+			and product_view = #{parm.productView}
+		</if>
 		<if test="parm.productRank != null">
-	     	and product_rank = #{parm.productRank}
-	   	</if>
+			and product_rank = #{parm.productRank}
+		</if>
 		<if test="parm.userId != null">
-	     	and user_id = #{parm.userId}
-	   	</if>
+			and user_id = #{parm.userId}
+		</if>
 		<if test="parm.productTypeId != null">
-	     	and product_type_id = #{parm.productTypeId}
-	   	</if>
+			and product_type_id = #{parm.productTypeId}
+		</if>
 		<if test="parm.createTime != null">
-	     	and create_time = #{parm.createTime}
-	   	</if>
+			and create_time = #{parm.createTime}
+		</if>
 		<if test="parm.productUrlClick != null">
-	     	and product_url_click = #{parm.productUrlClick}
-	   	</if>
+			and product_url_click = #{parm.productUrlClick}
+		</if>
 		<if test="parm.productEnDescription != null">
-	     	and product_en_description = #{parm.productEnDescription}
-	   	</if>
+			and product_en_description = #{parm.productEnDescription}
+		</if>
 		<if test="parm.productEnDim != null">
-	     	and product_en_dim = #{parm.productEnDim}
-	   	</if>
+			and product_en_dim = #{parm.productEnDim}
+		</if>
 		<if test="parm.shopId != null">
-	     	and shop_id = #{parm.shopId}
-	   	</if>
+			and shop_id = #{parm.shopId}
+		</if>
 		<if test="parm.productUrl != null">
-	     	and product_url = #{parm.productUrl}
-	   	</if>
+			and product_url = #{parm.productUrl}
+		</if>
 		<if test="parm.productPrice != null">
-	     	and product_price = #{parm.productPrice}
-	   	</if>
+			and product_price = #{parm.productPrice}
+		</if>
+		<if test="parm.currenciesType != null">
+			and currenciesType =  #{parm.currenciesType}
+			</if>
 		<if test="parm.productName != null">
-	     	and (product_name like  "%"#{parm.productName}"%"  or  product_en_name like  "%"#{parm.productName}"%")
-	   	</if>
-	   	<if test="parm.productSubtypeId != null">
-	     	and product_subtype_id = #{parm.productSubtypeId}
-	   	</if>
+			and (product_name like "%"#{parm.productName}"%" or
+			product_en_name like
+			"%"#{parm.productName}"%")
+		</if>
+		<if test="parm.productSubtypeId != null">
+			and product_subtype_id = #{parm.productSubtypeId}
+		</if>
 		<if test="parm.orderby != null">
-	   		order by ${parm.orderby}
-	   	</if>
+			order by ${parm.orderby}
+		</if>
 		<if test="parm.start != null">
 			limit #{parm.start},#{parm.limit}
 		</if>
-</select>
+	</select>
 
 
-<select id="getMapListByParm" parameterType="HashMap" resultType="HashMap">
-	select p.id id,
-	p.product_name as productNameCh,
-	p.product_en_name as productName, 
-	p.product_price as productPrice,
-	p.product_rank as productRank, p.product_view as productView,p.product_count as productCount,
-	p.product_status as productStatus,s.shop_title as shopName,
-	pt.type_name_ch as productTypeNameCh,
-	pt.type_name as productTypeName,
- 	date_format(p.create_time, '%Y-%m-%d') as createTimeStr,p.product_tag as productTag,
-	i.image_path as imagePath
-	from product p 
-	LEFT JOIN product_type pt on p.product_type_id=pt.id
-	LEFT JOIN shop s on p.shop_id=s.id
-	LEFT JOIN image i on p.id=i.product_id and i.index_show=1
-	where 1=1
-	<if test="parm.productDescripton != null">
-	     	and p.product_descripton = #{parm.productDescripton}
-	   	</if>
+	<select id="getMapListByParm" parameterType="HashMap"
+		resultType="HashMap">
+		select p.id id,
+		p.product_name as productNameCh,
+		p.product_en_name as
+		productName,
+		p.product_price as productPrice,
+		p.currencies_type,
+		p.product_rank as
+		productRank, p.product_view as productView,p.product_count as
+		productCount,
+		p.product_status as productStatus,s.shop_title as
+		shopName,
+		pt.type_name_ch as productTypeNameCh,
+		pt.type_name as
+		productTypeName,
+		date_format(p.create_time, '%Y-%m-%d') as
+		createTimeStr,p.product_tag as productTag,
+		i.image_path as imagePath
+		from product p
+		LEFT JOIN product_type pt on p.product_type_id=pt.id
+		LEFT JOIN shop s on p.shop_id=s.id
+		LEFT JOIN image i on
+		p.id=i.product_id and i.index_show=1
+		where 1=1
+		<if test="parm.productDescripton != null">
+			and p.product_descripton = #{parm.productDescripton}
+		</if>
 		<if test="parm.productEnName != null">
-	     	and p.product_en_name = #{parm.productEnName}
-	   	</if>
+			and p.product_en_name = #{parm.productEnName}
+		</if>
 		<if test="parm.productDim != null">
-	     	and p.product_dim = #{parm.productDim}
-	   	</if>
+			and p.product_dim = #{parm.productDim}
+		</if>
 		<if test="parm.productStatus != null">
-	     	and p.product_status = #{parm.productStatus}
-	   	</if>
+			and p.product_status = #{parm.productStatus}
+		</if>
 		<if test="parm.productCount != null">
-	     	and p.product_count = #{parm.productCount}
-	   	</if>
+			and p.product_count = #{parm.productCount}
+		</if>
 		<if test="parm.productView != null">
-	     	and p.product_view = #{parm.productView}
-	   	</if>
+			and p.product_view = #{parm.productView}
+		</if>
 		<if test="parm.productRank != null">
-	     	and p.product_rank = #{parm.productRank}
-	   	</if>
+			and p.product_rank = #{parm.productRank}
+		</if>
 		<if test="parm.userId != null">
-	     	and p.user_id = #{parm.userId}
-	   	</if>
+			and p.user_id = #{parm.userId}
+		</if>
 		<if test="parm.productTypeId != null">
-	     	and p.product_type_id = #{parm.productTypeId}
-	   	</if>
+			and p.product_type_id = #{parm.productTypeId}
+		</if>
 		<if test="parm.createTime != null">
-	     	and p.create_time = #{parm.createTime}
-	   	</if>
-	   	<if test="parm.createTimeStr != null">
-	     	and p.date_format(create_time,'%Y-%m-%d') = #{parm.parm.createTimeStr}
-	   	</if>
+			and p.create_time = #{parm.createTime}
+		</if>
+		<if test="parm.createTimeStr != null">
+			and p.date_format(create_time,'%Y-%m-%d') =
+			#{parm.parm.createTimeStr}
+		</if>
 		<if test="parm.productUrlClick != null">
-	     	and p.product_url_click = #{parm.productUrlClick}
-	   	</if>
+			and p.product_url_click = #{parm.productUrlClick}
+		</if>
 		<if test="parm.productEnDescription != null">
-	     	and p.product_en_description = #{parm.productEnDescription}
-	   	</if>
+			and p.product_en_description =
+			#{parm.productEnDescription}
+		</if>
 		<if test="parm.productEnDim != null">
-	     	and p.product_en_dim = #{parm.productEnDim}
-	   	</if>
+			and p.product_en_dim = #{parm.productEnDim}
+		</if>
 		<if test="parm.shopId != null">
-	     	and p.shop_id = #{parm.shopId}
-	   	</if>
+			and p.shop_id = #{parm.shopId}
+		</if>
 		<if test="parm.productUrl != null">
-	     	and p.product_url = #{parm.productUrl}
-	   	</if>
+			and p.product_url = #{parm.productUrl}
+		</if>
 		<if test="parm.productPrice != null">
-	     	and p.product_price = #{parm.productPrice}
-	   	</if>
+			and p.product_price = #{parm.productPrice}
+		</if>
 		<if test="parm.productName != null">
-	     	and (p.product_name like  "%"#{parm.productName}"%"
-	     	or p.product_en_name like  "%"#{parm.productName}"%")
-	   	</if>
-	   	<if test="parm.productSubtypeId != null">
-	     	and p.product_subtype_id = #{parm.productSubtypeId}
-	   	</if>
-	<if test="parm.orderby != null">
-   		order by ${parm.orderby}
-   	</if>
-	<if test="parm.start != null">
-		limit #{parm.start},#{parm.limit}
-	</if>
-</select>
+			and (p.product_name like "%"#{parm.productName}"%"
+			or
+			p.product_en_name like "%"#{parm.productName}"%")
+		</if>
+		<if test="parm.productSubtypeId != null">
+			and p.product_subtype_id = #{parm.productSubtypeId}
+		</if>
+		<if test="parm.orderby != null">
+			order by ${parm.orderby}
+		</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+	</select>
 
-<select id="getHotProductList" parameterType="HashMap" resultType="HashMap">
-	select p.id id,p.product_name as productName, p.product_price as productPrice,
-	p.product_descripton as productDesc,
-	i.image_path as imagePath
-	from product p 
-	LEFT JOIN image i on p.id=i.product_id
-	where 1=1
-	<if test="parm.productStatus != null">
-     	and p.product_status = #{parm.productStatus}
-   	</if>
-   	<if test="parm.productName != null">
-     	and p.product_name like  "%"#{parm.productName}"%"
-   	</if>
-   	<if test="parm.shopId != null">
-    	and p.shop_id = #{parm.shopId}
-  	</if>
-  	GROUP BY p.id
-	<if test="parm.orderby != null">
-   		order by ${parm.orderby}
-   	</if>
-	<if test="parm.start != null">
-		limit #{parm.start},#{parm.limit}
-	</if>
-</select>
+	<select id="getHotProductList" parameterType="HashMap"
+		resultType="HashMap">
+		select p.id id,p.product_name as productName, p.product_price as
+		productPrice,p.currencies_type,
+		p.product_descripton as productDesc,
+		i.image_path as
+		imagePath
+		from product p
+		LEFT JOIN image i on p.id=i.product_id
+		where 1=1
+		<if test="parm.productStatus != null">
+			and p.product_status = #{parm.productStatus}
+		</if>
+		<if test="parm.productName != null">
+			and p.product_name like "%"#{parm.productName}"%"
+		</if>
+		<if test="parm.shopId != null">
+			and p.shop_id = #{parm.shopId}
+		</if>
+		GROUP BY p.id
+		<if test="parm.orderby != null">
+			order by ${parm.orderby}
+		</if>
+		<if test="parm.start != null">
+			limit #{parm.start},#{parm.limit}
+		</if>
+	</select>
 
 
 </mapper>

@@ -36,6 +36,7 @@ import com.sqe.shop.service.ShopService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.service.cached.CachedService;
 import com.sqe.shop.service.file.ImageFileService;
+import com.sqe.shop.util.Currencies;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.PropertiesUtil;
@@ -380,7 +381,7 @@ public class SellerController extends BaseFrontController {
 			if (shop == null) {
 				return responseError(-1, "error_illegal");
 			}
-
+			product.setCurrenciesType(Currencies.check(product.getCurrenciesType()));
 			product.setShopId(shop.getId());
 			product.setProductStatus(Constants.PRODUCT_WAIT);
 			int count = productService.save(product);

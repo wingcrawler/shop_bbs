@@ -29,7 +29,7 @@
 											<del><span></span> ¥ ${item.productPrice }</del>										 	
 									 	</c:if>
 									 	<c:if test="${item.productCount!=0 }">
-									 		<span></span> ¥ ${item.productPrice } 
+									 		<span></span> ${item.currencies_type}  ${item.productPrice } 
 									 	</c:if>
 									 </p>
 								 </div>

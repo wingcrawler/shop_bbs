@@ -1,17 +1,9 @@
-package com.sqe.shop.model;
+package test;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import com.sqe.shop.common.BaseModel;
-
-public class Product extends BaseModel implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5862773276078856434L;
-
-	private Long id;
+public class Product {
+    private Long id;
 
     private String productName;
 

@@ -57,7 +57,7 @@
 						<div class="single-left-info">
 							<h3>${product.productName }</h3>
 							<a href="#product-details" class="view">${t.t_view_detail }</a>
-							<p>¥ ${product.productPrice }</p>
+							<p>${product.currenciesType} ${product.productPrice }</p>
 							<p><a href="/shop/product?shopId=${shop.id }" class="view">${t.t_shop_name }: ${shop.shopTitle }</a></p>
 						</div>
 						<div class="select-size">
@@ -113,7 +113,7 @@
 									<div class="clearfix"> </div>
 								</div>
 								<div class="col-md-3 related-right">
-									<p>¥ ${item.productPrice }</p>
+									<p>${item.currencies_type} ${item.productPrice }</p>
 									<a href="/product/single?productId=${item.id }">${t.t_view_detail }</a>
 								</div>
 								<div class="clearfix"> </div>

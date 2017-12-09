@@ -102,7 +102,7 @@
 									<h3><a href="/product/single?productId=${item.id }" target="_blank">${fn:substring(item.productName, 0, 10) }</a></h3>
 									<p>${fn:substring(item.productDesc, 0, 15)}</p>
 									<div class="price">
-										<p>¥ ${item.productPrice }</p>
+										<p>${item.currencies_type}  ${item.productPrice }</p>
 									</div>
 									<!-- <div class="like">
 										<a href="#"><img src="/frontstyle/images/like.png" alt="" /></a>

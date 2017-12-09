@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.ProductMapper">
+  <resultMap id="BaseResultMap" type="test.Product">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_descripton" jdbcType="VARCHAR" property="productDescripton" />
+    <result column="product_dim" jdbcType="VARCHAR" property="productDim" />
+    <result column="product_view" jdbcType="INTEGER" property="productView" />
+    <result column="product_rank" jdbcType="INTEGER" property="productRank" />
+    <result column="product_status" jdbcType="INTEGER" property="productStatus" />
+    <result column="product_count" jdbcType="INTEGER" property="productCount" />
+    <result column="product_url" jdbcType="VARCHAR" property="productUrl" />
+    <result column="product_url_click" jdbcType="INTEGER" property="productUrlClick" />
+    <result column="product_type_id" jdbcType="BIGINT" property="productTypeId" />
+    <result column="shop_id" jdbcType="BIGINT" property="shopId" />
+    <result column="product_price" jdbcType="DECIMAL" property="productPrice" />
+    <result column="currencies_type" jdbcType="CHAR" property="currenciesType" />
+    <result column="product_en_name" jdbcType="VARCHAR" property="productEnName" />
+    <result column="product_en_description" jdbcType="VARCHAR" property="productEnDescription" />
+    <result column="product_en_dim" jdbcType="VARCHAR" property="productEnDim" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="product_subtype_id" jdbcType="BIGINT" property="productSubtypeId" />
+    <result column="product_tag" jdbcType="VARCHAR" property="productTag" />
+    <result column="read_flag" jdbcType="CHAR" property="readFlag" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, product_name, product_descripton, product_dim, product_view, product_rank, product_status, 
+    product_count, product_url, product_url_click, product_type_id, shop_id, product_price, 
+    currencies_type, product_en_name, product_en_description, product_en_dim, user_id, 
+    create_time, product_subtype_id, product_tag, read_flag, del_flag
+  </sql>
+  <select id="selectByExample" parameterType="test.ProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="test.ProductExample">
+    delete from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="test.Product">
+    insert into product (id, product_name, product_descripton, 
+      product_dim, product_view, product_rank, 
+      product_status, product_count, product_url, 
+      product_url_click, product_type_id, shop_id, 
+      product_price, currencies_type, product_en_name, 
+      product_en_description, product_en_dim, user_id, 
+      create_time, product_subtype_id, product_tag, 
+      read_flag, del_flag)
+    values (#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{productDescripton,jdbcType=VARCHAR}, 
+      #{productDim,jdbcType=VARCHAR}, #{productView,jdbcType=INTEGER}, #{productRank,jdbcType=INTEGER}, 
+      #{productStatus,jdbcType=INTEGER}, #{productCount,jdbcType=INTEGER}, #{productUrl,jdbcType=VARCHAR}, 
+      #{productUrlClick,jdbcType=INTEGER}, #{productTypeId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, 
+      #{productPrice,jdbcType=DECIMAL}, #{currenciesType,jdbcType=CHAR}, #{productEnName,jdbcType=VARCHAR}, 
+      #{productEnDescription,jdbcType=VARCHAR}, #{productEnDim,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{productSubtypeId,jdbcType=BIGINT}, #{productTag,jdbcType=VARCHAR}, 
+      #{readFlag,jdbcType=CHAR}, #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="test.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productDescripton != null">
+        product_descripton,
+      </if>
+      <if test="productDim != null">
+        product_dim,
+      </if>
+      <if test="productView != null">
+        product_view,
+      </if>
+      <if test="productRank != null">
+        product_rank,
+      </if>
+      <if test="productStatus != null">
+        product_status,
+      </if>
+      <if test="productCount != null">
+        product_count,
+      </if>
+      <if test="productUrl != null">
+        product_url,
+      </if>
+      <if test="productUrlClick != null">
+        product_url_click,
+      </if>
+      <if test="productTypeId != null">
+        product_type_id,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="productPrice != null">
+        product_price,
+      </if>
+      <if test="currenciesType != null">
+        currencies_type,
+      </if>
+      <if test="productEnName != null">
+        product_en_name,
+      </if>
+      <if test="productEnDescription != null">
+        product_en_description,
+      </if>
+      <if test="productEnDim != null">
+        product_en_dim,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="productSubtypeId != null">
+        product_subtype_id,
+      </if>
+      <if test="productTag != null">
+        product_tag,
+      </if>
+      <if test="readFlag != null">
+        read_flag,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productDescripton != null">
+        #{productDescripton,jdbcType=VARCHAR},
+      </if>
+      <if test="productDim != null">
+        #{productDim,jdbcType=VARCHAR},
+      </if>
+      <if test="productView != null">
+        #{productView,jdbcType=INTEGER},
+      </if>
+      <if test="productRank != null">
+        #{productRank,jdbcType=INTEGER},
+      </if>
+      <if test="productStatus != null">
+        #{productStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productCount != null">
+        #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="productUrl != null">
+        #{productUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="productUrlClick != null">
+        #{productUrlClick,jdbcType=INTEGER},
+      </if>
+      <if test="productTypeId != null">
+        #{productTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="productPrice != null">
+        #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currenciesType != null">
+        #{currenciesType,jdbcType=CHAR},
+      </if>
+      <if test="productEnName != null">
+        #{productEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="productEnDescription != null">
+        #{productEnDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="productEnDim != null">
+        #{productEnDim,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productSubtypeId != null">
+        #{productSubtypeId,jdbcType=BIGINT},
+      </if>
+      <if test="productTag != null">
+        #{productTag,jdbcType=VARCHAR},
+      </if>
+      <if test="readFlag != null">
+        #{readFlag,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="test.ProductExample" resultType="java.lang.Long">
+    select count(*) from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productDescripton != null">
+        product_descripton = #{record.productDescripton,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productDim != null">
+        product_dim = #{record.productDim,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productView != null">
+        product_view = #{record.productView,jdbcType=INTEGER},
+      </if>
+      <if test="record.productRank != null">
+        product_rank = #{record.productRank,jdbcType=INTEGER},
+      </if>
+      <if test="record.productStatus != null">
+        product_status = #{record.productStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.productCount != null">
+        product_count = #{record.productCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.productUrl != null">
+        product_url = #{record.productUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productUrlClick != null">
+        product_url_click = #{record.productUrlClick,jdbcType=INTEGER},
+      </if>
+      <if test="record.productTypeId != null">
+        product_type_id = #{record.productTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=BIGINT},
+      </if>
+      <if test="record.productPrice != null">
+        product_price = #{record.productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.currenciesType != null">
+        currencies_type = #{record.currenciesType,jdbcType=CHAR},
+      </if>
+      <if test="record.productEnName != null">
+        product_en_name = #{record.productEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productEnDescription != null">
+        product_en_description = #{record.productEnDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productEnDim != null">
+        product_en_dim = #{record.productEnDim,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productSubtypeId != null">
+        product_subtype_id = #{record.productSubtypeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.productTag != null">
+        product_tag = #{record.productTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readFlag != null">
+        read_flag = #{record.readFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product
+    set id = #{record.id,jdbcType=BIGINT},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_descripton = #{record.productDescripton,jdbcType=VARCHAR},
+      product_dim = #{record.productDim,jdbcType=VARCHAR},
+      product_view = #{record.productView,jdbcType=INTEGER},
+      product_rank = #{record.productRank,jdbcType=INTEGER},
+      product_status = #{record.productStatus,jdbcType=INTEGER},
+      product_count = #{record.productCount,jdbcType=INTEGER},
+      product_url = #{record.productUrl,jdbcType=VARCHAR},
+      product_url_click = #{record.productUrlClick,jdbcType=INTEGER},
+      product_type_id = #{record.productTypeId,jdbcType=BIGINT},
+      shop_id = #{record.shopId,jdbcType=BIGINT},
+      product_price = #{record.productPrice,jdbcType=DECIMAL},
+      currencies_type = #{record.currenciesType,jdbcType=CHAR},
+      product_en_name = #{record.productEnName,jdbcType=VARCHAR},
+      product_en_description = #{record.productEnDescription,jdbcType=VARCHAR},
+      product_en_dim = #{record.productEnDim,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      product_subtype_id = #{record.productSubtypeId,jdbcType=BIGINT},
+      product_tag = #{record.productTag,jdbcType=VARCHAR},
+      read_flag = #{record.readFlag,jdbcType=CHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="test.Product">
+    update product
+    <set>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productDescripton != null">
+        product_descripton = #{productDescripton,jdbcType=VARCHAR},
+      </if>
+      <if test="productDim != null">
+        product_dim = #{productDim,jdbcType=VARCHAR},
+      </if>
+      <if test="productView != null">
+        product_view = #{productView,jdbcType=INTEGER},
+      </if>
+      <if test="productRank != null">
+        product_rank = #{productRank,jdbcType=INTEGER},
+      </if>
+      <if test="productStatus != null">
+        product_status = #{productStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productCount != null">
+        product_count = #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="productUrl != null">
+        product_url = #{productUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="productUrlClick != null">
+        product_url_click = #{productUrlClick,jdbcType=INTEGER},
+      </if>
+      <if test="productTypeId != null">
+        product_type_id = #{productTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="productPrice != null">
+        product_price = #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="currenciesType != null">
+        currencies_type = #{currenciesType,jdbcType=CHAR},
+      </if>
+      <if test="productEnName != null">
+        product_en_name = #{productEnName,jdbcType=VARCHAR},
+      </if>
+      <if test="productEnDescription != null">
+        product_en_description = #{productEnDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="productEnDim != null">
+        product_en_dim = #{productEnDim,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productSubtypeId != null">
+        product_subtype_id = #{productSubtypeId,jdbcType=BIGINT},
+      </if>
+      <if test="productTag != null">
+        product_tag = #{productTag,jdbcType=VARCHAR},
+      </if>
+      <if test="readFlag != null">
+        read_flag = #{readFlag,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="test.Product">
+    update product
+    set product_name = #{productName,jdbcType=VARCHAR},
+      product_descripton = #{productDescripton,jdbcType=VARCHAR},
+      product_dim = #{productDim,jdbcType=VARCHAR},
+      product_view = #{productView,jdbcType=INTEGER},
+      product_rank = #{productRank,jdbcType=INTEGER},
+      product_status = #{productStatus,jdbcType=INTEGER},
+      product_count = #{productCount,jdbcType=INTEGER},
+      product_url = #{productUrl,jdbcType=VARCHAR},
+      product_url_click = #{productUrlClick,jdbcType=INTEGER},
+      product_type_id = #{productTypeId,jdbcType=BIGINT},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      product_price = #{productPrice,jdbcType=DECIMAL},
+      currencies_type = #{currenciesType,jdbcType=CHAR},
+      product_en_name = #{productEnName,jdbcType=VARCHAR},
+      product_en_description = #{productEnDescription,jdbcType=VARCHAR},
+      product_en_dim = #{productEnDim,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      product_subtype_id = #{productSubtypeId,jdbcType=BIGINT},
+      product_tag = #{productTag,jdbcType=VARCHAR},
+      read_flag = #{readFlag,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
