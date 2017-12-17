@@ -27,6 +27,9 @@ public class User extends BaseModel implements Serializable {
 	private String userPhone;
 	private String userMail;
 	private Long id;
+	/**
+	 * 用户角色
+	 */
 	private Long userRole;
 	private String userIntroduce;
 	@Size(min = 5, max = 20, message = "{items.username.length}")

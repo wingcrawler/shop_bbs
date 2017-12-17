@@ -29,7 +29,7 @@ public class ImageFileService extends BaseService {
 
 	private static final Logger logger = LoggerFactory.getLogger(ImageFileService.class);
 
-	public Map<String, Object> uploadImage(MultipartFile attachFile, String uploadPath) {
+	public Map<String, Object> uploadImage(MultipartFile attachFile, String fileName,String uploadPath) {
 		if (attachFile == null) {
 			return responseError(-1, "error_no_file");
 		}
@@ -38,14 +38,14 @@ public class ImageFileService extends BaseService {
 
 		try {
 			if (attachFile != null) {
-				String fileName = attachFile.getOriginalFilename();
+				
 				if (StringUtils.isNotBlank(fileName)) {
 
 					if (attachFile.getSize() > IMG_MAXI_SIZE) {
 						return responseError(-1, "error_img_out_of_rang");
 					}
 
-					Pattern reg = Pattern.compile("[.]jpg|JPG|png|PNG|jpeg|JPEG|gif|GIF$");
+                    Pattern reg = Pattern.compile("[.]jpg|JPG|png|PNG|jpeg|JPEG|gif|GIF$");
 					Matcher matcher = reg.matcher(fileName);
 					if (!matcher.find()) {
 						return responseError(-1, "error_img_formate");
@@ -67,10 +67,10 @@ public class ImageFileService extends BaseService {
 		return responseError(-1, "error_unknow");
 	}
 
-	public Map<String, Object> uploadImage(MultipartFile attachFile) {
+	public Map<String, Object> uploadImage(MultipartFile attachFile,String fileName) {
 		String uploadPath = PropertiesUtil.get("upload_path");
 		uploadPath += DateUtil.dateToString(new Date(), DateUtil.DATE_FORMATE_1) + "//";
-		return this.uploadImage(attachFile, uploadPath);
+		return this.uploadImage(attachFile,fileName, uploadPath);
 	}
 
 	public Map<String, Object> uploadBase64Image(String base64ImgData) {

@@ -1,18 +1,35 @@
 package com.sqe.shop.dto;
 
+import java.sql.Date;
+
 import com.sqe.shop.model.Image;
 
 public class ImageDto extends Image {
 
-	private String Base64data;
+	private String ImageName;
 
-	public String getBase64data() {
-		return Base64data;
-	}
+	private String ImageURL;	
 
-	public void setBase64data(String base64data) {
-		Base64data = base64data;
-	}
+	/**
+	 * 上传用户登录账户
+	 */
+	private String UserName;
+
+	/**
+	 * 上传时间
+	 */
+	private Date UpLoadDate;
+
+	/**
+	 * 更新时间
+	 */
+	
+	private Date UpdateDate;
+	
+	
+	
+	
+	
 	
 
 }

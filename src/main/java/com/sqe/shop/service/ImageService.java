@@ -88,24 +88,24 @@ public class ImageService extends AdapterService implements BaseService {
 		return imageMapper.getBeanListByParm(parm);
 	}
 
-	public List<ImageDto> getImagetoListByProductId(Long id) {
-		Map<String, Object> parm = new HashMap<String, Object>();
-		parm.put("productId", id);
-		parm.put("orderBy", "id asc");
-
-		List<Image> result = imageMapper.getBeanListByParm(parm);
-		List<ImageDto> dtoResult = new ArrayList<ImageDto>();
-
-		for (Image image : result) {
-			ImageDto temp = new ImageDto();
-			String base64Data = com.sqe.shop.util.Image.GetImageStrFromPath(image.getImagePath());
-			temp.setBase64data(base64Data);
-			temp.setIndexShow(image.getIndexShow());
-			dtoResult.add(temp);
-		}
-		return dtoResult;
-
-	}
+//	public List<ImageDto> getImagetoListByProductId(Long id) {
+//		Map<String, Object> parm = new HashMap<String, Object>();
+//		parm.put("productId", id);
+//		parm.put("orderBy", "id asc");
+//
+//		List<Image> result = imageMapper.getBeanListByParm(parm);
+//		List<ImageDto> dtoResult = new ArrayList<ImageDto>();
+//
+//		for (Image image : result) {
+//			ImageDto temp = new ImageDto();
+//			String base64Data = com.sqe.shop.util.Image.GetImageStrFromPath(image.getImagePath());
+//			temp.setBase64data(base64Data);
+//			temp.setIndexShow(image.getIndexShow());
+//			dtoResult.add(temp);
+//		}
+//		return dtoResult;
+//
+//	}
 
 	public List<Image> getByProductIndexImg(Long id) {
 		Map<String, Object> parm = new HashMap<String, Object>();

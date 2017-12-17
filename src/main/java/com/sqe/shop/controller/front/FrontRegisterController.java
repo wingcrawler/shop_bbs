@@ -172,7 +172,7 @@ public class FrontRegisterController extends BaseFrontController {
 			return responseError(-1, "error_empty_shop_name2");
 		}
 		if (attachFile != null) {
-			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+			Map<String, Object> resMap = imageFileService.uploadImage(attachFile,attachFile.getOriginalFilename());
 			String fileName = resMap.get("errorInfo").toString();
 			if (!resMap.get("errorNo").equals(0)) {
 				return resMap;

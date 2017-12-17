@@ -7,7 +7,7 @@ String ctx = request.getContextPath();
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>头像上传</title>
+  <title></title>
   <link rel="stylesheet" href="<%=ctx%>/frontstyle/sell/cropper/assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="<%=ctx%>/frontstyle/sell/cropper/assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="<%=ctx%>/frontstyle/sell/cropper/dist/cropper.css">
@@ -75,7 +75,7 @@ String ctx = request.getContextPath();
 		    pick: '#picker',
 		
 		    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-		    resize: false,
+		    resize: true,
 		    // 只允许选择图片文件。
 		    accept: {
 		        title: 'Images',

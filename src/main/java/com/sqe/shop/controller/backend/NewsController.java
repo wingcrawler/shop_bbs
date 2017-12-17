@@ -79,7 +79,7 @@ public class NewsController extends BaseBackendController {
 		
 		String fileName = "";
 		if(attachFile!=null){
-		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+		    Map<String, Object> resMap = imageFileService.uploadImage(attachFile,attachFile.getOriginalFilename());
 		    fileName = resMap.get("errorInfo").toString(); 
 		    if(!resMap.get("errorNo").equals(0)){
 		    	return resMap;

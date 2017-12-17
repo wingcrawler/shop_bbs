@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -321,7 +322,7 @@ public class SellerController extends BaseFrontController {
 		String fileName = "";
 		Map<String, Object> resMap = null;
 		if (indexFile != null) {
-			resMap = imageFileService.uploadImage(indexFile);
+			resMap = imageFileService.uploadImage(indexFile,indexFile.getOriginalFilename());
 			fileName = resMap.get("errorInfo").toString();
 			if (resMap.get("errorNo").equals(0)) {
 				imageService.saveProductIndexImg(product, fileName, 1);
@@ -330,7 +331,7 @@ public class SellerController extends BaseFrontController {
 			}
 		}
 		for (MultipartFile file : listFile) {
-			resMap = imageFileService.uploadImage(file);
+			resMap = imageFileService.uploadImage(file,file.getOriginalFilename());
 			fileName = resMap.get("errorInfo").toString();
 			if (resMap.get("errorNo").equals(0)) {
 				imageService.saveProductImg(product, fileName, 0);
@@ -364,11 +365,10 @@ public class SellerController extends BaseFrontController {
 					return responseError(-1, "save_failed");
 				}
 
-			} else {
-				// 首次上传 需要上传默认图片
-				if (StringUtils.isBlank(targetImgVal)) {
-					return responseError(-1, "error_no_default_img");
-				}
+			} else
+			// 首次上传 需要上传默认图片
+			if (StringUtils.isBlank(targetImgVal)) {
+				return responseError(-1, "error_no_default_img");
 			}
 
 			Map<String, Object> checkMap = checkProduct(product);
@@ -381,7 +381,7 @@ public class SellerController extends BaseFrontController {
 			if (shop == null) {
 				return responseError(-1, "error_illegal");
 			}
-			product.setCurrenciesType(Currencies.check(product.getCurrenciesType()));
+			// product.setCurrenciesType(Currencies.check(product.getCurrenciesType());
 			product.setShopId(shop.getId());
 			product.setProductStatus(Constants.PRODUCT_WAIT);
 			int count = productService.save(product);
@@ -821,7 +821,7 @@ public class SellerController extends BaseFrontController {
 		}
 
 		if (attachFile != null) {
-			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+			Map<String, Object> resMap = imageFileService.uploadImage(attachFile,attachFile.getOriginalFilename());
 			String fileName = resMap.get("errorInfo").toString();
 			if (!resMap.get("errorNo").equals(0)) {
 				return resMap;
@@ -868,7 +868,7 @@ public class SellerController extends BaseFrontController {
 		}
 
 		if (attachFile != null) {
-			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+			Map<String, Object> resMap = imageFileService.uploadImage(attachFile,attachFile.getOriginalFilename());
 			String fileName = resMap.get("errorInfo").toString();
 			if (!resMap.get("errorNo").equals(0)) {
 				return resMap;
@@ -913,7 +913,7 @@ public class SellerController extends BaseFrontController {
 		}
 
 		if (attachFile != null) {
-			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+			Map<String, Object> resMap = imageFileService.uploadImage(attachFile,attachFile.getOriginalFilename());
 			String fileName = resMap.get("errorInfo").toString();
 			if (!resMap.get("errorNo").equals(0)) {
 				return resMap;
@@ -958,7 +958,7 @@ public class SellerController extends BaseFrontController {
 		}
 
 		if (attachFile != null) {
-			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+			Map<String, Object> resMap = imageFileService.uploadImage(attachFile,attachFile.getOriginalFilename());
 			String fileName = resMap.get("errorInfo").toString();
 			if (!resMap.get("errorNo").equals(0)) {
 				return resMap;

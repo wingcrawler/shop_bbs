@@ -235,9 +235,11 @@
 												<div class="photo_album">
 													<span class="labe">${t.t_show_img }:</span>
 													<div class="upimg">
-														<input type="hidden" id="targetImgVal" name="targetImgVal">
-														<img id="targetImg" alt="" src="${img.imagePath}"
-															width="100%" height="100%" style="padding: 0;"> <span
+														<input type="file" name="targetImgVal" id="targetImgVal"
+															multiple="multiple"
+															onchange="javascript:setImagePreviews();"> <img
+															id="targetImg" name="targetImg" alt="" src="${img.imagePath}" width="100%"
+															height="100%" style="padding: 0;"> <span
 															onclick="getImage('targetImg');"
 															style="backgroung: #aaa; z-index: 10; position: relative; float: right; width: 50px">选择</span>
 													</div>
@@ -300,7 +302,7 @@
 							</form>
 							<div class="button">
 								<button
-									onclick="submitPoduct('#form','/front/sell/doSaveProduct1',true,'/front/sell/productListPage')"
+									onclick="jQuery.common.ajaxFileSubmit('#form','/front/sell/doSaveProduct1',true,'/front/sell/productListPage')"
 									type="button" class="btn btn-danger btn-lg">${t.b_submit }</button>
 							</div>
 							<!-- <div class="g-tabMnItem">
@@ -383,12 +385,12 @@ function submitPoduct(elem ,_submitUrl,_isRefrush, _jumpUrl) {
 	if(!flag){
 		return;
 	}
-	var maxImg=1024*1024*4;
-	var imgStr=$("#targetImgVal").val();
+	var maxImg=1024*1024*2;
+     var imgStr=$("#targetImgVal").val();
 	if(imgStr.length>maxImg){
 		alert(1+"${t.product_img_large}");
 		return;
-	}
+	} 
 	imgStr=$("#targetImg1Val").val();
 	if(imgStr.length>maxImg){
 		alert(2+"${t.product_img_large}");
@@ -414,7 +416,7 @@ function submitPoduct(elem ,_submitUrl,_isRefrush, _jumpUrl) {
 		alert(6+"${t.product_img_large}");
 		return;
 	}
-	$(elem).ajaxSubmit({  
+	$("#form").ajaxSubmit({  
         type:'post',  
         cache: false,  
         url: _submitUrl, 

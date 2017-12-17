@@ -126,7 +126,7 @@ public class BizUserCenterService extends BaseCommon {
 		}
 
 		if (attachFile != null && attachFile.getSize()>0) {
-			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+			Map<String, Object> resMap = imageFileService.uploadImage(attachFile,attachFile.getOriginalFilename());
 			String fileName = resMap.get("errorInfo").toString();
 			if (!resMap.get("errorNo").equals(0)) {
 				return resMap;
@@ -151,7 +151,7 @@ public class BizUserCenterService extends BaseCommon {
 		}
 
 		if (attachFile != null) {
-			Map<String, Object> resMap = imageFileService.uploadImage(attachFile);
+			Map<String, Object> resMap = imageFileService.uploadImage(attachFile,attachFile.getOriginalFilename());
 			String fileName = resMap.get("errorInfo").toString();
 			if (!resMap.get("errorNo").equals(0)) {
 				return resMap;

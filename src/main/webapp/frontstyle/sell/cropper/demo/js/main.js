@@ -142,11 +142,34 @@ $(function () {
         	  $(window.parent.document.getElementById("form_div")).show();
         	  $(window.parent.document.getElementById("frame_div")).hide();
         	  var imgId=$(window.parent.document.getElementById("curtImg")).val();
-        	  $(window.parent.document.getElementById(imgId)).attr("src",result.toDataURL());
-        	  $(window.parent.document.getElementById(imgId+"Val")).val(result.toDataURL());
-        	 
-          
-          }
+        	  
+              var dataurl = result.toDataURL('image/jpeg');
+              var blob = convertBase64UrlToBlob(dataurl);
+              console.log(blob);
+              var form = new FormData();
+              form.append('file', blob);  
+              form.append("fileName", "123.jpg"); 
+              var request = new XMLHttpRequest();
+              // 2.设置回调函数
+              request.onreadystatechange = zswFun;   
+              //
+              request.open("POST", "/front/file/image");
+              request.send(form);  
+              var resp = request.get; 
+                         
+          }         
+                
+                
+          // 回调函数
+          function zswFun(){      
+              if(request.readyState == 4 && request.status == 200){    	  
+                  var resp = request.responseText; 
+                  var obj = JSON.parse(resp)
+                  $(window.parent.document.getElementById(imgId+"Val")).attr("src",obj.errorInfo);
+            	  $(window.parent.document.getElementById(imgId)).attr("src",URL.createObjectURL(blob));
+         
+          }    
+       }
 
           break;
       }
@@ -230,3 +253,19 @@ $(function () {
   }
 
 });
+
+function convertBase64UrlToBlob(urlData){
+
+　　　　var bytes=window.atob(urlData.split(',')[1]);        // 去掉url的头，并转换为byte
+
+　　　　// 处理异常,将ascii码小于0的转换为大于0
+
+　　　　var ab = new ArrayBuffer(bytes.length);     
+
+　　　　var ia = new Uint8Array(ab);     
+
+　　　　for (var i = 0; i < bytes.length; i++) {          ia[i] = bytes.charCodeAt(i);      }       
+
+　　　　return new Blob( [ab] , {type : 'image/png'});  
+
+　　} 
