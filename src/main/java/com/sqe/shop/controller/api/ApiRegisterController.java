@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,16 +62,19 @@ public class ApiRegisterController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/doRegister", method = RequestMethod.POST)
 	@ApiOperation(value = "买家注册", notes = "买家注册")
-	public Resp<?> doRegister(HttpServletRequest request, @Validated @RequestBody User user,
-			BindingResult bindingResult) {
+	public Resp<?> doRegister(@NotNull @RequestParam("username") String username,
+			@NotNull @RequestParam("password") String password, @RequestParam("repasswd") String repassword,
+			@NotNull @RequestParam("email") String email) {
 		// 获取校验错误信息
-		if (bindingResult.hasErrors()) {
-			return Resp.customFail("-1", bindingResult.getFieldErrors().get(0).getDefaultMessage());
-		} else {
-			user.setUserRole(ROLE_BUY);
-			Map<String, Object> resMap = registerservice.register(user);
-			return Resp.success(resMap);
-		}
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setRepassword(repassword);
+		user.setUserMail(email);
+		user.setUserRole(ROLE_BUY);
+		Map<String, Object> resMap = registerservice.register(user);
+		return Resp.success(resMap);
+
 	}
 
 	/**
@@ -82,17 +86,19 @@ public class ApiRegisterController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "/sellDoRegister", method = RequestMethod.POST)
 	@ApiOperation(value = "卖家注册", notes = "卖家注册")
-	public Resp<?> sellDoRegister(HttpServletRequest request, @RequestBody @Validated User user,
-			BindingResult bindingResult) {
+	public Resp<?> sellDoRegister(@NotNull @RequestParam("username") String username,
+			@NotNull @RequestParam("password") String password, @RequestParam("repasswd") String repassword,
+			@NotNull @RequestParam("email") String email) {
 
 		// 获取校验错误信息
-		if (bindingResult.hasErrors()) {
-			return Resp.customFail("-1", bindingResult.getFieldErrors().get(0).getDefaultMessage());
-		} else {
-			user.setUserRole(ROLE_SELL);
-			Map<String, Object> resMap = registerservice.register(user);
-			return Resp.success(resMap);
-		}
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setRepassword(repassword);
+		user.setUserMail(email);
+		user.setUserRole(ROLE_SELL);
+		Map<String, Object> resMap = registerservice.register(user);
+		return Resp.success(resMap);
 
 	}
 
@@ -104,10 +110,13 @@ public class ApiRegisterController extends BaseFrontController {
 	 */
 
 	@ResponseBody
-	@RequestMapping(value = "/doLogin", method = RequestMethod.PUT)
+	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	@ApiOperation(value = "登录", notes = "")
-	public Resp<?> doLogin(HttpServletRequest request, @RequestBody User user) {
-		Map<String, Object> resMap = loginService.login(user);
+	public Resp<?> doLogin(@NotNull @RequestBody String username, @NotNull @RequestBody String password) {
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		Map<String, Object> resMap = loginService.apilogin(user);
 		if (resMap.get(Constants.ERROR_NO).equals(0)) {
 			User userInfo = this.getCurrentUser();
 			// 记录登录时间
@@ -129,7 +138,7 @@ public class ApiRegisterController extends BaseFrontController {
 	@RequestMapping(value = "/dologout", method = RequestMethod.GET)
 	@ResponseBody
 	@ApiOperation(value = "登出", notes = "")
-	public Resp<?> dologout(HttpServletRequest request, User user) {
+	public Resp<?> dologout() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		this.logout();
 		map.put("result", "true");
@@ -144,7 +153,7 @@ public class ApiRegisterController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/doApplayShop", method = RequestMethod.POST)
 	@ApiOperation(value = "申请开店", notes = "")
-	public Resp<?> doApplayShop(@RequestBody Shop shop,
+	public Resp<?> doApplayShop(Shop shop,
 			@RequestParam(name = "file", value = "file", required = false) MultipartFile attachFile) {
 		if (StringUtils.isBlank(shop.getShopTitle())) {
 			return Resp.customFail("-1", "error_empty_shop_name");

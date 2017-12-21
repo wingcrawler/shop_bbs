@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -485,7 +486,7 @@ public class ApiSellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@PutMapping(value = "/offProductById")
+	@PostMapping(value = "/offProductById")
 	@ApiOperation(value = "下架商品", notes = "批量下架商品")
 	public Resp<?> offProductById(@RequestBody List<String> idList) {
 		return Resp.success(productService.updateProductStatus(idList, Constants.PRODUCT_OFF));
@@ -498,7 +499,7 @@ public class ApiSellerController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@PutMapping(value = "/onProductById")
+	@PostMapping(value = "/onProductById")
 	@ApiOperation(value = "上架商品", notes = "批量上架商品")
 	public Resp<?> onProductById(@RequestBody List<String> idList) {
 		return Resp.success(productService.updateProductStatus(idList, Constants.PRODUCT_ON));

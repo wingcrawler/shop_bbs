@@ -65,6 +65,48 @@ public class LoginService extends BaseCommon {
 		return resMap;
 	}
 
+	public Map<String, Object> apilogin(User user) {
+		Map<String, Object> resMap = new HashMap<String, Object>();
+
+		if (StringUtils.isBlank(user.getUsername())) {
+			return responseError(-1, "error_empty_username");
+		}
+		if (StringUtils.isBlank(user.getPassword())) {
+			return responseError(-1, "error_empty_pwd");
+		} else {
+			MD5Util md5 = new MD5Util(MD5Util.SALT, "MD5");
+			user.setPassword(md5.encode(user.getPassword()));
+		}
+
+		User u = userMapper.findUserByUsernameAndPassword(user);
+		if (u != null) {
+			u.setPassword(null);
+			Subject currentUser = SecurityUtils.getSubject();
+			UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
+			token.setRememberMe(true);
+			try {
+				currentUser.login(token);
+			} catch (AuthenticationException e) {
+				return responseError(-1, "error_empty_pwd");
+			}
+			if (currentUser.isAuthenticated()) {
+				currentUser.getSession().setAttribute("userInfo", u);
+			} else {
+				return responseError(-1, "error_unknow");
+			}
+		} else {
+			return responseError(-1, "error_username_pwd");
+		}
+
+		resMap = responseOK1("");
+		if (u.getUserRole().equals(3L)) {
+			resMap.put("message", "Login success");
+		} else {
+			resMap.put("message", "Login success");
+		}
+		return resMap;
+	}
+
 	public void autoLogin() {
 		Subject subject = SecurityUtils.getSubject();
 		if (!subject.isAuthenticated() && subject.isRemembered()) {
