@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,7 +37,7 @@ import com.sqe.shop.util.Resp;
 
 import io.swagger.annotations.ApiOperation;
 
-@Controller
+@RestController
 @RequestMapping("api/user")
 public class ApiRegisterController extends BaseFrontController {
 	@Autowired
@@ -62,9 +63,7 @@ public class ApiRegisterController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/doRegister", method = RequestMethod.POST)
 	@ApiOperation(value = "买家注册", notes = "买家注册")
-	public Resp<?> doRegister(@NotNull @RequestParam("username") String username,
-			@NotNull @RequestParam("password") String password, @RequestParam("repasswd") String repassword,
-			@NotNull @RequestParam("email") String email) {
+	public Resp<?> doRegister(String username, String password, String repassword, String email) {
 		// 获取校验错误信息
 		User user = new User();
 		user.setUsername(username);
@@ -86,9 +85,7 @@ public class ApiRegisterController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "/sellDoRegister", method = RequestMethod.POST)
 	@ApiOperation(value = "卖家注册", notes = "卖家注册")
-	public Resp<?> sellDoRegister(@NotNull @RequestParam("username") String username,
-			@NotNull @RequestParam("password") String password, @RequestParam("repasswd") String repassword,
-			@NotNull @RequestParam("email") String email) {
+	public Resp<?> sellDoRegister(String username, String password, String repassword, String email) {
 
 		// 获取校验错误信息
 		User user = new User();
@@ -112,7 +109,7 @@ public class ApiRegisterController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	@ApiOperation(value = "登录", notes = "")
-	public Resp<?> doLogin(@NotNull @RequestBody String username, @NotNull @RequestBody String password) {
+	public Resp<?> doLogin(String username, String password) {
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
@@ -153,7 +150,7 @@ public class ApiRegisterController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/doApplayShop", method = RequestMethod.POST)
 	@ApiOperation(value = "申请开店", notes = "")
-	public Resp<?> doApplayShop(Shop shop,
+	public Resp<?> doApplayShop(@RequestBody Shop shop,
 			@RequestParam(name = "file", value = "file", required = false) MultipartFile attachFile) {
 		if (StringUtils.isBlank(shop.getShopTitle())) {
 			return Resp.customFail("-1", "error_empty_shop_name");
