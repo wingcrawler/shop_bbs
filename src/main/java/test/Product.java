@@ -23,6 +23,10 @@ public class Product {
 
     private Integer productUrlClick;
 
+    private String productPriceMark;
+
+    private String productUnit;
+
     private Long productTypeId;
 
     private Long shopId;
@@ -127,6 +131,22 @@ public class Product {
 
     public void setProductUrlClick(Integer productUrlClick) {
         this.productUrlClick = productUrlClick;
+    }
+
+    public String getProductPriceMark() {
+        return productPriceMark;
+    }
+
+    public void setProductPriceMark(String productPriceMark) {
+        this.productPriceMark = productPriceMark == null ? null : productPriceMark.trim();
+    }
+
+    public String getProductUnit() {
+        return productUnit;
+    }
+
+    public void setProductUnit(String productUnit) {
+        this.productUnit = productUnit == null ? null : productUnit.trim();
     }
 
     public Long getProductTypeId() {

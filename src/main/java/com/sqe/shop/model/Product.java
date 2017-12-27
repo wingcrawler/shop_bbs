@@ -1,17 +1,9 @@
 package com.sqe.shop.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import com.sqe.shop.common.BaseModel;
-
-public class Product extends BaseModel implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5862773276078856434L;
-
-	private Long id;
+public class Product {
+    private Long id;
 
     private String productName;
 
@@ -30,6 +22,10 @@ public class Product extends BaseModel implements Serializable{
     private String productUrl;
 
     private Integer productUrlClick;
+
+    private String productPriceMark;
+
+    private String productUnit;
 
     private Long productTypeId;
 
@@ -135,6 +131,22 @@ public class Product extends BaseModel implements Serializable{
 
     public void setProductUrlClick(Integer productUrlClick) {
         this.productUrlClick = productUrlClick;
+    }
+
+    public String getProductPriceMark() {
+        return productPriceMark;
+    }
+
+    public void setProductPriceMark(String productPriceMark) {
+        this.productPriceMark = productPriceMark == null ? null : productPriceMark.trim();
+    }
+
+    public String getProductUnit() {
+        return productUnit;
+    }
+
+    public void setProductUnit(String productUnit) {
+        this.productUnit = productUnit == null ? null : productUnit.trim();
     }
 
     public Long getProductTypeId() {

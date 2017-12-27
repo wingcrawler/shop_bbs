@@ -14,6 +14,9 @@
 		<id property="productTypeId" column="product_type_id" />
 		<id property="productName" column="product_name" />
 		<id property="productSubtypeId" column="product_subtype_id" />
+		<result column="product_price_mark" jdbcType="VARCHAR"
+			property="productPriceMark" />
+		<result column="product_unit" jdbcType="VARCHAR" property="productUnit" />
 		<id property="createTime" column="create_time" />
 		<id property="productUrlClick" column="product_url_click" />
 		<id property="productEnDescription" column="product_en_description" />
@@ -24,8 +27,8 @@
 		<id property="productUrl" column="product_url" />
 		<id property="productPrice" column="product_price" />
 		<id property="currenciesType" column="currencies_type" />
-		<id property="readFlag" column="read_flag"/>
-		<id property="delFlag" column="del_flag"/>
+		<id property="readFlag" column="read_flag" />
+		<id property="delFlag" column="del_flag" />
 	</resultMap>
 
 	<insert id="insert">
@@ -196,8 +199,8 @@
 			and product_price = #{parm.productPrice}
 		</if>
 		<if test="parm.currenciesType != null">
-			and currenciesType =  #{parm.currenciesType}
-			</if>
+			and currenciesType = #{parm.currenciesType}
+		</if>
 		<if test="parm.productName != null">
 			and (product_name like "%"#{parm.productName}"%" or
 			product_en_name like
@@ -256,8 +259,8 @@
 			and product_price = #{parm.productPrice}
 		</if>
 		<if test="parm.currenciesType != null">
-			and currenciesType =  #{parm.currenciesType}
-			</if>
+			and currenciesType = #{parm.currenciesType}
+		</if>
 		<if test="parm.productName != null">
 			and (product_name like "%"#{parm.productName}"%" or
 			product_en_name like
@@ -284,19 +287,25 @@
 		p.product_price as productPrice,
 		p.currencies_type,
 		p.product_rank as
-		productRank, p.product_view as productView,p.product_count as
+		productRank, p.product_view as
+		productView,p.product_count as
 		productCount,
-		p.product_status as productStatus,s.shop_title as
+		p.product_status as
+		productStatus,s.shop_title as
 		shopName,
-		pt.type_name_ch as productTypeNameCh,
+		pt.type_name_ch as
+		productTypeNameCh,
 		pt.type_name as
 		productTypeName,
 		date_format(p.create_time, '%Y-%m-%d') as
-		createTimeStr,p.product_tag as productTag,
+		createTimeStr,p.product_tag
+		as productTag,
 		i.image_path as imagePath
 		from product p
-		LEFT JOIN product_type pt on p.product_type_id=pt.id
-		LEFT JOIN shop s on p.shop_id=s.id
+		LEFT JOIN
+		product_type pt on p.product_type_id=pt.id
+		LEFT JOIN shop s on
+		p.shop_id=s.id
 		LEFT JOIN image i on
 		p.id=i.product_id and i.index_show=1
 		where 1=1
@@ -377,7 +386,8 @@
 		i.image_path as
 		imagePath
 		from product p
-		LEFT JOIN image i on p.id=i.product_id
+		LEFT JOIN image i on
+		p.id=i.product_id
 		where 1=1
 		<if test="parm.productStatus != null">
 			and p.product_status = #{parm.productStatus}

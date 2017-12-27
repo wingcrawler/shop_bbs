@@ -745,6 +745,146 @@ public class ProductExample {
             return (Criteria) this;
         }
 
+        public Criteria andProductPriceMarkIsNull() {
+            addCriterion("product_price_mark is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkIsNotNull() {
+            addCriterion("product_price_mark is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkEqualTo(String value) {
+            addCriterion("product_price_mark =", value, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkNotEqualTo(String value) {
+            addCriterion("product_price_mark <>", value, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkGreaterThan(String value) {
+            addCriterion("product_price_mark >", value, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkGreaterThanOrEqualTo(String value) {
+            addCriterion("product_price_mark >=", value, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkLessThan(String value) {
+            addCriterion("product_price_mark <", value, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkLessThanOrEqualTo(String value) {
+            addCriterion("product_price_mark <=", value, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkLike(String value) {
+            addCriterion("product_price_mark like", value, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkNotLike(String value) {
+            addCriterion("product_price_mark not like", value, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkIn(List<String> values) {
+            addCriterion("product_price_mark in", values, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkNotIn(List<String> values) {
+            addCriterion("product_price_mark not in", values, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkBetween(String value1, String value2) {
+            addCriterion("product_price_mark between", value1, value2, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductPriceMarkNotBetween(String value1, String value2) {
+            addCriterion("product_price_mark not between", value1, value2, "productPriceMark");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitIsNull() {
+            addCriterion("product_unit is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitIsNotNull() {
+            addCriterion("product_unit is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitEqualTo(String value) {
+            addCriterion("product_unit =", value, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitNotEqualTo(String value) {
+            addCriterion("product_unit <>", value, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitGreaterThan(String value) {
+            addCriterion("product_unit >", value, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitGreaterThanOrEqualTo(String value) {
+            addCriterion("product_unit >=", value, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitLessThan(String value) {
+            addCriterion("product_unit <", value, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitLessThanOrEqualTo(String value) {
+            addCriterion("product_unit <=", value, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitLike(String value) {
+            addCriterion("product_unit like", value, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitNotLike(String value) {
+            addCriterion("product_unit not like", value, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitIn(List<String> values) {
+            addCriterion("product_unit in", values, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitNotIn(List<String> values) {
+            addCriterion("product_unit not in", values, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitBetween(String value1, String value2) {
+            addCriterion("product_unit between", value1, value2, "productUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductUnitNotBetween(String value1, String value2) {
+            addCriterion("product_unit not between", value1, value2, "productUnit");
+            return (Criteria) this;
+        }
+
         public Criteria andProductTypeIdIsNull() {
             addCriterion("product_type_id is null");
             return (Criteria) this;
