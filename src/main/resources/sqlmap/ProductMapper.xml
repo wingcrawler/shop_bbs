@@ -14,9 +14,8 @@
 		<id property="productTypeId" column="product_type_id" />
 		<id property="productName" column="product_name" />
 		<id property="productSubtypeId" column="product_subtype_id" />
-		<result column="product_price_mark" jdbcType="VARCHAR"
-			property="productPriceMark" />
-		<result column="product_unit" jdbcType="VARCHAR" property="productUnit" />
+		<id property="productPriceMark" column="product_price_mark" />
+		<id property="productUnit" column="product_unit" />
 		<id property="createTime" column="create_time" />
 		<id property="productUrlClick" column="product_url_click" />
 		<id property="productEnDescription" column="product_en_description" />
@@ -40,28 +39,32 @@
 		product_dim, product_view, product_rank,
 		product_status, product_count,
 		product_url,
-		product_url_click, product_type_id, shop_id,
-		product_price, currencies_type, product_en_name,
-		product_en_description, product_en_dim, user_id,
+		product_url_click, product_price_mark, product_unit,
+		product_type_id, shop_id, product_price,
+		currencies_type,
+		product_en_name, product_en_description,
+		product_en_dim, user_id,
 		create_time,
-		product_subtype_id, product_tag,
-		read_flag, del_flag)
-		values
-		(#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR},
+		product_subtype_id, product_tag, read_flag,
+		del_flag)
+		values (#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR},
 		#{productDescripton,jdbcType=VARCHAR},
 		#{productDim,jdbcType=VARCHAR},
 		#{productView,jdbcType=INTEGER}, #{productRank,jdbcType=INTEGER},
 		#{productStatus,jdbcType=INTEGER}, #{productCount,jdbcType=INTEGER},
 		#{productUrl,jdbcType=VARCHAR},
 		#{productUrlClick,jdbcType=INTEGER},
+		#{productPriceMark,jdbcType=VARCHAR},
+		#{productUnit,jdbcType=VARCHAR},
 		#{productTypeId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT},
-		#{productPrice,jdbcType=DECIMAL}, #{currenciesType,jdbcType=CHAR},
+		#{productPrice,jdbcType=DECIMAL},
+		#{currenciesType,jdbcType=CHAR},
 		#{productEnName,jdbcType=VARCHAR},
 		#{productEnDescription,jdbcType=VARCHAR},
 		#{productEnDim,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT},
-		#{createTime,jdbcType=TIMESTAMP}, #{productSubtypeId,jdbcType=BIGINT},
-		#{productTag,jdbcType=VARCHAR},
-		#{readFlag,jdbcType=CHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{productSubtypeId,jdbcType=BIGINT},
+		#{productTag,jdbcType=VARCHAR}, #{readFlag,jdbcType=CHAR},
 		#{delFlag,jdbcType=CHAR})
 	</insert>
 
@@ -106,6 +109,13 @@
 			</if>
 			<if test="productUrlClick != null">
 				product_url_click=#{productUrlClick},
+			</if>
+			<if test="productPriceMark != null">
+				product_price_mark =
+				#{productPriceMark,jdbcType=VARCHAR},
+			</if>
+			<if test="productUnit != null">
+				product_unit = #{productUnit,jdbcType=VARCHAR},
 			</if>
 			<if test="productEnDescription != null">
 				product_en_description=#{productEnDescription},
@@ -183,6 +193,13 @@
 		<if test="parm.productUrlClick != null">
 			and product_url_click = #{parm.productUrlClick}
 		</if>
+		<if test="parm.productPriceMark != null">
+			and product_price_mark =
+			#{parm.productPriceMark,jdbcType=VARCHAR},
+		</if>
+		<if test="parm.productUnit != null">
+			and product_unit = #{parm.productUnit,jdbcType=VARCHAR},
+		</if>
 		<if test="parm.productEnDescription != null">
 			and product_en_description = #{parm.productEnDescription}
 		</if>
@@ -243,6 +260,13 @@
 		<if test="parm.productUrlClick != null">
 			and product_url_click = #{parm.productUrlClick}
 		</if>
+		<if test="productPriceMark != null">
+			and product_price_mark =
+			#{parm.productPriceMark,jdbcType=VARCHAR},
+		</if>
+		<if test="productUnit != null">
+			and product_unit = #{parm.productUnit,jdbcType=VARCHAR},
+		</if>
 		<if test="parm.productEnDescription != null">
 			and product_en_description = #{parm.productEnDescription}
 		</if>
@@ -284,10 +308,13 @@
 		p.product_name as productNameCh,
 		p.product_en_name as
 		productName,
-		p.product_price as productPrice,
+		product_price_mark, product_unit,
+		p.product_price as
+		productPrice,
 		p.currencies_type,
 		p.product_rank as
-		productRank, p.product_view as
+		productRank,
+		p.product_view as
 		productView,p.product_count as
 		productCount,
 		p.product_status as
@@ -381,8 +408,9 @@
 	<select id="getHotProductList" parameterType="HashMap"
 		resultType="HashMap">
 		select p.id id,p.product_name as productName, p.product_price as
-		productPrice,p.currencies_type,
-		p.product_descripton as productDesc,
+		productPrice,product_unit,p.currencies_type,
+		p.product_descripton as
+		productDesc,
 		i.image_path as
 		imagePath
 		from product p

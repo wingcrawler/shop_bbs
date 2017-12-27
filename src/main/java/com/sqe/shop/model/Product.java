@@ -1,255 +1,264 @@
 package com.sqe.shop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Product {
-    private Long id;
+import com.sqe.shop.common.BaseModel;
 
-    private String productName;
+public class Product extends BaseModel implements Serializable {
 
-    private String productDescripton;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8526911004798094122L;
 
-    private String productDim;
+	private Long id;
 
-    private Integer productView;
+	private String productName;
 
-    private Integer productRank;
+	private String productDescripton;
 
-    private Integer productStatus;
+	private String productDim;
 
-    private Integer productCount;
+	private Integer productView;
 
-    private String productUrl;
+	private Integer productRank;
 
-    private Integer productUrlClick;
+	private Integer productStatus;
 
-    private String productPriceMark;
+	private Integer productCount;
 
-    private String productUnit;
+	private String productUrl;
 
-    private Long productTypeId;
+	private Integer productUrlClick;
 
-    private Long shopId;
+	private String productPriceMark;
 
-    private Long productPrice;
+	private String productUnit;
 
-    private String currenciesType;
+	private Long productTypeId;
 
-    private String productEnName;
+	private Long shopId;
 
-    private String productEnDescription;
+	private Long productPrice;
 
-    private String productEnDim;
+	private String currenciesType;
 
-    private Long userId;
+	private String productEnName;
 
-    private Date createTime;
+	private String productEnDescription;
 
-    private Long productSubtypeId;
+	private String productEnDim;
 
-    private String productTag;
+	private Long userId;
 
-    private String readFlag;
+	private Date createTime;
 
-    private String delFlag;
+	private Long productSubtypeId;
 
-    public Long getId() {
-        return id;
-    }
+	private String productTag;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	private String readFlag;
 
-    public String getProductName() {
-        return productName;
-    }
+	private String delFlag;
 
-    public void setProductName(String productName) {
-        this.productName = productName == null ? null : productName.trim();
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getProductDescripton() {
-        return productDescripton;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setProductDescripton(String productDescripton) {
-        this.productDescripton = productDescripton == null ? null : productDescripton.trim();
-    }
+	public String getProductName() {
+		return productName;
+	}
 
-    public String getProductDim() {
-        return productDim;
-    }
+	public void setProductName(String productName) {
+		this.productName = productName == null ? null : productName.trim();
+	}
 
-    public void setProductDim(String productDim) {
-        this.productDim = productDim == null ? null : productDim.trim();
-    }
+	public String getProductDescripton() {
+		return productDescripton;
+	}
 
-    public Integer getProductView() {
-        return productView;
-    }
+	public void setProductDescripton(String productDescripton) {
+		this.productDescripton = productDescripton == null ? null : productDescripton.trim();
+	}
 
-    public void setProductView(Integer productView) {
-        this.productView = productView;
-    }
+	public String getProductDim() {
+		return productDim;
+	}
 
-    public Integer getProductRank() {
-        return productRank;
-    }
+	public void setProductDim(String productDim) {
+		this.productDim = productDim == null ? null : productDim.trim();
+	}
 
-    public void setProductRank(Integer productRank) {
-        this.productRank = productRank;
-    }
+	public Integer getProductView() {
+		return productView;
+	}
 
-    public Integer getProductStatus() {
-        return productStatus;
-    }
-
-    public void setProductStatus(Integer productStatus) {
-        this.productStatus = productStatus;
-    }
-
-    public Integer getProductCount() {
-        return productCount;
-    }
-
-    public void setProductCount(Integer productCount) {
-        this.productCount = productCount;
-    }
-
-    public String getProductUrl() {
-        return productUrl;
-    }
-
-    public void setProductUrl(String productUrl) {
-        this.productUrl = productUrl == null ? null : productUrl.trim();
-    }
-
-    public Integer getProductUrlClick() {
-        return productUrlClick;
-    }
-
-    public void setProductUrlClick(Integer productUrlClick) {
-        this.productUrlClick = productUrlClick;
-    }
-
-    public String getProductPriceMark() {
-        return productPriceMark;
-    }
-
-    public void setProductPriceMark(String productPriceMark) {
-        this.productPriceMark = productPriceMark == null ? null : productPriceMark.trim();
-    }
-
-    public String getProductUnit() {
-        return productUnit;
-    }
-
-    public void setProductUnit(String productUnit) {
-        this.productUnit = productUnit == null ? null : productUnit.trim();
-    }
-
-    public Long getProductTypeId() {
-        return productTypeId;
-    }
-
-    public void setProductTypeId(Long productTypeId) {
-        this.productTypeId = productTypeId;
-    }
-
-    public Long getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(Long shopId) {
-        this.shopId = shopId;
-    }
-
-    public Long getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(Long productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public String getCurrenciesType() {
-        return currenciesType;
-    }
-
-    public void setCurrenciesType(String currenciesType) {
-        this.currenciesType = currenciesType == null ? null : currenciesType.trim();
-    }
-
-    public String getProductEnName() {
-        return productEnName;
-    }
-
-    public void setProductEnName(String productEnName) {
-        this.productEnName = productEnName == null ? null : productEnName.trim();
-    }
-
-    public String getProductEnDescription() {
-        return productEnDescription;
-    }
-
-    public void setProductEnDescription(String productEnDescription) {
-        this.productEnDescription = productEnDescription == null ? null : productEnDescription.trim();
-    }
-
-    public String getProductEnDim() {
-        return productEnDim;
-    }
-
-    public void setProductEnDim(String productEnDim) {
-        this.productEnDim = productEnDim == null ? null : productEnDim.trim();
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getProductSubtypeId() {
-        return productSubtypeId;
-    }
-
-    public void setProductSubtypeId(Long productSubtypeId) {
-        this.productSubtypeId = productSubtypeId;
-    }
-
-    public String getProductTag() {
-        return productTag;
-    }
-
-    public void setProductTag(String productTag) {
-        this.productTag = productTag == null ? null : productTag.trim();
-    }
-
-    public String getReadFlag() {
-        return readFlag;
-    }
-
-    public void setReadFlag(String readFlag) {
-        this.readFlag = readFlag == null ? null : readFlag.trim();
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag == null ? null : delFlag.trim();
-    }
+	public void setProductView(Integer productView) {
+		this.productView = productView;
+	}
+
+	public Integer getProductRank() {
+		return productRank;
+	}
+
+	public void setProductRank(Integer productRank) {
+		this.productRank = productRank;
+	}
+
+	public Integer getProductStatus() {
+		return productStatus;
+	}
+
+	public void setProductStatus(Integer productStatus) {
+		this.productStatus = productStatus;
+	}
+
+	public Integer getProductCount() {
+		return productCount;
+	}
+
+	public void setProductCount(Integer productCount) {
+		this.productCount = productCount;
+	}
+
+	public String getProductUrl() {
+		return productUrl;
+	}
+
+	public void setProductUrl(String productUrl) {
+		this.productUrl = productUrl == null ? null : productUrl.trim();
+	}
+
+	public Integer getProductUrlClick() {
+		return productUrlClick;
+	}
+
+	public void setProductUrlClick(Integer productUrlClick) {
+		this.productUrlClick = productUrlClick;
+	}
+
+	public String getProductPriceMark() {
+		return productPriceMark;
+	}
+
+	public void setProductPriceMark(String productPriceMark) {
+		this.productPriceMark = productPriceMark == null ? null : productPriceMark.trim();
+	}
+
+	public String getProductUnit() {
+		return productUnit;
+	}
+
+	public void setProductUnit(String productUnit) {
+		this.productUnit = productUnit == null ? null : productUnit.trim();
+	}
+
+	public Long getProductTypeId() {
+		return productTypeId;
+	}
+
+	public void setProductTypeId(Long productTypeId) {
+		this.productTypeId = productTypeId;
+	}
+
+	public Long getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Long shopId) {
+		this.shopId = shopId;
+	}
+
+	public Long getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(Long productPrice) {
+		this.productPrice = productPrice;
+	}
+
+	public String getCurrenciesType() {
+		return currenciesType;
+	}
+
+	public void setCurrenciesType(String currenciesType) {
+		this.currenciesType = currenciesType == null ? null : currenciesType.trim();
+	}
+
+	public String getProductEnName() {
+		return productEnName;
+	}
+
+	public void setProductEnName(String productEnName) {
+		this.productEnName = productEnName == null ? null : productEnName.trim();
+	}
+
+	public String getProductEnDescription() {
+		return productEnDescription;
+	}
+
+	public void setProductEnDescription(String productEnDescription) {
+		this.productEnDescription = productEnDescription == null ? null : productEnDescription.trim();
+	}
+
+	public String getProductEnDim() {
+		return productEnDim;
+	}
+
+	public void setProductEnDim(String productEnDim) {
+		this.productEnDim = productEnDim == null ? null : productEnDim.trim();
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Long getProductSubtypeId() {
+		return productSubtypeId;
+	}
+
+	public void setProductSubtypeId(Long productSubtypeId) {
+		this.productSubtypeId = productSubtypeId;
+	}
+
+	public String getProductTag() {
+		return productTag;
+	}
+
+	public void setProductTag(String productTag) {
+		this.productTag = productTag == null ? null : productTag.trim();
+	}
+
+	public String getReadFlag() {
+		return readFlag;
+	}
+
+	public void setReadFlag(String readFlag) {
+		this.readFlag = readFlag == null ? null : readFlag.trim();
+	}
+
+	public String getDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(String delFlag) {
+		this.delFlag = delFlag == null ? null : delFlag.trim();
+	}
 }

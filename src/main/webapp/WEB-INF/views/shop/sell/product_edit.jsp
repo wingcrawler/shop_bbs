@@ -133,6 +133,24 @@
 														</div>
 													</div>
 												</div>
+												<div class="col-xs-6 col-md-6">
+													<div class="m-form-item">
+														<label class="m-form-hd"> <span
+															class="u-hd-require">*</span> <span class="u-hd-txt">${t.t_product_price_mark }:</span>
+														</label> <input class="u-ipt-text" name="productPriceMark"
+															id="productPriceMark" value="${entity.productPriceMark }">
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-xs-6 col-md-6">
+														<div class="m-form-item">
+															<label class="m-form-hd"> <span
+																class="u-hd-require">*</span> <span class="u-hd-txt">${t.t_product_unit}:</span>
+															</label> <input type="text" class="u-ipt-text" name="productUnit"
+																value="${entity.productUnit }">
+														</div>
+													</div>
+												</div>
 												<div class="row">
 													<div class="col-xs-6 col-md-6">
 														<div class="m-form-item">
@@ -208,7 +226,7 @@
 										<div class="img_describe">
 											<div class="heade">${t.t_img_desc }</div>
 											<div>
-												<span class="u-hd-txt">${t.p_image }</span>
+												<span class="u-hd-txt"></span>
 											</div>
 											<div class="imgDescribe"
 												style="display: none; padding-left: 1rem;" id="frame_div">
@@ -238,8 +256,9 @@
 														<input type="file" name="targetImgVal" id="targetImgVal"
 															multiple="multiple"
 															onchange="javascript:setImagePreviews();"> <img
-															id="targetImg" name="targetImg" alt="" src="${img.imagePath}" width="100%"
-															height="100%" style="padding: 0;"> <span
+															id="targetImg" name="targetImg" alt=""
+															src="${img.imagePath}" width="100%" height="100%"
+															style="padding: 0;"> <span
 															onclick="getImage('targetImg');"
 															style="backgroung: #aaa; z-index: 10; position: relative; float: right; width: 50px">选择</span>
 													</div>
@@ -283,7 +302,7 @@
 													<span class="labe">${t.t_desc }(${t.t_zh }): </span>
 													<div class="text_editing">
 														<textarea rows="15" cols="83" id="productDescripton"
-															name="productDescripton" placeholder="${t.p_description}"
+															name="productDescripton" placeholder="${t.t_p_description}"
 															style="padding: 0; margin: 0; border: 0">${entity.productDescripton }</textarea>
 													</div>
 												</div>
@@ -292,7 +311,7 @@
 													<div class="text_editing">
 														<textarea rows="15" cols="83" id="productEnDescription"
 															name="productEnDescription"
-															placeholder="${t.p_description}"
+															placeholder="${t.t_p_description}"
 															style="padding: 0; margin: 0; border: 0">${entity.productEnDescription }</textarea>
 													</div>
 												</div>
