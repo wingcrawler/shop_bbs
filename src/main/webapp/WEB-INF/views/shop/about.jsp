@@ -1,48 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="include/meta.jsp"></jsp:include>
-	<title>${t.t_aboutus }</title>
+<jsp:include page="include/meta.jsp"></jsp:include>
+<title>${t.t_aboutus }</title>
+<link rel="stylesheet" type="text/css" href="/frontstyle/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/frontstyle/css/main.css">
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
-	
-	<!-- about -->
-	<div class="about">
-		<!-- container -->
-		<div class="container">
-			<div class="about-grids">
-				<div class="col-md-4 about-left">
-					<h3>WHO WE ARE</h3>
-					<img src="/frontstyle/images/a2.jpg" alt="" />
-					<h5>Sesequat ante. Lorem ipsum dolor sit amet, consectetuer adipiscing elit Vestibulum et commodo.</h5>
-					<p>Phasellus turpis purus, fringilla eu ultricies ultricies, ultrices at nulla. Quisque ac ex ac lorem euismod viverra. Pellentesque ac sollicitudin ligula, vel mollis nunc. Quisque eget neque lobortis, egestas velit id, aliquam elit. Morbi ultricies laoreet arcu at sollicitudin. Phasellus id semper tellus.</p>
+
+	<!--  stat page title  -->
+	<section class="page_title">
+		<h1 class="title">About Us</h1>
+	</section>
+	<!--  end page title  -->
+
+
+	<!--  start work details section  -->
+	<section class="work_details clearfix">
+		<div class="wrapper">
+			<p class="intro">Sachiel Connect is a Canadian Information
+				Services Platform focused on the gathering and dissemination of
+				Canadian health and healthy-living related data, information, foods
+				and services.  Current export markets of focus include China,
+				Africa, and New Zealand. Our Customer and Suppliers' portal can be
+				located at www.sachielconnect.com We are based in the beautiful
+				seaside city of Vancouver BC Canada.</p>
+			<div class="columns">
+				<img src="/frontstyle/images/work1.jpg" alt="" title="" class="col_left" /> <img
+					src="/frontstyle/images/work2.jpg" alt="" title="" class="col_right" />
+			</div>
+
+		</div>
+	</section>
+	<section class="about clearfix">
+		<div class="wrapper">
+
+
+			<div class="columns clearfix">
+				<div class="col_1 col_left">
+					<h2>Tell us what you think!</h2>
+					<p>Email: general@sachielconnectinc.com Telephone: 604-620-2092
+					</p>
 				</div>
-				<div class="col-md-4 about-middle">
-					<h3>HISTORY</h3>
-					<h5>2010</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel turpis sit amet ipsum fringilla suscipit ut ac sem.</p>
-					<h5>2011</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel turpis sit amet ipsum fringilla suscipit ut ac sem.</p>
-					<h5>2013</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel turpis sit amet ipsum fringilla suscipit ut ac sem.</p>
-					<h5>2014</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel turpis sit amet ipsum fringilla suscipit ut ac sem.</p>
+				<div class="col_1 col_right">
+					<h2>Address</h2>
+					<p>2368-666 Burrard St Vancouver BC Canada</p>
 				</div>
-				<div class="col-md-4 about-right">
-					<h3>OPPORTUNITIES</h3>
-					<h5>Sesequat ante. Lorem ipsum dolor sit amet, consectetuer adipiscing elit Vestibulum et commodo.</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel turpis sit amet ipsum fringilla suscipit ut ac sem. Vivamus condimentum neque vitae felis tempor, eu porttitor elit cursus. In auctor quam a mollis sagittis. Nam leo lectus, laoreet nec tortor nec, laoreet vulputate lectus.</p>
-					<h5>Sesequat ante. Lorem ipsum dolor sit amet, consectetuer adipiscing elit Vestibulum et commodo.</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel turpis sit amet ipsum fringilla suscipit ut ac sem. Vivamus condimentum neque vitae felis tempor, eu porttitor elit cursus. In auctor quam a mollis sagittis. Nam leo lectus, laoreet nec tortor nec, laoreet vulputate lectus.</p>
-				</div>
-				<div class="clearfix"> </div>
 			</div>
 		</div>
-		<!-- container -->
-	</div>
-	<!-- //about -->
-	
+	</section>
+
+
+	<!--  end footer  -->
+
 	<jsp:include page="include/footer.jsp"></jsp:include>
 </body>
 </html>
