@@ -352,7 +352,7 @@ public class SellerController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "/doSaveProduct1", method = RequestMethod.POST)
 	public Map<String, Object> doSaveProduct1(Product product,
-			@RequestParam(name = "targetImgVal", value = "targetImgVal", required = false) String targetImgVal,
+			@RequestParam(name = "targetImg", value = "targetImg", required = false) String targetImgVal,
 			@RequestParam(name = "targetImg5Val", value = "targetImg5Val", required = false) String targetImg5Val,
 			@RequestParam(name = "targetImg1Val", value = "targetImg1Val", required = false) String targetImg1Val,
 			@RequestParam(name = "targetImg2Val", value = "targetImg2Val", required = false) String targetImg2Val,

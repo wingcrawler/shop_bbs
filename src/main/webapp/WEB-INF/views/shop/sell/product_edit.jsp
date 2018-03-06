@@ -257,7 +257,7 @@
 															multiple="multiple"
 															onchange="javascript:setImagePreviews();"> <img
 															id="targetImg" name="targetImg" alt=""
-															src="${img.imagePath}" width="100%" height="100%"
+															value="${img.imagePath}" src="${img.imagePath}" width="100%" height="100%"
 															style="padding: 0;"> <span
 															onclick="getImage('targetImg');"
 															style="backgroung: #aaa; z-index: 10; position: relative; float: right; width: 50px">选择</span>
@@ -290,7 +290,7 @@
 													<div class="upimg">
 														<input type="hidden" id="targetImg${i}Val"
 															name="targetImg${i}Val"> <img alt=""
-															id="targetImg${i}" src="" width="100%" height="100%"
+															id="targetImg${i}" value="${img.imagePath}" src="" width="100%" height="100%"
 															style="padding: 0;"> <span class="deleteImg"
 															onclick="getImage('targetImg'+${i});"
 															style="backgroung: #aaa; z-index: 10; position: relative; float: right; width: 50px">选择</span>
