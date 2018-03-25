@@ -1,6 +1,7 @@
 package com.sqe.shop.controller.api;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,13 +18,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.sqe.shop.controller.base.BaseFrontController;
+import com.sqe.shop.model.Likes;
+import com.sqe.shop.model.News;
 import com.sqe.shop.model.Post;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.model.Thread;
+import com.sqe.shop.service.LikesService;
 import com.sqe.shop.service.PostService;
 import com.sqe.shop.service.SectionService;
 import com.sqe.shop.service.ThreadService;
 import com.sqe.shop.util.PageUtil;
+import com.sqe.shop.util.PropertiesUtil;
 import com.sqe.shop.util.Resp;
 
 import io.swagger.annotations.ApiOperation;
@@ -42,6 +47,9 @@ public class ApiBBSThreadController extends BaseFrontController {
 
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private LikesService likeService;
 
 
 	/**
@@ -271,5 +279,47 @@ public class ApiBBSThreadController extends BaseFrontController {
 		PageUtil<Thread> result = threadService.getBeanListByParm(thread, 1, 2);
 		return Resp.success(result);
 	}
+	
+	/**
+	 * 帖子点赞
+	 * 
+	 * @param bbs
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "doBBSUp", method = RequestMethod.GET)
+	@ApiOperation(value = "帖子点赞", notes = "后台控制 防止重复  前台效果点击加1")
+	public Resp<?> thumb(@RequestParam Long id) {
+		Thread threaddetil = new Thread();
+		
+		threaddetil = threadService.getById(id);
+		if (threaddetil == null) {
+			return Resp.customFail("-1", "error bbs id");
+		}
+		// 点赞
+		Map<String, Object> parmMap = new HashMap<String, Object>();
+		parmMap.put("threadId", id);
+		parmMap.put("userId", getCurrentUserId());
+		int thumbCount1 = likeService.countByParm(parmMap);
+		if (thumbCount1 > 0) {
+			String lang = PropertiesUtil.get("lang");
+			if (lang.equals("zh")) {
+				return Resp.success("已经点赞");
+			} else {
+				return Resp.success("You're already thumb up");
+			}
+		} else {
+			Likes likes = new Likes();
+			likes.setThreadId(id);
+			likes.setUserId(getCurrentUserId());
+			likes.setCreateTime(new Date(System.currentTimeMillis()));
+			likeService.insert(likes);
+			threadService.updateThumb(threaddetil.getThreadUp(), id);
+			/* return responseOK("success_thumb"); */
+			return Resp.success("success");
+		}
+
+	}
+
 
 }

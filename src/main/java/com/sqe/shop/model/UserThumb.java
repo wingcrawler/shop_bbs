@@ -13,6 +13,7 @@ public class UserThumb implements Serializable {
 	private Long productId;
 	private Date createTime;
 	private Long shopId;
+	private Long bbsId;
 	private Long id;
 	private Long userId;
 	
@@ -51,6 +52,12 @@ public class UserThumb implements Serializable {
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+	public Long getBbsId() {
+		return bbsId;
+	}
+	public void setBbsId(Long bbsId) {
+		this.bbsId = bbsId;
 	}
 	
 	

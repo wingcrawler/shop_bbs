@@ -19,8 +19,11 @@ import com.sqe.shop.common.Constants;
 import com.sqe.shop.mapper.PostMapper;
 import com.sqe.shop.mapper.ThreadMapper;
 import com.sqe.shop.mapper.TopicMapper;
+import com.sqe.shop.mapper.UserThumbMapper;
+import com.sqe.shop.model.News;
 import com.sqe.shop.model.Section;
 import com.sqe.shop.model.Thread;
+import com.sqe.shop.model.UserThumb;
 import com.sqe.shop.util.DateUtil;
 import com.sqe.shop.util.PageUtil;
 import com.sqe.shop.util.RelativeDateFormat;
@@ -38,6 +41,9 @@ public class ThreadService extends AdapterService implements BaseService {
 	private TopicMapper topicMapper;
 	@Autowired
 	private PostMapper postMapper;
+
+	@Autowired
+	private UserThumbMapper userThumbMapper;
 
 	public int insert(Thread thread) {
 		return threadMapper.insert(thread);
@@ -109,7 +115,7 @@ public class ThreadService extends AdapterService implements BaseService {
 				String status = map.get("threadStatus").toString();
 				map.put("statusName", this.getThreadStatus(Integer.valueOf(status)));
 				parm.put("threadId", map.get("id"));
-				parm.put("postStatus",1);
+				parm.put("postStatus", 1);
 				map.put("threadPostNum", postMapper.countByParm(parm));
 			}
 		}
@@ -143,9 +149,9 @@ public class ThreadService extends AdapterService implements BaseService {
 				String type = map.get("threadType").toString();
 				map.put("typeName", this.getThreadType(Integer.valueOf(type)));
 				parm.put("threadId", map.get("id"));
-				parm.put("postStatus",1);
+				parm.put("postStatus", 1);
 				map.put("threadPostNum", postMapper.countByParm(parm));
-				map.put("relativeDate",RelativeDateFormat.format((Date)map.get("date")));
+				map.put("relativeDate", RelativeDateFormat.format((Date) map.get("date")));
 			}
 		}
 		pageUtil.setList(list);
@@ -373,6 +379,19 @@ public class ThreadService extends AdapterService implements BaseService {
 		pageUtil.setList(list);
 
 		return pageUtil;
+	}
+
+	public void updateThumb(Long bbsUpCount, Long Id) {
+		Thread bbs = new Thread();
+		bbs.setId(Id);
+		bbs.setThreadUp(bbsUpCount + 1);
+		this.update(bbs);
+
+		UserThumb thumb = new UserThumb();
+		thumb.setBbsId(Id);
+		thumb.setUserId(this.getCurrentUserId());
+		thumb.setCreateTime(new Date());
+		userThumbMapper.insert(thumb);
 	}
 
 }
