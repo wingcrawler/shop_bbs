@@ -79,7 +79,7 @@ public class ApiProductController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getList", method = RequestMethod.GET)
+	@RequestMapping(value = "/getList", method = RequestMethod.POST)
 	@ApiOperation(value = "店铺商品列表", notes = "需用户登录  userId 为登录用户 ")
 	public Resp<?> getProductList(Product product,
 			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
