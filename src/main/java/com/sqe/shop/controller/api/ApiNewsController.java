@@ -12,12 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sqe.shop.controller.base.BaseFrontController;
@@ -38,7 +40,7 @@ import com.sqe.shop.util.Resp;
 
 import io.swagger.annotations.ApiOperation;
 
-@Controller
+@RestController
 @RequestMapping("api/news")
 public class ApiNewsController extends BaseFrontController {
 
@@ -76,6 +78,27 @@ public class ApiNewsController extends BaseFrontController {
 	}
 
 	/**
+	 * 新闻资讯详情页
+	 * 
+	 * @param model
+	 * @param newsId
+	 * @return
+	 */
+	@GetMapping(value = "detail")
+	public Resp<?> detail(@RequestParam Long newsId) {
+		if (newsId == null) {
+			return Resp.customFail("-1", "newsId null");
+		}
+
+		// 查询news
+		News news = newsService.getById(newsId);
+		if (news == null) {
+			return Resp.customFail("-1", "news nonentity");
+		}
+		return Resp.success(bizNewsService.getDetail(newsId, news));
+	}
+
+	/**
 	 * 发表评论
 	 * 
 	 * @param news
@@ -84,9 +107,9 @@ public class ApiNewsController extends BaseFrontController {
 	@ResponseBody
 	@RequestMapping(value = "saveComment", method = RequestMethod.POST)
 	@ApiOperation(value = "新闻资讯发表评论", notes = "需要登录")
-	public Resp<?> saveComment( Comment comment) {
-		Long userId=this.getCurrentUserId();
-		if(null==userId){
+	public Resp<?> saveComment(Comment comment) {
+		Long userId = this.getCurrentUserId();
+		if (null == userId) {
 			return Resp.badRequest("need login in");
 		}
 		if (StringUtils.isBlank(comment.getContext())) {
@@ -123,12 +146,12 @@ public class ApiNewsController extends BaseFrontController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "doNewsUp")
+	@RequestMapping(value = "doNewsUp", method = RequestMethod.GET)
 	@ApiOperation(value = "新闻资讯点赞", notes = "后台控制 防止重复  前台效果点击加1")
 	public Resp<?> thumb(@RequestParam Long newsId) {
 		News news = newsService.getById(newsId);
 		if (news == null) {
-			return  Resp.customFail("-1", "error_thumb");
+			return Resp.customFail("-1", "error_thumb");
 		}
 		// 点赞
 		Map<String, Object> parmMap = new HashMap<String, Object>();
@@ -166,11 +189,10 @@ public class ApiNewsController extends BaseFrontController {
 	 */
 	@RequestMapping(value = "search", method = RequestMethod.POST)
 	@ApiOperation(value = "新闻搜索", notes = "分页 默认10篇 内容默认前100字")
-	public Resp<?> search(@RequestParam String newsTitle,
-			@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+	public Resp<?> search(@RequestParam String newsTitle, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
 		if (StringUtils.isBlank(newsTitle)) {
-			return  Resp.customFail("-1", "newsTitle null");
+			return Resp.customFail("-1", "newsTitle null");
 		}
 		pageSize = 10;
 
